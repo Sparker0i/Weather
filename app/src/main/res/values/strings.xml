@@ -9,14 +9,19 @@
 
     <string name="weather_sunny">&#xf00d;</string>
     <string name="weather_clear_night">&#xf02e;</string>
-
+    <string name="thunderstorm_with_light_rain">&#xf01d;</string>
     <string name="weather_foggy">&#xf014;</string>
     <string name="weather_cloudy">&#xf013;</string>
     <string name="weather_rainy">&#xf019;</string>
+    <string name="weather_heavy_drizzle">&#xf015;</string>
     <string name="weather_snowy">&#xf01b;</string>
     <string name="weather_thunder">&#xf01e;</string>
-    <string name="weather_drizzle">&#xf01c;</string>
-
+    <string name="weather_drizzle">&#xf01a;</string>
+    <string name="weather_rain_wind">&#xf018;</string>
+    <string name="weather_rain_drizzle">&#xf017;</string>
+    <string name="weather_heavy_snow">&#xf076;</string>
+    <string name="weather_shower_rain">&#xf01a;</string>
+    <string name="weather_sleet">&#xf0b5;</string>
     <string name="place_not_found">Sorry, no weather data found.</string>
 
 </resources>

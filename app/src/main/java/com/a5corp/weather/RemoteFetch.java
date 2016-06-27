@@ -12,7 +12,7 @@ import android.content.Context;
 public class RemoteFetch {
 
     private static final String OPEN_WEATHER_MAP_API =
-            "http://api.openweathermap.org/data/2.5/weather?q=%s&units=metric";
+            "http://api.openweathermap.org/data/2.5/forecast/daily?q=%s&units=metric";
 
     public static JSONObject getJSON(Context context, String city){
         try {

@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import org.json.JSONObject;
 
 import java.text.DateFormat;
@@ -22,9 +23,9 @@ public class WeatherFragment extends Fragment {
 
     TextView cityField;
     TextView updatedField;
-    TextView detailsField;
+    TextView detailsField2 , detailsField1 , detailsField3;
     TextView currentTemperatureField;
-    TextView weatherIcon;
+    TextView weatherIcon2 , weatherIcon1 , weatherIcon3;
 
     Handler handler;
     private void updateWeatherData(final String city){
@@ -50,7 +51,7 @@ public class WeatherFragment extends Fragment {
         }.start();
     }
 
-    private void setWeatherIcon(int actualId, long sunrise, long sunset){
+    /*private void setWeatherIcon(int actualId, long sunrise, long sunset){                   //CHANGE THIS SHIT ASAP
         int id = actualId / 100;
         String icon = "";
         if(actualId == 800){
@@ -76,7 +77,262 @@ public class WeatherFragment extends Fragment {
                     break;
             }
         }
-        weatherIcon.setText(icon);
+        weatherIcon2.setText(icon);
+    }*/
+
+    private void setWeatherIcon2(int id){
+        String icon = "";
+            switch(id) {
+                case 501 : icon = getActivity().getString(R.string.weather_drizzle);
+                    break;
+                case 500 : icon = getActivity().getString(R.string.weather_drizzle);
+                    break;
+                case 502 : icon = getActivity().getString(R.string.weather_rainy);
+                    break;
+                case 503 : icon = getActivity().getString(R.string.weather_rainy);
+                    break;
+                case 504 : icon = getActivity().getString(R.string.weather_rainy);
+                    break;
+                case 511 : icon = getActivity().getString(R.string.weather_rain_wind);
+                    break;
+                case 520 : icon = getActivity().getString(R.string.weather_shower_rain);
+                    break;
+                case 521 : icon = getActivity().getString(R.string.weather_drizzle);
+                    break;
+                case 522 : icon = getActivity().getString(R.string.weather_thunder);
+                    break;
+                case 531 : icon = getActivity().getString(R.string.weather_thunder);
+                    break;
+                case 200 : icon = getActivity().getString(R.string.weather_thunder);
+                    break;
+                case 201 : icon = getActivity().getString(R.string.weather_thunder);
+                    break;
+                case 202 : icon = getActivity().getString(R.string.weather_thunder);
+                    break;
+                case 210 : icon = getActivity().getString(R.string.weather_thunder);
+                    break;
+                case 211 : icon = getActivity().getString(R.string.weather_thunder);
+                    break;
+                case 212 : icon = getActivity().getString(R.string.weather_thunder);
+                    break;
+                case 221 : icon = getActivity().getString(R.string.weather_thunder);
+                    break;
+                case 230 : icon = getActivity().getString(R.string.weather_thunder);
+                    break;
+                case 231 : icon = getActivity().getString(R.string.weather_thunder);
+                    break;
+                case 232 : icon = getActivity().getString(R.string.weather_thunder);
+                    break;
+                case 300 : icon = getActivity().getString(R.string.weather_shower_rain);
+                    break;
+                case 301 : icon = getActivity().getString(R.string.weather_shower_rain);
+                    break;
+                case 302 : icon = getActivity().getString(R.string.weather_heavy_drizzle);
+                    break;
+                case 310 : icon = getActivity().getString(R.string.weather_shower_rain);
+                    break;
+                case 311 : icon = getActivity().getString(R.string.weather_shower_rain);
+                    break;
+                case 312 : icon = getActivity().getString(R.string.weather_heavy_drizzle);
+                    break;
+                case 313 : icon = getActivity().getString(R.string.weather_rain_drizzle);
+                    break;
+                case 314 : icon = getActivity().getString(R.string.weather_heavy_drizzle);
+                    break;
+                case 321 : icon = getActivity().getString(R.string.weather_heavy_drizzle);
+                    break;
+                case 600 : icon = getActivity().getString(R.string.weather_snowy);
+                    break;
+                case 601 : icon = getActivity().getString(R.string.weather_snowy);
+                    break;
+                case 602 : icon = getActivity().getString(R.string.weather_heavy_snow);
+                    break;
+                case 611 : icon = getActivity().getString(R.string.weather_sleet);
+                    break;
+                case 612 : icon = getActivity().getString(R.string.weather_heavy_snow);
+                    break;
+                case 615 : icon = getActivity().getString(R.string.weather_snowy);
+                    break;
+                case 616 : icon = getActivity().getString(R.string.weather_snowy);
+                    break;
+                case 620 : icon = getActivity().getString(R.string.weather_snowy);
+                    break;
+                case 621 : icon = getActivity().getString(R.string.weather_snowy);
+                    break;
+                case 622 : icon = getActivity().getString(R.string.weather_snowy);
+                    break;
+            }
+        weatherIcon2.setText(icon);
+    }
+
+    private void setWeatherIcon1(int id){
+        String icon = "";
+        switch(id) {
+            case 501 : icon = getActivity().getString(R.string.weather_drizzle);
+                break;
+            case 500 : icon = getActivity().getString(R.string.weather_drizzle);
+                break;
+            case 502 : icon = getActivity().getString(R.string.weather_rainy);
+                break;
+            case 503 : icon = getActivity().getString(R.string.weather_rainy);
+                break;
+            case 504 : icon = getActivity().getString(R.string.weather_rainy);
+                break;
+            case 511 : icon = getActivity().getString(R.string.weather_rain_wind);
+                break;
+            case 520 : icon = getActivity().getString(R.string.weather_shower_rain);
+                break;
+            case 521 : icon = getActivity().getString(R.string.weather_drizzle);
+                break;
+            case 522 : icon = getActivity().getString(R.string.weather_thunder);
+                break;
+            case 531 : icon = getActivity().getString(R.string.weather_thunder);
+                break;
+            case 200 : icon = getActivity().getString(R.string.weather_thunder);
+                break;
+            case 201 : icon = getActivity().getString(R.string.weather_thunder);
+                break;
+            case 202 : icon = getActivity().getString(R.string.weather_thunder);
+                break;
+            case 210 : icon = getActivity().getString(R.string.weather_thunder);
+                break;
+            case 211 : icon = getActivity().getString(R.string.weather_thunder);
+                break;
+            case 212 : icon = getActivity().getString(R.string.weather_thunder);
+                break;
+            case 221 : icon = getActivity().getString(R.string.weather_thunder);
+                break;
+            case 230 : icon = getActivity().getString(R.string.weather_thunder);
+                break;
+            case 231 : icon = getActivity().getString(R.string.weather_thunder);
+                break;
+            case 232 : icon = getActivity().getString(R.string.weather_thunder);
+                break;
+            case 300 : icon = getActivity().getString(R.string.weather_shower_rain);
+                break;
+            case 301 : icon = getActivity().getString(R.string.weather_shower_rain);
+                break;
+            case 302 : icon = getActivity().getString(R.string.weather_heavy_drizzle);
+                break;
+            case 310 : icon = getActivity().getString(R.string.weather_shower_rain);
+                break;
+            case 311 : icon = getActivity().getString(R.string.weather_shower_rain);
+                break;
+            case 312 : icon = getActivity().getString(R.string.weather_heavy_drizzle);
+                break;
+            case 313 : icon = getActivity().getString(R.string.weather_rain_drizzle);
+                break;
+            case 314 : icon = getActivity().getString(R.string.weather_heavy_drizzle);
+                break;
+            case 321 : icon = getActivity().getString(R.string.weather_heavy_drizzle);
+                break;
+            case 600 : icon = getActivity().getString(R.string.weather_snowy);
+                break;
+            case 601 : icon = getActivity().getString(R.string.weather_snowy);
+                break;
+            case 602 : icon = getActivity().getString(R.string.weather_heavy_snow);
+                break;
+            case 611 : icon = getActivity().getString(R.string.weather_sleet);
+                break;
+            case 612 : icon = getActivity().getString(R.string.weather_heavy_snow);
+                break;
+            case 615 : icon = getActivity().getString(R.string.weather_snowy);
+                break;
+            case 616 : icon = getActivity().getString(R.string.weather_snowy);
+                break;
+            case 620 : icon = getActivity().getString(R.string.weather_snowy);
+                break;
+            case 621 : icon = getActivity().getString(R.string.weather_snowy);
+                break;
+            case 622 : icon = getActivity().getString(R.string.weather_snowy);
+                break;
+        }
+        weatherIcon1.setText(icon);
+    }
+
+    private void setWeatherIcon3(int id){
+        String icon = "";
+        switch(id) {
+            case 501 : icon = getActivity().getString(R.string.weather_drizzle);
+                break;
+            case 500 : icon = getActivity().getString(R.string.weather_drizzle);
+                break;
+            case 502 : icon = getActivity().getString(R.string.weather_rainy);
+                break;
+            case 503 : icon = getActivity().getString(R.string.weather_rainy);
+                break;
+            case 504 : icon = getActivity().getString(R.string.weather_rainy);
+                break;
+            case 511 : icon = getActivity().getString(R.string.weather_rain_wind);
+                break;
+            case 520 : icon = getActivity().getString(R.string.weather_shower_rain);
+                break;
+            case 521 : icon = getActivity().getString(R.string.weather_drizzle);
+                break;
+            case 522 : icon = getActivity().getString(R.string.weather_thunder);
+                break;
+            case 531 : icon = getActivity().getString(R.string.weather_thunder);
+                break;
+            case 200 : icon = getActivity().getString(R.string.weather_thunder);
+                break;
+            case 201 : icon = getActivity().getString(R.string.weather_thunder);
+                break;
+            case 202 : icon = getActivity().getString(R.string.weather_thunder);
+                break;
+            case 210 : icon = getActivity().getString(R.string.weather_thunder);
+                break;
+            case 211 : icon = getActivity().getString(R.string.weather_thunder);
+                break;
+            case 212 : icon = getActivity().getString(R.string.weather_thunder);
+                break;
+            case 221 : icon = getActivity().getString(R.string.weather_thunder);
+                break;
+            case 230 : icon = getActivity().getString(R.string.weather_thunder);
+                break;
+            case 231 : icon = getActivity().getString(R.string.weather_thunder);
+                break;
+            case 232 : icon = getActivity().getString(R.string.weather_thunder);
+                break;
+            case 300 : icon = getActivity().getString(R.string.weather_shower_rain);
+                break;
+            case 301 : icon = getActivity().getString(R.string.weather_shower_rain);
+                break;
+            case 302 : icon = getActivity().getString(R.string.weather_heavy_drizzle);
+                break;
+            case 310 : icon = getActivity().getString(R.string.weather_shower_rain);
+                break;
+            case 311 : icon = getActivity().getString(R.string.weather_shower_rain);
+                break;
+            case 312 : icon = getActivity().getString(R.string.weather_heavy_drizzle);
+                break;
+            case 313 : icon = getActivity().getString(R.string.weather_rain_drizzle);
+                break;
+            case 314 : icon = getActivity().getString(R.string.weather_heavy_drizzle);
+                break;
+            case 321 : icon = getActivity().getString(R.string.weather_heavy_drizzle);
+                break;
+            case 600 : icon = getActivity().getString(R.string.weather_snowy);
+                break;
+            case 601 : icon = getActivity().getString(R.string.weather_snowy);
+                break;
+            case 602 : icon = getActivity().getString(R.string.weather_heavy_snow);
+                break;
+            case 611 : icon = getActivity().getString(R.string.weather_sleet);
+                break;
+            case 612 : icon = getActivity().getString(R.string.weather_heavy_snow);
+                break;
+            case 615 : icon = getActivity().getString(R.string.weather_snowy);
+                break;
+            case 616 : icon = getActivity().getString(R.string.weather_snowy);
+                break;
+            case 620 : icon = getActivity().getString(R.string.weather_snowy);
+                break;
+            case 621 : icon = getActivity().getString(R.string.weather_snowy);
+                break;
+            case 622 : icon = getActivity().getString(R.string.weather_snowy);
+                break;
+        }
+        weatherIcon3.setText(icon);
     }
 
     public void changeCity(String city){
@@ -88,24 +344,43 @@ public class WeatherFragment extends Fragment {
             cityField.setText(json.getString("name").toUpperCase(Locale.US) +
                     ", " +
                     json.getJSONObject("sys").getString("country"));
+            Log.i("Location" , "Location Received");
 
-            JSONObject details = json.getJSONArray("weather").getJSONObject(0);
-            JSONObject main = json.getJSONObject("main");
-            detailsField.setText(
-                    details.getString("description").toUpperCase(Locale.US) +
-                            "\n" + "Humidity: " + main.getString("humidity") + "%" +
-                            "\n" + "Pressure: " + main.getString("pressure") + " hPa");
+            /*JSONObject details = json.getJSONArray("weather").getJSONObject(0);
+            JSONObject main = json.getJSONObject("main");*/
 
-            currentTemperatureField.setText(
-                    String.format("%.2f", main.getDouble("temp"))+ " ℃");
+            JSONObject details1 = json.getJSONArray("list").getJSONObject(0);
+            JSONObject details2 = json.getJSONArray("list").getJSONObject(1);
+            JSONObject details3 = json.getJSONArray("list").getJSONObject(2);
+            Log.i("Objects" , "JSON Objects Created");
+            detailsField1.setText(
+                    details1.getJSONArray("weather").getJSONObject(0).getString("description").toUpperCase(Locale.US) +
+                            "\n" + "Humidity: " + details1.getString("humidity") + "%" +
+                            "\n" + "Pressure: " + details1.getString("pressure") + " hPa");
+            Log.i("Infor String 1","Details Done");
+            detailsField2.setText(
+                    details2.getJSONArray("weather").getJSONObject(0).getString("description").toUpperCase(Locale.US) +
+                            "\n" + "Humidity: " + details2.getString("humidity") + "%" +
+                            "\n" + "Pressure: " + details2.getString("pressure") + " hPa");
+            Log.i("Infor String 2","Details Done");
 
-            DateFormat df = DateFormat.getDateTimeInstance();
+            detailsField3.setText(
+                    details3.getJSONArray("weather").getJSONObject(0).getString("description").toUpperCase(Locale.US) +
+                            "\n" + "Humidity: " + details3.getString("humidity") + "%" +
+                            "\n" + "Pressure: " + details3.getString("pressure") + " hPa");
+            Log.i("Infor String 3","Details Done");
+
+
+            //currentTemperatureField.setText(String.format("%.2f", main.getDouble("temp"))+ " ℃");
+
+            /*DateFormat df = DateFormat.getDateTimeInstance();
             String updatedOn = df.format(new Date(json.getLong("dt")*1000));
-            updatedField.setText("Last update: " + updatedOn);
+            updatedField.setText("Last update: " + updatedOn);*/
 
-            setWeatherIcon(details.getInt("id"),
-                    json.getJSONObject("sys").getLong("sunrise") * 1000,
-                    json.getJSONObject("sys").getLong("sunset") * 1000);
+            setWeatherIcon1(details1.getJSONArray("weather").getJSONObject(0).getInt("id"));
+            setWeatherIcon2(details2.getJSONArray("weather").getJSONObject(0).getInt("id"));
+            setWeatherIcon3(details3.getJSONArray("weather").getJSONObject(0).getInt("id"));
+
 
         }catch(Exception e){
             Log.e("SimpleWeather", "One or more fields not found in the JSON data");
@@ -122,11 +397,16 @@ public class WeatherFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_weather, container, false);
         cityField = (TextView)rootView.findViewById(R.id.city_field);
         updatedField = (TextView)rootView.findViewById(R.id.updated_field);
-        detailsField = (TextView)rootView.findViewById(R.id.details_field);
+        detailsField2 = (TextView)rootView.findViewById(R.id.details_field2);
         currentTemperatureField = (TextView)rootView.findViewById(R.id.current_temperature_field);
-        weatherIcon = (TextView)rootView.findViewById(R.id.weather_icon);
-
-        weatherIcon.setTypeface(weatherFont);
+        weatherIcon2 = (TextView)rootView.findViewById(R.id.weather_icon2);
+        weatherIcon1 = (TextView)rootView.findViewById(R.id.weather_icon1);
+        weatherIcon3 = (TextView)rootView.findViewById(R.id.weather_icon3);
+        detailsField1 = (TextView)rootView.findViewById(R.id.details_field1);
+        detailsField3 = (TextView)rootView.findViewById(R.id.details_field3);
+        weatherIcon1.setTypeface(weatherFont);
+        weatherIcon3.setTypeface(weatherFont);
+        weatherIcon2.setTypeface(weatherFont);
         return rootView;
     }
 
