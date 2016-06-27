@@ -341,9 +341,9 @@ public class WeatherFragment extends Fragment {
 
     private void renderWeather(JSONObject json){
         try {
-            cityField.setText(json.getString("name").toUpperCase(Locale.US) +
+            cityField.setText(json.getJSONObject("city").getString("name").toUpperCase(Locale.US) +
                     ", " +
-                    json.getJSONObject("sys").getString("country"));
+                    json.getJSONObject("city").getString("country"));
             Log.i("Location" , "Location Received");
 
             /*JSONObject details = json.getJSONArray("weather").getJSONObject(0);
