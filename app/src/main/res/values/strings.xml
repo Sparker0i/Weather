@@ -22,6 +22,12 @@
     <string name="weather_heavy_snow">&#xf076;</string>
     <string name="weather_shower_rain">&#xf01a;</string>
     <string name="weather_sleet">&#xf0b5;</string>
+    <string name="weather_smoke">&#xf062;</string>
+    <string name="weather_dust">&#xf063;</string>
+    <string name="weather_storm">&#xf0ce;</string>
+    <string name="weather_hurricane">&#xf0cf;</string>
+    <string name="weather_volcano">&#xf0c8;</string>
+    <string name="weather_tornado">&#xf056;</string>
     <string name="place_not_found">Sorry, no weather data found.</string>
 
 </resources>
