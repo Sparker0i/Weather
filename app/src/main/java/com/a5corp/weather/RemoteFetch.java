@@ -7,47 +7,50 @@ import java.net.URL;
 
 import org.json.JSONObject;
 
+import android.app.Activity;
 import android.content.Context;
+import android.location.Location;
+
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
 
 public class RemoteFetch {
 
-    private static final String OPEN_WEATHER_MAP_API =
-            "http://api.openweathermap.org/data/2.5/forecast/daily?q=%s&units=metric&cnt=10";
-
-    private static final String OPEN_WEATHER_API =
-            "http://api.openweathermap.org/data/2.5/weather?q=%s&units=metric";
+    private static final String OPEN_WEATHER_MAP_FORECAST_API = "http://api.openweathermap.org/data/2.5/forecast/daily?q=%s&units=metric&cnt=10";
+    private static final String OPEN_WEATHER_MAP_DAILY_API = "http://api.openweathermap.org/data/2.5/weather?q=%s&units=metric";
+    private GoogleApiClient mGoogleApiClient;
+    private Location mLastLocation;
 
     public static JSONObject[] getJSON(Context context, String city){
+        double Latitude , Longitude;
         try {
-            URL url = new URL(String.format(OPEN_WEATHER_MAP_API, city));
-            URL url1 = new URL(String.format(OPEN_WEATHER_API, city));
+            URL day = new URL(String.format(OPEN_WEATHER_MAP_FORECAST_API, city));
+            URL fort = new URL(String.format(OPEN_WEATHER_MAP_DAILY_API, city));
 
-            HttpURLConnection connection =
-                    (HttpURLConnection)url.openConnection();
-            HttpURLConnection connection1 =
-                    (HttpURLConnection)url1.openConnection();
+            HttpURLConnection connection0 = (HttpURLConnection)day.openConnection();
+            HttpURLConnection connection1 = (HttpURLConnection)fort.openConnection();
 
-            connection.addRequestProperty("x-api-key",
-                    context.getString(R.string.open_weather_maps_app_id));
-            connection1.addRequestProperty("x-api-key" ,
-                    context.getString(R.string.open_weather_maps_app_id));
+            connection0.addRequestProperty("x-api-key", context.getString(R.string.open_weather_maps_app_id));
+            connection1.addRequestProperty("x-api-key", context.getString(R.string.open_weather_maps_app_id));
 
-            BufferedReader reader = new BufferedReader(
-                    new InputStreamReader(connection.getInputStream())) , reader1 = new BufferedReader(
-                    new InputStreamReader(connection1.getInputStream())
-            );
-
+            BufferedReader reader;
             StringBuffer json = new StringBuffer(1024) , json1 = new StringBuffer(1024);
+
+            reader= new BufferedReader(new InputStreamReader(connection0.getInputStream()));
             String tmp="";
             while((tmp=reader.readLine())!=null)
                 json.append(tmp).append("\n");
             reader.close();
+
+            reader = new BufferedReader(new InputStreamReader(connection1.getInputStream()));
             String tmp1="";
-            while((tmp1=reader1.readLine())!=null)
+            while((tmp1=reader.readLine())!=null)
                 json1.append(tmp1).append("\n");
-            reader1.close();
+            reader.close();
 
             JSONObject data = new JSONObject(json.toString()) , data1 = new JSONObject(json1.toString());
+            double latitude = data1.getJSONObject("coord").getDouble("lat") , longitude = data1.getJSONObject("coord").getDouble("lon");
+
 
             // This value will be 404 if the request was not
             // successful

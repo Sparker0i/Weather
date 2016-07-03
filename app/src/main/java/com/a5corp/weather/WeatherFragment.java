@@ -1,6 +1,5 @@
 package com.a5corp.weather;
 
-import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
