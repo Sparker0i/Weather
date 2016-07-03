@@ -25,7 +25,9 @@
         android:layout_below="@+id/city_field"
         android:layout_alignParentStart="false"
         android:layout_marginTop="84dp"
-        android:weightSum="1">
+        android:weightSum="1"
+        android:layout_marginBottom="40dp"
+        android:id="@+id/linearLayout2">
 
         <HorizontalScrollView
             android:layout_width="match_parent"
@@ -286,5 +288,21 @@
             </LinearLayout>
         </HorizontalScrollView>
     </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/current_temperature_field"
+        android:layout_below="@+id/updated_field"
+        android:layout_alignStart="@+id/updated_field" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/updated_field"
+        android:layout_below="@+id/city_field"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

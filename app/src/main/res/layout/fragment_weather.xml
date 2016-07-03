@@ -18,6 +18,14 @@
         android:textColor="#FFFFFF"
         android:textSize="48sp" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/updated_field"
+        android:layout_below="@+id/city_field"
+        android:layout_centerHorizontal="true" />
+
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -25,7 +33,9 @@
         android:layout_below="@+id/city_field"
         android:layout_alignParentStart="false"
         android:layout_marginTop="84dp"
-        android:weightSum="1">
+        android:weightSum="1"
+        android:id="@+id/linearLayout"
+        android:layout_marginBottom="40dp">
 
         <HorizontalScrollView
             android:layout_width="match_parent"
@@ -155,6 +165,24 @@
                 </LinearLayout>
             </LinearLayout>
         </HorizontalScrollView>
+
     </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/current_temperature_field"
+        android:layout_below="@+id/linearLayout"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
+        android:id="@+id/cField"
+        android:layout_alignBottom="@+id/updated_field"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

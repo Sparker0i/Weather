@@ -25,15 +25,13 @@ public class WeatherFragment extends Fragment {
     TextView cityField;
     TextView updatedField;
     TextView detailsField[] = new TextView[10] , weatherIcon[] = new TextView[10];
-    //TextView detailsField2 , detailsField1 , detailsField3;
-    //TextView currentTemperatureField;
-    //TextView weatherIcon2 , weatherIcon1 , weatherIcon3;
+    TextView currentTemperatureField;
 
     Handler handler;
     private void updateWeatherData(final String city){
         new Thread(){
             public void run(){
-                final JSONObject json = RemoteFetch.getJSON(getActivity(), city);
+                final JSONObject[] json = RemoteFetch.getJSON(getActivity(), city);
                 if(json == null){
                     handler.post(new Runnable(){
                         public void run(){
@@ -200,8 +198,10 @@ public class WeatherFragment extends Fragment {
         updateWeatherData(city);
     }
 
-    private void renderWeather(JSONObject json){
+    private void renderWeather(JSONObject[] jsonj){
         try {
+            JSONObject json = jsonj[0] , json1 = jsonj[1];
+
             cityField.setText(json.getJSONObject("city").getString("name").toUpperCase(Locale.US) +
                     ", " +
                     json.getJSONObject("city").getString("country"));
@@ -220,11 +220,11 @@ public class WeatherFragment extends Fragment {
                 Log.i("Details[" + Integer.toString(i) + "]", "Infor String " + Integer.toString(i + 1) + " loaded");
                 setWeatherIcon(details[i].getJSONArray("weather").getJSONObject(0).getInt("id") , i);
             }
-            //currentTemperatureField.setText(String.format("%.2f", main.getDouble("temp"))+ " ℃");
-
-            /*DateFormat df = DateFormat.getDateTimeInstance();
-            String updatedOn = df.format(new Date(json.getLong("dt")*1000));
-            updatedField.setText("Last update: " + updatedOn);*/
+            JSONObject main = json1.getJSONObject("main");
+            currentTemperatureField.setText(String.format("%.2f", main.getDouble("temp"))+ " ℃");
+            DateFormat df = DateFormat.getDateTimeInstance();
+            String updatedOn = df.format(new Date(json1.getLong("dt")*1000));
+            updatedField.setText("Last update: " + updatedOn);
         }catch(Exception e){
             Log.e("SimpleWeather", "One or more fields not found in the JSON data");
         }
@@ -239,7 +239,8 @@ public class WeatherFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_weather, container, false);
         cityField = (TextView)rootView.findViewById(R.id.city_field);
-        //currentTemperatureField = (TextView)rootView.findViewById(R.id.current_temperature_field);
+        currentTemperatureField = (TextView)rootView.findViewById(R.id.current_temperature_field);
+        updatedField = (TextView)rootView.findViewById(R.id.updated_field);
         for (int i = 0; i < 10; ++i)
         {
             String f = "details_view" + (i + 1) , g = "weather_icon" + (i + 1);
