@@ -1,31 +1,38 @@
 package com.a5corp.weather;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.RelativeSizeSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 
 import org.json.JSONObject;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Calendar;
 import java.util.Locale;
 
 public class WeatherFragment extends Fragment {
     Typeface weatherFont;
-
-    TextView cityField;
-    TextView updatedField;
-    TextView detailsField[] = new TextView[10] , weatherIcon[] = new TextView[10];
-    TextView currentTemperatureField;
-
+    Button button;
+    ProgressDialog pd;
+    TextView detailsField[] = new TextView[10] , weatherIcon[] = new TextView[11];
+    TextView currentTemperatureField , windView , humidityView , directionView, dailyView, updatedField, cityField;
+    double tc , tf;
     Handler handler;
     private void updateWeatherData(final String city){
         new Thread(){
@@ -50,34 +57,263 @@ public class WeatherFragment extends Fragment {
         }.start();
     }
 
-    /*private void setWeatherIcon(int actualId, long sunrise, long sunset){                   //CHANGE THIS SHIT ASAP
-        int id = actualId / 100;
-        String icon = "";
-        if(actualId == 800){
-            long currentTime = new Date().getTime();
-            if(currentTime>=sunrise && currentTime<sunset) {
-                icon = getActivity().getString(R.string.weather_sunny);
-            } else {
-                icon = getActivity().getString(R.string.weather_clear_night);
-            }
-        } else {
-            switch(id) {
-                case 2 : icon = getActivity().getString(R.string.weather_thunder);
+    public void Units(JSONObject json1)
+    {
+        try {
+            String x = button.getText().toString();
+            switch (x) {
+                case "°C":
+                    double Fah = json1.getJSONObject("main").getDouble("temp") * 1.8 + 32;
+                    int F = (int) Fah;
+                    currentTemperatureField.setText(Integer.toString(F) + "°");
+                    button.setText("°F");
                     break;
-                case 3 : icon = getActivity().getString(R.string.weather_drizzle);
-                    break;
-                case 7 : icon = getActivity().getString(R.string.weather_foggy);
-                    break;
-                case 8 : icon = getActivity().getString(R.string.weather_cloudy);
-                    break;
-                case 6 : icon = getActivity().getString(R.string.weather_snowy);
-                    break;
-                case 5 : icon = getActivity().getString(R.string.weather_rainy);
+                case "°F":
+                    currentTemperatureField.setText((int) Math.round(json1.getJSONObject("main").getDouble("temp")) + "°");
+                    button.setText("°C");
                     break;
             }
         }
-        weatherIcon2.setText(icon);
-    }*/
+        catch (Exception ex)
+        {
+            Log.e("Not Found" , "BFFK");
+        }
+    }
+
+    public void changeCity(String city)
+    {
+        updateWeatherData(city);
+    }
+
+    private void renderWeather(JSONObject[] jsonj){
+        try {
+            button.setVisibility(View.INVISIBLE);
+            Log.i("Showed" , "Done");
+            final JSONObject json = jsonj[0] , json1 = jsonj[1];
+            tc = json1.getJSONObject("main").getDouble("temp");
+            tf = (1.8 * tc + 32);
+            button.setText("°C");
+            cityField.setText(json.getJSONObject("city").getString("name").toUpperCase(Locale.US) +
+                    ", " +
+                    json.getJSONObject("city").getString("country"));
+            cityField.setOnClickListener(new View.OnClickListener()
+            {
+                public void onClick(View v) {
+                    AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create(); //Read Update
+                    alertDialog.setTitle("City Information");
+                    try {
+                        alertDialog.setMessage(json.getJSONObject("city").getString("name").toUpperCase(Locale.US) +
+                                ", " +
+                                json.getJSONObject("city").getString("country"));
+                        alertDialog.show();
+                        Log.i("Load", "BFFK");
+                    } catch (Exception ex) {
+                        Log.e("Error", "FFFF");
+                    }
+                }
+            });
+            Log.i("Location" , "Location Received");
+            JSONObject details[] = new JSONObject[10];
+            for (int i = 0; i < 10; ++i)
+            {
+                details[i] = json.getJSONArray("list").getJSONObject(i);
+            }
+            Log.i("Objects" , "JSON Objects Created");
+            for (int i = 0; i < 10; ++i)
+            {
+                final JSONObject J = details[i];
+                String date1 = details[i].getString("dt");
+                Date expiry = new Date(Long.parseLong(date1) * 1000);
+                String date = new SimpleDateFormat("EE, dd").format(expiry);
+                SpannableString ss1=  new SpannableString(date + "\n"
+                + details[i].getJSONObject("temp").getLong("max") + "°" + "      "
+                + details[i].getJSONObject("temp").getLong("min") + "°" + "\n");
+                ss1.setSpan(new RelativeSizeSpan(1.1f), 0,7, 0); // set size
+                ss1.setSpan(new RelativeSizeSpan(1.4f) , 8 , 11 , 0);
+                detailsField[i].setText(ss1);
+                Log.i("Details[" + Integer.toString(i) + "]", "Infor String " + Integer.toString(i + 1) + " loaded");
+                setWeatherIcon(details[i].getJSONArray("weather").getJSONObject(0).getInt("id") , i);
+                detailsField[i].setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v)
+                    {
+                        AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create(); //Read Update
+                        alertDialog.setTitle("Weather Information");
+                        try{
+                            String date1 = J.getString("dt");
+                            Date expiry = new Date(Long.parseLong(date1) * 1000);
+                            String date = new SimpleDateFormat("EE, dd MMMM yyyy").format(expiry);
+                        alertDialog.setMessage(date +
+                                "\n" + J.getJSONArray("weather").getJSONObject(0).getString("description").toUpperCase(Locale.US) +
+                                "\n" + "Maximum: " + J.getJSONObject("temp").getLong("max") + " ℃" +
+                                "\n" + "Minimum:  " + J.getJSONObject("temp").getLong("min") + " ℃" +
+                                "\n" + "Morning:    " + J.getJSONObject("temp").getLong("morn") + " ℃" +
+                                "\n" + "At Night:    " + J.getJSONObject("temp").getLong("night") + " ℃" +
+                                "\n" + "Evening:    " + J.getJSONObject("temp").getLong("eve") + " ℃" +
+                                "\n" + "Humidity:  " + J.getString("humidity") + "%" +
+                                "\n" + "Pressure:  " + J.getString("pressure") + " hPa" +
+                                "\n" + "Wind:         " + J.getString("speed") + "km/h");
+                            alertDialog.show();
+                        Log.i("Load" , "BFFK");}
+                        catch (Exception e) {
+                            Log.e("Error", "FO");
+                        }
+                    }
+                });
+                weatherIcon[i].setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v)
+                    {
+                        AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create(); //Read Update
+                        alertDialog.setTitle("Weather Information");
+                        try{
+                            String date1 = J.getString("dt");
+                            Date expiry = new Date(Long.parseLong(date1) * 1000);
+                            String date = new SimpleDateFormat("EE, dd MMMM yyyy").format(expiry);
+                            alertDialog.setMessage(date +
+                                    "\n" + J.getJSONArray("weather").getJSONObject(0).getString("description").toUpperCase(Locale.US) +
+                                    "\n" + "Maximum: " + J.getJSONObject("temp").getLong("max") + " ℃" +
+                                    "\n" + "Minimum:  " + J.getJSONObject("temp").getLong("min") + " ℃" +
+                                    "\n" + "Morning:    " + J.getJSONObject("temp").getLong("morn") + " ℃" +
+                                    "\n" + "At Night:    " + J.getJSONObject("temp").getLong("night") + " ℃" +
+                                    "\n" + "Evening:    " + J.getJSONObject("temp").getLong("eve") + " ℃" +
+                                    "\n" + "Humidity:  " + J.getString("humidity") + "%" +
+                                    "\n" + "Pressure:  " + J.getString("pressure") + " hPa" +
+                                    "\n" + "Wind:         " + J.getString("speed") + "km/h");
+                            alertDialog.show();
+                            Log.i("Load" , "BFFK");}
+                        catch (Exception e) {
+                            Log.e("Error", "FO");
+                        }
+                    }
+                });
+            }
+            int a = (int) Math.round(json1.getJSONObject("main").getDouble("temp"));
+            currentTemperatureField.setText(Integer.toString(a) + "°");         //℃
+            DateFormat df = DateFormat.getDateTimeInstance();
+            String updatedOn = df.format(new Date(json1.getLong("dt")*1000));
+            updatedField.setText("Last update: " + updatedOn);
+            int deg = json1.getJSONObject("wind").getInt("deg");
+            if (deg < 90)
+                directionView.setText(getActivity().getString(R.string.top_right));
+            else if (deg == 90)
+                directionView.setText(getActivity().getString(R.string.right));
+            else if (deg < 180)
+                directionView.setText(getActivity().getString(R.string.bottom_right));
+            else if (deg == 180)
+                directionView.setText(getActivity().getString(R.string.down));
+            else if (deg < 270)
+                directionView.setText(getActivity().getString(R.string.bottom_left));
+            else if (deg == 270)
+                directionView.setText(getActivity().getString(R.string.left));
+            else
+                directionView.setText(getActivity().getString(R.string.top_left));
+            setWeatherIcon(json1.getJSONArray("weather").getJSONObject(0).getInt("id"),10);
+            humidityView.setText("HUMIDITY:\n" + json1.getJSONObject("main").getInt("humidity") + "%");
+            Log.i("Humidity Loaded" , "Done");
+            windView.setText("WIND:\n" + json1.getJSONObject("wind").getDouble("speed") + "km/h");
+            Log.i("Wind Loaded" , "Done");
+            Log.i("10" , "Weather Icon 11 Set");
+            button.setOnClickListener(new View.OnClickListener() {
+                public void onClick (View v)
+                {
+                    Units(json1);
+                }
+            });
+            weatherIcon[10].setOnClickListener(new View.OnClickListener()
+            {
+                public void onClick (View v)
+                {
+                    AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create(); //Read Update
+                    alertDialog.setTitle("Weather Information");
+                    try{
+                        String d1 = new java.text.SimpleDateFormat("hh:mm:ss a").format(new Date(json1.getJSONObject("sys").getLong("sunrise")*1000));
+                        String d2 = new java.text.SimpleDateFormat("hh:mm:ss a").format(new Date(json1.getJSONObject("sys").getLong("sunset")*1000));
+                        alertDialog.setMessage(json1.getJSONArray("weather").getJSONObject(0).getString("description").toUpperCase(Locale.US) +
+                                "\n" + "TEMPERATURE :\t " + json1.getJSONObject("main").getInt("temp") + " ℃" +
+                                "\n" + "Maximum:\t " + json1.getJSONObject("main").getDouble("temp_max") + " ℃" +
+                                "\n" + "Minimum:\t " + json1.getJSONObject("main").getDouble("temp_min") + " ℃" +
+                                "\n" + "Humidity:\t   " + json1.getJSONObject("main").getString("humidity") + "%" +
+                                "\n" + "Pressure:\t   " + json1.getJSONObject("main").getString("pressure") + " hPa" +
+                                "\n" + "Wind:\t        " + json1.getJSONObject("wind").getString("speed") + "km/h" +
+                                "\n" + "Sunrise:\t  " + d1 +
+                                "\n" + "Sunset:\t  " + d2);
+                        alertDialog.show();
+                        Log.i("Load" , "BFFK");}
+                    catch (Exception e) {
+                        Log.e("Error", "FO");
+                    }
+                }
+            });
+            currentTemperatureField.setOnClickListener(new View.OnClickListener()
+            {
+                public void onClick (View v)
+                {
+                    AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create(); //Read Update
+                    alertDialog.setTitle("Weather Information");
+                    try{
+                        String d1 = new java.text.SimpleDateFormat("hh:mm:ss a").format(new Date(json1.getJSONObject("sys").getLong("sunrise")*1000));
+                        String d2 = new java.text.SimpleDateFormat("hh:mm:ss a").format(new Date(json1.getJSONObject("sys").getLong("sunset")*1000));
+                        alertDialog.setMessage(json1.getJSONArray("weather").getJSONObject(0).getString("description").toUpperCase(Locale.US) +
+                                "\n" + "TEMPERATURE :\t " + json1.getJSONObject("main").getInt("temp") + " ℃" +
+                                "\n" + "Maximum:\t " + json1.getJSONObject("main").getDouble("temp_max") + " ℃" +
+                                "\n" + "Minimum:\t " + json1.getJSONObject("main").getDouble("temp_min") + " ℃" +
+                                "\n" + "Humidity:\t   " + json1.getJSONObject("main").getString("humidity") + "%" +
+                                "\n" + "Pressure:\t   " + json1.getJSONObject("main").getString("pressure") + " hPa" +
+                                "\n" + "Wind:\t        " + json1.getJSONObject("wind").getString("speed") + "km/h" +
+                                "\n" + "Sunrise:\t  " + d1 +
+                                "\n" + "Sunset:\t  " + d2);
+                        alertDialog.show();
+                        Log.i("Load" , "BFFK");
+                    }
+                    catch (Exception e) {
+                        Log.e("Error", "FO");
+                    }
+                }
+            });
+            button.setVisibility(View.VISIBLE);
+        }catch(Exception e){
+            Log.e("SimpleWeather", "One or more fields not found in the JSON data");
+        }
+    }
+
+    public WeatherFragment(){
+        handler = new Handler();
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_weather, container, false);
+        cityField = (TextView)rootView.findViewById(R.id.city_field);
+        currentTemperatureField = (TextView)rootView.findViewById(R.id.current_temperature_field);
+        updatedField = (TextView)rootView.findViewById(R.id.updated_field);
+        humidityView = (TextView) rootView.findViewById(R.id.humidity_view);
+        windView = (TextView) rootView.findViewById(R.id.wind_view);
+        directionView = (TextView)rootView.findViewById(R.id.direction_view);
+        directionView.setTypeface(weatherFont);
+        dailyView = (TextView)rootView.findViewById(R.id.daily_view);
+        dailyView.setText("DAILY");
+        button = (Button)rootView.findViewById(R.id.button);
+        button.setText("°C");
+        for (int i = 0; i < 11; ++i)
+        {
+            String f = "details_view" + (i + 1) , g = "weather_icon" + (i + 1);
+            if (i != 10) {
+                int resID = getResources().getIdentifier(f, "id", getContext().getPackageName());
+                detailsField[i] = (TextView) rootView.findViewById(resID);
+            }
+            int resIDI = getResources().getIdentifier(g, "id" , getContext().getPackageName());
+            weatherIcon[i] = (TextView)rootView.findViewById(resIDI);
+            weatherIcon[i].setTypeface(weatherFont);
+        }
+        return rootView;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        weatherFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/weather.ttf");
+        updateWeatherData(new CityPreference(getActivity()).getCity());
+    }
 
     private void setWeatherIcon(int id , int i){
         String icon = "";
@@ -177,12 +413,16 @@ public class WeatherFragment extends Fragment {
             case 900 :
             case 781 : icon = getActivity().getString(R.string.weather_tornado);
                 break;
-            case 904 :
+            case 904 : icon = getActivity().getString(R.string.weather_sunny);
+                break;
             case 800 : icon = getActivity().getString(R.string.weather_sunny);
                 break;
-            case 801 :
-            case 802 :
-            case 803 :
+            case 801 : icon = getActivity().getString(R.string.weather_cloudy);
+                break;
+            case 802 : icon = getActivity().getString(R.string.weather_cloudy);
+                break;
+            case 803 : icon = getActivity().getString(R.string.weather_cloudy);
+                break;
             case 804 : icon = getActivity().getString(R.string.weather_cloudy);
                 break;
             case 901 : icon = getActivity().getString(R.string.weather_storm);
@@ -190,72 +430,7 @@ public class WeatherFragment extends Fragment {
             case 902 : icon = getActivity().getString(R.string.weather_hurricane);
                 break;
         }
+        Log.i(Integer.toString(id) , Integer.toString(i));
         weatherIcon[i].setText(icon);
-    }
-
-    public void changeCity(String city){
-        updateWeatherData(city);
-    }
-
-    private void renderWeather(JSONObject[] jsonj){
-        try {
-            JSONObject json = jsonj[0] , json1 = jsonj[1];
-
-            cityField.setText(json.getJSONObject("city").getString("name").toUpperCase(Locale.US) +
-                    ", " +
-                    json.getJSONObject("city").getString("country"));
-            Log.i("Location" , "Location Received");
-            JSONObject details[] = new JSONObject[10];
-            for (int i = 0; i < 10; ++i)
-            {
-                details[i] = json.getJSONArray("list").getJSONObject(i);
-            }
-            Log.i("Objects" , "JSON Objects Created");
-            for (int i = 0; i < 10; ++i)
-            {
-                detailsField[i].setText(details[i].getJSONArray("weather").getJSONObject(0).getString("description").toUpperCase(Locale.US) +
-                        "\n" + "Humidity: " + details[i].getString("humidity") + "%" +
-                        "\n" + "Pressure: " + details[i].getString("pressure") + " hPa");
-                Log.i("Details[" + Integer.toString(i) + "]", "Infor String " + Integer.toString(i + 1) + " loaded");
-                setWeatherIcon(details[i].getJSONArray("weather").getJSONObject(0).getInt("id") , i);
-            }
-            JSONObject main = json1.getJSONObject("main");
-            currentTemperatureField.setText(String.format("%.2f", main.getDouble("temp"))+ " ℃");
-            DateFormat df = DateFormat.getDateTimeInstance();
-            String updatedOn = df.format(new Date(json1.getLong("dt")*1000));
-            updatedField.setText("Last update: " + updatedOn);
-        }catch(Exception e){
-            Log.e("SimpleWeather", "One or more fields not found in the JSON data");
-        }
-    }
-
-    public WeatherFragment(){
-        handler = new Handler();
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_weather, container, false);
-        cityField = (TextView)rootView.findViewById(R.id.city_field);
-        currentTemperatureField = (TextView)rootView.findViewById(R.id.current_temperature_field);
-        updatedField = (TextView)rootView.findViewById(R.id.updated_field);
-        for (int i = 0; i < 10; ++i)
-        {
-            String f = "details_view" + (i + 1) , g = "weather_icon" + (i + 1);
-            int resID = getResources().getIdentifier(f, "id" , getContext().getPackageName());
-            detailsField[i] = (TextView)rootView.findViewById(resID);
-            int resIDI = getResources().getIdentifier(g, "id" , getContext().getPackageName());
-            weatherIcon[i] = (TextView)rootView.findViewById(resIDI);
-            weatherIcon[i].setTypeface(weatherFont);
-        }
-        return rootView;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        weatherFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/weather.ttf");
-        updateWeatherData(new CityPreference(getActivity()).getCity());
     }
 }

@@ -11,14 +11,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.location.Location;
 
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationServices;
-
 public class RemoteFetch {
 
     private static final String OPEN_WEATHER_MAP_FORECAST_API = "http://api.openweathermap.org/data/2.5/forecast/daily?q=%s&units=metric&cnt=10";
     private static final String OPEN_WEATHER_MAP_DAILY_API = "http://api.openweathermap.org/data/2.5/weather?q=%s&units=metric";
-    private GoogleApiClient mGoogleApiClient;
     private Location mLastLocation;
 
     public static JSONObject[] getJSON(Context context, String city){
@@ -29,7 +25,6 @@ public class RemoteFetch {
 
             HttpURLConnection connection0 = (HttpURLConnection)day.openConnection();
             HttpURLConnection connection1 = (HttpURLConnection)fort.openConnection();
-
             connection0.addRequestProperty("x-api-key", context.getString(R.string.open_weather_maps_app_id));
             connection1.addRequestProperty("x-api-key", context.getString(R.string.open_weather_maps_app_id));
 

@@ -29,5 +29,18 @@
     <string name="weather_volcano">&#xf0c8;</string>
     <string name="weather_tornado">&#xf056;</string>
     <string name="place_not_found">Sorry, no weather data found.</string>
+    <string name="icon">Icon</string>
+    <string name="value">Value</string>
+    <string name="f">F</string>
+    <string name="top_right">&#xf057;</string>
+    <string name="right">&#xf04d;</string>
+    <string name="bottom_right">&#xf088;</string>
+    <string name="down">&#xf044;</string>
+    <string name="bottom_left">&#xf043;</string>
+    <string name="left">&#xf048;</string>
+    <string name="top_left">&#xf087;</string>
+    <string name="celsius">CELSIUS</string>
+    <string name="c">°C</string>
+    <string name="daily">DAILY</string>
 
 </resources>

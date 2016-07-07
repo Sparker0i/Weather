@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="icon">Icon</string>
+    <string name="value">Value</string>
+    <string name="f">F</string>
+    <string name="celsius">CELSIUS</string>
+    <string name="c">°C</string>
+    <string name="daily">DAILY</string>
+</resources>
