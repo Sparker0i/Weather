@@ -31,9 +31,10 @@ public class WeatherFragment extends Fragment {
     Button button;
     ProgressDialog pd;
     TextView detailsField[] = new TextView[10] , weatherIcon[] = new TextView[11];
-    TextView currentTemperatureField , windView , humidityView , directionView, dailyView, updatedField, cityField;
-    double tc , tf;
+    TextView windView , humidityView , directionView, dailyView, updatedField, cityField;
+    double tc;
     Handler handler;
+    int Clicks = 0;
     private void updateWeatherData(final String city){
         new Thread(){
             public void run(){
@@ -60,17 +61,17 @@ public class WeatherFragment extends Fragment {
     public void Units(JSONObject json1)
     {
         try {
-            String x = button.getText().toString();
-            switch (x) {
-                case "°C":
+            int bool = Clicks % 2;
+            switch (bool) {
+                case 0 :
                     double Fah = json1.getJSONObject("main").getDouble("temp") * 1.8 + 32;
                     int F = (int) Fah;
-                    currentTemperatureField.setText(Integer.toString(F) + "°");
-                    button.setText("°F");
+                    button.setText(Integer.toString(F) + "°F");
+                    ++Clicks;
                     break;
-                case "°F":
-                    currentTemperatureField.setText((int) Math.round(json1.getJSONObject("main").getDouble("temp")) + "°");
-                    button.setText("°C");
+                case 1:
+                    button.setText((int) Math.round(json1.getJSONObject("main").getDouble("temp")) + "°C");
+                    ++Clicks;
                     break;
             }
         }
@@ -88,11 +89,12 @@ public class WeatherFragment extends Fragment {
     private void renderWeather(JSONObject[] jsonj){
         try {
             button.setVisibility(View.INVISIBLE);
+            Clicks = 0;
             Log.i("Showed" , "Done");
             final JSONObject json = jsonj[0] , json1 = jsonj[1];
             tc = json1.getJSONObject("main").getDouble("temp");
-            tf = (1.8 * tc + 32);
-            button.setText("°C");
+            int a = (int) Math.round(json1.getJSONObject("main").getDouble("temp"));
+            //button.setText("°C");         //℃
             cityField.setText(json.getJSONObject("city").getString("name").toUpperCase(Locale.US) +
                     ", " +
                     json.getJSONObject("city").getString("country"));
@@ -186,8 +188,6 @@ public class WeatherFragment extends Fragment {
                     }
                 });
             }
-            int a = (int) Math.round(json1.getJSONObject("main").getDouble("temp"));
-            currentTemperatureField.setText(Integer.toString(a) + "°");         //℃
             DateFormat df = DateFormat.getDateTimeInstance();
             String updatedOn = df.format(new Date(json1.getLong("dt")*1000));
             updatedField.setText("Last update: " + updatedOn);
@@ -243,32 +243,7 @@ public class WeatherFragment extends Fragment {
                     }
                 }
             });
-            currentTemperatureField.setOnClickListener(new View.OnClickListener()
-            {
-                public void onClick (View v)
-                {
-                    AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create(); //Read Update
-                    alertDialog.setTitle("Weather Information");
-                    try{
-                        String d1 = new java.text.SimpleDateFormat("hh:mm:ss a").format(new Date(json1.getJSONObject("sys").getLong("sunrise")*1000));
-                        String d2 = new java.text.SimpleDateFormat("hh:mm:ss a").format(new Date(json1.getJSONObject("sys").getLong("sunset")*1000));
-                        alertDialog.setMessage(json1.getJSONArray("weather").getJSONObject(0).getString("description").toUpperCase(Locale.US) +
-                                "\n" + "TEMPERATURE :\t " + json1.getJSONObject("main").getInt("temp") + " ℃" +
-                                "\n" + "Maximum:\t " + json1.getJSONObject("main").getDouble("temp_max") + " ℃" +
-                                "\n" + "Minimum:\t " + json1.getJSONObject("main").getDouble("temp_min") + " ℃" +
-                                "\n" + "Humidity:\t   " + json1.getJSONObject("main").getString("humidity") + "%" +
-                                "\n" + "Pressure:\t   " + json1.getJSONObject("main").getString("pressure") + " hPa" +
-                                "\n" + "Wind:\t        " + json1.getJSONObject("wind").getString("speed") + "km/h" +
-                                "\n" + "Sunrise:\t  " + d1 +
-                                "\n" + "Sunset:\t  " + d2);
-                        alertDialog.show();
-                        Log.i("Load" , "BFFK");
-                    }
-                    catch (Exception e) {
-                        Log.e("Error", "FO");
-                    }
-                }
-            });
+            button.setText(Integer.toString(a) + "°C");
             button.setVisibility(View.VISIBLE);
         }catch(Exception e){
             Log.e("SimpleWeather", "One or more fields not found in the JSON data");
@@ -284,7 +259,6 @@ public class WeatherFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_weather, container, false);
         cityField = (TextView)rootView.findViewById(R.id.city_field);
-        currentTemperatureField = (TextView)rootView.findViewById(R.id.current_temperature_field);
         updatedField = (TextView)rootView.findViewById(R.id.updated_field);
         humidityView = (TextView) rootView.findViewById(R.id.humidity_view);
         windView = (TextView) rootView.findViewById(R.id.wind_view);
@@ -292,7 +266,7 @@ public class WeatherFragment extends Fragment {
         directionView.setTypeface(weatherFont);
         dailyView = (TextView)rootView.findViewById(R.id.daily_view);
         dailyView.setText("DAILY");
-        button = (Button)rootView.findViewById(R.id.button);
+        button = (Button)rootView.findViewById(R.id.button1);
         button.setText("°C");
         for (int i = 0; i < 11; ++i)
         {

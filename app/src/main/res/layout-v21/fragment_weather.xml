@@ -306,16 +306,6 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/current_temperature_field"
-        android:textSize="70sp"
-        android:layout_below="@+id/updated_field"
-        android:layout_toEndOf="@+id/weather_icon11"
-        android:textColor="#FFFFFF" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:id="@+id/updated_field"
         android:layout_below="@+id/city_field"
@@ -327,17 +317,17 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/weather_icon11"
-        android:layout_marginTop="35dp"
-        android:layout_alignTop="@+id/current_temperature_field"
         android:textColor="#FFFFFF"
-        android:layout_marginLeft="115dp" />
+        android:textSize="100sp"
+        android:layout_below="@+id/updated_field"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/button"
-        android:layout_below="@+id/current_temperature_field"
         android:visibility="invisible"
+        android:layout_below="@+id/weather_icon11"
         android:layout_centerHorizontal="true" />
 
     <TextView
@@ -385,6 +375,13 @@
         android:layout_alignParentStart="true"
         android:layout_marginTop="41dp"
         android:textColor="#FFFFFF" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button1"
+        android:layout_above="@+id/direction_view"
+        android:layout_alignStart="@+id/button" />
 
 </RelativeLayout>
     </ScrollView>
