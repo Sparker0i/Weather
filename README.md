@@ -1,4 +1,4 @@
-# WeatherApp
+# Simple Weather
 
 Welcome to my Open Source Weather app
 
