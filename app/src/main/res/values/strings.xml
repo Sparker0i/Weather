@@ -5,6 +5,7 @@
     <string name="change_city">Change city</string>
     <string name="about_dialog">About This App</string>
     <string name="project_link">here</string>
+    <string name="about_page">About App</string>
 
     <!-- Put your own APP ID here -->
     <string name="open_weather_maps_app_id">4c08a22b02c58467e6241629c1d08717</string>

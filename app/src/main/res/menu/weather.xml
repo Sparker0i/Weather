@@ -13,5 +13,10 @@
         android:orderInCategory="1"
         android:title="@string/about_dialog"
         app:showAsAction="never"/>
+    <item
+        android:id="@+id/about_page"
+        android:orderInCategory="1"
+        android:title="@string/about_dialog"
+        app:showAsAction="never"/>
 
 </menu>

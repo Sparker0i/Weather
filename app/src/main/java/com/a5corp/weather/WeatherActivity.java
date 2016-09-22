@@ -1,6 +1,7 @@
 package com.a5corp.weather;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -53,6 +54,10 @@ public class WeatherActivity extends AppCompatActivity {
         }
         else if (item.getItemId() == R.id.about_dialog) {
             showAbout();
+        }
+        else if (item.getItemId() == R.id.about_page) {
+            Intent intent = new Intent(WeatherActivity.this, AboutActivity.class);
+            WeatherActivity.this.startActivity(intent);
         }
         return false;
     }
