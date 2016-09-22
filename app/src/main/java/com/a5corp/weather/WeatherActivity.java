@@ -10,7 +10,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.text.Html;
 import android.text.InputType;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -56,11 +58,34 @@ public class WeatherActivity extends AppCompatActivity {
     }
 
     private void showAbout() {
-        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        /*AlertDialog alertDialog = new AlertDialog.Builder(this).create();
         alertDialog.setTitle("About This App");
         alertDialog.setMessage("Made by Aaditya Menon\n\n" +
-                "Source Code available at https://github.com/Sparker0i/Weather.git");
+                "Source Code available" + Html.fromHtml("<br><a href=https://github.com/Sparker0i/Weather.git> Here</a>"));
         alertDialog.show();
+        */
+        /*TextView tv  = new TextView(this);
+        tv.setMovementMethod(LinkMovementMethod.getInstance());
+        tv.setText(Html.fromHtml("<br><a href=https://play.google.com/store/apps/details?id=com.xxxxxxxxx>Click Here</a>"));
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setView(tv)
+                .setPositiveButton("OK!", new DialogInterface.OnClickListener()
+                {
+
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+
+                    }
+                })
+                .show();*/
+        final AlertDialog d = new AlertDialog.Builder(this)
+                .setPositiveButton(android.R.string.ok, null)
+                .setMessage(Html.fromHtml("<a href=\"https://github.com/Sparker0i/Weather.git\">Click here for the Source Code</a>"))
+                .create();
+        d.show();
+        // Make the textview clickable. Must be called after show()
+        ((TextView)d.findViewById(android.R.id.message)).setMovementMethod(LinkMovementMethod.getInstance());
+
     }
 
     private void showInputDialog(){
