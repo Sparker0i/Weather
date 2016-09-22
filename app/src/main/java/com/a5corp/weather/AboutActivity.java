@@ -13,9 +13,9 @@ public class AboutActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
         TextView madeBy = (TextView) findViewById(R.id.madeBy);
-        madeBy.setText("Made By Aaditya Menon");
         TextView sourceAt = (TextView) findViewById(R.id.sourceAt);
-        sourceAt.setMovementMethod(LinkMovementMethod.getInstance());
+        sourceAt.setMovementMethod(LinkMovementMethod.getInstance());           //To make the link clickable
+        madeBy.setMovementMethod(LinkMovementMethod.getInstance());
         Typeface weatherFont;
         TextView appIcon = (TextView) findViewById(R.id.appIcon);
         weatherFont = Typeface.createFromAsset(getAssets(), "fonts/weather.ttf");
