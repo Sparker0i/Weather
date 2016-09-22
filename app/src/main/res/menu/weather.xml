@@ -8,5 +8,10 @@
         android:orderInCategory="1"
         android:title="@string/change_city"
         app:showAsAction="never"/>
+    <item
+        android:id="@+id/about_dialog"
+        android:orderInCategory="1"
+        android:title="@string/about_dialog"
+        app:showAsAction="never"/>
 
 </menu>

@@ -49,7 +49,18 @@ public class WeatherActivity extends AppCompatActivity {
         if(item.getItemId() == R.id.change_city){
             showInputDialog();
         }
+        else if (item.getItemId() == R.id.about_dialog) {
+            showAbout();
+        }
         return false;
+    }
+
+    private void showAbout() {
+        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        alertDialog.setTitle("About this App");
+        alertDialog.setMessage("Made by Aaditya Menon\n\n" +
+                "Source Code available at https://github.com/Sparker0i/Weather.git");
+        alertDialog.show();
     }
 
     private void showInputDialog(){
