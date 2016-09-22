@@ -2,6 +2,7 @@ package com.a5corp.weather;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.method.LinkMovementMethod;
 import android.widget.TextView;
 
 public class AboutActivity extends AppCompatActivity {
@@ -12,5 +13,7 @@ public class AboutActivity extends AppCompatActivity {
         setContentView(R.layout.activity_about);
         TextView madeBy = (TextView) findViewById(R.id.madeBy);
         madeBy.setText("Made By Aaditya Menon");
+        TextView sourceAt = (TextView) findViewById(R.id.sourceAt);
+        sourceAt.setMovementMethod(LinkMovementMethod.getInstance());
     }
 }

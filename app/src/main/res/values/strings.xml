@@ -6,6 +6,8 @@
     <string name="about_dialog">About This App</string>
     <string name="project_link">here</string>
     <string name="about_page">About App</string>
+    <string name="source_code">Find the Source Code <a href="https://github.com/Sparker0i/Weather.git">here</a>.</string>
+
 
     <!-- Put your own APP ID here -->
     <string name="open_weather_maps_app_id">4c08a22b02c58467e6241629c1d08717</string>

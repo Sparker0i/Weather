@@ -11,12 +11,32 @@
     tools:context="com.a5corp.weather.AboutActivity">
 
     <TextView
+        android:text="@string/source_code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="86dp"
+        android:id="@+id/sourceAt"
+        android:textAppearance="@android:style/TextAppearance.Material.Large"
+        android:layout_below="@+id/madeBy"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
         android:text="TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="92dp"
+        android:layout_marginTop="135dp"
         android:id="@+id/madeBy"
+        android:textAppearance="@android:style/TextAppearance.Material.Medium"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text="Simple Weather"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/sourceAt"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="23dp"
+        android:id="@+id/textView3"
         android:textAppearance="@android:style/TextAppearance.Material.Medium" />
 </RelativeLayout>
