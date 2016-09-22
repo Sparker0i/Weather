@@ -7,7 +7,6 @@ import java.net.URL;
 
 import org.json.JSONObject;
 
-import android.app.Activity;
 import android.content.Context;
 import android.location.Location;
 
@@ -15,10 +14,10 @@ public class RemoteFetch {
 
     private static final String OPEN_WEATHER_MAP_FORECAST_API = "http://api.openweathermap.org/data/2.5/forecast/daily?q=%s&units=metric&cnt=10";
     private static final String OPEN_WEATHER_MAP_DAILY_API = "http://api.openweathermap.org/data/2.5/weather?q=%s&units=metric";
-    private Location mLastLocation;
+    //private Location mLastLocation;
 
     public static JSONObject[] getJSON(Context context, String city){
-        double Latitude , Longitude;
+        //double Latitude , Longitude;
         try {
             URL day = new URL(String.format(OPEN_WEATHER_MAP_FORECAST_API, city));
             URL fort = new URL(String.format(OPEN_WEATHER_MAP_DAILY_API, city));

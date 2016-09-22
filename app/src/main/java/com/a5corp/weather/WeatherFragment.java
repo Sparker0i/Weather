@@ -1,14 +1,11 @@
 package com.a5corp.weather;
 
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.text.SpannableString;
-import android.text.style.ForegroundColorSpan;
 import android.text.style.RelativeSizeSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,13 +20,11 @@ import org.json.JSONObject;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Calendar;
 import java.util.Locale;
 
 public class WeatherFragment extends Fragment {
     Typeface weatherFont;
     Button button;
-    ProgressDialog pd;
     TextView detailsField[] = new TextView[10] , weatherIcon[] = new TextView[11];
     TextView windView , humidityView , directionView, dailyView, updatedField, cityField;
     double tc;
@@ -225,8 +220,8 @@ public class WeatherFragment extends Fragment {
                     AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create(); //Read Update
                     alertDialog.setTitle("Weather Information");
                     try{
-                        String d1 = new java.text.SimpleDateFormat("hh:mm:ss a").format(new Date(json1.getJSONObject("sys").getLong("sunrise")*1000));
-                        String d2 = new java.text.SimpleDateFormat("hh:mm:ss a").format(new Date(json1.getJSONObject("sys").getLong("sunset")*1000));
+                        String d1 = new java.text.SimpleDateFormat("hh:mm:ss a" , Locale.US).format(new Date(json1.getJSONObject("sys").getLong("sunrise")*1000));
+                        String d2 = new java.text.SimpleDateFormat("hh:mm:ss a" , Locale.US).format(new Date(json1.getJSONObject("sys").getLong("sunset")*1000));
                         alertDialog.setMessage(json1.getJSONArray("weather").getJSONObject(0).getString("description").toUpperCase(Locale.US) +
                                 "\n" + "TEMPERATURE :\t " + json1.getJSONObject("main").getInt("temp") + " ℃" +
                                 "\n" + "Maximum:\t " + json1.getJSONObject("main").getDouble("temp_max") + " ℃" +
@@ -243,7 +238,8 @@ public class WeatherFragment extends Fragment {
                     }
                 }
             });
-            button.setText(Integer.toString(a) + "°C");
+            String r1 = Integer.toString(a) + "°C";
+            button.setText(r1);
             button.setVisibility(View.VISIBLE);
         }catch(Exception e){
             Log.e("SimpleWeather", "One or more fields not found in the JSON data");
@@ -265,7 +261,7 @@ public class WeatherFragment extends Fragment {
         directionView = (TextView)rootView.findViewById(R.id.direction_view);
         directionView.setTypeface(weatherFont);
         dailyView = (TextView)rootView.findViewById(R.id.daily_view);
-        dailyView.setText("DAILY");
+        dailyView.setText(getString(R.string.daily));
         button = (Button)rootView.findViewById(R.id.button1);
         button.setText("°C");
         for (int i = 0; i < 11; ++i)
