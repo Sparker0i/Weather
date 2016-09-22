@@ -16,7 +16,7 @@
     <item
         android:id="@+id/about_page"
         android:orderInCategory="1"
-        android:title="@string/about_dialog"
+        android:title="@string/about_page"
         app:showAsAction="never"/>
 
 </menu>
