@@ -20,8 +20,7 @@
         android:id="@+id/appIcon"
         android:textAppearance="@android:style/TextAppearance.Material.Large"
         android:textColor="@android:color/holo_orange_light"
-        android:textSize="96sp"
-        android:textAlignment="center" />
+        android:textSize="96sp" />
 
     <TextView
         android:text="@string/app_name"
