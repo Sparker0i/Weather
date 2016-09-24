@@ -97,8 +97,14 @@ public class WeatherFragment extends Fragment {
             cityField.setOnClickListener(new View.OnClickListener()
             {
                 public void onClick(View v) {
-                    AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create(); //Read Update
+                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity()); //Read Update
                     alertDialog.setTitle("City Information");
+                    alertDialog.setPositiveButton("OK" , new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface d , int arg1) {
+                            d.cancel();
+                        }
+                    });
                     try {
                         alertDialog.setMessage(json.getJSONObject("city").getString("name").toUpperCase(Locale.US) +
                                 ", " +
@@ -134,7 +140,13 @@ public class WeatherFragment extends Fragment {
                 detailsField[i].setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v)
                     {
-                        AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create(); //Read Update
+                        AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity()); //Read Update
+                        alertDialog.setPositiveButton("OK" , new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface d , int arg1) {
+                                d.cancel();
+                            }
+                        });
                         alertDialog.setTitle("Weather Information");
                         try{
                             String date1 = J.getString("dt");
@@ -160,8 +172,14 @@ public class WeatherFragment extends Fragment {
                 weatherIcon[i].setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v)
                     {
-                        AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create(); //Read Update
+                        AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity()); //Read Update
                         alertDialog.setTitle("Weather Information");
+                        alertDialog.setPositiveButton("OK" , new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface d , int arg1) {
+                                d.cancel();
+                            }
+                        });
                         try{
                             String date1 = J.getString("dt");
                             Date expiry = new Date(Long.parseLong(date1) * 1000);

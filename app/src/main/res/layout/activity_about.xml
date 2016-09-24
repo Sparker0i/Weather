@@ -19,6 +19,7 @@
         android:layout_marginBottom="13dp"
         android:id="@+id/appIcon"
         android:textAppearance="@android:style/TextAppearance.Material.Large"
+        android:textAlignment="center"
         android:textColor="@android:color/holo_orange_light"
         android:textSize="96sp" />
 
