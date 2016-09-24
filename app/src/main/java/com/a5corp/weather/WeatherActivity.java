@@ -50,6 +50,7 @@ public class WeatherActivity extends AppCompatActivity {
         final EditText input = new EditText(this);
         input.setSingleLine();
         FrameLayout container = new FrameLayout(this);
+        alert.setCancelable(false);
         FrameLayout.LayoutParams params = new  FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         params.leftMargin= convertDpToPx(25); // remember to scale correctly
         params.rightMargin= convertDpToPx(30);
@@ -62,6 +63,12 @@ public class WeatherActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 changeCity(input.getText().toString());
+            }
+        });
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
             }
         });
         alert.show();
