@@ -25,3 +25,12 @@ dependencies {
     compile 'com.android.support:support-v4:23.3.0'
     compile 'com.android.support:design:23.3.0'
 }
+
+android {
+    defaultConfig {
+        versionCode 1
+        versionName "1.B"
+        minSdkVersion 19
+        targetSdkVersion 23
+    }
+}

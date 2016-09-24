@@ -1,6 +1,7 @@
 package com.a5corp.weather;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
@@ -217,8 +218,14 @@ public class WeatherFragment extends Fragment {
             {
                 public void onClick (View v)
                 {
-                    AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create(); //Read Update
+                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity()); //Read Update
                     alertDialog.setTitle("Weather Information");
+                    alertDialog.setPositiveButton("OK" , new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface d , int arg1) {
+                            d.cancel();
+                        }
+                    });
                     try{
                         String d1 = new java.text.SimpleDateFormat("hh:mm:ss a" , Locale.US).format(new Date(json1.getJSONObject("sys").getLong("sunrise")*1000));
                         String d2 = new java.text.SimpleDateFormat("hh:mm:ss a" , Locale.US).format(new Date(json1.getJSONObject("sys").getLong("sunset")*1000));
