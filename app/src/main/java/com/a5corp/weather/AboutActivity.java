@@ -21,5 +21,7 @@ public class AboutActivity extends AppCompatActivity {
         weatherFont = Typeface.createFromAsset(getAssets(), "fonts/weather.ttf");
         appIcon.setTypeface(weatherFont);
         appIcon.setText(getString(R.string.weather_sunny_cloudy));
+        TextView verText = (TextView) findViewById(R.id.verText);
+        verText.setText("Version " + BuildConfig.VERSION_NAME);
     }
 }

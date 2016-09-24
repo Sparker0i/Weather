@@ -14,7 +14,7 @@
         android:text="TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/textView3"
+        android:layout_above="@+id/appName"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="13dp"
         android:id="@+id/appIcon"
@@ -27,7 +27,7 @@
         android:text="@string/app_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView3"
+        android:id="@+id/appName"
         android:textAppearance="@android:style/TextAppearance.Material.Medium"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
@@ -39,7 +39,7 @@
         android:layout_marginTop="62dp"
         android:id="@+id/sourceAt"
         android:textAppearance="@android:style/TextAppearance.Material.Large"
-        android:layout_below="@+id/textView3"
+        android:layout_below="@+id/appName"
         android:layout_centerHorizontal="true" />
 
     <TextView
@@ -49,6 +49,13 @@
         android:layout_marginTop="19dp"
         android:id="@+id/madeBy"
         android:textAppearance="@android:style/TextAppearance.Material.Medium"
-        android:layout_alignTop="@+id/textView3"
+        android:layout_alignTop="@+id/appName"
         android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/verText" />
 </RelativeLayout>
