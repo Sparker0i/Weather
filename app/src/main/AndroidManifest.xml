@@ -11,20 +11,22 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name="com.a5corp.weather.GlobalActivity">
+        </activity>
         <activity
             android:name=".WeatherActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
-        </activity>
-        <activity android:name=".AboutActivity" />
-        <activity
-            android:name=".GlobalActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".AboutActivity"
+            android:label="About"/>
+        <activity android:name=".FirstLaunch" />
     </application>
 
 </manifest>
