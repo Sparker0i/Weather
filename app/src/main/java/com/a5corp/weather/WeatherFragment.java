@@ -182,6 +182,7 @@ public class WeatherFragment extends Fragment {
                                 d.cancel();
                             }
                         });
+                        alertDialog.setCancelable(false);
                         try{
                             String date1 = J.getString("dt");
                             Date expiry = new Date(Long.parseLong(date1) * 1000);
