@@ -311,7 +311,7 @@ public class WeatherFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         weatherFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/weather.ttf");
-        updateWeatherData(new CityPreference(getActivity()).getCity());
+        updateWeatherData(GlobalActivity.cp.getCity());
     }
 
     private void setWeatherIcon(int id , int i){

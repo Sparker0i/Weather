@@ -10,49 +10,28 @@ import android.util.Log;
 
 public class GlobalActivity extends Activity {
 
-    static SharedPreferences prefs = null;
-    static String firstRun = "first_run";
+    static CityPreference cp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_global);
-        prefs = getSharedPreferences("com.a5corp.weather.GlobalActivity",MODE_PRIVATE);
         Log.i("Loaded" , "Global");
-        /*userInfo = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        Log.i("Loaded" , "Global");
-        boolean loggedIn = userInfo.getBoolean("loggedIn" , false);
-        Log.i("loggedIn" , (loggedIn == true) ? "True" : "False");
-        if (loggedIn) {
-            userInfo.edit().putBoolean("loggedIn" , true);
-            Intent intent = new Intent(GlobalActivity.this, WeatherActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            Log.i("Loaded" , "Weather");
-            startActivity(intent);
-        } else {
-            Intent intent = new Intent(GlobalActivity.this, FirstLaunch.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            Log.i("Loaded" , "First");
-            startActivity(intent);
-        }*/
-    }
-
-    public boolean firstTime(){
-        return prefs.getBoolean(firstRun,false);
     }
 
     @Override
     protected void onResume() {
+        cp = new CityPreference(this);
         super.onResume();
 
-        if (firstTime()) {
+        if (!cp.prefs.getBoolean("first" , true)) {
             Intent intent = new Intent(GlobalActivity.this, WeatherActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             Log.i("Loaded" , "Weather");
             startActivity(intent);
         }
         else {
-            prefs.edit().putBoolean(firstRun , false);
+            cp.prefs.edit().putBoolean("first" , false);
             Intent intent = new Intent(GlobalActivity.this, FirstLaunch.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             Log.i("Loaded" , "First");

@@ -12,22 +12,34 @@ import android.widget.TextView;
 public class FirstLaunch extends AppCompatActivity {
 
     WeatherFragment wf;
+    TextView cityInput;
+    int init = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_launch);
-        final TextView cityInput = (TextView) findViewById(R.id.city_input);
+        cityInput = (TextView) findViewById(R.id.city_input);
         Button goButton = (Button) findViewById(R.id.go_button);
         goButton.setText("GO");
         goButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences pf = CityPreference.getPrefs();
-                pf.edit().putString("city" , cityInput.getText().toString()).apply();
-                CityPreference.prefs = pf;
+                buttonFunction();
+                if (init == 1) {
+                    Intent intent = new Intent(FirstLaunch.this, WeatherActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    Log.i("Loaded" , "Weather");
+                    startActivity(intent);
+                }
                 Log.i("Changed" , "City");
             }
         });
+    }
+
+    public void buttonFunction() {
+        GlobalActivity.cp.setLaunched();
+        GlobalActivity.cp.setCity(cityInput.getText().toString());
+        init = 1;
     }
 }
