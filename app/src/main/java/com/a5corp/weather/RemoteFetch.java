@@ -8,7 +8,7 @@ import java.net.URL;
 import org.json.JSONObject;
 
 import android.content.Context;
-import android.location.Location;
+//import android.location.Location;
 
 public class RemoteFetch {
 

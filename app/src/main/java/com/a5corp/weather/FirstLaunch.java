@@ -1,7 +1,6 @@
 package com.a5corp.weather;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,7 +10,6 @@ import android.widget.TextView;
 
 public class FirstLaunch extends AppCompatActivity {
 
-    WeatherFragment wf;
     TextView cityInput;
     int init = 0;
 

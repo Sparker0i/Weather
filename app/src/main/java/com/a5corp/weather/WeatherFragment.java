@@ -1,6 +1,7 @@
 package com.a5corp.weather;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -30,7 +31,10 @@ public class WeatherFragment extends Fragment {
     TextView windView , humidityView , directionView, dailyView, updatedField, cityField;
     double tc;
     Handler handler;
+    JSONObject json , json1;
     int Clicks = 0;
+    ProgressDialog pd;
+
     private void updateWeatherData(final String city){
         new Thread(){
             public void run(){
@@ -47,6 +51,7 @@ public class WeatherFragment extends Fragment {
                     handler.post(new Runnable(){
                         public void run(){
                             renderWeather(json);
+                            pd.hide();
                         }
                     });
                 }
@@ -73,12 +78,13 @@ public class WeatherFragment extends Fragment {
         }
         catch (Exception ex)
         {
-            Log.e("Not Found" , "BFFK");
+            Log.e("Unlikely" , "Why?");
         }
     }
 
     public void changeCity(String city)
     {
+        pd.show();
         updateWeatherData(city);
     }
 
@@ -87,7 +93,8 @@ public class WeatherFragment extends Fragment {
             button.setVisibility(View.INVISIBLE);
             Clicks = 0;
             Log.i("Showed" , "Done");
-            final JSONObject json = jsonj[0] , json1 = jsonj[1];
+            json = jsonj[0];
+            json1 = jsonj[1];
             tc = json1.getJSONObject("main").getDouble("temp");
             int a = (int) Math.round(json1.getJSONObject("main").getDouble("temp"));
             //button.setText("°C");         //℃
@@ -279,41 +286,6 @@ public class WeatherFragment extends Fragment {
         handler = new Handler();
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_weather, container, false);
-        cityField = (TextView)rootView.findViewById(R.id.city_field);
-        updatedField = (TextView)rootView.findViewById(R.id.updated_field);
-        humidityView = (TextView) rootView.findViewById(R.id.humidity_view);
-        windView = (TextView) rootView.findViewById(R.id.wind_view);
-        directionView = (TextView)rootView.findViewById(R.id.direction_view);
-        directionView.setTypeface(weatherFont);
-        dailyView = (TextView)rootView.findViewById(R.id.daily_view);
-        dailyView.setText(getString(R.string.daily));
-        button = (Button)rootView.findViewById(R.id.button1);
-        button.setText("°C");
-        for (int i = 0; i < 11; ++i)
-        {
-            String f = "details_view" + (i + 1) , g = "weather_icon" + (i + 1);
-            if (i != 10) {
-                int resID = getResources().getIdentifier(f, "id", getContext().getPackageName());
-                detailsField[i] = (TextView) rootView.findViewById(resID);
-            }
-            int resIDI = getResources().getIdentifier(g, "id" , getContext().getPackageName());
-            weatherIcon[i] = (TextView)rootView.findViewById(resIDI);
-            weatherIcon[i].setTypeface(weatherFont);
-        }
-        return rootView;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        weatherFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/weather.ttf");
-        updateWeatherData(GlobalActivity.cp.getCity());
-    }
-
     private void setWeatherIcon(int id , int i){
         String icon = "";
         switch(id) {
@@ -431,5 +403,44 @@ public class WeatherFragment extends Fragment {
         }
         Log.i(Integer.toString(id) , Integer.toString(i));
         weatherIcon[i].setText(icon);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_weather, container, false);
+        cityField = (TextView)rootView.findViewById(R.id.city_field);
+        updatedField = (TextView)rootView.findViewById(R.id.updated_field);
+        humidityView = (TextView) rootView.findViewById(R.id.humidity_view);
+        windView = (TextView) rootView.findViewById(R.id.wind_view);
+        directionView = (TextView)rootView.findViewById(R.id.direction_view);
+        directionView.setTypeface(weatherFont);
+        dailyView = (TextView)rootView.findViewById(R.id.daily_view);
+        dailyView.setText(getString(R.string.daily));
+        button = (Button)rootView.findViewById(R.id.button1);
+        button.setText("°C");
+        pd = new ProgressDialog(this.getActivity());
+        pd.setMessage("Loading");
+        pd.setTitle("Please Wait");
+        pd.show();
+        for (int i = 0; i < 11; ++i)
+        {
+            String f = "details_view" + (i + 1) , g = "weather_icon" + (i + 1);
+            if (i != 10) {
+                int resID = getResources().getIdentifier(f, "id", getContext().getPackageName());
+                detailsField[i] = (TextView) rootView.findViewById(resID);
+            }
+            int resIDI = getResources().getIdentifier(g, "id" , getContext().getPackageName());
+            weatherIcon[i] = (TextView)rootView.findViewById(resIDI);
+            weatherIcon[i].setTypeface(weatherFont);
+        }
+        return rootView;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        weatherFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/weather.ttf");
+        updateWeatherData(GlobalActivity.cp.getCity());
     }
 }
