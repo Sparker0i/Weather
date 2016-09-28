@@ -420,6 +420,7 @@ public class WeatherFragment extends Fragment {
         button = (Button)rootView.findViewById(R.id.button1);
         button.setText("°C");
         pd = new ProgressDialog(this.getActivity());
+        pd.setCancelable(false);
         pd.setMessage("Loading");
         pd.setTitle("Please Wait");
         pd.show();
