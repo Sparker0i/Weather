@@ -84,8 +84,7 @@ public class WeatherActivity extends AppCompatActivity {
 
     public int convertDpToPx(int dp) {
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
-        int px = Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
-        return px;
+        return Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
     }
 
     public void changeCity(String city){

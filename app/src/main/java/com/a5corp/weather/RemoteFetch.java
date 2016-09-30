@@ -14,7 +14,6 @@ public class RemoteFetch {
 
     private static final String OPEN_WEATHER_MAP_FORECAST_API = "http://api.openweathermap.org/data/2.5/forecast/daily?q=%s&units=metric&cnt=10";
     private static final String OPEN_WEATHER_MAP_DAILY_API = "http://api.openweathermap.org/data/2.5/weather?q=%s&units=metric";
-    //private Location mLastLocation;
 
     public static JSONObject[] getJSON(Context context, String city){
         //double Latitude , Longitude;
