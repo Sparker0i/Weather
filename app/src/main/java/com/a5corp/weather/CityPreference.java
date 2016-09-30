@@ -7,19 +7,23 @@ class CityPreference {
 
     private static SharedPreferences prefs;
 
-    CityPreference(Activity activity){
+    CityPreference(Activity activity) {
         prefs = activity.getPreferences(Activity.MODE_PRIVATE);
     }
 
-    String getCity(){
+    String getCity() {
         return prefs.getString("city", "Sydney");
     }
 
-    SharedPreferences getPrefs() {return prefs;}
+    SharedPreferences getPrefs() {
+        return prefs;
+    }
 
     void setCity(String city) {
         prefs.edit().putString("city", city).apply();
     }
 
-    void setLaunched() { prefs.edit().putBoolean("first" , false).apply();}
+    void setLaunched() {
+        prefs.edit().putBoolean("first" , false).apply();
+    }
 }

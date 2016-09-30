@@ -30,19 +30,17 @@ class RemoteFetch {
             StringBuilder json = new StringBuilder(1024) , json1 = new StringBuilder(1024);
 
             reader= new BufferedReader(new InputStreamReader(connection0.getInputStream()));
-            String tmp="";
-            while((tmp=reader.readLine())!=null)
-                json.append(tmp).append("\n");
+            while((reader.readLine())!=null)
+                json.append("").append("\n");
             reader.close();
 
             reader = new BufferedReader(new InputStreamReader(connection1.getInputStream()));
-            String tmp1="";
-            while((tmp1=reader.readLine())!=null)
-                json1.append(tmp1).append("\n");
+            while((reader.readLine())!=null)
+                json1.append("").append("\n");
             reader.close();
 
             JSONObject data = new JSONObject(json.toString()) , data1 = new JSONObject(json1.toString());
-            double latitude = data1.getJSONObject("coord").getDouble("lat") , longitude = data1.getJSONObject("coord").getDouble("lon");
+            //double latitude = data1.getJSONObject("coord").getDouble("lat") , longitude = data1.getJSONObject("coord").getDouble("lon");
 
 
             // This value will be 404 if the request was not
