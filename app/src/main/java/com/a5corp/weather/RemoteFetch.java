@@ -27,7 +27,7 @@ public class RemoteFetch {
             connection1.addRequestProperty("x-api-key", context.getString(R.string.open_weather_maps_app_id));
 
             BufferedReader reader;
-            StringBuffer json = new StringBuffer(1024) , json1 = new StringBuffer(1024);
+            StringBuilder json = new StringBuilder(1024) , json1 = new StringBuilder(1024);
 
             reader= new BufferedReader(new InputStreamReader(connection0.getInputStream()));
             String tmp="";
