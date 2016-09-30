@@ -52,6 +52,7 @@ public class WeatherFragment extends Fragment {
                         public void run(){
                             renderWeather(json);
                             pd.hide();
+                            GlobalActivity.cp.setLaunched();
                         }
                     });
                 }
@@ -67,11 +68,13 @@ public class WeatherFragment extends Fragment {
                 case 0 :
                     double Fah = json1.getJSONObject("main").getDouble("temp") * 1.8 + 32;
                     int F = (int) Fah;
-                    button.setText(Integer.toString(F) + "°F");
+                    String result = Integer.toString(F) + "°F";
+                    button.setText(result);
                     ++Clicks;
                     break;
                 case 1:
-                    button.setText((int) Math.round(json1.getJSONObject("main").getDouble("temp")) + "°C");
+                    result = (int) Math.round(json1.getJSONObject("main").getDouble("temp")) + "°C";
+                    button.setText(result);
                     ++Clicks;
                     break;
             }
@@ -136,7 +139,7 @@ public class WeatherFragment extends Fragment {
                 final JSONObject J = details[i];
                 String date1 = details[i].getString("dt");
                 Date expiry = new Date(Long.parseLong(date1) * 1000);
-                String date = new SimpleDateFormat("EE, dd").format(expiry);
+                String date = new SimpleDateFormat("EE, dd" , Locale.US).format(expiry);
                 SpannableString ss1=  new SpannableString(date + "\n"
                 + details[i].getJSONObject("temp").getLong("max") + "°" + "      "
                 + details[i].getJSONObject("temp").getLong("min") + "°" + "\n");
@@ -160,7 +163,7 @@ public class WeatherFragment extends Fragment {
                         try{
                             String date1 = J.getString("dt");
                             Date expiry = new Date(Long.parseLong(date1) * 1000);
-                            String date = new SimpleDateFormat("EE, dd MMMM yyyy").format(expiry);
+                            String date = new SimpleDateFormat("EE, dd MMMM yyyy" , Locale.US).format(expiry);
                         alertDialog.setMessage(date +
                                 "\n" + J.getJSONArray("weather").getJSONObject(0).getString("description").toUpperCase(Locale.US) +
                                 "\n" + "Maximum: " + J.getJSONObject("temp").getLong("max") + " ℃" +
@@ -193,7 +196,7 @@ public class WeatherFragment extends Fragment {
                         try{
                             String date1 = J.getString("dt");
                             Date expiry = new Date(Long.parseLong(date1) * 1000);
-                            String date = new SimpleDateFormat("EE, dd MMMM yyyy").format(expiry);
+                            String date = new SimpleDateFormat("EE, dd MMMM yyyy" , Locale.US).format(expiry);
                             alertDialog.setMessage(date +
                                     "\n" + J.getJSONArray("weather").getJSONObject(0).getString("description").toUpperCase(Locale.US) +
                                     "\n" + "Maximum: " + J.getJSONObject("temp").getLong("max") + " ℃" +
@@ -213,8 +216,8 @@ public class WeatherFragment extends Fragment {
                 });
             }
             DateFormat df = DateFormat.getDateTimeInstance();
-            String updatedOn = df.format(new Date(json1.getLong("dt")*1000));
-            updatedField.setText("Last update: " + updatedOn);
+            String updatedOn = "Last update: " + df.format(new Date(json1.getLong("dt")*1000));
+            updatedField.setText(updatedOn);
             int deg = json1.getJSONObject("wind").getInt("deg");
             if (deg < 90)
                 directionView.setText(getActivity().getString(R.string.top_right));

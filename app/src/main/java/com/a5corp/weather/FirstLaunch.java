@@ -36,7 +36,6 @@ public class FirstLaunch extends AppCompatActivity {
     }
 
     public void buttonFunction() {
-        GlobalActivity.cp.setLaunched();
         GlobalActivity.cp.setCity(cityInput.getText().toString());
         init = 1;
     }
