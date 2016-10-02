@@ -3,6 +3,7 @@ package com.a5corp.weather;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
@@ -45,6 +46,17 @@ public class WeatherFragment extends Fragment {
                             Toast.makeText(getActivity(),
                                     getActivity().getString(R.string.place_not_found),
                                     Toast.LENGTH_LONG).show();
+                            if (GlobalActivity.cp.getLaunched()) {
+                                pd.hide();
+                                Intent intent = new Intent(getActivity(), FirstLaunch.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                Log.i("Loaded" , "Weather");
+                                startActivity(intent);
+                            }
+                            else {
+                                pd.hide();
+                                WeatherActivity.showInputDialog();
+                            }
                         }
                     });
                 } else {
@@ -422,7 +434,6 @@ public class WeatherFragment extends Fragment {
         dailyView.setText(getString(R.string.daily));
         button = (Button)rootView.findViewById(R.id.button1);
         button.setText("°C");
-        pd = new ProgressDialog(this.getActivity());
         pd.setCancelable(false);
         pd.setMessage("Loading");
         pd.setTitle("Please Wait");
@@ -443,6 +454,7 @@ public class WeatherFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        pd = new ProgressDialog(this.getActivity());
         super.onCreate(savedInstanceState);
         weatherFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/weather.ttf");
         updateWeatherData(GlobalActivity.cp.getCity());

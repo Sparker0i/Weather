@@ -16,6 +16,10 @@ class CityPreference {
         return prefs.getString("city", "Sydney");
     }
 
+    boolean getLaunched() {
+        return prefs.getBoolean("first" , true);
+    }
+
     SharedPreferences getPrefs() {
         return prefs;
     }
