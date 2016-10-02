@@ -10,13 +10,13 @@ import org.json.JSONObject;
 import android.content.Context;
 //import android.location.Location;
 
-public class RemoteFetch {
+class RemoteFetch {
 
     private static final String OPEN_WEATHER_MAP_FORECAST_API = "http://api.openweathermap.org/data/2.5/forecast/daily?q=%s&units=metric&cnt=10";
     private static final String OPEN_WEATHER_MAP_DAILY_API = "http://api.openweathermap.org/data/2.5/weather?q=%s&units=metric";
     //private Location mLastLocation;
 
-    public static JSONObject[] getJSON(Context context, String city){
+    static JSONObject[] getJSON(Context context, String city){
         //double Latitude , Longitude;
         try {
             URL day = new URL(String.format(OPEN_WEATHER_MAP_FORECAST_API, city));
@@ -31,19 +31,18 @@ public class RemoteFetch {
             StringBuffer json = new StringBuffer(1024) , json1 = new StringBuffer(1024);
 
             reader= new BufferedReader(new InputStreamReader(connection0.getInputStream()));
-            String tmp="";
-            while((tmp=reader.readLine())!=null)
+            String tmp;
+            while((tmp = reader.readLine())!=null)
                 json.append(tmp).append("\n");
             reader.close();
 
             reader = new BufferedReader(new InputStreamReader(connection1.getInputStream()));
-            String tmp1="";
-            while((tmp1=reader.readLine())!=null)
-                json1.append(tmp1).append("\n");
+            while((tmp = reader.readLine())!=null)
+                json1.append(tmp).append("\n");
             reader.close();
 
             JSONObject data = new JSONObject(json.toString()) , data1 = new JSONObject(json1.toString());
-            double latitude = data1.getJSONObject("coord").getDouble("lat") , longitude = data1.getJSONObject("coord").getDouble("lon");
+            //double latitude = data1.getJSONObject("coord").getDouble("lat") , longitude = data1.getJSONObject("coord").getDouble("lon");
 
 
             // This value will be 404 if the request was not
