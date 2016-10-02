@@ -420,7 +420,7 @@ public class WeatherFragment extends Fragment {
         directionView.setTypeface(weatherFont);
         dailyView = (TextView)rootView.findViewById(R.id.daily_view);
         dailyView.setText(getString(R.string.daily));
-        button = (Button)rootView.findViewById(R.id.button);
+        button = (Button)rootView.findViewById(R.id.button1);
         button.setText("°C");
         pd = new ProgressDialog(this.getActivity());
         pd.setCancelable(false);

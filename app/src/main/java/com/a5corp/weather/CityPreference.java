@@ -3,27 +3,22 @@ package com.a5corp.weather;
 import android.app.Activity;
 import android.content.SharedPreferences;
 
-class CityPreference {
+public class CityPreference {
 
-    private static SharedPreferences prefs;
+    public static SharedPreferences prefs;
 
-    CityPreference(Activity activity) {
+    public CityPreference(Activity activity){
         prefs = activity.getPreferences(Activity.MODE_PRIVATE);
     }
-
-    String getCity() {
+    // If the user has not chosen a city yet, return
+    // Sydney as the default city
+    String getCity(){
         return prefs.getString("city", "Sydney");
     }
 
-    SharedPreferences getPrefs() {
-        return prefs;
-    }
-
     void setCity(String city) {
-        prefs.edit().putString("city", city).apply();
+        prefs.edit().putString("city", city).commit();
     }
 
-    void setLaunched() {
-        prefs.edit().putBoolean("first" , false).apply();
-    }
+    void setLaunched() { prefs.edit().putBoolean("first" , false).commit();}
 }

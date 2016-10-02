@@ -48,8 +48,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:paddingLeft="5dp"
-                    android:minWidth="78sp"
-                    android:paddingRight="2dp">
+                    android:minWidth="85sp"
+                    android:paddingRight="2dp"
+                    android:layout_marginRight="8dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -58,8 +59,8 @@
                         android:id="@+id/weather_icon1"
                         android:textSize="70sp"
                         android:textColor="#FFFFFF"
-                        android:textAlignment="center"
-                        android:layout_gravity="center_horizontal" />
+                        android:textAlignment="textStart"
+                        android:layout_gravity="center" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -74,8 +75,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:paddingLeft="5dp"
-                    android:minWidth="78sp"
-                    android:paddingRight="2dp">
+                    android:minWidth="85sp"
+                    android:paddingRight="2dp"
+                    android:layout_marginRight="8dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -84,7 +86,7 @@
                         android:id="@+id/weather_icon2"
                         android:textColor="#FFFFFF"
                         android:textSize="70sp"
-                        android:textAlignment="center"
+                        android:textAlignment="textStart"
                         android:layout_gravity="center_horizontal" />
 
                     <TextView
@@ -100,8 +102,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:paddingLeft="5dp"
-                    android:minWidth="78sp"
-                    android:paddingRight="2dp">
+                    android:minWidth="85sp"
+                    android:paddingRight="2dp"
+                    android:layout_marginRight="8dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -110,7 +113,7 @@
                         android:id="@+id/weather_icon3"
                         android:textColor="#FFFFFF"
                         android:textSize="70sp"
-                        android:textAlignment="center"
+                        android:textAlignment="textStart"
                         android:layout_gravity="center_horizontal" />
 
                     <TextView
@@ -125,7 +128,8 @@
                     android:orientation="vertical"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:minWidth="78sp">
+                    android:minWidth="85sp"
+                    android:layout_marginRight="8dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -133,7 +137,7 @@
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:id="@+id/weather_icon4"
                         android:layout_gravity="center_horizontal"
-                        android:textAlignment="center"
+                        android:textAlignment="textStart"
                         android:textColor="#FFFFFF"
                         android:textSize="70sp" />
 
@@ -150,7 +154,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:nestedScrollingEnabled="false"
-                    android:minWidth="78sp">
+                    android:minWidth="85sp"
+                    android:layout_marginRight="8dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -158,7 +163,7 @@
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:id="@+id/weather_icon5"
                         android:layout_gravity="center_horizontal"
-                        android:textAlignment="center"
+                        android:textAlignment="textStart"
                         android:textColor="#FFFFFF"
                         android:textSize="70sp" />
 
@@ -174,7 +179,8 @@
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:minWidth="78sp">
+                    android:minWidth="85sp"
+                    android:layout_marginRight="8dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -182,7 +188,7 @@
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:id="@+id/weather_icon6"
                         android:layout_gravity="center_horizontal"
-                        android:textAlignment="center"
+                        android:textAlignment="textStart"
                         android:textColor="#FFFFFF"
                         android:textSize="70sp" />
 
@@ -198,7 +204,8 @@
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:minWidth="78sp">
+                    android:minWidth="85sp"
+                    android:layout_marginRight="8dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -206,7 +213,7 @@
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:id="@+id/weather_icon7"
                         android:layout_gravity="center_horizontal"
-                        android:textAlignment="center"
+                        android:textAlignment="textStart"
                         android:textColor="#FFFFFF"
                         android:textSize="70sp" />
 
@@ -222,7 +229,8 @@
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:minWidth="78sp">
+                    android:minWidth="85sp"
+                    android:layout_marginRight="8dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -230,7 +238,7 @@
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:id="@+id/weather_icon8"
                         android:layout_gravity="center_horizontal"
-                        android:textAlignment="center"
+                        android:textAlignment="textStart"
                         android:textColor="#FFFFFF"
                         android:textSize="70sp" />
 
@@ -246,7 +254,8 @@
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:minWidth="78sp">
+                    android:minWidth="85sp"
+                    android:layout_marginRight="8dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -254,7 +263,7 @@
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:id="@+id/weather_icon9"
                         android:layout_gravity="center_horizontal"
-                        android:textAlignment="center"
+                        android:textAlignment="textStart"
                         android:textColor="#FFFFFF"
                         android:textSize="70sp" />
 
@@ -270,7 +279,8 @@
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:minWidth="78sp">
+                    android:minWidth="85sp"
+                    android:layout_marginRight="8dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -278,7 +288,7 @@
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:id="@+id/weather_icon10"
                         android:layout_gravity="center_horizontal"
-                        android:textAlignment="center"
+                        android:textAlignment="textStart"
                         android:textColor="#FFFFFF"
                         android:textSize="70sp" />
 
@@ -296,16 +306,6 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/current_temperature_field"
-        android:textSize="70sp"
-        android:layout_below="@+id/updated_field"
-        android:layout_toEndOf="@+id/weather_icon11"
-        android:textColor="#FFFFFF" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:id="@+id/updated_field"
         android:layout_below="@+id/city_field"
@@ -317,17 +317,17 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/weather_icon11"
-        android:layout_marginTop="35dp"
-        android:layout_alignTop="@+id/current_temperature_field"
         android:textColor="#FFFFFF"
-        android:layout_marginLeft="115dp" />
+        android:textSize="100sp"
+        android:layout_below="@+id/updated_field"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/button"
-        android:layout_below="@+id/current_temperature_field"
         android:visibility="invisible"
+        android:layout_below="@+id/weather_icon11"
         android:layout_centerHorizontal="true" />
 
     <TextView
@@ -375,6 +375,13 @@
         android:layout_alignParentStart="true"
         android:layout_marginTop="41dp"
         android:textColor="#FFFFFF" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button1"
+        android:layout_above="@+id/direction_view"
+        android:layout_alignStart="@+id/button" />
 
 </RelativeLayout>
     </ScrollView>

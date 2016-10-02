@@ -19,7 +19,7 @@ public class FirstLaunch extends AppCompatActivity {
         setContentView(R.layout.activity_first_launch);
         cityInput = (TextView) findViewById(R.id.city_input);
         Button goButton = (Button) findViewById(R.id.go_button);
-        goButton.setText(getString(R.string.first_go_text));
+        goButton.setText("GO");
         goButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
