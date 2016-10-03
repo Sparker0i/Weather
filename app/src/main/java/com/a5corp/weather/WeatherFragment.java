@@ -104,6 +104,7 @@ public class WeatherFragment extends Fragment {
     {
         pd.show();
         updateWeatherData(city);
+        GlobalActivity.cp.setCity(city);
     }
 
     private void renderWeather(JSONObject[] jsonj){
