@@ -65,6 +65,7 @@ public class WeatherFragment extends Fragment {
                 } else {
                     handler.post(new Runnable(){
                         public void run(){
+                            GlobalActivity.cp.setLaunched();
                             renderWeather(json);
                             pd.hide();
                             GlobalActivity.cp.setLaunched();
