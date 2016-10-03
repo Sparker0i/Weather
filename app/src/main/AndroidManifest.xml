@@ -26,7 +26,12 @@
 
         <activity
             android:name=".AboutActivity"
-            android:label="About"/>
+            android:label="About"
+            android:parentActivityName="com.a5corp.weather.WeatherActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a5corp.weather.WeatherActivity" />
+        </activity>
         <activity android:name=".FirstLaunch"
             android:label="Enter City"/>
     </application>

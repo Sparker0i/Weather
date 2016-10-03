@@ -24,5 +24,6 @@ public class AboutActivity extends AppCompatActivity {
         TextView verText = (TextView) findViewById(R.id.verText);
         String verId = "Version " + BuildConfig.VERSION_NAME;
         verText.setText(verId);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
     }
 }
