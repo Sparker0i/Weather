@@ -10,11 +10,14 @@ import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.text.SpannableString;
 import android.text.style.RelativeSizeSpan;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -55,7 +58,7 @@ public class WeatherFragment extends Fragment {
                             }
                             else {
                                 pd.hide();
-                                WeatherActivity.showInputDialog();
+                                showInputDialog();
                             }
                         }
                     });
@@ -418,6 +421,40 @@ public class WeatherFragment extends Fragment {
         }
         Log.i(Integer.toString(id) , Integer.toString(i));
         weatherIcon[i].setText(icon);
+    }
+
+    private void showInputDialog() {
+        final AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+        final EditText input = new EditText(getActivity());
+        input.setSingleLine();
+        FrameLayout container = new FrameLayout(getActivity());
+        alert.setCancelable(false);
+        FrameLayout.LayoutParams params = new  FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        params.leftMargin= convertDpToPx(25); // remember to scale correctly
+        params.rightMargin= convertDpToPx(30);
+        input.setLayoutParams(params);
+        container.addView(input);
+        alert.setTitle("Change City");
+        alert.setMessage("Hey there, could not find the city you wanted. Please enter a new one:");
+        alert.setView(container);
+        alert.setPositiveButton("Go", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                changeCity(input.getText().toString());
+            }
+        });
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        alert.show();
+    }
+
+    public int convertDpToPx(int dp) {
+        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+        return Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
     }
 
     @Override
