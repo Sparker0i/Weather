@@ -35,7 +35,7 @@ public class WeatherFragment extends Fragment {
     TextView windView , humidityView , directionView, dailyView, updatedField, cityField;
     double tc;
     Handler handler;
-    JSONObject json , json1;
+    JSONObject json0 , json1;
     int Clicks = 0;
     ProgressDialog pd;
 
@@ -113,14 +113,14 @@ public class WeatherFragment extends Fragment {
             button.setVisibility(View.INVISIBLE);
             Clicks = 0;
             Log.i("Showed" , "Done");
-            json = jsonj[0];
+            json0 = jsonj[0];
             json1 = jsonj[1];
             tc = json1.getJSONObject("main").getDouble("temp");
             int a = (int) Math.round(json1.getJSONObject("main").getDouble("temp"));
             //button.setText("°C");         //℃
-            cityField.setText(json.getJSONObject("city").getString("name").toUpperCase(Locale.US) +
+            cityField.setText(json0.getJSONObject("city").getString("name").toUpperCase(Locale.US) +
                     ", " +
-                    json.getJSONObject("city").getString("country"));
+                    json0.getJSONObject("city").getString("country"));
             cityField.setOnClickListener(new View.OnClickListener()
             {
                 public void onClick(View v) {
@@ -134,9 +134,9 @@ public class WeatherFragment extends Fragment {
                         }
                     });
                     try {
-                        alertDialog.setMessage(json.getJSONObject("city").getString("name").toUpperCase(Locale.US) +
+                        alertDialog.setMessage(json0.getJSONObject("city").getString("name").toUpperCase(Locale.US) +
                                 ", " +
-                                json.getJSONObject("city").getString("country"));
+                                json0.getJSONObject("city").getString("country"));
                         alertDialog.show();
                         Log.i("Load", "BFFK");
                     } catch (Exception ex) {
@@ -148,7 +148,7 @@ public class WeatherFragment extends Fragment {
             JSONObject details[] = new JSONObject[10];
             for (int i = 0; i < 10; ++i)
             {
-                details[i] = json.getJSONArray("list").getJSONObject(i);
+                details[i] = json0.getJSONArray("list").getJSONObject(i);
             }
             Log.i("Objects" , "JSON Objects Created");
             for (int i = 0; i < 10; ++i)
@@ -437,7 +437,7 @@ public class WeatherFragment extends Fragment {
         input.setLayoutParams(params);
         container.addView(input);
         alert.setTitle("Change City");
-        alert.setMessage("Hey there, could not find the city you wanted. Please enter a new one:");
+        alert.setMessage("Hey there, could not find the city you wanted. Please enter a new one:\n");
         alert.setView(container);
         alert.setPositiveButton("Go", new DialogInterface.OnClickListener() {
             @Override
