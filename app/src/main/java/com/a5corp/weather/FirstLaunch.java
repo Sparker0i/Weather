@@ -25,6 +25,7 @@ public class FirstLaunch extends AppCompatActivity {
             public void onClick(View v) {
                 buttonFunction();
                 if (init == 1) {
+                    buttonFunction();
                     Intent intent = new Intent(FirstLaunch.this, WeatherActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     Log.i("Loaded" , "Weather");

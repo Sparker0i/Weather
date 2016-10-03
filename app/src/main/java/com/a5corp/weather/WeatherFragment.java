@@ -58,7 +58,7 @@ public class WeatherFragment extends Fragment {
                             }
                             else {
                                 pd.hide();
-                                showInputDialog();
+                                //showInputDialog();
                             }
                         }
                     });
