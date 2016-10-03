@@ -1,6 +1,6 @@
 # Simple Weather
 
-Welcome to my Open Source Weather app, built using Android Studio for Android 4.4+
+Welcome to my Open Source Weather app, built using Android Studio for Android 5.0+
 
 LATEST UPDATE: Added More Menu Options
 
