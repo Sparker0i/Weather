@@ -138,9 +138,9 @@ public class WeatherFragment extends Fragment {
                                 ", " +
                                 json0.getJSONObject("city").getString("country"));
                         alertDialog.show();
-                        Log.i("Load", "BFFK");
+                        Log.i("Loaded in Dialog", "City Name");
                     } catch (Exception ex) {
-                        Log.e("Error", "FFFF");
+                        Log.e("Error", "Could not load city name");
                     }
                 }
             });
@@ -163,7 +163,7 @@ public class WeatherFragment extends Fragment {
                 ss1.setSpan(new RelativeSizeSpan(1.1f), 0,7, 0); // set size
                 ss1.setSpan(new RelativeSizeSpan(1.4f) , 8 , 11 , 0);
                 detailsField[i].setText(ss1);
-                Log.i("Details[" + Integer.toString(i) + "]", "Infor String " + Integer.toString(i + 1) + " loaded");
+                Log.i("Details[" + Integer.toString(i) + "]", "Information String " + Integer.toString(i + 1) + " loaded");
                 setWeatherIcon(details[i].getJSONArray("weather").getJSONObject(0).getInt("id") , i);
                 detailsField[i].setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v)
@@ -192,9 +192,9 @@ public class WeatherFragment extends Fragment {
                                 "\n" + "Pressure:  " + J.getString("pressure") + " hPa" +
                                 "\n" + "Wind:         " + J.getString("speed") + "km/h");
                             alertDialog.show();
-                        Log.i("Load" , "BFFK");}
+                        Log.i("Loaded" , "Details Field");}
                         catch (Exception e) {
-                            Log.e("Error", "FO");
+                            Log.e("Error", "Something's wrong in the JSON Received");
                         }
                     }
                 });
@@ -225,7 +225,7 @@ public class WeatherFragment extends Fragment {
                                     "\n" + "Pressure:  " + J.getString("pressure") + " hPa" +
                                     "\n" + "Wind:         " + J.getString("speed") + "km/h");
                             alertDialog.show();
-                            Log.i("Load" , "BFFK");}
+                            Log.i("Loaded" , "Weather Icon onClick Dialog Details");}
                         catch (Exception e) {
                             Log.e("Error", "FO");
                         }
