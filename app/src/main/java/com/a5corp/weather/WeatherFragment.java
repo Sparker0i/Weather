@@ -227,7 +227,7 @@ public class WeatherFragment extends Fragment {
                             alertDialog.show();
                             Log.i("Loaded" , "Weather Icon onClick Dialog Details");}
                         catch (Exception e) {
-                            Log.e("Error", "FO");
+                            Log.e("Error", "Weather Icon onClick Dialog details could not be loaded");
                         }
                     }
                 });
@@ -288,9 +288,9 @@ public class WeatherFragment extends Fragment {
                                 "\n" + "Sunrise:\t  " + d1 +
                                 "\n" + "Sunset:\t  " + d2);
                         alertDialog.show();
-                        Log.i("Load" , "BFFK");}
+                        Log.i("Load" , "Main Weather Icon OnClick Details loaded");}
                     catch (Exception e) {
-                        Log.e("Error", "FO");
+                        Log.e("Error", "Main Weather Icon OnClick Details could not be loaded");
                     }
                 }
             });
