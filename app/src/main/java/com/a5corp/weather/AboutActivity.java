@@ -27,6 +27,7 @@ public class AboutActivity extends AppCompatActivity {
         String verId = "Version " + BuildConfig.VERSION_NAME;
         verText.setText(verId);
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
         actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
     }

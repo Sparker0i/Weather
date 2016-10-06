@@ -39,7 +39,7 @@ public class WeatherFragment extends Fragment {
     int Clicks = 0;
     ProgressDialog pd;
 
-    private void updateWeatherData(final String city){
+    private void updateWeatherData(final String city) {
         new Thread(){
             public void run(){
                 final JSONObject[] json = RemoteFetch.getJSON(getActivity(), city);
@@ -302,11 +302,11 @@ public class WeatherFragment extends Fragment {
         }
     }
 
-    public WeatherFragment(){
+    public WeatherFragment() {
         handler = new Handler();
     }
 
-    private void setWeatherIcon(int id , int i){
+    private void setWeatherIcon(int id , int i) {
         String icon = "";
         switch(id) {
             case 501 : icon = getActivity().getString(R.string.weather_drizzle);
@@ -432,7 +432,7 @@ public class WeatherFragment extends Fragment {
         FrameLayout container = new FrameLayout(getActivity());
         alert.setCancelable(false);
         FrameLayout.LayoutParams params = new  FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        params.leftMargin= convertDpToPx(25); // remember to scale correctly
+        params.leftMargin= convertDpToPx(25);                                       //remember to scale correctly
         params.rightMargin= convertDpToPx(30);
         input.setLayoutParams(params);
         container.addView(input);
@@ -443,12 +443,6 @@ public class WeatherFragment extends Fragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 changeCity(input.getText().toString());
-            }
-        });
-        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
             }
         });
         alert.show();

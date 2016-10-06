@@ -45,8 +45,7 @@ class RemoteFetch {
             //double latitude = data1.getJSONObject("coord").getDouble("lat") , longitude = data1.getJSONObject("coord").getDouble("lon");
 
 
-            // This value will be 404 if the request was not
-            // successful
+            // This value will be 404 if the request was not successful
             if(data.getInt("cod") != 200 || data1.getInt("cod") != 200){
                 return null;
             }
