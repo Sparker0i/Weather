@@ -283,9 +283,9 @@ public class WeatherFragment extends Fragment {
                                 "\n" + "Minimum:\t " + json1.getJSONObject("main").getDouble("temp_min") + " ℃" +
                                 "\n" + "Humidity:\t   " + json1.getJSONObject("main").getString("humidity") + "%" +
                                 "\n" + "Pressure:\t   " + json1.getJSONObject("main").getString("pressure") + " hPa" +
-                                "\n" + "Wind:\t        " + json1.getJSONObject("wind").getString("speed") + "km/h" +
-                                "\n" + "Sunrise:\t    " + d1 +
-                                "\n" + "Sunset:\t      " + d2);
+                                "\n" + "Wind:\t         " + json1.getJSONObject("wind").getString("speed") + "km/h" +
+                                "\n" + "Sunrise:\t     " + d1 +
+                                "\n" + "Sunset:\t       " + d2);
                         alertDialog.show();
                         Log.i("Load" , "Main Weather Icon OnClick Details loaded");}
                     catch (Exception e) {
