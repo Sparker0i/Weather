@@ -29,4 +29,12 @@ class CityPreference {
     void setLaunched() {
         prefs.edit().putBoolean("first" , false).apply();
     }
+
+    void setLastCity(String city) {
+        prefs.edit().putString("lcity" , city).apply();
+    }
+
+    String getLastCity() {
+        return prefs.getString("lcity" , "Sydney");
+    }
 }

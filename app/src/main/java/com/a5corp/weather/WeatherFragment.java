@@ -44,6 +44,7 @@ public class WeatherFragment extends Fragment {
             public void run(){
                 final JSONObject[] json = RemoteFetch.getJSON(getActivity(), city);
                 if(json == null){
+                    GlobalActivity.cp.setCity(GlobalActivity.cp.getLastCity());
                     handler.post(new Runnable(){
                         public void run(){
                             Toast.makeText(getActivity(),
@@ -68,7 +69,7 @@ public class WeatherFragment extends Fragment {
                             GlobalActivity.cp.setLaunched();
                             renderWeather(json);
                             pd.hide();
-                            GlobalActivity.cp.setLaunched();
+                            GlobalActivity.cp.setLastCity(city);
                         }
                     });
                 }
