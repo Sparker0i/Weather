@@ -8,6 +8,7 @@
     <string name="source_code">Find the Source Code <a href="https://github.com/Sparker0i/Weather.git">here</a>.</string>
     <string name="dev_info">Made by <a href="http://aaditya.website">Aaditya Menon</a></string>
     <string name="first_go_text">GO</string>
+    <string name="pick_city">Hey there, let's start by picking a city for you</string>
 
     <!-- Put your own APP ID here -->
     <string name="open_weather_maps_app_id">4c08a22b02c58467e6241629c1d08717</string>

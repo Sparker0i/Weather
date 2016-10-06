@@ -6,4 +6,5 @@
     <string name="celsius">CELSIUS</string>
     <string name="c">°C</string>
     <string name="daily">DAILY</string>
+    <string name="go">GO</string>
 </resources>

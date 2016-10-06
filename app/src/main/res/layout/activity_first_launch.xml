@@ -11,7 +11,7 @@
     tools:context="com.a5corp.weather.FirstLaunch">
 
     <Button
-        android:text="GO"
+        android:text="@string/go"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/city_input"
@@ -19,14 +19,13 @@
         android:id="@+id/go_button" />
 
     <TextView
-        android:text="Hey there, let's start by picking a city for you"
+        android:text="@string/pick_city"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/city_input"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="99dp"
         android:id="@+id/intro_text"
-        android:textAppearance="@android:style/TextAppearance.Material.Medium"
         android:textSize="24sp"
         android:textColor="#000000" />
 
@@ -38,5 +37,6 @@
         android:id="@+id/city_input"
         android:layout_centerVertical="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        tools:ignore="LabelFor" />
 </RelativeLayout>

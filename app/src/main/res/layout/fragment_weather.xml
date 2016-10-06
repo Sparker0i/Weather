@@ -6,8 +6,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="@dimen/activity_vertical_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingStart="@dimen/activity_horizontal_margin"
+        android:paddingEnd="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
         tools:context="com.a5corp.weather.WeatherActivity$PlaceholderFragment">
 
@@ -46,10 +46,10 @@
                         android:orientation="vertical"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:paddingLeft="5dp"
+                        android:paddingStart="5dp"
                         android:minWidth="85sp"
-                        android:paddingRight="2dp"
-                        android:layout_marginRight="8dp">
+                        android:paddingEnd="2dp"
+                        android:layout_marginEnd="8dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -72,10 +72,10 @@
                         android:orientation="vertical"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:paddingLeft="5dp"
+                        android:paddingStart="5dp"
                         android:minWidth="85sp"
-                        android:paddingRight="2dp"
-                        android:layout_marginRight="8dp">
+                        android:paddingEnd="2dp"
+                        android:layout_marginEnd="8dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -98,10 +98,10 @@
                         android:orientation="vertical"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:paddingLeft="5dp"
+                        android:paddingStart="5dp"
                         android:minWidth="85sp"
-                        android:paddingRight="2dp"
-                        android:layout_marginRight="8dp">
+                        android:paddingEnd="2dp"
+                        android:layout_marginEnd="8dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -125,7 +125,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:minWidth="85sp"
-                        android:layout_marginRight="8dp">
+                        android:layout_marginEnd="8dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -148,9 +148,8 @@
                         android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:nestedScrollingEnabled="false"
                         android:minWidth="85sp"
-                        android:layout_marginRight="8dp">
+                        android:layout_marginEnd="8dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -174,7 +173,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:minWidth="85sp"
-                        android:layout_marginRight="8dp">
+                        android:layout_marginEnd="8dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -198,7 +197,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:minWidth="85sp"
-                        android:layout_marginRight="8dp">
+                        android:layout_marginEnd="8dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -222,7 +221,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:minWidth="85sp"
-                        android:layout_marginRight="8dp">
+                        android:layout_marginEnd="8dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -246,7 +245,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:minWidth="85sp"
-                        android:layout_marginRight="8dp">
+                        android:layout_marginEnd="8dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -270,7 +269,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:minWidth="85sp"
-                        android:layout_marginRight="8dp">
+                        android:layout_marginEnd="8dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -328,7 +327,7 @@
             android:textSize="40sp"
             android:textStyle="bold"
             android:layout_below="@+id/button"
-            android:layout_toRightOf="@+id/wind_view" />
+            android:layout_toEndOf="@+id/wind_view" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -339,8 +338,7 @@
             android:layout_below="@+id/button"
             android:layout_alignParentStart="true"
             android:layout_toStartOf="@+id/button"
-            android:textAlignment="center"
-            android:layout_alignParentLeft="true" />
+            android:textAlignment="center" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -352,8 +350,7 @@
             android:textColor="#FFFFFF"
             android:layout_below="@+id/button"
             android:textAlignment="center"
-            android:layout_above="@+id/daily_view"
-            android:layout_alignParentRight="true" />
+            android:layout_above="@+id/daily_view" />
 
         <TextView
             android:layout_width="wrap_content"
