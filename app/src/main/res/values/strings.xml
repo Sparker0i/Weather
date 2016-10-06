@@ -9,6 +9,7 @@
     <string name="source_code">Find the Source Code <a href="https://github.com/Sparker0i/Weather.git">here</a>.</string>
     <string name="dev_info">Made by <a href="http://aaditya.website">Aaditya Menon</a></string>
     <string name="first_go_text">GO</string>
+    <string name="uh_oh">Uh oh. Seems like the city you entered does not exist on the Database. Please Try Again</string>
     <string name="pick_city">Hey there, let\'s start by picking a city for you</string>
     <string name="credits"><u>CREDITS</u></string>
 

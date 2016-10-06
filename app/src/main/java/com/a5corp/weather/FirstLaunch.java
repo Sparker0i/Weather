@@ -1,6 +1,7 @@
 package com.a5corp.weather;
 
 import android.content.Intent;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 public class FirstLaunch extends AppCompatActivity {
 
     TextView cityInput;
+    TextView message;
     int init = 0;
 
     @Override
@@ -18,6 +20,13 @@ public class FirstLaunch extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_launch);
         cityInput = (TextView) findViewById(R.id.city_input);
+        message = (TextView) findViewById(R.id.intro_text);
+        if (GlobalActivity.i == 0) {
+            message.setText(getString(R.string.pick_city));
+        }
+        else {
+            message.setText(getString(R.string.uh_oh));
+        }
         Button goButton = (Button) findViewById(R.id.go_button);
         goButton.setText(getString(R.string.first_go_text));
         goButton.setOnClickListener(new View.OnClickListener() {

@@ -8,6 +8,7 @@ import android.util.Log;
 public class GlobalActivity extends Activity {
 
     static CityPreference cp;
+    static int i = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

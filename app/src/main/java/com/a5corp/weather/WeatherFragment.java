@@ -43,7 +43,8 @@ public class WeatherFragment extends Fragment {
         new Thread(){
             public void run(){
                 final JSONObject[] json = RemoteFetch.getJSON(getActivity(), city);
-                if(json == null){
+                if(json == null) {
+                    GlobalActivity.i = -1;
                     GlobalActivity.cp.setCity(GlobalActivity.cp.getLastCity());
                     handler.post(new Runnable(){
                         public void run(){
