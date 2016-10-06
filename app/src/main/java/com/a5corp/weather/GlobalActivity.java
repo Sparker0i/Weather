@@ -8,6 +8,7 @@ import android.util.Log;
 public class GlobalActivity extends Activity {
 
     static CityPreference cp;
+    static String city;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +26,7 @@ public class GlobalActivity extends Activity {
             Intent intent = new Intent(GlobalActivity.this, WeatherActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             Log.i("Loaded" , "Weather");
+            city = FirstLaunch.cityInput.getText().toString();
             startActivity(intent);
         }
         else {

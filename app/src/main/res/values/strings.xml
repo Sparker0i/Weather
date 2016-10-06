@@ -6,6 +6,7 @@
     <string name="project_link">here</string>
     <string name="about_page">About This App</string>
     <string name="source_code">Find the Source Code <a href="https://github.com/Sparker0i/Weather.git">here</a>.</string>
+    <string name="icons"><a href = "https://erikflowers.github.io/weather-icons">Erik Flowers</a>, for the icons and the app icon.</string>
     <string name="dev_info">Made by <a href="http://aaditya.website">Aaditya Menon</a></string>
     <string name="first_go_text">GO</string>
     <string name="pick_city">Hey there, let\'s start by picking a city for you</string>

@@ -49,6 +49,7 @@ public class WeatherFragment extends Fragment {
                             Toast.makeText(getActivity(),
                                     getActivity().getString(R.string.place_not_found),
                                     Toast.LENGTH_LONG).show();
+                            GlobalActivity.cp.setCity(GlobalActivity.city);
                             if (GlobalActivity.cp.getLaunched()) {
                                 pd.hide();
                                 Intent intent = new Intent(getActivity(), FirstLaunch.class);
