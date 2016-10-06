@@ -57,4 +57,24 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:id="@+id/verText" />
+
+    <TextView
+        android:text="CREDITS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:id="@+id/textView"
+        android:textSize="18sp"
+        android:layout_below="@+id/sourceAt"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="@string/icons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView"
+        android:layout_alignParentStart="true"
+        android:id="@+id/textView2"
+        android:textSize="18sp"
+        android:textColor="#000000" />
 </RelativeLayout>
