@@ -8,8 +8,8 @@ android {
         applicationId "com.a5corp.weather"
         minSdkVersion 19
         targetSdkVersion 24
-        versionCode 40
-        versionName "0.50-RC"
+        versionCode 45
+        versionName "1.0-Release"
     }
     buildTypes {
         release {
