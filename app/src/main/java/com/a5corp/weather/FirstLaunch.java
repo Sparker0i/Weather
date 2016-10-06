@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 public class FirstLaunch extends AppCompatActivity {
 
-    static TextView cityInput;
+    TextView cityInput;
     int init = 0;
 
     @Override
