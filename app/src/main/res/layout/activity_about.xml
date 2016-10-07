@@ -11,26 +11,6 @@
     tools:context="com.a5corp.weather.AboutActivity">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/appName"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="13dp"
-        android:id="@+id/appIcon"
-        android:textSize="96sp"
-        android:textAlignment="center"
-        android:textColor="#ffbb33" />
-
-    <TextView
-        android:text="@string/app_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/appName"
-        android:textSize="18sp"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
         android:text="@string/source_code"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -78,4 +58,34 @@
         android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/appIcon"
         android:textAlignment="textEnd" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/appIcon"
+        android:textSize="96sp"
+        android:textAlignment="center"
+        android:textColor="#ffbb33"
+        android:layout_below="@+id/verText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:text="@string/app_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/appName"
+        android:textSize="18sp"
+        android:layout_below="@+id/appIcon"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView2"
+        android:layout_alignParentStart="true"
+        android:id="@+id/owmField"
+        android:textSize="18sp"
+        android:textColor="#000000"
+        android:text="@string/owm" />
 </RelativeLayout>
