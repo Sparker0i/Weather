@@ -431,7 +431,6 @@ public class WeatherFragment extends Fragment {
         final EditText input = new EditText(getActivity());
         input.setSingleLine();
         FrameLayout container = new FrameLayout(getActivity());
-        alert.setCancelable(false);
         FrameLayout.LayoutParams params = new  FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         params.leftMargin= convertDpToPx(25);                                       //remember to scale correctly
         params.rightMargin= convertDpToPx(30);
