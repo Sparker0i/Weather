@@ -127,7 +127,6 @@ public class WeatherFragment extends Fragment {
                 public void onClick(View v) {
                     AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity()); //Read Update
                     alertDialog.setTitle("City Information");
-                    alertDialog.setCancelable(false);
                     alertDialog.setPositiveButton("OK" , new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface d , int arg1) {
@@ -170,7 +169,6 @@ public class WeatherFragment extends Fragment {
                     public void onClick(View v)
                     {
                         AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity()); //Read Update
-                        alertDialog.setCancelable(false);
                         alertDialog.setPositiveButton("OK" , new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface d , int arg1) {
@@ -210,7 +208,6 @@ public class WeatherFragment extends Fragment {
                                 d.cancel();
                             }
                         });
-                        alertDialog.setCancelable(false);
                         try{
                             String date1 = J.getString("dt");
                             Date expiry = new Date(Long.parseLong(date1) * 1000);
@@ -269,7 +266,6 @@ public class WeatherFragment extends Fragment {
                 {
                     AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity()); //Read Update
                     alertDialog.setTitle("Weather Information");
-                    alertDialog.setCancelable(false);
                     alertDialog.setPositiveButton("OK" , new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface d , int arg1) {
