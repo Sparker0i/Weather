@@ -441,6 +441,12 @@ public class WeatherFragment extends Fragment {
                 changeCity(input.getText().toString());
             }
         });
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
         alert.show();
     }
 

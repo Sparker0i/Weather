@@ -65,11 +65,11 @@
         android:id="@+id/appIcon"
         android:textAppearance="@android:style/TextAppearance.Material.Large"
         android:textAlignment="center"
+        android:layout_marginTop="50dp"
         android:textColor="#ffbb33"
         android:textSize="96sp"
         android:layout_below="@+id/verText"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="18dp" />
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:text="@string/app_name"
