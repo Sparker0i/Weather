@@ -45,6 +45,9 @@ public class WeatherActivity extends AppCompatActivity {
             Intent intent = new Intent(WeatherActivity.this, AboutActivity.class);
             WeatherActivity.this.startActivity(intent);
         }
+        else if (item.getItemId() == R.id.refresh) {
+            changeCity(GlobalActivity.cp.getCity());
+        }
         return false;
     }
 

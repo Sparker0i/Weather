@@ -13,6 +13,7 @@
     <string name="uh_oh">Uh oh. Seems like the city you entered does not exist on the Database. Please Try Again</string>
     <string name="pick_city">Hey there, let\'s start by picking a city for you</string>
     <string name="credits"><u>CREDITS</u></string>
+    <string name="refresh">Refresh</string>
 
     <!-- Put your own APP ID here -->
     <string name="open_weather_maps_app_id">4c08a22b02c58467e6241629c1d08717</string>
