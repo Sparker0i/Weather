@@ -2,12 +2,15 @@ package com.a5corp.weather;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.text.SpannableString;
 import android.text.style.RelativeSizeSpan;
 import android.util.DisplayMetrics;
@@ -20,7 +23,6 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.graphics.Color;
 import android.widget.Toast;
 
 import org.json.JSONObject;
@@ -62,7 +64,7 @@ public class WeatherFragment extends Fragment {
                             }
                             else {
                                 pd.hide();
-                                show();
+                                showInputDialog();
                             }
                         }
                     });
@@ -139,7 +141,8 @@ public class WeatherFragment extends Fragment {
                         alertDialog.setMessage(json0.getJSONObject("city").getString("name").toUpperCase(Locale.US) +
                                 ", " +
                                 json0.getJSONObject("city").getString("country"));
-                        alertDialog.show();
+                        AlertDialog dialog = alertDialog.show();
+                        dialog.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(getColor(getContext()));
                         Log.i("Loaded in Dialog", "City Name");
                     } catch (Exception ex) {
                         Log.e("Error", "Could not load city name");
@@ -192,7 +195,8 @@ public class WeatherFragment extends Fragment {
                                 "\n" + "Humidity:  " + J.getString("humidity") + "%" +
                                 "\n" + "Pressure:  " + J.getString("pressure") + " hPa" +
                                 "\n" + "Wind:         " + J.getString("speed") + "km/h");
-                            alertDialog.show();
+                            AlertDialog dialog = alertDialog.show();
+                            dialog.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(getColor(getContext()));
                         Log.i("Loaded" , "Details Field");}
                         catch (Exception e) {
                             Log.e("Error", "Something's wrong in the JSON Received");
@@ -224,7 +228,8 @@ public class WeatherFragment extends Fragment {
                                     "\n" + "Humidity:  " + J.getString("humidity") + "%" +
                                     "\n" + "Pressure:  " + J.getString("pressure") + " hPa" +
                                     "\n" + "Wind:         " + J.getString("speed") + "km/h");
-                            alertDialog.show();
+                            AlertDialog dialog = alertDialog.show();
+                            dialog.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(getColor(getContext()));
                             Log.i("Loaded" , "Weather Icon onClick Dialog Details");}
                         catch (Exception e) {
                             Log.e("Error", "Weather Icon onClick Dialog details could not be loaded");
@@ -286,7 +291,8 @@ public class WeatherFragment extends Fragment {
                                 "\n" + "Wind:\t         " + json1.getJSONObject("wind").getString("speed") + "km/h" +
                                 "\n" + "Sunrise:\t     " + d1 +
                                 "\n" + "Sunset:\t       " + d2);
-                        alertDialog.show();
+                        AlertDialog dialog = alertDialog.show();
+                        dialog.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(getColor(getContext()));
                         Log.i("Load" , "Main Weather Icon OnClick Details loaded");}
                     catch (Exception e) {
                         Log.e("Error", "Main Weather Icon OnClick Details could not be loaded");
@@ -449,38 +455,20 @@ public class WeatherFragment extends Fragment {
                 dialog.cancel();
             }
         });
-        alert.show();
+        AlertDialog dialog = alert.show();
+        dialog.getButton(DialogInterface.BUTTON_NEGATIVE).setTextColor(getColor(getContext()));
+        dialog.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(getColor(getContext()));
     }
 
-    private void show() {
-        final AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
-        final EditText input = new EditText(getActivity());
-        input.setSingleLine();
-        FrameLayout container = new FrameLayout(getActivity());
-        FrameLayout.LayoutParams params = new  FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        params.leftMargin= convertDpToPx(25);                                       //remember to scale correctly
-        params.rightMargin= convertDpToPx(30);
-        input.setLayoutParams(params);
-        container.addView(input);
-        alert.setTitle("Change City");
-        alert.setMessage("Hey there, could not find the city you wanted. Please enter a new one:\n");
-        alert.setView(container);
-        alert.setPositiveButton("Go", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                changeCity(input.getText().toString());
-            }
-        });
-        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-        AlertDialog dialog = alert.show();
-        dialog.getButton(dialog.BUTTON_NEGATIVE).setTextColor(getResources().getColor(R.color.colorAccent));
-        dialog.getButton(dialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.colorAccent));
+    public static int getColor(Context context) {
+        final int version = Build.VERSION.SDK_INT;
+        if (version >= 23) {
+            return ContextCompat.getColor(context, R.color.colorAccent);
+        } else {
+            return context.getResources().getColor(R.color.colorAccent);
+        }
     }
+
 
     public int convertDpToPx(int dp) {
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();

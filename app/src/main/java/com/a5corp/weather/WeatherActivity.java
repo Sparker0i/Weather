@@ -1,7 +1,10 @@
 package com.a5corp.weather;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 
@@ -78,7 +81,17 @@ public class WeatherActivity extends AppCompatActivity {
                 dialog.cancel();
             }
         });
-        alert.show();
+        AlertDialog dialog = alert.show();
+        dialog.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(getColor(this));
+    }
+
+    public static int getColor(Context context) {
+        final int version = Build.VERSION.SDK_INT;
+        if (version >= 23) {
+            return ContextCompat.getColor(context, R.color.colorAccent);
+        } else {
+            return context.getResources().getColor(R.color.colorAccent);
+        }
     }
 
     public int convertDpToPx(int dp) {
