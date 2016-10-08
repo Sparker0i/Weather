@@ -18,7 +18,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.graphics.Color;
 import android.widget.Toast;
 
 import org.json.JSONObject;
@@ -60,7 +62,7 @@ public class WeatherFragment extends Fragment {
                             }
                             else {
                                 pd.hide();
-                                showInputDialog();
+                                show();
                             }
                         }
                     });
@@ -450,6 +452,36 @@ public class WeatherFragment extends Fragment {
         alert.show();
     }
 
+    private void show() {
+        final AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+        final EditText input = new EditText(getActivity());
+        input.setSingleLine();
+        FrameLayout container = new FrameLayout(getActivity());
+        FrameLayout.LayoutParams params = new  FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        params.leftMargin= convertDpToPx(25);                                       //remember to scale correctly
+        params.rightMargin= convertDpToPx(30);
+        input.setLayoutParams(params);
+        container.addView(input);
+        alert.setTitle("Change City");
+        alert.setMessage("Hey there, could not find the city you wanted. Please enter a new one:\n");
+        alert.setView(container);
+        alert.setPositiveButton("Go", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                changeCity(input.getText().toString());
+            }
+        });
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        AlertDialog dialog = alert.show();
+        dialog.getButton(dialog.BUTTON_NEGATIVE).setTextColor(getResources().getColor(R.color.colorAccent));
+        dialog.getButton(dialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.colorAccent));
+    }
+
     public int convertDpToPx(int dp) {
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
         return Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
@@ -493,5 +525,14 @@ public class WeatherFragment extends Fragment {
         super.onCreate(savedInstanceState);
         weatherFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/weather.ttf");
         updateWeatherData(GlobalActivity.cp.getCity());
+        pd.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+                ProgressBar v = (ProgressBar)pd.findViewById(android.R.id.progress);
+                v.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.colorAccent),
+                        android.graphics.PorterDuff.Mode.MULTIPLY);
+
+            }
+        });
     }
 }
