@@ -14,6 +14,7 @@ android {
     buildTypes {
         release {
             minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -24,4 +25,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:24.2.1'
     compile 'com.android.support:support-v4:24.2.1'
     compile 'com.android.support:design:24.2.1'
+    compile 'com.afollestad.material-dialogs:core:0.9.0.2'
 }

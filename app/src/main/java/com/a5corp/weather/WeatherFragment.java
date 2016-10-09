@@ -1,7 +1,7 @@
 package com.a5corp.weather;
 
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
+import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,17 +13,16 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.text.SpannableString;
 import android.text.style.RelativeSizeSpan;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.FrameLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 
 import org.json.JSONObject;
 
@@ -41,7 +40,7 @@ public class WeatherFragment extends Fragment {
     Handler handler;
     JSONObject json0 , json1;
     int Clicks = 0;
-    ProgressDialog pd;
+    MaterialDialog pd;
 
     private void updateWeatherData(final String city) {
         new Thread(){
@@ -56,14 +55,14 @@ public class WeatherFragment extends Fragment {
                                     getActivity().getString(R.string.place_not_found),
                                     Toast.LENGTH_LONG).show();
                             if (GlobalActivity.cp.getLaunched()) {
-                                pd.hide();
+                                pd.dismiss();
                                 Intent intent = new Intent(getActivity(), FirstLaunch.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 Log.i("Loaded" , "Weather");
                                 startActivity(intent);
                             }
                             else {
-                                pd.hide();
+                                pd.dismiss();
                                 showInputDialog();
                             }
                         }
@@ -73,7 +72,7 @@ public class WeatherFragment extends Fragment {
                         public void run(){
                             GlobalActivity.cp.setLaunched();
                             renderWeather(json);
-                            pd.hide();
+                            pd.dismiss();
                             GlobalActivity.cp.setLastCity(city);
                         }
                     });
@@ -171,54 +170,16 @@ public class WeatherFragment extends Fragment {
                 Log.i("Details[" + Integer.toString(i) + "]", "Information String " + Integer.toString(i + 1) + " loaded");
                 setWeatherIcon(details[i].getJSONArray("weather").getJSONObject(0).getInt("id") , i);
                 detailsField[i].setOnClickListener(new View.OnClickListener() {
-                    public void onClick(View v)
-                    {
-                        AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity()); //Read Update
-                        alertDialog.setPositiveButton("OK" , new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface d , int arg1) {
-                                d.cancel();
-                            }
-                        });
-                        alertDialog.setTitle("Weather Information");
-                        try{
+                    public void onClick(View v) {
+                        MaterialDialog.Builder builder = new MaterialDialog.Builder(getActivity())
+                                .title("Weather Information")
+                                .content("Loading")
+                                .positiveText("OK");
+                        try {
                             String date1 = J.getString("dt");
                             Date expiry = new Date(Long.parseLong(date1) * 1000);
                             String date = new SimpleDateFormat("EE, dd MMMM yyyy" , Locale.US).format(expiry);
-                        alertDialog.setMessage(date +
-                                "\n" + J.getJSONArray("weather").getJSONObject(0).getString("description").toUpperCase(Locale.US) +
-                                "\n" + "Maximum: " + J.getJSONObject("temp").getLong("max") + " ℃" +
-                                "\n" + "Minimum:  " + J.getJSONObject("temp").getLong("min") + " ℃" +
-                                "\n" + "Morning:    " + J.getJSONObject("temp").getLong("morn") + " ℃" +
-                                "\n" + "At Night:    " + J.getJSONObject("temp").getLong("night") + " ℃" +
-                                "\n" + "Evening:    " + J.getJSONObject("temp").getLong("eve") + " ℃" +
-                                "\n" + "Humidity:  " + J.getString("humidity") + "%" +
-                                "\n" + "Pressure:  " + J.getString("pressure") + " hPa" +
-                                "\n" + "Wind:         " + J.getString("speed") + "km/h");
-                            AlertDialog dialog = alertDialog.show();
-                            dialog.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(getColor(getContext()));
-                        Log.i("Loaded" , "Details Field");}
-                        catch (Exception e) {
-                            Log.e("Error", "Something's wrong in the JSON Received");
-                        }
-                    }
-                });
-                weatherIcon[i].setOnClickListener(new View.OnClickListener() {
-                    public void onClick(View v)
-                    {
-                        AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity()); //Read Update
-                        alertDialog.setTitle("Weather Information");
-                        alertDialog.setPositiveButton("OK" , new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface d , int arg1) {
-                                d.cancel();
-                            }
-                        });
-                        try{
-                            String date1 = J.getString("dt");
-                            Date expiry = new Date(Long.parseLong(date1) * 1000);
-                            String date = new SimpleDateFormat("EE, dd MMMM yyyy" , Locale.US).format(expiry);
-                            alertDialog.setMessage(date +
+                            builder.content(date +
                                     "\n" + J.getJSONArray("weather").getJSONObject(0).getString("description").toUpperCase(Locale.US) +
                                     "\n" + "Maximum: " + J.getJSONObject("temp").getLong("max") + " ℃" +
                                     "\n" + "Minimum:  " + J.getJSONObject("temp").getLong("min") + " ℃" +
@@ -228,11 +189,40 @@ public class WeatherFragment extends Fragment {
                                     "\n" + "Humidity:  " + J.getString("humidity") + "%" +
                                     "\n" + "Pressure:  " + J.getString("pressure") + " hPa" +
                                     "\n" + "Wind:         " + J.getString("speed") + "km/h");
-                            AlertDialog dialog = alertDialog.show();
-                            dialog.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(getColor(getContext()));
-                            Log.i("Loaded" , "Weather Icon onClick Dialog Details");}
+                            MaterialDialog dialog = builder.build();
+                            dialog.show();
+                        Log.i("Loaded" , "Details Field");}
                         catch (Exception e) {
-                            Log.e("Error", "Weather Icon onClick Dialog details could not be loaded");
+                            Log.e("Error", "Something's wrong in the JSON Received");
+                        }
+                    }
+                });
+                weatherIcon[i].setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v)
+                    {
+                        MaterialDialog.Builder builder = new MaterialDialog.Builder(getActivity())
+                                .title("Weather Information")
+                                .content("Loading")
+                                .positiveText("OK");
+                        try {
+                            String date1 = J.getString("dt");
+                            Date expiry = new Date(Long.parseLong(date1) * 1000);
+                            String date = new SimpleDateFormat("EE, dd MMMM yyyy" , Locale.US).format(expiry);
+                            builder.content(date +
+                                    "\n" + J.getJSONArray("weather").getJSONObject(0).getString("description").toUpperCase(Locale.US) +
+                                    "\n" + "Maximum: " + J.getJSONObject("temp").getLong("max") + " ℃" +
+                                    "\n" + "Minimum:  " + J.getJSONObject("temp").getLong("min") + " ℃" +
+                                    "\n" + "Morning:    " + J.getJSONObject("temp").getLong("morn") + " ℃" +
+                                    "\n" + "At Night:    " + J.getJSONObject("temp").getLong("night") + " ℃" +
+                                    "\n" + "Evening:    " + J.getJSONObject("temp").getLong("eve") + " ℃" +
+                                    "\n" + "Humidity:  " + J.getString("humidity") + "%" +
+                                    "\n" + "Pressure:  " + J.getString("pressure") + " hPa" +
+                                    "\n" + "Wind:         " + J.getString("speed") + "km/h");
+                            MaterialDialog dialog = builder.build();
+                            dialog.show();
+                            Log.i("Loaded" , "Details Field");}
+                        catch (Exception e) {
+                            Log.e("Error", "Something's wrong in the JSON Received");
                         }
                     }
                 });
@@ -271,18 +261,13 @@ public class WeatherFragment extends Fragment {
             {
                 public void onClick (View v)
                 {
-                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity()); //Read Update
-                    alertDialog.setTitle("Weather Information");
-                    alertDialog.setPositiveButton("OK" , new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface d , int arg1) {
-                            d.cancel();
-                        }
-                    });
-                    try{
+                    MaterialDialog.Builder builder = new MaterialDialog.Builder(getActivity())
+                            .title("Weather Information")
+                            .positiveText("OK");
+                    try {
                         String d1 = new java.text.SimpleDateFormat("hh:mm:ss a" , Locale.US).format(new Date(json1.getJSONObject("sys").getLong("sunrise")*1000));
                         String d2 = new java.text.SimpleDateFormat("hh:mm:ss a" , Locale.US).format(new Date(json1.getJSONObject("sys").getLong("sunset")*1000));
-                        alertDialog.setMessage(json1.getJSONArray("weather").getJSONObject(0).getString("description").toUpperCase(Locale.US) +
+                        builder.content(json1.getJSONArray("weather").getJSONObject(0).getString("description").toUpperCase(Locale.US) +
                                 "\n" + "TEMPERATURE :\t " + json1.getJSONObject("main").getInt("temp") + " ℃" +
                                 "\n" + "Maximum:\t " + json1.getJSONObject("main").getDouble("temp_max") + " ℃" +
                                 "\n" + "Minimum:\t " + json1.getJSONObject("main").getDouble("temp_min") + " ℃" +
@@ -291,12 +276,21 @@ public class WeatherFragment extends Fragment {
                                 "\n" + "Wind:\t         " + json1.getJSONObject("wind").getString("speed") + "km/h" +
                                 "\n" + "Sunrise:\t     " + d1 +
                                 "\n" + "Sunset:\t       " + d2);
-                        AlertDialog dialog = alertDialog.show();
-                        dialog.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(getColor(getContext()));
-                        Log.i("Load" , "Main Weather Icon OnClick Details loaded");}
+                        MaterialDialog dialog = builder.build();
+                        dialog.show();
+                        Log.i("Load" , "Main Weather Icon OnClick Details loaded");
+                    }
                     catch (Exception e) {
                         Log.e("Error", "Main Weather Icon OnClick Details could not be loaded");
                     }
+                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity()); //Read Update
+                    alertDialog.setTitle("Weather Information");
+                    alertDialog.setPositiveButton("OK" , new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface d , int arg1) {
+                            d.cancel();
+                        }
+                    });
                 }
             });
             String r1 = Integer.toString(a) + "°C";
@@ -431,33 +425,22 @@ public class WeatherFragment extends Fragment {
     }
 
     private void showInputDialog() {
-        final AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
-        final EditText input = new EditText(getActivity());
-        input.setSingleLine();
-        FrameLayout container = new FrameLayout(getActivity());
-        FrameLayout.LayoutParams params = new  FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        params.leftMargin= convertDpToPx(25);                                       //remember to scale correctly
-        params.rightMargin= convertDpToPx(30);
-        input.setLayoutParams(params);
-        container.addView(input);
-        alert.setTitle("Change City");
-        alert.setMessage("Hey there, could not find the city you wanted. Please enter a new one:\n");
-        alert.setView(container);
-        alert.setPositiveButton("Go", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                changeCity(input.getText().toString());
-            }
-        });
-        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-        AlertDialog dialog = alert.show();
-        dialog.getButton(DialogInterface.BUTTON_NEGATIVE).setTextColor(getColor(getContext()));
-        dialog.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(getColor(getContext()));
+        new MaterialDialog.Builder(this.getActivity())
+                .title("Change City")
+                .content("Hey there, could not find the city you wanted. Please enter a new one:\n")
+                .negativeText("CANCEL")
+                .onNegative(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog , @NonNull DialogAction which) {
+                        dialog.dismiss();
+                    }
+                })
+                .input(null, null, new MaterialDialog.InputCallback() {
+                    @Override
+                    public void onInput(@NonNull MaterialDialog dialog, @NonNull CharSequence input) {
+                        changeCity(input.toString());
+                    }
+                }).show();
     }
 
     public static int getColor(Context context) {
@@ -467,12 +450,6 @@ public class WeatherFragment extends Fragment {
         } else {
             return context.getResources().getColor(R.color.colorAccent);
         }
-    }
-
-
-    public int convertDpToPx(int dp) {
-        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
-        return Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
     }
 
     @Override
@@ -489,9 +466,6 @@ public class WeatherFragment extends Fragment {
         dailyView.setText(getString(R.string.daily));
         button = (Button)rootView.findViewById(R.id.button1);
         button.setText("°C");
-        pd.setCancelable(false);
-        pd.setMessage("Loading");
-        pd.setTitle("Please Wait");
         pd.show();
         for (int i = 0; i < 11; ++i)
         {
@@ -509,18 +483,13 @@ public class WeatherFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        pd = new ProgressDialog(this.getActivity());
+        MaterialDialog.Builder builder = new MaterialDialog.Builder(this.getActivity())
+                .title("Please Wait")
+                .content("Loading")
+                .progress(true , 0);
+        pd = builder.build();
         super.onCreate(savedInstanceState);
         weatherFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/weather.ttf");
         updateWeatherData(GlobalActivity.cp.getCity());
-        pd.setOnShowListener(new DialogInterface.OnShowListener() {
-            @Override
-            public void onShow(DialogInterface dialog) {
-                ProgressBar v = (ProgressBar)pd.findViewById(android.R.id.progress);
-                v.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.colorAccent),
-                        android.graphics.PorterDuff.Mode.MULTIPLY);
-
-            }
-        });
     }
 }
