@@ -117,9 +117,7 @@ public class WeatherFragment extends Fragment {
             json1 = jsonObj[1];
             tc = json1.getJSONObject("main").getDouble("temp");
             int a = (int) Math.round(json1.getJSONObject("main").getDouble("temp"));                        //℃
-            cityField.setText(json0.getJSONObject("city").getString("name").toUpperCase(Locale.US) +
-                    ", " +
-                    json0.getJSONObject("city").getString("country"));
+            cityField.setText(json0.getJSONObject("city").getString("name").toUpperCase(Locale.US) + ", " + json0.getJSONObject("city").getString("country"));
             cityField.setOnClickListener(new View.OnClickListener()
             {
                 public void onClick(View v) {
@@ -128,9 +126,7 @@ public class WeatherFragment extends Fragment {
                             .content("Loading")
                             .positiveText("OK");
                     try {
-                        builder.content(json0.getJSONObject("city").getString("name").toUpperCase(Locale.US) +
-                                ", " +
-                                json0.getJSONObject("city").getString("country"));
+                        builder.content(json0.getJSONObject("city").getString("name").toUpperCase(Locale.US) + ", " + json0.getJSONObject("city").getString("country"));
                         MaterialDialog dialog = builder.build();
                         dialog.show();
                         Log.i("Loaded in Dialog", "City Name");
@@ -150,6 +146,7 @@ public class WeatherFragment extends Fragment {
             {
                 final JSONObject J = details[i];
                 String date1 = details[i].getString("dt");
+                final int u = i;
                 Date expiry = new Date(Long.parseLong(date1) * 1000);
                 String date = new SimpleDateFormat("EE, dd" , Locale.US).format(expiry);
                 SpannableString ss1=  new SpannableString(date + "\n"
@@ -162,65 +159,58 @@ public class WeatherFragment extends Fragment {
                 setWeatherIcon(details[i].getJSONArray("weather").getJSONObject(0).getInt("id") , i);
                 detailsField[i].setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
-                        MaterialDialog.Builder builder = new MaterialDialog.Builder(getActivity())
-                                .title("Weather Information")
-                                .content("Loading")
-                                .positiveText("OK");
-                        try {
-                            String date1 = J.getString("dt");
-                            Date expiry = new Date(Long.parseLong(date1) * 1000);
-                            String date = new SimpleDateFormat("EE, dd MMMM yyyy" , Locale.US).format(expiry);
-                            builder.content(date +
-                                    "\n" + J.getJSONArray("weather").getJSONObject(0).getString("description").toUpperCase(Locale.US) +
-                                    "\n" + "Maximum: " + J.getJSONObject("temp").getLong("max") + " ℃" +
-                                    "\n" + "Minimum:  " + J.getJSONObject("temp").getLong("min") + " ℃" +
-                                    "\n" + "Morning:    " + J.getJSONObject("temp").getLong("morn") + " ℃" +
-                                    "\n" + "At Night:    " + J.getJSONObject("temp").getLong("night") + " ℃" +
-                                    "\n" + "Evening:    " + J.getJSONObject("temp").getLong("eve") + " ℃" +
-                                    "\n" + "Humidity:  " + J.getString("humidity") + "%" +
-                                    "\n" + "Pressure:  " + J.getString("pressure") + " hPa" +
-                                    "\n" + "Wind:         " + J.getString("speed") + "km/h");
-                            MaterialDialog dialog = builder.build();
-                            dialog.show();
-                        Log.i("Loaded" , "Details Field");}
-                        catch (Exception e) {
-                            Log.e("Error", "Something's wrong in the JSON Received");
-                        }
+                        setDetailsField(J);
                     }
                 });
                 weatherIcon[i].setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v)
                     {
-                        MaterialDialog.Builder builder = new MaterialDialog.Builder(getActivity())
-                                .title("Weather Information")
-                                .content("Loading")
-                                .positiveText("OK");
-                        try {
-                            String date1 = J.getString("dt");
-                            Date expiry = new Date(Long.parseLong(date1) * 1000);
-                            String date = new SimpleDateFormat("EE, dd MMMM yyyy" , Locale.US).format(expiry);
-                            builder.content(date +
-                                    "\n" + J.getJSONArray("weather").getJSONObject(0).getString("description").toUpperCase(Locale.US) +
-                                    "\n" + "Maximum: " + J.getJSONObject("temp").getLong("max") + " ℃" +
-                                    "\n" + "Minimum:  " + J.getJSONObject("temp").getLong("min") + " ℃" +
-                                    "\n" + "Morning:    " + J.getJSONObject("temp").getLong("morn") + " ℃" +
-                                    "\n" + "At Night:    " + J.getJSONObject("temp").getLong("night") + " ℃" +
-                                    "\n" + "Evening:    " + J.getJSONObject("temp").getLong("eve") + " ℃" +
-                                    "\n" + "Humidity:  " + J.getString("humidity") + "%" +
-                                    "\n" + "Pressure:  " + J.getString("pressure") + " hPa" +
-                                    "\n" + "Wind:         " + J.getString("speed") + "km/h");
-                            MaterialDialog dialog = builder.build();
-                            dialog.show();
-                            Log.i("Loaded" , "Details Field");}
-                        catch (Exception e) {
-                            Log.e("Error", "Something's wrong in the JSON Received");
-                        }
+                        setWeatherIcon(J , u);
                     }
                 });
             }
+            setAll();
+            button.setOnClickListener(new View.OnClickListener() {
+                public void onClick (View v)
+                {
+                    Units(json1);
+                }
+            });
+            weatherIcon[10].setOnClickListener(new View.OnClickListener()
+            {
+                public void onClick (View v)
+                {
+                    setWeatherIcon(null , 10);
+                }
+            });
+            String r1 = Integer.toString(a) + "°C";
+            button.setText(r1);
+            button.setVisibility(View.VISIBLE);
+        }catch(Exception e){
+            Log.e("SimpleWeather", "One or more fields not found in the JSON data");
+        }
+    }
+
+    public void setAll() {
+        try {
             DateFormat df = DateFormat.getDateTimeInstance();
             String updatedOn = "Last update: " + df.format(new Date(json1.getLong("dt")*1000));
             updatedField.setText(updatedOn);
+            setDirectionView();
+            setWeatherIcon(json1.getJSONArray("weather").getJSONObject(0).getInt("id"),10);
+            humidityView.setText("HUMIDITY:\n" + json1.getJSONObject("main").getInt("humidity") + "%");
+            Log.i("Humidity Loaded" , "Done");
+            windView.setText("WIND:\n" + json1.getJSONObject("wind").getDouble("speed") + "km/h");
+            Log.i("Wind Loaded" , "Done");
+            Log.i("10" , "Weather Icon 11 Set");
+        }
+        catch (Exception ex) {
+
+        }
+    }
+
+    public void setDirectionView() {
+        try {
             int deg = json1.getJSONObject("wind").getInt("deg");
             if (deg < 90)
                 directionView.setText(getActivity().getString(R.string.top_right));
@@ -236,56 +226,90 @@ public class WeatherFragment extends Fragment {
                 directionView.setText(getActivity().getString(R.string.left));
             else
                 directionView.setText(getActivity().getString(R.string.top_left));
-            setWeatherIcon(json1.getJSONArray("weather").getJSONObject(0).getInt("id"),10);
-            humidityView.setText("HUMIDITY:\n" + json1.getJSONObject("main").getInt("humidity") + "%");
-            Log.i("Humidity Loaded" , "Done");
-            windView.setText("WIND:\n" + json1.getJSONObject("wind").getDouble("speed") + "km/h");
-            Log.i("Wind Loaded" , "Done");
-            Log.i("10" , "Weather Icon 11 Set");
-            button.setOnClickListener(new View.OnClickListener() {
-                public void onClick (View v)
-                {
-                    Units(json1);
-                }
-            });
-            weatherIcon[10].setOnClickListener(new View.OnClickListener()
-            {
-                public void onClick (View v)
-                {
-                    MaterialDialog.Builder builder = new MaterialDialog.Builder(getActivity())
-                            .title("Weather Information")
-                            .positiveText("OK");
-                    try {
-                        String d1 = new java.text.SimpleDateFormat("hh:mm:ss a" , Locale.US).format(new Date(json1.getJSONObject("sys").getLong("sunrise")*1000));
-                        String d2 = new java.text.SimpleDateFormat("hh:mm:ss a" , Locale.US).format(new Date(json1.getJSONObject("sys").getLong("sunset")*1000));
-                        builder.content(json1.getJSONArray("weather").getJSONObject(0).getString("description").toUpperCase(Locale.US) +
-                                "\n" + "TEMPERATURE :\t " + json1.getJSONObject("main").getInt("temp") + " ℃" +
-                                "\n" + "Maximum:\t " + json1.getJSONObject("main").getDouble("temp_max") + " ℃" +
-                                "\n" + "Minimum:\t " + json1.getJSONObject("main").getDouble("temp_min") + " ℃" +
-                                "\n" + "Humidity:\t   " + json1.getJSONObject("main").getString("humidity") + "%" +
-                                "\n" + "Pressure:\t   " + json1.getJSONObject("main").getString("pressure") + " hPa" +
-                                "\n" + "Wind:\t         " + json1.getJSONObject("wind").getString("speed") + "km/h" +
-                                "\n" + "Sunrise:\t     " + d1 +
-                                "\n" + "Sunset:\t       " + d2);
-                        MaterialDialog dialog = builder.build();
-                        dialog.show();
-                        Log.i("Load" , "Main Weather Icon OnClick Details loaded");
-                    }
-                    catch (Exception e) {
-                        Log.e("Error", "Main Weather Icon OnClick Details could not be loaded");
-                    }
-                }
-            });
-            String r1 = Integer.toString(a) + "°C";
-            button.setText(r1);
-            button.setVisibility(View.VISIBLE);
-        }catch(Exception e){
-            Log.e("SimpleWeather", "One or more fields not found in the JSON data");
+        }
+        catch (Exception ex) {
+            Log.e("Failed" , "Set Direction View");
         }
     }
 
-    public void setDetailsField(JSONObject J , int i) {
+    public void setDetailsField(JSONObject J) {
+        MaterialDialog.Builder builder = new MaterialDialog.Builder(getActivity())
+                .title("Weather Information")
+                .content("Loading")
+                .positiveText("OK");
+        try {
+            String date1 = J.getString("dt");
+            Date expiry = new Date(Long.parseLong(date1) * 1000);
+            String date = new SimpleDateFormat("EE, dd MMMM yyyy" , Locale.US).format(expiry);
+            builder.content(date +
+                    "\n" + J.getJSONArray("weather").getJSONObject(0).getString("description").toUpperCase(Locale.US) +
+                    "\n" + "Maximum: " + J.getJSONObject("temp").getLong("max") + " ℃" +
+                    "\n" + "Minimum:  " + J.getJSONObject("temp").getLong("min") + " ℃" +
+                    "\n" + "Morning:    " + J.getJSONObject("temp").getLong("morn") + " ℃" +
+                    "\n" + "At Night:    " + J.getJSONObject("temp").getLong("night") + " ℃" +
+                    "\n" + "Evening:    " + J.getJSONObject("temp").getLong("eve") + " ℃" +
+                    "\n" + "Humidity:  " + J.getString("humidity") + "%" +
+                    "\n" + "Pressure:  " + J.getString("pressure") + " hPa" +
+                    "\n" + "Wind:         " + J.getString("speed") + "km/h");
+            MaterialDialog dialog = builder.build();
+            dialog.show();
+            Log.i("Loaded" , "Details Field");}
+        catch (Exception e) {
+            Log.e("Error", "Something's wrong in the JSON Received");
+        }
+    }
 
+    public void setWeatherIcon(JSONObject J , int id) {
+        if (id == 10) {
+            MaterialDialog.Builder builder = new MaterialDialog.Builder(getActivity())
+                    .title("Weather Information")
+                    .positiveText("OK");
+            try {
+                String d1 = new java.text.SimpleDateFormat("hh:mm:ss a" , Locale.US).format(new Date(json1.getJSONObject("sys").getLong("sunrise")*1000));
+                String d2 = new java.text.SimpleDateFormat("hh:mm:ss a" , Locale.US).format(new Date(json1.getJSONObject("sys").getLong("sunset")*1000));
+                builder.content(json1.getJSONArray("weather").getJSONObject(0).getString("description").toUpperCase(Locale.US) +
+                        "\n" + "TEMPERATURE :\t " + json1.getJSONObject("main").getInt("temp") + " ℃" +
+                        "\n" + "Maximum:\t " + json1.getJSONObject("main").getDouble("temp_max") + " ℃" +
+                        "\n" + "Minimum:\t " + json1.getJSONObject("main").getDouble("temp_min") + " ℃" +
+                        "\n" + "Humidity:\t   " + json1.getJSONObject("main").getString("humidity") + "%" +
+                        "\n" + "Pressure:\t   " + json1.getJSONObject("main").getString("pressure") + " hPa" +
+                        "\n" + "Wind:\t         " + json1.getJSONObject("wind").getString("speed") + "km/h" +
+                        "\n" + "Sunrise:\t     " + d1 +
+                        "\n" + "Sunset:\t       " + d2);
+                MaterialDialog dialog = builder.build();
+                dialog.show();
+                Log.i("Load" , "Main Weather Icon OnClick Details loaded");
+            }
+            catch (Exception e) {
+                Log.e("Error", "Main Weather Icon OnClick Details could not be loaded");
+            }
+        }
+        else {
+            MaterialDialog.Builder builder = new MaterialDialog.Builder(getActivity())
+                    .title("Weather Information")
+                    .content("Loading")
+                    .positiveText("OK");
+            try {
+                String date1 = J.getString("dt");
+                Date expiry = new Date(Long.parseLong(date1) * 1000);
+                String date = new SimpleDateFormat("EE, dd MMMM yyyy" , Locale.US).format(expiry);
+                builder.content(date +
+                        "\n" + J.getJSONArray("weather").getJSONObject(0).getString("description").toUpperCase(Locale.US) +
+                        "\n" + "Maximum: " + J.getJSONObject("temp").getLong("max") + " ℃" +
+                        "\n" + "Minimum:  " + J.getJSONObject("temp").getLong("min") + " ℃" +
+                        "\n" + "Morning:    " + J.getJSONObject("temp").getLong("morn") + " ℃" +
+                        "\n" + "At Night:    " + J.getJSONObject("temp").getLong("night") + " ℃" +
+                        "\n" + "Evening:    " + J.getJSONObject("temp").getLong("eve") + " ℃" +
+                        "\n" + "Humidity:  " + J.getString("humidity") + "%" +
+                        "\n" + "Pressure:  " + J.getString("pressure") + " hPa" +
+                        "\n" + "Wind:         " + J.getString("speed") + "km/h");
+                MaterialDialog dialog = builder.build();
+                dialog.show();
+                Log.i("Loaded" , "Details Field");}
+            catch (Exception e) {
+                Log.e("Error", "Something's wrong in the JSON Received");
+            }
+        }
     }
 
     public WeatherFragment() {
@@ -295,115 +319,98 @@ public class WeatherFragment extends Fragment {
     private void setWeatherIcon(int id , int i) {
         String icon = "";
         switch(id) {
-            case 501 : icon = getActivity().getString(R.string.weather_drizzle);
-                break;
+            case 501 :
+            case 521 :
             case 500 : icon = getActivity().getString(R.string.weather_drizzle);
                 break;
-            case 502 : icon = getActivity().getString(R.string.weather_rainy);
-                break;
-            case 503 : icon = getActivity().getString(R.string.weather_rainy);
-                break;
+
+            case 502 :
+            case 503 :
             case 504 : icon = getActivity().getString(R.string.weather_rainy);
                 break;
+
             case 511 : icon = getActivity().getString(R.string.weather_rain_wind);
                 break;
-            case 520 : icon = getActivity().getString(R.string.weather_shower_rain);
-                break;
-            case 521 : icon = getActivity().getString(R.string.weather_drizzle);
-                break;
-            case 522 : icon = getActivity().getString(R.string.weather_thunder);
-                break;
-            case 531 : icon = getActivity().getString(R.string.weather_thunder);
-                break;
-            case 200 : icon = getActivity().getString(R.string.weather_thunder);
-                break;
-            case 201 : icon = getActivity().getString(R.string.weather_thunder);
-                break;
-            case 202 : icon = getActivity().getString(R.string.weather_thunder);
-                break;
-            case 210 : icon = getActivity().getString(R.string.weather_thunder);
-                break;
-            case 211 : icon = getActivity().getString(R.string.weather_thunder);
-                break;
-            case 212 : icon = getActivity().getString(R.string.weather_thunder);
-                break;
-            case 221 : icon = getActivity().getString(R.string.weather_thunder);
-                break;
-            case 230 : icon = getActivity().getString(R.string.weather_thunder);
-                break;
-            case 231 : icon = getActivity().getString(R.string.weather_thunder);
-                break;
-            case 232 : icon = getActivity().getString(R.string.weather_thunder);
-                break;
-            case 300 : icon = getActivity().getString(R.string.weather_shower_rain);
-                break;
-            case 301 : icon = getActivity().getString(R.string.weather_shower_rain);
-                break;
-            case 302 : icon = getActivity().getString(R.string.weather_heavy_drizzle);
-                break;
-            case 310 : icon = getActivity().getString(R.string.weather_shower_rain);
-                break;
+
+            case 520 :
+            case 300 :
+            case 301 :
+            case 310 :
             case 311 : icon = getActivity().getString(R.string.weather_shower_rain);
                 break;
-            case 312 : icon = getActivity().getString(R.string.weather_heavy_drizzle);
+
+            case 522 :
+            case 531 :
+            case 200 :
+            case 201 :
+            case 202 :
+            case 210 :
+            case 211 :
+            case 212 :
+            case 221 :
+            case 230 :
+            case 231 :
+            case 232 : icon = getActivity().getString(R.string.weather_thunder);
                 break;
-            case 313 : icon = getActivity().getString(R.string.weather_rain_drizzle);
-                break;
-            case 314 : icon = getActivity().getString(R.string.weather_heavy_drizzle);
-                break;
+
+            case 302 :
+            case 312 :
+            case 314 :
             case 321 : icon = getActivity().getString(R.string.weather_heavy_drizzle);
                 break;
-            case 600 : icon = getActivity().getString(R.string.weather_snowy);
+
+            case 313 : icon = getActivity().getString(R.string.weather_rain_drizzle);
                 break;
-            case 601 : icon = getActivity().getString(R.string.weather_snowy);
-                break;
-            case 602 : icon = getActivity().getString(R.string.weather_heavy_snow);
-                break;
-            case 611 : icon = getActivity().getString(R.string.weather_sleet);
-                break;
-            case 612 : icon = getActivity().getString(R.string.weather_heavy_snow);
-                break;
+
+            case 600 :
+            case 601 :
             case 903 :
-            case 615 : icon = getActivity().getString(R.string.weather_snowy);
-                break;
-            case 616 : icon = getActivity().getString(R.string.weather_snowy);
-                break;
-            case 620 : icon = getActivity().getString(R.string.weather_snowy);
-                break;
-            case 621 : icon = getActivity().getString(R.string.weather_snowy);
-                break;
+            case 615 :
+            case 616 :
+            case 620 :
+            case 621 :
             case 622 : icon = getActivity().getString(R.string.weather_snowy);
                 break;
+
+            case 602 :
+            case 612 : icon = getActivity().getString(R.string.weather_heavy_snow);
+                break;
+
+            case 611 : icon = getActivity().getString(R.string.weather_sleet);
+                break;
+
             case 701 :
             case 702 :
             case 721 : icon = getActivity().getString(R.string.weather_smoke);
                 break;
+
             case 751 :
             case 761 :
             case 731 : icon = getActivity().getString(R.string.weather_dust);
                 break;
+
             case 741 : icon = getActivity().getString(R.string.weather_foggy);
                 break;
+
             case 762 : icon = getActivity().getString(R.string.weather_volcano);
                 break;
+
             case 771 :
             case 900 :
             case 781 : icon = getActivity().getString(R.string.weather_tornado);
                 break;
-            case 904 : icon = getActivity().getString(R.string.weather_sunny);
-                break;
+
+            case 904 :
             case 800 : icon = getActivity().getString(R.string.weather_sunny);
                 break;
-            case 801 : icon = getActivity().getString(R.string.weather_cloudy);
-                break;
-            case 802 : icon = getActivity().getString(R.string.weather_cloudy);
-                break;
-            case 803 : icon = getActivity().getString(R.string.weather_cloudy);
-                break;
+
+            case 801 :
             case 804 : icon = getActivity().getString(R.string.weather_cloudy);
                 break;
+
             case 901 : icon = getActivity().getString(R.string.weather_storm);
                 break;
+
             case 902 : icon = getActivity().getString(R.string.weather_hurricane);
                 break;
         }
