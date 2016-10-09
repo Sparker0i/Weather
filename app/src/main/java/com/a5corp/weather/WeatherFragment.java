@@ -1,16 +1,11 @@
 package com.a5corp.weather;
 
 import android.support.annotation.NonNull;
-import android.support.v7.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.text.SpannableString;
 import android.text.style.RelativeSizeSpan;
 import android.util.Log;
@@ -128,20 +123,16 @@ public class WeatherFragment extends Fragment {
             cityField.setOnClickListener(new View.OnClickListener()
             {
                 public void onClick(View v) {
-                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity()); //Read Update
-                    alertDialog.setTitle("City Information");
-                    alertDialog.setPositiveButton("OK" , new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface d , int arg1) {
-                            d.cancel();
-                        }
-                    });
+                    MaterialDialog.Builder builder = new MaterialDialog.Builder(getActivity())
+                            .title("City Information")
+                            .content("Loading")
+                            .positiveText("OK");
                     try {
-                        alertDialog.setMessage(json0.getJSONObject("city").getString("name").toUpperCase(Locale.US) +
+                        builder.content(json0.getJSONObject("city").getString("name").toUpperCase(Locale.US) +
                                 ", " +
                                 json0.getJSONObject("city").getString("country"));
-                        AlertDialog dialog = alertDialog.show();
-                        dialog.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(getColor(getContext()));
+                        MaterialDialog dialog = builder.build();
+                        dialog.show();
                         Log.i("Loaded in Dialog", "City Name");
                     } catch (Exception ex) {
                         Log.e("Error", "Could not load city name");
@@ -283,14 +274,6 @@ public class WeatherFragment extends Fragment {
                     catch (Exception e) {
                         Log.e("Error", "Main Weather Icon OnClick Details could not be loaded");
                     }
-                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity()); //Read Update
-                    alertDialog.setTitle("Weather Information");
-                    alertDialog.setPositiveButton("OK" , new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface d , int arg1) {
-                            d.cancel();
-                        }
-                    });
                 }
             });
             String r1 = Integer.toString(a) + "°C";
@@ -299,6 +282,10 @@ public class WeatherFragment extends Fragment {
         }catch(Exception e){
             Log.e("SimpleWeather", "One or more fields not found in the JSON data");
         }
+    }
+
+    public void setDetailsField(JSONObject J , int i) {
+
     }
 
     public WeatherFragment() {
@@ -427,7 +414,7 @@ public class WeatherFragment extends Fragment {
     private void showInputDialog() {
         new MaterialDialog.Builder(this.getActivity())
                 .title("Change City")
-                .content("Hey there, could not find the city you wanted. Please enter a new one:\n")
+                .content("Hey there, could not find the city you wanted. Please enter a new one:")
                 .negativeText("CANCEL")
                 .onNegative(new MaterialDialog.SingleButtonCallback() {
                     @Override
@@ -441,15 +428,6 @@ public class WeatherFragment extends Fragment {
                         changeCity(input.toString());
                     }
                 }).show();
-    }
-
-    public static int getColor(Context context) {
-        final int version = Build.VERSION.SDK_INT;
-        if (version >= 23) {
-            return ContextCompat.getColor(context, R.color.colorAccent);
-        } else {
-            return context.getResources().getColor(R.color.colorAccent);
-        }
     }
 
     @Override
@@ -486,6 +464,7 @@ public class WeatherFragment extends Fragment {
         MaterialDialog.Builder builder = new MaterialDialog.Builder(this.getActivity())
                 .title("Please Wait")
                 .content("Loading")
+                .cancelable(false)
                 .progress(true , 0);
         pd = builder.build();
         super.onCreate(savedInstanceState);

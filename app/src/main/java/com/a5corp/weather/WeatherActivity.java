@@ -57,7 +57,7 @@ public class WeatherActivity extends AppCompatActivity {
     private void showInputDialog() {
         new MaterialDialog.Builder(this)
                 .title("Change City")
-                .content("Ypu can change the city here")
+                .content("You can change the city here")
                 .negativeText("CANCEL")
                 .onNegative(new MaterialDialog.SingleButtonCallback() {
                     @Override
