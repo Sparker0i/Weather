@@ -14,16 +14,22 @@ public class AboutActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
-        TextView madeBy = (TextView) findViewById(R.id.madeBy);
-        TextView sourceAt = (TextView) findViewById(R.id.sourceAt);
+        TextView madeBy = (TextView) findViewById(R.id.made_by);
+        TextView sourceAt = (TextView) findViewById(R.id.source_at);
+        TextView icons = (TextView) findViewById(R.id.icons);
+        TextView owmField = (TextView) findViewById(R.id.owm_field);
+        TextView appIcon = (TextView) findViewById(R.id.app_icon);
+        TextView verText = (TextView) findViewById(R.id.ver_text);
+
         sourceAt.setMovementMethod(LinkMovementMethod.getInstance());           //To make the link clickable
         madeBy.setMovementMethod(LinkMovementMethod.getInstance());
+        icons.setMovementMethod(LinkMovementMethod.getInstance());
+        owmField.setMovementMethod(LinkMovementMethod.getInstance());
+
         Typeface weatherFont;
-        TextView appIcon = (TextView) findViewById(R.id.appIcon);
         weatherFont = Typeface.createFromAsset(getAssets(), "fonts/weather.ttf");
         appIcon.setTypeface(weatherFont);
         appIcon.setText(getString(R.string.weather_sunny_cloudy));
-        TextView verText = (TextView) findViewById(R.id.verText);
         String verId = "Version " + BuildConfig.VERSION_NAME;
         verText.setText(verId);
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
