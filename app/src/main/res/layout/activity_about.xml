@@ -38,11 +38,14 @@
             android:text="@string/credits"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="50dp"
             android:id="@+id/credits_view"
-            android:textSize="18sp"
+            android:textSize="21sp"
+            android:fontFamily="sans-serif"
             android:layout_below="@+id/source_at"
-            android:layout_alignParentStart="true" />
+            android:layout_centerHorizontal="true"
+            android:textStyle="normal|bold"
+            android:textColor="#303F9F" />
 
         <TextView
             android:text="@string/icons"

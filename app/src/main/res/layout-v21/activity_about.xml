@@ -34,17 +34,6 @@
             android:layout_centerHorizontal="true" />
 
         <TextView
-            android:text="@string/credits"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:id="@+id/credits_view"
-            android:textSize="18sp"
-            android:layout_below="@+id/source_at"
-            android:layout_alignParentStart="true"
-            android:fontFamily="sans-serif" />
-
-        <TextView
             android:text="@string/icons"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -102,5 +91,18 @@
             android:textAlignment="textEnd"
             android:layout_alignParentTop="true"
             android:layout_toEndOf="@+id/app_icon" />
+
+        <TextView
+            android:text="@string/credits"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:id="@+id/credits_view"
+            android:textSize="21sp"
+            android:fontFamily="sans-serif"
+            android:layout_below="@+id/source_at"
+            android:layout_centerHorizontal="true"
+            android:textStyle="normal|bold"
+            android:textColor="#303F9F" />
     </RelativeLayout>
 </ScrollView>
