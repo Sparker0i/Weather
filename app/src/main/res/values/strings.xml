@@ -9,7 +9,7 @@
     <string name="owm">&#8226; <a href = "https://openweathermap.org">OpenWeatherMap</a>, for the weather data, licensed under <a href = "https://creativecommons.org/licenses/by-sa/3.0/deed.en_US">CC BY SA-3.0</a>.\n</string>
     <string name="source_code">Find the Source Code <a href="https://github.com/Sparker0i/Weather.git">here</a>.</string>
     <string name="dev_info">Made by <a href="http://aaditya.website">Aaditya Menon</a></string>
-    <string name="material_dialogs">&#8226; <a href = "https://github.com/afollestad/material-dialogs">Aidan Follestad Material Dialogs</a>, for the Material Design Dialog Boxes for all Android Versions.</string>
+    <string name="material_dialogs">&#8226; <a href = "https://github.com/afollestad/material-dialogs">Aidan Follestad Material Dialogs</a>, for the Material Design Dialog Boxes for all Android Versions, licensed under <a href = "https://github.com/afollestad/material-dialogs/blob/master/LICENSE.txt">MIT License</a>.\n</string>
 
     <string name="first_go_text">GO</string>
     <string name="uh_oh">Uh oh. Seems like the city you entered does not exist on the Database. Please Try Again</string>
