@@ -8,10 +8,10 @@
         <screen android:screenSize="normal" android:screenDensity="hdpi" />
         <screen android:screenSize="normal" android:screenDensity="xhdpi" />
         <screen android:screenSize="large" android:screenDensity="hdpi" />
+        <screen android:screenSize="large" android:screenDensity="mdpi" />
         <screen android:screenSize="large" android:screenDensity="xhdpi" />
         <screen android:screenSize="xlarge" android:screenDensity="hdpi" />
         <screen android:screenSize="xlarge" android:screenDensity="xhdpi" />
-        <screen android:screenSize="xlarge" android:screenDensity="mdpi" />
     </compatible-screens>
 
     <application
