@@ -6,10 +6,10 @@ android {
 
     defaultConfig {
         applicationId "com.a5corp.weather"
-        minSdkVersion 19
+        minSdkVersion 15
         targetSdkVersion 24
-        versionCode 125
-        versionName "1.0-Release"
+        versionCode 126
+        versionName "1.1-Release"
     }
     buildTypes {
         release {
