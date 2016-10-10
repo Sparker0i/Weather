@@ -20,11 +20,13 @@ public class AboutActivity extends AppCompatActivity {
         TextView owmField = (TextView) findViewById(R.id.owm_field);
         TextView appIcon = (TextView) findViewById(R.id.app_icon);
         TextView verText = (TextView) findViewById(R.id.ver_text);
+        TextView matDialog = (TextView) findViewById(R.id.material_dialogs);
 
         sourceAt.setMovementMethod(LinkMovementMethod.getInstance());           //To make the link clickable
         madeBy.setMovementMethod(LinkMovementMethod.getInstance());
         icons.setMovementMethod(LinkMovementMethod.getInstance());
         owmField.setMovementMethod(LinkMovementMethod.getInstance());
+        matDialog.setMovementMethod(LinkMovementMethod.getInstance());
 
         Typeface weatherFont;
         weatherFont = Typeface.createFromAsset(getAssets(), "fonts/weather.ttf");

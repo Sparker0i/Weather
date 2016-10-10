@@ -2,13 +2,15 @@
 <resources>
 
     <string name="app_name">Simple Weather</string>
-    <string name="change_city">Change city</string>
-    <string name="project_link">here</string>
+    <string name="change_city">Change City</string>
     <string name="about_page">About This App</string>
+
     <string name="icons">&#8226; <a href = "https://erikflowers.github.io/weather-icons">Erik Flowers Weather Icons</a>, for the weather icons and the app icon, licensed under <a href = "https://creativecommons.org/licenses/by-sa/3.0/deed.en_US">CC BY SA-3.0</a> and <a href = "https://opensource.org/licenses/OFL-1.1">SIL OFS-1.1</a> .\n</string>
-    <string name="owm">&#8226; <a href = "https://openweathermap.org">OpenWeatherMap</a>, for the weather data, licensed under <a href = "https://creativecommons.org/licenses/by-sa/3.0/deed.en_US">CC BY SA-3.0</a>.</string>
+    <string name="owm">&#8226; <a href = "https://openweathermap.org">OpenWeatherMap</a>, for the weather data, licensed under <a href = "https://creativecommons.org/licenses/by-sa/3.0/deed.en_US">CC BY SA-3.0</a>.\n</string>
     <string name="source_code">Find the Source Code <a href="https://github.com/Sparker0i/Weather.git">here</a>.</string>
     <string name="dev_info">Made by <a href="http://aaditya.website">Aaditya Menon</a></string>
+    <string name="material_dialogs">&#8226; <a href = "https://github.com/afollestad/material-dialogs">Aidan Follestad Material Dialogs</a>, for the Material Design Dialog Boxes for all Android Versions.</string>
+
     <string name="first_go_text">GO</string>
     <string name="uh_oh">Uh oh. Seems like the city you entered does not exist on the Database. Please Try Again</string>
     <string name="pick_city">Hey there, let\'s start by picking a city for you</string>
@@ -43,7 +45,6 @@
     <string name="place_not_found">Sorry, no weather data found.</string>
     <string name="icon">Icon</string>
     <string name="value">Value</string>
-    <string name="f">F</string>
     <string name="top_right">&#xf057;</string>
     <string name="right">&#xf04d;</string>
     <string name="bottom_right">&#xf088;</string>
@@ -51,7 +52,7 @@
     <string name="bottom_left">&#xf043;</string>
     <string name="left">&#xf048;</string>
     <string name="top_left">&#xf087;</string>
-    <string name="celsius">CELSIUS</string>
+
     <string name="c">°C</string>
     <string name="daily">DAILY</string>
 
