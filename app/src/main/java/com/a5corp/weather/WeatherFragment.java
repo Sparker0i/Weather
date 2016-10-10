@@ -284,10 +284,6 @@ public class WeatherFragment extends Fragment {
         }
     }
 
-    public void setDetailsField(JSONObject J , int i) {
-
-    }
-
     public WeatherFragment() {
         handler = new Handler();
     }
