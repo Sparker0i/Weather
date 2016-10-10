@@ -30,7 +30,8 @@
             android:weightSum="1"
             android:id="@+id/linearLayout2"
             android:layout_below="@+id/daily_view"
-            android:layout_alignParentStart="true">
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true">
 
             <HorizontalScrollView
                 android:layout_width="match_parent"
@@ -49,7 +50,10 @@
                         android:paddingStart="5dp"
                         android:minWidth="85sp"
                         android:paddingEnd="2dp"
-                        android:layout_marginEnd="8dp">
+                        android:layout_marginEnd="8dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="2dp"
+                        android:layout_marginRight="8dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -75,7 +79,10 @@
                         android:paddingStart="5dp"
                         android:minWidth="85sp"
                         android:paddingEnd="2dp"
-                        android:layout_marginEnd="8dp">
+                        android:layout_marginEnd="8dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="2dp"
+                        android:layout_marginRight="8dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -101,7 +108,10 @@
                         android:paddingStart="5dp"
                         android:minWidth="85sp"
                         android:paddingEnd="2dp"
-                        android:layout_marginEnd="8dp">
+                        android:layout_marginEnd="8dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="2dp"
+                        android:layout_marginRight="8dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -125,7 +135,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:minWidth="85sp"
-                        android:layout_marginEnd="8dp">
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginRight="8dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -149,7 +160,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:minWidth="85sp"
-                        android:layout_marginEnd="8dp">
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginRight="8dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -173,7 +185,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:minWidth="85sp"
-                        android:layout_marginEnd="8dp">
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginRight="8dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -197,7 +210,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:minWidth="85sp"
-                        android:layout_marginEnd="8dp">
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginRight="8dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -221,7 +235,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:minWidth="85sp"
-                        android:layout_marginEnd="8dp">
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginRight="8dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -245,7 +260,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:minWidth="85sp"
-                        android:layout_marginEnd="8dp">
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginRight="8dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -269,7 +285,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:minWidth="85sp"
-                        android:layout_marginEnd="8dp">
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginRight="8dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -327,7 +344,8 @@
             android:textSize="40sp"
             android:textStyle="bold"
             android:layout_below="@+id/button"
-            android:layout_toEndOf="@+id/wind_view" />
+            android:layout_toEndOf="@+id/wind_view"
+            android:layout_toRightOf="@+id/wind_view" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -338,7 +356,9 @@
             android:layout_below="@+id/button"
             android:layout_alignParentStart="true"
             android:layout_toStartOf="@+id/button"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/button" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -350,7 +370,9 @@
             android:textColor="#FFFFFF"
             android:layout_below="@+id/button"
             android:textAlignment="center"
-            android:layout_above="@+id/daily_view" />
+            android:layout_above="@+id/daily_view"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@+id/button" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -360,14 +382,16 @@
             android:layout_below="@+id/wind_view"
             android:layout_alignParentStart="true"
             android:layout_marginTop="41dp"
-            android:textColor="#FFFFFF" />
+            android:textColor="#FFFFFF"
+            android:layout_alignParentLeft="true" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/button1"
             android:layout_above="@+id/direction_view"
-            android:layout_alignStart="@+id/button" />
+            android:layout_alignStart="@+id/button"
+            android:layout_alignLeft="@+id/button" />
 
     </RelativeLayout>
 </ScrollView>

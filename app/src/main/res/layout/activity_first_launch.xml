@@ -16,7 +16,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/city_input"
         android:layout_alignEnd="@+id/city_input"
-        android:id="@+id/go_button" />
+        android:id="@+id/go_button"
+        android:layout_alignRight="@+id/city_input" />
 
     <TextView
         android:text="@string/pick_city"
@@ -38,5 +39,7 @@
         android:layout_centerVertical="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        tools:ignore="LabelFor" />
+        tools:ignore="LabelFor"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true" />
 </RelativeLayout>

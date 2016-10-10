@@ -1,8 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.a5corp.weather">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <compatible-screens>
+        <screen android:screenSize="normal" android:screenDensity="mdpi" />
+        <screen android:screenSize="normal" android:screenDensity="hdpi" />
+        <screen android:screenSize="normal" android:screenDensity="xhdpi" />
+        <screen android:screenSize="large" android:screenDensity="mdpi" />
+        <screen android:screenSize="large" android:screenDensity="hdpi" />
+        <screen android:screenSize="large" android:screenDensity="xhdpi" />
+        <screen android:screenSize="large" android:screenDensity="ldpi" />
+        <screen android:screenSize="xlarge" android:screenDensity="mdpi" />
+        <screen android:screenSize="xlarge" android:screenDensity="hdpi" />
+        <screen android:screenSize="xlarge" android:screenDensity="xhdpi" />
+        <screen android:screenSize="xlarge" android:screenDensity="ldpi" />
+    </compatible-screens>
 
     <application
         android:allowBackup="true"
@@ -10,6 +24,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity android:name="com.a5corp.weather.GlobalActivity"
             android:label="@string/app_name">
             <intent-filter>
@@ -20,7 +35,8 @@
         <activity
             android:name=".AboutActivity"
             android:label="About"
-            android:parentActivityName="com.a5corp.weather.WeatherActivity">
+            android:parentActivityName="com.a5corp.weather.WeatherActivity"
+            tools:ignore="UnusedAttribute">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.a5corp.weather.WeatherActivity" />
