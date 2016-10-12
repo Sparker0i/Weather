@@ -3,6 +3,7 @@
 Welcome to my Open Source Weather app, built using Android Studio for Android 5.0+
 
 Get it on Google Play:
+
 <a href='https://play.google.com/store/apps/details?id=com.a5corp.weather'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png' width='210' heigh='80'/></a>
 
 ## To-Do
