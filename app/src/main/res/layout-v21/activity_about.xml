@@ -90,7 +90,9 @@
             android:id="@+id/ver_text"
             android:textAlignment="textEnd"
             android:layout_alignParentTop="true"
-            android:layout_toEndOf="@+id/app_icon" />
+            android:layout_toEndOf="@+id/app_icon"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
         <TextView
             android:text="@string/credits"

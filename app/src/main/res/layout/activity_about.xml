@@ -63,10 +63,10 @@
             android:layout_height="wrap_content"
             android:id="@+id/ver_text"
             android:layout_alignParentTop="true"
-            android:layout_alignStart="@+id/app_icon"
             android:textAlignment="textEnd"
-            android:layout_alignLeft="@+id/app_icon"
-            tools:ignore="RtlCompat" />
+            tools:ignore="RtlCompat"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
         <TextView
             android:text="@string/app_name"
