@@ -1,11 +1,11 @@
 package com.a5corp.weather;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-public class GlobalActivity extends Activity {
+public class GlobalActivity extends AppCompatActivity {
 
     static CityPreference cp;
     static int i = 0;

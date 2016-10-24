@@ -20,14 +20,12 @@
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_anchorGravity="bottom|right|end"
-        app:layout_behavior="com.a5corp.weathersss.ScrollAwareFABBehavior"
+        android:layout_gravity="bottom|end"
         android:layout_marginEnd="10dp"
+        android:scaleType="center"
         android:layout_marginBottom="10dp"
         android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        app:srcCompat="@android:drawable/ic_search_category_default"
-        android:layout_marginRight="10dp" />
+        app:srcCompat="?android:attr/actionModeWebSearchDrawable" />
 
 </android.support.design.widget.CoordinatorLayout>
