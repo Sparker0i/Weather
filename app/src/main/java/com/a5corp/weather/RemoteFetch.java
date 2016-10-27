@@ -60,7 +60,7 @@ class RemoteFetch {
         }
     }
 
-    static JSONObject[] getJSONLocation(Context context, String longitude, String latitude){
+    static JSONObject[] getJSONLocation(Context context, String latitude, String longitude){
         //double Latitude , Longitude;
         try {
             final String OPEN_WEATHER_MAP_FORECAST_API = "http://api.openweathermap.org/data/2.5/forecast/daily?lat=%s&lon=%s&units=metric&cnt=10";
