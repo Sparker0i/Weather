@@ -126,6 +126,7 @@ public class WeatherFragment extends Fragment {
             json0 = jsonObj[0];
             json1 = jsonObj[1];
             tc = json1.getJSONObject("main").getDouble("temp");
+            GlobalActivity.cp.setCity(json0.getJSONObject("city").getString("name"));
             int a = (int) Math.round(json1.getJSONObject("main").getDouble("temp"));                        //℃
             cityField.setText(json0.getJSONObject("city").getString("name").toUpperCase(Locale.US) +
                     ", " +
