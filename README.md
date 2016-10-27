@@ -1,6 +1,6 @@
 # Easy Weather (Formerly Simple Weather)
 
-Welcome to my Open Source Weather app, built using Android Studio for Android 5.0+
+Welcome to my Open Source, easy to use Weather app, built using Android Studio for Android 5.0+
 
 Get it on Google Play:
 
