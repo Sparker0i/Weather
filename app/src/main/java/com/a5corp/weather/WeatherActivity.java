@@ -52,6 +52,7 @@ public class WeatherActivity extends AppCompatActivity implements GoogleApiClien
                 showInputDialog();
             }
         });
+        buildGoogleApiClient();
     }
 
     @SuppressWarnings("InfiniteRecursion")
@@ -121,19 +122,18 @@ public class WeatherActivity extends AppCompatActivity implements GoogleApiClien
         mLocationRequest.setInterval(100); // Update location every second
 
         if (Build.VERSION.SDK_INT >= 23) {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
-                    MY_PERMISSIONS_REQUEST_READ_COARSE_LOCATION);
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                    MY_PERMISSIONS_REQUEST_READ_FINE_LOCATION);
             if (ContextCompat.checkSelfPermission( this, android.Manifest.permission.ACCESS_COARSE_LOCATION ) != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission( this, Manifest.permission.ACCESS_FINE_LOCATION ) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
+                        MY_PERMISSIONS_REQUEST_READ_COARSE_LOCATION);
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        MY_PERMISSIONS_REQUEST_READ_FINE_LOCATION);
+            }
+            else {
                 LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
                 mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
                         mGoogleApiClient);
-            }
-            else {
-                Log.i("Permission Denied" , "Coarse OR Fine Location");
             }
         }
         else {
