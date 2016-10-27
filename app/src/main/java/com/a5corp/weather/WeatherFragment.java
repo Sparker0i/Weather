@@ -35,13 +35,17 @@ public class WeatherFragment extends Fragment {
     Handler handler;
     JSONObject json0 , json1;
     int Clicks = 0;
+    JSONObject[] jsonz;
     MaterialDialog pd;
 
-    private void updateWeatherData(final String city) {
+    private void updateWeatherData(final String city, final String lat, final String lon) {
         new Thread(){
             public void run(){
-                final JSONObject[] json = RemoteFetch.getJSON(getActivity(), city);
-                if(json == null) {
+                if (lat == null && lon == null)
+                    jsonz = RemoteFetch.getJSON(getActivity(), city);
+                else if (city == null)
+                    jsonz = RemoteFetch.getJSONLocation(getActivity(), lat , lon);
+                if(jsonz == null) {
                     GlobalActivity.i = -1;
                     GlobalActivity.cp.setCity(GlobalActivity.cp.getLastCity());
                     handler.post(new Runnable(){
@@ -66,7 +70,7 @@ public class WeatherFragment extends Fragment {
                     handler.post(new Runnable(){
                         public void run(){
                             GlobalActivity.cp.setLaunched();
-                            renderWeather(json);
+                            renderWeather(jsonz);
                             pd.dismiss();
                             GlobalActivity.cp.setLastCity(city);
                         }
@@ -104,8 +108,14 @@ public class WeatherFragment extends Fragment {
     public void changeCity(String city)
     {
         pd.show();
-        updateWeatherData(city);
+        updateWeatherData(city, null, null);
         GlobalActivity.cp.setCity(city);
+    }
+
+    public void changeCity(String lat , String lon)
+    {
+        pd.show();
+        updateWeatherData(null, lat, lon);
     }
 
     private void renderWeather(JSONObject[] jsonObj){
@@ -465,6 +475,6 @@ public class WeatherFragment extends Fragment {
         pd = builder.build();
         super.onCreate(savedInstanceState);
         weatherFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/weather.ttf");
-        updateWeatherData(GlobalActivity.cp.getCity());
+        updateWeatherData(GlobalActivity.cp.getCity(), null, null);
     }
 }

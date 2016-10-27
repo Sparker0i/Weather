@@ -5,17 +5,21 @@
 
     <item
         android:id="@+id/change_city"
-        android:orderInCategory="2"
+        android:orderInCategory="4"
         android:title="@string/change_city"
         app:showAsAction="never"/>
     <item
         android:id="@+id/refresh"
         android:title="@string/refresh"
-        android:orderInCategory="1"
+        android:orderInCategory="2"
         app:showAsAction="never"/>
     <item
-        android:id="@+id/about_page"
+        android:title="Location"
         android:orderInCategory="3"
+        android:id="@+id/location" />
+    <item
+        android:id="@+id/about_page"
+        android:orderInCategory="5"
         android:title="@string/about_page"
         app:showAsAction="never"/>
 

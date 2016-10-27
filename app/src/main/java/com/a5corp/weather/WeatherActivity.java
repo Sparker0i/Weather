@@ -26,6 +26,8 @@ import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 
+import java.text.DecimalFormat;
+
 public class WeatherActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
@@ -40,6 +42,14 @@ public class WeatherActivity extends AppCompatActivity implements GoogleApiClien
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather);
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
+                        MY_PERMISSIONS_REQUEST_READ_COARSE_LOCATION);
+            }
+        }
+        buildGoogleApiClient();
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.container, new WeatherFragment())
@@ -52,7 +62,6 @@ public class WeatherActivity extends AppCompatActivity implements GoogleApiClien
                 showInputDialog();
             }
         });
-        buildGoogleApiClient();
     }
 
     @SuppressWarnings("InfiniteRecursion")
@@ -77,6 +86,9 @@ public class WeatherActivity extends AppCompatActivity implements GoogleApiClien
         }
         else if (item.getItemId() == R.id.refresh) {
             changeCity(GlobalActivity.cp.getCity());
+        }
+        else if (item.getItemId() == R.id.location) {
+            changeCity(lat, lon);
         }
         return false;
     }
@@ -113,6 +125,12 @@ public class WeatherActivity extends AppCompatActivity implements GoogleApiClien
                 .findFragmentById(R.id.container);
         wf.changeCity(city);
         GlobalActivity.cp.setCity(city);
+    }
+
+    public void changeCity(String lat, String lon){
+        WeatherFragment wf = (WeatherFragment)getSupportFragmentManager()
+                .findFragmentById(R.id.container);
+        wf.changeCity(lat , lon);
     }
 
     @Override
@@ -156,6 +174,13 @@ public class WeatherActivity extends AppCompatActivity implements GoogleApiClien
     public void onLocationChanged(Location location) {
         lat = String.valueOf(location.getLatitude());
         lon = String.valueOf(location.getLongitude());
+        DecimalFormat df = new DecimalFormat("###.##");
+        double la = Double.parseDouble(lat);
+        double lo = Double.parseDouble(lon);
+        lat = df.format(la).toString();
+        lon = df.format(lo).toString();
+        Log.i("lat" , lat);
+        Log.i("lon" , lon);
     }
 
     @Override
@@ -169,8 +194,6 @@ public class WeatherActivity extends AppCompatActivity implements GoogleApiClien
                 .addOnConnectionFailedListener(this)
                 .addApi(LocationServices.API)
                 .build();
-
-
     }
 
     @Override
