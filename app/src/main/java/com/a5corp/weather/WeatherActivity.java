@@ -177,8 +177,8 @@ public class WeatherActivity extends AppCompatActivity implements GoogleApiClien
         DecimalFormat df = new DecimalFormat("###.##");
         double la = Double.parseDouble(lat);
         double lo = Double.parseDouble(lon);
-        lat = df.format(la).toString();
-        lon = df.format(lo).toString();
+        lat = df.format(la);
+        lon = df.format(lo);
         Log.i("lat" , lat);
         Log.i("lon" , lon);
     }
