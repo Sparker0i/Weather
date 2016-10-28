@@ -4,6 +4,7 @@
     <string name="app_name">Easy Weather</string>
     <string name="change_city">Change City</string>
     <string name="about_page">About This App</string>
+    <string name="location">Location</string>
 
     <string name="icons">&#8226; <a href = "https://erikflowers.github.io/weather-icons">Erik Flowers Weather Icons</a>, for the weather icons and the app icon, licensed under <a href = "https://creativecommons.org/licenses/by-sa/3.0/deed.en_US">CC BY SA-3.0</a> and <a href = "https://opensource.org/licenses/OFL-1.1">SIL OFS-1.1</a> .\n</string>
     <string name="owm">&#8226; <a href = "https://openweathermap.org">OpenWeatherMap</a>, for the weather data, licensed under <a href = "https://creativecommons.org/licenses/by-sa/3.0/deed.en_US">CC BY SA-3.0</a>.\n</string>

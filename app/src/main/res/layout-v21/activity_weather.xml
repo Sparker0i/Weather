@@ -26,6 +26,6 @@
         android:layout_marginBottom="10dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        app:srcCompat="@drawable/ic_action_name" />
+        app:srcCompat="@drawable/ic_search_white_36dp" />
 
 </android.support.design.widget.CoordinatorLayout>
