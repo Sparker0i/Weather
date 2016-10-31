@@ -20,4 +20,4 @@ LATEST UPDATE:
 - Compatibility for Android ICS (4.0.3)
 - Minor UI Changes in the Attribution Page
 
-![Weather App as on a 5" phone](img/Weather App.png?raw=true "Weather App on a 5" phone")
+![Weather App as on a 5" phone](img/Weather App.png?raw=true "Weather App on a 5.5" phone")
