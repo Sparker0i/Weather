@@ -1,4 +1,4 @@
-# Easy Weather (Formerly Simple Weather)
+# Simple Weather
 
 Welcome to my Open Source, easy to use Weather app, built using Android Studio for Android 5.0+
 
@@ -20,4 +20,4 @@ LATEST UPDATE:
 - Compatibility for Android ICS (4.0.3)
 - Minor UI Changes in the Attribution Page
 
-![Weather App as on a 5" phone](img/Weather App.png?raw=true "Weather App on a 5\" phone")
+![Weather App as on a 5" phone](img/Weather App.png?raw=true "Weather App on a 5" phone")
