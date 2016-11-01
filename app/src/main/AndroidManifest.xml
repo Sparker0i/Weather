@@ -12,18 +12,23 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
-        <activity android:name="com.a5corp.weather.GlobalActivity"
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <activity
+            android:name=".GlobalActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".AboutActivity"
             android:label="About"
-            android:parentActivityName="com.a5corp.weather.WeatherActivity"
+            android:parentActivityName=".WeatherActivity"
             tools:ignore="UnusedAttribute">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -32,10 +37,10 @@
         <activity
             android:name=".WeatherActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
-        </activity>
-        <activity android:name=".FirstLaunch"
-            android:label="Enter City"/>
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".FirstLaunch"
+            android:label="Enter City" />
     </application>
 
 </manifest>
