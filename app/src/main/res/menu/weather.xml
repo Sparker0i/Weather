@@ -24,5 +24,10 @@
         android:orderInCategory="5"
         android:title="@string/about_page"
         app:showAsAction="never"/>
+    <item
+        android:id="@+id/activity_new"
+        android:orderInCategory="5"
+        android:title="New Activity"
+        app:showAsAction="never" />
 
 </menu>

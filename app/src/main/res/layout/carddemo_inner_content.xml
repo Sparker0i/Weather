@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:layout_marginTop="2dp"
+        android:id="@+id/colorBorder"
+        android:layout_width="10dp"
+        android:layout_height="@dimen/card_base_empty_height"/>
+
+    <!-- Use same ID to use built-in features -->
+    <TextView
+        android:layout_toRightOf="@id/colorBorder"
+        android:layout_toEndOf="@id/colorBorder"
+        android:id="@+id/card_main_inner_simple_title"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</RelativeLayout>
