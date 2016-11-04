@@ -11,13 +11,9 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.a5corp.weather.NewActivity">
 
-    <it.gmariotti.cardslib.library.view.CardViewNative
-        android:id="@+id/cards_activity"
+    <it.gmariotti.cardslib.library.view.CardListView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="12dp"
-        android:layout_marginRight="12dp"
-        card:card_layout_resourceID="@layout/native_card_thumbnail_layout"
-        android:layout_marginTop="12dp"/>
+        android:layout_height="match_parent"
+        android:id="@+id/myList"/>
 
 </RelativeLayout>
