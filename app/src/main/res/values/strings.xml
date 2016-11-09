@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Easy Weather</string>
+    <string name="app_name">Simple Weather</string>
     <string name="change_city">Change City</string>
     <string name="about_page">About This App</string>
     <string name="location">Location</string>
@@ -18,7 +18,7 @@
     <string name="credits"><u>CREDITS</u></string>
     <string name="refresh">Refresh</string>
 
-    <!-- Put your own APP ID here -->
+    <!-- My OpenWeatherMap API key -->
     <string name="open_weather_maps_app_id">4c08a22b02c58467e6241629c1d08717</string>
 
     <string name="weather_sunny">&#xf00d;</string>

@@ -37,11 +37,11 @@
         <activity
             android:name=".WeatherActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".FirstLaunch"
             android:label="Enter City" />
-        <activity android:name=".NewActivity"></activity>
+        <activity android:name=".NewActivity" />
     </application>
 
 </manifest>
