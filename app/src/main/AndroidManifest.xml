@@ -41,7 +41,7 @@
         <activity
             android:name=".FirstLaunch"
             android:label="Enter City" />
-        <activity android:name=".NewActivity" />
+        <activity android:name=".ParallaxActivity"></activity>
     </application>
 
 </manifest>

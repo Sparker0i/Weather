@@ -29,5 +29,9 @@
         android:orderInCategory="5"
         android:title="New Activity"
         app:showAsAction="never" />
+    <item
+        android:title="Parallax"
+        android:orderInCategory="6"
+        android:id="@+id/parallax" />
 
 </menu>
