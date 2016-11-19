@@ -17,6 +17,7 @@ public class ParallaxActivity extends AppCompatActivity implements ObservableScr
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_parallax);
+        ActionBar ab = getSupportActionBar();
 
         ObservableListView listView = (ObservableListView) findViewById(R.id.list);
         listView.setScrollViewCallbacks(this);
