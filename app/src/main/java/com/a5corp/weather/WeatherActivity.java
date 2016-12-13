@@ -90,10 +90,6 @@ public class WeatherActivity extends AppCompatActivity implements GoogleApiClien
         else if (item.getItemId() == R.id.location) {
             changeCity(lat, lon);
         }
-        else if (item.getItemId() == R.id.parallax) {
-            Intent intent = new Intent(WeatherActivity.this, ParallaxActivity.class);
-            WeatherActivity.this.startActivity(intent);
-        }
         return false;
     }
 
