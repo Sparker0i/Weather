@@ -2,20 +2,16 @@ package com.a5corp.weather;
 
 import android.Manifest;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-
-import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 
 import com.afollestad.materialdialogs.DialogAction;
@@ -28,7 +24,7 @@ import com.google.android.gms.location.LocationServices;
 
 import java.text.DecimalFormat;
 
-public class WeatherActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks,
+public class NewWeatherActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
     Location mLastLocation;
@@ -67,39 +63,6 @@ public class WeatherActivity extends AppCompatActivity implements GoogleApiClien
     @SuppressWarnings("InfiniteRecursion")
     public Context getContext() {
         return getContext();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.weather, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.change_city : showInputDialog();
-                break;
-            case R.id.about_page : Intent intent = new Intent(WeatherActivity.this, AboutActivity.class);
-                WeatherActivity.this.startActivity(intent);
-                break;
-            case R.id.new_weather : intent = new Intent(WeatherActivity.this, NewWeatherActivity.class);
-                WeatherActivity.this.startActivity(intent);
-                break;
-            case R.id.refresh : changeCity(GlobalActivity.cp.getCity());
-                break;
-            case R.id.location : changeCity(lat, lon);
-                break;
-        }
-        return true;
-    }
-
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(Intent.ACTION_MAIN);
-        intent.addCategory(Intent.CATEGORY_HOME);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
     }
 
     private void showInputDialog() {

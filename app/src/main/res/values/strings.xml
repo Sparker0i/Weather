@@ -56,5 +56,7 @@
 
     <string name="c">°C</string>
     <string name="daily">DAILY</string>
+    <string name="title_activity_new_weather">NewWeatherActivity</string>
+    <string name="action_settings">Settings</string>
 
 </resources>

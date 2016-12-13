@@ -41,7 +41,16 @@
         <activity
             android:name=".FirstLaunch"
             android:label="Enter City" />
-        <activity android:name=".ParallaxActivity"></activity>
+        <activity android:name=".ParallaxActivity" />
+        <activity
+            android:name=".NewWeatherActivity"
+            android:label="@string/title_activity_new_weather"
+            android:parentActivityName=".WeatherActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a5corp.weather.WeatherActivity" />
+        </activity>
     </application>
 
 </manifest>

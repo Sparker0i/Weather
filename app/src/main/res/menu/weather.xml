@@ -24,5 +24,9 @@
         android:orderInCategory="5"
         android:title="@string/about_page"
         app:showAsAction="never"/>
+    <item
+        android:id="@+id/new_weather"
+        android:title="New Weather"
+        app:showAsAction="never" />
 
 </menu>
