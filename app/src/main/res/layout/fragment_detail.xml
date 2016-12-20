@@ -72,5 +72,67 @@
         android:id="@+id/textView16"
         android:layout_alignEnd="@+id/weather_icon" />
 
+    <LinearLayout
+        android:id="@+id/sun_rise_set"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/textView16"
+        android:layout_alignEnd="@+id/weather_icon"
+        android:layout_marginTop="23dp"
+        android:layout_height="120sp">
+
+        <LinearLayout
+            android:layout_width="87sp"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_height="match_parent"/>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="87sp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"/>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="87sp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"/>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="87sp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/sun_rise_set"
+        android:layout_alignEnd="@+id/weather_icon"
+        android:layout_marginTop="23dp"
+        android:layout_height="120sp">
+
+        <LinearLayout
+            android:layout_width="87sp"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_height="match_parent"/>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="87sp"
+            android:layout_height="match_parent"/>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="87sp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+
 
 </RelativeLayout>
