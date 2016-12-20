@@ -1,18 +1,21 @@
 package com.a5corp.weather;
 
-import android.support.annotation.NonNull;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.text.SpannableString;
 import android.text.style.RelativeSizeSpan;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,12 +29,15 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import static com.a5corp.weather.GlobalActivity.i;
+
 public class NewWeatherActivityFragment extends Fragment {
     Typeface weatherFont;
     Button button;
     TextView detailsField[] = new TextView[10] , weatherIcon[] = new TextView[11];
     TextView windView , humidityView , directionView, dailyView, updatedField, cityField;
     double tc;
+    LinearLayout layout;
     Handler handler;
     JSONObject json0 , json1;
     int Clicks = 0;
@@ -46,7 +52,7 @@ public class NewWeatherActivityFragment extends Fragment {
                 else if (city == null)
                     jsonz = RemoteFetch.getJSONLocation(getActivity(), lat , lon);
                 if(jsonz == null) {
-                    GlobalActivity.i = -1;
+                    i = -1;
                     GlobalActivity.cp.setCity(GlobalActivity.cp.getLastCity());
                     handler.post(new Runnable(){
                         public void run(){
@@ -119,6 +125,8 @@ public class NewWeatherActivityFragment extends Fragment {
     }
 
     private void renderWeather(JSONObject[] jsonObj){
+        //layout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT , ViewGroup.LayoutParams.WRAP_CONTENT));
+        layout.setOrientation(LinearLayout.HORIZONTAL);
         try {
             button.setVisibility(View.INVISIBLE);
             Clicks = 0;
@@ -293,6 +301,34 @@ public class NewWeatherActivityFragment extends Fragment {
         }catch(Exception e){
             Log.e("SimpleWeather", "One or more fields not found in the JSON data");
         }
+        LinearLayout child = new LinearLayout(getContext());
+        for (int i = 0; i < 10; ++i) {
+            child.setOrientation(LinearLayout.VERTICAL);
+            child.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT , ViewGroup.LayoutParams.MATCH_PARENT));
+            child.setPadding(5 , 0 , 2 , 0);
+            child.setPaddingRelative(5 , 0 , 2 , 0);
+            child.setMinimumHeight(85);
+
+            TextView wIcon = new TextView(getContext());
+            TextView detField = new TextView(getContext());
+
+            wIcon.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT , ViewGroup.LayoutParams.WRAP_CONTENT));
+            wIcon.setTextSize(70);
+            wIcon.setTextColor(Color.WHITE);
+            wIcon.setTextAppearance(getContext() , android.R.style.TextAppearance_Large);
+            wIcon.setGravity(Gravity.CENTER);
+
+            detField.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT , ViewGroup.LayoutParams.WRAP_CONTENT));
+            detField.setTextAppearance(getContext() , android.R.style.TextAppearance_Medium);
+            detField.setTextColor(Color.WHITE);
+
+            wIcon = weatherIcon[i];
+            detField = detailsField[i];
+            child.addView(wIcon);
+            child.addView(detField);
+            child.removeAllViewsInLayout();
+        }
+        layout.addView(child);
     }
 
     public NewWeatherActivityFragment() {
@@ -440,9 +476,12 @@ public class NewWeatherActivityFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_weather, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_new_weather, container, false);
         cityField = (TextView)rootView.findViewById(R.id.city_field);
         updatedField = (TextView)rootView.findViewById(R.id.updated_field);
+        layout = (LinearLayout) rootView.findViewById(R.id.layout_root);
+        if (layout == null)
+            Log.e("NewFragment" , "Layout is null");
         humidityView = (TextView) rootView.findViewById(R.id.humidity_view);
         windView = (TextView) rootView.findViewById(R.id.wind_view);
         directionView = (TextView)rootView.findViewById(R.id.direction_view);
@@ -454,15 +493,14 @@ public class NewWeatherActivityFragment extends Fragment {
         pd.show();
         for (int i = 0; i < 11; ++i)
         {
-            String f = "details_view" + (i + 1) , g = "weather_icon" + (i + 1);
             if (i != 10) {
-                int resID = getResources().getIdentifier(f, "id", getContext().getPackageName());
-                detailsField[i] = (TextView) rootView.findViewById(resID);
+                detailsField[i] = new TextView(getContext());
             }
-            int resIDI = getResources().getIdentifier(g, "id" , getContext().getPackageName());
-            weatherIcon[i] = (TextView)rootView.findViewById(resIDI);
+            weatherIcon[i] = new TextView(getContext());
             weatherIcon[i].setTypeface(weatherFont);
         }
+        weatherIcon[10] = new TextView(getContext());
+        weatherIcon[10].setTypeface(weatherFont);
         return rootView;
     }
 

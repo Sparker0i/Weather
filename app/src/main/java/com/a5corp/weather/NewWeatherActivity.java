@@ -48,7 +48,7 @@ public class NewWeatherActivity extends AppCompatActivity implements GoogleApiCl
         buildGoogleApiClient();
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new WeatherFragment())
+                    .add(R.id.container, new NewWeatherActivityFragment())
                     .commit();
         }
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -85,14 +85,14 @@ public class NewWeatherActivity extends AppCompatActivity implements GoogleApiCl
     }
 
     public void changeCity(String city){
-        WeatherFragment wf = (WeatherFragment)getSupportFragmentManager()
+        NewWeatherActivityFragment wf = (NewWeatherActivityFragment)getSupportFragmentManager()
                 .findFragmentById(R.id.container);
         wf.changeCity(city);
         GlobalActivity.cp.setCity(city);
     }
 
     public void changeCity(String lat, String lon){
-        WeatherFragment wf = (WeatherFragment)getSupportFragmentManager()
+        NewWeatherActivityFragment wf = (NewWeatherActivityFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.container);
         wf.changeCity(lat , lon);
     }

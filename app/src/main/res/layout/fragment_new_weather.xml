@@ -1,5 +1,4 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
@@ -11,7 +10,8 @@
         android:paddingStart="@dimen/activity_horizontal_margin"
         android:paddingEnd="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
-        tools:context="com.a5corp.weather.WeatherActivity$PlaceholderFragment">
+        tools:context="com.a5corp.weather.WeatherActivity$PlaceholderFragment"
+        android:outlineProvider="bounds">
 
         <TextView
             android:layout_width="wrap_content"
@@ -32,8 +32,7 @@
             android:weightSum="1"
             android:id="@+id/linearLayout2"
             android:layout_below="@+id/daily_view"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true">
+            android:layout_alignParentStart="true">
 
             <HorizontalScrollView
                 android:layout_width="match_parent"
@@ -43,6 +42,8 @@
 
                 <LinearLayout
                     android:orientation="horizontal"
+                    android:id="@+id/layout_root"
+                    android:minHeight="85sp"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent">
 
@@ -53,10 +54,7 @@
                         android:paddingStart="5dp"
                         android:minWidth="85sp"
                         android:paddingEnd="2dp"
-                        android:layout_marginEnd="8dp"
-                        android:paddingLeft="5dp"
-                        android:paddingRight="2dp"
-                        android:layout_marginRight="8dp">
+                        android:layout_marginEnd="8dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -82,10 +80,7 @@
                         android:paddingStart="5dp"
                         android:minWidth="85sp"
                         android:paddingEnd="2dp"
-                        android:layout_marginEnd="8dp"
-                        android:paddingLeft="5dp"
-                        android:paddingRight="2dp"
-                        android:layout_marginRight="8dp">
+                        android:layout_marginEnd="8dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -111,10 +106,7 @@
                         android:paddingStart="5dp"
                         android:minWidth="85sp"
                         android:paddingEnd="2dp"
-                        android:layout_marginEnd="8dp"
-                        android:paddingLeft="5dp"
-                        android:paddingRight="2dp"
-                        android:layout_marginRight="8dp">
+                        android:layout_marginEnd="8dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -138,8 +130,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:minWidth="85sp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginRight="8dp">
+                        android:layout_marginEnd="8dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -162,9 +153,9 @@
                         android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:nestedScrollingEnabled="false"
                         android:minWidth="85sp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginRight="8dp">
+                        android:layout_marginEnd="8dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -188,8 +179,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:minWidth="85sp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginRight="8dp">
+                        android:layout_marginEnd="8dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -213,8 +203,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:minWidth="85sp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginRight="8dp">
+                        android:layout_marginEnd="8dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -238,8 +227,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:minWidth="85sp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginRight="8dp">
+                        android:layout_marginEnd="8dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -263,8 +251,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:minWidth="85sp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginRight="8dp">
+                        android:layout_marginEnd="8dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -288,8 +275,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:minWidth="85sp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginRight="8dp">
+                        android:layout_marginEnd="8dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -347,8 +333,7 @@
             android:textSize="40sp"
             android:textStyle="bold"
             android:layout_below="@+id/button"
-            android:layout_toEndOf="@+id/wind_view"
-            android:layout_toRightOf="@+id/wind_view" />
+            android:layout_toEndOf="@+id/wind_view" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -360,8 +345,7 @@
             android:layout_alignParentStart="true"
             android:layout_toStartOf="@+id/button"
             android:textAlignment="center"
-            android:layout_alignParentLeft="true"
-            android:layout_toLeftOf="@+id/button" />
+            android:gravity="start" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -373,9 +357,7 @@
             android:textColor="#FFFFFF"
             android:layout_below="@+id/button"
             android:textAlignment="center"
-            android:layout_above="@+id/daily_view"
-            android:layout_alignParentRight="true"
-            android:layout_toRightOf="@+id/button" />
+            android:layout_above="@+id/daily_view"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -385,16 +367,14 @@
             android:layout_below="@+id/wind_view"
             android:layout_alignParentStart="true"
             android:layout_marginTop="41dp"
-            android:textColor="#FFFFFF"
-            android:layout_alignParentLeft="true" />
+            android:textColor="#FFFFFF" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/button1"
             android:layout_above="@+id/direction_view"
-            android:layout_alignStart="@+id/button"
-            android:layout_alignLeft="@+id/button" />
+            android:layout_alignStart="@+id/button" />
 
     </RelativeLayout>
 </ScrollView>
