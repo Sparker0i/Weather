@@ -83,9 +83,6 @@ public class WeatherActivity extends AppCompatActivity implements GoogleApiClien
             case R.id.about_page : Intent intent = new Intent(WeatherActivity.this, AboutActivity.class);
                 WeatherActivity.this.startActivity(intent);
                 break;
-            case R.id.new_weather : intent = new Intent(WeatherActivity.this, NewWeatherActivity.class);
-                WeatherActivity.this.startActivity(intent);
-                break;
             case R.id.refresh : changeCity(GlobalActivity.cp.getCity());
                 break;
             case R.id.location : changeCity(lat, lon);

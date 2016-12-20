@@ -14,7 +14,7 @@
         android:layout_height="match_parent"
         tools:context="com.a5corp.weather.WeatherActivity"
         tools:ignore="MergeRootFrame"
-        android:background="#3F51B5" />
+        android:background="@color/colorPrimary" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
