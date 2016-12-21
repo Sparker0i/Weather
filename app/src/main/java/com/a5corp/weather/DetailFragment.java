@@ -22,6 +22,7 @@ import java.util.Locale;
 public class DetailFragment extends Fragment {
 
     Typeface weatherFont;
+    View rootView;
     TextView cityField;
     TextView dateText , tempText, humidityText, sunriseText, sunsetText, speedText, pressureText;
     TextView weatherIcon, humidityIcon, sunriseIcon, sunsetIcon, speedIcon, pressureIcon;
@@ -50,11 +51,11 @@ public class DetailFragment extends Fragment {
 
             long dy = obj.getJSONObject("temp").getLong("day");
             int day = (int) dy;
-            sunriseText.setText(day + getString(R.string.c));
+            sunriseText.setText(day + getString(R.string.c) + "");
 
             long nt = obj.getJSONObject("temp").getLong("night");
             int night = (int) nt;
-            sunsetText.setText(night + getString(R.string.c));
+            sunsetText.setText(night + getString(R.string.c) + "");
 
             SpannableString ss1=  new SpannableString(
                     + obj.getJSONObject("temp").getLong("max") + "°" + "         "
@@ -62,9 +63,9 @@ public class DetailFragment extends Fragment {
             ss1.setSpan(new RelativeSizeSpan(1.4f) , 0 , 3 , 0);
             tempText.setText(ss1);
 
-            humidityText.setText(obj.getInt("humidity") + "%");
-            speedText.setText(obj.getLong("speed") + " km/h");
-            pressureText.setText(obj.getLong("pressure") + " hPa");
+            humidityText.setText(obj.getInt("humidity") + "%" + "");
+            speedText.setText(obj.getLong("speed") + " km/h" + "");
+            pressureText.setText(obj.getLong("pressure") + " hPa" + "");
         }
         catch (JSONException ex) {
             Log.e("Detail View" , "Cannot Find Details");
@@ -163,7 +164,7 @@ public class DetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         weatherFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/newweather.ttf");
         intent = getActivity().getIntent();
-        View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
+        rootView = inflater.inflate(R.layout.fragment_detail, container, false);
         cityField = (TextView) rootView.findViewById(R.id.city_field);
         dateText = (TextView) rootView.findViewById(R.id.date_text);
 

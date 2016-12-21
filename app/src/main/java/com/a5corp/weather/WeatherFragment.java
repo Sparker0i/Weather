@@ -177,7 +177,9 @@ public class WeatherFragment extends Fragment {
                         Intent intent = new Intent(getContext() , DetailActivity.class);
                         intent.putExtra("jsonStr" , J.toString());
                         try {
-                            intent.putExtra("city", json1.getJSONObject("city").getString("name"));
+                            intent.putExtra("city", json0.getJSONObject("city").getString("name").toUpperCase(Locale.US) +
+                                    ", " +
+                                    json0.getJSONObject("city").getString("country"));
                         }
                         catch (JSONException jx) {
                             Log.e("JSONEX" , "Caught a JSON Exception");
@@ -190,6 +192,14 @@ public class WeatherFragment extends Fragment {
                     {
                         Intent intent = new Intent(getContext() , DetailActivity.class);
                         intent.putExtra("jsonStr" , J.toString());
+                        try {
+                            intent.putExtra("city", json0.getJSONObject("city").getString("name").toUpperCase(Locale.US) +
+                                    ", " +
+                                    json0.getJSONObject("city").getString("country"));
+                        }
+                        catch (JSONException jx) {
+                            Log.e("JSONEX" , "Caught a JSON Exception");
+                        }
                         startActivity(intent);
                     }
                 });
