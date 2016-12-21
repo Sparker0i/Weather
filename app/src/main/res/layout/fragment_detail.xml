@@ -13,7 +13,6 @@
 
 
     <TextView
-        android:text="CITY NAME"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -36,16 +35,24 @@
         android:id="@+id/weather_icon" />
 
     <TextView
+        android:id="@+id/temp_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/weather_icon"
+        android:layout_alignEnd="@id/weather_icon"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/city_field"
         android:layout_alignParentStart="true"
-        android:textSize="29sp"
+        android:textSize="37sp"
         android:textColor="#FFFFFF"
         android:id="@+id/date_text" />
 
     <TextView
-        android:textSize="29sp"
+        android:textSize="37sp"
         android:textColor="#FFFFFF"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -55,7 +62,7 @@
         android:id="@+id/max_text" />
 
     <TextView
-        android:textSize="29sp"
+        android:textSize="37sp"
         android:textColor="#FFFFFF"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -64,55 +71,97 @@
         android:id="@+id/min_text"
         android:layout_toEndOf="@+id/max_text" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/weather_icon"
-        android:layout_alignParentStart="true"
-        android:id="@+id/textView16"
-        android:layout_alignEnd="@+id/weather_icon" />
-
-    <LinearLayout
-        android:id="@+id/sun_rise_set"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_below="@+id/textView16"
-        android:layout_alignEnd="@+id/weather_icon"
-        android:layout_marginTop="23dp"
-        android:layout_height="120sp">
-
-        <LinearLayout
-            android:layout_width="87sp"
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:layout_height="match_parent"/>
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="87sp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"/>
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="87sp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"/>
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="87sp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"/>
-    </LinearLayout>
-
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_below="@+id/sun_rise_set"
         android:layout_alignEnd="@+id/weather_icon"
         android:layout_marginTop="23dp"
-        android:layout_height="120sp">
+        android:layout_height="120sp"
+        android:id="@+id/detail">
+
+        <LinearLayout
+            android:layout_width="87sp"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:id="@+id/humidity_icon"
+                android:layout_weight="2"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/humidity_text"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="87sp"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:id="@+id/speed_icon"
+                android:layout_weight="2"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/speed_text"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="87sp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:id="@+id/pressure_icon"
+                android:layout_weight="2"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/pressure_text"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/sun_rise_set"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_marginTop="20dp"
+        android:layout_height="120sp"
+        android:layout_below="@+id/temp_text"
+        android:layout_alignParentStart="true">
 
         <LinearLayout
             android:layout_width="87sp"
@@ -122,16 +171,61 @@
 
         <LinearLayout
             android:orientation="vertical"
-            android:layout_weight="1"
             android:layout_width="87sp"
-            android:layout_height="match_parent"/>
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:id="@+id/sunrise_icon"
+                android:layout_weight="2"
+                android:gravity="center_vertical"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/sunrise_text"
+                android:gravity="bottom"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="87sp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_weight="2"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:id="@+id/sunset_icon"
+                android:gravity="center_vertical"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/sunset_text"
+                android:gravity="bottom"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF" />
+            </LinearLayout>
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="87sp"
             android:layout_weight="1"
             android:layout_height="match_parent"/>
-
     </LinearLayout>
 
 
