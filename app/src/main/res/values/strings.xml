@@ -21,6 +21,12 @@
     <!-- My OpenWeatherMap API key -->
     <string name="open_weather_maps_app_id">4c08a22b02c58467e6241629c1d08717</string>
 
+    <string name="humidity_icon">&#xf07a;</string>
+    <string name="pressure_icon">&#xf079;</string>
+    <string name="speed_icon">&#xf050;</string>
+    <string name="sunrise_icon">&#xf051;</string>
+    <string name="sunset_icon">&#xf052;</string>
+
     <string name="weather_sunny">&#xf00d;</string>
     <string name="weather_sunny_cloudy">&#xf002;</string>
     <string name="weather_clear_night">&#xf02e;</string>
@@ -43,9 +49,6 @@
     <string name="weather_hurricane">&#xf0cf;</string>
     <string name="weather_volcano">&#xf0c8;</string>
     <string name="weather_tornado">&#xf056;</string>
-    <string name="place_not_found">Sorry, no weather data found.</string>
-    <string name="icon">Icon</string>
-    <string name="value">Value</string>
     <string name="top_right">&#xf057;</string>
     <string name="right">&#xf04d;</string>
     <string name="bottom_right">&#xf088;</string>
@@ -54,10 +57,18 @@
     <string name="left">&#xf048;</string>
     <string name="top_left">&#xf087;</string>
 
+    <string name="place_not_found">Sorry, no weather data found.</string>
+    <string name="icon">Icon</string>
+    <string name="value">Value</string>
+
     <string name="c">°C</string>
     <string name="daily">DAILY</string>
     <string name="title_activity_new_weather">NewWeatherActivity</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_detail">DetailActivity</string>
+
+    <string name="f">F</string>
+    <string name="celsius">CELSIUS</string>
+    <string name="go">GO</string>
 
 </resources>
