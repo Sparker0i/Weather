@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.DateFormat;
@@ -173,59 +174,23 @@ public class WeatherFragment extends Fragment {
                 setWeatherIcon(details[i].getJSONArray("weather").getJSONObject(0).getInt("id") , i);
                 detailsField[i].setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
-                        MaterialDialog.Builder builder = new MaterialDialog.Builder(getActivity())
-                                .title("Weather Information")
-                                .content("Loading")
-                                .positiveText("OK");
+                        Intent intent = new Intent(getContext() , DetailActivity.class);
+                        intent.putExtra("jsonStr" , J.toString());
                         try {
-                            String date1 = J.getString("dt");
-                            Date expiry = new Date(Long.parseLong(date1) * 1000);
-                            String date = new SimpleDateFormat("EE, dd MMMM yyyy" , Locale.US).format(expiry);
-                            builder.content(date +
-                                    "\n" + J.getJSONArray("weather").getJSONObject(0).getString("description").toUpperCase(Locale.US) +
-                                    "\n" + "Maximum: " + J.getJSONObject("temp").getLong("max") + " ℃" +
-                                    "\n" + "Minimum:  " + J.getJSONObject("temp").getLong("min") + " ℃" +
-                                    "\n" + "Morning:    " + J.getJSONObject("temp").getLong("morn") + " ℃" +
-                                    "\n" + "At Night:    " + J.getJSONObject("temp").getLong("night") + " ℃" +
-                                    "\n" + "Evening:    " + J.getJSONObject("temp").getLong("eve") + " ℃" +
-                                    "\n" + "Humidity:  " + J.getString("humidity") + "%" +
-                                    "\n" + "Pressure:  " + J.getString("pressure") + " hPa" +
-                                    "\n" + "Wind:         " + J.getString("speed") + "km/h");
-                            MaterialDialog dialog = builder.build();
-                            dialog.show();
-                        Log.i("Loaded" , "Details Field");}
-                        catch (Exception e) {
-                            Log.e("Error", "Something's wrong in the JSON Received");
+                            intent.putExtra("city", json1.getJSONObject("city").getString("name"));
                         }
+                        catch (JSONException jx) {
+                            Log.e("JSONEX" , "Caught a JSON Exception");
+                        }
+                        startActivity(intent);
                     }
                 });
                 weatherIcon[i].setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v)
                     {
-                        MaterialDialog.Builder builder = new MaterialDialog.Builder(getActivity())
-                                .title("Weather Information")
-                                .content("Loading")
-                                .positiveText("OK");
-                        try {
-                            String date1 = J.getString("dt");
-                            Date expiry = new Date(Long.parseLong(date1) * 1000);
-                            String date = new SimpleDateFormat("EE, dd MMMM yyyy" , Locale.US).format(expiry);
-                            builder.content(date +
-                                    "\n" + J.getJSONArray("weather").getJSONObject(0).getString("description").toUpperCase(Locale.US) +
-                                    "\n" + "Maximum: " + J.getJSONObject("temp").getLong("max") + " ℃" +
-                                    "\n" + "Minimum:  " + J.getJSONObject("temp").getLong("min") + " ℃" +
-                                    "\n" + "Morning:    " + J.getJSONObject("temp").getLong("morn") + " ℃" +
-                                    "\n" + "At Night:    " + J.getJSONObject("temp").getLong("night") + " ℃" +
-                                    "\n" + "Evening:    " + J.getJSONObject("temp").getLong("eve") + " ℃" +
-                                    "\n" + "Humidity:  " + J.getString("humidity") + "%" +
-                                    "\n" + "Pressure:  " + J.getString("pressure") + " hPa" +
-                                    "\n" + "Wind:         " + J.getString("speed") + "km/h");
-                            MaterialDialog dialog = builder.build();
-                            dialog.show();
-                            Log.i("Loaded" , "Details Field");}
-                        catch (Exception e) {
-                            Log.e("Error", "Something's wrong in the JSON Received");
-                        }
+                        Intent intent = new Intent(getContext() , DetailActivity.class);
+                        intent.putExtra("jsonStr" , J.toString());
+                        startActivity(intent);
                     }
                 });
             }

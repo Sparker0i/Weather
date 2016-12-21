@@ -23,7 +23,7 @@ public class DetailFragment extends Fragment {
 
     Typeface weatherFont;
     TextView cityField;
-    TextView dateText , tempText, dayText , nightText, humidityText, sunriseText, sunsetText, speedText, pressureText;
+    TextView dateText , tempText, humidityText, sunriseText, sunsetText, speedText, pressureText;
     TextView weatherIcon, humidityIcon, sunriseIcon, sunsetIcon, speedIcon, pressureIcon;
     JSONObject obj;
     Intent intent;
@@ -41,28 +41,33 @@ public class DetailFragment extends Fragment {
             speedIcon.setText(getActivity().getString(R.string.speed_icon));
             pressureIcon.setText(getActivity().getString(R.string.pressure_icon));
 
+            cityField.setText(intent.getStringExtra("city"));
+
             Long date1 = obj.getLong("dt");
             Date expiry = new Date(Long.parseLong(Long.toString(date1)) * 1000);
             String date = new SimpleDateFormat("EE, dd" , Locale.US).format(expiry);
             dateText.setText(date);
 
-            long dy = obj.getJSONObject("main").getLong("day");
+            long dy = obj.getJSONObject("temp").getLong("day");
             int day = (int) dy;
-            dayText.setText("Day : " + day);
+            sunriseText.setText(day + getString(R.string.c));
 
-            long nt = obj.getJSONObject("main").getLong("night");
+            long nt = obj.getJSONObject("temp").getLong("night");
             int night = (int) nt;
-            nightText.setText("Night : " + night);
+            sunsetText.setText(night + getString(R.string.c));
 
-            SpannableString ss1=  new SpannableString(date + "\n"
-                    + obj.getJSONObject("temp").getLong("max") + "°" + "      "
+            SpannableString ss1=  new SpannableString(
+                    + obj.getJSONObject("temp").getLong("max") + "°" + "         "
                     + obj.getJSONObject("temp").getLong("min") + "°" + "\n");
-            ss1.setSpan(new RelativeSizeSpan(1.1f), 0,7, 0); // set size
-            ss1.setSpan(new RelativeSizeSpan(1.4f) , 8 , 11 , 0);
+            ss1.setSpan(new RelativeSizeSpan(1.4f) , 0 , 3 , 0);
             tempText.setText(ss1);
+
+            humidityText.setText(obj.getInt("humidity") + "%");
+            speedText.setText(obj.getLong("speed") + " km/h");
+            pressureText.setText(obj.getLong("pressure") + " hPa");
         }
         catch (JSONException ex) {
-            Log.e("Detail View" , "Cannot Find Detail");
+            Log.e("Detail View" , "Cannot Find Details");
             getActivity().finish();
         }
     }
@@ -156,11 +161,11 @@ public class DetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        weatherFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/newweather.ttf");
+        intent = getActivity().getIntent();
         View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
         cityField = (TextView) rootView.findViewById(R.id.city_field);
         dateText = (TextView) rootView.findViewById(R.id.date_text);
-        dayText = (TextView) rootView.findViewById(R.id.day_text);
-        nightText = (TextView) rootView.findViewById(R.id.min_text);
 
         weatherIcon = (TextView) rootView.findViewById(R.id.weather_icon);
         weatherIcon.setTypeface(weatherFont);
@@ -182,15 +187,7 @@ public class DetailFragment extends Fragment {
         sunsetIcon = (TextView) rootView.findViewById(R.id.sunset_icon);
         sunsetIcon.setTypeface(weatherFont);
         sunsetText = (TextView) rootView.findViewById(R.id.sunset_text);
-
-        return rootView;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        weatherFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/newweather.ttf");
-        intent = getActivity().getIntent();
         updateView();
+        return rootView;
     }
 }

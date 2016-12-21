@@ -39,8 +39,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/weather_icon"
+        android:layout_alignStart="@id/weather_icon"
         android:layout_alignEnd="@id/weather_icon"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="#FFFFFF"
+        android:textAlignment="center" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -50,26 +53,6 @@
         android:textSize="37sp"
         android:textColor="#FFFFFF"
         android:id="@+id/date_text" />
-
-    <TextView
-        android:textSize="37sp"
-        android:textColor="#FFFFFF"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/date_text"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="3sp"
-        android:id="@+id/day_text" />
-
-    <TextView
-        android:textSize="37sp"
-        android:textColor="#FFFFFF"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/day_text"
-        android:layout_marginTop="3sp"
-        android:id="@+id/night_text"
-        android:layout_toEndOf="@+id/day_text" />
 
     <LinearLayout
         android:orientation="horizontal"
