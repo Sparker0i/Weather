@@ -59,6 +59,15 @@ public class DetailFragment extends Fragment {
                     }
                 }
         );
+        humidityIcon.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Snackbar.make(view, "Humidity : " + humidity + "%", Snackbar.LENGTH_SHORT)
+                                .show();
+                    }
+                }
+        );
         final long speed = obj.getLong("speed");
         speedText.setText(speed + " km/h" + "");
         speedText.setOnClickListener(
@@ -70,9 +79,27 @@ public class DetailFragment extends Fragment {
                     }
                 }
         );
+        speedIcon.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Snackbar.make(view, "Speed : " + speed + " km/h", Snackbar.LENGTH_SHORT)
+                                .show();
+                    }
+                }
+        );
         final long pressure = obj.getLong("pressure");
         pressureText.setText(pressure + " hPa" + "");
         pressureText.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Snackbar.make(view, "Pressure : " + pressure + " hPa", Snackbar.LENGTH_SHORT)
+                                .show();
+                    }
+                }
+        );
+        pressureIcon.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
