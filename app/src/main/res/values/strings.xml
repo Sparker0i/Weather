@@ -24,8 +24,8 @@
     <string name="humidity_icon">&#xf07a;</string>
     <string name="pressure_icon">&#xf079;</string>
     <string name="speed_icon">&#xf050;</string>
-    <string name="sunrise_icon">&#xf00d;</string>
-    <string name="sunset_icon">&#xf0db;</string>
+    <string name="day_icon">&#xf00d;</string>
+    <string name="night_icon">&#xf0db;</string>
 
     <string name="weather_sunny">&#xf00d;</string>
     <string name="weather_sunny_cloudy">&#xf002;</string>

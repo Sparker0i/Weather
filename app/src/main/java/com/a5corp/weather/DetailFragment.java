@@ -24,8 +24,8 @@ public class DetailFragment extends Fragment {
     Typeface weatherFont;
     View rootView;
     TextView cityField;
-    TextView dateText , tempText, humidityText, sunriseText, sunsetText, speedText, pressureText;
-    TextView weatherIcon, humidityIcon, sunriseIcon, sunsetIcon, speedIcon, pressureIcon;
+    TextView dateText , tempText, humidityText, dayText, nightText, speedText, pressureText, sunriseText, sunsetText;
+    TextView weatherIcon, humidityIcon, dayIcon, nightIcon, speedIcon, pressureIcon, sunriseIcon, sunsetIcon;
     JSONObject obj;
     Intent intent;
 
@@ -35,12 +35,7 @@ public class DetailFragment extends Fragment {
     public void updateView() {
         try {
             obj = new JSONObject(intent.getStringExtra("jsonStr"));
-            setWeatherIcon();
-            humidityIcon.setText(getActivity().getString(R.string.humidity_icon));
-            sunsetIcon.setText(getActivity().getString(R.string.sunset_icon));
-            sunriseIcon.setText(getActivity().getString(R.string.sunrise_icon));
-            speedIcon.setText(getActivity().getString(R.string.speed_icon));
-            pressureIcon.setText(getActivity().getString(R.string.pressure_icon));
+            initIcons();
 
             cityField.setText(intent.getStringExtra("city"));
 
@@ -51,11 +46,11 @@ public class DetailFragment extends Fragment {
 
             long dy = obj.getJSONObject("temp").getLong("day");
             int day = (int) dy;
-            sunriseText.setText(day + getString(R.string.c) + "");
+            dayText.setText(day + getString(R.string.c) + "");
 
             long nt = obj.getJSONObject("temp").getLong("night");
             int night = (int) nt;
-            sunsetText.setText(night + getString(R.string.c) + "");
+            nightText.setText(night + getString(R.string.c) + "");
 
             SpannableString ss1=  new SpannableString(
                     + obj.getJSONObject("temp").getLong("max") + "°" + "         "
@@ -71,6 +66,15 @@ public class DetailFragment extends Fragment {
             Log.e("Detail View" , "Cannot Find Details");
             getActivity().finish();
         }
+    }
+
+    private void initIcons() throws JSONException{
+        setWeatherIcon();
+        humidityIcon.setText(getActivity().getString(R.string.humidity_icon));
+        nightIcon.setText(getActivity().getString(R.string.night_icon));
+        dayIcon.setText(getActivity().getString(R.string.day_icon));
+        speedIcon.setText(getActivity().getString(R.string.speed_icon));
+        pressureIcon.setText(getActivity().getString(R.string.pressure_icon));
     }
 
     private void setWeatherIcon() throws JSONException {
@@ -182,12 +186,12 @@ public class DetailFragment extends Fragment {
         pressureIcon.setTypeface(weatherFont);
         pressureText = (TextView) rootView.findViewById(R.id.pressure_text);
 
-        sunriseIcon = (TextView) rootView.findViewById(R.id.sunrise_icon);
-        sunriseIcon.setTypeface(weatherFont);
-        sunriseText = (TextView) rootView.findViewById(R.id.sunrise_text);
-        sunsetIcon = (TextView) rootView.findViewById(R.id.sunset_icon);
-        sunsetIcon.setTypeface(weatherFont);
-        sunsetText = (TextView) rootView.findViewById(R.id.sunset_text);
+        dayIcon = (TextView) rootView.findViewById(R.id.day_icon);
+        dayIcon.setTypeface(weatherFont);
+        dayText = (TextView) rootView.findViewById(R.id.day_text);
+        nightIcon = (TextView) rootView.findViewById(R.id.night_icon);
+        nightIcon.setTypeface(weatherFont);
+        nightText = (TextView) rootView.findViewById(R.id.night_text);
         updateView();
         return rootView;
     }

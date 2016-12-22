@@ -172,34 +172,26 @@ public class WeatherFragment extends Fragment {
                 detailsField[i].setText(ss1);
                 Log.i("Details[" + Integer.toString(i) + "]", "Information String " + Integer.toString(i + 1) + " loaded");
                 setWeatherIcon(details[i].getJSONArray("weather").getJSONObject(0).getInt("id") , i);
+                final Intent intent = new Intent(getContext() , DetailActivity.class);
+                intent.putExtra("jsonStr" , J.toString());
+                try {
+                    intent.putExtra("city", json0.getJSONObject("city").getString("name").toUpperCase(Locale.US) +
+                            ", " +
+                            json0.getJSONObject("city").getString("country"));
+                }
+                catch (JSONException jx) {
+                    Log.e("JSONEX" , "Caught a JSON Exception");
+                }
+                intent.putExtra("sunrise" , json1.getJSONObject("sys").getLong("sunrise"));
+                intent.putExtra("sunset" , json1.getJSONObject("sys").getLong("sunset"));
                 detailsField[i].setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
-                        Intent intent = new Intent(getContext() , DetailActivity.class);
-                        intent.putExtra("jsonStr" , J.toString());
-                        try {
-                            intent.putExtra("city", json0.getJSONObject("city").getString("name").toUpperCase(Locale.US) +
-                                    ", " +
-                                    json0.getJSONObject("city").getString("country"));
-                        }
-                        catch (JSONException jx) {
-                            Log.e("JSONEX" , "Caught a JSON Exception");
-                        }
                         startActivity(intent);
                     }
                 });
                 weatherIcon[i].setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v)
                     {
-                        Intent intent = new Intent(getContext() , DetailActivity.class);
-                        intent.putExtra("jsonStr" , J.toString());
-                        try {
-                            intent.putExtra("city", json0.getJSONObject("city").getString("name").toUpperCase(Locale.US) +
-                                    ", " +
-                                    json0.getJSONObject("city").getString("country"));
-                        }
-                        catch (JSONException jx) {
-                            Log.e("JSONEX" , "Caught a JSON Exception");
-                        }
                         startActivity(intent);
                     }
                 });
