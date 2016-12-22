@@ -48,32 +48,35 @@ public class DetailFragment extends Fragment {
     }
 
     private void setLowerLayout() throws JSONException{
-        humidityText.setText(obj.getInt("humidity") + "%" + "");
+        final int humidity = obj.getInt("humidity");
+        humidityText.setText(humidity + "%" + "");
         humidityText.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Snackbar.make(view, "Humidity", Snackbar.LENGTH_SHORT)
+                        Snackbar.make(view, "Humidity : " + humidity + "%", Snackbar.LENGTH_SHORT)
                                 .show();
                     }
                 }
         );
-        speedText.setText(obj.getLong("speed") + " km/h" + "");
+        final long speed = obj.getLong("speed");
+        speedText.setText(speed + " km/h" + "");
         speedText.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Snackbar.make(view, "Speed", Snackbar.LENGTH_SHORT)
+                        Snackbar.make(view, "Speed : " + speed + " km/h", Snackbar.LENGTH_SHORT)
                                 .show();
                     }
                 }
         );
-        pressureText.setText(obj.getLong("pressure") + " hPa" + "");
+        final long pressure = obj.getLong("pressure");
+        pressureText.setText(pressure + " hPa" + "");
         pressureText.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Snackbar.make(view, "Pressure", Snackbar.LENGTH_SHORT)
+                        Snackbar.make(view, "Pressure : " + pressure + " hPa", Snackbar.LENGTH_SHORT)
                                 .show();
                     }
                 }
@@ -89,10 +92,28 @@ public class DetailFragment extends Fragment {
         long dy = obj.getJSONObject("temp").getLong("day");
         int day = (int) dy;
         dayText.setText(day + getString(R.string.c) + "");
+        dayText.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Snackbar.make(view, "Temperature at Daytime", Snackbar.LENGTH_SHORT)
+                                .show();
+                    }
+                }
+        );
 
         long nt = obj.getJSONObject("temp").getLong("night");
         int night = (int) nt;
         nightText.setText(night + getString(R.string.c) + "");
+        nightText.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Snackbar.make(view, "Temperature at Night", Snackbar.LENGTH_SHORT)
+                                .show();
+                    }
+                }
+        );
 
         SpannableString ss1=  new SpannableString(
                 + obj.getJSONObject("temp").getLong("max") + "°" + "         "
@@ -102,10 +123,28 @@ public class DetailFragment extends Fragment {
 
         long sr = intent.getLongExtra("sunrise" , 0);
         long ss = intent.getLongExtra("sunset" , 0);
-        String d1 = new java.text.SimpleDateFormat("hh:mm: a" , Locale.US).format(new Date(sr * 1000));
-        String d2 = new java.text.SimpleDateFormat("hh:mm: a" , Locale.US).format(new Date(ss * 1000));
+        final String d1 = new java.text.SimpleDateFormat("hh:mm a" , Locale.US).format(new Date(sr * 1000));
+        final String d2 = new java.text.SimpleDateFormat("hh:mm a" , Locale.US).format(new Date(ss * 1000));
         sunriseText.setText(d1);
+        sunriseText.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Snackbar.make(view, "Sunrise Time : " + d1, Snackbar.LENGTH_SHORT)
+                                .show();
+                    }
+                }
+        );
         sunsetText.setText(d2);
+        sunsetText.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Snackbar.make(view, "Sunset Time : " + d2, Snackbar.LENGTH_SHORT)
+                                .show();
+                    }
+                }
+        );
     }
 
     private void initIcons() throws JSONException{

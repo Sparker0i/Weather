@@ -14,19 +14,19 @@
         android:layout_height="match_parent"
         tools:context="com.a5corp.weather.WeatherActivity"
         tools:ignore="MergeRootFrame"
-        android:background="@color/colorPrimary" />
+        android:background="@color/colorPrimary" >
+
+    </FrameLayout>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
         android:layout_gravity="bottom|end"
-        android:layout_marginEnd="10dp"
+        android:layout_marginEnd="16dp"
         android:scaleType="center"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="16dp"
         android:layout_alignParentEnd="true"
-        app:srcCompat="@drawable/ic_search_white_24dp"
-        android:layout_marginRight="10dp"
-        android:layout_alignParentRight="true" />
+        app:srcCompat="@drawable/ic_search_white_24dp" />
 
 </android.support.design.widget.CoordinatorLayout>
