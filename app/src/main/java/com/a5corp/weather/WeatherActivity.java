@@ -2,6 +2,7 @@ package com.a5corp.weather;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -35,6 +36,7 @@ public class WeatherActivity extends AppCompatActivity implements GoogleApiClien
     private GoogleApiClient mGoogleApiClient;
     LocationRequest mLocationRequest;
     String lat, lon;
+    FloatingActionButton fab;
 
     int MY_PERMISSIONS_REQUEST_READ_COARSE_LOCATION, MY_PERMISSIONS_REQUEST_READ_FINE_LOCATION;
 
@@ -55,13 +57,18 @@ public class WeatherActivity extends AppCompatActivity implements GoogleApiClien
                     .add(R.id.container, new WeatherFragment())
                     .commit();
         }
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showInputDialog();
+                fabClick();
             }
         });
+    }
+
+    private void fabClick() {
+        fab.hide();
+        showInputDialog();
     }
 
     @SuppressWarnings("InfiniteRecursion")
@@ -103,17 +110,31 @@ public class WeatherActivity extends AppCompatActivity implements GoogleApiClien
         new MaterialDialog.Builder(this)
                 .title("Change City")
                 .content("You can change the city here")
+                .onAny(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        fab.show();
+                    }
+                })
+                .dismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialogInterface) {
+                        fab.show();
+                    }
+                })
                 .negativeText("CANCEL")
                 .onNegative(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog , @NonNull DialogAction which) {
                         dialog.dismiss();
+                        fab.show();
                     }
                 })
                 .input(null, null, new MaterialDialog.InputCallback() {
                     @Override
                     public void onInput(@NonNull MaterialDialog dialog, @NonNull CharSequence input) {
                         changeCity(input.toString());
+                        fab.show();
                     }
                 }).show();
     }

@@ -3,6 +3,7 @@ package com.a5corp.weather;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.text.SpannableString;
 import android.text.style.RelativeSizeSpan;
@@ -36,36 +37,75 @@ public class DetailFragment extends Fragment {
         try {
             obj = new JSONObject(intent.getStringExtra("jsonStr"));
             initIcons();
-
+            setTexts();
+            setLowerLayout();
             cityField.setText(intent.getStringExtra("city"));
-
-            Long date1 = obj.getLong("dt");
-            Date expiry = new Date(Long.parseLong(Long.toString(date1)) * 1000);
-            String date = new SimpleDateFormat("EE, dd" , Locale.US).format(expiry);
-            dateText.setText(date);
-
-            long dy = obj.getJSONObject("temp").getLong("day");
-            int day = (int) dy;
-            dayText.setText(day + getString(R.string.c) + "");
-
-            long nt = obj.getJSONObject("temp").getLong("night");
-            int night = (int) nt;
-            nightText.setText(night + getString(R.string.c) + "");
-
-            SpannableString ss1=  new SpannableString(
-                    + obj.getJSONObject("temp").getLong("max") + "°" + "         "
-                    + obj.getJSONObject("temp").getLong("min") + "°" + "\n");
-            ss1.setSpan(new RelativeSizeSpan(1.4f) , 0 , 3 , 0);
-            tempText.setText(ss1);
-
-            humidityText.setText(obj.getInt("humidity") + "%" + "");
-            speedText.setText(obj.getLong("speed") + " km/h" + "");
-            pressureText.setText(obj.getLong("pressure") + " hPa" + "");
         }
         catch (JSONException ex) {
             Log.e("Detail View" , "Cannot Find Details");
             getActivity().finish();
         }
+    }
+
+    private void setLowerLayout() throws JSONException{
+        humidityText.setText(obj.getInt("humidity") + "%" + "");
+        humidityText.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Snackbar.make(view, "Humidity", Snackbar.LENGTH_SHORT)
+                                .show();
+                    }
+                }
+        );
+        speedText.setText(obj.getLong("speed") + " km/h" + "");
+        speedText.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Snackbar.make(view, "Speed", Snackbar.LENGTH_SHORT)
+                                .show();
+                    }
+                }
+        );
+        pressureText.setText(obj.getLong("pressure") + " hPa" + "");
+        pressureText.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Snackbar.make(view, "Pressure", Snackbar.LENGTH_SHORT)
+                                .show();
+                    }
+                }
+        );
+    }
+
+    private void setTexts() throws JSONException{
+        Long date1 = obj.getLong("dt");
+        Date expiry = new Date(Long.parseLong(Long.toString(date1)) * 1000);
+        String date = new SimpleDateFormat("EE, dd" , Locale.US).format(expiry);
+        dateText.setText(date);
+
+        long dy = obj.getJSONObject("temp").getLong("day");
+        int day = (int) dy;
+        dayText.setText(day + getString(R.string.c) + "");
+
+        long nt = obj.getJSONObject("temp").getLong("night");
+        int night = (int) nt;
+        nightText.setText(night + getString(R.string.c) + "");
+
+        SpannableString ss1=  new SpannableString(
+                + obj.getJSONObject("temp").getLong("max") + "°" + "         "
+                        + obj.getJSONObject("temp").getLong("min") + "°" + "\n");
+        ss1.setSpan(new RelativeSizeSpan(1.4f) , 0 , 3 , 0);
+        tempText.setText(ss1);
+
+        long sr = intent.getLongExtra("sunrise" , 0);
+        long ss = intent.getLongExtra("sunset" , 0);
+        String d1 = new java.text.SimpleDateFormat("hh:mm: a" , Locale.US).format(new Date(sr * 1000));
+        String d2 = new java.text.SimpleDateFormat("hh:mm: a" , Locale.US).format(new Date(ss * 1000));
+        sunriseText.setText(d1);
+        sunsetText.setText(d2);
     }
 
     private void initIcons() throws JSONException{
@@ -75,6 +115,8 @@ public class DetailFragment extends Fragment {
         dayIcon.setText(getActivity().getString(R.string.day_icon));
         speedIcon.setText(getActivity().getString(R.string.speed_icon));
         pressureIcon.setText(getActivity().getString(R.string.pressure_icon));
+        sunriseIcon.setText(getActivity().getString(R.string.sunrise_icon));
+        sunsetIcon.setText(getActivity().getString(R.string.sunset_icon));
     }
 
     private void setWeatherIcon() throws JSONException {
@@ -185,6 +227,13 @@ public class DetailFragment extends Fragment {
         pressureIcon = (TextView) rootView.findViewById(R.id.pressure_icon);
         pressureIcon.setTypeface(weatherFont);
         pressureText = (TextView) rootView.findViewById(R.id.pressure_text);
+
+        sunriseIcon = (TextView) rootView.findViewById(R.id.sunrise_icon);
+        sunriseIcon.setTypeface(weatherFont);
+        sunsetIcon = (TextView) rootView.findViewById(R.id.sunset_icon);
+        sunsetIcon.setTypeface(weatherFont);
+        sunriseText = (TextView) rootView.findViewById(R.id.sunrise_text);
+        sunsetText = (TextView) rootView.findViewById(R.id.sunset_text);
 
         dayIcon = (TextView) rootView.findViewById(R.id.day_icon);
         dayIcon.setTypeface(weatherFont);
