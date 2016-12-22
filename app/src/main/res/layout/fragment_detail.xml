@@ -77,7 +77,7 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textAlignment="center"
                 android:textColor="#FFFFFF"
-                android:textSize="70sp" />
+                android:textSize="60sp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -102,7 +102,7 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textAlignment="center"
                 android:textColor="#FFFFFF"
-                android:textSize="70sp" />
+                android:textSize="60sp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -127,7 +127,7 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textAlignment="center"
                 android:textColor="#FFFFFF"
-                android:textSize="70sp" />
+                android:textSize="60sp" />
 
             <TextView
                 android:layout_width="match_parent"

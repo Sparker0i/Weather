@@ -117,26 +117,44 @@ public class DetailFragment extends Fragment {
         dateText.setText(date);
 
         long dy = obj.getJSONObject("temp").getLong("day");
-        int day = (int) dy;
+        final int day = (int) dy;
         dayText.setText(day + getString(R.string.c) + "");
         dayText.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Snackbar.make(view, "Temperature at Daytime", Snackbar.LENGTH_SHORT)
+                        Snackbar.make(view, "Temperature at Daytime : " + day + getString(R.string.c), Snackbar.LENGTH_SHORT)
+                                .show();
+                    }
+                }
+        );
+        dayIcon.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Snackbar.make(view, "Temperature at Daytime : " + day + getString(R.string.c), Snackbar.LENGTH_SHORT)
                                 .show();
                     }
                 }
         );
 
         long nt = obj.getJSONObject("temp").getLong("night");
-        int night = (int) nt;
+        final int night = (int) nt;
         nightText.setText(night + getString(R.string.c) + "");
         nightText.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Snackbar.make(view, "Temperature at Night", Snackbar.LENGTH_SHORT)
+                        Snackbar.make(view, "Temperature at Night : " + night + getString(R.string.c), Snackbar.LENGTH_SHORT)
+                                .show();
+                    }
+                }
+        );
+        nightIcon.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Snackbar.make(view, "Temperature at Night : " + night + getString(R.string.c), Snackbar.LENGTH_SHORT)
                                 .show();
                     }
                 }
@@ -162,8 +180,26 @@ public class DetailFragment extends Fragment {
                     }
                 }
         );
+        sunriseIcon.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Snackbar.make(view, "Sunrise Time : " + d1, Snackbar.LENGTH_SHORT)
+                                .show();
+                    }
+                }
+        );
         sunsetText.setText(d2);
         sunsetText.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Snackbar.make(view, "Sunset Time : " + d2, Snackbar.LENGTH_SHORT)
+                                .show();
+                    }
+                }
+        );
+        sunsetIcon.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {

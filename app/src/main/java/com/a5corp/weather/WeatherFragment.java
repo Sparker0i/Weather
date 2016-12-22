@@ -1,10 +1,11 @@
 package com.a5corp.weather;
 
-import android.support.annotation.NonNull;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.text.SpannableString;
 import android.text.style.RelativeSizeSpan;
@@ -132,23 +133,14 @@ public class WeatherFragment extends Fragment {
             cityField.setText(json0.getJSONObject("city").getString("name").toUpperCase(Locale.US) +
                     ", " +
                     json0.getJSONObject("city").getString("country"));
+            final String city = json0.getJSONObject("city").getString("name").toUpperCase(Locale.US) +
+                    ", " +
+                    json0.getJSONObject("city").getString("country");
             cityField.setOnClickListener(new View.OnClickListener()
             {
                 public void onClick(View v) {
-                    MaterialDialog.Builder builder = new MaterialDialog.Builder(getActivity())
-                            .title("City Information")
-                            .content("Loading")
-                            .positiveText("OK");
-                    try {
-                        builder.content(json0.getJSONObject("city").getString("name").toUpperCase(Locale.US) +
-                                ", " +
-                                json0.getJSONObject("city").getString("country"));
-                        MaterialDialog dialog = builder.build();
-                        dialog.show();
-                        Log.i("Loaded in Dialog", "City Name");
-                    } catch (Exception ex) {
-                        Log.e("Error", "Could not load city name");
-                    }
+                    Snackbar.make(v, city, Snackbar.LENGTH_SHORT)
+                            .show();
                 }
             });
             Log.i("Location" , "Location Received");
@@ -200,20 +192,7 @@ public class WeatherFragment extends Fragment {
             String updatedOn = "Last update: " + df.format(new Date(json1.getLong("dt")*1000));
             updatedField.setText(updatedOn);
             int deg = json1.getJSONObject("wind").getInt("deg");
-            if (deg < 90)
-                directionView.setText(getActivity().getString(R.string.top_right));
-            else if (deg == 90)
-                directionView.setText(getActivity().getString(R.string.right));
-            else if (deg < 180)
-                directionView.setText(getActivity().getString(R.string.bottom_right));
-            else if (deg == 180)
-                directionView.setText(getActivity().getString(R.string.down));
-            else if (deg < 270)
-                directionView.setText(getActivity().getString(R.string.bottom_left));
-            else if (deg == 270)
-                directionView.setText(getActivity().getString(R.string.left));
-            else
-                directionView.setText(getActivity().getString(R.string.top_left));
+            setDeg(deg);
             setWeatherIcon(json1.getJSONArray("weather").getJSONObject(0).getInt("id"),10);
             humidityView.setText("HUMIDITY:\n" + json1.getJSONObject("main").getInt("humidity") + "%");
             Log.i("Humidity Loaded" , "Done");
@@ -230,24 +209,16 @@ public class WeatherFragment extends Fragment {
             {
                 public void onClick (View v)
                 {
-                    MaterialDialog.Builder builder = new MaterialDialog.Builder(getActivity())
-                            .title("Weather Information")
-                            .positiveText("OK");
                     try {
-                        String d1 = new java.text.SimpleDateFormat("hh:mm:ss a" , Locale.US).format(new Date(json1.getJSONObject("sys").getLong("sunrise")*1000));
-                        String d2 = new java.text.SimpleDateFormat("hh:mm:ss a" , Locale.US).format(new Date(json1.getJSONObject("sys").getLong("sunset")*1000));
-                        builder.content(json1.getJSONArray("weather").getJSONObject(0).getString("description").toUpperCase(Locale.US) +
-                                "\n" + "TEMPERATURE :\t " + json1.getJSONObject("main").getInt("temp") + " ℃" +
-                                "\n" + "Maximum:\t " + json1.getJSONObject("main").getDouble("temp_max") + " ℃" +
-                                "\n" + "Minimum:\t " + json1.getJSONObject("main").getDouble("temp_min") + " ℃" +
-                                "\n" + "Humidity:\t   " + json1.getJSONObject("main").getString("humidity") + "%" +
-                                "\n" + "Pressure:\t   " + json1.getJSONObject("main").getString("pressure") + " hPa" +
-                                "\n" + "Wind:\t         " + json1.getJSONObject("wind").getString("speed") + "km/h" +
-                                "\n" + "Sunrise:\t     " + d1 +
-                                "\n" + "Sunset:\t       " + d2);
-                        MaterialDialog dialog = builder.build();
-                        dialog.show();
-                        Log.i("Load" , "Main Weather Icon OnClick Details loaded");
+                        String rs = json1.getJSONArray("weather").getJSONObject(0).getString("description");
+                        String[] strArray = rs.split(" ");
+                        StringBuilder builder = new StringBuilder();
+                        for (String s : strArray) {
+                            String cap = s.substring(0, 1).toUpperCase() + s.substring(1);
+                            builder.append(cap.concat(" "));
+                        }
+                        Snackbar.make(v , "Hey there, " + builder.toString() + "here right now!", Snackbar.LENGTH_SHORT)
+                                .show();
                     }
                     catch (Exception e) {
                         Log.e("Error", "Main Weather Icon OnClick Details could not be loaded");
@@ -256,10 +227,29 @@ public class WeatherFragment extends Fragment {
             });
             String r1 = Integer.toString(a) + "°C";
             button.setText(r1);
+            button.setTextSize(16);
+            button.setClickable(false);
             button.setVisibility(View.VISIBLE);
         }catch(Exception e){
             Log.e("SimpleWeather", "One or more fields not found in the JSON data");
         }
+    }
+
+    private void setDeg(int deg) {
+        if (deg < 90)
+            directionView.setText(getActivity().getString(R.string.top_right));
+        else if (deg == 90)
+            directionView.setText(getActivity().getString(R.string.right));
+        else if (deg < 180)
+            directionView.setText(getActivity().getString(R.string.bottom_right));
+        else if (deg == 180)
+            directionView.setText(getActivity().getString(R.string.down));
+        else if (deg < 270)
+            directionView.setText(getActivity().getString(R.string.bottom_left));
+        else if (deg == 270)
+            directionView.setText(getActivity().getString(R.string.left));
+        else
+            directionView.setText(getActivity().getString(R.string.top_left));
     }
 
     public WeatherFragment() {

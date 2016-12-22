@@ -25,7 +25,7 @@
     <string name="pressure_icon">&#xf079;</string>
     <string name="speed_icon">&#xf050;</string>
     <string name="day_icon">&#xf00d;</string>
-    <string name="night_icon">&#xf0db;</string>
+    <string name="night_icon">&#xf0ae;</string>
     <string name="sunrise_icon">&#xf051;</string>
     <string name="sunset_icon">&#xf052;</string>
 
