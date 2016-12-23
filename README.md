@@ -1,23 +1,26 @@
 # Simple Weather
+[![Release](https://img.shields.io/github/release/Sparker0i/Weather.svg)](https://github.com/Sparker0i/Weather/releases)
+[![License](https://img.shields.io/github/license/Sparker0i/Weather.svg)](https://raw.githubusercontent.com/Sparker0i/Weather/HEAD/LICENSE)
 
 Welcome to my Open Source, easy to use Weather app, built using Android Studio for Android 4.0.3+
 
 Get it on Google Play:
 
-<a href='https://play.google.com/store/apps/details?id=com.a5corp.weather'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png' width='210' heigh='80'/></a>
+<a href='https://play.google.com/store/apps/details?id=com.a5corp.weather'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png' style="width: 80%; height: 80%;"/></a>
 
 ## To-Do
 
-- [x] 10 Day Weather View
-- [x] Change City
-- [x] Attributions Page
+- [x] Auto Detect Location
+- [x] Refreshed Look
 - [ ] Add Material Design
-- [ ] Auto Detect Location
-- [ ] Many more.
+- [ ] Use Of Databases
+- [ ] Widgets
+- [ ] Ability to change colors from within the app
 
 LATEST UPDATE:
-- Removed GPS Permission
-- Compatibility for Android ICS (4.0.3)
-- Minor UI Changes in the Attribution Page
+- Added Auto Detect Location
+- Dropped Support for Android 4.1 and below
+- Refreshed Look When a Day View is selected
+- Refreshed UI Colors
 
-![Weather App as on a 5" phone](img/Weather App.png?raw=true "Weather App on a 5.5" phone")
+<img alt="Weather App as on a 5\" phone" src="/img/Weather App.png" style="width=70%; height=70%;">
