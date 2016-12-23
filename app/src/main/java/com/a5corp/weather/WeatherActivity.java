@@ -181,33 +181,33 @@ public class WeatherActivity extends AppCompatActivity implements GoogleApiClien
 
     @Override
     public void onConnected(Bundle bundle) {
-        if (GlobalActivity.cp.getLaunched()) {
-            mLocationRequest = LocationRequest.create();
-            mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-            mLocationRequest.setInterval(100); // Update location every second
+        mLocationRequest = LocationRequest.create();
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        mLocationRequest.setInterval(100); // Update location every second
 
-            if (Build.VERSION.SDK_INT >= 23) {
-                if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(this,
-                            new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
-                            MY_PERMISSIONS_REQUEST_READ_COARSE_LOCATION);
-                    ActivityCompat.requestPermissions(this,
-                            new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                            MY_PERMISSIONS_REQUEST_READ_FINE_LOCATION);
-                } else {
-                    LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
-                    mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
-                            mGoogleApiClient);
-                }
-            } else {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (ContextCompat.checkSelfPermission( this, Manifest.permission.ACCESS_COARSE_LOCATION ) != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission( this, Manifest.permission.ACCESS_FINE_LOCATION ) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
+                        MY_PERMISSIONS_REQUEST_READ_COARSE_LOCATION);
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        MY_PERMISSIONS_REQUEST_READ_FINE_LOCATION);
+            }
+            else {
                 LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
                 mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
                         mGoogleApiClient);
             }
-            if (mLastLocation != null) {
-                lat = String.valueOf(mLastLocation.getLatitude());
-                lon = String.valueOf(mLastLocation.getLongitude());
-            }
+        }
+        else {
+            LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+            mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
+                    mGoogleApiClient);
+        }
+        if (mLastLocation != null) {
+            lat = String.valueOf(mLastLocation.getLatitude());
+            lon = String.valueOf(mLastLocation.getLongitude());
         }
     }
 
@@ -218,49 +218,39 @@ public class WeatherActivity extends AppCompatActivity implements GoogleApiClien
 
     @Override
     public void onLocationChanged(Location location) {
-        if (GlobalActivity.cp.getLaunched()) {
-            lat = String.valueOf(location.getLatitude());
-            lon = String.valueOf(location.getLongitude());
-            DecimalFormat df = new DecimalFormat("###.##");
-            double la = Double.parseDouble(lat);
-            double lo = Double.parseDouble(lon);
-            lat = df.format(la);
-            lon = df.format(lo);
-            Log.i("lat", lat);
-            Log.i("lon", lon);
-        }
+        lat = String.valueOf(location.getLatitude());
+        lon = String.valueOf(location.getLongitude());
+        DecimalFormat df = new DecimalFormat("###.##");
+        double la = Double.parseDouble(lat);
+        double lo = Double.parseDouble(lon);
+        lat = df.format(la);
+        lon = df.format(lo);
+        Log.i("lat" , lat);
+        Log.i("lon" , lon);
     }
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-        if (GlobalActivity.cp.getLaunched()) {
-            buildGoogleApiClient();
-        }
+        buildGoogleApiClient();
     }
 
     synchronized void buildGoogleApiClient() {
-        if (GlobalActivity.cp.getLaunched()) {
-            mGoogleApiClient = new GoogleApiClient.Builder(this)
-                    .addConnectionCallbacks(this)
-                    .addOnConnectionFailedListener(this)
-                    .addApi(LocationServices.API)
-                    .build();
-        }
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        if (GlobalActivity.cp.getLaunched()) {
-            mGoogleApiClient.connect();
-        }
+        mGoogleApiClient.connect();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (GlobalActivity.cp.getLaunched()) {
-            mGoogleApiClient.disconnect();
-        }
+        mGoogleApiClient.disconnect();
     }
 }
