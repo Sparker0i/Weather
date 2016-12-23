@@ -17,6 +17,8 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:id="@+id/city_field"
+        android:ellipsize="end"
+        android:maxLines="1"
         android:layout_alignParentEnd="true"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textAlignment="center"
