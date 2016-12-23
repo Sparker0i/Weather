@@ -11,8 +11,8 @@ android {
         applicationId "com.a5corp.weather"
         minSdkVersion 17
         targetSdkVersion 25
-        versionCode 145
-        versionName "2.0-Alpha"
+        versionCode 203
+        versionName "2.0"
     }
     buildTypes {
         release {
@@ -30,11 +30,4 @@ dependencies {
     compile 'com.android.support:design:25.0.1'
     compile 'com.google.android.gms:play-services:9.8.0'
     compile 'com.afollestad.material-dialogs:core:0.9.0.2'
-    compile 'com.github.ksoichiro:android-observablescrollview:1.5.0'
-    compile 'com.github.gabrielemariotti.cards:cardslib-core:2.1.0'
-    compile 'com.github.gabrielemariotti.cards:cardslib-cards:2.1.0'
-    compile 'com.github.gabrielemariotti.cards:cardslib-recyclerview:2.1.0'
-    compile 'com.github.gabrielemariotti.cards:cardslib-extra-staggeredgrid:2.1.0'
-    compile 'com.github.gabrielemariotti.cards:cardslib-extra-dragdrop:2.1.0'
-    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha9'
 }

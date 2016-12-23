@@ -8,6 +8,14 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-feature android:name="android.hardware.telephony" android:required="false" />
     <uses-feature android:name="android.hardware.location" android:required="false" />
+    <supports-screens
+        android:resizeable="false"
+        android:smallScreens="false"
+        android:normalScreens="true"
+        android:largeScreens="true"
+        android:xlargeScreens="true"
+        android:anyDensity="false"
+        android:requiresSmallestWidthDp="320" />
 
     <application
         android:allowBackup="true"
@@ -55,5 +63,4 @@
                 android:value="com.a5corp.weather.WeatherActivity" />
         </activity>
     </application>
-
 </manifest>

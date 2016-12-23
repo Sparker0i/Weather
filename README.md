@@ -23,4 +23,4 @@ LATEST UPDATE:
 - Refreshed Look When a Day View is selected
 - Refreshed UI Colors
 
-<img alt="Weather App as on a 5\" phone" src="/img/Weather App.png" style="width=70%; height=70%;">
+[<img src='/img/Weather App.png' width='1080' heigh='1920'>](/img/Weather App.png)
