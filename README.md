@@ -1,12 +1,12 @@
 # Simple Weather
 [![Release](https://img.shields.io/github/release/Sparker0i/Weather.svg)](https://github.com/Sparker0i/Weather/releases)
-[![License](https://img.shields.io/github/license/Sparker0i/Weather.svg)](https://raw.githubusercontent.com/Sparker0i/Weather/HEAD/LICENSE)
+[![License](https://img.shields.io/badge/license-MIT%20License-orange.svg)](https://raw.githubusercontent.com/Sparker0i/Weather/HEAD/LICENSE)
 
 Welcome to my Open Source, easy to use Weather app, built using Android Studio for Android 4.0.3+
 
 Get it on Google Play:
 
-<a href='https://play.google.com/store/apps/details?id=com.a5corp.weather'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png' style="width: 80%; height: 80%;"/></a>
+[<img src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png' alt='Get it on Google Play' width='210' heigh='80'>](https://play.google.com/store/apps/details?id=com.a5corp.weather)
 
 ## To-Do
 
