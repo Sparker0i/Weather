@@ -58,6 +58,7 @@
     <string name="bottom_left">&#xf043;</string>
     <string name="left">&#xf048;</string>
     <string name="top_left">&#xf087;</string>
+    <string name="top">&#xf058;</string>
 
     <string name="place_not_found">Sorry, no weather data found.</string>
     <string name="icon">Icon</string>

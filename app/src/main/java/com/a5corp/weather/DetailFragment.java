@@ -40,6 +40,12 @@ public class DetailFragment extends Fragment {
             setTexts();
             setLowerLayout();
             cityField.setText(intent.getStringExtra("city"));
+            cityField.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Snackbar.make(view , intent.getStringExtra("city") , Snackbar.LENGTH_SHORT).show();
+                }
+            });
         }
         catch (JSONException ex) {
             Log.e("Detail View" , "Cannot Find Details");
@@ -108,6 +114,30 @@ public class DetailFragment extends Fragment {
                     }
                 }
         );
+        try {
+            String cond = obj.getJSONArray("weather").getJSONObject(0).getString("description");
+            String[] strArray = cond.split(" ");
+            final StringBuilder builder = new StringBuilder();
+            for (String s : strArray) {
+                String cap = s.substring(0, 1).toUpperCase() + s.substring(1);
+                builder.append(cap.concat(" "));
+            }
+            Long date1 = obj.getLong("dt");
+            Date expiry = new Date(Long.parseLong(Long.toString(date1)) * 1000);
+            final String date = new SimpleDateFormat("EE, dd" , Locale.US).format(expiry);
+            weatherIcon.setOnClickListener(
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Snackbar.make(view, "Hey there, expect " + builder.toString() + "on " + date, Snackbar.LENGTH_SHORT)
+                                    .show();
+                        }
+                    }
+            );
+        }
+        catch (JSONException ex) {
+            //HW
+        }
     }
 
     private void setTexts() throws JSONException{
@@ -221,8 +251,14 @@ public class DetailFragment extends Fragment {
         sunsetIcon.setText(getActivity().getString(R.string.sunset_icon));
     }
 
-    private void setWeatherIcon() throws JSONException {
-        int id = obj.getJSONArray("weather").getJSONObject(0).getInt("id");
+    private void setWeatherIcon() {
+        int id = 0;
+        try {
+            id = obj.getJSONArray("weather").getJSONObject(0).getInt("id");
+        }
+        catch (JSONException ex) {
+            //HW
+        }
         String icon = "";
         switch(id) {
             case 501 :
