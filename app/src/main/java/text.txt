@@ -1,17 +1,24 @@
 package com.a5corp.weather;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
-import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+
+import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -38,7 +45,6 @@ public class WeatherActivity extends AppCompatActivity implements GoogleApiClien
     FloatingActionButton fab;
 
     int MY_PERMISSIONS_REQUEST_READ_COARSE_LOCATION, MY_PERMISSIONS_REQUEST_READ_FINE_LOCATION;
-    int READ_COARSE_LOCATION = 20;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +77,11 @@ public class WeatherActivity extends AppCompatActivity implements GoogleApiClien
         showInputDialog();
     }
 
+    @SuppressWarnings("InfiniteRecursion")
+    public Context getContext() {
+        return getContext();
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.weather, menu);
@@ -87,7 +98,8 @@ public class WeatherActivity extends AppCompatActivity implements GoogleApiClien
                 break;
             case R.id.refresh : changeCity(GlobalActivity.cp.getCity());
                 break;
-            case R.id.location : cityLocation();
+            case R.id.location : PermissionTask task = new PermissionTask();
+                task.execute();
                 break;
         }
         return true;
@@ -104,7 +116,7 @@ public class WeatherActivity extends AppCompatActivity implements GoogleApiClien
     private void showInputDialog() {
         new MaterialDialog.Builder(this)
                 .title("Change City")
-                .content("You can change the city by entering City name or the ZIP Code")
+                .content("You can change the city by entering the city name or the ZIP Code")
                 .onAny(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
@@ -147,38 +159,6 @@ public class WeatherActivity extends AppCompatActivity implements GoogleApiClien
         wf.changeCity(lat , lon);
     }
 
-    private void showCity() {
-        changeCity(lat , lon);
-    }
-
-    private void cityLocation() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ContextCompat.checkSelfPermission(WeatherActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION)
-                    != PackageManager.PERMISSION_GRANTED) {
-                requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
-                        READ_COARSE_LOCATION);
-            } else {
-                showCity();
-            }
-        }
-        else {
-            showCity();
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
-        if (requestCode == READ_COARSE_LOCATION
-                && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            showCity();
-        }
-        else {
-            Toast.makeText(getApplicationContext() , "Denied Location Permission" , Toast.LENGTH_SHORT).show();
-        }
-    }
-
     @Override
     public void onConnected(Bundle bundle) {
         mLocationRequest = LocationRequest.create();
@@ -186,7 +166,7 @@ public class WeatherActivity extends AppCompatActivity implements GoogleApiClien
         mLocationRequest.setInterval(100); // Update location every second
 
         if (Build.VERSION.SDK_INT >= 23) {
-            if (ContextCompat.checkSelfPermission( this, Manifest.permission.ACCESS_COARSE_LOCATION ) != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission( this, Manifest.permission.ACCESS_FINE_LOCATION ) != PackageManager.PERMISSION_GRANTED) {
+            if (ContextCompat.checkSelfPermission( this, android.Manifest.permission.ACCESS_COARSE_LOCATION ) != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission( this, Manifest.permission.ACCESS_FINE_LOCATION ) != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(this,
                         new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
                         MY_PERMISSIONS_REQUEST_READ_COARSE_LOCATION);
@@ -253,4 +233,79 @@ public class WeatherActivity extends AppCompatActivity implements GoogleApiClien
         super.onDestroy();
         mGoogleApiClient.disconnect();
     }
+
+    public class PermissionTask extends AsyncTask<Void , Void , Void> {
+        private SharedPreferences permissionStatus;
+        private boolean sentToSettings = false;
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            permissionStatus = getSharedPreferences("permissionStatus",MODE_PRIVATE);
+            if (ActivityCompat.checkSelfPermission(WeatherActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED ) {
+                if (ActivityCompat.shouldShowRequestPermissionRationale(WeatherActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION)) {
+                    //Show Information about why you need the permission
+                    AlertDialog.Builder builder = new AlertDialog.Builder(WeatherActivity.this);
+                    builder.setTitle("Need Storage Permission");
+                    builder.setMessage("This app needs storage permission.");
+                    builder.setPositiveButton("Grant", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                            ActivityCompat.requestPermissions(WeatherActivity.this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 100);
+                        }
+                    });
+                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+                    builder.show();
+                } else if (permissionStatus.getBoolean(Manifest.permission.ACCESS_COARSE_LOCATION,false)) {
+                    //Previously Permission Request was cancelled with 'Dont Ask Again',
+                    // Redirect to Settings after showing Information about why you need the permission
+                    AlertDialog.Builder builder = new AlertDialog.Builder(WeatherActivity.this);
+                    builder.setTitle("Need Storage Permission");
+                    builder.setMessage("This app needs storage permission.");
+                    builder.setPositiveButton("Grant", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                            sentToSettings = true;
+                            Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                            Uri uri = Uri.fromParts("package", getPackageName(), null);
+                            intent.setData(uri);
+                            startActivityForResult(intent, 101);
+                            Toast.makeText(getBaseContext(), "Go to Permissions to Grant Storage", Toast.LENGTH_LONG).show();
+                        }
+                    });
+                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+                    builder.show();
+                } else {
+                    //just request the permission
+                    ActivityCompat.requestPermissions(WeatherActivity.this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 100);
+                }
+
+                SharedPreferences.Editor editor = permissionStatus.edit();
+                editor.putBoolean(Manifest.permission.ACCESS_COARSE_LOCATION,true);
+                editor.commit();
+            } else {
+                //You already have the permission, just go ahead.
+                changeCity(lat , lon);
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            changeCity(lat , lon);
+            super.onPostExecute(aVoid);
+        }
+    }
+
 }

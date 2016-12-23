@@ -122,7 +122,6 @@ public class WeatherFragment extends Fragment {
 
     private void renderWeather(JSONObject[] jsonObj){
         try {
-            button.setVisibility(View.INVISIBLE);
             Clicks = 0;
             Log.i("Showed" , "Done");
             json0 = jsonObj[0];
@@ -227,9 +226,7 @@ public class WeatherFragment extends Fragment {
             });
             String r1 = Integer.toString(a) + "°C";
             button.setText(r1);
-            button.setTextSize(16);
             button.setClickable(false);
-            button.setVisibility(View.VISIBLE);
         }catch(Exception e){
             Log.e("SimpleWeather", "One or more fields not found in the JSON data");
         }
