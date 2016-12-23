@@ -155,8 +155,10 @@ public class WeatherActivity extends AppCompatActivity {
         if (ActivityCompat.checkSelfPermission(getApplicationContext() , Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this , new String[]{Manifest.permission.ACCESS_COARSE_LOCATION} , READ_COARSE_LOCATION);
         }
-        else
-            wf.changeCity(lat , lon);
+        else {
+            gps = new GPSTracker(this);
+            wf.changeCity(lat, lon);
+        }
     }
 
     private void showCity() {
@@ -211,10 +213,12 @@ public class WeatherActivity extends AppCompatActivity {
                     requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
                         READ_COARSE_LOCATION);
             } else {
+                gps = new GPSTracker(this);
                 showCity();
             }
         }
         else {
+            gps = new GPSTracker(this);
             showCity();
         }
     }
@@ -225,6 +229,7 @@ public class WeatherActivity extends AppCompatActivity {
                                            @NonNull int[] grantResults) {
         if (requestCode == READ_COARSE_LOCATION
                 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            gps = new GPSTracker(this);
             showCity();
         }
         else {
