@@ -1,33 +1,50 @@
 package com.a5corp.weather;
 
+import android.content.Context;
+import android.net.Uri;
+
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Locale;
-
-import org.json.JSONObject;
-
-import android.content.Context;
-//import android.location.Location;
 
 class RemoteFetch {
 
-    private static final String OPEN_WEATHER_MAP_FORECAST_API = "http://api.openweathermap.org/data/2.5/forecast/daily?q=%s&units=metric&cnt=10";
-    private static final String OPEN_WEATHER_MAP_DAILY_API = "http://api.openweathermap.org/data/2.5/weather?q=%s&units=metric";
-    //private Location mLastLocation;
+    private static final String OPEN_WEATHER_MAP_FORECAST_API = "http://api.openweathermap.org/data/2.5/forecast/daily?";
+    private static final String OPEN_WEATHER_MAP_DAILY_API = "http://api.openweathermap.org/data/2.5/weather?";
 
-    static JSONObject[] getJSON(Context context, String city){
-        //double Latitude , Longitude;
+    static JSONObject[] getJSON(Context context, String city) {
         try {
-            URL day = new URL(String.format(OPEN_WEATHER_MAP_FORECAST_API, city));
-            URL fort = new URL(String.format(OPEN_WEATHER_MAP_DAILY_API, city));
+            final String QUERY_PARAM = "q";
+            final String FORMAT_PARAM = "mode";
+            final String FORMAT_VALUE = "json";
+            final String UNITS_PARAM = "units";
+            final String UNITS_VALUE = "metric";
+            final String DAYS_PARAM = "cnt";
+            final int DAYS_VALUE = 10;
+
+            Uri builtDay = Uri.parse(OPEN_WEATHER_MAP_DAILY_API).buildUpon()
+                    .appendQueryParameter(QUERY_PARAM , city)
+                    .appendQueryParameter(FORMAT_PARAM , FORMAT_VALUE)
+                    .appendQueryParameter(UNITS_PARAM , UNITS_VALUE)
+                    .appendQueryParameter(DAYS_PARAM , Integer.toString(DAYS_VALUE))
+                    .build();
+            URL day = new URL(builtDay.toString());
+
+            Uri builtFort = Uri.parse(OPEN_WEATHER_MAP_FORECAST_API).buildUpon()
+                    .appendQueryParameter(QUERY_PARAM , city)
+                    .appendQueryParameter(FORMAT_PARAM , FORMAT_VALUE)
+                    .appendQueryParameter(UNITS_PARAM , UNITS_VALUE)
+                    .appendQueryParameter(DAYS_PARAM , Integer.toString(DAYS_VALUE))
+                    .build();
+            URL fort = new URL(builtFort.toString());
 
             HttpURLConnection connection0 = (HttpURLConnection)day.openConnection();
             HttpURLConnection connection1 = (HttpURLConnection)fort.openConnection();
             connection0.addRequestProperty("x-api-key", context.getString(R.string.open_weather_maps_app_id));
             connection1.addRequestProperty("x-api-key", context.getString(R.string.open_weather_maps_app_id));
-
             BufferedReader reader;
             StringBuilder json = new StringBuilder(1024) , json1 = new StringBuilder(1024);
 
@@ -43,8 +60,6 @@ class RemoteFetch {
             reader.close();
 
             JSONObject data = new JSONObject(json.toString()) , data1 = new JSONObject(json1.toString());
-            //double latitude = data1.getJSONObject("coord").getDouble("lat") , longitude = data1.getJSONObject("coord").getDouble("lon");
-
 
             // This value will be 404 if the request was not successful
             if(data.getInt("cod") != 200 || data1.getInt("cod") != 200){
@@ -60,13 +75,34 @@ class RemoteFetch {
         }
     }
 
-    static JSONObject[] getJSONLocation(Context context, String latitude, String longitude){
-        //double Latitude , Longitude;
+    static JSONObject[] getJSONLocation(Context context, String latitude, String longitude) {
         try {
-            final String OPEN_WEATHER_MAP_FORECAST_API = "http://api.openweathermap.org/data/2.5/forecast/daily?lat=%s&lon=%s&units=metric&cnt=10";
-            final String OPEN_WEATHER_MAP_DAILY_API = "http://api.openweathermap.org/data/2.5/weather?lat=%s&lon=%s&units=metric";
-            URL day = new URL(String.format(Locale.ENGLISH, OPEN_WEATHER_MAP_FORECAST_API, latitude, longitude));
-            URL fort = new URL(String.format(Locale.ENGLISH, OPEN_WEATHER_MAP_DAILY_API, latitude, longitude));
+            final String LAT_PARAM = "lat";
+            final String LON_PARAM = "lon";
+            final String FORMAT_PARAM = "mode";
+            final String FORMAT_VALUE = "json";
+            final String UNITS_PARAM = "units";
+            final String UNITS_VALUE = "metric";
+            final String DAYS_PARAM = "cnt";
+            final int DAYS_VALUE = 10;
+
+            Uri builtDay = Uri.parse(OPEN_WEATHER_MAP_DAILY_API).buildUpon()
+                    .appendQueryParameter(LAT_PARAM , latitude)
+                    .appendQueryParameter(LON_PARAM , longitude)
+                    .appendQueryParameter(FORMAT_PARAM , FORMAT_VALUE)
+                    .appendQueryParameter(UNITS_PARAM , UNITS_VALUE)
+                    .appendQueryParameter(DAYS_PARAM , Integer.toString(DAYS_VALUE))
+                    .build();
+            URL day = new URL(builtDay.toString());
+
+            Uri builtFort = Uri.parse(OPEN_WEATHER_MAP_FORECAST_API).buildUpon()
+                    .appendQueryParameter(LAT_PARAM , latitude)
+                    .appendQueryParameter(LON_PARAM , longitude)
+                    .appendQueryParameter(FORMAT_PARAM , FORMAT_VALUE)
+                    .appendQueryParameter(UNITS_PARAM , UNITS_VALUE)
+                    .appendQueryParameter(DAYS_PARAM , Integer.toString(DAYS_VALUE))
+                    .build();
+            URL fort = new URL(builtFort.toString());
 
             HttpURLConnection connection0 = (HttpURLConnection)day.openConnection();
             HttpURLConnection connection1 = (HttpURLConnection)fort.openConnection();
@@ -88,8 +124,6 @@ class RemoteFetch {
             reader.close();
 
             JSONObject data = new JSONObject(json.toString()) , data1 = new JSONObject(json1.toString());
-            //double latitude = data1.getJSONObject("coord").getDouble("lat") , longitude = data1.getJSONObject("coord").getDouble("lon");
-
 
             // This value will be 404 if the request was not successful
             if(data.getInt("cod") != 200 || data1.getInt("cod") != 200){
