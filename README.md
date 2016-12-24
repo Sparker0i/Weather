@@ -22,5 +22,7 @@ LATEST UPDATE:
 - Dropped Support for Android 4.1 and below
 - Refreshed Look When a Day View is selected
 - Refreshed UI Colors
+- Added Support to Search via ZIP Code/PIN
+- Polished View when the City is selected or when the main weather icon is selected
 
 [<img src='/img/Weather App.png' width='1080' heigh='1920'>](/img/Weather App.png)
