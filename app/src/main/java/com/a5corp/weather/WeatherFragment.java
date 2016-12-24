@@ -124,14 +124,18 @@ public class WeatherFragment extends Fragment {
         try {
             Clicks = 0;
             Log.i("Showed" , "Done");
-            json0 = jsonObj[0];
-            json1 = jsonObj[1];
+            json1 = jsonObj[0];
+            Log.d("json0" , json0 + "\n");
+            json0 = jsonObj[1];
+            Log.d("json1" , json1 + "\n");
             tc = json1.getJSONObject("main").getDouble("temp");
+            Log.d("Set" , "tc");
             GlobalActivity.cp.setCity(json0.getJSONObject("city").getString("name"));
             int a = (int) Math.round(json1.getJSONObject("main").getDouble("temp"));                        //℃
             cityField.setText(json0.getJSONObject("city").getString("name").toUpperCase(Locale.US) +
                     ", " +
                     json0.getJSONObject("city").getString("country"));
+            Log.d("Set" , "Citytext");
             final String city = json0.getJSONObject("city").getString("name").toUpperCase(Locale.US) +
                     ", " +
                     json0.getJSONObject("city").getString("country");
