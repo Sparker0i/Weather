@@ -11,8 +11,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.a5corp.weather.LocationRequestActivity"
-    tools:showIn="@layout/activity_location_request"
-    android:background="@color/colorPrimary">
+    tools:showIn="@layout/activity_location_request">
 
     <TextView
         android:text="We need to have the Location Permission Enabled in order to perform this action. Please Click on the Icon Below"
@@ -21,8 +20,7 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:id="@+id/textView"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="#FFFFFF" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
     <TextView
         android:text=""
