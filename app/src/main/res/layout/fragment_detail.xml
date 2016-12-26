@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" >
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/content_detail"
@@ -79,7 +82,7 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textAlignment="center"
                 android:textColor="#FFFFFF"
-                android:textSize="60sp" />
+                android:textSize="65sp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -87,6 +90,7 @@
                 android:id="@+id/humidity_text"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textAlignment="center"
+                android:textSize="16sp"
                 android:textColor="#FFFFFF" />
         </LinearLayout>
 
@@ -104,12 +108,13 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textAlignment="center"
                 android:textColor="#FFFFFF"
-                android:textSize="60sp" />
+                android:textSize="65sp" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/speed_text"
+                android:textSize="16sp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textAlignment="center"
                 android:textColor="#FFFFFF" />
@@ -129,12 +134,13 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textAlignment="center"
                 android:textColor="#FFFFFF"
-                android:textSize="60sp" />
+                android:textSize="65sp" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/pressure_text"
+                android:textSize="16sp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textAlignment="center"
                 android:textColor="#FFFFFF" />
@@ -227,12 +233,12 @@
             android:layout_weight="1"
             android:orientation="vertical"
             android:layout_height="match_parent"
-            android:layout_width="87sp" />
+            android:layout_width="wrap_content" />
         <LinearLayout
             android:layout_weight="1"
             android:orientation="vertical"
             android:layout_height="match_parent"
-            android:layout_width="87sp" >
+            android:layout_width="wrap_content" >
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -242,7 +248,7 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textAlignment="center"
                 android:textColor="#FFFFFF"
-                android:textSize="70sp" />
+                android:textSize="65sp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -251,16 +257,14 @@
                 android:gravity="bottom"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textAlignment="center"
+                android:textSize="16sp"
                 android:textColor="#FFFFFF" />
         </LinearLayout>
-        <TextView
-            android:layout_width="30sp"
-            android:layout_height="match_parent" />
         <LinearLayout
             android:layout_weight="1"
             android:orientation="vertical"
             android:layout_height="match_parent"
-            android:layout_width="87sp" >
+            android:layout_width="wrap_content" >
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -270,7 +274,7 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textAlignment="center"
                 android:textColor="#FFFFFF"
-                android:textSize="70sp" />
+                android:textSize="65sp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -279,12 +283,14 @@
                 android:gravity="bottom"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textAlignment="center"
+                android:textSize="16sp"
                 android:textColor="#FFFFFF" />
         </LinearLayout>
         <LinearLayout
             android:layout_weight="1"
             android:orientation="vertical"
             android:layout_height="match_parent"
-            android:layout_width="87sp" />
+            android:layout_width="wrap_content" />
     </LinearLayout>
 </RelativeLayout>
+</ScrollView>
