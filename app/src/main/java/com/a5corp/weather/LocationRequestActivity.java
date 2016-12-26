@@ -48,10 +48,10 @@ public class LocationRequestActivity extends AppCompatActivity {
             if (!checkIfAlreadyHavePermission()) {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, READ_COARSE_LOCATION);
             } else {
-                startActivity(intent);
+                permOk();
             }
         } else {
-            startActivity(intent);
+            permOk();
         }
     }
 
@@ -66,7 +66,7 @@ public class LocationRequestActivity extends AppCompatActivity {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    startActivity(intent);
+                    permOk();
 
                 } else {
                     permission_denied();
@@ -170,5 +170,22 @@ public class LocationRequestActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void permOk() {
+        MaterialDialog dialog;
+        MaterialDialog.Builder builder = new MaterialDialog.Builder(this);
+        builder.title("Great!")
+                .content("You can now tap on the GPS icon on the main bar and view Weather Data of the current location.\n" +
+                        "Try it by clicking on OK Below, then tapping on the GPS Icon in the main bar!")
+                .positiveText("OK")
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        startActivity(intent);
+                    }
+                });
+        dialog = builder.build();
+        dialog.show();
     }
 }

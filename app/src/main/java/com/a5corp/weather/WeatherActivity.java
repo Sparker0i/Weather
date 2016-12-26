@@ -1,16 +1,12 @@
 package com.a5corp.weather;
 
 import android.Manifest;
-import android.annotation.TargetApi;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.location.Location;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -148,9 +144,8 @@ public class WeatherActivity extends AppCompatActivity implements GoogleApiClien
         if (Build.VERSION.SDK_INT >= 23) {
             if (checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION)
                     != PackageManager.PERMISSION_GRANTED) {
-
-                requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
-                        READ_COARSE_LOCATION);
+                Intent intent  = new Intent(WeatherActivity.this , LocationRequestActivity.class);
+                startActivity(intent);
             } else {
                 showCity();
             }
@@ -158,65 +153,6 @@ public class WeatherActivity extends AppCompatActivity implements GoogleApiClien
         else {
             showCity();
         }
-    }
-
-    @TargetApi(23)
-    @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
-            String permission = permissions[0];
-            if (grantResults[0] == PackageManager.PERMISSION_DENIED) {
-                boolean showRationale = shouldShowRequestPermissionRationale(permission);
-                if (!showRationale) {
-                    MaterialDialog dialog;
-                    MaterialDialog.Builder builder = new MaterialDialog.Builder(this);
-                    builder.title("Permission needed")
-                            .content("This Action Requires the Location Setting to be enabled. Go to Settings and check the Location Permission inside the Permissions View")
-                            .positiveText("SETTINGS")
-                            .negativeText("CANCEL")
-                            .onPositive(new MaterialDialog.SingleButtonCallback() {
-                                @Override
-                                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                                    final Intent i = new Intent();
-                                    i.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                                    i.addCategory(Intent.CATEGORY_DEFAULT);
-                                    i.setData(Uri.parse("package:" + getApplicationContext().getPackageName()));
-                                    i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                    i.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-                                    i.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
-                                    startActivity(i);
-                                }
-                            })
-                            .onNegative(new MaterialDialog.SingleButtonCallback() {
-                                @Override
-                                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                                    dialog.dismiss();
-                                }
-                            });
-                    dialog = builder.build();
-                    dialog.show();
-                }
-                else if (Manifest.permission.ACCESS_COARSE_LOCATION.equals(permission)) {
-                    MaterialDialog dialog;
-                    MaterialDialog.Builder builder = new MaterialDialog.Builder(this);
-                    builder.title("Permission needed")
-                            .content("This Action Requires the Location Setting to be enabled.")
-                            .negativeText("OK")
-                            .negativeColor(Color.RED)
-                            .onNegative(new MaterialDialog.SingleButtonCallback() {
-                                @Override
-                                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                                    dialog.dismiss();
-                                }
-                            });
-                    dialog = builder.build();
-                    dialog.show();
-                }
-            }
-            else {
-                showCity();
-            }
     }
 
     @Override
