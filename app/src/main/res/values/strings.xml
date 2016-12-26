@@ -3,7 +3,7 @@
 
     <string name="app_name">Simple Weather</string>
     <string name="change_city">Change City</string>
-    <string name="about_page">About This App</string>
+    <string name="about_page">About</string>
     <string name="location">Location</string>
 
     <string name="icons">&#8226; <a href="https://erikflowers.github.io/weather-icons">Erik Flowers Weather Icons</a>, for the weather icons and the app icon, licensed under <a href="https://creativecommons.org/licenses/by-sa/3.0/deed.en_US">CC BY SA-3.0</a> and <a href="https://opensource.org/licenses/OFL-1.1">SIL OFS-1.1</a> .\n</string>
@@ -68,10 +68,10 @@
     <string name="daily">DAILY</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_detail">Details</string>
+    <string name="title_activity_location_request">Location Permission Needed</string>
 
     <string name="f">F</string>
     <string name="celsius">CELSIUS</string>
     <string name="go">GO</string>
-    <string name="title_activity_location_request">LocationRequestActivity</string>
 
 </resources>
