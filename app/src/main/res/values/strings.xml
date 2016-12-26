@@ -72,5 +72,6 @@
     <string name="f">F</string>
     <string name="celsius">CELSIUS</string>
     <string name="go">GO</string>
+    <string name="title_activity_location_request">LocationRequestActivity</string>
 
 </resources>

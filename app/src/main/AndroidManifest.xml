@@ -6,16 +6,22 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-feature android:name="android.hardware.telephony" android:required="false" />
-    <uses-feature android:name="android.hardware.location" android:required="false" />
+
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.location"
+        android:required="false" />
+
     <supports-screens
+        android:anyDensity="false"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:requiresSmallestWidthDp="320"
         android:resizeable="false"
         android:smallScreens="false"
-        android:normalScreens="true"
-        android:largeScreens="true"
-        android:xlargeScreens="true"
-        android:anyDensity="false"
-        android:requiresSmallestWidthDp="320" />
+        android:xlargeScreens="true" />
 
     <application
         android:allowBackup="true"
@@ -62,5 +68,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.a5corp.weather.WeatherActivity" />
         </activity>
+        <activity
+            android:name=".LocationRequestActivity"
+            android:label="@string/title_activity_location_request"
+            android:parentActivityName=".WeatherActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a5corp.weather.WeatherActivity" />
+        </activity>
     </application>
+
 </manifest>

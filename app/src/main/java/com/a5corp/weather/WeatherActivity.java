@@ -148,6 +148,7 @@ public class WeatherActivity extends AppCompatActivity implements GoogleApiClien
         if (Build.VERSION.SDK_INT >= 23) {
             if (checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION)
                     != PackageManager.PERMISSION_GRANTED) {
+
                 requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
                         READ_COARSE_LOCATION);
             } else {
@@ -220,7 +221,6 @@ public class WeatherActivity extends AppCompatActivity implements GoogleApiClien
 
     @Override
     public void onConnected(Bundle bundle) {
-        if (GlobalActivity.cp.getLaunched()) {
             mLocationRequest = LocationRequest.create();
             mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
             mLocationRequest.setInterval(100); // Update location every second
@@ -236,7 +236,6 @@ public class WeatherActivity extends AppCompatActivity implements GoogleApiClien
                 lat = String.valueOf(mLastLocation.getLatitude());
                 lon = String.valueOf(mLastLocation.getLongitude());
             }
-        }
     }
 
     @Override
@@ -246,7 +245,6 @@ public class WeatherActivity extends AppCompatActivity implements GoogleApiClien
 
     @Override
     public void onLocationChanged(Location location) {
-        if (GlobalActivity.cp.getLaunched()) {
             lat = String.valueOf(location.getLatitude());
             lon = String.valueOf(location.getLongitude());
             DecimalFormat df = new DecimalFormat("###.##");
@@ -256,39 +254,30 @@ public class WeatherActivity extends AppCompatActivity implements GoogleApiClien
             lon = df.format(lo);
             Log.i("lat", lat);
             Log.i("lon", lon);
-        }
     }
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-        if (GlobalActivity.cp.getLaunched()) {
             buildGoogleApiClient();
-        }
     }
 
     synchronized void buildGoogleApiClient() {
-        if (GlobalActivity.cp.getLaunched()) {
             mGoogleApiClient = new GoogleApiClient.Builder(this)
                     .addConnectionCallbacks(this)
                     .addOnConnectionFailedListener(this)
                     .addApi(LocationServices.API)
                     .build();
-        }
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        if (GlobalActivity.cp.getLaunched()) {
             mGoogleApiClient.connect();
-        }
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (GlobalActivity.cp.getLaunched()) {
             mGoogleApiClient.disconnect();
-        }
     }
 }
