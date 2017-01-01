@@ -3,10 +3,10 @@ package com.a5corp.weather;
 import android.app.Activity;
 import android.content.SharedPreferences;
 
-class CityPreference {
+class Preferences {
     private static SharedPreferences prefs;
 
-    CityPreference(Activity activity) {
+    Preferences(Activity activity) {
         prefs = activity.getPreferences(Activity.MODE_PRIVATE);
     }
 

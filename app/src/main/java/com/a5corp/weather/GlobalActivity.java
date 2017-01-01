@@ -7,7 +7,7 @@ import android.util.Log;
 
 public class GlobalActivity extends AppCompatActivity {
 
-    static CityPreference cp;
+    static Preferences cp;
     static int i = 0;
 
     @Override
@@ -19,7 +19,7 @@ public class GlobalActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
-        cp = new CityPreference(this);
+        cp = new Preferences(this);
         super.onResume();
 
         if (!cp.getPrefs().getBoolean("first" , true)) {
