@@ -1,4 +1,4 @@
-package com.a5corp.weather;
+package com.a5corp.weather.permissions;
 
 import android.Manifest;
 import android.content.Intent;
@@ -17,6 +17,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.a5corp.weather.R;
+import com.a5corp.weather.WeatherActivity;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 

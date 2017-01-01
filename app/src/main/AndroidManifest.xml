@@ -69,7 +69,7 @@
                 android:value="com.a5corp.weather.WeatherActivity" />
         </activity>
         <activity
-            android:name=".LocationRequestActivity"
+            android:name=".permissions.LocationRequestActivity"
             android:label="@string/title_activity_location_request"
             android:parentActivityName=".WeatherActivity"
             android:theme="@style/AppTheme.NoActionBar">

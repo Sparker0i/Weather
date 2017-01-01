@@ -1,7 +1,9 @@
-package com.a5corp.weather;
+package com.a5corp.weather.retriever;
 
 import android.content.Context;
 import android.net.Uri;
+
+import com.a5corp.weather.R;
 
 import org.json.JSONObject;
 
@@ -10,12 +12,12 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-class RemoteFetch {
+public class RemoteFetch {
 
     private static final String OPEN_WEATHER_MAP_FORECAST_API = "http://api.openweathermap.org/data/2.5/forecast/daily?";
     private static final String OPEN_WEATHER_MAP_DAILY_API = "http://api.openweathermap.org/data/2.5/weather?";
 
-    static JSONObject[] getJSON(Context context, String city) {
+    public static JSONObject[] getJSON(Context context, String city) {
         try {
             final String QUERY_PARAM = "q";
             final String FORMAT_PARAM = "mode";
@@ -75,7 +77,7 @@ class RemoteFetch {
         }
     }
 
-    static JSONObject[] getJSONLocation(Context context, String latitude, String longitude) {
+    public static JSONObject[] getJSONLocation(Context context, String latitude, String longitude) {
         try {
             final String LAT_PARAM = "lat";
             final String LON_PARAM = "lon";

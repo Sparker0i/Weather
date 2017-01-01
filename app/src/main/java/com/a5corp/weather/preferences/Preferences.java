@@ -1,40 +1,40 @@
-package com.a5corp.weather;
+package com.a5corp.weather.preferences;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
 
-class Preferences {
+public class Preferences {
     private static SharedPreferences prefs;
 
-    Preferences(Activity activity) {
+    public Preferences(Activity activity) {
         prefs = activity.getPreferences(Activity.MODE_PRIVATE);
     }
 
-    String getCity() {
+    public String getCity() {
         return prefs.getString("city", "Sydney");
     }
 
-    boolean getLaunched() {
+    public boolean getLaunched() {
         return prefs.getBoolean("first" , true);
     }
 
-    SharedPreferences getPrefs() {
+    public SharedPreferences getPrefs() {
         return prefs;
     }
 
-    void setCity(String city) {
+    public void setCity(String city) {
         prefs.edit().putString("city", city).apply();
     }
 
-    void setLaunched() {
+    public void setLaunched() {
         prefs.edit().putBoolean("first" , false).apply();
     }
 
-    void setLastCity(String city) {
+    public void setLastCity(String city) {
         prefs.edit().putString("lcity" , city).apply();
     }
 
-    String getLastCity() {
+    public String getLastCity() {
         return prefs.getString("lcity" , "Sydney");
     }
 }
