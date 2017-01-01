@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.SpannableString;
 import android.text.style.RelativeSizeSpan;
 import android.util.Log;
@@ -36,6 +37,7 @@ public class WeatherFragment extends Fragment {
     double tc;
     Handler handler;
     JSONObject json0 , json1;
+    SwipeRefreshLayout swipeView;
     int Clicks = 0;
     JSONObject[] jsonz;
     MaterialDialog pd;
@@ -57,6 +59,7 @@ public class WeatherFragment extends Fragment {
                                     Toast.LENGTH_LONG).show();
                             if (GlobalActivity.cp.getLaunched()) {
                                 pd.dismiss();
+                                swipeView.setRefreshing(false);
                                 Intent intent = new Intent(getActivity(), FirstLaunch.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 Log.i("Loaded" , "Weather");
@@ -64,6 +67,7 @@ public class WeatherFragment extends Fragment {
                             }
                             else {
                                 pd.dismiss();
+                                swipeView.setRefreshing(false);
                                 showInputDialog();
                             }
                         }
@@ -118,6 +122,12 @@ public class WeatherFragment extends Fragment {
     {
         pd.show();
         updateWeatherData(null, lat, lon);
+    }
+
+    public void changeCity(String city , Boolean b)
+    {
+        updateWeatherData(city, null, null);
+        GlobalActivity.cp.setCity(city);
     }
 
     private void renderWeather(JSONObject[] jsonObj){
@@ -452,12 +462,33 @@ public class WeatherFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_weather, container, false);
+        final View rootView = inflater.inflate(R.layout.fragment_weather, container, false);
         cityField = (TextView)rootView.findViewById(R.id.city_field);
         updatedField = (TextView)rootView.findViewById(R.id.updated_field);
         humidityView = (TextView) rootView.findViewById(R.id.humidity_view);
         windView = (TextView) rootView.findViewById(R.id.wind_view);
         directionView = (TextView)rootView.findViewById(R.id.direction_view);
+        swipeView = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe);
+        swipeView.setColorSchemeResources(R.color.colorAccent, R.color.green);
+        swipeView.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeView.setRefreshing(true);
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        changeCity(GlobalActivity.cp.getCity() , false);
+                    }
+                });
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        swipeView.setRefreshing(false);
+                        Snackbar.make(rootView , "Refreshed Weather Data" , Snackbar.LENGTH_SHORT).show();
+                    }
+                }, 1500);
+            }
+        });
         directionView.setTypeface(weatherFont);
         dailyView = (TextView)rootView.findViewById(R.id.daily_view);
         dailyView.setText(getString(R.string.daily));
