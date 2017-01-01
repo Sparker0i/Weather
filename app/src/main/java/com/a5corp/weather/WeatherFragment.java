@@ -41,6 +41,7 @@ public class WeatherFragment extends Fragment {
     int Clicks = 0;
     JSONObject[] jsonz;
     MaterialDialog pd;
+    View rootView;
 
     private void updateWeatherData(final String city, final String lat, final String lon) {
         new Thread(){
@@ -59,7 +60,6 @@ public class WeatherFragment extends Fragment {
                                     Toast.LENGTH_LONG).show();
                             if (GlobalActivity.cp.getLaunched()) {
                                 pd.dismiss();
-                                swipeView.setRefreshing(false);
                                 Intent intent = new Intent(getActivity(), FirstLaunch.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 Log.i("Loaded" , "Weather");
@@ -67,7 +67,6 @@ public class WeatherFragment extends Fragment {
                             }
                             else {
                                 pd.dismiss();
-                                swipeView.setRefreshing(false);
                                 showInputDialog();
                             }
                         }
@@ -77,6 +76,7 @@ public class WeatherFragment extends Fragment {
                         public void run(){
                             GlobalActivity.cp.setLaunched();
                             renderWeather(jsonz);
+                            Snackbar.make(rootView , "Loaded Weather Data" , Snackbar.LENGTH_SHORT).show();
                             pd.dismiss();
                             GlobalActivity.cp.setLastCity(city);
                         }
@@ -113,7 +113,8 @@ public class WeatherFragment extends Fragment {
 
     public void changeCity(String city)
     {
-        pd.show();
+        if (!swipeView.isRefreshing())
+            pd.show();
         updateWeatherData(city, null, null);
         GlobalActivity.cp.setCity(city);
     }
@@ -122,12 +123,6 @@ public class WeatherFragment extends Fragment {
     {
         pd.show();
         updateWeatherData(null, lat, lon);
-    }
-
-    public void changeCity(String city , Boolean b)
-    {
-        updateWeatherData(city, null, null);
-        GlobalActivity.cp.setCity(city);
     }
 
     private void renderWeather(JSONObject[] jsonObj){
@@ -462,7 +457,7 @@ public class WeatherFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        final View rootView = inflater.inflate(R.layout.fragment_weather, container, false);
+        rootView = inflater.inflate(R.layout.fragment_weather, container, false);
         cityField = (TextView)rootView.findViewById(R.id.city_field);
         updatedField = (TextView)rootView.findViewById(R.id.updated_field);
         humidityView = (TextView) rootView.findViewById(R.id.humidity_view);
@@ -477,14 +472,13 @@ public class WeatherFragment extends Fragment {
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-                        changeCity(GlobalActivity.cp.getCity() , false);
+                        changeCity(GlobalActivity.cp.getCity());
                     }
                 });
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         swipeView.setRefreshing(false);
-                        Snackbar.make(rootView , "Refreshed Weather Data" , Snackbar.LENGTH_SHORT).show();
                     }
                 }, 1500);
             }
