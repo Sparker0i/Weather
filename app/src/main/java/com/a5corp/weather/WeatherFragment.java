@@ -77,7 +77,7 @@ public class WeatherFragment extends Fragment {
                         public void run(){
                             GlobalActivity.cp.setLaunched();
                             renderWeather(jsonz);
-                            Snackbar.make(rootView , "Loaded Weather Data" , Snackbar.LENGTH_SHORT).show();
+                            Snackbar.make(rootView , "Loaded Weather Data" , 500).show();
                             pd.dismiss();
                             GlobalActivity.cp.setLastCity(city);
                         }
