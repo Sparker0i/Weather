@@ -37,8 +37,6 @@ public class WeatherActivity extends AppCompatActivity implements GoogleApiClien
     String lat, lon;
     FloatingActionButton fab;
 
-    int READ_COARSE_LOCATION = 20;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -16,7 +16,6 @@ public class FirstLaunch extends AppCompatActivity {
     TextView cityInput;
     TextView message;
     int init = 0;
-    int MY_PERMISSIONS_REQUEST_READ_COARSE_LOCATION;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
