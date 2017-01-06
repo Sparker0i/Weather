@@ -1,4 +1,4 @@
-package com.a5corp.weather;
+package com.a5corp.weather.launch;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -6,6 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.method.LinkMovementMethod;
 import android.view.MenuItem;
 import android.widget.TextView;
+
+import com.a5corp.weather.BuildConfig;
+import com.a5corp.weather.R;
 
 public class AboutActivity extends AppCompatActivity {
 

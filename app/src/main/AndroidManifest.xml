@@ -35,7 +35,7 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name=".GlobalActivity"
+            android:name=".launch.GlobalActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -44,7 +44,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".AboutActivity"
+            android:name=".launch.AboutActivity"
             android:label="About"
             android:parentActivityName=".WeatherActivity"
             tools:ignore="UnusedAttribute">
@@ -57,7 +57,7 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".FirstLaunch"
+            android:name=".launch.FirstLaunch"
             android:label="Enter City" />
         <activity
             android:name=".DetailActivity"
