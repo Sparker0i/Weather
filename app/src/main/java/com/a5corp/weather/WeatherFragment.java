@@ -54,7 +54,6 @@ public class WeatherFragment extends Fragment {
                 else if (city == null)
                     jsonz = RemoteFetch.getJSONLocation(getActivity(), lat , lon);
                 if(jsonz == null) {
-                    GlobalActivity.i = -1;
                     GlobalActivity.cp.setCity(GlobalActivity.cp.getLastCity());
                     handler.post(new Runnable(){
                         public void run(){

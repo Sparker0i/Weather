@@ -12,7 +12,7 @@ import com.a5corp.weather.preferences.Preferences;
 public class GlobalActivity extends AppCompatActivity {
 
     public static Preferences cp;
-    static int i = 0;
+    public static int i = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
