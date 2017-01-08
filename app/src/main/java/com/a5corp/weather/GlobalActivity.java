@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import com.a5corp.weather.activity.WeatherActivity;
 import com.a5corp.weather.launch.FirstLaunch;
 import com.a5corp.weather.preferences.Preferences;
 

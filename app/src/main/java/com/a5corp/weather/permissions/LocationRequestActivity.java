@@ -18,7 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.a5corp.weather.R;
-import com.a5corp.weather.WeatherActivity;
+import com.a5corp.weather.activity.WeatherActivity;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 

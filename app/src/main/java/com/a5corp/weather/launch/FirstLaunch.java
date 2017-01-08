@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.a5corp.weather.GlobalActivity;
 import com.a5corp.weather.R;
-import com.a5corp.weather.WeatherActivity;
+import com.a5corp.weather.activity.WeatherActivity;
 
 public class FirstLaunch extends AppCompatActivity {
 

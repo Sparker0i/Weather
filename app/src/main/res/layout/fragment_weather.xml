@@ -14,7 +14,7 @@
             android:paddingStart="@dimen/activity_horizontal_margin"
             android:paddingEnd="@dimen/activity_horizontal_margin"
             android:paddingTop="@dimen/activity_vertical_margin"
-            tools:context="com.a5corp.weather.WeatherActivity$PlaceholderFragment">
+            tools:context="com.a5corp.weather.activity.WeatherActivity$PlaceholderFragment">
 
             <TextView
                 android:layout_width="wrap_content"

@@ -1,4 +1,4 @@
-package com.a5corp.weather;
+package com.a5corp.weather.activity;
 
 import android.Manifest;
 import android.content.DialogInterface;
@@ -15,6 +15,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.a5corp.weather.GlobalActivity;
+import com.a5corp.weather.R;
+import com.a5corp.weather.fragment.WeatherFragment;
 import com.a5corp.weather.launch.AboutActivity;
 import com.a5corp.weather.permissions.LocationRequestActivity;
 import com.afollestad.materialdialogs.DialogAction;

@@ -1,9 +1,12 @@
-package com.a5corp.weather;
+package com.a5corp.weather.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+
+import com.a5corp.weather.R;
+import com.a5corp.weather.fragment.DetailFragment;
 
 public class DetailActivity extends AppCompatActivity {
 
