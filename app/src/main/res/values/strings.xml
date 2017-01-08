@@ -64,14 +64,14 @@
     <string name="icon">Icon</string>
     <string name="value">Value</string>
 
+    <string name="f">F</string>
+    <string name="celsius">CELSIUS</string>
+    <string name="go">GO</string>
+
     <string name="c">°C</string>
     <string name="daily">DAILY</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_detail">Details</string>
     <string name="title_activity_location_request">Location Permission Needed</string>
-
-    <string name="f">F</string>
-    <string name="celsius">CELSIUS</string>
-    <string name="go">GO</string>
-
+    <string name="title_activity_drawer">Drawer Activity</string>
 </resources>

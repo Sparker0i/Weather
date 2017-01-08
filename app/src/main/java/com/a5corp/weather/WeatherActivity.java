@@ -16,7 +16,6 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.a5corp.weather.launch.AboutActivity;
-import com.a5corp.weather.launch.GlobalActivity;
 import com.a5corp.weather.permissions.LocationRequestActivity;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;

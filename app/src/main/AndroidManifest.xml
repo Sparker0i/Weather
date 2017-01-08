@@ -35,7 +35,7 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name=".launch.GlobalActivity"
+            android:name=".GlobalActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -71,6 +71,15 @@
         <activity
             android:name=".permissions.LocationRequestActivity"
             android:label="@string/title_activity_location_request"
+            android:parentActivityName=".WeatherActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a5corp.weather.WeatherActivity" />
+        </activity>
+        <activity
+            android:name=".testdrawer.DrawerActivity"
+            android:label="@string/title_activity_drawer"
             android:parentActivityName=".WeatherActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
