@@ -77,15 +77,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.a5corp.weather.activity.WeatherActivity" />
         </activity>
-        <activity
-            android:name=".testdrawer.DrawerActivity"
-            android:label="@string/title_activity_drawer"
-            android:parentActivityName=".activity.WeatherActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.a5corp.weather.activity.WeatherActivity" />
-        </activity>
+        <activity android:name=".activity.PrivacyPolicyActivity"></activity>
     </application>
 
 </manifest>
