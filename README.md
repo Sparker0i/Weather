@@ -8,7 +8,7 @@ Get it on Google Play:
 
 [<img src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png' alt='Get it on Google Play' width='210' heigh='80'>](https://play.google.com/store/apps/details?id=com.a5corp.weather)
 
-## To-Do
+# To-Do
 
 - [x] Auto Detect Location
 - [x] Refreshed Look
@@ -17,13 +17,14 @@ Get it on Google Play:
 - [ ] Widgets
 - [ ] Ability to change colors from within the app
 
-LATEST UPDATE:
+# LATEST UPDATE:
 - Added Auto Detect Location
 - Dropped Support for Android 4.1 and below
 - Refreshed Look When a Day View is selected
 - Refreshed UI Colors
 - Added Support to Search via ZIP Code/PIN
 - Polished View when the City is selected or when the main weather icon is selected
+- Added Swipe to Refresh in the Beta Version
 
 # CONTRIBUTING
 
