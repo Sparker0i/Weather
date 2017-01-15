@@ -29,4 +29,20 @@ LATEST UPDATE:
 
 - Create a new PR with a feature you want to add, or fix a bug with an already existing feature
 
+# ISSUES/NEW FEATURE REQUEST
+
+Create a new Issue in the Issues Tab, specifying what issue you have. While specifying the issue, do add the following details :
+
+- Android version of the device
+- Name of the phone/tablet having this issue
+
+PS. If you are having an issue with the location services in an Emulator, do not consider opening an Issue
+
+To request for a new feature, create a new Issue in the issues tab in this format :
+
+- The title of the Issue must begin with [FEATUREREQ], followed by the feature needed
+- Provide a little description of what you want in this app
+- Maybe you can also provide an example code of how to implement it
+- Do not make a new PR for a Feature Request
+
 [<img src='/img/Weather App.png' width='1080' heigh='1920'>](/img/Weather App.png)
