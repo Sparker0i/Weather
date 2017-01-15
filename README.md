@@ -25,4 +25,8 @@ LATEST UPDATE:
 - Added Support to Search via ZIP Code/PIN
 - Polished View when the City is selected or when the main weather icon is selected
 
+# CONTRIBUTING
+
+- Create a new PR with a feature you want to add, or fix a bug with an already existing feature
+
 [<img src='/img/Weather App.png' width='1080' heigh='1920'>](/img/Weather App.png)
