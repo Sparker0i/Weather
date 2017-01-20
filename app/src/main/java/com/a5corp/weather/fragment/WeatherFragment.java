@@ -1,4 +1,4 @@
-package com.a5corp.weather;
+package com.a5corp.weather.fragment;
 
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -18,6 +18,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.a5corp.weather.GlobalActivity;
+import com.a5corp.weather.R;
+import com.a5corp.weather.activity.DetailActivity;
 import com.a5corp.weather.launch.FirstLaunch;
 import com.a5corp.weather.retriever.RemoteFetch;
 import com.afollestad.materialdialogs.DialogAction;

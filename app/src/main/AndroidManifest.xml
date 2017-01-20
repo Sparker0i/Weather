@@ -46,45 +46,36 @@
         <activity
             android:name=".launch.AboutActivity"
             android:label="About"
-            android:parentActivityName=".WeatherActivity"
+            android:parentActivityName=".activity.WeatherActivity"
             tools:ignore="UnusedAttribute">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.a5corp.weather.WeatherActivity" />
+                android:value="com.a5corp.weather.activity.WeatherActivity" />
         </activity>
         <activity
-            android:name=".WeatherActivity"
+            android:name=".activity.WeatherActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
         <activity
             android:name=".launch.FirstLaunch"
             android:label="Enter City" />
         <activity
-            android:name=".DetailActivity"
+            android:name=".activity.DetailActivity"
             android:label="@string/title_activity_detail"
-            android:parentActivityName=".WeatherActivity"
+            android:parentActivityName=".activity.WeatherActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.a5corp.weather.WeatherActivity" />
+                android:value="com.a5corp.weather.activity.WeatherActivity" />
         </activity>
         <activity
             android:name=".permissions.LocationRequestActivity"
             android:label="@string/title_activity_location_request"
-            android:parentActivityName=".WeatherActivity"
+            android:parentActivityName=".activity.WeatherActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.a5corp.weather.WeatherActivity" />
-        </activity>
-        <activity
-            android:name=".testdrawer.DrawerActivity"
-            android:label="@string/title_activity_drawer"
-            android:parentActivityName=".WeatherActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.a5corp.weather.WeatherActivity" />
+                android:value="com.a5corp.weather.activity.WeatherActivity" />
         </activity>
     </application>
 

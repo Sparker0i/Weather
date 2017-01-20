@@ -1,4 +1,4 @@
-package com.a5corp.weather;
+package com.a5corp.weather.fragment;
 
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -12,6 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.a5corp.weather.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;

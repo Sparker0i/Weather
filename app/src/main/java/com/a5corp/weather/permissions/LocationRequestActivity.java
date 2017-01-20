@@ -18,7 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.a5corp.weather.R;
-import com.a5corp.weather.WeatherActivity;
+import com.a5corp.weather.activity.WeatherActivity;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 
@@ -126,39 +126,20 @@ public class LocationRequestActivity extends AppCompatActivity {
     }
 
     private void showDialogOK() {
-        MaterialDialog dialog;
-        MaterialDialog.Builder builder = new MaterialDialog.Builder(this);
+        MaterialDialog dialog1;
+        MaterialDialog.Builder builder = new MaterialDialog.Builder(getApplicationContext());
         builder.title("Permission needed")
-                .content("Permission is required for register")
-                .positiveText("OK")
-                .negativeText("CANCEL")
-                .onPositive(new MaterialDialog.SingleButtonCallback() {
-                    @Override
-                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                        startActivity(intent);
-                    }
-                })
+                .content("This Action Requires the Location Permission to be enabled so that the app can display weather data of your location")
+                .negativeText("OK")
+                .negativeColor(Color.RED)
                 .onNegative(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                        MaterialDialog dialog1;
-                        MaterialDialog.Builder builder = new MaterialDialog.Builder(getApplicationContext());
-                        builder.title("Permission needed")
-                                .content("This Action Requires the Location Setting to be enabled.")
-                                .negativeText("OK")
-                                .negativeColor(Color.RED)
-                                .onNegative(new MaterialDialog.SingleButtonCallback() {
-                                    @Override
-                                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                                        dialog.dismiss();
-                                    }
-                                });
-                        dialog1 = builder.build();
-                        dialog1.show();
+                        dialog.dismiss();
                     }
                 });
-        dialog = builder.build();
-        dialog.show();
+        dialog1 = builder.build();
+        dialog1.show();
     }
 
     @Override
