@@ -77,7 +77,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.a5corp.weather.activity.WeatherActivity" />
         </activity>
-        <activity android:name=".activity.PrivacyPolicyActivity"></activity>
     </application>
 
 </manifest>
