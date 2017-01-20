@@ -126,20 +126,19 @@ public class LocationRequestActivity extends AppCompatActivity {
     }
 
     private void showDialogOK() {
-        MaterialDialog dialog1;
-        MaterialDialog.Builder builder = new MaterialDialog.Builder(getApplicationContext());
+        MaterialDialog dialog;
+        MaterialDialog.Builder builder = new MaterialDialog.Builder(this);
         builder.title("Permission needed")
-                .content("This Action Requires the Location Permission to be enabled so that the app can display weather data of your location")
-                .negativeText("OK")
-                .negativeColor(Color.RED)
-                .onNegative(new MaterialDialog.SingleButtonCallback() {
+                .content("This permission is required to access the weather data of your location.")
+                .positiveText("OK")
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                         dialog.dismiss();
                     }
                 });
-        dialog1 = builder.build();
-        dialog1.show();
+        dialog = builder.build();
+        dialog.show();
     }
 
     @Override
