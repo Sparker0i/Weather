@@ -13,26 +13,26 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class FetchWeather extends AsyncTask<String , Void , Void> {
+public class FetchWeather extends AsyncTask<String , Void , JSONObject[]> {
 
     private static final String OPEN_WEATHER_MAP_FORECAST_API = "http://api.openweathermap.org/data/2.5/forecast/daily?";
     private static final String OPEN_WEATHER_MAP_DAILY_API = "http://api.openweathermap.org/data/2.5/weather?";
     //private final String LOG_TAG = FetchWeather.class.getSimpleName();
     private Context context;
+    private final String QUERY_PARAM = "q";
+    private final String FORMAT_PARAM = "mode";
+    private final String FORMAT_VALUE = "json";
+    private final String UNITS_PARAM = "units";
+    private final String UNITS_VALUE = "metric";
+    private final String DAYS_PARAM = "cnt";
 
     public FetchWeather(Context mContext) {
         context = mContext;
     }
 
     @Override
-    protected Void doInBackground(String... params) {
+    protected JSONObject[] doInBackground(String... params) {
         try {
-            final String QUERY_PARAM = "q";
-            final String FORMAT_PARAM = "mode";
-            final String FORMAT_VALUE = "json";
-            final String UNITS_PARAM = "units";
-            final String UNITS_VALUE = "metric";
-            final String DAYS_PARAM = "cnt";
             final int DAYS_VALUE = 10;
 
             Uri builtDay = Uri.parse(OPEN_WEATHER_MAP_DAILY_API).buildUpon()
@@ -44,7 +44,7 @@ public class FetchWeather extends AsyncTask<String , Void , Void> {
             URL day = new URL(builtDay.toString());
 
             Uri builtFort = Uri.parse(OPEN_WEATHER_MAP_FORECAST_API).buildUpon()
-                    .appendQueryParameter(QUERY_PARAM , params[0])
+                    .appendQueryParameter(QUERY_PARAM , params[1])
                     .appendQueryParameter(FORMAT_PARAM , FORMAT_VALUE)
                     .appendQueryParameter(UNITS_PARAM , UNITS_VALUE)
                     .appendQueryParameter(DAYS_PARAM , Integer.toString(DAYS_VALUE))
@@ -79,9 +79,9 @@ public class FetchWeather extends AsyncTask<String , Void , Void> {
             JSONObject array[] = new JSONObject[2];
             array[0] = data;
             array[1] = data1;
+            return array;
         }catch(Exception e){
             return null;
         }
-        return null;
     }
 }
