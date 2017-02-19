@@ -33,13 +33,11 @@ public class FetchWeather extends AsyncTask<String , Void , JSONObject[]> {
     @Override
     protected JSONObject[] doInBackground(String... params) {
         try {
-            final int DAYS_VALUE = 10;
-
             Uri builtDay = Uri.parse(OPEN_WEATHER_MAP_DAILY_API).buildUpon()
                     .appendQueryParameter(QUERY_PARAM , params[0])
                     .appendQueryParameter(FORMAT_PARAM , FORMAT_VALUE)
                     .appendQueryParameter(UNITS_PARAM , UNITS_VALUE)
-                    .appendQueryParameter(DAYS_PARAM , Integer.toString(DAYS_VALUE))
+                    .appendQueryParameter(DAYS_PARAM , Integer.toString(10))
                     .build();
             URL day = new URL(builtDay.toString());
 
@@ -47,7 +45,7 @@ public class FetchWeather extends AsyncTask<String , Void , JSONObject[]> {
                     .appendQueryParameter(QUERY_PARAM , params[1])
                     .appendQueryParameter(FORMAT_PARAM , FORMAT_VALUE)
                     .appendQueryParameter(UNITS_PARAM , UNITS_VALUE)
-                    .appendQueryParameter(DAYS_PARAM , Integer.toString(DAYS_VALUE))
+                    .appendQueryParameter(DAYS_PARAM , Integer.toString(10))
                     .build();
             URL fort = new URL(builtFort.toString());
 
@@ -84,4 +82,6 @@ public class FetchWeather extends AsyncTask<String , Void , JSONObject[]> {
             return null;
         }
     }
+
+
 }

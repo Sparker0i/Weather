@@ -38,7 +38,6 @@ public class GPSTracker implements GoogleApiClient.ConnectionCallbacks,
         service = (LocationManager) mContext.getSystemService(LOCATION_SERVICE);
         boolean enabled = service.isProviderEnabled(LocationManager.GPS_PROVIDER);
         if (!enabled) {
-            View parent = ((Activity) mContext).getCurrentFocus();
             new MaterialDialog.Builder(mContext)
                     .content("GPS Needs to be enabled to view Weather Data of your Location")
                     .title("Enable GPS")
@@ -62,10 +61,6 @@ public class GPSTracker implements GoogleApiClient.ConnectionCallbacks,
         return lon;
     }
 
-    private void program() {
-
-    }
-
     @Override
     public void onConnected(Bundle bundle) {
         mLocationRequest = LocationRequest.create();
@@ -77,7 +72,7 @@ public class GPSTracker implements GoogleApiClient.ConnectionCallbacks,
                     mGoogleApiClient);
         }
         catch (SecurityException ex) {
-            Log.e("Error" , "Helloworld");
+            Log.e("Error" , "No Permission");
         }
         if (mLastLocation != null) {
             lat = String.valueOf(mLastLocation.getLatitude());
