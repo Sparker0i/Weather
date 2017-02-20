@@ -1,4 +1,4 @@
-package com.a5corp.weather.launch;
+package com.a5corp.weather.activity;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
