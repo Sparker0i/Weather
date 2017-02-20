@@ -1,12 +1,10 @@
 package com.a5corp.weather.activity;
 
-import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.location.Location;
-import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -19,31 +17,22 @@ import com.a5corp.weather.GlobalActivity;
 import com.a5corp.weather.R;
 import com.a5corp.weather.fragment.WeatherFragment;
 import com.a5corp.weather.launch.AboutActivity;
-import com.a5corp.weather.permissions.LocationRequestActivity;
+import com.a5corp.weather.permissions.GPSTracker;
+import com.a5corp.weather.permissions.Permissions;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationListener;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationServices;
 
-import java.text.DecimalFormat;
+public class WeatherActivity extends AppCompatActivity  {
 
-public class WeatherActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener, LocationListener {
-
-    Location mLastLocation;
-    private GoogleApiClient mGoogleApiClient;
-    LocationRequest mLocationRequest;
+    Permissions permission;
     String lat, lon;
+    GPSTracker gps;
     FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather);
-        buildGoogleApiClient();
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.container, new WeatherFragment())
@@ -79,7 +68,9 @@ public class WeatherActivity extends AppCompatActivity implements GoogleApiClien
                 break;
             case R.id.refresh : changeCity(GlobalActivity.cp.getCity());
                 break;
-            case R.id.location : cityLocation();
+            case R.id.location :
+                permission = new Permissions(this);
+                permission.checkPermission();
                 break;
         }
         return true;
@@ -133,90 +124,46 @@ public class WeatherActivity extends AppCompatActivity implements GoogleApiClien
         GlobalActivity.cp.setCity(city);
     }
 
-    public void changeCity(String lat, String lon){
+    public void changeCity(String lat, String lon) {
         WeatherFragment wf = (WeatherFragment)getSupportFragmentManager()
                 .findFragmentById(R.id.container);
         wf.changeCity(lat , lon);
     }
 
     private void showCity() {
-        changeCity(lat , lon);
-    }
-
-    private void cityLocation() {
-        if (Build.VERSION.SDK_INT >= 23) {
-            if (checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION)
-                    != PackageManager.PERMISSION_GRANTED) {
-                Intent intent  = new Intent(WeatherActivity.this , LocationRequestActivity.class);
-                startActivity(intent);
-            } else {
-                showCity();
-            }
-        }
+        gps = new GPSTracker(this);
+        if (!gps.canGetLocation())
+            new MaterialDialog.Builder(this)
+                    .content("GPS Needs to be enabled to view Weather Data of your Location")
+                    .title("Enable GPS")
+                    .positiveText("ENABLE")
+                    .onPositive(new MaterialDialog.SingleButtonCallback() {
+                        @Override
+                        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                            startActivity(intent);
+                        }
+                    })
+                    .show();
         else {
-            showCity();
+            lat = gps.getLatitude();
+            lon = gps.getLongitude();
+            changeCity(lat, lon);
         }
     }
 
-    @Override
-    public void onConnected(Bundle bundle) {
-            mLocationRequest = LocationRequest.create();
-            mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-            mLocationRequest.setInterval(100); // Update location every second
-            try {
-                LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
-                mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
-                        mGoogleApiClient);
+    public void onRequestPermissionsResult(int requestCode,@NonNull String permissions[],@NonNull int[] grantResults) {
+        switch (requestCode) {
+            case 20: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    showCity();
+                } else {
+                    permission.permission_denied();
+                }
+                break;
             }
-            catch (SecurityException ex) {
-                Log.e("Error" , "Helloworld");
-            }
-            if (mLastLocation != null) {
-                lat = String.valueOf(mLastLocation.getLatitude());
-                lon = String.valueOf(mLastLocation.getLongitude());
-            }
-    }
-
-    @Override
-    public void onConnectionSuspended(int i) {
-
-    }
-
-    @Override
-    public void onLocationChanged(Location location) {
-            lat = String.valueOf(location.getLatitude());
-            lon = String.valueOf(location.getLongitude());
-            DecimalFormat df = new DecimalFormat("###.##");
-            double la = Double.parseDouble(lat);
-            double lo = Double.parseDouble(lon);
-            lat = df.format(la);
-            lon = df.format(lo);
-            Log.i("lat", lat);
-            Log.i("lon", lon);
-    }
-
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-            buildGoogleApiClient();
-    }
-
-    synchronized void buildGoogleApiClient() {
-            mGoogleApiClient = new GoogleApiClient.Builder(this)
-                    .addConnectionCallbacks(this)
-                    .addOnConnectionFailedListener(this)
-                    .addApi(LocationServices.API)
-                    .build();
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-            mGoogleApiClient.connect();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-            mGoogleApiClient.disconnect();
+        }
     }
 }
