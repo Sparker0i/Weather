@@ -243,7 +243,7 @@ public class WeatherFragment extends Fragment {
     }
 
     private void setDeg(int deg) {
-        if (deg == 0) {
+        if (deg >= 349 || deg <= 11) {
             directionView.setText(getActivity().getString(R.string.top));
             directionView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -252,7 +252,7 @@ public class WeatherFragment extends Fragment {
                 }
             });
         }
-        else if (deg < 90) {
+        else if (deg >= 12 && deg <= 77) {
             directionView.setText(getActivity().getString(R.string.top_right));
             directionView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -261,7 +261,7 @@ public class WeatherFragment extends Fragment {
                 }
             });
         }
-        else if (deg == 90) {
+        else if (deg >= 78 && deg <= 101) {
             directionView.setText(getActivity().getString(R.string.right));
             directionView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -270,7 +270,7 @@ public class WeatherFragment extends Fragment {
                 }
             });
         }
-        else if (deg < 180) {
+        else if (deg >= 102 && deg <= 168) {
             directionView.setText(getActivity().getString(R.string.bottom_right));
             directionView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -279,7 +279,7 @@ public class WeatherFragment extends Fragment {
                 }
             });
         }
-        else if (deg == 180) {
+        else if (deg >= 169 && deg <= 191) {
             directionView.setText(getActivity().getString(R.string.down));
             directionView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -288,7 +288,7 @@ public class WeatherFragment extends Fragment {
                 }
             });
         }
-        else if (deg < 270) {
+        else if (deg >= 192 && deg <= 258) {
             directionView.setText(getActivity().getString(R.string.bottom_left));
             directionView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -297,7 +297,7 @@ public class WeatherFragment extends Fragment {
                 }
             });
         }
-        else if (deg == 270) {
+        else if (deg >= 259 && deg <= 281) {
             directionView.setText(getActivity().getString(R.string.left));
             directionView.setOnClickListener(new View.OnClickListener() {
                 @Override
