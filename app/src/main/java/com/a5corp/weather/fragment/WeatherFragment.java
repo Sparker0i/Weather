@@ -21,8 +21,9 @@ import android.widget.Toast;
 import com.a5corp.weather.GlobalActivity;
 import com.a5corp.weather.R;
 import com.a5corp.weather.activity.DetailActivity;
+import com.a5corp.weather.internet.FetchWeather;
 import com.a5corp.weather.launch.FirstLaunch;
-import com.a5corp.weather.retriever.RemoteFetch;
+import com.a5corp.weather.internet.RemoteFetch;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 
@@ -33,6 +34,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.concurrent.ExecutionException;
 
 public class WeatherFragment extends Fragment {
     Typeface weatherFont;
@@ -47,12 +49,24 @@ public class WeatherFragment extends Fragment {
     JSONObject[] jsonz;
     MaterialDialog pd;
     View rootView;
+    FetchWeather wt;
 
     private void updateWeatherData(final String city, final String lat, final String lon) {
+        wt = new FetchWeather(getContext());
         new Thread(){
             public void run(){
-                if (lat == null && lon == null)
-                    jsonz = RemoteFetch.getJSON(getActivity(), city);
+                if (lat == null && lon == null) {
+                    try {
+                        jsonz = wt.execute(city).get();
+                    }
+                    catch (InterruptedException iex) {
+                        Log.e("InterruptedException" , "iex");
+                    }
+                    catch (ExecutionException eex) {
+                        Log.e("ExecutionException" , "eex");
+                    }
+                    //jsonz = RemoteFetch.getJSON(getActivity() , city);
+                }
                 else if (city == null)
                     jsonz = RemoteFetch.getJSONLocation(getActivity(), lat , lon);
                 if(jsonz == null) {
@@ -89,31 +103,6 @@ public class WeatherFragment extends Fragment {
                 }
             }
         }.start();
-    }
-
-    public void Units(JSONObject json1)
-    {
-        try {
-            int bool = Clicks % 2;
-            switch (bool) {
-                case 0 :
-                    double Fah = json1.getJSONObject("main").getDouble("temp") * 1.8 + 32;
-                    int F = (int) Fah;
-                    String result = Integer.toString(F) + "°F";
-                    button.setText(result);
-                    ++Clicks;
-                    break;
-                case 1:
-                    result = (int) Math.round(json1.getJSONObject("main").getDouble("temp")) + "°C";
-                    button.setText(result);
-                    ++Clicks;
-                    break;
-            }
-        }
-        catch (Exception ex)
-        {
-            Log.e("Unlikely" , "Why?");
-        }
     }
 
     public void changeCity(String city)
@@ -208,12 +197,6 @@ public class WeatherFragment extends Fragment {
             windView.setText("WIND:\n" + json1.getJSONObject("wind").getDouble("speed") + "km/h");
             Log.i("Wind Loaded" , "Done");
             Log.i("10" , "Weather Icon 11 Set");
-            button.setOnClickListener(new View.OnClickListener() {
-                public void onClick (View v)
-                {
-                    Units(json1);
-                }
-            });
             weatherIcon[10].setOnClickListener(new View.OnClickListener()
             {
                 public void onClick (View v)
@@ -492,7 +475,6 @@ public class WeatherFragment extends Fragment {
         dailyView = (TextView)rootView.findViewById(R.id.daily_view);
         dailyView.setText(getString(R.string.daily));
         button = (Button)rootView.findViewById(R.id.button1);
-        button.setText("°C");
         pd.show();
         for (int i = 0; i < 11; ++i)
         {
