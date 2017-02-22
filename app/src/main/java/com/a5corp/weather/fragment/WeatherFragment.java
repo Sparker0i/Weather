@@ -23,7 +23,6 @@ import com.a5corp.weather.R;
 import com.a5corp.weather.activity.DetailActivity;
 import com.a5corp.weather.internet.FetchWeather;
 import com.a5corp.weather.launch.FirstLaunch;
-import com.a5corp.weather.internet.RemoteFetch;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 
@@ -53,26 +52,17 @@ public class WeatherFragment extends Fragment {
 
     private void updateWeatherData(final String city, final String lat, final String lon) {
         wt = new FetchWeather(getContext());
-        new Thread(){
-            public void run(){
+        new Thread() {
+            public void run() {
                 if (lat == null && lon == null) {
-                    try {
-                        jsonz = wt.execute(city).get();
-                    }
-                    catch (InterruptedException iex) {
-                        Log.e("InterruptedException" , "iex");
-                    }
-                    catch (ExecutionException eex) {
-                        Log.e("ExecutionException" , "eex");
-                    }
-                    //jsonz = RemoteFetch.getJSON(getActivity() , city);
+                    getCity(city);
+                } else if (city == null) {
+                    getLocation(lat, lon);
                 }
-                else if (city == null)
-                    jsonz = RemoteFetch.getJSONLocation(getActivity(), lat , lon);
-                if(jsonz == null) {
+                if (jsonz == null) {
                     GlobalActivity.cp.setCity(GlobalActivity.cp.getLastCity());
-                    handler.post(new Runnable(){
-                        public void run(){
+                    handler.post(new Runnable() {
+                        public void run() {
                             Toast.makeText(getActivity(),
                                     getActivity().getString(R.string.place_not_found),
                                     Toast.LENGTH_LONG).show();
@@ -81,21 +71,20 @@ public class WeatherFragment extends Fragment {
                                 pd.dismiss();
                                 Intent intent = new Intent(getActivity(), FirstLaunch.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                Log.i("Loaded" , "Weather");
+                                Log.i("Loaded", "Weather");
                                 startActivity(intent);
-                            }
-                            else {
+                            } else {
                                 pd.dismiss();
                                 showInputDialog();
                             }
                         }
                     });
                 } else {
-                    handler.post(new Runnable(){
-                        public void run(){
+                    handler.post(new Runnable() {
+                        public void run() {
                             GlobalActivity.cp.setLaunched();
                             renderWeather(jsonz);
-                            Snackbar.make(rootView , "Loaded Weather Data" , 500).show();
+                            Snackbar.make(rootView, "Loaded Weather Data", 500).show();
                             pd.dismiss();
                             GlobalActivity.cp.setLastCity(city);
                         }
@@ -103,6 +92,30 @@ public class WeatherFragment extends Fragment {
                 }
             }
         }.start();
+    }
+
+    public void getCity(String city) {
+        try {
+            jsonz = wt.execute(city).get();
+        }
+        catch (InterruptedException iex) {
+            Log.e("InterruptedException" , "iex");
+        }
+        catch (ExecutionException eex) {
+            Log.e("ExecutionException" , "eex");
+        }
+    }
+
+    public void getLocation(String lat , String lon) {
+        try {
+            jsonz = wt.execute(lat, lon).get();
+        }
+        catch (InterruptedException iex) {
+            Log.e("InterruptedException" , "iex");
+        }
+        catch (ExecutionException eex) {
+            Log.e("ExecutionException" , "eex");
+        }
     }
 
     public void changeCity(String city)

@@ -26,6 +26,8 @@ public class FetchWeather extends AsyncTask<String , Void , JSONObject[]> {
     private final String QUERY_PARAM = "q";
     private final String FORMAT_PARAM = "mode";
     private final String FORMAT_VALUE = "json";
+    final String LAT_PARAM = "lat";
+    final String LON_PARAM = "lon";
     private final String UNITS_PARAM = "units";
     private final String UNITS_VALUE = "metric";
     private final String DAYS_PARAM = "cnt";
@@ -42,7 +44,7 @@ public class FetchWeather extends AsyncTask<String , Void , JSONObject[]> {
             return coordinates(params);
     }
 
-    public JSONObject[] city(String... params) {
+    JSONObject[] city(String... params) {
         try {
             Log.d(LOG_TAG , "Execution Fcked");
             Uri builtDay = Uri.parse(OPEN_WEATHER_MAP_DAILY_API).buildUpon()
@@ -102,11 +104,11 @@ public class FetchWeather extends AsyncTask<String , Void , JSONObject[]> {
         }
     }
 
-    public JSONObject[] coordinates(String... params) {
+    JSONObject[] coordinates(String... params) {
         try {
-            Log.d(LOG_TAG , "Execution Fcked");
             Uri builtDay = Uri.parse(OPEN_WEATHER_MAP_DAILY_API).buildUpon()
-                    .appendQueryParameter(QUERY_PARAM , params[0])
+                    .appendQueryParameter(LAT_PARAM , params[0])
+                    .appendQueryParameter(LON_PARAM , params[1])
                     .appendQueryParameter(FORMAT_PARAM , FORMAT_VALUE)
                     .appendQueryParameter(UNITS_PARAM , UNITS_VALUE)
                     .appendQueryParameter(DAYS_PARAM , Integer.toString(10))
@@ -114,17 +116,19 @@ public class FetchWeather extends AsyncTask<String , Void , JSONObject[]> {
             URL day = new URL(builtDay.toString());
 
             Uri builtFort = Uri.parse(OPEN_WEATHER_MAP_FORECAST_API).buildUpon()
-                    .appendQueryParameter(QUERY_PARAM , params[0])
+                    .appendQueryParameter(LAT_PARAM , params[0])
+                    .appendQueryParameter(LON_PARAM , params[1])
                     .appendQueryParameter(FORMAT_PARAM , FORMAT_VALUE)
                     .appendQueryParameter(UNITS_PARAM , UNITS_VALUE)
                     .appendQueryParameter(DAYS_PARAM , Integer.toString(10))
                     .build();
             URL fort = new URL(builtFort.toString());
-            Log.d(LOG_TAG , "URI Ready");
+
             HttpURLConnection connection0 = (HttpURLConnection)day.openConnection();
             HttpURLConnection connection1 = (HttpURLConnection)fort.openConnection();
             connection0.addRequestProperty("x-api-key", context.getString(R.string.open_weather_maps_app_id));
             connection1.addRequestProperty("x-api-key", context.getString(R.string.open_weather_maps_app_id));
+
             BufferedReader reader;
             StringBuilder json = new StringBuilder(1024) , json1 = new StringBuilder(1024);
 
@@ -143,14 +147,12 @@ public class FetchWeather extends AsyncTask<String , Void , JSONObject[]> {
 
             // This value will be 404 if the request was not successful
             if(data.getInt("cod") != 200 || data1.getInt("cod") != 200){
-                Log.e(LOG_TAG , "Execution Failed");
                 return null;
             }
 
             JSONObject array[] = new JSONObject[2];
             array[0] = data;
             array[1] = data1;
-            Log.d(LOG_TAG , "Array Ready");
             return array;
         }catch(JSONException e){
             Log.e(LOG_TAG , "Execution Failed JSON");
