@@ -59,6 +59,12 @@ public class WeatherFragment extends Fragment {
                 } else if (city == null) {
                     getLocation(lat, lon);
                 }
+                swipeView.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        swipeView.setRefreshing(false);
+                    }
+                });
                 if (jsonz == null) {
                     GlobalActivity.cp.setCity(GlobalActivity.cp.getLastCity());
                     handler.post(new Runnable() {
@@ -481,7 +487,7 @@ public class WeatherFragment extends Fragment {
                     public void run() {
                         swipeView.setRefreshing(false);
                     }
-                }, 1500);
+                }, 10000);
             }
         });
         directionView.setTypeface(weatherFont);
