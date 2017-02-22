@@ -45,7 +45,7 @@ public class WeatherFragment extends Fragment {
     JSONObject json0 , json1;
     SwipeRefreshLayout swipeView;
     int Clicks = 0;
-    JSONObject[] jsonz;
+    JSONObject[] json;
     MaterialDialog pd;
     View rootView;
     FetchWeather wt;
@@ -65,7 +65,7 @@ public class WeatherFragment extends Fragment {
                         swipeView.setRefreshing(false);
                     }
                 });
-                if (jsonz == null) {
+                if (json == null) {
                     GlobalActivity.cp.setCity(GlobalActivity.cp.getLastCity());
                     handler.post(new Runnable() {
                         public void run() {
@@ -89,7 +89,7 @@ public class WeatherFragment extends Fragment {
                     handler.post(new Runnable() {
                         public void run() {
                             GlobalActivity.cp.setLaunched();
-                            renderWeather(jsonz);
+                            renderWeather(json);
                             Snackbar.make(rootView, "Loaded Weather Data", 500).show();
                             pd.dismiss();
                             GlobalActivity.cp.setLastCity(city);
@@ -102,7 +102,7 @@ public class WeatherFragment extends Fragment {
 
     public void getCity(String city) {
         try {
-            jsonz = wt.execute(city).get();
+            json = wt.execute(city).get();
         }
         catch (InterruptedException iex) {
             Log.e("InterruptedException" , "iex");
@@ -114,7 +114,7 @@ public class WeatherFragment extends Fragment {
 
     public void getLocation(String lat , String lon) {
         try {
-            jsonz = wt.execute(lat, lon).get();
+            json = wt.execute(lat, lon).get();
         }
         catch (InterruptedException iex) {
             Log.e("InterruptedException" , "iex");
@@ -471,7 +471,7 @@ public class WeatherFragment extends Fragment {
         windView = (TextView) rootView.findViewById(R.id.wind_view);
         directionView = (TextView)rootView.findViewById(R.id.direction_view);
         swipeView = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe);
-        swipeView.setColorSchemeResources(R.color.colorAccent, R.color.green);
+        swipeView.setColorSchemeResources(R.color.colorAccent, R.color.green , R.color.blue , R.color.yellow , R.color.orange);
         swipeView.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
