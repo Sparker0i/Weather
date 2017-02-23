@@ -59,12 +59,14 @@ public class WeatherFragment extends Fragment {
                 } else if (city == null) {
                     getLocation(lat, lon);
                 }
-                swipeView.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        swipeView.setRefreshing(false);
-                    }
-                });
+                pd.dismiss();
+                if (swipeView != null && swipeView.isRefreshing())
+                    swipeView.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            swipeView.setRefreshing(false);
+                        }
+                    });
                 if (json == null) {
                     GlobalActivity.cp.setCity(GlobalActivity.cp.getLastCity());
                     handler.post(new Runnable() {

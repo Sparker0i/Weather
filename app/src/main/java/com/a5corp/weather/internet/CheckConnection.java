@@ -7,10 +7,10 @@ import android.net.NetworkInfo;
 public class CheckConnection {
     private Context mContext;
 
-    CheckConnection(Context context) {
+    public CheckConnection(Context context) {
         mContext = context;
     }
-    private boolean isNetworkAvailable() {
+    public boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager
                 = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
