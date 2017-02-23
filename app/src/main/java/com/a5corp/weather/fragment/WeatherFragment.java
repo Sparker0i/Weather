@@ -58,10 +58,18 @@ public class WeatherFragment extends Fragment {
         wt = new FetchWeather(getContext());
         new Thread() {
             public void run() {
-                if (lat == null && lon == null) {
-                    getCity(city);
-                } else if (city == null) {
-                    getLocation(lat, lon);
+                try {
+                    if (lat == null && lon == null) {
+                        json = wt.execute(city).get();
+                    } else if (city == null) {
+                        json = wt.execute(lat, lon).get();
+                    }
+                }
+                catch (InterruptedException iex) {
+                    Log.e("InterruptedException" , "iex");
+                }
+                catch (ExecutionException eex) {
+                    Log.e("ExecutionException" , "eex");
                 }
                 pd.dismiss();
                 if (swipeView != null && swipeView.isRefreshing())
@@ -80,11 +88,7 @@ public class WeatherFragment extends Fragment {
                                     Toast.LENGTH_LONG).show();
                             GlobalActivity.i = 1;
                             if (GlobalActivity.cp.getLaunched()) {
-                                pd.dismiss();
-                                Intent intent = new Intent(getActivity(), FirstLaunch.class);
-                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                Log.i("Loaded", "Weather");
-                                startActivity(intent);
+                                FirstStart();
                             } else {
                                 cc = new CheckConnection(getContext());
                                 if (!cc.isNetworkAvailable()) {
@@ -112,28 +116,12 @@ public class WeatherFragment extends Fragment {
         }.start();
     }
 
-    public void getCity(String city) {
-        try {
-            json = wt.execute(city).get();
-        }
-        catch (InterruptedException iex) {
-            Log.e("InterruptedException" , "iex");
-        }
-        catch (ExecutionException eex) {
-            Log.e("ExecutionException" , "eex");
-        }
-    }
-
-    public void getLocation(String lat , String lon) {
-        try {
-            json = wt.execute(lat, lon).get();
-        }
-        catch (InterruptedException iex) {
-            Log.e("InterruptedException" , "iex");
-        }
-        catch (ExecutionException eex) {
-            Log.e("ExecutionException" , "eex");
-        }
+    public void FirstStart() {
+        pd.dismiss();
+        Intent intent = new Intent(getActivity(), FirstLaunch.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        Log.i("Loaded", "Weather");
+        startActivity(intent);
     }
 
     public void changeCity(String city)
