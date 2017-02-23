@@ -1,9 +1,11 @@
 package com.a5corp.weather.fragment;
 
+import android.content.ComponentName;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -21,6 +23,7 @@ import android.widget.Toast;
 import com.a5corp.weather.GlobalActivity;
 import com.a5corp.weather.R;
 import com.a5corp.weather.activity.DetailActivity;
+import com.a5corp.weather.internet.CheckConnection;
 import com.a5corp.weather.internet.FetchWeather;
 import com.a5corp.weather.launch.FirstLaunch;
 import com.afollestad.materialdialogs.DialogAction;
@@ -44,6 +47,7 @@ public class WeatherFragment extends Fragment {
     Handler handler;
     JSONObject json0 , json1;
     SwipeRefreshLayout swipeView;
+    CheckConnection cc;
     int Clicks = 0;
     JSONObject[] json;
     MaterialDialog pd;
@@ -82,8 +86,14 @@ public class WeatherFragment extends Fragment {
                                 Log.i("Loaded", "Weather");
                                 startActivity(intent);
                             } else {
-                                pd.dismiss();
-                                showInputDialog();
+                                cc = new CheckConnection(getContext());
+                                if (!cc.isNetworkAvailable()) {
+                                    showNoInternet();
+                                }
+                                else {
+                                    pd.dismiss();
+                                    showInputDialog();
+                                }
                             }
                         }
                     });
@@ -461,6 +471,43 @@ public class WeatherFragment extends Fragment {
                         changeCity(input.toString());
                     }
                 }).show();
+    }
+
+    public void showNoInternet() {
+        new MaterialDialog.Builder(getContext())
+                .title("No Internet")
+                .cancelable(false)
+                .content("Internet Access Needs To Be Enabled To Display Weather Data")
+                .positiveText("MOBILE DATA")
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        Intent intent = new Intent();
+                        intent.setComponent(new ComponentName("com.android.settings","com.android.settings.Settings$DataUsageSummaryActivity"));
+                        startActivityForResult(intent , 0);
+                    }
+                })
+                .negativeText("WIFI")
+                .onNegative(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        startActivityForResult(new Intent(Settings.ACTION_WIFI_SETTINGS) , 0);
+                    }
+                })
+                .show();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 0) {
+            cc = new CheckConnection(getContext());
+            if (!cc.isNetworkAvailable())
+                showNoInternet();
+            else {
+                pd.show();
+                updateWeatherData(GlobalActivity.cp.getCity(), null, null);
+            }
+        }
     }
 
     @Override
