@@ -19,6 +19,7 @@ import com.a5corp.weather.permissions.GPSTracker;
 import com.a5corp.weather.permissions.Permissions;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.mikepenz.materialdrawer.DrawerBuilder;
 
 public class WeatherActivity extends AppCompatActivity  {
 
@@ -43,6 +44,7 @@ public class WeatherActivity extends AppCompatActivity  {
                 fabClick();
             }
         });
+        new DrawerBuilder().withActivity(this).build();
     }
 
     private void fabClick() {

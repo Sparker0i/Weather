@@ -106,7 +106,8 @@ public class WeatherFragment extends Fragment {
                         public void run() {
                             GlobalActivity.cp.setLaunched();
                             renderWeather(json);
-                            Snackbar.make(rootView, "Loaded Weather Data", 500).show();
+                            Snackbar snackbar = Snackbar.make(rootView, "Loaded Weather Data", 500);
+                            snackbar.show();
                             pd.dismiss();
                             GlobalActivity.cp.setLastCity(city);
                         }
@@ -458,7 +459,9 @@ public class WeatherFragment extends Fragment {
                     public void onInput(@NonNull MaterialDialog dialog, @NonNull CharSequence input) {
                         changeCity(input.toString());
                     }
-                }).show();
+                })
+                .cancelable(false)
+                .show();
     }
 
     public void showNoInternet() {

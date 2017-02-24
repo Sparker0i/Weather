@@ -29,8 +29,7 @@
         android:icon="@mipmap/ic_launcher_dark"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-
+        android:theme="@style/AppTheme.NoActionBar">
         <activity
             android:name=".GlobalActivity"
             android:label="@string/app_name">
@@ -41,18 +40,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.AboutActivity"
-            android:label="About"
-            android:parentActivityName=".activity.WeatherActivity"
-            tools:ignore="UnusedAttribute">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.a5corp.weather.activity.WeatherActivity" />
-        </activity>
-        <activity
             android:name=".activity.WeatherActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".launch.FirstLaunch"
             android:label="Enter City" />
@@ -66,8 +57,8 @@
                 android:value="com.a5corp.weather.activity.WeatherActivity" />
         </activity>
         <activity
-            android:name=".permissions.LocationRequestActivity"
-            android:label="@string/title_activity_location_request"
+            android:name=".activity.AboutActivity"
+            android:label="@string/about_page"
             android:parentActivityName=".activity.WeatherActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
