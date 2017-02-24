@@ -25,7 +25,7 @@ import com.a5corp.weather.R;
 import com.a5corp.weather.activity.DetailActivity;
 import com.a5corp.weather.internet.CheckConnection;
 import com.a5corp.weather.internet.FetchWeather;
-import com.a5corp.weather.launch.FirstLaunch;
+import com.a5corp.weather.activity.FirstLaunch;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 
