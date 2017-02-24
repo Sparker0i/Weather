@@ -8,6 +8,7 @@ import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,7 +22,7 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 
-public class WeatherActivity extends AppCompatActivity  {
+public class WeatherActivity extends AppCompatActivity {
 
     Permissions permission;
     String lat, lon;
@@ -32,11 +33,9 @@ public class WeatherActivity extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather);
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new WeatherFragment())
-                    .commit();
-        }
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,6 +44,22 @@ public class WeatherActivity extends AppCompatActivity  {
             }
         });
         new DrawerBuilder().withActivity(this).build();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,@NonNull String permissions[],@NonNull int[] grantResults) {
+        switch (requestCode) {
+            case 20: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    showCity();
+                } else {
+                    permission.permission_denied();
+                }
+                break;
+            }
+        }
     }
 
     private void fabClick() {
@@ -64,7 +79,7 @@ public class WeatherActivity extends AppCompatActivity  {
             case R.id.change_city : showInputDialog();
                 break;
             case R.id.about_page : Intent intent = new Intent(WeatherActivity.this, AboutActivity.class);
-                WeatherActivity.this.startActivity(intent);
+                startActivity(intent);
                 break;
             case R.id.refresh : changeCity(GlobalActivity.cp.getCity());
                 break;
@@ -119,14 +134,13 @@ public class WeatherActivity extends AppCompatActivity  {
 
     public void changeCity(String city){
         WeatherFragment wf = (WeatherFragment)getSupportFragmentManager()
-                .findFragmentById(R.id.container);
-        wf.changeCity(city);
+                .findFragmentById(R.id.fragment);
         GlobalActivity.cp.setCity(city);
     }
 
     public void changeCity(String lat, String lon) {
         WeatherFragment wf = (WeatherFragment)getSupportFragmentManager()
-                .findFragmentById(R.id.container);
+                .findFragmentById(R.id.fragment);
         wf.changeCity(lat , lon);
     }
 
@@ -149,21 +163,6 @@ public class WeatherActivity extends AppCompatActivity  {
             lat = gps.getLatitude();
             lon = gps.getLongitude();
             changeCity(lat, lon);
-        }
-    }
-
-    public void onRequestPermissionsResult(int requestCode,@NonNull String permissions[],@NonNull int[] grantResults) {
-        switch (requestCode) {
-            case 20: {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    showCity();
-                } else {
-                    permission.permission_denied();
-                }
-                break;
-            }
         }
     }
 }

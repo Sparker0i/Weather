@@ -3,12 +3,12 @@ package com.a5corp.weather.fragment;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.SpannableString;
 import android.text.style.RelativeSizeSpan;
@@ -23,9 +23,9 @@ import android.widget.Toast;
 import com.a5corp.weather.GlobalActivity;
 import com.a5corp.weather.R;
 import com.a5corp.weather.activity.DetailActivity;
+import com.a5corp.weather.activity.FirstLaunch;
 import com.a5corp.weather.internet.CheckConnection;
 import com.a5corp.weather.internet.FetchWeather;
-import com.a5corp.weather.activity.FirstLaunch;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 
@@ -38,6 +38,9 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
+/**
+ * A placeholder fragment containing a simple view.
+ */
 public class WeatherFragment extends Fragment {
     Typeface weatherFont;
     Button button;
@@ -51,8 +54,8 @@ public class WeatherFragment extends Fragment {
     int Clicks = 0;
     JSONObject[] json;
     MaterialDialog pd;
-    View rootView;
     FetchWeather wt;
+    View rootView;
 
     private void updateWeatherData(final String city, final String lat, final String lon) {
         wt = new FetchWeather(getContext());
@@ -139,6 +142,170 @@ public class WeatherFragment extends Fragment {
         updateWeatherData(null, lat, lon);
     }
 
+    private void showInputDialog() {
+        new MaterialDialog.Builder(this.getActivity())
+                .title("Change City")
+                .content("Hey there, could not find the city you wanted. Please enter a new one:")
+                .negativeText("CANCEL")
+                .onNegative(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog , @NonNull DialogAction which) {
+                        dialog.dismiss();
+                    }
+                })
+                .input(null, null, new MaterialDialog.InputCallback() {
+                    @Override
+                    public void onInput(@NonNull MaterialDialog dialog, @NonNull CharSequence input) {
+                        changeCity(input.toString());
+                    }
+                })
+                .cancelable(false)
+                .show();
+    }
+
+    public void showNoInternet() {
+        new MaterialDialog.Builder(getContext())
+                .title("No Internet")
+                .cancelable(false)
+                .content("Internet Access Needs To Be Enabled To Display Weather Data")
+                .positiveText("MOBILE DATA")
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        Intent intent = new Intent();
+                        intent.setComponent(new ComponentName("com.android.settings","com.android.settings.Settings$DataUsageSummaryActivity"));
+                        startActivityForResult(intent , 0);
+                    }
+                })
+                .negativeText("WIFI")
+                .onNegative(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        startActivityForResult(new Intent(Settings.ACTION_WIFI_SETTINGS) , 0);
+                    }
+                })
+                .show();
+    }
+
+    private void setWeatherIcon(int id , int i) {
+        String icon = "";
+        switch(id) {
+            case 501 : icon = getActivity().getString(R.string.weather_drizzle);
+                break;
+            case 500 : icon = getActivity().getString(R.string.weather_drizzle);
+                break;
+            case 502 : icon = getActivity().getString(R.string.weather_rainy);
+                break;
+            case 503 : icon = getActivity().getString(R.string.weather_rainy);
+                break;
+            case 504 : icon = getActivity().getString(R.string.weather_rainy);
+                break;
+            case 511 : icon = getActivity().getString(R.string.weather_rain_wind);
+                break;
+            case 520 : icon = getActivity().getString(R.string.weather_shower_rain);
+                break;
+            case 521 : icon = getActivity().getString(R.string.weather_drizzle);
+                break;
+            case 522 : icon = getActivity().getString(R.string.weather_thunder);
+                break;
+            case 531 : icon = getActivity().getString(R.string.weather_thunder);
+                break;
+            case 200 : icon = getActivity().getString(R.string.weather_thunder);
+                break;
+            case 201 : icon = getActivity().getString(R.string.weather_thunder);
+                break;
+            case 202 : icon = getActivity().getString(R.string.weather_thunder);
+                break;
+            case 210 : icon = getActivity().getString(R.string.weather_thunder);
+                break;
+            case 211 : icon = getActivity().getString(R.string.weather_thunder);
+                break;
+            case 212 : icon = getActivity().getString(R.string.weather_thunder);
+                break;
+            case 221 : icon = getActivity().getString(R.string.weather_thunder);
+                break;
+            case 230 : icon = getActivity().getString(R.string.weather_thunder);
+                break;
+            case 231 : icon = getActivity().getString(R.string.weather_thunder);
+                break;
+            case 232 : icon = getActivity().getString(R.string.weather_thunder);
+                break;
+            case 300 : icon = getActivity().getString(R.string.weather_shower_rain);
+                break;
+            case 301 : icon = getActivity().getString(R.string.weather_shower_rain);
+                break;
+            case 302 : icon = getActivity().getString(R.string.weather_heavy_drizzle);
+                break;
+            case 310 : icon = getActivity().getString(R.string.weather_shower_rain);
+                break;
+            case 311 : icon = getActivity().getString(R.string.weather_shower_rain);
+                break;
+            case 312 : icon = getActivity().getString(R.string.weather_heavy_drizzle);
+                break;
+            case 313 : icon = getActivity().getString(R.string.weather_rain_drizzle);
+                break;
+            case 314 : icon = getActivity().getString(R.string.weather_heavy_drizzle);
+                break;
+            case 321 : icon = getActivity().getString(R.string.weather_heavy_drizzle);
+                break;
+            case 600 : icon = getActivity().getString(R.string.weather_snowy);
+                break;
+            case 601 : icon = getActivity().getString(R.string.weather_snowy);
+                break;
+            case 602 : icon = getActivity().getString(R.string.weather_heavy_snow);
+                break;
+            case 611 : icon = getActivity().getString(R.string.weather_sleet);
+                break;
+            case 612 : icon = getActivity().getString(R.string.weather_heavy_snow);
+                break;
+            case 903 :
+            case 615 : icon = getActivity().getString(R.string.weather_snowy);
+                break;
+            case 616 : icon = getActivity().getString(R.string.weather_snowy);
+                break;
+            case 620 : icon = getActivity().getString(R.string.weather_snowy);
+                break;
+            case 621 : icon = getActivity().getString(R.string.weather_snowy);
+                break;
+            case 622 : icon = getActivity().getString(R.string.weather_snowy);
+                break;
+            case 701 :
+            case 702 :
+            case 721 : icon = getActivity().getString(R.string.weather_smoke);
+                break;
+            case 751 :
+            case 761 :
+            case 731 : icon = getActivity().getString(R.string.weather_dust);
+                break;
+            case 741 : icon = getActivity().getString(R.string.weather_foggy);
+                break;
+            case 762 : icon = getActivity().getString(R.string.weather_volcano);
+                break;
+            case 771 :
+            case 900 :
+            case 781 : icon = getActivity().getString(R.string.weather_tornado);
+                break;
+            case 904 : icon = getActivity().getString(R.string.weather_sunny);
+                break;
+            case 800 : icon = getActivity().getString(R.string.weather_sunny);
+                break;
+            case 801 : icon = getActivity().getString(R.string.weather_cloudy);
+                break;
+            case 802 : icon = getActivity().getString(R.string.weather_cloudy);
+                break;
+            case 803 : icon = getActivity().getString(R.string.weather_cloudy);
+                break;
+            case 804 : icon = getActivity().getString(R.string.weather_cloudy);
+                break;
+            case 901 : icon = getActivity().getString(R.string.weather_storm);
+                break;
+            case 902 : icon = getActivity().getString(R.string.weather_hurricane);
+                break;
+        }
+        Log.i(Integer.toString(id) , Integer.toString(i));
+        weatherIcon[i].setText(icon);
+    }
+
     private void renderWeather(JSONObject[] jsonObj){
         try {
             Clicks = 0;
@@ -175,8 +342,8 @@ public class WeatherFragment extends Fragment {
                 Date expiry = new Date(Long.parseLong(date1) * 1000);
                 String date = new SimpleDateFormat("EE, dd" , Locale.US).format(expiry);
                 SpannableString ss1=  new SpannableString(date + "\n"
-                + details[i].getJSONObject("temp").getLong("max") + "°" + "      "
-                + details[i].getJSONObject("temp").getLong("min") + "°" + "\n");
+                        + details[i].getJSONObject("temp").getLong("max") + "°" + "      "
+                        + details[i].getJSONObject("temp").getLong("min") + "°" + "\n");
                 ss1.setSpan(new RelativeSizeSpan(1.1f), 0,7, 0); // set size
                 ss1.setSpan(new RelativeSizeSpan(1.4f) , 8 , 11 , 0);
                 detailsField[i].setText(ss1);
@@ -320,174 +487,6 @@ public class WeatherFragment extends Fragment {
         }
     }
 
-    public WeatherFragment() {
-        handler = new Handler();
-    }
-
-    private void setWeatherIcon(int id , int i) {
-        String icon = "";
-        switch(id) {
-            case 501 : icon = getActivity().getString(R.string.weather_drizzle);
-                break;
-            case 500 : icon = getActivity().getString(R.string.weather_drizzle);
-                break;
-            case 502 : icon = getActivity().getString(R.string.weather_rainy);
-                break;
-            case 503 : icon = getActivity().getString(R.string.weather_rainy);
-                break;
-            case 504 : icon = getActivity().getString(R.string.weather_rainy);
-                break;
-            case 511 : icon = getActivity().getString(R.string.weather_rain_wind);
-                break;
-            case 520 : icon = getActivity().getString(R.string.weather_shower_rain);
-                break;
-            case 521 : icon = getActivity().getString(R.string.weather_drizzle);
-                break;
-            case 522 : icon = getActivity().getString(R.string.weather_thunder);
-                break;
-            case 531 : icon = getActivity().getString(R.string.weather_thunder);
-                break;
-            case 200 : icon = getActivity().getString(R.string.weather_thunder);
-                break;
-            case 201 : icon = getActivity().getString(R.string.weather_thunder);
-                break;
-            case 202 : icon = getActivity().getString(R.string.weather_thunder);
-                break;
-            case 210 : icon = getActivity().getString(R.string.weather_thunder);
-                break;
-            case 211 : icon = getActivity().getString(R.string.weather_thunder);
-                break;
-            case 212 : icon = getActivity().getString(R.string.weather_thunder);
-                break;
-            case 221 : icon = getActivity().getString(R.string.weather_thunder);
-                break;
-            case 230 : icon = getActivity().getString(R.string.weather_thunder);
-                break;
-            case 231 : icon = getActivity().getString(R.string.weather_thunder);
-                break;
-            case 232 : icon = getActivity().getString(R.string.weather_thunder);
-                break;
-            case 300 : icon = getActivity().getString(R.string.weather_shower_rain);
-                break;
-            case 301 : icon = getActivity().getString(R.string.weather_shower_rain);
-                break;
-            case 302 : icon = getActivity().getString(R.string.weather_heavy_drizzle);
-                break;
-            case 310 : icon = getActivity().getString(R.string.weather_shower_rain);
-                break;
-            case 311 : icon = getActivity().getString(R.string.weather_shower_rain);
-                break;
-            case 312 : icon = getActivity().getString(R.string.weather_heavy_drizzle);
-                break;
-            case 313 : icon = getActivity().getString(R.string.weather_rain_drizzle);
-                break;
-            case 314 : icon = getActivity().getString(R.string.weather_heavy_drizzle);
-                break;
-            case 321 : icon = getActivity().getString(R.string.weather_heavy_drizzle);
-                break;
-            case 600 : icon = getActivity().getString(R.string.weather_snowy);
-                break;
-            case 601 : icon = getActivity().getString(R.string.weather_snowy);
-                break;
-            case 602 : icon = getActivity().getString(R.string.weather_heavy_snow);
-                break;
-            case 611 : icon = getActivity().getString(R.string.weather_sleet);
-                break;
-            case 612 : icon = getActivity().getString(R.string.weather_heavy_snow);
-                break;
-            case 903 :
-            case 615 : icon = getActivity().getString(R.string.weather_snowy);
-                break;
-            case 616 : icon = getActivity().getString(R.string.weather_snowy);
-                break;
-            case 620 : icon = getActivity().getString(R.string.weather_snowy);
-                break;
-            case 621 : icon = getActivity().getString(R.string.weather_snowy);
-                break;
-            case 622 : icon = getActivity().getString(R.string.weather_snowy);
-                break;
-            case 701 :
-            case 702 :
-            case 721 : icon = getActivity().getString(R.string.weather_smoke);
-                break;
-            case 751 :
-            case 761 :
-            case 731 : icon = getActivity().getString(R.string.weather_dust);
-                break;
-            case 741 : icon = getActivity().getString(R.string.weather_foggy);
-                break;
-            case 762 : icon = getActivity().getString(R.string.weather_volcano);
-                break;
-            case 771 :
-            case 900 :
-            case 781 : icon = getActivity().getString(R.string.weather_tornado);
-                break;
-            case 904 : icon = getActivity().getString(R.string.weather_sunny);
-                break;
-            case 800 : icon = getActivity().getString(R.string.weather_sunny);
-                break;
-            case 801 : icon = getActivity().getString(R.string.weather_cloudy);
-                break;
-            case 802 : icon = getActivity().getString(R.string.weather_cloudy);
-                break;
-            case 803 : icon = getActivity().getString(R.string.weather_cloudy);
-                break;
-            case 804 : icon = getActivity().getString(R.string.weather_cloudy);
-                break;
-            case 901 : icon = getActivity().getString(R.string.weather_storm);
-                break;
-            case 902 : icon = getActivity().getString(R.string.weather_hurricane);
-                break;
-        }
-        Log.i(Integer.toString(id) , Integer.toString(i));
-        weatherIcon[i].setText(icon);
-    }
-
-    private void showInputDialog() {
-        new MaterialDialog.Builder(this.getActivity())
-                .title("Change City")
-                .content("Hey there, could not find the city you wanted. Please enter a new one:")
-                .negativeText("CANCEL")
-                .onNegative(new MaterialDialog.SingleButtonCallback() {
-                    @Override
-                    public void onClick(@NonNull MaterialDialog dialog , @NonNull DialogAction which) {
-                        dialog.dismiss();
-                    }
-                })
-                .input(null, null, new MaterialDialog.InputCallback() {
-                    @Override
-                    public void onInput(@NonNull MaterialDialog dialog, @NonNull CharSequence input) {
-                        changeCity(input.toString());
-                    }
-                })
-                .cancelable(false)
-                .show();
-    }
-
-    public void showNoInternet() {
-        new MaterialDialog.Builder(getContext())
-                .title("No Internet")
-                .cancelable(false)
-                .content("Internet Access Needs To Be Enabled To Display Weather Data")
-                .positiveText("MOBILE DATA")
-                .onPositive(new MaterialDialog.SingleButtonCallback() {
-                    @Override
-                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                        Intent intent = new Intent();
-                        intent.setComponent(new ComponentName("com.android.settings","com.android.settings.Settings$DataUsageSummaryActivity"));
-                        startActivityForResult(intent , 0);
-                    }
-                })
-                .negativeText("WIFI")
-                .onNegative(new MaterialDialog.SingleButtonCallback() {
-                    @Override
-                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                        startActivityForResult(new Intent(Settings.ACTION_WIFI_SETTINGS) , 0);
-                    }
-                })
-                .show();
-    }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 0) {
@@ -500,6 +499,12 @@ public class WeatherFragment extends Fragment {
             }
         }
     }
+
+    public WeatherFragment() {
+        handler = new Handler();
+    }
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
