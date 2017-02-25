@@ -55,7 +55,7 @@ public class WeatherActivity extends AppCompatActivity {
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     showCity();
                 } else {
-                    permission.permission_denied();
+                    permission.permissionDenied();
                 }
                 break;
             }

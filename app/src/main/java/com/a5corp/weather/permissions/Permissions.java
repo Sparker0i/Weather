@@ -70,7 +70,7 @@ public class Permissions {
         dialog.show();
     }
 
-    public void permission_denied() {
+    public void permissionDenied() {
         // permission was not granted
         // permission is denied (this is the first time, when "never ask again" is not checked) so ask again explaining the usage of permission
         // shouldShowRequestPermissionRationale will return true
