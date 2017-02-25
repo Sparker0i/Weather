@@ -3,6 +3,7 @@ package com.a5corp.weather.activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -24,6 +25,7 @@ import com.a5corp.weather.permissions.Permissions;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.mikepenz.materialdrawer.DrawerBuilder;
+import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 public class WeatherActivity extends AppCompatActivity {
 
@@ -40,8 +42,15 @@ public class WeatherActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             Window w = getWindow(); // in Activity's onCreate() for instance
-            w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+            w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         }
+        SystemBarTintManager tintManager = new SystemBarTintManager(this);
+// enable status bar tint
+        tintManager.setStatusBarTintEnabled(true);
+// enable navigation bar tint
+        tintManager.setNavigationBarTintEnabled(true);
+// set the transparent color of the status bar, 20% darker
+        tintManager.setTintColor(Color.parseColor("#00000000"));
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
