@@ -11,6 +11,8 @@ import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.View;
 
+import com.a5corp.weather.R;
+
 public class Permissions {
     private Context mContext;
     final int READ_COARSE_LOCATION = 20;
@@ -24,8 +26,8 @@ public class Permissions {
     }
 
     private void showNoRationale() {
-        View rootView = ((Activity) mContext).getWindow().getDecorView().findViewById(android.R.id.content);
-        Snackbar.make(rootView , "This Action Requires the Location Setting to be enabled. Go to Settings -> Permissions, and then enable the Locatinon Permission" , Snackbar.LENGTH_INDEFINITE)
+        View rootView = ((Activity) mContext).getWindow().getDecorView().findViewById(R.id.fragment);
+        Snackbar.make(rootView , "Tap Settings, then in Permissions, enable the Location Permission to do this action" , Snackbar.LENGTH_INDEFINITE)
                 .setAction("SETTINGS", new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
