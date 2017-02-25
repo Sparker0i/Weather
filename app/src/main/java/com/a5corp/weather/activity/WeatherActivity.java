@@ -45,12 +45,8 @@ public class WeatherActivity extends AppCompatActivity {
             w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         }
         SystemBarTintManager tintManager = new SystemBarTintManager(this);
-// enable status bar tint
         tintManager.setStatusBarTintEnabled(true);
-// enable navigation bar tint
-        tintManager.setNavigationBarTintEnabled(true);
-// set the transparent color of the status bar, 20% darker
-        tintManager.setTintColor(Color.parseColor("#00000000"));
+        tintManager.setTintColor(Color.parseColor("#05000000"));
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
