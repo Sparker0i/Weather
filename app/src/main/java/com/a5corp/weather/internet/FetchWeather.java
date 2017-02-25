@@ -31,6 +31,7 @@ public class FetchWeather extends AsyncTask<String , Void , JSONObject[]> {
     private final String UNITS_PARAM = "units";
     private final String UNITS_VALUE = "metric";
     private final String DAYS_PARAM = "cnt";
+    private Uri builtDay , builtFort;
 
     public FetchWeather(Context mContext) {
         context = mContext;
@@ -39,28 +40,12 @@ public class FetchWeather extends AsyncTask<String , Void , JSONObject[]> {
     @Override
     protected JSONObject[] doInBackground(String... params) {
         if (params.length == 1)
-            return city(params);
+            city(params);
         else
-            return coordinates(params);
-    }
-
-    JSONObject[] city(String... params) {
+            coordinates(params);
         try {
             Log.d(LOG_TAG , "Execution Fcked");
-            Uri builtDay = Uri.parse(OPEN_WEATHER_MAP_DAILY_API).buildUpon()
-                    .appendQueryParameter(QUERY_PARAM , params[0])
-                    .appendQueryParameter(FORMAT_PARAM , FORMAT_VALUE)
-                    .appendQueryParameter(UNITS_PARAM , UNITS_VALUE)
-                    .appendQueryParameter(DAYS_PARAM , Integer.toString(10))
-                    .build();
             URL day = new URL(builtDay.toString());
-
-            Uri builtFort = Uri.parse(OPEN_WEATHER_MAP_FORECAST_API).buildUpon()
-                    .appendQueryParameter(QUERY_PARAM , params[0])
-                    .appendQueryParameter(FORMAT_PARAM , FORMAT_VALUE)
-                    .appendQueryParameter(UNITS_PARAM , UNITS_VALUE)
-                    .appendQueryParameter(DAYS_PARAM , Integer.toString(10))
-                    .build();
             URL fort = new URL(builtFort.toString());
             Log.d(LOG_TAG , "URI Ready");
             HttpURLConnection connection0 = (HttpURLConnection)day.openConnection();
@@ -104,63 +89,35 @@ public class FetchWeather extends AsyncTask<String , Void , JSONObject[]> {
         }
     }
 
-    JSONObject[] coordinates(String... params) {
-        try {
-            Uri builtDay = Uri.parse(OPEN_WEATHER_MAP_DAILY_API).buildUpon()
-                    .appendQueryParameter(LAT_PARAM , params[0])
-                    .appendQueryParameter(LON_PARAM , params[1])
-                    .appendQueryParameter(FORMAT_PARAM , FORMAT_VALUE)
-                    .appendQueryParameter(UNITS_PARAM , UNITS_VALUE)
-                    .appendQueryParameter(DAYS_PARAM , Integer.toString(10))
-                    .build();
-            URL day = new URL(builtDay.toString());
+    private void city(String... params) {
+        builtDay = Uri.parse(OPEN_WEATHER_MAP_DAILY_API).buildUpon()
+                .appendQueryParameter(QUERY_PARAM , params[0])
+                .appendQueryParameter(FORMAT_PARAM , FORMAT_VALUE)
+                .appendQueryParameter(UNITS_PARAM , UNITS_VALUE)
+                .appendQueryParameter(DAYS_PARAM , Integer.toString(10))
+                .build();
+        builtFort = Uri.parse(OPEN_WEATHER_MAP_FORECAST_API).buildUpon()
+                .appendQueryParameter(QUERY_PARAM , params[0])
+                .appendQueryParameter(FORMAT_PARAM , FORMAT_VALUE)
+                .appendQueryParameter(UNITS_PARAM , UNITS_VALUE)
+                .appendQueryParameter(DAYS_PARAM , Integer.toString(10))
+                .build();
+    }
 
-            Uri builtFort = Uri.parse(OPEN_WEATHER_MAP_FORECAST_API).buildUpon()
-                    .appendQueryParameter(LAT_PARAM , params[0])
-                    .appendQueryParameter(LON_PARAM , params[1])
-                    .appendQueryParameter(FORMAT_PARAM , FORMAT_VALUE)
-                    .appendQueryParameter(UNITS_PARAM , UNITS_VALUE)
-                    .appendQueryParameter(DAYS_PARAM , Integer.toString(10))
-                    .build();
-            URL fort = new URL(builtFort.toString());
-
-            HttpURLConnection connection0 = (HttpURLConnection)day.openConnection();
-            HttpURLConnection connection1 = (HttpURLConnection)fort.openConnection();
-            connection0.addRequestProperty("x-api-key", context.getString(R.string.open_weather_maps_app_id));
-            connection1.addRequestProperty("x-api-key", context.getString(R.string.open_weather_maps_app_id));
-
-            BufferedReader reader;
-            StringBuilder json = new StringBuilder(1024) , json1 = new StringBuilder(1024);
-
-            reader= new BufferedReader(new InputStreamReader(connection0.getInputStream()));
-            String tmp;
-            while((tmp = reader.readLine())!=null)
-                json.append(tmp).append("\n");
-            reader.close();
-
-            reader = new BufferedReader(new InputStreamReader(connection1.getInputStream()));
-            while((tmp = reader.readLine())!=null)
-                json1.append(tmp).append("\n");
-            reader.close();
-
-            JSONObject data = new JSONObject(json.toString()) , data1 = new JSONObject(json1.toString());
-
-            // This value will be 404 if the request was not successful
-            if(data.getInt("cod") != 200 || data1.getInt("cod") != 200){
-                return null;
-            }
-
-            JSONObject array[] = new JSONObject[2];
-            array[0] = data;
-            array[1] = data1;
-            return array;
-        }catch(JSONException e){
-            Log.e(LOG_TAG , "Execution Failed JSON");
-            return null;
-        }
-        catch(IOException e){
-            Log.e(LOG_TAG , "Execution Failed IO");
-            return null;
-        }
+    private void coordinates(String... params) {
+        builtDay = Uri.parse(OPEN_WEATHER_MAP_DAILY_API).buildUpon()
+                .appendQueryParameter(LAT_PARAM , params[0])
+                .appendQueryParameter(LON_PARAM , params[1])
+                .appendQueryParameter(FORMAT_PARAM , FORMAT_VALUE)
+                .appendQueryParameter(UNITS_PARAM , UNITS_VALUE)
+                .appendQueryParameter(DAYS_PARAM , Integer.toString(10))
+                .build();
+        builtFort = Uri.parse(OPEN_WEATHER_MAP_FORECAST_API).buildUpon()
+                .appendQueryParameter(LAT_PARAM , params[0])
+                .appendQueryParameter(LON_PARAM , params[1])
+                .appendQueryParameter(FORMAT_PARAM , FORMAT_VALUE)
+                .appendQueryParameter(UNITS_PARAM , UNITS_VALUE)
+                .appendQueryParameter(DAYS_PARAM , Integer.toString(10))
+                .build();
     }
 }
