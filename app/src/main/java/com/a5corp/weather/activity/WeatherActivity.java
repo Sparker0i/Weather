@@ -141,6 +141,7 @@ public class WeatherActivity extends AppCompatActivity {
     public void changeCity(String city){
         WeatherFragment wf = (WeatherFragment)getSupportFragmentManager()
                 .findFragmentById(R.id.fragment);
+        wf.changeCity(city);
         GlobalActivity.cp.setCity(city);
     }
 
