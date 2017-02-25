@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.SpannableString;
 import android.text.style.RelativeSizeSpan;
@@ -513,12 +514,17 @@ public class WeatherFragment extends Fragment {
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_weather, container, false);
         cityField = (TextView)rootView.findViewById(R.id.city_field);
+        cityField.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
         updatedField = (TextView)rootView.findViewById(R.id.updated_field);
+        updatedField.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
         humidityView = (TextView) rootView.findViewById(R.id.humidity_view);
+        humidityView.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
         windView = (TextView) rootView.findViewById(R.id.wind_view);
+        windView.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
         directionView = (TextView)rootView.findViewById(R.id.direction_view);
+        directionView.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
         swipeView = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe);
-        swipeView.setColorSchemeResources(R.color.colorAccent, R.color.green , R.color.blue , R.color.yellow , R.color.orange);
+        swipeView.setColorSchemeResources(R.color.red, R.color.green , R.color.blue , R.color.yellow , R.color.orange);
         swipeView.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -538,8 +544,10 @@ public class WeatherFragment extends Fragment {
             }
         });
         directionView.setTypeface(weatherFont);
+        directionView.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
         dailyView = (TextView)rootView.findViewById(R.id.daily_view);
         dailyView.setText(getString(R.string.daily));
+        dailyView.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
         button = (Button)rootView.findViewById(R.id.button1);
         pd.show();
         for (int i = 0; i < 11; ++i)
@@ -548,10 +556,12 @@ public class WeatherFragment extends Fragment {
             if (i != 10) {
                 int resID = getResources().getIdentifier(f, "id", getContext().getPackageName());
                 detailsField[i] = (TextView) rootView.findViewById(resID);
+                detailsField[i].setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
             }
             int resIDI = getResources().getIdentifier(g, "id" , getContext().getPackageName());
             weatherIcon[i] = (TextView)rootView.findViewById(resIDI);
             weatherIcon[i].setTypeface(weatherFont);
+            weatherIcon[i].setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
         }
         return rootView;
     }
