@@ -6,11 +6,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.provider.Settings;
-import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
-
-import com.afollestad.materialdialogs.DialogAction;
-import com.afollestad.materialdialogs.MaterialDialog;
+import android.util.Log;
+import android.view.View;
 
 public class Permissions {
     private Context mContext;
@@ -24,16 +23,12 @@ public class Permissions {
         ActivityCompat.requestPermissions((Activity) mContext, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, READ_COARSE_LOCATION);
     }
 
-    public void showMaterialDialog() {
-        MaterialDialog dialog;
-        MaterialDialog.Builder builder = new MaterialDialog.Builder(mContext);
-        builder.title("Permission needed")
-                .content("This Action Requires the Location Setting to be enabled. Go to Settings and check the Location Permission inside the Permissions View")
-                .positiveText("SETTINGS")
-                .negativeText("CANCEL")
-                .onPositive(new MaterialDialog.SingleButtonCallback() {
+    private void showNoRationale() {
+        View rootView = ((Activity) mContext).getWindow().getDecorView().findViewById(android.R.id.content);
+        Snackbar.make(rootView , "This Action Requires the Location Setting to be enabled. Go to Settings -> Permissions, and then enable the Locatinon Permission" , Snackbar.LENGTH_INDEFINITE)
+                .setAction("SETTINGS", new View.OnClickListener() {
                     @Override
-                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                    public void onClick(View view) {
                         final Intent i = new Intent();
                         i.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
                         i.addCategory(Intent.CATEGORY_DEFAULT);
@@ -44,30 +39,14 @@ public class Permissions {
                         mContext.startActivity(i);
                     }
                 })
-                .onNegative(new MaterialDialog.SingleButtonCallback() {
-                    @Override
-                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                        dialog.dismiss();
-                    }
-                });
-        dialog = builder.build();
-        dialog.show();
+                .show();
+        Log.i("Permissions" , "showNoRationale");
     }
 
-    public void showDialogOK() {
-        MaterialDialog dialog;
-        MaterialDialog.Builder builder = new MaterialDialog.Builder(mContext);
-        builder.title("Permission needed")
-                .content("This permission is required to access the weather data of your location.")
-                .positiveText("OK")
-                .onPositive(new MaterialDialog.SingleButtonCallback() {
-                    @Override
-                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                        dialog.dismiss();
-                    }
-                });
-        dialog = builder.build();
-        dialog.show();
+    private void showRationale() {
+        View rootView = ((Activity) mContext).getWindow().getDecorView().findViewById(android.R.id.content);
+        Snackbar.make(rootView , "This Permission Is Required to access Weather Data of your location" , Snackbar.LENGTH_LONG).show();
+        Log.i("Permissions" , "showRationale");
     }
 
     public void permissionDenied() {
@@ -77,11 +56,11 @@ public class Permissions {
         //show the dialog or snackbar saying its necessary and try again otherwise proceed with setup.
         if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) mContext,
                 Manifest.permission.ACCESS_COARSE_LOCATION)) {
-            showDialogOK();
+            showRationale();
         } //permission is denied (and never ask again is  checked)
         //shouldShowRequestPermissionRationale will return false
         else {
-            showMaterialDialog();
+            showNoRationale();
         }
     }
 }
