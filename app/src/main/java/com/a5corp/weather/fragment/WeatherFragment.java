@@ -487,6 +487,10 @@ public class WeatherFragment extends Fragment {
         }
     }
 
+    public View getRootView() {
+        return rootView;
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 0) {
@@ -503,8 +507,6 @@ public class WeatherFragment extends Fragment {
     public WeatherFragment() {
         handler = new Handler();
     }
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
