@@ -113,6 +113,9 @@
     <!--Navigation Drawer Strings End-->
 
     <string name="drawer_item_home">Home</string>
+    <string name="drawer_item_weather">Default Weather</string>
+    <string name="drawer_item_graph">Weather Graphs</string>
+    <string name="drawer_item_map">Weather Map</string>
     <string name="drawer_item_settings">Settings</string>
 
 </resources>

@@ -522,7 +522,6 @@ public class WeatherFragment extends Fragment {
         swipeView = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe);
         swipeView.setColorSchemeResources(R.color.red, R.color.green , R.color.blue , R.color.yellow , R.color.orange);
         swipeView.setProgressBackgroundColorSchemeColor(ContextCompat.getColor(getContext() , R.color.colorPrimaryLight));
-        swipeView.setElevation(10);
         swipeView.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {

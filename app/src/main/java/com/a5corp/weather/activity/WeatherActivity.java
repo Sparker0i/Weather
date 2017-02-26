@@ -60,15 +60,19 @@ public class WeatherActivity extends AppCompatActivity {
             }
         });
         PrimaryDrawerItem item1 = new PrimaryDrawerItem().withIdentifier(1).withName(R.string.drawer_item_home);
-        SecondaryDrawerItem item2 = new SecondaryDrawerItem().withIdentifier(2).withName(R.string.drawer_item_settings);
+        PrimaryDrawerItem item2 = new PrimaryDrawerItem().withIdentifier(2).withName(R.string.drawer_item_graph);
+        PrimaryDrawerItem item3 = new PrimaryDrawerItem().withIdentifier(3).withName(R.string.drawer_item_map);
+        SecondaryDrawerItem item4 = new SecondaryDrawerItem().withIdentifier(4).withName(R.string.drawer_item_settings);
 //create the drawer and remember the `Drawer` result object
         Drawer result = new DrawerBuilder()
                 .withActivity(this)
                 .withToolbar(toolbar)
                 .addDrawerItems(
                         item1,
+                        item2,
+                        item3,
                         new DividerDrawerItem(),
-                        item2
+                        item4
                 )
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
@@ -76,8 +80,7 @@ public class WeatherActivity extends AppCompatActivity {
                         // do something with the clicked item :D
                         boolean flag = false;
                         switch (position) {
-                            case 1 : break;
-                            case 2 : startActivity(new Intent(WeatherActivity.this , AboutActivity.class));
+                            case 4 : startActivity(new Intent(WeatherActivity.this , AboutActivity.class));
                                 flag = true;
                                 break;
                         }
