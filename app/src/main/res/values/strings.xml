@@ -112,4 +112,7 @@
     <string name="title_activity_first_launch">FirstLaunch</string>
     <!--Navigation Drawer Strings End-->
 
+    <string name="drawer_item_home">Home</string>
+    <string name="drawer_item_settings">Settings</string>
+
 </resources>
