@@ -12,7 +12,7 @@ Get it on Google Play:
 
 - [x] Auto Detect Location
 - [x] Refreshed Look
-- [ ] Add Material Design
+- [ ] Add Material Design Components
 - [ ] Use Of Databases
 - [ ] Widgets
 - [ ] Ability to change colors from within the app
@@ -24,7 +24,7 @@ Get it on Google Play:
 - Refreshed UI Colors
 - Added Support to Search via ZIP Code/PIN
 - Polished View when the City is selected or when the main weather icon is selected
-- Added Swipe to Refresh in the Beta Version
+- Added Swipe to Refresh in the Weather Main Screen
 
 # CONTRIBUTING
 
@@ -41,7 +41,7 @@ PS. If you are having an issue with the location services in an Emulator, do not
 
 To request for a new feature, create a new Issue in the issues tab in this format :
 
-- The title of the Issue must begin with [FEATUREREQ], followed by the feature needed
+- The title of the Issue must begin with "Feature Request -" , followed by the feature needed
 - Provide a little description of what you want in this app
 - Maybe you can also provide an example code of how to implement it
 - Do not make a new PR for a Feature Request
