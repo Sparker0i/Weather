@@ -67,6 +67,8 @@ public class WeatherActivity extends AppCompatActivity {
         Drawer result = new DrawerBuilder()
                 .withActivity(this)
                 .withToolbar(toolbar)
+                .withSelectedItem(1)
+                .withActionBarDrawerToggleAnimated(true)
                 .addDrawerItems(
                         item1,
                         item2,
@@ -84,13 +86,10 @@ public class WeatherActivity extends AppCompatActivity {
                                 flag = true;
                                 break;
                         }
-                        if (flag)
-                            return true;
-                        return false;
+                        return flag;
                     }
                 })
                 .build();
-
     }
 
     @Override
