@@ -24,9 +24,10 @@ import com.a5corp.weather.permissions.GPSTracker;
 import com.a5corp.weather.permissions.Permissions;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.mikepenz.google_material_typeface_library.GoogleMaterial;
+import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
-import com.mikepenz.materialdrawer.model.DividerDrawerItem;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
@@ -43,6 +44,7 @@ public class WeatherActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather);
+        //LayoutInflaterCompat.setFactory(getLayoutInflater(), new IconicsLayoutInflater(getDelegate()));
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -59,9 +61,18 @@ public class WeatherActivity extends AppCompatActivity {
                 fabClick();
             }
         });
-        PrimaryDrawerItem item1 = new PrimaryDrawerItem().withIdentifier(1).withName(R.string.drawer_item_home);
-        PrimaryDrawerItem item2 = new PrimaryDrawerItem().withIdentifier(2).withName(R.string.drawer_item_graph);
-        PrimaryDrawerItem item3 = new PrimaryDrawerItem().withIdentifier(3).withName(R.string.drawer_item_map);
+        PrimaryDrawerItem item1 = new PrimaryDrawerItem().withIdentifier(1).withName(R.string.drawer_item_home)
+                .withIcon(new IconicsDrawable(this)
+                .icon(GoogleMaterial.Icon.gmd_home)
+                .sizeRes(R.dimen.activity_horizontal_margin));
+        PrimaryDrawerItem item2 = new PrimaryDrawerItem().withIdentifier(2).withName(R.string.drawer_item_graph)
+                .withIcon(new IconicsDrawable(this)
+                .icon(GoogleMaterial.Icon.gmd_trending_up)
+                .sizeRes(R.dimen.activity_horizontal_margin));
+        PrimaryDrawerItem item3 = new PrimaryDrawerItem().withIdentifier(3).withName(R.string.drawer_item_map)
+                .withIcon(new IconicsDrawable(this)
+                .icon(GoogleMaterial.Icon.gmd_map)
+                .sizeRes(R.dimen.activity_horizontal_margin));
         SecondaryDrawerItem item4 = new SecondaryDrawerItem().withIdentifier(4).withName(R.string.drawer_item_settings);
 //create the drawer and remember the `Drawer` result object
         Drawer result = new DrawerBuilder()
@@ -69,12 +80,12 @@ public class WeatherActivity extends AppCompatActivity {
                 .withToolbar(toolbar)
                 .withSelectedItem(1)
                 .withActionBarDrawerToggleAnimated(true)
+                .addStickyDrawerItems(item4)
                 .addDrawerItems(
                         item1,
                         item2,
-                        item3,
-                        new DividerDrawerItem(),
-                        item4
+                        item3
+                        //new DividerDrawerItem()
                 )
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
