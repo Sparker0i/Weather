@@ -28,6 +28,7 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.mikepenz.google_material_typeface_library.GoogleMaterial;
 import com.mikepenz.iconics.IconicsDrawable;
+import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
@@ -71,6 +72,18 @@ public class WeatherActivity extends AppCompatActivity {
     }
 
     public void initDrawer(Bundle savedInstanceState) {
+        final IProfile profile = new ProfileDrawerItem().withName("Simple Weather")
+                .withEmail("Version : " + BuildConfig.VERSION_NAME)
+                .withIcon(getResources().getIdentifier("ic_launcher_dark", "drawable", getPackageName()));
+        AccountHeader headerResult = new AccountHeaderBuilder()
+                .withActivity(this)
+                .withTranslucentStatusBar(true)
+                .withHeaderBackground(R.drawable.header)
+                .addProfiles(
+                        profile
+                )
+                .withSavedInstance(savedInstanceState)
+                .build();
         SecondaryDrawerItem item1 = new SecondaryDrawerItem().withIdentifier(1).withName(R.string.drawer_item_home)
                 .withIcon(new IconicsDrawable(this)
                         .icon(GoogleMaterial.Icon.gmd_home)
@@ -91,6 +104,7 @@ public class WeatherActivity extends AppCompatActivity {
                 .withActivity(this)
                 .withToolbar(getToolbar())
                 .withSelectedItem(1)
+                .withAccountHeader(headerResult)
                 .withActionBarDrawerToggleAnimated(true)
                 .addDrawerItems(
                         item1,
@@ -112,19 +126,6 @@ public class WeatherActivity extends AppCompatActivity {
                         return flag;
                     }
                 })
-                .build();
-    }
-
-    public void initHeader(Bundle savedInstanceState) {
-        final IProfile profile = new ProfileDrawerItem().withName("Simple Weather")
-                .withEmail("Version : " + BuildConfig.VERSION_NAME)
-                .withIcon(getResources().getIdentifier("ic_launcher_dark", "drawable", getPackageName()));
-        AccountHeaderBuilder headerResult = new AccountHeaderBuilder()
-                .withActivity(this)
-                .withTranslucentStatusBar(true)
-                .withHeaderBackground(R.drawable.header)
-
-                .withSavedInstance(savedInstanceState)
                 .build();
     }
 
