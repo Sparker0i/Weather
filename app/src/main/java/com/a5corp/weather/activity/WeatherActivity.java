@@ -74,7 +74,7 @@ public class WeatherActivity extends AppCompatActivity {
     public void initDrawer(Bundle savedInstanceState) {
         final IProfile profile = new ProfileDrawerItem().withName("Simple Weather")
                 .withEmail("Version : " + BuildConfig.VERSION_NAME)
-                .withIcon(getResources().getIdentifier("ic_launcher_dark", "drawable", getPackageName()));
+                .withIcon(R.drawable.ic_launcher_dark);
         AccountHeader headerResult = new AccountHeaderBuilder()
                 .withActivity(this)
                 .withTranslucentStatusBar(true)
