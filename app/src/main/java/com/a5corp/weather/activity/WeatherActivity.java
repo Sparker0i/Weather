@@ -11,12 +11,14 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.a5corp.weather.BuildConfig;
 import com.a5corp.weather.GlobalActivity;
 import com.a5corp.weather.R;
 import com.a5corp.weather.fragment.WeatherFragment;
@@ -26,11 +28,15 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.mikepenz.google_material_typeface_library.GoogleMaterial;
 import com.mikepenz.iconics.IconicsDrawable;
+import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
+import com.mikepenz.materialdrawer.model.DividerDrawerItem;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
+import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
+import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 public class WeatherActivity extends AppCompatActivity {
@@ -61,34 +67,37 @@ public class WeatherActivity extends AppCompatActivity {
                 fabClick();
             }
         });
-        PrimaryDrawerItem item1 = new PrimaryDrawerItem().withIdentifier(1).withName(R.string.drawer_item_home)
+        initDrawer(savedInstanceState);
+    }
+
+    public void initDrawer(Bundle savedInstanceState) {
+        SecondaryDrawerItem item1 = new SecondaryDrawerItem().withIdentifier(1).withName(R.string.drawer_item_home)
                 .withIcon(new IconicsDrawable(this)
-                .icon(GoogleMaterial.Icon.gmd_home)
-                .sizeRes(R.dimen.activity_horizontal_margin));
-        PrimaryDrawerItem item2 = new PrimaryDrawerItem().withIdentifier(2).withName(R.string.drawer_item_graph)
+                        .icon(GoogleMaterial.Icon.gmd_home)
+                        .sizeRes(R.dimen.activity_horizontal_margin));
+        SecondaryDrawerItem item2 = new SecondaryDrawerItem().withIdentifier(2).withName(R.string.drawer_item_graph)
                 .withIcon(new IconicsDrawable(this)
-                .icon(GoogleMaterial.Icon.gmd_trending_up)
-                .sizeRes(R.dimen.activity_horizontal_margin));
-        PrimaryDrawerItem item3 = new PrimaryDrawerItem().withIdentifier(3).withName(R.string.drawer_item_map)
+                        .icon(GoogleMaterial.Icon.gmd_trending_up)
+                        .sizeRes(R.dimen.activity_horizontal_margin));
+        SecondaryDrawerItem item3 = new SecondaryDrawerItem().withIdentifier(3).withName(R.string.drawer_item_map)
                 .withIcon(new IconicsDrawable(this)
-                .icon(GoogleMaterial.Icon.gmd_map)
-                .sizeRes(R.dimen.activity_horizontal_margin));
+                        .icon(GoogleMaterial.Icon.gmd_map)
+                        .sizeRes(R.dimen.activity_horizontal_margin));
         SecondaryDrawerItem item4 = new SecondaryDrawerItem().withIdentifier(4).withName(R.string.drawer_item_settings)
                 .withIcon(new IconicsDrawable(this)
-                .icon(GoogleMaterial.Icon.gmd_settings)
-                .sizeRes(R.dimen.activity_horizontal_margin));
-//create the drawer and remember the `Drawer` result object
+                        .icon(GoogleMaterial.Icon.gmd_settings)
+                        .sizeRes(R.dimen.activity_horizontal_margin));
         Drawer result = new DrawerBuilder()
                 .withActivity(this)
-                .withToolbar(toolbar)
+                .withToolbar(getToolbar())
                 .withSelectedItem(1)
                 .withActionBarDrawerToggleAnimated(true)
-                .addStickyDrawerItems(item4)
                 .addDrawerItems(
                         item1,
                         item2,
-                        item3
-                        //new DividerDrawerItem()
+                        item3,
+                        new DividerDrawerItem(),
+                        item4
                 )
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
@@ -97,13 +106,30 @@ public class WeatherActivity extends AppCompatActivity {
                         boolean flag = false;
                         switch (position) {
                             case 4 : startActivity(new Intent(WeatherActivity.this , AboutActivity.class));
-                                flag = false;
+                                flag = true;
                                 break;
                         }
                         return flag;
                     }
                 })
                 .build();
+    }
+
+    public void initHeader(Bundle savedInstanceState) {
+        final IProfile profile = new ProfileDrawerItem().withName("Simple Weather")
+                .withEmail("Version : " + BuildConfig.VERSION_NAME)
+                .withIcon(getResources().getIdentifier("ic_launcher_dark", "drawable", getPackageName()));
+        AccountHeaderBuilder headerResult = new AccountHeaderBuilder()
+                .withActivity(this)
+                .withTranslucentStatusBar(true)
+                .withHeaderBackground(R.drawable.header)
+
+                .withSavedInstance(savedInstanceState)
+                .build();
+    }
+
+    public Toolbar getToolbar() {
+        return (Toolbar) findViewById(R.id.toolbar);
     }
 
     @Override
