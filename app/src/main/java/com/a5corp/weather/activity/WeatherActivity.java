@@ -73,7 +73,10 @@ public class WeatherActivity extends AppCompatActivity {
                 .withIcon(new IconicsDrawable(this)
                 .icon(GoogleMaterial.Icon.gmd_map)
                 .sizeRes(R.dimen.activity_horizontal_margin));
-        SecondaryDrawerItem item4 = new SecondaryDrawerItem().withIdentifier(4).withName(R.string.drawer_item_settings);
+        SecondaryDrawerItem item4 = new SecondaryDrawerItem().withIdentifier(4).withName(R.string.drawer_item_settings)
+                .withIcon(new IconicsDrawable(this)
+                .icon(GoogleMaterial.Icon.gmd_settings)
+                .sizeRes(R.dimen.activity_horizontal_margin));
 //create the drawer and remember the `Drawer` result object
         Drawer result = new DrawerBuilder()
                 .withActivity(this)
@@ -94,7 +97,7 @@ public class WeatherActivity extends AppCompatActivity {
                         boolean flag = false;
                         switch (position) {
                             case 4 : startActivity(new Intent(WeatherActivity.this , AboutActivity.class));
-                                flag = true;
+                                flag = false;
                                 break;
                         }
                         return flag;
