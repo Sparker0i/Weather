@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -75,10 +76,12 @@ public class WeatherActivity extends AppCompatActivity {
                 .withIcon(R.drawable.ic_launcher_dark);
         AccountHeader headerResult = new AccountHeaderBuilder()
                 .withActivity(this)
-                //.withHeaderBackground(R.drawable.header)
+                .withHeaderBackground(R.drawable.header)
+                .withTextColor(ContextCompat.getColor(this , R.color.md_amber_400))
                 .addProfiles(
                         profile
                 )
+                .withSelectionListEnabled(false)
                 .withSavedInstance(savedInstanceState)
                 .build();
         SecondaryDrawerItem item1 = new SecondaryDrawerItem().withIdentifier(1).withName(R.string.drawer_item_home)
