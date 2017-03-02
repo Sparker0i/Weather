@@ -50,11 +50,11 @@ public class WeatherActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather);
-        //LayoutInflaterCompat.setFactory(getLayoutInflater(), new IconicsLayoutInflater(getDelegate()));
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            Window w = getWindow(); // in Activity's onCreate() for instance
+            Window w = getWindow();
             w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         }
         SystemBarTintManager tintManager = new SystemBarTintManager(this);
@@ -67,10 +67,10 @@ public class WeatherActivity extends AppCompatActivity {
                 fabClick();
             }
         });
-        initDrawer(savedInstanceState);
+        initDrawer();
     }
 
-    public void initDrawer(Bundle savedInstanceState) {
+    public void initDrawer() {
         final IProfile profile = new ProfileDrawerItem().withName("Simple Weather")
                 .withEmail("Version : " + BuildConfig.VERSION_NAME)
                 .withIcon(R.drawable.ic_launcher_dark);
@@ -82,7 +82,6 @@ public class WeatherActivity extends AppCompatActivity {
                         profile
                 )
                 .withSelectionListEnabled(false)
-                .withSavedInstance(savedInstanceState)
                 .build();
         SecondaryDrawerItem item1 = new SecondaryDrawerItem().withIdentifier(1).withName(R.string.drawer_item_home)
                 .withIcon(new IconicsDrawable(this)
@@ -100,7 +99,7 @@ public class WeatherActivity extends AppCompatActivity {
                 .withIcon(new IconicsDrawable(this)
                         .icon(GoogleMaterial.Icon.gmd_settings)
                         .sizeRes(R.dimen.activity_horizontal_margin));
-        Drawer result = new DrawerBuilder()
+        new DrawerBuilder()
                 .withActivity(this)
                 .withToolbar(getToolbar())
                 .withSelectedItem(1)
@@ -253,5 +252,10 @@ public class WeatherActivity extends AppCompatActivity {
             lon = gps.getLongitude();
             changeCity(lat, lon);
         }
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
     }
 }

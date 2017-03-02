@@ -1,17 +1,21 @@
 package com.a5corp.weather.preferences;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.SharedPreferences;
 
 public class Preferences {
     private static SharedPreferences prefs;
+    private Context context;
+    private final String USER_PREFS = "Prefs";
 
-    public Preferences(Activity activity) {
-        prefs = activity.getPreferences(Activity.MODE_PRIVATE);
+    public Preferences(Context context) {
+        this.context = context;
+        prefs = context.getSharedPreferences(USER_PREFS , Context.MODE_PRIVATE);
     }
 
     public String getCity() {
-        return prefs.getString("city", "Sydney");
+        return prefs.getString("city", null);
     }
 
     public boolean getLaunched() {
@@ -23,7 +27,9 @@ public class Preferences {
     }
 
     public void setCity(String city) {
-        prefs.edit().putString("city", city).apply();
+        SharedPreferences.Editor prefsEditor = prefs.edit();
+        prefsEditor.putString("city", city);
+        prefsEditor.apply();
     }
 
     public void setLaunched() {

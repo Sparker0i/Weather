@@ -17,17 +17,20 @@ import com.a5corp.weather.GlobalActivity;
 import com.a5corp.weather.R;
 import com.a5corp.weather.activity.FirstLaunch;
 import com.a5corp.weather.activity.WeatherActivity;
+import com.a5corp.weather.preferences.Preferences;
 
 public class FirstLaunchFragment extends Fragment {
 
     View rootView;
     EditText cityInput;
     TextView message;
+    Preferences preferences;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_first_launch, container, false);
+        preferences = new Preferences(getContext());
         cityInput = (EditText) rootView.findViewById(R.id.city_input);
         message = (TextView) rootView.findViewById(R.id.intro_text);
         if (GlobalActivity.i == 0) {
@@ -42,7 +45,7 @@ public class FirstLaunchFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (cityInput.getText().length() > 0) {
-                    GlobalActivity.cp.setCity(cityInput.getText().toString());
+                    preferences.setCity(cityInput.getText().toString());
                     Intent intent = new Intent(getActivity(), WeatherActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     Log.i("Loaded", "Weather");

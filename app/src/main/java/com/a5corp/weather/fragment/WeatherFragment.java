@@ -27,6 +27,7 @@ import com.a5corp.weather.activity.DetailActivity;
 import com.a5corp.weather.activity.FirstLaunch;
 import com.a5corp.weather.internet.CheckConnection;
 import com.a5corp.weather.internet.FetchWeather;
+import com.a5corp.weather.preferences.Preferences;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 
@@ -56,6 +57,7 @@ public class WeatherFragment extends Fragment {
     JSONObject[] json;
     MaterialDialog pd;
     FetchWeather wt;
+    Preferences preferences;
     View rootView;
 
     private void updateWeatherData(final String city, final String lat, final String lon) {
@@ -84,14 +86,14 @@ public class WeatherFragment extends Fragment {
                         }
                     });
                 if (json == null) {
-                    GlobalActivity.cp.setCity(GlobalActivity.cp.getLastCity());
+                    preferences.setCity(preferences.getLastCity());
                     handler.post(new Runnable() {
                         public void run() {
                             Toast.makeText(getActivity(),
                                     getActivity().getString(R.string.place_not_found),
                                     Toast.LENGTH_LONG).show();
                             GlobalActivity.i = 1;
-                            if (GlobalActivity.cp.getLaunched()) {
+                            if (preferences.getLaunched()) {
                                 FirstStart();
                             } else {
                                 cc = new CheckConnection(getContext());
@@ -108,12 +110,12 @@ public class WeatherFragment extends Fragment {
                 } else {
                     handler.post(new Runnable() {
                         public void run() {
-                            GlobalActivity.cp.setLaunched();
+                            preferences.setLaunched();
                             renderWeather(json);
                             Snackbar snackbar = Snackbar.make(rootView, "Loaded Weather Data", 500);
                             snackbar.show();
                             pd.dismiss();
-                            GlobalActivity.cp.setLastCity(city);
+                            preferences.setLastCity(city);
                         }
                     });
                 }
@@ -134,7 +136,7 @@ public class WeatherFragment extends Fragment {
         if (!swipeView.isRefreshing())
             pd.show();
         updateWeatherData(city, null, null);
-        GlobalActivity.cp.setCity(city);
+        preferences.setCity(city);
     }
 
     public void changeCity(String lat , String lon)
@@ -314,7 +316,7 @@ public class WeatherFragment extends Fragment {
             json1 = jsonObj[0];
             json0 = jsonObj[1];
             tc = json1.getJSONObject("main").getDouble("temp");
-            GlobalActivity.cp.setCity(json0.getJSONObject("city").getString("name"));
+            preferences.setCity(json0.getJSONObject("city").getString("name"));
             int a = (int) Math.round(json1.getJSONObject("main").getDouble("temp"));                        //℃
             cityField.setText(json0.getJSONObject("city").getString("name").toUpperCase(Locale.US) +
                     ", " +
@@ -496,7 +498,7 @@ public class WeatherFragment extends Fragment {
                 showNoInternet();
             else {
                 pd.show();
-                updateWeatherData(GlobalActivity.cp.getCity(), null, null);
+                updateWeatherData(preferences.getCity(), null, null);
             }
         }
     }
@@ -529,7 +531,7 @@ public class WeatherFragment extends Fragment {
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-                        changeCity(GlobalActivity.cp.getCity());
+                        changeCity(preferences.getCity());
                     }
                 });
                 handler.postDelayed(new Runnable() {
@@ -565,14 +567,15 @@ public class WeatherFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         MaterialDialog.Builder builder = new MaterialDialog.Builder(this.getActivity())
                 .title("Please Wait")
                 .content("Loading")
                 .cancelable(false)
                 .progress(true , 0);
         pd = builder.build();
-        super.onCreate(savedInstanceState);
+        preferences = new Preferences(getContext());
         weatherFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/weather.ttf");
-        updateWeatherData(GlobalActivity.cp.getCity(), null, null);
+        updateWeatherData(preferences.getCity(), null, null);
     }
 }
