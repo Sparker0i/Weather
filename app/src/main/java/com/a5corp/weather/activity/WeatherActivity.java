@@ -11,7 +11,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,7 +32,6 @@ import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.DividerDrawerItem;
-import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
@@ -77,8 +75,7 @@ public class WeatherActivity extends AppCompatActivity {
                 .withIcon(R.drawable.ic_launcher_dark);
         AccountHeader headerResult = new AccountHeaderBuilder()
                 .withActivity(this)
-                .withTranslucentStatusBar(true)
-                .withHeaderBackground(R.drawable.header)
+                //.withHeaderBackground(R.drawable.header)
                 .addProfiles(
                         profile
                 )
@@ -113,6 +110,7 @@ public class WeatherActivity extends AppCompatActivity {
                         new DividerDrawerItem(),
                         item4
                 )
+                .withShowDrawerOnFirstLaunch(true)
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
