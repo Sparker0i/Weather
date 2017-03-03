@@ -119,7 +119,7 @@ public class WeatherActivity extends AppCompatActivity {
                         // do something with the clicked item :D
                         boolean flag = false;
                         switch (position) {
-                            case 4 : startActivity(new Intent(WeatherActivity.this , AboutActivity.class));
+                            case 5 : startActivity(new Intent(WeatherActivity.this , AboutActivity.class));
                                 flag = true;
                                 break;
                         }
