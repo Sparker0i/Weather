@@ -41,7 +41,7 @@ public class AboutFragment extends Fragment {
         Typeface weatherFont;
         weatherFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/weather.ttf");
         appIcon.setTypeface(weatherFont);
-        appIcon.setText(getString(R.string.weather_sunny_cloudy));
+        appIcon.setText(getString(R.string.day_cloudy));
         String verId = "Version " + BuildConfig.VERSION_NAME;
         verText.setText(verId);
         return rootView;

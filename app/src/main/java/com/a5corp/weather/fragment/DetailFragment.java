@@ -265,7 +265,7 @@ public class DetailFragment extends Fragment {
         switch(id) {
             case 501 :
             case 521 :
-            case 500 : icon = getActivity().getString(R.string.weather_drizzle);
+            case 500 : icon = getActivity().getString(R.string.);
                 break;
             case 502 :
             case 503 :

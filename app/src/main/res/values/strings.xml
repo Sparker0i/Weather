@@ -29,28 +29,6 @@
     <string name="sunrise_icon">&#xf051;</string>
     <string name="sunset_icon">&#xf052;</string>
 
-    <string name="weather_sunny">&#xf00d;</string>
-    <string name="weather_sunny_cloudy">&#xf002;</string>
-    <string name="weather_clear_night">&#xf02e;</string>
-    <string name="thunderstorm_with_light_rain">&#xf01d;</string>
-    <string name="weather_foggy">&#xf014;</string>
-    <string name="weather_cloudy">&#xf013;</string>
-    <string name="weather_rainy">&#xf019;</string>
-    <string name="weather_heavy_drizzle">&#xf015;</string>
-    <string name="weather_snowy">&#xf01b;</string>
-    <string name="weather_thunder">&#xf01e;</string>
-    <string name="weather_drizzle">&#xf01a;</string>
-    <string name="weather_rain_wind">&#xf018;</string>
-    <string name="weather_rain_drizzle">&#xf017;</string>
-    <string name="weather_heavy_snow">&#xf076;</string>
-    <string name="weather_shower_rain">&#xf01a;</string>
-    <string name="weather_sleet">&#xf0b5;</string>
-    <string name="weather_smoke">&#xf062;</string>
-    <string name="weather_dust">&#xf063;</string>
-    <string name="weather_storm">&#xf0ce;</string>
-    <string name="weather_hurricane">&#xf0cf;</string>
-    <string name="weather_volcano">&#xf0c8;</string>
-    <string name="weather_tornado">&#xf056;</string>
     <string name="top_right">&#xf057;</string>
     <string name="right">&#xf04d;</string>
     <string name="bottom_right">&#xf088;</string>
@@ -89,6 +67,7 @@
     <string name="day_sprinkle">&#xf00b;</string>
     <string name="day_rain">&#xf008;</string>
     <string name="day_rain_mix">&#xf006;</string>
+    <string name="day_cloudy">&#xf002;</string>
     <string name="day_showers">&#xf009;</string>
     <string name="day_storm_showers">&#xf00e;</string>
     <string name="day_snow">&#xf00a;</string>
@@ -110,6 +89,8 @@
     <string name="night_snow">&#xf038;</string>
     <string name="night_sleet">&#xf0b3;</string>
     <string name="night_fog">&#xf04a;</string>
+    <string name="night_cloudy">&#xf086;</string>
+    <string name="night_clear">&#xf02e;</string>
     <string name="night_cloudy_gusts">&#xf02f;</string>
     <string name="night_hail">&#xf032;</string>
 
