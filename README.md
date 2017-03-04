@@ -2,7 +2,7 @@
 [![Release](https://img.shields.io/github/release/Sparker0i/Weather.svg)](https://github.com/Sparker0i/Weather/releases)
 [![License](https://img.shields.io/badge/license-MIT%20License-orange.svg)](https://raw.githubusercontent.com/Sparker0i/Weather/HEAD/LICENSE)
 
-Welcome to my Open Source, easy to use Weather app, built using Android Studio for Android 4.0.3+
+Welcome to my Open Source, easy to use Weather app, built using Android Studio for Android 4.1+
 
 Get it on Google Play:
 
