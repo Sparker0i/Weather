@@ -37,7 +37,7 @@
     <string name="left">&#xf048;</string>
     <string name="top_left">&#xf087;</string>
     <string name="top">&#xf058;</string>
-    
+
     <string name="thunderstorm">&#xf01e;</string>
     <string name="lightning">&#xf016;</string>
     <string name="sprinkle">&#xf01c;</string>
@@ -61,7 +61,7 @@
     <string name="windy">&#xf021;</string>
     <string name="hail">&#xf015;</string>
     <string name="strong_wind">&#xf050;</string>
-    
+
     <!--Day Icons-->
     <string name="day_thunderstorm">&#xf010;</string>
     <string name="day_lightning">&#xf005;</string>
@@ -111,5 +111,8 @@
     <string name="drawer_item_graph">Weather Graphs</string>
     <string name="drawer_item_map">Weather Map</string>
     <string name="drawer_item_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
