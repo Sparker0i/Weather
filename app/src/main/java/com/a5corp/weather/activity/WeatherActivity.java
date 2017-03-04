@@ -21,6 +21,7 @@ import android.view.WindowManager;
 import com.a5corp.weather.BuildConfig;
 import com.a5corp.weather.GlobalActivity;
 import com.a5corp.weather.R;
+import com.a5corp.weather.fragment.AboutFragment;
 import com.a5corp.weather.fragment.WeatherFragment;
 import com.a5corp.weather.permissions.GPSTracker;
 import com.a5corp.weather.permissions.Permissions;
@@ -98,7 +99,8 @@ public class WeatherActivity extends AppCompatActivity {
         SecondaryDrawerItem item4 = new SecondaryDrawerItem().withIdentifier(4).withName(R.string.drawer_item_settings)
                 .withIcon(new IconicsDrawable(this)
                         .icon(GoogleMaterial.Icon.gmd_settings)
-                        .sizeRes(R.dimen.activity_horizontal_margin));
+                        .sizeRes(R.dimen.activity_horizontal_margin))
+                .withSelectable(false);
         new DrawerBuilder()
                 .withActivity(this)
                 .withToolbar(getToolbar())
@@ -112,18 +114,20 @@ public class WeatherActivity extends AppCompatActivity {
                         new DividerDrawerItem(),
                         item4
                 )
-                .withShowDrawerOnFirstLaunch(true)
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
                         // do something with the clicked item :D
-                        boolean flag = false;
-                        switch (position) {
-                            case 5 : startActivity(new Intent(WeatherActivity.this , AboutActivity.class));
-                                flag = true;
-                                break;
+                        if (drawerItem != null) {
+                            Intent intent = null;
+                            if (drawerItem.getIdentifier() == 4) {
+                                intent = new Intent(WeatherActivity.this, AboutActivity.class);
+                            }
+                            if (intent != null) {
+                                startActivity(intent);
+                            }
                         }
-                        return flag;
+                        return false;
                     }
                 })
                 .build();

@@ -59,6 +59,60 @@
     <string name="left">&#xf048;</string>
     <string name="top_left">&#xf087;</string>
     <string name="top">&#xf058;</string>
+    
+    <string name="thunderstorm">&#xf01e;</string>
+    <string name="lightning">&#xf016;</string>
+    <string name="sprinkle">&#xf01c;</string>
+    <string name="rain">&#xf019;</string>
+    <string name="rain_mix">&#xf017;</string>
+    <string name="showers">&#xf01a;</string>
+    <string name="storm_showers">&#xf01d;</string>
+    <string name="snow">&#xf01b;</string>
+    <string name="sleet">&#xf0b5;</string>
+    <string name="smoke">&#xf062;</string>
+    <string name="day_haze">&#xf0b6;</string>
+    <string name="dust">&#xf063;</string>
+    <string name="fog">&#xf014;</string>
+    <string name="cloudy_gusts">&#xf011;</string>
+    <string name="tornado">&#xf056;</string>
+    <string name="cloudy">&#xf013;</string>
+    <string name="hurricane">&#xf073;</string>
+    <string name="snowflake_cold">&#xf076;</string>
+    <string name="hot">&#xf072;</string>
+    <string name="windy">&#xf021;</string>
+    <string name="hail">&#xf015;</string>
+    <string name="strong_wind">&#xf050;</string>
+    
+    <!--Day Icons-->
+    <string name="day_thunderstorm">&#xf010;</string>
+    <string name="day_lightning">&#xf005;</string>
+    <string name="day_sprinkle">&#xf00b;</string>
+    <string name="day_rain">&#xf008;</string>
+    <string name="day_rain_mix">&#xf006;</string>
+    <string name="day_showers">&#xf009;</string>
+    <string name="day_storm_showers">&#xf00e;</string>
+    <string name="day_snow">&#xf00a;</string>
+    <string name="day_sleet">&#xf0b2;</string>
+    <string name="day_fog">&#xf003;</string>
+    <string name="day_cloudy_gusts">&#xf000;</string>
+    <string name="day_sunny">&#xf00d;</string>
+    <string name="day_sunny_overcast">&#xf00c;</string>
+    <string name="day_hail">&#xf004;</string>
+
+    <!--Night Icons-->
+    <string name="night_thunderstorm">&#xf03b;</string>
+    <string name="night_lightning">&#xf033;</string>
+    <string name="night_sprinkle">&#xf039;</string>
+    <string name="night_rain">&#xf036;</string>
+    <string name="night_rain_mix">&#xf034;</string>
+    <string name="night_showers">&#xf037;</string>
+    <string name="night_storm_showers">&#xf03a;</string>
+    <string name="night_snow">&#xf038;</string>
+    <string name="night_sleet">&#xf0b3;</string>
+    <string name="night_fog">&#xf04a;</string>
+    <string name="night_cloudy_gusts">&#xf02f;</string>
+    <string name="night_hail">&#xf032;</string>
+
 
     <string name="place_not_found">Sorry, no weather data found.</string>
 
