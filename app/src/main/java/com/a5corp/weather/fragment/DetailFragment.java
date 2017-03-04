@@ -19,6 +19,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -253,6 +254,15 @@ public class DetailFragment extends Fragment {
         sunsetIcon.setText(getActivity().getString(R.string.sunset_icon));
     }
 
+    private boolean checkDay() {
+        Calendar c = Calendar.getInstance();
+        int hours = c.get(Calendar.HOUR_OF_DAY);
+
+        if (hours >= 18 && hours <= 5)
+            return true;
+        return false;
+    }
+
     private void setWeatherIcon() {
         int id = 0;
         try {
@@ -262,86 +272,164 @@ public class DetailFragment extends Fragment {
             //HW
         }
         String icon = "";
-        switch(id) {
-            case 501 :
-            case 521 :
-            case 500 : icon = getActivity().getString(R.string.);
-                break;
-            case 502 :
-            case 503 :
-            case 504 : icon = getActivity().getString(R.string.weather_rainy);
-                break;
-            case 511 : icon = getActivity().getString(R.string.weather_rain_wind);
-                break;
-            case 301 :
-            case 310 :
-            case 311 :
-            case 300 :
-            case 520 : icon = getActivity().getString(R.string.weather_shower_rain);
-                break;
-            case 522 :
-            case 531 :
-            case 200 :
-            case 201 :
-            case 202 :
-            case 210 :
-            case 211 :
-            case 212 :
-            case 221 :
-            case 230 :
-            case 231 :
-            case 232 : icon = getActivity().getString(R.string.weather_thunder);
-                break;
-            case 302 :
-            case 314 :
-            case 321 :
-            case 312 : icon = getActivity().getString(R.string.weather_heavy_drizzle);
-                break;
-            case 313 : icon = getActivity().getString(R.string.weather_rain_drizzle);
-                break;
-            case 612 :
-            case 602 : icon = getActivity().getString(R.string.weather_heavy_snow);
-                break;
-            case 611 : icon = getActivity().getString(R.string.weather_sleet);
-                break;
-            case 903 :
-            case 600 :
-            case 601 :
-            case 615 :
-            case 616 :
-            case 620 :
-            case 621 :
-            case 622 : icon = getActivity().getString(R.string.weather_snowy);
-                break;
-            case 701 :
-            case 702 :
-            case 721 : icon = getActivity().getString(R.string.weather_smoke);
-                break;
-            case 751 :
-            case 761 :
-            case 731 : icon = getActivity().getString(R.string.weather_dust);
-                break;
-            case 741 : icon = getActivity().getString(R.string.weather_foggy);
-                break;
-            case 762 : icon = getActivity().getString(R.string.weather_volcano);
-                break;
-            case 771 :
-            case 900 :
-            case 781 : icon = getActivity().getString(R.string.weather_tornado);
-                break;
-            case 904 :
-            case 800 : icon = getActivity().getString(R.string.weather_sunny);
-                break;
-            case 801 :
-            case 802 :
-            case 803 :
-            case 804 : icon = getActivity().getString(R.string.weather_cloudy);
-                break;
-            case 901 : icon = getActivity().getString(R.string.weather_storm);
-                break;
-            case 902 : icon = getActivity().getString(R.string.weather_hurricane);
-                break;
-        }
+        if (checkDay())
+            switch(id) {
+                case 200:
+                case 201:
+                case 202:
+                case 230:
+                case 231:
+                case 232: icon = getActivity().getString(R.string.day_thunderstorm);
+                    break;
+                case 210:
+                case 211:
+                case 212:
+                case 221: icon = getActivity().getString(R.string.day_lightning);
+                    break;
+                case 300:
+                case 301:
+                case 321:
+                case 500: icon = getActivity().getString(R.string.day_sprinkle);
+                    break;
+                case 302:
+                case 310:
+                case 311:
+                case 312:
+                case 313:
+                case 314:
+                case 501:
+                case 502:
+                case 503:
+                case 504: icon = getActivity().getString(R.string.day_rain);
+                    break;
+                case 511:
+                case 611:
+                case 612:
+                case 615:
+                case 616:
+                case 620: icon = getActivity().getString(R.string.day_rain_mix);
+                    break;
+                case 520:
+                case 521:
+                case 522:
+                case 701: icon = getActivity().getString(R.string.day_showers);
+                    break;
+                case 531: icon = getActivity().getString(R.string.day_storm_showers);
+                    break;
+                case 600:
+                case 602:
+                case 621:
+                case 622: icon = getActivity().getString(R.string.day_snow);
+                    break;
+                case 711: icon = getActivity().getString(R.string.smoke);
+                    break;
+                case 721: icon = getActivity().getString(R.string.day_haze);
+                    break;
+                case 731:
+                case 761:
+                case 762: icon = getActivity().getString(R.string.smoke);
+                    break;
+                case 781:
+                case 900: icon = getActivity().getString(R.string.tornado);
+                    break;
+                case 800: icon = getActivity().getString(R.string.day_sunny);
+                    break;
+                case 801:
+                case 802:
+                case 803: icon = getActivity().getString(R.string.day_cloudy_gusts);
+                    break;
+                case 804: icon = getActivity().getString(R.string.day_sunny_overcast);
+                    break;
+                case 902: icon = getActivity().getString(R.string.hurricane);
+                    break;
+                case 903: icon = getActivity().getString(R.string.snowflake_cold);
+                    break;
+                case 904 : icon = getActivity().getString(R.string.hot);
+                    break;
+                case 906: icon = getActivity().getString(R.string.day_hail);
+                    break;
+                case 957: icon = getActivity().getString(R.string.strong_wind);
+                    break;
+            }
+        else
+            switch(id) {
+                case 200:
+                case 201:
+                case 202:
+                case 230:
+                case 231:
+                case 232: icon = getActivity().getString(R.string.night_thunderstorm);
+                    break;
+                case 210:
+                case 211:
+                case 212:
+                case 221: icon = getActivity().getString(R.string.night_lightning);
+                    break;
+                case 300:
+                case 301:
+                case 321:
+                case 500: icon = getActivity().getString(R.string.night_sprinkle);
+                    break;
+                case 302:
+                case 310:
+                case 311:
+                case 312:
+                case 313:
+                case 314:
+                case 501:
+                case 502:
+                case 503:
+                case 504: icon = getActivity().getString(R.string.night_rain);
+                    break;
+                case 511:
+                case 611:
+                case 612:
+                case 615:
+                case 616:
+                case 620: icon = getActivity().getString(R.string.night_rain_mix);
+                    break;
+                case 520:
+                case 521:
+                case 522:
+                case 701: icon = getActivity().getString(R.string.night_showers);
+                    break;
+                case 531: icon = getActivity().getString(R.string.night_storm_showers);
+                    break;
+                case 600:
+                case 602:
+                case 621:
+                case 622: icon = getActivity().getString(R.string.night_snow);
+                    break;
+                case 711: icon = getActivity().getString(R.string.smoke);
+                    break;
+                case 721: icon = getActivity().getString(R.string.day_haze);
+                    break;
+                case 731:
+                case 761:
+                case 762: icon = getActivity().getString(R.string.smoke);
+                    break;
+                case 781:
+                case 900: icon = getActivity().getString(R.string.tornado);
+                    break;
+                case 800: icon = getActivity().getString(R.string.night_clear);
+                    break;
+                case 801:
+                case 802:
+                case 803: icon = getActivity().getString(R.string.night_cloudy_gusts);
+                    break;
+                case 804: icon = getActivity().getString(R.string.night_cloudy);
+                    break;
+                case 902: icon = getActivity().getString(R.string.hurricane);
+                    break;
+                case 903: icon = getActivity().getString(R.string.snowflake_cold);
+                    break;
+                case 904 : icon = getActivity().getString(R.string.hot);
+                    break;
+                case 906: icon = getActivity().getString(R.string.night_hail);
+                    break;
+                case 957: icon = getActivity().getString(R.string.strong_wind);
+                    break;
+            }
         weatherIcon.setText(icon);
     }
 

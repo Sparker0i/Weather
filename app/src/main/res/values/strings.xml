@@ -42,6 +42,7 @@
     <string name="lightning">&#xf016;</string>
     <string name="sprinkle">&#xf01c;</string>
     <string name="rain">&#xf019;</string>
+    <string name="rain_wind">&#xf018;</string>
     <string name="rain_mix">&#xf017;</string>
     <string name="showers">&#xf01a;</string>
     <string name="storm_showers">&#xf01d;</string>
@@ -79,8 +80,8 @@
     <string name="day_hail">&#xf004;</string>
 
     <!--Night Icons-->
-    <string name="night_thunderstorm">&#xf03b;</string>
-    <string name="night_lightning">&#xf033;</string>
+    <string name="night_thunderstorm">&#xf02d;</string>
+    <string name="night_lightning">&#xf025;</string>
     <string name="night_sprinkle">&#xf039;</string>
     <string name="night_rain">&#xf036;</string>
     <string name="night_rain_mix">&#xf034;</string>
