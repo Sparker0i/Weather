@@ -82,18 +82,18 @@
     <!--Night Icons-->
     <string name="night_thunderstorm">&#xf02d;</string>
     <string name="night_lightning">&#xf025;</string>
-    <string name="night_sprinkle">&#xf039;</string>
-    <string name="night_rain">&#xf036;</string>
-    <string name="night_rain_mix">&#xf034;</string>
-    <string name="night_showers">&#xf037;</string>
-    <string name="night_storm_showers">&#xf03a;</string>
-    <string name="night_snow">&#xf038;</string>
-    <string name="night_sleet">&#xf0b3;</string>
+    <string name="night_sprinkle">&#xf02b;</string>
+    <string name="night_rain">&#xf028;</string>
+    <string name="night_rain_mix">&#xf026;</string>
+    <string name="night_showers">&#xf029;</string>
+    <string name="night_storm_showers">&#xf02c;</string>
+    <string name="night_snow">&#xf02a;</string>
+    <string name="night_sleet">&#xf0b4;</string>
     <string name="night_fog">&#xf04a;</string>
     <string name="night_cloudy">&#xf086;</string>
     <string name="night_clear">&#xf02e;</string>
-    <string name="night_cloudy_gusts">&#xf02f;</string>
-    <string name="night_hail">&#xf032;</string>
+    <string name="night_cloudy_gusts">&#xf022;</string>
+    <string name="night_hail">&#xf024;</string>
 
 
     <string name="place_not_found">Sorry, no weather data found.</string>
