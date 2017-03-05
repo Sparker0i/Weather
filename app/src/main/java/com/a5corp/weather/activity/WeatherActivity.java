@@ -1,5 +1,6 @@
 package com.a5corp.weather.activity;
 
+import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -8,11 +9,12 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.FloatingActionButton;;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.app.FragmentManager;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -22,6 +24,8 @@ import com.a5corp.weather.BuildConfig;
 import com.a5corp.weather.GlobalActivity;
 import com.a5corp.weather.R;
 import com.a5corp.weather.fragment.AboutFragment;
+import com.a5corp.weather.fragment.GraphsFragment;
+import com.a5corp.weather.fragment.MapsFragment;
 import com.a5corp.weather.fragment.WeatherFragment;
 import com.a5corp.weather.permissions.GPSTracker;
 import com.a5corp.weather.permissions.Permissions;
@@ -119,12 +123,23 @@ public class WeatherActivity extends AppCompatActivity {
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
                         // do something with the clicked item :D
                         if (drawerItem != null) {
-                            Intent intent = null;
-                            if (drawerItem.getIdentifier() == 4) {
-                                intent = new Intent(WeatherActivity.this, AboutActivity.class);
+                            if (drawerItem.getIdentifier() == 1) {
+                                getSupportFragmentManager().beginTransaction()
+                                        .add(R.id.fragment, new WeatherFragment())
+                                        .commit();
                             }
-                            if (intent != null) {
-                                startActivity(intent);
+                            else if (drawerItem.getIdentifier() == 2) {
+                                getSupportFragmentManager().beginTransaction()
+                                        .add(R.id.fragment, new GraphsFragment())
+                                        .commit();
+                            }
+                            else if (drawerItem.getIdentifier() == 3) {
+                                getSupportFragmentManager().beginTransaction()
+                                        .add(R.id.fragment, new MapsFragment())
+                                        .commit();
+                            }
+                            else if (drawerItem.getIdentifier() == 4) {
+                                startActivity(new Intent(WeatherActivity.this, AboutActivity.class));
                             }
                         }
                         return false;
