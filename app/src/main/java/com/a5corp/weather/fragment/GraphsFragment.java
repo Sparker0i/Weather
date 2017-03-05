@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +28,12 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -35,15 +42,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import static com.a5corp.weather.utilities.Constants.DAYS_PARAM;
-import static com.a5corp.weather.utilities.Constants.FORMAT_PARAM;
-import static com.a5corp.weather.utilities.Constants.FORMAT_VALUE;
-import static com.a5corp.weather.utilities.Constants.UNITS_PARAM;
-import static com.a5corp.weather.utilities.Constants.UNITS_VALUE;
+import static com.a5corp.weather.utilities.Constants.*;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class GraphsFragment extends Fragment {
 
     View rootView;
@@ -59,7 +59,7 @@ public class GraphsFragment extends Fragment {
 
     public GraphsFragment() {
         // Required empty public constructor
-        preferences = new Preferences(getContext());
+        handler = new Handler();
     }
 
     private void chartEntry() {
@@ -73,6 +73,8 @@ public class GraphsFragment extends Fragment {
         rootView = inflater.inflate(R.layout.fragment_graphs, container, false);
         chart = (LineChart) rootView.findViewById(R.id.chart);
         customFormatter = new CustomFormatter();
+        preferences = new Preferences(getContext());
+        getWeather();
         setTemperatureView();
         yFormatter = new YFormatter();
         return rootView;
@@ -151,29 +153,101 @@ public class GraphsFragment extends Fragment {
     }
 
     private void getWeather() {
+
         new Thread(
                 new Runnable() {
+                    StringBuilder json;
                     @Override
                     public void run() {
                         try {
                             String url = Uri.parse(Constants.WEATHER_DAILY)
                                     .buildUpon()
                                     .appendQueryParameter(Constants.QUERY_PARAM , preferences.getCity())
-                                    .appendQueryParameter(Constants.FORMAT_PARAM , FORMAT_VALUE)
+                                    .appendQueryParameter("appid" , getString(R.string.open_weather_maps_app_id))
                                     .appendQueryParameter(UNITS_PARAM , UNITS_VALUE)
                                     .appendQueryParameter(DAYS_PARAM , Integer.toString(10))
                                     .build()
                                     .toString();
+                            Log.i("Log" , url);
                             URL Url = new URL(url);
                             HttpURLConnection connection = (HttpURLConnection) Url.openConnection();
-                            connection.addRequestProperty("x-api-key" , getString(R.string.open_weather_maps_app_id));
-
+                            Log.i("Created" , "Connection");
+                            BufferedReader reader= new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                            Log.i("Created" , "Reader");
+                            String tmp;
+                            json = new StringBuilder(1024);
+                            while((tmp = reader.readLine())!=null)
+                                json.append(tmp).append("\n");
+                            reader.close();
+                            Log.i("Closed" , "Reader");
                         }
                         catch(Exception ex) {
-
+                            ex.printStackTrace();
                         }
+                        parseWeatherForecast(json.toString());
                     }
                 }
         ).start();
+    }
+
+    private void parseWeatherForecast(String data) {
+        Log.i("Reached" , "ParseWeatherForecasr");
+        try {
+            if (!mForecastList.isEmpty()) {
+                mForecastList.clear();
+            }
+
+            JSONObject jsonObject = new JSONObject(data);
+            JSONArray listArray = jsonObject.getJSONArray("list");
+
+            int listArrayCount = listArray.length();
+            for (int i = 0; i < listArrayCount; i++) {
+                WeatherForecast weatherForecast = new WeatherForecast();
+                JSONObject resultObject = listArray.getJSONObject(i);
+                weatherForecast.setDateTime(resultObject.getLong("dt"));
+                weatherForecast.setPressure(resultObject.getString("pressure"));
+                weatherForecast.setHumidity(resultObject.getString("humidity"));
+                weatherForecast.setWindSpeed(resultObject.getString("speed"));
+                weatherForecast.setWindDegree(resultObject.getString("deg"));
+                weatherForecast.setCloudiness(resultObject.getString("clouds"));
+                if (resultObject.has("rain")) {
+                    weatherForecast.setRain(resultObject.getString("rain"));
+                } else {
+                    weatherForecast.setRain("0");
+                }
+                if (resultObject.has("snow")) {
+                    weatherForecast.setSnow(resultObject.getString("snow"));
+                } else {
+                    weatherForecast.setSnow("0");
+                }
+                JSONObject temperatureObject = resultObject.getJSONObject("temp");
+                weatherForecast.setTemperatureMin(
+                        Float.parseFloat(temperatureObject.getString("min")));
+                weatherForecast.setTemperatureMax(
+                        Float.parseFloat(temperatureObject.getString("max")));
+                weatherForecast.setTemperatureMorning(
+                        Float.parseFloat(temperatureObject.getString("morn")));
+                weatherForecast.setTemperatureDay(
+                        Float.parseFloat(temperatureObject.getString("day")));
+                weatherForecast.setTemperatureEvening(
+                        Float.parseFloat(temperatureObject.getString("eve")));
+                weatherForecast.setTemperatureNight(
+                        Float.parseFloat(temperatureObject.getString("night")));
+                JSONArray weatherArray = resultObject.getJSONArray("weather");
+                JSONObject weatherObject = weatherArray.getJSONObject(0);
+                weatherForecast.setDescription(weatherObject.getString("description"));
+                weatherForecast.setIcon(weatherObject.getString("icon"));
+                Log.e("Failed Graph" , "Fcked");
+                mForecastList.add(weatherForecast);
+                handler.sendEmptyMessage(Constants.PARSE_RESULT_SUCCESS);
+            }
+        } catch (JSONException e) {
+            handler.sendEmptyMessage(Constants.TASK_RESULT_ERROR);
+            e.printStackTrace();
+        }
+        if (mForecastList != null)
+            Log.i("Not Null" , "mForecastList");
+        else
+            Log.e("Null" , "mForecastList");
     }
 }

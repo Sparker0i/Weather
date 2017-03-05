@@ -1,7 +1,7 @@
 package com.a5corp.weather.utilities;
 
 public class Constants {
-    public static final String WEATHER_DAILY = "http://api.openweathermap.org/data/2.5/forecast/daily/";
+    public static final String WEATHER_DAILY = "http://api.openweathermap.org/data/2.5/forecast/daily";
 
     public static final String QUERY_PARAM = "q";
     public static final String FORMAT_PARAM = "mode";
@@ -11,4 +11,8 @@ public class Constants {
     public static final String UNITS_PARAM = "units";
     public static final String UNITS_VALUE = "metric";
     public static final String DAYS_PARAM = "cnt";
+
+    public static final int PARSE_RESULT_SUCCESS = 0;
+    public static final int TASK_RESULT_ERROR = -1;
+    public static final int PARSE_RESULT_ERROR = -2;
 }

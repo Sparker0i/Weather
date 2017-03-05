@@ -125,17 +125,17 @@ public class WeatherActivity extends AppCompatActivity {
                         if (drawerItem != null) {
                             if (drawerItem.getIdentifier() == 1) {
                                 getSupportFragmentManager().beginTransaction()
-                                        .add(R.id.fragment, new WeatherFragment())
+                                        .replace(R.id.fragment, new WeatherFragment())
                                         .commit();
                             }
                             else if (drawerItem.getIdentifier() == 2) {
                                 getSupportFragmentManager().beginTransaction()
-                                        .add(R.id.fragment, new GraphsFragment())
+                                        .replace(R.id.fragment, new GraphsFragment())
                                         .commit();
                             }
                             else if (drawerItem.getIdentifier() == 3) {
                                 getSupportFragmentManager().beginTransaction()
-                                        .add(R.id.fragment, new MapsFragment())
+                                        .replace(R.id.fragment, new MapsFragment())
                                         .commit();
                             }
                             else if (drawerItem.getIdentifier() == 4) {
