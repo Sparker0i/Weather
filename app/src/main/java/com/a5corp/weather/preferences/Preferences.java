@@ -6,11 +6,9 @@ import android.content.SharedPreferences;
 
 public class Preferences {
     private static SharedPreferences prefs;
-    private Context context;
     private final String USER_PREFS = "Prefs";
 
     public Preferences(Context context) {
-        this.context = context;
         prefs = context.getSharedPreferences(USER_PREFS , Context.MODE_PRIVATE);
     }
 
@@ -41,6 +39,6 @@ public class Preferences {
     }
 
     public String getLastCity() {
-        return prefs.getString("lcity" , "Sydney");
+        return prefs.getString("lcity" , null);
     }
 }
