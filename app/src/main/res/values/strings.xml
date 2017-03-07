@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">Simple Weather</string>
+    <string name="app_icon">&#xf002;</string>
     <string name="change_city">Change City</string>
     <string name="about_page">About</string>
     <string name="location">Location</string>
@@ -49,8 +50,9 @@
     <string name="snow">&#xf01b;</string>
     <string name="sleet">&#xf0b5;</string>
     <string name="smoke">&#xf062;</string>
-    <string name="day_haze">&#xf0b6;</string>
+    <string name="haze">&#xf0b6;</string>
     <string name="dust">&#xf063;</string>
+    <string name="volcano">&#xf0c8;</string>
     <string name="fog">&#xf014;</string>
     <string name="cloudy_gusts">&#xf011;</string>
     <string name="tornado">&#xf056;</string>
@@ -63,37 +65,26 @@
     <string name="strong_wind">&#xf050;</string>
 
     <!--Day Icons-->
-    <string name="day_thunderstorm">&#xf010;</string>
-    <string name="day_lightning">&#xf005;</string>
-    <string name="day_sprinkle">&#xf00b;</string>
-    <string name="day_rain">&#xf008;</string>
-    <string name="day_rain_mix">&#xf006;</string>
+    <string name="day_clear">&#xf00d;</string>
     <string name="day_cloudy">&#xf002;</string>
-    <string name="day_showers">&#xf009;</string>
-    <string name="day_storm_showers">&#xf00e;</string>
-    <string name="day_snow">&#xf00a;</string>
-    <string name="day_sleet">&#xf0b2;</string>
-    <string name="day_fog">&#xf003;</string>
-    <string name="day_cloudy_gusts">&#xf000;</string>
-    <string name="day_sunny">&#xf00d;</string>
-    <string name="day_sunny_overcast">&#xf00c;</string>
-    <string name="day_hail">&#xf004;</string>
+    <string name="day_rainy">&#xf008;</string>
+    <string name="day_heavy_drizzle">&#xf004;</string>
+    <string name="day_snowy">&#xf00a;</string>
+    <string name="day_thunder">&#xf01e;</string>
+    <string name="day_drizzle">&#xf009;</string>
+    <string name="day_rain_wind">&#xf007;</string>
+    <string name="day_rain_drizzle">&#xf006;</string>
 
-    <!--Night Icons-->
-    <string name="night_thunderstorm">&#xf02d;</string>
-    <string name="night_lightning">&#xf025;</string>
-    <string name="night_sprinkle">&#xf02b;</string>
-    <string name="night_rain">&#xf028;</string>
-    <string name="night_rain_mix">&#xf026;</string>
-    <string name="night_showers">&#xf029;</string>
-    <string name="night_storm_showers">&#xf02c;</string>
-    <string name="night_snow">&#xf02a;</string>
-    <string name="night_sleet">&#xf0b4;</string>
-    <string name="night_fog">&#xf04a;</string>
-    <string name="night_cloudy">&#xf086;</string>
+    <!-- Night Icons -->
     <string name="night_clear">&#xf02e;</string>
-    <string name="night_cloudy_gusts">&#xf022;</string>
-    <string name="night_hail">&#xf024;</string>
+    <string name="night_cloudy">&#xf086;</string>
+    <string name="night_rainy">&#xf028;</string>
+    <string name="night_heavy_drizzle">&#xf024;</string>
+    <string name="night_snowy">&#xf02a;</string>
+    <string name="night_thunder">&#xf02d;</string>
+    <string name="night_drizzle">&#xf029;</string>
+    <string name="night_rain_wind">&#xf027;</string>
+    <string name="night_rain_drizzle">&#xf026;</string>
 
     <string name="place_not_found">Sorry, no weather data found.</string>
 
