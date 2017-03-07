@@ -21,44 +21,21 @@ import java.util.List;
 public class GraphsFragment extends Fragment {
 
     View rootView;
-    LineChart chart;
-    public List<WeatherForecast> mForecastList;
-    CheckConnection mCheckConnection;
-    String[] dateArray;
-    CustomFormatter customFormatter;
-    YFormatter yFormatter;
     Handler handler;
-    Preferences preferences;
-
+    LineChart chart;
 
     public GraphsFragment() {
         // Required empty public constructor
         handler = new Handler();
     }
 
-    private void chartEntry() {
-
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        Log.i("Loaded" , "Fragment");
         rootView = inflater.inflate(R.layout.fragment_graphs, container, false);
-        customFormatter = new CustomFormatter();
-        preferences = new Preferences(getContext());
-        yFormatter = new YFormatter();
+        Log.i("Loaded" , "Fragment");
+        chart = (LineChart) rootView.findViewById(R.id.chart);
         return rootView;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        MaterialDialog.Builder builder = new MaterialDialog.Builder(this.getActivity())
-                .title("Please Wait")
-                .content("Loading")
-                .progress(true , 0);
-        builder.build().show();
     }
 }
