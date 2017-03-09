@@ -48,7 +48,7 @@ public class WeatherFragment extends Fragment {
     TextView windView , humidityView , directionView, dailyView, updatedField, cityField;
     double tc;
     Handler handler;
-    JSONObject json0 , json1;
+    JSONObject json1 , json0;
     SwipeRefreshLayout swipeView;
     CheckConnection cc;
     int Clicks = 0;
@@ -180,7 +180,8 @@ public class WeatherFragment extends Fragment {
                             }
                         }
                     });
-                } else {
+                }
+                else {
                     handler.post(new Runnable() {
                         public void run() {
                             preferences.setLaunched();
@@ -512,17 +513,17 @@ public class WeatherFragment extends Fragment {
         try {
             Clicks = 0;
             Log.i("Showed" , "Done");
-            json1 = jsonObj[0];
-            json0 = jsonObj[1];
-            tc = json1.getJSONObject("main").getDouble("temp");
-            preferences.setCity(json0.getJSONObject("city").getString("name"));
-            int a = (int) Math.round(json1.getJSONObject("main").getDouble("temp"));                        //℃
-            cityField.setText(json0.getJSONObject("city").getString("name").toUpperCase(Locale.US) +
+            json0 = jsonObj[0];
+            json1 = jsonObj[1];
+            tc = json0.getJSONObject("main").getDouble("temp");
+            preferences.setCity(json1.getJSONObject("city").getString("name"));
+            int a = (int) Math.round(json0.getJSONObject("main").getDouble("temp"));                        //℃
+            cityField.setText(json1.getJSONObject("city").getString("name").toUpperCase(Locale.US) +
                     ", " +
-                    json0.getJSONObject("city").getString("country"));
-            final String city = json0.getJSONObject("city").getString("name").toUpperCase(Locale.US) +
+                    json1.getJSONObject("city").getString("country"));
+            final String city = json1.getJSONObject("city").getString("name").toUpperCase(Locale.US) +
                     ", " +
-                    json0.getJSONObject("city").getString("country");
+                    json1.getJSONObject("city").getString("country");
             cityField.setOnClickListener(new View.OnClickListener()
             {
                 public void onClick(View v) {
@@ -534,7 +535,7 @@ public class WeatherFragment extends Fragment {
             JSONObject details[] = new JSONObject[10];
             for (int i = 0; i < 10; ++i)
             {
-                details[i] = json0.getJSONArray("list").getJSONObject(i);
+                details[i] = json1.getJSONArray("list").getJSONObject(i);
             }
             Log.i("Objects" , "JSON Objects Created");
             for (int i = 0; i < 10; ++i)
@@ -554,15 +555,15 @@ public class WeatherFragment extends Fragment {
                 final Intent intent = new Intent(getContext() , DetailActivity.class);
                 intent.putExtra("jsonStr" , J.toString());
                 try {
-                    intent.putExtra("city", json0.getJSONObject("city").getString("name").toUpperCase(Locale.US) +
+                    intent.putExtra("city", json1.getJSONObject("city").getString("name").toUpperCase(Locale.US) +
                             ", " +
-                            json0.getJSONObject("city").getString("country"));
+                            json1.getJSONObject("city").getString("country"));
                 }
                 catch (JSONException jx) {
                     Log.e("JSONEX" , "Caught a JSON Exception");
                 }
-                intent.putExtra("sunrise" , json1.getJSONObject("sys").getLong("sunrise"));
-                intent.putExtra("sunset" , json1.getJSONObject("sys").getLong("sunset"));
+                intent.putExtra("sunrise" , json0.getJSONObject("sys").getLong("sunrise"));
+                intent.putExtra("sunset" , json0.getJSONObject("sys").getLong("sunset"));
                 detailsField[i].setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
                         startActivity(intent);
@@ -576,14 +577,14 @@ public class WeatherFragment extends Fragment {
                 });
             }
             DateFormat df = DateFormat.getDateTimeInstance();
-            String updatedOn = "Last update: " + df.format(new Date(json1.getLong("dt")*1000));
+            String updatedOn = "Last update: " + df.format(new Date(json0.getLong("dt")*1000));
             updatedField.setText(updatedOn);
-            int deg = json1.getJSONObject("wind").getInt("deg");
+            int deg = json0.getJSONObject("wind").getInt("deg");
             setDeg(deg);
-            setWeatherIcon(json1.getJSONArray("weather").getJSONObject(0).getInt("id"),10);
-            humidityView.setText("HUMIDITY:\n" + json1.getJSONObject("main").getInt("humidity") + "%");
+            setWeatherIcon(json0.getJSONArray("weather").getJSONObject(0).getInt("id"),10);
+            humidityView.setText("HUMIDITY:\n" + json0.getJSONObject("main").getInt("humidity") + "%");
             Log.i("Humidity Loaded" , "Done");
-            windView.setText("WIND:\n" + json1.getJSONObject("wind").getDouble("speed") + "km/h");
+            windView.setText("WIND:\n" + json0.getJSONObject("wind").getDouble("speed") + "km/h");
             Log.i("Wind Loaded" , "Done");
             Log.i("10" , "Weather Icon 11 Set");
             weatherIcon[10].setOnClickListener(new View.OnClickListener()
@@ -591,7 +592,7 @@ public class WeatherFragment extends Fragment {
                 public void onClick (View v)
                 {
                     try {
-                        String rs = json1.getJSONArray("weather").getJSONObject(0).getString("description");
+                        String rs = json0.getJSONArray("weather").getJSONObject(0).getString("description");
                         String[] strArray = rs.split(" ");
                         StringBuilder builder = new StringBuilder();
                         for (String s : strArray) {
