@@ -50,14 +50,16 @@ public class WeatherActivity extends AppCompatActivity {
     String lat, lon;
     GPSTracker gps;
     FloatingActionButton fab;
+    WeatherFragment wf;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather);
+        wf = new WeatherFragment();
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.fragment, new WeatherFragment())
+                    .add(R.id.fragment, wf)
                     .commit();
         }
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -133,8 +135,11 @@ public class WeatherActivity extends AppCompatActivity {
                                         .commit();
                             }
                             else if (drawerItem.getIdentifier() == 2) {
+                                GraphsFragment graphsFragment = new GraphsFragment();
+                                Bundle bundle = new Bundle();
+                                bundle.putString("json" , wf.getDailyJson().toString());
                                 getSupportFragmentManager().beginTransaction()
-                                        .replace(R.id.fragment, new GraphsFragment())
+                                        .replace(R.id.fragment, graphsFragment)
                                         .commit();
                             }
                             else if (drawerItem.getIdentifier() == 3) {

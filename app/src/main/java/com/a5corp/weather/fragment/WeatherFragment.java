@@ -6,7 +6,6 @@ import android.graphics.Typeface;
 import android.os.Handler;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -42,9 +41,6 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
-/**
- * A placeholder fragment containing a simple view.
- */
 public class WeatherFragment extends Fragment {
     Typeface weatherFont;
     Button button;
@@ -61,6 +57,81 @@ public class WeatherFragment extends Fragment {
     FetchWeather wt;
     Preferences preferences;
     View rootView;
+
+    public WeatherFragment() {
+        handler = new Handler();
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        rootView = inflater.inflate(R.layout.fragment_weather, container, false);
+        cityField = (TextView)rootView.findViewById(R.id.city_field);
+        cityField.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
+        updatedField = (TextView)rootView.findViewById(R.id.updated_field);
+        updatedField.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
+        humidityView = (TextView) rootView.findViewById(R.id.humidity_view);
+        humidityView.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
+        windView = (TextView) rootView.findViewById(R.id.wind_view);
+        windView.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
+        directionView = (TextView)rootView.findViewById(R.id.direction_view);
+        directionView.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
+        swipeView = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe);
+        swipeView.setColorSchemeResources(R.color.red, R.color.green , R.color.blue , R.color.yellow , R.color.orange);
+        swipeView.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeView.setRefreshing(true);
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        changeCity(preferences.getCity());
+                    }
+                });
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        swipeView.setRefreshing(false);
+                    }
+                }, 10000);
+            }
+        });
+        directionView.setTypeface(weatherFont);
+        directionView.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
+        dailyView = (TextView)rootView.findViewById(R.id.daily_view);
+        dailyView.setText(getString(R.string.daily));
+        dailyView.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
+        button = (Button)rootView.findViewById(R.id.button1);
+        pd.show();
+        for (int i = 0; i < 11; ++i)
+        {
+            String f = "details_view" + (i + 1) , g = "weather_icon" + (i + 1);
+            if (i != 10) {
+                int resID = getResources().getIdentifier(f, "id", getContext().getPackageName());
+                detailsField[i] = (TextView) rootView.findViewById(resID);
+                detailsField[i].setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
+            }
+            int resIDI = getResources().getIdentifier(g, "id" , getContext().getPackageName());
+            weatherIcon[i] = (TextView)rootView.findViewById(resIDI);
+            weatherIcon[i].setTypeface(weatherFont);
+            weatherIcon[i].setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
+        }
+        return rootView;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        MaterialDialog.Builder builder = new MaterialDialog.Builder(this.getActivity())
+                .title("Please Wait")
+                .content("Loading")
+                .cancelable(false)
+                .progress(true , 0);
+        pd = builder.build();
+        preferences = new Preferences(getContext());
+        weatherFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/weather.ttf");
+        updateWeatherData(preferences.getCity(), null, null);
+    }
 
     private void updateWeatherData(final String city, final String lat, final String lon) {
         wt = new FetchWeather(getContext());
@@ -131,6 +202,10 @@ public class WeatherFragment extends Fragment {
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         Log.i("Loaded", "Weather");
         startActivity(intent);
+    }
+
+    public JSONObject getDailyJson() {
+        return json[0];
     }
 
     public void changeCity(String city)
@@ -468,7 +543,7 @@ public class WeatherFragment extends Fragment {
                 String date1 = details[i].getString("dt");
                 Date expiry = new Date(Long.parseLong(date1) * 1000);
                 String date = new SimpleDateFormat("EE, dd" , Locale.US).format(expiry);
-                SpannableString ss1=  new SpannableString(date + "\n"
+                SpannableString ss1 = new SpannableString(date + "\n"
                         + details[i].getJSONObject("temp").getLong("max") + "°" + "      "
                         + details[i].getJSONObject("temp").getLong("min") + "°" + "\n");
                 ss1.setSpan(new RelativeSizeSpan(1.1f), 0,7, 0); // set size
@@ -625,80 +700,5 @@ public class WeatherFragment extends Fragment {
                 updateWeatherData(preferences.getCity(), null, null);
             }
         }
-    }
-
-    public WeatherFragment() {
-        handler = new Handler();
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.fragment_weather, container, false);
-        cityField = (TextView)rootView.findViewById(R.id.city_field);
-        cityField.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
-        updatedField = (TextView)rootView.findViewById(R.id.updated_field);
-        updatedField.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
-        humidityView = (TextView) rootView.findViewById(R.id.humidity_view);
-        humidityView.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
-        windView = (TextView) rootView.findViewById(R.id.wind_view);
-        windView.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
-        directionView = (TextView)rootView.findViewById(R.id.direction_view);
-        directionView.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
-        swipeView = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe);
-        swipeView.setColorSchemeResources(R.color.red, R.color.green , R.color.blue , R.color.yellow , R.color.orange);
-        swipeView.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                swipeView.setRefreshing(true);
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        changeCity(preferences.getCity());
-                    }
-                });
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        swipeView.setRefreshing(false);
-                    }
-                }, 10000);
-            }
-        });
-        directionView.setTypeface(weatherFont);
-        directionView.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
-        dailyView = (TextView)rootView.findViewById(R.id.daily_view);
-        dailyView.setText(getString(R.string.daily));
-        dailyView.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
-        button = (Button)rootView.findViewById(R.id.button1);
-        pd.show();
-        for (int i = 0; i < 11; ++i)
-        {
-            String f = "details_view" + (i + 1) , g = "weather_icon" + (i + 1);
-            if (i != 10) {
-                int resID = getResources().getIdentifier(f, "id", getContext().getPackageName());
-                detailsField[i] = (TextView) rootView.findViewById(resID);
-                detailsField[i].setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
-            }
-            int resIDI = getResources().getIdentifier(g, "id" , getContext().getPackageName());
-            weatherIcon[i] = (TextView)rootView.findViewById(resIDI);
-            weatherIcon[i].setTypeface(weatherFont);
-            weatherIcon[i].setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
-        }
-        return rootView;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        MaterialDialog.Builder builder = new MaterialDialog.Builder(this.getActivity())
-                .title("Please Wait")
-                .content("Loading")
-                .cancelable(false)
-                .progress(true , 0);
-        pd = builder.build();
-        preferences = new Preferences(getContext());
-        weatherFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/weather.ttf");
-        updateWeatherData(preferences.getCity(), null, null);
     }
 }
