@@ -38,7 +38,7 @@ public class FetchWeather extends AsyncTask<String , Void , JSONObject[]> {
     }
 
     @Override
-    protected JSONObject[] doInBackground(String... params) {
+    public JSONObject[] doInBackground(String... params) {
         if (params.length == 1)
             city(params);
         else

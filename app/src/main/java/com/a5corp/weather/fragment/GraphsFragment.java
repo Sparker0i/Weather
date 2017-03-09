@@ -39,3 +39,7 @@ public class GraphsFragment extends Fragment {
         return rootView;
     }
 }
+
+class Temperature {
+    
+}
