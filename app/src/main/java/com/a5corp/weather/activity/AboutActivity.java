@@ -25,8 +25,6 @@ public class AboutActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent (Intent.ACTION_VIEW , Uri.parse("mailto:" + "AadityaMenon007@gmail.com"));
-                intent.putExtra(Intent.EXTRA_SUBJECT, "your_subject");
-                intent.putExtra(Intent.EXTRA_TEXT, "your_text");
                 startActivity(intent);
             }
         });
