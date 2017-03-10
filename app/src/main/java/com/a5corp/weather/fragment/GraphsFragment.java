@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.a5corp.weather.R;
+import com.a5corp.weather.internet.FetchWeather;
+import com.a5corp.weather.preferences.Preferences;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
@@ -21,6 +23,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class GraphsFragment extends Fragment {
 
@@ -30,6 +33,8 @@ public class GraphsFragment extends Fragment {
     List<Entry> temperatures;
     LineDataSet dataSet;
     List<Entry> entries = new ArrayList<Entry>(10);
+    FetchWeather fw;
+    Preferences pf;
 
     public GraphsFragment() {
         // Required empty public constructor
@@ -39,6 +44,8 @@ public class GraphsFragment extends Fragment {
     @Override
     public void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        fw = new FetchWeather(getContext());
+        pf = new Preferences(getContext());
     }
 
     @Override
@@ -60,28 +67,40 @@ public class GraphsFragment extends Fragment {
 
     public void getTemperatures() {
         Bundle bundle = this.getArguments();
-        JSONObject str;
+        JSONObject[] str = null ;
+        JSONObject str1;
         JSONArray list;
         Temperature[] x = new Temperature[10];
-        if (bundle != null) {
+        try {
+            str = fw.execute(pf.getCity()).get();
+            System.out.println(str[1].toString());
+        }
+        catch(InterruptedException iex) {
+            iex.printStackTrace();
+        }
+        catch (ExecutionException eex) {
+            eex.printStackTrace();
+        }
             try {
-                str = new JSONObject(bundle.getString("json", null));
-                list = str.getJSONArray("list");
+                //str = new JSONObject(bundle.getString("json", null));
+                str1 = str[1];
+                list = str1.getJSONArray("list");
                 for (int i = 0; i < 10; ++i) {
                     //SimpleDateFormat simpleDateformat = new SimpleDateFormat("E" , Locale.US);
                     long day = list.getJSONObject(i).getLong("dt");
-                    long temp = list.getJSONObject(i).getLong("day");
+                    long temp = list.getJSONObject(i).getJSONObject("temp").getLong("day");
                     x[i] = new Temperature(day, temp);
+                    Log.i("added" , i + "to temperature");
                 }
                 for (Temperature data : x) {
 
                     // turn your data into Entry objects
                     entries.add(new Entry(data.getDate(), data.getTemp()));
+                    Log.i("added" , data + "to temperature");
                 }
             } catch (JSONException ex) {
                 ex.printStackTrace();
             }
-        }
     }
 
     public void loadChart() {
