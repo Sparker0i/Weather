@@ -13,6 +13,7 @@ import android.support.design.widget.FloatingActionButton;;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.app.FragmentManager;
 import android.view.MenuItem;
@@ -138,6 +139,8 @@ public class WeatherActivity extends AppCompatActivity {
                                 GraphsFragment graphsFragment = new GraphsFragment();
                                 Bundle bundle = new Bundle();
                                 bundle.putString("json" , wf.getDailyJson().toString());
+                                graphsFragment.setArguments(bundle);
+                                Log.i("jsonz" , wf.getDailyJson().toString());
                                 getSupportFragmentManager().beginTransaction()
                                         .replace(R.id.fragment, graphsFragment)
                                         .commit();

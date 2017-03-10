@@ -67,40 +67,26 @@ public class GraphsFragment extends Fragment {
 
     public void getTemperatures() {
         Bundle bundle = this.getArguments();
-        JSONObject[] str = null ;
-        JSONObject str1;
+        JSONObject str;
         JSONArray list;
-        Temperature[] x = new Temperature[10];
-        try {
-            str = fw.execute(pf.getCity()).get();
-            System.out.println(str[1].toString());
-        }
-        catch(InterruptedException iex) {
-            iex.printStackTrace();
-        }
-        catch (ExecutionException eex) {
-            eex.printStackTrace();
-        }
+        if (bundle != null) {
             try {
-                //str = new JSONObject(bundle.getString("json", null));
-                str1 = str[1];
-                list = str1.getJSONArray("list");
+                str = new JSONObject(bundle.getString("json", null));
+                list = str.getJSONArray("list");
                 for (int i = 0; i < 10; ++i) {
                     //SimpleDateFormat simpleDateformat = new SimpleDateFormat("E" , Locale.US);
                     long day = list.getJSONObject(i).getLong("dt");
                     long temp = list.getJSONObject(i).getJSONObject("temp").getLong("day");
-                    x[i] = new Temperature(day, temp);
-                    Log.i("added" , i + "to temperature");
-                }
-                for (Temperature data : x) {
-
-                    // turn your data into Entry objects
-                    entries.add(new Entry(data.getDate(), data.getTemp()));
-                    Log.i("added" , data + "to temperature");
+                    entries.add(new Entry(day , temp));
+                    Log.i("Added" , "Entry");
                 }
             } catch (JSONException ex) {
                 ex.printStackTrace();
+                Log.i("Caught" , "JSON Ex");
             }
+        }
+        else
+            Log.e("Null" , "Bundle");
     }
 
     public void loadChart() {
@@ -109,24 +95,7 @@ public class GraphsFragment extends Fragment {
         dataSet.setValueTextColor(Color.parseColor("#FFFFFF"));
         LineData lineData = new LineData(dataSet);
         chart.setData(lineData);
+        chart.setBackgroundColor(Color.parseColor("#FFFFFF"));
         chart.invalidate();
-    }
-}
-
-class Temperature {
-    private long date;
-    private long temp;
-
-    Temperature(long str , long temp) {
-        this.date = str;
-        this.temp = temp;
-    }
-
-    public long getDate() {
-        return date;
-    }
-
-    public long getTemp() {
-        return temp;
     }
 }

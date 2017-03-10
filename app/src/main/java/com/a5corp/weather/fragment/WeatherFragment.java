@@ -206,7 +206,7 @@ public class WeatherFragment extends Fragment {
     }
 
     public JSONObject getDailyJson() {
-        return json[0];
+        return json[1];
     }
 
     public void changeCity(String city)
