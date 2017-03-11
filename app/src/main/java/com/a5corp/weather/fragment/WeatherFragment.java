@@ -15,6 +15,9 @@ import android.text.SpannableString;
 import android.text.style.RelativeSizeSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -23,10 +26,13 @@ import android.widget.Toast;
 
 import com.a5corp.weather.GlobalActivity;
 import com.a5corp.weather.R;
+import com.a5corp.weather.activity.AboutActivity;
 import com.a5corp.weather.activity.DetailActivity;
 import com.a5corp.weather.activity.FirstLaunch;
+import com.a5corp.weather.activity.WeatherActivity;
 import com.a5corp.weather.internet.CheckConnection;
 import com.a5corp.weather.internet.FetchWeather;
+import com.a5corp.weather.permissions.Permissions;
 import com.a5corp.weather.preferences.Preferences;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -128,10 +134,35 @@ public class WeatherFragment extends Fragment {
                 .cancelable(false)
                 .progress(true , 0);
         pd = builder.build();
+        setHasOptionsMenu(true);
         preferences = new Preferences(getContext());
         weatherFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/weather.ttf");
         updateWeatherData(preferences.getCity(), null, null);
     }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu , MenuInflater inflater) {
+        getActivity().getMenuInflater().inflate(R.menu.weather, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.change_city : showInputDialog();
+                break;
+            case R.id.about_page : Intent intent = new Intent(getActivity() , AboutActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.refresh : changeCity(GlobalActivity.cp.getCity());
+                break;
+            case R.id.location :
+                Permissions permission = new Permissions(getContext());
+                permission.checkPermission();
+                break;
+        }
+        return true;
+    }
+
 
     private void updateWeatherData(final String city, final String lat, final String lon) {
         wt = new FetchWeather(getContext());

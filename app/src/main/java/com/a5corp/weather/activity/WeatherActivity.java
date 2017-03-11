@@ -186,30 +186,6 @@ public class WeatherActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.weather, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.change_city : showInputDialog();
-                break;
-            case R.id.about_page : Intent intent = new Intent(WeatherActivity.this, AboutActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.refresh : changeCity(GlobalActivity.cp.getCity());
-                break;
-            case R.id.location :
-                permission = new Permissions(this);
-                permission.checkPermission();
-                break;
-        }
-        return true;
-    }
-
-    @Override
     public void onBackPressed() {
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.addCategory(Intent.CATEGORY_HOME);
