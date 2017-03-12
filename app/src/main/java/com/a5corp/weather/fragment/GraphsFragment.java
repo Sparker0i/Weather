@@ -1,6 +1,6 @@
 package com.a5corp.weather.fragment;
 
-import android.content.Intent;
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -39,9 +39,8 @@ public class GraphsFragment extends Fragment {
 
     View rootView;
     Handler handler;
-    LineChart chart;
-    List<Entry> temperatures;
-    List<Entry> entries = new ArrayList<>();
+    LineChart temperatureChart , rainChart;
+    List<Entry> tempEntries = new ArrayList<>() , rainEntries = new ArrayList<>();
     FetchWeather fw;
     Preferences pf;
     Bundle bundle;
@@ -67,8 +66,8 @@ public class GraphsFragment extends Fragment {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_graphs, container, false);
         Log.i("Loaded" , "Fragment");
-        chart = (LineChart) rootView.findViewById(R.id.chart);
-        temperatures = new ArrayList<>();
+        temperatureChart = (LineChart) rootView.findViewById(R.id.temperature_chart);
+        rainChart = (LineChart) rootView.findViewById(R.id.rain_chart);
         function();
         return rootView;
     }
@@ -90,15 +89,15 @@ public class GraphsFragment extends Fragment {
 
     public void function() {
         getTemperatures();
-        loadChart();
+        loadCharts();
     }
 
     public void toggleValues() {
-        for (IDataSet set : chart.getData().getDataSets()) {
+        for (IDataSet set : temperatureChart.getData().getDataSets()) {
             set.setDrawValues(!set.isDrawValuesEnabled());
             set.setValueTextColor(Color.WHITE);
         }
-        chart.invalidate();
+        temperatureChart.invalidate();
     }
 
     public void getTemperatures() {
@@ -110,29 +109,34 @@ public class GraphsFragment extends Fragment {
             Log.e("Null" , "Bundle");
     }
 
-    public void loadChart() {
-        chart.setDrawGridBackground(false);
-        chart.setBackgroundColor(Color.WHITE);
-        chart.setTouchEnabled(true);
-        chart.setDragEnabled(true);
-        chart.setMaxHighlightDistance(300);
-        chart.setPinchZoom(true);
-        chart.setPadding(2 , 2 , 2 , 2);
-        chart.getLegend().setEnabled(true);
-        chart.getLegend().setTextColor(Color.WHITE);
-        chart.setBackgroundColor(Color.parseColor("#000000"));
+    public void loadCharts() {
+        loadTemperatureChart();
+        loadRainChart();
+    }
 
-        YAxis yAxisRight = chart.getAxisRight();
+    public void loadTemperatureChart() {
+        temperatureChart.setDrawGridBackground(false);
+        temperatureChart.setBackgroundColor(Color.WHITE);
+        temperatureChart.setTouchEnabled(true);
+        temperatureChart.setDragEnabled(true);
+        temperatureChart.setMaxHighlightDistance(300);
+        temperatureChart.setPinchZoom(true);
+        temperatureChart.setPadding(2 , 2 , 2 , 2);
+        temperatureChart.getLegend().setEnabled(true);
+        temperatureChart.getLegend().setTextColor(Color.WHITE);
+        temperatureChart.setBackgroundColor(Color.parseColor("#000000"));
+
+        YAxis yAxisRight = temperatureChart.getAxisRight();
         yAxisRight.setDrawGridLines(false);
         yAxisRight.setDrawAxisLine(false);
         yAxisRight.setDrawLabels(false);
         yAxisRight.setTextColor(Color.WHITE);
         yAxisRight.enableAxisLineDashedLine(2f , 4f , 2f);
 
-        YAxis yAxisLeft = chart.getAxisLeft();
+        YAxis yAxisLeft = temperatureChart.getAxisLeft();
         yAxisLeft.setTextColor(Color.WHITE);
 
-        XAxis x = chart.getXAxis();
+        XAxis x = temperatureChart.getXAxis();
         x.setEnabled(true);
         x.setPosition(XAxis.XAxisPosition.BOTTOM);
         x.setDrawGridLines(false);
@@ -140,12 +144,12 @@ public class GraphsFragment extends Fragment {
         x.setValueFormatter(new XFormatter(dates));
 
         LineDataSet set;
-        if (chart.getData() != null) {
-            chart.getData().removeDataSet(chart.getData().getDataSetByIndex(
-                    chart.getData().getDataSetCount() - 1));
-            chart.getLegend().setTextColor(Color.parseColor("#FFFFFF"));
+        if (temperatureChart.getData() != null) {
+            temperatureChart.getData().removeDataSet(temperatureChart.getData().getDataSetByIndex(
+                    temperatureChart.getData().getDataSetCount() - 1));
+            temperatureChart.getLegend().setTextColor(Color.parseColor("#FFFFFF"));
         }
-        set = new LineDataSet(entries, "Temperature, " + getString(R.string.c));
+        set = new LineDataSet(tempEntries, "Temperature, " + getString(R.string.c));
         set.setMode(LineDataSet.Mode.CUBIC_BEZIER);
         set.setCubicIntensity(0.2f);
         set.setDrawCircles(false);
@@ -157,9 +161,61 @@ public class GraphsFragment extends Fragment {
         set.setValueFormatter(mValueFormatter);
 
         LineData data = new LineData(set);
-        chart.setData(data);
+        temperatureChart.setData(data);
 
-        chart.invalidate();
+        temperatureChart.invalidate();
+    }
+
+    public void loadRainChart() {
+        rainChart.setDrawGridBackground(false);
+        rainChart.setBackgroundColor(Color.WHITE);
+        rainChart.setTouchEnabled(true);
+        rainChart.setDragEnabled(true);
+        rainChart.setMaxHighlightDistance(300);
+        rainChart.setPinchZoom(true);
+        rainChart.setPadding(2 , 2 , 2 , 2);
+        rainChart.getLegend().setEnabled(true);
+        rainChart.getLegend().setTextColor(Color.WHITE);
+        rainChart.setBackgroundColor(Color.parseColor("#000000"));
+
+        YAxis yAxisRight = rainChart.getAxisRight();
+        yAxisRight.setDrawGridLines(false);
+        yAxisRight.setDrawAxisLine(false);
+        yAxisRight.setDrawLabels(false);
+        yAxisRight.setTextColor(Color.WHITE);
+        yAxisRight.enableAxisLineDashedLine(2f , 4f , 2f);
+
+        YAxis yAxisLeft = rainChart.getAxisLeft();
+        yAxisLeft.setTextColor(Color.WHITE);
+
+        XAxis x = rainChart.getXAxis();
+        x.setEnabled(true);
+        x.setPosition(XAxis.XAxisPosition.BOTTOM);
+        x.setDrawGridLines(false);
+        x.setTextColor(Color.parseColor("#FFFFFF"));
+        x.setValueFormatter(new XFormatter(dates));
+
+        LineDataSet set;
+        if (rainChart.getData() != null) {
+            rainChart.getData().removeDataSet(rainChart.getData().getDataSetByIndex(
+                    rainChart.getData().getDataSetCount() - 1));
+            rainChart.getLegend().setTextColor(Color.parseColor("#FFFFFF"));
+        }
+        set = new LineDataSet(rainEntries, "Rain, mm");
+        set.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+        set.setCubicIntensity(0.2f);
+        set.setDrawCircles(false);
+        set.setLineWidth(2f);
+        set.setDrawValues(false);
+        set.setValueTextSize(10f);
+        set.setColor(Color.GREEN);
+        set.setHighlightEnabled(false);
+        set.setValueFormatter(mValueFormatter);
+
+        LineData data = new LineData(set);
+        rainChart.setData(data);
+
+        rainChart.invalidate();
     }
 
     public void createEntries() {
@@ -171,8 +227,16 @@ public class GraphsFragment extends Fragment {
             for (int i = 0; i < 10; ++i) {
                 long day = list.getJSONObject(i).getLong("dt");
                 long temp = list.getJSONObject(i).getJSONObject("temp").getLong("day");
-                entries.add(new Entry(i , temp));
-                Log.i("Added" , "Entry : " + i + " " + (int) temp);
+                long rain;
+                try {
+                    rain = list.getJSONObject(i).getLong("rain");
+                }
+                catch (JSONException ex) {
+                    rain = 0;
+                }
+                tempEntries.add(new Entry(i , temp));
+                rainEntries.add(new Entry(i , rain));
+                Log.i("Added" , "Entry : " + i + " " + temp);
                 dates[i] = getDay(day);
                 Log.i("Added" , "Day : " + dates[i]);
             }
@@ -182,6 +246,7 @@ public class GraphsFragment extends Fragment {
         }
     }
 
+    @SuppressLint("SwitchIntDef")
     public String getDay(long dt) {
         dt *= 1000;
         Calendar c = Calendar.getInstance();

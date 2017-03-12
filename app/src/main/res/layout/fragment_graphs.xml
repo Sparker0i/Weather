@@ -1,17 +1,35 @@
 <RelativeLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <it.gmariotti.cardslib.library.view.CardViewNative android:id="@+id/carddemo"
+    <it.gmariotti.cardslib.library.view.CardViewNative
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="12dp"
         android:layout_marginRight="12dp"
         android:layout_marginTop="12dp"
         android:paddingBottom="@dimen/activity_horizontal_margin"
-        xmlns:android="http://schemas.android.com/apk/res/android" >
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/cardViewNative">
 
         <com.github.mikephil.charting.charts.LineChart
-            android:id="@+id/chart"
+            android:id="@+id/temperature_chart"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:padding="@dimen/activity_horizontal_margin" />
+    </it.gmariotti.cardslib.library.view.CardViewNative>
+
+    <it.gmariotti.cardslib.library.view.CardViewNative xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginTop="16dp"
+        android:paddingBottom="@dimen/activity_horizontal_margin"
+        android:layout_below="@+id/cardViewNative"
+        android:layout_alignParentEnd="true">
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/rain_chart"
             android:layout_width="match_parent"
             android:layout_height="250dp"
             android:padding="@dimen/activity_horizontal_margin" />
