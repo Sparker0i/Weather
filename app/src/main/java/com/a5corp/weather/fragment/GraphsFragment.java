@@ -1,11 +1,15 @@
 package com.a5corp.weather.fragment;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -15,12 +19,12 @@ import com.a5corp.weather.preferences.Preferences;
 import com.a5corp.weather.utils.CustomFormatter;
 import com.a5corp.weather.utils.XFormatter;
 import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.interfaces.datasets.IDataSet;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -37,7 +41,6 @@ public class GraphsFragment extends Fragment {
     Handler handler;
     LineChart chart;
     List<Entry> temperatures;
-    LineDataSet dataSet;
     List<Entry> entries = new ArrayList<>();
     FetchWeather fw;
     Preferences pf;
@@ -55,7 +58,7 @@ public class GraphsFragment extends Fragment {
         mValueFormatter = new CustomFormatter();
         fw = new FetchWeather(getContext());
             pf = new Preferences(getContext());
-        setHasOptionsMenu(false);
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -70,9 +73,32 @@ public class GraphsFragment extends Fragment {
         return rootView;
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu , MenuInflater inflater) {
+        getActivity().getMenuInflater().inflate(R.menu.menu_graph, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.toggle_values :
+                toggleValues();
+                break;
+        }
+        return true;
+    }
+
     public void function() {
         getTemperatures();
         loadChart();
+    }
+
+    public void toggleValues() {
+        for (IDataSet set : chart.getData().getDataSets()) {
+            set.setDrawValues(!set.isDrawValuesEnabled());
+            set.setValueTextColor(Color.WHITE);
+        }
+        chart.invalidate();
     }
 
     public void getTemperatures() {
@@ -85,12 +111,6 @@ public class GraphsFragment extends Fragment {
     }
 
     public void loadChart() {
-        dataSet = new LineDataSet(entries, "Temperature"); // add entries to dataset
-        dataSet.setColor(Color.parseColor("#FF0000"));
-        dataSet.setValueTextColor(Color.parseColor("#FFFFFF"));
-        LineData lineData = new LineData(dataSet);
-
-        chart.setData(lineData);
         chart.setDrawGridBackground(false);
         chart.setBackgroundColor(Color.WHITE);
         chart.setTouchEnabled(true);
@@ -98,53 +118,46 @@ public class GraphsFragment extends Fragment {
         chart.setMaxHighlightDistance(300);
         chart.setPinchZoom(true);
         chart.setPadding(2 , 2 , 2 , 2);
-        chart.getLegend().setEnabled(false);
-
+        chart.getLegend().setEnabled(true);
+        chart.getLegend().setTextColor(Color.WHITE);
+        chart.setBackgroundColor(Color.parseColor("#000000"));
 
         YAxis yAxisRight = chart.getAxisRight();
         yAxisRight.setDrawGridLines(false);
         yAxisRight.setDrawAxisLine(false);
         yAxisRight.setDrawLabels(false);
+        yAxisRight.setTextColor(Color.WHITE);
         yAxisRight.enableAxisLineDashedLine(2f , 4f , 2f);
+
+        YAxis yAxisLeft = chart.getAxisLeft();
+        yAxisLeft.setTextColor(Color.WHITE);
 
         XAxis x = chart.getXAxis();
         x.setEnabled(true);
         x.setPosition(XAxis.XAxisPosition.BOTTOM);
         x.setDrawGridLines(false);
+        x.setTextColor(Color.parseColor("#FFFFFF"));
         x.setValueFormatter(new XFormatter(dates));
 
         LineDataSet set;
         if (chart.getData() != null) {
             chart.getData().removeDataSet(chart.getData().getDataSetByIndex(
                     chart.getData().getDataSetCount() - 1));
-            set = new LineDataSet(entries, "Day");
-            set.setMode(LineDataSet.Mode.CUBIC_BEZIER);
-            set.setCubicIntensity(0.2f);
-            set.setDrawCircles(false);
-            set.setLineWidth(2f);
-            set.setDrawValues(false);
-            set.setValueTextSize(12f);
-            set.setColor(Color.parseColor("#E84E40"));
-            set.setHighlightEnabled(false);
-            set.setValueFormatter(mValueFormatter);
-
-            LineData data = new LineData(set);
-            chart.setData(data);
-        } else {
-            set = new LineDataSet(entries, "Day");
-            set.setMode(LineDataSet.Mode.CUBIC_BEZIER);
-            set.setCubicIntensity(0.2f);
-            set.setDrawCircles(false);
-            set.setLineWidth(2f);
-            set.setValueTextSize(12f);
-            set.setDrawValues(false);
-            set.setColor(Color.parseColor("#E84E40"));
-            set.setHighlightEnabled(false);
-            set.setValueFormatter(mValueFormatter);
-
-            LineData data = new LineData(set);
-            chart.setData(data);
+            chart.getLegend().setTextColor(Color.parseColor("#FFFFFF"));
         }
+        set = new LineDataSet(entries, "Temperature, " + getString(R.string.c));
+        set.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+        set.setCubicIntensity(0.2f);
+        set.setDrawCircles(false);
+        set.setLineWidth(2f);
+        set.setDrawValues(false);
+        set.setValueTextSize(10f);
+        set.setColor(Color.MAGENTA);
+        set.setHighlightEnabled(false);
+        set.setValueFormatter(mValueFormatter);
+
+        LineData data = new LineData(set);
+        chart.setData(data);
 
         chart.invalidate();
     }
@@ -158,7 +171,7 @@ public class GraphsFragment extends Fragment {
             for (int i = 0; i < 10; ++i) {
                 long day = list.getJSONObject(i).getLong("dt");
                 long temp = list.getJSONObject(i).getJSONObject("temp").getLong("day");
-                entries.add(new Entry(i , (int) temp));
+                entries.add(new Entry(i , temp));
                 Log.i("Added" , "Entry : " + i + " " + (int) temp);
                 dates[i] = getDay(day);
                 Log.i("Added" , "Day : " + dates[i]);
