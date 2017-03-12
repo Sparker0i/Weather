@@ -43,7 +43,6 @@ public class GraphsFragment extends Fragment {
     String[] dates = new String[10];
 
     public GraphsFragment() {
-        // Required empty public constructor
         handler = new Handler();
     }
 
@@ -80,12 +79,13 @@ public class GraphsFragment extends Fragment {
             try {
                 str = new JSONObject(bundle.getString("json", null));
                 list = str.getJSONArray("list");
-                for (int i = 0; i < 10; ++i) {
+                for (int i = 0; i < 7; ++i) {
                     long day = list.getJSONObject(i).getLong("dt");
                     long temp = list.getJSONObject(i).getJSONObject("temp").getLong("day");
-                    entries.add(new Entry(day , temp));
+                    entries.add(new Entry(i , temp));
+                    Log.i("Added" , "Entry : " + i + " " + temp);
                     dates[i] = getDay(day);
-                    Log.i("Added" , "Entry");
+                    Log.i("Added" , "Day : " + dates[i]);
                 }
             } catch (JSONException ex) {
                 ex.printStackTrace();
@@ -105,7 +105,8 @@ public class GraphsFragment extends Fragment {
         Description desc = new Description();
         desc.setText("Temperature, " + getString(R.string.c));
         chart.setDescription(desc);
-        chart.setBackgroundColor(Color.MAGENTA);
+        chart.setBackgroundColor(Color.WHITE);
+        
 
         YAxis yAxisRight = chart.getAxisRight();
         yAxisRight.setDrawGridLines(false);
@@ -117,7 +118,6 @@ public class GraphsFragment extends Fragment {
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setTextSize(10f);
         xAxis.setDrawGridLines(false);
-        xAxis.setTextSize(2f);
         xAxis.setValueFormatter(new XFormatter(dates));
 
         chart.invalidate();
