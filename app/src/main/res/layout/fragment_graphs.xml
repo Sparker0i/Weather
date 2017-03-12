@@ -6,12 +6,20 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <com.github.mikephil.charting.charts.LineChart
-            android:id="@+id/chart"
-            android:padding="@dimen/activity_horizontal_margin"
+        <it.gmariotti.cardslib.library.view.CardViewNative android:id="@+id/carddemo"
             android:layout_width="match_parent"
-            android:layout_height="300dp"/>
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="12dp"
+            xmlns:android="http://schemas.android.com/apk/res/android" >
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/chart"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:padding="@dimen/activity_horizontal_margin" />
+        </it.gmariotti.cardslib.library.view.CardViewNative>
 
     </RelativeLayout>
 </android.support.v4.widget.SwipeRefreshLayout>
