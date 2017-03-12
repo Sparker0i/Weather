@@ -1,6 +1,5 @@
 package com.a5corp.weather.activity;
 
-import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -9,14 +8,11 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
-import android.app.FragmentManager;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -24,7 +20,6 @@ import android.view.WindowManager;
 import com.a5corp.weather.BuildConfig;
 import com.a5corp.weather.GlobalActivity;
 import com.a5corp.weather.R;
-import com.a5corp.weather.fragment.AboutFragment;
 import com.a5corp.weather.fragment.GraphsFragment;
 import com.a5corp.weather.fragment.MapsFragment;
 import com.a5corp.weather.fragment.WeatherFragment;
@@ -43,6 +38,7 @@ import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
+import com.mikepenz.weather_icons_typeface_library.WeatherIcons;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 public class WeatherActivity extends AppCompatActivity {
@@ -97,7 +93,7 @@ public class WeatherActivity extends AppCompatActivity {
                 .build();
         SecondaryDrawerItem item1 = new SecondaryDrawerItem().withIdentifier(1).withName(R.string.drawer_item_home)
                 .withIcon(new IconicsDrawable(this)
-                        .icon(GoogleMaterial.Icon.gmd_home)
+                        .icon(WeatherIcons.Icon.wic_day_sunny)
                         .sizeRes(R.dimen.activity_horizontal_margin));
         SecondaryDrawerItem item2 = new SecondaryDrawerItem().withIdentifier(2).withName(R.string.drawer_item_graph)
                 .withIcon(new IconicsDrawable(this)
