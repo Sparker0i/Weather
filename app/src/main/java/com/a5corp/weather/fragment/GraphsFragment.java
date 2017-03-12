@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import com.a5corp.weather.R;
 import com.a5corp.weather.internet.FetchWeather;
 import com.a5corp.weather.preferences.Preferences;
+import com.a5corp.weather.utils.CustomFormatter;
 import com.a5corp.weather.utils.XFormatter;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Description;
@@ -40,6 +41,8 @@ public class GraphsFragment extends Fragment {
     List<Entry> entries = new ArrayList<>();
     FetchWeather fw;
     Preferences pf;
+    Bundle bundle;
+    CustomFormatter mValueFormatter;
     String[] dates = new String[10];
 
     public GraphsFragment() {
@@ -49,6 +52,7 @@ public class GraphsFragment extends Fragment {
     @Override
     public void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mValueFormatter = new CustomFormatter();
         fw = new FetchWeather(getContext());
             pf = new Preferences(getContext());
         setHasOptionsMenu(false);
@@ -72,25 +76,9 @@ public class GraphsFragment extends Fragment {
     }
 
     public void getTemperatures() {
-        Bundle bundle = this.getArguments();
-        JSONObject str;
-        JSONArray list;
+        bundle = this.getArguments();
         if (bundle != null) {
-            try {
-                str = new JSONObject(bundle.getString("json", null));
-                list = str.getJSONArray("list");
-                for (int i = 0; i < 7; ++i) {
-                    long day = list.getJSONObject(i).getLong("dt");
-                    long temp = list.getJSONObject(i).getJSONObject("temp").getLong("day");
-                    entries.add(new Entry(i , temp));
-                    Log.i("Added" , "Entry : " + i + " " + temp);
-                    dates[i] = getDay(day);
-                    Log.i("Added" , "Day : " + dates[i]);
-                }
-            } catch (JSONException ex) {
-                ex.printStackTrace();
-                Log.i("Caught" , "JSON Ex");
-            }
+            createEntries();
         }
         else
             Log.e("Null" , "Bundle");
@@ -101,12 +89,17 @@ public class GraphsFragment extends Fragment {
         dataSet.setColor(Color.parseColor("#FF0000"));
         dataSet.setValueTextColor(Color.parseColor("#FFFFFF"));
         LineData lineData = new LineData(dataSet);
+
         chart.setData(lineData);
-        Description desc = new Description();
-        desc.setText("Temperature, " + getString(R.string.c));
-        chart.setDescription(desc);
+        chart.setDrawGridBackground(false);
         chart.setBackgroundColor(Color.WHITE);
-        
+        chart.setTouchEnabled(true);
+        chart.setDragEnabled(true);
+        chart.setMaxHighlightDistance(300);
+        chart.setPinchZoom(true);
+        chart.setPadding(2 , 2 , 2 , 2);
+        chart.getLegend().setEnabled(false);
+
 
         YAxis yAxisRight = chart.getAxisRight();
         yAxisRight.setDrawGridLines(false);
@@ -114,13 +107,66 @@ public class GraphsFragment extends Fragment {
         yAxisRight.setDrawLabels(false);
         yAxisRight.enableAxisLineDashedLine(2f , 4f , 2f);
 
-        XAxis xAxis = chart.getXAxis();
-        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis.setTextSize(10f);
-        xAxis.setDrawGridLines(false);
-        xAxis.setValueFormatter(new XFormatter(dates));
+        XAxis x = chart.getXAxis();
+        x.setEnabled(true);
+        x.setPosition(XAxis.XAxisPosition.BOTTOM);
+        x.setDrawGridLines(false);
+        x.setValueFormatter(new XFormatter(dates));
+
+        LineDataSet set;
+        if (chart.getData() != null) {
+            chart.getData().removeDataSet(chart.getData().getDataSetByIndex(
+                    chart.getData().getDataSetCount() - 1));
+            set = new LineDataSet(entries, "Day");
+            set.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+            set.setCubicIntensity(0.2f);
+            set.setDrawCircles(false);
+            set.setLineWidth(2f);
+            set.setDrawValues(false);
+            set.setValueTextSize(12f);
+            set.setColor(Color.parseColor("#E84E40"));
+            set.setHighlightEnabled(false);
+            set.setValueFormatter(mValueFormatter);
+
+            LineData data = new LineData(set);
+            chart.setData(data);
+        } else {
+            set = new LineDataSet(entries, "Day");
+            set.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+            set.setCubicIntensity(0.2f);
+            set.setDrawCircles(false);
+            set.setLineWidth(2f);
+            set.setValueTextSize(12f);
+            set.setDrawValues(false);
+            set.setColor(Color.parseColor("#E84E40"));
+            set.setHighlightEnabled(false);
+            set.setValueFormatter(mValueFormatter);
+
+            LineData data = new LineData(set);
+            chart.setData(data);
+        }
 
         chart.invalidate();
+    }
+
+    public void createEntries() {
+        JSONObject str;
+        JSONArray list;
+        try {
+            str = new JSONObject(bundle.getString("json", null));
+            list = str.getJSONArray("list");
+            for (int i = 0; i < 10; ++i) {
+                long day = list.getJSONObject(i).getLong("dt");
+                long temp = list.getJSONObject(i).getJSONObject("temp").getLong("day");
+                entries.add(new Entry(i , (int) temp));
+                Log.i("Added" , "Entry : " + i + " " + (int) temp);
+                dates[i] = getDay(day);
+                Log.i("Added" , "Day : " + dates[i]);
+            }
+        } catch (JSONException ex) {
+            ex.printStackTrace();
+            Log.i("Caught" , "JSON Ex");
+        }
     }
 
     public String getDay(long dt) {

@@ -29,7 +29,6 @@ import com.a5corp.weather.R;
 import com.a5corp.weather.activity.AboutActivity;
 import com.a5corp.weather.activity.DetailActivity;
 import com.a5corp.weather.activity.FirstLaunch;
-import com.a5corp.weather.activity.WeatherActivity;
 import com.a5corp.weather.internet.CheckConnection;
 import com.a5corp.weather.internet.FetchWeather;
 import com.a5corp.weather.permissions.Permissions;
@@ -142,7 +141,7 @@ public class WeatherFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu , MenuInflater inflater) {
-        getActivity().getMenuInflater().inflate(R.menu.weather, menu);
+        getActivity().getMenuInflater().inflate(R.menu.menu_weather, menu);
     }
 
     @Override
