@@ -39,8 +39,8 @@ public class GraphsFragment extends Fragment {
 
     View rootView;
     Handler handler;
-    LineChart temperatureChart , rainChart;
-    List<Entry> tempEntries = new ArrayList<>() , rainEntries = new ArrayList<>();
+    LineChart temperatureChart , rainChart, pressureChart;
+    List<Entry> tempEntries = new ArrayList<>() , rainEntries = new ArrayList<>() , pressureEntries = new ArrayList<>();
     FetchWeather fw;
     Preferences pf;
     Bundle bundle;
@@ -68,6 +68,7 @@ public class GraphsFragment extends Fragment {
         Log.i("Loaded" , "Fragment");
         temperatureChart = (LineChart) rootView.findViewById(R.id.temperature_chart);
         rainChart = (LineChart) rootView.findViewById(R.id.rain_chart);
+        pressureChart = (LineChart) rootView.findViewById(R.id.pressure_chart);
         function();
         return rootView;
     }
@@ -224,6 +225,8 @@ public class GraphsFragment extends Fragment {
         rainChart.invalidate();
     }
 
+    
+
     public void createEntries() {
         JSONObject str;
         JSONArray list;
@@ -233,6 +236,7 @@ public class GraphsFragment extends Fragment {
             for (int i = 0; i < 10; ++i) {
                 long day = list.getJSONObject(i).getLong("dt");
                 long temp = list.getJSONObject(i).getJSONObject("temp").getLong("day");
+                long pressure = list.getJSONObject(i).getLong("pressure");
                 long rain;
                 try {
                     rain = list.getJSONObject(i).getLong("rain");
@@ -242,6 +246,7 @@ public class GraphsFragment extends Fragment {
                 }
                 tempEntries.add(new Entry(i , temp));
                 rainEntries.add(new Entry(i , rain));
+                pressureEntries.add(new Entry(i , pressure));
                 Log.i("Added" , "Entry : " + i + " " + temp);
                 dates[i] = getDay(day);
                 Log.i("Added" , "Day : " + dates[i]);
