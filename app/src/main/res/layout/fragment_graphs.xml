@@ -61,5 +61,43 @@
                 android:padding="@dimen/activity_horizontal_margin" />
         </it.gmariotti.cardslib.library.view.CardViewNative>
 
+        <it.gmariotti.cardslib.library.view.CardViewNative
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/cardViewNative3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="16dp"
+            android:paddingBottom="@dimen/activity_horizontal_margin"
+            android:layout_below="@+id/cardViewNative2"
+            android:layout_alignParentEnd="true">
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/snow_chart"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:padding="@dimen/activity_horizontal_margin" />
+        </it.gmariotti.cardslib.library.view.CardViewNative>
+
+        <it.gmariotti.cardslib.library.view.CardViewNative
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/cardViewNative4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="16dp"
+            android:paddingBottom="@dimen/activity_horizontal_margin"
+            android:layout_below="@+id/cardViewNative3"
+            android:layout_alignParentEnd="true">
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/wind_chart"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:padding="@dimen/activity_horizontal_margin" />
+        </it.gmariotti.cardslib.library.view.CardViewNative>
+
     </RelativeLayout>
 </ScrollView>

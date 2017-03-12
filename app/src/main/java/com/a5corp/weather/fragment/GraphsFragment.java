@@ -39,8 +39,8 @@ public class GraphsFragment extends Fragment {
 
     View rootView;
     Handler handler;
-    LineChart temperatureChart , rainChart, pressureChart;
-    List<Entry> tempEntries = new ArrayList<>() , rainEntries = new ArrayList<>() , pressureEntries = new ArrayList<>();
+    LineChart temperatureChart , rainChart, pressureChart, snowChart, windChart;
+    List<Entry> tempEntries = new ArrayList<>() , rainEntries = new ArrayList<>() , pressureEntries = new ArrayList<>() , snowEntries = new ArrayList<>() , windEntries = new ArrayList<>();
     FetchWeather fw;
     Preferences pf;
     Bundle bundle;
@@ -299,6 +299,13 @@ public class GraphsFragment extends Fragment {
                 }
                 catch (JSONException ex) {
                     rain = 0;
+                }
+                long snow;
+                try {
+                    snow = list.getJSONObject(i).getLong("snow");
+                }
+                catch (JSONException ex) {
+                    snow = 0;
                 }
                 tempEntries.add(new Entry(i , temp));
                 rainEntries.add(new Entry(i , rain));
