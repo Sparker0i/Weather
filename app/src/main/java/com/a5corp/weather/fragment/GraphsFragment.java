@@ -98,6 +98,12 @@ public class GraphsFragment extends Fragment {
             set.setValueTextColor(Color.WHITE);
         }
         temperatureChart.invalidate();
+        for (IDataSet set : rainChart.getData().getDataSets()) {
+            set.setDrawValues(!set.isDrawValuesEnabled());
+            set.setValueTextColor(Color.WHITE);
+        }
+        temperatureChart.invalidate();
+        rainChart.invalidate();
     }
 
     public void getTemperatures() {
@@ -202,7 +208,7 @@ public class GraphsFragment extends Fragment {
             rainChart.getLegend().setTextColor(Color.parseColor("#FFFFFF"));
         }
         set = new LineDataSet(rainEntries, "Rain, mm");
-        set.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+        set.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
         set.setCubicIntensity(0.2f);
         set.setDrawCircles(false);
         set.setLineWidth(2f);
