@@ -114,10 +114,15 @@ public class GraphsFragment extends Fragment {
             set.setDrawValues(!set.isDrawValuesEnabled());
             set.setValueTextColor(Color.WHITE);
         }
+        for (IDataSet set : windChart.getData().getDataSets()) {
+            set.setDrawValues(!set.isDrawValuesEnabled());
+            set.setValueTextColor(Color.WHITE);
+        }
         temperatureChart.invalidate();
         rainChart.invalidate();
         pressureChart.invalidate();
         snowChart.invalidate();
+        windChart.invalidate();
     }
 
     public void getTemperatures() {

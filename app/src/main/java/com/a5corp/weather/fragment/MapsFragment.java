@@ -3,13 +3,10 @@ package com.a5corp.weather.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.IdRes;
-import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AccelerateInterpolator;
 import android.webkit.WebView;
 
 import com.a5corp.weather.R;
@@ -37,10 +34,6 @@ public class MapsFragment extends Fragment {
         rootView = inflater.inflate(R.layout.fragment_maps, container, false);
         webView = (WebView) rootView.findViewById(R.id.webView);
         mBottomBar = (BottomBar) rootView.findViewById(R.id.bottomBar);
-        Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
-        AppBarLayout.LayoutParams params = (AppBarLayout.LayoutParams) toolbar.getLayoutParams();
-        params.setScrollFlags(0);
-        toolbar.animate().translationY(-toolbar.getBottom()).setInterpolator(new AccelerateInterpolator()).start();
         bundle = this.getArguments();
         mapsloader();
         return rootView;
@@ -50,7 +43,7 @@ public class MapsFragment extends Fragment {
         try {
             JSONObject json = new JSONObject(bundle.getString("json"));
             webView.getSettings().setJavaScriptEnabled(true);
-            webView.loadUrl("file:///android_asset/map.html?lat=" + json.getJSONObject("city").getJSONObject("coord").getDouble("lat") + "&lon=" + json.getJSONObject("city").getJSONObject("coord").getDouble("lat") + "&appid=" + getString(R.string.open_weather_maps_app_id));
+            webView.loadUrl("file:///android_asset/map.html?lat=" + json.getJSONObject("city").getJSONObject("coord").getDouble("lon") + "&lon=" + json.getJSONObject("city").getJSONObject("coord").getDouble("lat") + "&appid=" + getString(R.string.open_weather_maps_app_id));
             mBottomBar.setOnTabSelectListener(new OnTabSelectListener() {
                 @Override
                 public void onTabSelected(@IdRes int tabId) {
