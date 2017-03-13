@@ -125,25 +125,28 @@ public class WeatherActivity extends AppCompatActivity {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
                         // do something with the clicked item :D
+                        Bundle bundle = new Bundle();
                         if (drawerItem != null) {
                             if (drawerItem.getIdentifier() == 1) {
                                 getSupportFragmentManager().beginTransaction()
-                                        .replace(R.id.fragment, new WeatherFragment())
+                                        .add(R.id.fragment, new WeatherFragment())
                                         .commit();
                             }
                             else if (drawerItem.getIdentifier() == 2) {
                                 GraphsFragment graphsFragment = new GraphsFragment();
-                                Bundle bundle = new Bundle();
                                 bundle.putString("json" , wf.getDailyJson().toString());
                                 graphsFragment.setArguments(bundle);
                                 Log.i("jsonz" , wf.getDailyJson().toString());
                                 getSupportFragmentManager().beginTransaction()
-                                        .replace(R.id.fragment, graphsFragment)
+                                        .add(R.id.fragment, graphsFragment)
                                         .commit();
                             }
                             else if (drawerItem.getIdentifier() == 3) {
+                                bundle.putString("json" , wf.getDailyJson().toString());
+                                MapsFragment mapsFragment = new MapsFragment();
+                                mapsFragment.setArguments(bundle);
                                 getSupportFragmentManager().beginTransaction()
-                                        .replace(R.id.fragment, new MapsFragment())
+                                        .add(R.id.fragment, mapsFragment)
                                         .commit();
                             }
                             else if (drawerItem.getIdentifier() == 4) {

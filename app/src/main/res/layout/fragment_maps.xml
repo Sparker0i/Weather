@@ -3,11 +3,18 @@
              android:layout_width="match_parent"
              android:layout_height="match_parent"
              tools:context="com.a5corp.weather.fragment.MapsFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment"/>
+        tools:context="cz.martykan.forecastie.activities.MapActivity">
+
+        <WebView
+            android:id="@+id/webView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </RelativeLayout>
 
 </FrameLayout>
