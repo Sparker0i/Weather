@@ -547,6 +547,10 @@ public class WeatherFragment extends Fragment {
             json0 = jsonObj[0];
             json1 = jsonObj[1];
             tc = json0.getJSONObject("main").getDouble("temp");
+            preferences.setLatitude((float) json1.getJSONObject("city").getJSONObject("coord").getDouble("lat"));
+            Log.i("Lat", Float.toString((float) json1.getJSONObject("city").getJSONObject("coord").getDouble("lat")));
+            preferences.setLongitude((float) json1.getJSONObject("city").getJSONObject("coord").getDouble("lon"));
+            Log.i("Lon", Float.toString((float) json1.getJSONObject("city").getJSONObject("coord").getDouble("lon")));
             preferences.setCity(json1.getJSONObject("city").getString("name"));
             int a = (int) Math.round(json0.getJSONObject("main").getDouble("temp"));                        //℃
             cityField.setText(json1.getJSONObject("city").getString("name").toUpperCase(Locale.US) +

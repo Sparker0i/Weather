@@ -12,16 +12,12 @@ public class Preferences {
         prefs = context.getSharedPreferences(USER_PREFS , Context.MODE_PRIVATE);
     }
 
-    public String getCity() {
-        return prefs.getString("city", null);
-    }
-
-    public boolean getLaunched() {
-        return prefs.getBoolean("first" , true);
-    }
-
     public SharedPreferences getPrefs() {
         return prefs;
+    }
+
+    public String getCity() {
+        return prefs.getString("city", null);
     }
 
     public void setCity(String city) {
@@ -34,11 +30,31 @@ public class Preferences {
         prefs.edit().putBoolean("first" , false).apply();
     }
 
+    public boolean getLaunched() {
+        return prefs.getBoolean("first" , true);
+    }
+
     public void setLastCity(String city) {
         prefs.edit().putString("lcity" , city).apply();
     }
 
     public String getLastCity() {
         return prefs.getString("lcity" , null);
+    }
+
+    public void setLatitude(float lat) {
+        prefs.edit().putFloat("lat" , lat).apply();
+    }
+
+    public float getLatitude() {
+        return prefs.getFloat("lat" , 0);
+    }
+
+    public void setLongitude(float lon) {
+        prefs.edit().putFloat("lon" , lon).apply();
+    }
+
+    public float getLongitude() {
+        return prefs.getFloat("lon" , 0);
     }
 }
