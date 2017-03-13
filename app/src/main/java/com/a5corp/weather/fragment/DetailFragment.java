@@ -258,7 +258,7 @@ public class DetailFragment extends Fragment {
         Calendar c = Calendar.getInstance();
         int hours = c.get(Calendar.HOUR_OF_DAY);
 
-        return (hours >= 18 && hours <= 5);
+        return !(hours >= 18 || hours <= 6);
     }
 
     private void setWeatherIcon() {
