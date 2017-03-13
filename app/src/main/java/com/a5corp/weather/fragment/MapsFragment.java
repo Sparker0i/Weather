@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.webkit.WebView;
 
 import com.a5corp.weather.R;
+import com.a5corp.weather.activity.WeatherActivity;
 import com.a5corp.weather.preferences.Preferences;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
@@ -40,6 +41,7 @@ public class MapsFragment extends Fragment {
         prefs = new Preferences(getContext());
         mBottomBar = (BottomBar) rootView.findViewById(R.id.bottomBar);
         bundle = this.getArguments();
+        ((WeatherActivity) getActivity()).hideFab();
         mapsloader();
         return rootView;
     }

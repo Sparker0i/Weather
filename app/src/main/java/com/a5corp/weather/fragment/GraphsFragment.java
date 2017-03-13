@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.a5corp.weather.R;
+import com.a5corp.weather.activity.WeatherActivity;
 import com.a5corp.weather.internet.FetchWeather;
 import com.a5corp.weather.preferences.Preferences;
 import com.a5corp.weather.utils.CustomFormatter;
@@ -71,7 +72,7 @@ public class GraphsFragment extends Fragment {
         pressureChart = (LineChart) rootView.findViewById(R.id.pressure_chart);
         snowChart = (LineChart) rootView.findViewById(R.id.snow_chart);
         windChart = (LineChart) rootView.findViewById(R.id.wind_chart);
-        //getActivity().getActionBar().show();
+        ((WeatherActivity) getActivity()).hideFab();
         function();
         return rootView;
     }

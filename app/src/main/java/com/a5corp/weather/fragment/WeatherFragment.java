@@ -29,6 +29,7 @@ import com.a5corp.weather.R;
 import com.a5corp.weather.activity.AboutActivity;
 import com.a5corp.weather.activity.DetailActivity;
 import com.a5corp.weather.activity.FirstLaunch;
+import com.a5corp.weather.activity.WeatherActivity;
 import com.a5corp.weather.internet.CheckConnection;
 import com.a5corp.weather.internet.FetchWeather;
 import com.a5corp.weather.permissions.Permissions;
@@ -101,6 +102,7 @@ public class WeatherFragment extends Fragment {
                 }, 10000);
             }
         });
+        ((WeatherActivity) getActivity()).showFab();
         //getActivity().getActionBar().show();
         directionView.setTypeface(weatherFont);
         directionView.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));

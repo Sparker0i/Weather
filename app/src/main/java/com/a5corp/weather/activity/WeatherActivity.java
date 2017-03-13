@@ -79,6 +79,14 @@ public class WeatherActivity extends AppCompatActivity {
         initDrawer();
     }
 
+    public void hideFab() {
+        fab.hide();
+    }
+
+    public void showFab() {
+        fab.show();
+    }
+
     public void initDrawer() {
         final IProfile profile = new ProfileDrawerItem().withName("Simple Weather")
                 .withEmail("Version : " + BuildConfig.VERSION_NAME)
