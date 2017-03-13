@@ -69,6 +69,8 @@ public class GraphsFragment extends Fragment {
         temperatureChart = (LineChart) rootView.findViewById(R.id.temperature_chart);
         rainChart = (LineChart) rootView.findViewById(R.id.rain_chart);
         pressureChart = (LineChart) rootView.findViewById(R.id.pressure_chart);
+        snowChart = (LineChart) rootView.findViewById(R.id.snow_chart);
+        windChart = (LineChart) rootView.findViewById(R.id.wind_chart); 
         function();
         return rootView;
     }
@@ -107,9 +109,14 @@ public class GraphsFragment extends Fragment {
             set.setDrawValues(!set.isDrawValuesEnabled());
             set.setValueTextColor(Color.WHITE);
         }
+        for (IDataSet set : snowChart.getData().getDataSets()) {
+            set.setDrawValues(!set.isDrawValuesEnabled());
+            set.setValueTextColor(Color.WHITE);
+        }
         temperatureChart.invalidate();
         rainChart.invalidate();
         pressureChart.invalidate();
+        snowChart.invalidate();
     }
 
     public void getTemperatures() {
@@ -125,6 +132,8 @@ public class GraphsFragment extends Fragment {
         loadTemperatureChart();
         loadRainChart();
         loadPressureChart();
+        loadSnowChart();
+        loadWindChart();
     }
 
     public void loadTemperatureChart() {
@@ -283,6 +292,110 @@ public class GraphsFragment extends Fragment {
         pressureChart.invalidate();
     }
 
+    public void loadSnowChart() {
+        snowChart.setDrawGridBackground(false);
+        snowChart.setBackgroundColor(Color.WHITE);
+        snowChart.setTouchEnabled(true);
+        snowChart.setDragEnabled(true);
+        snowChart.setMaxHighlightDistance(300);
+        snowChart.setPinchZoom(true);
+        snowChart.setPadding(2 , 2 , 2 , 2);
+        snowChart.getLegend().setEnabled(true);
+        snowChart.getLegend().setTextColor(Color.WHITE);
+        snowChart.setBackgroundColor(Color.parseColor("#000000"));
+
+        YAxis yAxisRight = snowChart.getAxisRight();
+        yAxisRight.setDrawGridLines(false);
+        yAxisRight.setDrawAxisLine(false);
+        yAxisRight.setDrawLabels(false);
+        yAxisRight.setTextColor(Color.WHITE);
+        yAxisRight.enableAxisLineDashedLine(2f , 4f , 2f);
+
+        YAxis yAxisLeft = snowChart.getAxisLeft();
+        yAxisLeft.setTextColor(Color.WHITE);
+
+        XAxis x = snowChart.getXAxis();
+        x.setEnabled(true);
+        x.setPosition(XAxis.XAxisPosition.BOTTOM);
+        x.setDrawGridLines(false);
+        x.setTextColor(Color.parseColor("#FFFFFF"));
+        x.setValueFormatter(new XFormatter(dates));
+
+        LineDataSet set;
+        if (snowChart.getData() != null) {
+            snowChart.getData().removeDataSet(snowChart.getData().getDataSetByIndex(
+                    snowChart.getData().getDataSetCount() - 1));
+            snowChart.getLegend().setTextColor(Color.parseColor("#FFFFFF"));
+        }
+        set = new LineDataSet(snowEntries, "Snow, mm");
+        set.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
+        set.setCubicIntensity(0.2f);
+        set.setDrawCircles(false);
+        set.setLineWidth(2f);
+        set.setDrawValues(false);
+        set.setValueTextSize(10f);
+        set.setColor(Color.YELLOW);
+        set.setHighlightEnabled(false);
+        set.setValueFormatter(mValueFormatter);
+
+        LineData data = new LineData(set);
+        snowChart.setData(data);
+
+        snowChart.invalidate();
+    }
+
+    public void loadWindChart() {
+        windChart.setDrawGridBackground(false);
+        windChart.setBackgroundColor(Color.WHITE);
+        windChart.setTouchEnabled(true);
+        windChart.setDragEnabled(true);
+        windChart.setMaxHighlightDistance(300);
+        windChart.setPinchZoom(true);
+        windChart.setPadding(2 , 2 , 2 , 2);
+        windChart.getLegend().setEnabled(true);
+        windChart.getLegend().setTextColor(Color.WHITE);
+        windChart.setBackgroundColor(Color.parseColor("#000000"));
+
+        YAxis yAxisRight = windChart.getAxisRight();
+        yAxisRight.setDrawGridLines(false);
+        yAxisRight.setDrawAxisLine(false);
+        yAxisRight.setDrawLabels(false);
+        yAxisRight.setTextColor(Color.WHITE);
+        yAxisRight.enableAxisLineDashedLine(2f , 4f , 2f);
+
+        YAxis yAxisLeft = windChart.getAxisLeft();
+        yAxisLeft.setTextColor(Color.WHITE);
+
+        XAxis x = windChart.getXAxis();
+        x.setEnabled(true);
+        x.setPosition(XAxis.XAxisPosition.BOTTOM);
+        x.setDrawGridLines(false);
+        x.setTextColor(Color.parseColor("#FFFFFF"));
+        x.setValueFormatter(new XFormatter(dates));
+
+        LineDataSet set;
+        if (windChart.getData() != null) {
+            windChart.getData().removeDataSet(windChart.getData().getDataSetByIndex(
+                    windChart.getData().getDataSetCount() - 1));
+            windChart.getLegend().setTextColor(Color.parseColor("#FFFFFF"));
+        }
+        set = new LineDataSet(windEntries, "Wind, km/h");
+        set.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
+        set.setCubicIntensity(0.2f);
+        set.setDrawCircles(false);
+        set.setLineWidth(2f);
+        set.setDrawValues(false);
+        set.setValueTextSize(10f);
+        set.setColor(Color.RED);
+        set.setHighlightEnabled(false);
+        set.setValueFormatter(mValueFormatter);
+
+        LineData data = new LineData(set);
+        windChart.setData(data);
+
+        windChart.invalidate();
+    }
+
     public void createEntries() {
         JSONObject str;
         JSONArray list;
@@ -307,9 +420,12 @@ public class GraphsFragment extends Fragment {
                 catch (JSONException ex) {
                     snow = 0;
                 }
+                long wind = list.getJSONObject(i).getLong("speed");
                 tempEntries.add(new Entry(i , temp));
                 rainEntries.add(new Entry(i , rain));
                 pressureEntries.add(new Entry(i , pressure));
+                snowEntries.add(new Entry(i , snow));
+                windEntries.add(new Entry(i , wind));
                 Log.i("Added" , "Entry : " + i + " " + temp);
                 dates[i] = getDay(day);
                 Log.i("Added" , "Day : " + dates[i]);
