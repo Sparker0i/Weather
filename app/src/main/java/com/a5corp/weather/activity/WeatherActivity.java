@@ -48,6 +48,7 @@ public class WeatherActivity extends AppCompatActivity {
     GPSTracker gps;
     FloatingActionButton fab;
     WeatherFragment wf;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +60,7 @@ public class WeatherActivity extends AppCompatActivity {
                     .add(R.id.fragment, wf)
                     .commit();
         }
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             Window w = getWindow();
@@ -110,7 +111,7 @@ public class WeatherActivity extends AppCompatActivity {
                 .withSelectable(false);
         new DrawerBuilder()
                 .withActivity(this)
-                .withToolbar(getToolbar())
+                .withToolbar(toolbar)
                 .withSelectedItem(1)
                 .withAccountHeader(headerResult)
                 .withActionBarDrawerToggleAnimated(true)
@@ -129,7 +130,7 @@ public class WeatherActivity extends AppCompatActivity {
                         if (drawerItem != null) {
                             if (drawerItem.getIdentifier() == 1) {
                                 getSupportFragmentManager().beginTransaction()
-                                        .add(R.id.fragment, new WeatherFragment())
+                                        .replace(R.id.fragment, new WeatherFragment())
                                         .commit();
                             }
                             else if (drawerItem.getIdentifier() == 2) {
@@ -138,7 +139,7 @@ public class WeatherActivity extends AppCompatActivity {
                                 graphsFragment.setArguments(bundle);
                                 Log.i("jsonz" , wf.getDailyJson().toString());
                                 getSupportFragmentManager().beginTransaction()
-                                        .add(R.id.fragment, graphsFragment)
+                                        .replace(R.id.fragment, graphsFragment)
                                         .commit();
                             }
                             else if (drawerItem.getIdentifier() == 3) {
@@ -146,7 +147,7 @@ public class WeatherActivity extends AppCompatActivity {
                                 MapsFragment mapsFragment = new MapsFragment();
                                 mapsFragment.setArguments(bundle);
                                 getSupportFragmentManager().beginTransaction()
-                                        .add(R.id.fragment, mapsFragment)
+                                        .replace(R.id.fragment, mapsFragment)
                                         .commit();
                             }
                             else if (drawerItem.getIdentifier() == 4) {
@@ -157,10 +158,6 @@ public class WeatherActivity extends AppCompatActivity {
                     }
                 })
                 .build();
-    }
-
-    public Toolbar getToolbar() {
-        return (Toolbar) findViewById(R.id.toolbar);
     }
 
     @Override

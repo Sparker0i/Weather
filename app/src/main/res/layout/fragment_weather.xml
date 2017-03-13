@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/swipe"
+    android:paddingTop="?attr/actionBarSize"
     tools:context="com.a5corp.weather.fragment.WeatherFragment"
     tools:showIn="@layout/activity_weather">
 

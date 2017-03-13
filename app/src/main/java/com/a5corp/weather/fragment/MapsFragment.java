@@ -2,21 +2,23 @@ package com.a5corp.weather.fragment;
 
 
 import android.os.Bundle;
+import android.support.annotation.IdRes;
+import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateInterpolator;
 import android.webkit.WebView;
 
 import com.a5corp.weather.R;
 import com.roughike.bottombar.BottomBar;
+import com.roughike.bottombar.OnTabSelectListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class MapsFragment extends Fragment {
 
     public View rootView;
@@ -34,8 +36,13 @@ public class MapsFragment extends Fragment {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_maps, container, false);
         webView = (WebView) rootView.findViewById(R.id.webView);
-        mBottomBar = new BottomBar(getContext());
+        mBottomBar = (BottomBar) rootView.findViewById(R.id.bottomBar);
+        Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
+        AppBarLayout.LayoutParams params = (AppBarLayout.LayoutParams) toolbar.getLayoutParams();
+        params.setScrollFlags(0);
+        toolbar.animate().translationY(-toolbar.getBottom()).setInterpolator(new AccelerateInterpolator()).start();
         bundle = this.getArguments();
+        mapsloader();
         return rootView;
     }
 
@@ -44,9 +51,30 @@ public class MapsFragment extends Fragment {
             JSONObject json = new JSONObject(bundle.getString("json"));
             webView.getSettings().setJavaScriptEnabled(true);
             webView.loadUrl("file:///android_asset/map.html?lat=" + json.getJSONObject("city").getJSONObject("coord").getDouble("lat") + "&lon=" + json.getJSONObject("city").getJSONObject("coord").getDouble("lat") + "&appid=" + getString(R.string.open_weather_maps_app_id));
+            mBottomBar.setOnTabSelectListener(new OnTabSelectListener() {
+                @Override
+                public void onTabSelected(@IdRes int tabId) {
+                    if (tabId == R.id.map_rain) {
+                        webView.loadUrl("javascript:map.removeLayer(windLayer);map.removeLayer(tempLayer);map.addLayer(rainLayer);");
+                    }
+                    else if (tabId == R.id.map_temperature) {
+                        webView.loadUrl("javascript:map.removeLayer(windLayer);map.removeLayer(rainLayer);map.addLayer(tempLayer);");
+                    }
+                    else if (tabId == R.id.map_wind) {
+                        webView.loadUrl("javascript:map.removeLayer(rainLayer);map.removeLayer(tempLayer);map.addLayer(windLayer);");
+                    }
+                }
+            });
+
         }
         catch (JSONException jex) {
 
         }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        mBottomBar.onSaveInstanceState();
     }
 }

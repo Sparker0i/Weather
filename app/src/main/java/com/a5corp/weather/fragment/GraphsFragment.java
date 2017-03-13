@@ -70,7 +70,8 @@ public class GraphsFragment extends Fragment {
         rainChart = (LineChart) rootView.findViewById(R.id.rain_chart);
         pressureChart = (LineChart) rootView.findViewById(R.id.pressure_chart);
         snowChart = (LineChart) rootView.findViewById(R.id.snow_chart);
-        windChart = (LineChart) rootView.findViewById(R.id.wind_chart); 
+        windChart = (LineChart) rootView.findViewById(R.id.wind_chart);
+        //getActivity().getActionBar().show();
         function();
         return rootView;
     }

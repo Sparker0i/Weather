@@ -101,6 +101,7 @@ public class WeatherFragment extends Fragment {
                 }, 10000);
             }
         });
+        //getActivity().getActionBar().show();
         directionView.setTypeface(weatherFont);
         directionView.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
         dailyView = (TextView)rootView.findViewById(R.id.daily_view);
