@@ -4,7 +4,6 @@ package com.a5corp.weather.fragment;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,8 +34,10 @@ public class MapsFragment extends Fragment {
         webView = (WebView) rootView.findViewById(R.id.webView);
         prefs = new Preferences(getContext());
         webView.getSettings().setJavaScriptEnabled(true);
-        webView.loadUrl("file:///android_asset/map.html?lat=" + prefs.getLatitude() + "&lon=" + prefs.getLongitude() + "&appid=" + getString(R.string.open_weather_maps_app_id));
-
+        webView.loadUrl("file:///android_asset/map.html?lat=" + prefs.getLatitude() + "&lon=" + prefs.getLongitude() + "&k=2.0" + "&appid=" + getString(R.string.open_weather_maps_app_id));
+        webView.setInitialScale(1);
+        webView.getSettings().setLoadWithOverviewMode(true);
+        webView.getSettings().setUseWideViewPort(true);
         mBottomBar = BottomBar.attach(getActivity() , savedInstanceState);
         mBottomBar.setItems(R.menu.menu_bottombar);
         mBottomBar.setOnMenuTabClickListener(new OnMenuTabClickListener() {
