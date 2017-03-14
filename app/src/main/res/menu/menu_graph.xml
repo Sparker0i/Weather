@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/toggle_values"
-        android:title="@string/toggle_values"
-        app:showAsAction="never"/>
+        android:title="Toggle Values"
+        app:showAsAction="always"/>
 
 </menu>
