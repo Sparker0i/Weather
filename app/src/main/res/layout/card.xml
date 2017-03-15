@@ -4,7 +4,6 @@
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:padding="6dp"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
         <LinearLayout
@@ -12,6 +11,9 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:orientation="horizontal"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="6dp"
+            android:layout_marginRight="6dp"
             android:paddingLeft="8dp"
             android:paddingRight="8dp">
 
@@ -40,19 +42,25 @@
                 tools:text="Creator" />
         </LinearLayout>
 
-        <View
-            android:id="@+id/libraryDescriptionDivider"
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:layout_marginTop="4dp" />
+    <View
+        android:id="@+id/libraryDescriptionDivider"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginTop="4dp"
+        android:background="#000000" />
 
-        <TextView
-            android:id="@+id/libraryDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:maxLines="20"
-            android:padding="8dp"
-            android:textSize="@dimen/textSizeSmall_openSource"
-            android:textStyle="normal"
-            tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla in aliquet justo. Donec tincidunt, leo imperdiet pretium posuere, sapien leo auctor mi, ac scelerisque diam leo vel sapien. Morbi lobortis, sem sed molestie fermentum."/>
+    <TextView
+        android:id="@+id/libraryDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="20"
+        android:padding="8dp"
+        android:layout_marginBottom="6dp"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp"
+        android:textSize="@dimen/textSizeSmall_openSource"
+        android:textStyle="normal"
+        tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla in aliquet justo. Donec tincidunt, leo imperdiet pretium posuere, sapien leo auctor mi, ac scelerisque diam leo vel sapien. Morbi lobortis, sem sed molestie fermentum." />
 </LinearLayout>

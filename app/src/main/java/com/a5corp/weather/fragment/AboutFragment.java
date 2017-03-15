@@ -64,10 +64,14 @@ public class AboutFragment extends Fragment {
                 cvn[i].setBackgroundColor(Color.WHITE);
                 String libraryName = "This";
                 TextView libName = (TextView) cvn[i].findViewById(R.id.libraryName);
+                libName.setTextColor(Color.BLACK);
                 libName.setText(libraryName);
                 String libCreator = "Sparker0i";
                 TextView libCre = (TextView) cvn[i].findViewById(R.id.libraryCreator);
                 libCre.setText(libCreator);
+                String libDescription = "ABOGG I{RNBTIJRN TIJRN IGHUIRGHRUITRBH R TRTUYBEEYEYYB E&YREBRYVE(*RYE(VBR FERYE*&RY*VWE&REVEYRVYT&EBYT YE&YBEVYRE&YR&VE*WRYVWY&V YREYVEB*RVYEW&RWVE";
+                TextView libDesc = (TextView) cvn[i].findViewById(R.id.libraryDescription);
+                libDesc.setText(libDescription);
             }
         }
     }
