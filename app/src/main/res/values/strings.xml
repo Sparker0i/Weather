@@ -95,18 +95,12 @@
     <string name="daily">DAILY</string>
 
     <string name="title_activity_detail">Details</string>
-    <string name="title_activity_first_launch">First Launch</string>
+    <string name="title_activity_first_launch">Enter City</string>
     <!--Navigation Drawer Strings End-->
 
     <string name="drawer_item_home">Home</string>
     <string name="drawer_item_graph">Weather Graphs</string>
     <string name="drawer_item_map">Weather Map</string>
     <string name="drawer_item_settings">Settings</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="appwidget_text">EXAMPLE</string>
-    <string name="configure">Configure</string>
-    <string name="add_widget">Add widget</string>
 
 </resources>

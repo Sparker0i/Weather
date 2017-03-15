@@ -48,22 +48,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.a5corp.weather.activity.WeatherActivity" />
         </activity>
-
-        <receiver android:name=".activity.WideWidget">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/wide_widget_info" />
-        </receiver>
-
-        <activity android:name=".activity.WideWidgetConfigureActivity">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
-            </intent-filter>
-        </activity>
     </application>
 
 </manifest>
