@@ -10,6 +10,11 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.a5corp.weather.R;
+import com.mikepenz.aboutlibraries.Libs;
+import com.mikepenz.aboutlibraries.LibsBuilder;
+import com.mikepenz.aboutlibraries.entity.Library;
+
+import java.util.ArrayList;
 
 public class AboutActivity extends AppCompatActivity {
 

@@ -3,6 +3,7 @@ package com.a5corp.weather.fragment;
 import android.graphics.Typeface;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,10 +13,15 @@ import android.widget.TextView;
 import com.a5corp.weather.BuildConfig;
 import com.a5corp.weather.R;
 
+import it.gmariotti.cardslib.library.view.CardViewNative;
+
 /**
  * A placeholder fragment containing a simple view.
  */
 public class AboutFragment extends Fragment {
+
+    CardViewNative[] cvn;
+    View rootView;
 
     public AboutFragment() {
     }
@@ -23,7 +29,7 @@ public class AboutFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_about, container, false);
+        rootView = inflater.inflate(R.layout.fragment_about, container, false);
         TextView madeBy = (TextView) rootView.findViewById(R.id.made_by);
         TextView sourceAt = (TextView) rootView.findViewById(R.id.source_at);
         TextView icons = (TextView) rootView.findViewById(R.id.icons);
@@ -31,7 +37,7 @@ public class AboutFragment extends Fragment {
         TextView appIcon = (TextView) rootView.findViewById(R.id.app_icon);
         TextView verText = (TextView) rootView.findViewById(R.id.ver_text);
         TextView matDialog = (TextView) rootView.findViewById(R.id.material_dialogs);
-
+        cvn = new CardViewNative[3];
         sourceAt.setMovementMethod(LinkMovementMethod.getInstance());           //To make the link clickable
         madeBy.setMovementMethod(LinkMovementMethod.getInstance());
         icons.setMovementMethod(LinkMovementMethod.getInstance());
@@ -44,6 +50,23 @@ public class AboutFragment extends Fragment {
         appIcon.setText(getString(R.string.app_icon));
         String verId = "Version " + BuildConfig.VERSION_NAME;
         verText.setText(verId);
+        constructCards();
         return rootView;
+    }
+
+    public void constructCards() {
+        for (int i = 0; i < 3; ++i) {
+            String f = "card" + (i + 1);
+            if (i != 10) {
+                int resID = getResources().getIdentifier(f, "id", getContext().getPackageName());
+                cvn[i] = (CardViewNative) rootView.findViewById(resID);
+                String libraryName = "This";
+                TextView libName = (TextView) cvn[i].findViewById(R.id.libraryName);
+                libName.setText(libraryName);
+                String libCreator = "Sparker0i";
+                TextView libCre = (TextView) cvn[i].findViewById(R.id.libraryCreator);
+                libCre.setText(libCreator);
+            }
+        }
     }
 }
