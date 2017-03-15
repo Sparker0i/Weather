@@ -8,15 +8,6 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
-    <supports-screens
-        android:anyDensity="false"
-        android:largeScreens="true"
-        android:normalScreens="true"
-        android:requiresSmallestWidthDp="320"
-        android:resizeable="false"
-        android:smallScreens="false"
-        android:xlargeScreens="true" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_dark"
@@ -56,6 +47,22 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.a5corp.weather.activity.WeatherActivity" />
+        </activity>
+
+        <receiver android:name=".activity.WideWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/wide_widget_info" />
+        </receiver>
+
+        <activity android:name=".activity.WideWidgetConfigureActivity">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
+            </intent-filter>
         </activity>
     </application>
 
