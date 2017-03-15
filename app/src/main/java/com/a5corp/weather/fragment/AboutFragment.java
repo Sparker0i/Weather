@@ -1,5 +1,6 @@
 package com.a5corp.weather.fragment;
 
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -60,6 +61,7 @@ public class AboutFragment extends Fragment {
             if (i != 10) {
                 int resID = getResources().getIdentifier(f, "id", getContext().getPackageName());
                 cvn[i] = (CardViewNative) rootView.findViewById(resID);
+                cvn[i].setBackgroundColor(Color.WHITE);
                 String libraryName = "This";
                 TextView libName = (TextView) cvn[i].findViewById(R.id.libraryName);
                 libName.setText(libraryName);
