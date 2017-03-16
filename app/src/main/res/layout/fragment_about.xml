@@ -12,8 +12,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:paddingBottom="16dp"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
         android:paddingTop="@dimen/activity_vertical_margin" >
 
         <TextView
@@ -51,24 +51,12 @@
             android:textColor="#303F9F" />
 
         <TextView
-            android:text="@string/icons"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/credits_view"
-            android:layout_alignParentStart="true"
-            android:id="@+id/icons"
-            android:textSize="18sp"
-            android:textColor="#000000"
-            tools:ignore="RtlCompat" />
-
-        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/ver_text"
             android:layout_alignParentTop="true"
             android:textAlignment="textEnd"
             tools:ignore="RtlCompat"
-            android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
         <TextView
@@ -80,37 +68,16 @@
             android:layout_below="@+id/app_icon"
             android:layout_centerHorizontal="true" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/icons"
-            android:layout_alignParentStart="true"
-            android:id="@+id/owm_field"
-            android:textSize="18sp"
-            android:textColor="#000000"
-            android:text="@string/owm"
-            android:layout_alignParentLeft="true" />
-
-        <TextView
-            android:text="@string/material_dialogs"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/owm_field"
-            android:layout_alignParentStart="true"
-            android:id="@+id/material_dialogs"
-            android:textSize="18sp"
-            android:textColor="#000000"
-            android:layout_alignParentLeft="true" />
-
         <it.gmariotti.cardslib.library.view.CardViewNative
             android:id="@+id/card1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/material_dialogs"
+            android:layout_below="@+id/credits_view"
             android:layout_marginLeft="1dp"
             android:layout_marginRight="1dp"
             card:card_layout_resourceID="@layout/card"
-            android:layout_marginTop="12dp"/>
+            card:cardCornerRadius="@dimen/cardview_default_radius"
+            android:layout_marginTop="20dp"/>
 
         <it.gmariotti.cardslib.library.view.CardViewNative
             android:id="@+id/card2"
@@ -120,7 +87,8 @@
             android:layout_marginLeft="1dp"
             android:layout_marginRight="1dp"
             card:card_layout_resourceID="@layout/card"
-            android:layout_marginTop="12dp"/>
+            card:cardCornerRadius="@dimen/cardview_default_radius"
+            android:layout_marginTop="20dp"/>
 
         <it.gmariotti.cardslib.library.view.CardViewNative
             android:id="@+id/card3"
@@ -130,7 +98,8 @@
             android:layout_marginLeft="1dp"
             android:layout_marginRight="1dp"
             card:card_layout_resourceID="@layout/card"
-            android:layout_marginTop="12dp"/>
+            card:cardCornerRadius="@dimen/cardview_default_radius"
+            android:layout_marginTop="20dp"/>
 
         <it.gmariotti.cardslib.library.view.CardViewNative
             android:id="@+id/card4"
@@ -140,7 +109,8 @@
             android:layout_marginLeft="1dp"
             android:layout_marginRight="1dp"
             card:card_layout_resourceID="@layout/card"
-            android:layout_marginTop="12dp"/>
+            card:cardCornerRadius="@dimen/cardview_default_radius"
+            android:layout_marginTop="20dp"/>
 
         <it.gmariotti.cardslib.library.view.CardViewNative
             android:id="@+id/card5"
@@ -150,7 +120,8 @@
             android:layout_marginLeft="1dp"
             android:layout_marginRight="1dp"
             card:card_layout_resourceID="@layout/card"
-            android:layout_marginTop="12dp"/>
+            card:cardCornerRadius="@dimen/cardview_default_radius"
+            android:layout_marginTop="20dp"/>
 
         <it.gmariotti.cardslib.library.view.CardViewNative
             android:id="@+id/card6"
@@ -160,7 +131,7 @@
             android:layout_marginLeft="1dp"
             android:layout_marginRight="1dp"
             card:card_layout_resourceID="@layout/card"
-            android:layout_marginTop="12dp"/>
+            android:layout_marginTop="20dp"/>
 
         <it.gmariotti.cardslib.library.view.CardViewNative
             android:id="@+id/card7"
@@ -170,7 +141,8 @@
             android:layout_marginLeft="1dp"
             android:layout_marginRight="1dp"
             card:card_layout_resourceID="@layout/card"
-            android:layout_marginTop="12dp"/>
+            card:cardCornerRadius="@dimen/cardview_default_radius"
+            android:layout_marginTop="20dp"/>
 
         <it.gmariotti.cardslib.library.view.CardViewNative
             android:id="@+id/card8"
@@ -180,7 +152,8 @@
             android:layout_marginLeft="1dp"
             android:layout_marginRight="1dp"
             card:card_layout_resourceID="@layout/card"
-            android:layout_marginTop="12dp"/>
+            card:cardCornerRadius="@dimen/cardview_default_radius"
+            android:layout_marginTop="20dp"/>
 
         <it.gmariotti.cardslib.library.view.CardViewNative
             android:id="@+id/card9"
@@ -190,7 +163,10 @@
             android:layout_marginLeft="1dp"
             android:layout_marginRight="1dp"
             card:card_layout_resourceID="@layout/card"
-            android:layout_marginTop="12dp"/>
+            card:cardCornerRadius="@dimen/cardview_default_radius"
+            card:cardPreventCornerOverlap="true"
+
+            android:layout_marginTop="20dp"/>
 
         <it.gmariotti.cardslib.library.view.CardViewNative
             android:id="@+id/card10"
@@ -200,7 +176,9 @@
             android:layout_marginLeft="1dp"
             android:layout_marginRight="1dp"
             card:card_layout_resourceID="@layout/card"
-            android:layout_marginTop="12dp"/>
+            card:cardCornerRadius="@dimen/cardview_default_radius"
+            android:layout_marginBottom="4dp"
+            android:layout_marginTop="20dp"/>
 
         <TextView
             android:layout_width="wrap_content"

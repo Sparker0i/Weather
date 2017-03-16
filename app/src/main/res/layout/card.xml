@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
+    style="@style/card.main_layout"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
         <LinearLayout
@@ -78,6 +79,7 @@
         android:orientation="horizontal"
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
+        android:paddingBottom="4dp"
         android:paddingTop="4dp">
 
         <TextView
@@ -88,6 +90,8 @@
             android:gravity="start"
             android:maxLines="1"
             android:textSize="14dp"
+            android:paddingLeft="6dp"
+            android:paddingRight="6dp"
             android:textStyle="normal"
             tools:text="Version" />
 
@@ -99,6 +103,8 @@
             android:gravity="end"
             android:maxLines="1"
             android:textSize="14dp"
+            android:paddingLeft="6dp"
+            android:paddingRight="6dp"
             android:textStyle="normal"
             tools:text="License" />
     </LinearLayout>
