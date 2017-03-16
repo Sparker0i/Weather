@@ -132,6 +132,76 @@
             card:card_layout_resourceID="@layout/card"
             android:layout_marginTop="12dp"/>
 
+        <it.gmariotti.cardslib.library.view.CardViewNative
+            android:id="@+id/card4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/card3"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="1dp"
+            card:card_layout_resourceID="@layout/card"
+            android:layout_marginTop="12dp"/>
+
+        <it.gmariotti.cardslib.library.view.CardViewNative
+            android:id="@+id/card5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/card4"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="1dp"
+            card:card_layout_resourceID="@layout/card"
+            android:layout_marginTop="12dp"/>
+
+        <it.gmariotti.cardslib.library.view.CardViewNative
+            android:id="@+id/card6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/card5"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="1dp"
+            card:card_layout_resourceID="@layout/card"
+            android:layout_marginTop="12dp"/>
+
+        <it.gmariotti.cardslib.library.view.CardViewNative
+            android:id="@+id/card7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/card6"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="1dp"
+            card:card_layout_resourceID="@layout/card"
+            android:layout_marginTop="12dp"/>
+
+        <it.gmariotti.cardslib.library.view.CardViewNative
+            android:id="@+id/card8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/card7"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="1dp"
+            card:card_layout_resourceID="@layout/card"
+            android:layout_marginTop="12dp"/>
+
+        <it.gmariotti.cardslib.library.view.CardViewNative
+            android:id="@+id/card9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/card8"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="1dp"
+            card:card_layout_resourceID="@layout/card"
+            android:layout_marginTop="12dp"/>
+
+        <it.gmariotti.cardslib.library.view.CardViewNative
+            android:id="@+id/card10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/card9"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="1dp"
+            card:card_layout_resourceID="@layout/card"
+            android:layout_marginTop="12dp"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
