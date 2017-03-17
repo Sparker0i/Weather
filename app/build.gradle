@@ -13,6 +13,7 @@ android {
         targetSdkVersion 25
         versionCode 251
         versionName "3.0-Alpha"
+        vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         release {
@@ -38,6 +39,7 @@ dependencies {
     compile 'com.android.support:support-v4:25.2.0'
     compile 'com.android.support:appcompat-v7:25.2.0'
     compile 'com.android.support:design:25.2.0'
+    compile 'com.android.support:preference-v7:25.2.0'
     compile 'com.afollestad.material-dialogs:core:0.9.2.3'
     compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
     compile 'com.mikepenz:iconics-core:2.8.2@aar'
@@ -48,4 +50,5 @@ dependencies {
     compile 'com.github.gabrielemariotti.cards:cardslib-core:2.1.0'
     compile 'com.github.gabrielemariotti.cards:cardslib-cards:2.1.0'
     compile 'com.github.gabrielemariotti.cards:cardslib-recyclerview:2.1.0'
+    compile 'com.android.support:support-vector-drawable:25.2.0'
 }

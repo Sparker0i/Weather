@@ -117,6 +117,11 @@ public class WeatherActivity extends AppCompatActivity {
                         .icon(GoogleMaterial.Icon.gmd_settings)
                         .sizeRes(R.dimen.activity_horizontal_margin))
                 .withSelectable(false);
+        SecondaryDrawerItem item5 = new SecondaryDrawerItem().withIdentifier(5).withName(R.string.drawer_item_about)
+                .withIcon(new IconicsDrawable(this)
+                        .icon(GoogleMaterial.Icon.gmd_info)
+                        .sizeRes(R.dimen.activity_horizontal_margin))
+                .withSelectable(false);
         new DrawerBuilder()
                 .withActivity(this)
                 .withToolbar(toolbar)
@@ -128,7 +133,8 @@ public class WeatherActivity extends AppCompatActivity {
                         item2,
                         item3,
                         new DividerDrawerItem(),
-                        item4
+                        item4,
+                        item5
                 )
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
@@ -159,6 +165,9 @@ public class WeatherActivity extends AppCompatActivity {
                                         .commit();
                             }
                             else if (drawerItem.getIdentifier() == 4) {
+                                startActivity(new Intent(WeatherActivity.this, SettingsActivity.class));
+                            }
+                            else if (drawerItem.getIdentifier() == 5) {
                                 startActivity(new Intent(WeatherActivity.this, AboutActivity.class));
                             }
                         }

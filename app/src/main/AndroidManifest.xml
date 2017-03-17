@@ -7,7 +7,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
@@ -48,6 +48,11 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.a5corp.weather.activity.WeatherActivity" />
+        </activity>
+        <activity
+            android:name=".activity.SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:theme="@style/AppTheme">
         </activity>
     </application>
 
