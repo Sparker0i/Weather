@@ -103,7 +103,6 @@ public class WeatherFragment extends Fragment {
             }
         });
         ((WeatherActivity) getActivity()).showFab();
-        //getActivity().getActionBar().show();
         directionView.setTypeface(weatherFont);
         directionView.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
         dailyView = (TextView)rootView.findViewById(R.id.daily_view);
@@ -584,7 +583,7 @@ public class WeatherFragment extends Fragment {
                 SpannableString ss1 = new SpannableString(date + "\n"
                         + details[i].getJSONObject("temp").getLong("max") + "°" + "      "
                         + details[i].getJSONObject("temp").getLong("min") + "°" + "\n");
-                ss1.setSpan(new RelativeSizeSpan(1.1f), 0,7, 0); // set size
+                ss1.setSpan(new RelativeSizeSpan(1.1f) , 0 , 7 , 0); // set size
                 ss1.setSpan(new RelativeSizeSpan(1.4f) , 8 , 11 , 0);
                 detailsField[i].setText(ss1);
                 Log.i("Details[" + Integer.toString(i) + "]", "Information String " + Integer.toString(i + 1) + " loaded");
@@ -621,7 +620,7 @@ public class WeatherFragment extends Fragment {
             setWeatherIcon(json0.getJSONArray("weather").getJSONObject(0).getInt("id"),10);
             humidityView.setText("HUMIDITY:\n" + json0.getJSONObject("main").getInt("humidity") + "%");
             Log.i("Humidity Loaded" , "Done");
-            windView.setText("WIND:\n" + json0.getJSONObject("wind").getDouble("speed") + "m/s");
+            windView.setText("WIND:\n" + json0.getJSONObject("wind").getDouble("speed") + " m/s");
             Log.i("Wind Loaded" , "Done");
             Log.i("10" , "Weather Icon 11 Set");
             weatherIcon[10].setOnClickListener(new View.OnClickListener()
