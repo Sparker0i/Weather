@@ -621,7 +621,7 @@ public class WeatherFragment extends Fragment {
             setWeatherIcon(json0.getJSONArray("weather").getJSONObject(0).getInt("id"),10);
             humidityView.setText("HUMIDITY:\n" + json0.getJSONObject("main").getInt("humidity") + "%");
             Log.i("Humidity Loaded" , "Done");
-            windView.setText("WIND:\n" + json0.getJSONObject("wind").getDouble("speed") + "km/h");
+            windView.setText("WIND:\n" + json0.getJSONObject("wind").getDouble("speed") + "m/s");
             Log.i("Wind Loaded" , "Done");
             Log.i("10" , "Weather Icon 11 Set");
             weatherIcon[10].setOnClickListener(new View.OnClickListener()

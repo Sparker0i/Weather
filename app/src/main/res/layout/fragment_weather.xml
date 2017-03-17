@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/swipe"
-    tools:context="com.a5corp.weather.fragment.WeatherFragment"
-    tools:showIn="@layout/activity_weather">
+    tools:context="com.a5corp.weather.fragment.WeatherFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -318,6 +317,7 @@
                 android:id="@+id/weather_icon11"
                 android:textColor="#FFFFFF"
                 android:textSize="100sp"
+                android:layout_marginTop="8dp"
                 android:layout_below="@+id/updated_field"
                 android:layout_centerHorizontal="true" />
 
@@ -377,8 +377,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/button1"
-                android:layout_above="@+id/direction_view"
-                android:layout_alignStart="@+id/button" />
+                android:layout_alignTop="@+id/weather_icon11"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="30dp" />
         </RelativeLayout>
     </ScrollView>
 </android.support.v4.widget.SwipeRefreshLayout>

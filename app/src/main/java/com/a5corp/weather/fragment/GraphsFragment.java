@@ -400,7 +400,7 @@ public class GraphsFragment extends Fragment {
                     windChart.getData().getDataSetCount() - 1));
             windChart.getLegend().setTextColor(Color.parseColor("#FFFFFF"));
         }
-        set = new LineDataSet(windEntries, "Wind, km/h");
+        set = new LineDataSet(windEntries, "Wind, m/s");
         set.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
         set.setCubicIntensity(0.2f);
         set.setDrawCircles(false);
