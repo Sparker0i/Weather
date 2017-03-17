@@ -68,7 +68,7 @@ public class WeatherActivity extends AppCompatActivity {
         }
         SystemBarTintManager tintManager = new SystemBarTintManager(this);
         tintManager.setStatusBarTintEnabled(true);
-        tintManager.setTintColor(Color.parseColor("#10000000"));
+        tintManager.setTintColor(Color.parseColor("#05000000"));
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

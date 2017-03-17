@@ -30,4 +30,13 @@
         android:positiveButtonText="@null"
         android:title="@string/pref_title_add_friends_to_messages" />
 
+    <ListPreference
+        android:defaultValue="metric"
+        android:entries="@array/pref_example_temp_titles"
+        android:entryValues="@array/pref_example_temp_values"
+        android:key="temp_unit"
+        android:negativeButtonText="@null"
+        android:positiveButtonText="@null"
+        android:title="@string/pref_title_temp" />
+
 </PreferenceScreen>
