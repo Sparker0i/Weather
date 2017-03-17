@@ -317,10 +317,9 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="#FFFFFF"
                 android:textSize="100sp"
-                android:layout_marginStart="43dp"
+                android:layout_marginStart="48dp"
                 android:layout_below="@+id/updated_field"
                 android:layout_toEndOf="@+id/daily_view" />
-
 
             <TextView
                 android:layout_width="wrap_content"
@@ -332,13 +331,15 @@
                 android:layout_marginTop="41dp"
                 android:textColor="#FFFFFF" />
 
-            <Button
+            <TextView
                 android:id="@+id/button1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="18dp"
-                android:layout_marginTop="48dp"
-                android:layout_marginEnd="42dp"
+                android:layout_marginTop="41dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="30sp"
+                android:layout_marginEnd="80dp"
                 android:layout_below="@+id/updated_field"
                 android:layout_alignParentEnd="true" />
 

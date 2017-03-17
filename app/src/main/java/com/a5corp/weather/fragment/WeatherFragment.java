@@ -2,6 +2,7 @@ package com.a5corp.weather.fragment;
 
 import android.content.ComponentName;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Handler;
 import android.provider.Settings;
@@ -49,7 +50,7 @@ import java.util.concurrent.ExecutionException;
 
 public class WeatherFragment extends Fragment {
     Typeface weatherFont;
-    Button button;
+    TextView button;
     TextView detailsField[] = new TextView[10] , weatherIcon[] = new TextView[11];
     TextView windView , humidityView , directionView, dailyView, updatedField, cityField;
     double tc;
@@ -108,7 +109,8 @@ public class WeatherFragment extends Fragment {
         dailyView = (TextView)rootView.findViewById(R.id.daily_view);
         dailyView.setText(getString(R.string.daily));
         dailyView.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
-        button = (Button)rootView.findViewById(R.id.button1);
+        button = (TextView) rootView.findViewById(R.id.button1);
+        button.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
         pd.show();
         for (int i = 0; i < 11; ++i)
         {
@@ -643,7 +645,7 @@ public class WeatherFragment extends Fragment {
                     }
                 }
             });
-            String r1 = Integer.toString(a) + "°C";
+            String r1 = Integer.toString(a) + "°";
             button.setText(r1);
             button.setClickable(false);
         }catch(Exception e){
