@@ -26,7 +26,6 @@ import android.widget.Toast;
 
 import com.a5corp.weather.GlobalActivity;
 import com.a5corp.weather.R;
-import com.a5corp.weather.activity.DetailActivity;
 import com.a5corp.weather.activity.FirstLaunch;
 import com.a5corp.weather.activity.WeatherActivity;
 import com.a5corp.weather.internet.CheckConnection;
@@ -36,7 +35,6 @@ import com.a5corp.weather.preferences.Preferences;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.DateFormat;
@@ -622,18 +620,6 @@ public class WeatherFragment extends Fragment {
                 detailsField[i].setText(ss1);
                 Log.i("Details[" + Integer.toString(i) + "]", "Information String " + Integer.toString(i + 1) + " loaded");
                 setWeatherIcon(details[i].getJSONArray("weather").getJSONObject(0).getInt("id") , i);
-                final Intent intent = new Intent(getContext() , DetailActivity.class);
-                intent.putExtra("jsonStr" , J.toString());
-                try {
-                    intent.putExtra("city", json1.getJSONObject("city").getString("name").toUpperCase(Locale.US) +
-                            ", " +
-                            json1.getJSONObject("city").getString("country"));
-                }
-                catch (JSONException jx) {
-                    Log.e("JSONEX" , "Caught a JSON Exception");
-                }
-                intent.putExtra("sunrise" , json0.getJSONObject("sys").getLong("sunrise"));
-                intent.putExtra("sunset" , json0.getJSONObject("sys").getLong("sunset"));
                 detailsField[i].setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
                         bundle = new Bundle();
@@ -646,7 +632,11 @@ public class WeatherFragment extends Fragment {
                 weatherIcon[i].setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v)
                     {
-                        startActivity(intent);
+                        bundle = new Bundle();
+                        bundle.putString("json" , J.toString());
+                        bottomSheetDialogFragment = new CustomBottomSheetDialogFragment();
+                        bottomSheetDialogFragment.setArguments(bundle);
+                        bottomSheetDialogFragment.show(getActivity().getSupportFragmentManager(), bottomSheetDialogFragment.getTag());
                     }
                 });
             }

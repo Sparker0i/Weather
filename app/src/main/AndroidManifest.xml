@@ -41,15 +41,6 @@
             android:name=".activity.FirstLaunch"
             android:label="Enter City" />
         <activity
-            android:name=".activity.DetailActivity"
-            android:label="@string/title_activity_detail"
-            android:parentActivityName=".activity.WeatherActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.a5corp.weather.activity.WeatherActivity" />
-        </activity>
-        <activity
             android:name=".activity.SettingsActivity"
             android:label="@string/title_activity_settings"
             android:theme="@style/AppTheme">
