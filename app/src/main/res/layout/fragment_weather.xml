@@ -308,6 +308,7 @@
                 android:id="@+id/updated_field"
                 android:layout_below="@+id/city_field"
                 android:layout_centerHorizontal="true"
+                android:layout_marginBottom="8dp"
                 android:textColor="#FFFFFF" />
 
             <TextView
@@ -322,13 +323,13 @@
                 android:layout_toEndOf="@+id/daily_view" />
 
             <TextView
+                android:id="@+id/daily_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:id="@+id/daily_view"
-                android:layout_below="@+id/ll1"
                 android:layout_alignParentStart="true"
-                android:layout_marginTop="41dp"
+                android:layout_below="@+id/ll1"
+                android:layout_marginTop="24dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="#FFFFFF" />
 
             <TextView
@@ -350,28 +351,17 @@
                 android:minHeight="72dp"
                 android:layout_below="@id/weather_icon11"
                 android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
                     android:id="@+id/wind_view"
-                    android:layout_weight="1"
-                    android:textColor="#FFFFFF"
-                    android:textAlignment="center" />
-
-                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="start"
+                    android:textAlignment="center"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:id="@+id/direction_view"
-                    android:layout_marginTop="20dp"
-                    android:textColor="#FFFFFF"
-                    android:layout_weight="0.25"
-                    android:textSize="40sp"
-                    android:textStyle="bold" />
+                    android:textColor="#FFFFFF" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -382,7 +372,38 @@
                     android:textColor="#FFFFFF"
                     android:textAlignment="center" />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:id="@+id/sunrise_view"
+                    android:layout_weight="1"
+                    android:textColor="#FFFFFF"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:id="@+id/sunset_view"
+                    android:layout_weight="1"
+                    android:textColor="#FFFFFF"
+                    android:textAlignment="center" />
+
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/direction_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:textAlignment="textStart"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#FFFFFF"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                android:layout_above="@+id/ll1"
+                android:layout_alignStart="@+id/button1" />
         </RelativeLayout>
     </ScrollView>
 </android.support.v4.widget.SwipeRefreshLayout>

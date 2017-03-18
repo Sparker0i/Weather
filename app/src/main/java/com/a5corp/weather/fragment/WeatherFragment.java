@@ -40,6 +40,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -52,7 +53,7 @@ public class WeatherFragment extends Fragment {
     Typeface weatherFont;
     TextView button;
     TextView detailsField[] = new TextView[10] , weatherIcon[] = new TextView[11];
-    TextView windView , humidityView , directionView, dailyView, updatedField, cityField;
+    TextView windView , humidityView , directionView, dailyView, updatedField, cityField, sunriseView , sunsetView;
     double tc;
     Handler handler;
     JSONObject json1 , json0;
@@ -109,6 +110,10 @@ public class WeatherFragment extends Fragment {
         dailyView = (TextView)rootView.findViewById(R.id.daily_view);
         dailyView.setText(getString(R.string.daily));
         dailyView.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
+        sunriseView = (TextView) rootView.findViewById(R.id.sunrise_view);
+        sunriseView.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
+        sunsetView = (TextView) rootView.findViewById(R.id.sunset_view);
+        sunsetView.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
         button = (TextView) rootView.findViewById(R.id.button1);
         button.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
         pd.show();
@@ -548,7 +553,9 @@ public class WeatherFragment extends Fragment {
             Clicks = 0;
             Log.i("Showed" , "Done");
             json0 = jsonObj[0];
+            Log.i("Json 0" , json0.toString());
             json1 = jsonObj[1];
+            Log.i("Json 1" , json1.toString());
             tc = json0.getJSONObject("main").getDouble("temp");
             preferences.setLatitude((float) json1.getJSONObject("city").getJSONObject("coord").getDouble("lat"));
             Log.i("Lat", Float.toString((float) json1.getJSONObject("city").getJSONObject("coord").getDouble("lat")));
@@ -614,6 +621,10 @@ public class WeatherFragment extends Fragment {
                     }
                 });
             }
+            final String d1 = new java.text.SimpleDateFormat("hh:mm a" , Locale.US).format(new Date(json0.getJSONObject("sys").getLong("sunrise") * 1000));
+            final String d2 = new java.text.SimpleDateFormat("hh:mm a" , Locale.US).format(new Date(json0.getJSONObject("sys").getLong("sunset") * 1000));
+            sunriseView.setText("SUNRISE:\n" + d1);
+            sunsetView.setText("SUNSET:\n" + d2);
             DateFormat df = DateFormat.getDateTimeInstance();
             String updatedOn = "Last update: " + df.format(new Date(json0.getLong("dt")*1000));
             updatedField.setText(updatedOn);
