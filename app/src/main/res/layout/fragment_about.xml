@@ -2,16 +2,14 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:card="http://schemas.android.com/apk/res-auto"
-    tools:context="com.a5corp.weather.fragment.AboutFragment"
-    tools:showIn="@layout/activity_about">
+    android:layout_height="wrap_content"
+    xmlns:card="http://schemas.android.com/apk/res-auto">
     <RelativeLayout
         android:id="@+id/content_new_about"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:paddingBottom="16dp"
+        android:paddingBottom="12dp"
         android:paddingLeft="12dp"
         android:paddingRight="12dp"
         android:paddingTop="@dimen/activity_vertical_margin" >
@@ -76,7 +74,6 @@
             android:layout_marginLeft="1dp"
             android:layout_marginRight="1dp"
             card:card_layout_resourceID="@layout/card"
-            card:cardCornerRadius="@dimen/cardview_default_radius"
             android:layout_marginTop="20dp"/>
 
         <it.gmariotti.cardslib.library.view.CardViewNative

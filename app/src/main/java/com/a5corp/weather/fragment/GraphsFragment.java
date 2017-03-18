@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -26,8 +27,6 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.IDataSet;
-import com.mikepenz.google_material_typeface_library.GoogleMaterial;
-import com.mikepenz.iconics.IconicsDrawable;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -85,7 +84,7 @@ public class GraphsFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu , MenuInflater inflater) {
         getActivity().getMenuInflater().inflate(R.menu.menu_graph, menu);
         this.menu = menu;
-        this.menu.getItem(0).setIcon(getResources().getDrawable(R.drawable.ic_radio_button_unchecked_white_24dp));
+        this.menu.getItem(0).setIcon(ContextCompat.getDrawable(getContext() , R.drawable.ic_radio_button_unchecked_white_24dp));
     }
 
     @Override
@@ -105,11 +104,11 @@ public class GraphsFragment extends Fragment {
 
     public void toggleValues() {
         if (i == 1) {
-            menu.getItem(0).setIcon(getResources().getDrawable(R.drawable.ic_radio_button_unchecked_white_24dp));
+            menu.getItem(0).setIcon(ContextCompat.getDrawable(getContext() , R.drawable.ic_radio_button_unchecked_white_24dp));
             i = 0;
         }
         else {
-            menu.getItem(0).setIcon(getResources().getDrawable(R.drawable.ic_radio_button_checked_white_24dp));
+            menu.getItem(0).setIcon(ContextCompat.getDrawable(getContext() , R.drawable.ic_radio_button_checked_white_24dp));
             i = 1;
         }
         for (IDataSet set : temperatureChart.getData().getDataSets()) {

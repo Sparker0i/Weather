@@ -54,6 +54,7 @@ public class WeatherFragment extends Fragment {
     TextView button;
     TextView detailsField[] = new TextView[10] , weatherIcon[] = new TextView[11];
     TextView windView , humidityView , directionView, dailyView, updatedField, cityField, sunriseView , sunsetView;
+    TextView sunriseIcon , sunsetIcon , windIcon , humidityIcon;
     double tc;
     Handler handler;
     JSONObject json1 , json0;
@@ -80,6 +81,22 @@ public class WeatherFragment extends Fragment {
         updatedField.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
         humidityView = (TextView) rootView.findViewById(R.id.humidity_view);
         humidityView.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
+        sunriseIcon = (TextView) rootView.findViewById(R.id.sunrise_icon);
+        sunriseIcon.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
+        sunriseIcon.setTypeface(weatherFont);
+        sunriseIcon.setText(getActivity().getString(R.string.sunrise_icon));
+        sunsetIcon = (TextView) rootView.findViewById(R.id.sunset_icon);
+        sunsetIcon.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
+        sunsetIcon.setTypeface(weatherFont);
+        sunsetIcon.setText(getActivity().getString(R.string.sunset_icon));
+        windIcon = (TextView) rootView.findViewById(R.id.wind_icon);
+        windIcon.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
+        windIcon.setTypeface(weatherFont);
+        windIcon.setText(getActivity().getString(R.string.speed_icon));
+        humidityIcon = (TextView) rootView.findViewById(R.id.humidity_icon);
+        humidityIcon.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
+        humidityIcon.setTypeface(weatherFont);
+        humidityIcon.setText(getActivity().getString(R.string.humidity_icon));
         windView = (TextView) rootView.findViewById(R.id.wind_view);
         windView.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
         directionView = (TextView)rootView.findViewById(R.id.direction_view);
@@ -623,17 +640,17 @@ public class WeatherFragment extends Fragment {
             }
             final String d1 = new java.text.SimpleDateFormat("hh:mm a" , Locale.US).format(new Date(json0.getJSONObject("sys").getLong("sunrise") * 1000));
             final String d2 = new java.text.SimpleDateFormat("hh:mm a" , Locale.US).format(new Date(json0.getJSONObject("sys").getLong("sunset") * 1000));
-            sunriseView.setText("SUNRISE:\n" + d1);
-            sunsetView.setText("SUNSET:\n" + d2);
+            sunriseView.setText(d1);
+            sunsetView.setText(d2);
             DateFormat df = DateFormat.getDateTimeInstance();
             String updatedOn = "Last update: " + df.format(new Date(json0.getLong("dt")*1000));
             updatedField.setText(updatedOn);
             int deg = json0.getJSONObject("wind").getInt("deg");
             setDeg(deg);
             setWeatherIcon(json0.getJSONArray("weather").getJSONObject(0).getInt("id"),10);
-            humidityView.setText("HUMIDITY:\n" + json0.getJSONObject("main").getInt("humidity") + "%");
+            humidityView.setText(json0.getJSONObject("main").getInt("humidity") + "%");
             Log.i("Humidity Loaded" , "Done");
-            windView.setText("WIND:\n" + json0.getJSONObject("wind").getDouble("speed") + " m/s");
+            windView.setText(json0.getJSONObject("wind").getDouble("speed") + " m/s");
             Log.i("Wind Loaded" , "Done");
             Log.i("10" , "Weather Icon 11 Set");
             weatherIcon[10].setOnClickListener(new View.OnClickListener()
