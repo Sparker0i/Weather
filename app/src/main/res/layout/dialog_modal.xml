@@ -64,7 +64,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Night:"
+                    android:text="@string/night"
                     android:textColor="#000000"
                     android:textSize="16sp"
                     tools:text="Night"/>
@@ -89,7 +89,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Morning:"
+                    android:text="@string/morning"
                     android:textColor="#000000"
                     android:textSize="16sp"
                     tools:text="Morning"/>
@@ -115,7 +115,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Day:"
+                    android:text="@string/day"
                     android:textColor="#000000"
                     android:textSize="16sp"
                     tools:text="Day"/>
@@ -141,7 +141,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Evening:"
+                    android:text="@string/Evening"
                     android:textColor="#000000"
                     android:textSize="16sp"
                     tools:text="Evening"/>
@@ -168,11 +168,11 @@
                 android:id="@+id/wind_icon"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:textSize="24sp"
-                android:layout_gravity="center_horizontal|center_vertical"
+                android:layout_gravity="center_vertical"
                 android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
-                tools:ignore="ContentDescription"/>
+                android:layout_marginTop="6dp"
+                android:textSize="24sp"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:id="@+id/wind"
@@ -195,11 +195,11 @@
                 android:id="@+id/rain_icon"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:textSize="24sp"
                 android:layout_gravity="center_horizontal|center_vertical"
                 android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
-                tools:ignore="ContentDescription"/>
+                android:layout_marginTop="6dp"
+                android:textSize="24sp"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:id="@+id/rain"
@@ -222,11 +222,11 @@
                 android:id="@+id/snow_icon"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:textSize="24sp"
                 android:layout_gravity="center_horizontal|center_vertical"
                 android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
-                tools:ignore="ContentDescription"/>
+                android:layout_marginTop="6dp"
+                android:textSize="24sp"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:id="@+id/snow"
@@ -249,12 +249,12 @@
                 android:id="@+id/humidity_icon"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:textSize="24sp"
                 android:layout_gravity="center"
                 android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="6dp"
                 android:cropToPadding="false"
-                tools:ignore="ContentDescription"/>
+                android:textSize="24sp"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:id="@+id/humidity"
@@ -277,15 +277,15 @@
                 android:id="@+id/pressure_icon"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:textSize="24sp"
                 android:layout_gravity="center"
-                tools:ignore="ContentDescription"/>
+                android:layout_marginTop="6dp"
+                android:textSize="24sp"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:id="@+id/pressure"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:layout_marginStart="@dimen/activity_horizontal_margin"
                 android:gravity="center"
                 android:textSize="16sp"

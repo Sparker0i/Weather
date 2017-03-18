@@ -71,6 +71,7 @@ public class CustomBottomSheetDialogFragment extends BottomSheetDialogFragment {
         snowText = (TextView) rootView.findViewById(R.id.snow);
         humidityText = (TextView) rootView.findViewById(R.id.humidity);
         pressureText = (TextView) rootView.findViewById(R.id.pressure);
+        updateElements();
         return rootView;
     }
 
@@ -99,6 +100,63 @@ public class CustomBottomSheetDialogFragment extends BottomSheetDialogFragment {
         if (behavior != null && behavior instanceof BottomSheetBehavior) {
             ((BottomSheetBehavior) behavior).setBottomSheetCallback(mBottomSheetBehaviorCallback);
 
+        }
+    }
+
+    public void updateElements() {
+        setCondition();
+        setOthers();
+        setTemperatures();
+    }
+
+    public void setCondition() {
+        try {
+            String cond = json.getJSONArray("weather").getJSONObject(0).getString("description");
+            String[] strArray = cond.split(" ");
+            final StringBuilder builder = new StringBuilder();
+            for (String s : strArray) {
+                String cap = s.substring(0, 1).toUpperCase() + s.substring(1);
+                builder.append(cap.concat(" "));
+            }
+            condition.setText(builder.toString());
+        }
+        catch (JSONException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void setOthers() {
+        try {
+            windText.setText("Speed : " + json.getDouble("speed") + " m/s");
+            try {
+                rainText.setText("Rain : " + json.getDouble("rain") + " mm");
+            }
+            catch (JSONException ex) {
+                rainText.setText("Rain : 0 mm");
+            }
+            try {
+                snowText.setText("Snow : " + json.getDouble("snow") + " mm");
+            }
+            catch (JSONException ex) {
+                snowText.setText("Snow : 0 mm");
+            }
+            humidityText.setText("Humidity : " + json.getDouble("humidity") + " %");
+            pressureText.setText("Pressure : " + json.getDouble("pressure") + " Pa");
+        }
+        catch (JSONException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void setTemperatures() {
+        try {
+            dayValue.setText(Double.toString(json.getJSONObject("temp").getDouble("day")) + "°");
+            mornValue.setText(Double.toString(json.getJSONObject("temp").getDouble("morn")) + "°");
+            eveValue.setText(Double.toString(json.getJSONObject("temp").getDouble("eve")) + "°");
+            nightValue.setText(Double.toString(json.getJSONObject("temp").getDouble("night")) + "°");
+        }
+        catch (JSONException ex) {
+            ex.printStackTrace();
         }
     }
 }
