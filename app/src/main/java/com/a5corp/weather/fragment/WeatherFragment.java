@@ -2,7 +2,6 @@ package com.a5corp.weather.fragment;
 
 import android.content.ComponentName;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Handler;
 import android.provider.Settings;
@@ -22,13 +21,11 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.a5corp.weather.GlobalActivity;
 import com.a5corp.weather.R;
-import com.a5corp.weather.activity.AboutActivity;
 import com.a5corp.weather.activity.DetailActivity;
 import com.a5corp.weather.activity.FirstLaunch;
 import com.a5corp.weather.activity.WeatherActivity;
@@ -57,6 +54,7 @@ public class WeatherFragment extends Fragment {
     TextView sunriseIcon , sunsetIcon , windIcon , humidityIcon;
     double tc;
     Handler handler;
+    BottomSheetDialogFragment bottomSheetDialogFragment;
     JSONObject json1 , json0;
     SwipeRefreshLayout swipeView;
     CheckConnection cc;
@@ -65,6 +63,7 @@ public class WeatherFragment extends Fragment {
     MaterialDialog pd;
     FetchWeather wt;
     Preferences preferences;
+    Bundle bundle;
     View rootView;
 
     public WeatherFragment() {
@@ -175,9 +174,6 @@ public class WeatherFragment extends Fragment {
         switch (item.getItemId()) {
             case R.id.change_city : showInputDialog();
                 break;
-            case R.id.show_bottom : BottomSheetDialogFragment bottomSheetDialogFragment = new CustomBottomSheetDialogFragment();
-                bottomSheetDialogFragment.show(getActivity().getSupportFragmentManager(), bottomSheetDialogFragment.getTag());
-                break;
             case R.id.refresh : changeCity(GlobalActivity.cp.getCity());
                 break;
             case R.id.location :
@@ -188,6 +184,18 @@ public class WeatherFragment extends Fragment {
         return true;
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 0) {
+            cc = new CheckConnection(getContext());
+            if (!cc.isNetworkAvailable())
+                showNoInternet();
+            else {
+                pd.show();
+                updateWeatherData(preferences.getCity(), null, null);
+            }
+        }
+    }
 
     private void updateWeatherData(final String city, final String lat, final String lon) {
         wt = new FetchWeather(getContext());
@@ -628,7 +636,11 @@ public class WeatherFragment extends Fragment {
                 intent.putExtra("sunset" , json0.getJSONObject("sys").getLong("sunset"));
                 detailsField[i].setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
-                        startActivity(intent);
+                        bundle = new Bundle();
+                        bundle.putString("json" , J.toString());
+                        bottomSheetDialogFragment = new CustomBottomSheetDialogFragment();
+                        bottomSheetDialogFragment.setArguments(bundle);
+                        bottomSheetDialogFragment.show(getActivity().getSupportFragmentManager(), bottomSheetDialogFragment.getTag());
                     }
                 });
                 weatherIcon[i].setOnClickListener(new View.OnClickListener() {
@@ -682,90 +694,72 @@ public class WeatherFragment extends Fragment {
     }
 
     private void setDeg(int deg) {
-        if (deg >= 349 || deg <= 11) {
-            directionView.setText(getActivity().getString(R.string.top));
-            directionView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Snackbar.make(view , "Wind blowing towards North" , Snackbar.LENGTH_SHORT).show();
-                }
-            });
-        }
-        else if (deg >= 12 && deg <= 77) {
-            directionView.setText(getActivity().getString(R.string.top_right));
-            directionView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Snackbar.make(view , "Wind blowing in the North-East direction" , Snackbar.LENGTH_SHORT).show();
-                }
-            });
-        }
-        else if (deg >= 78 && deg <= 101) {
-            directionView.setText(getActivity().getString(R.string.right));
-            directionView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Snackbar.make(view , "Wind blowing towards East" , Snackbar.LENGTH_SHORT).show();
-                }
-            });
-        }
-        else if (deg >= 102 && deg <= 168) {
-            directionView.setText(getActivity().getString(R.string.bottom_right));
-            directionView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Snackbar.make(view , "Wind blowing in the South-East direction" , Snackbar.LENGTH_SHORT).show();
-                }
-            });
-        }
-        else if (deg >= 169 && deg <= 191) {
-            directionView.setText(getActivity().getString(R.string.down));
-            directionView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Snackbar.make(view , "Wind blowing towards South" , Snackbar.LENGTH_SHORT).show();
-                }
-            });
-        }
-        else if (deg >= 192 && deg <= 258) {
-            directionView.setText(getActivity().getString(R.string.bottom_left));
-            directionView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Snackbar.make(view , "Wind blowing in the South-West direction" , Snackbar.LENGTH_SHORT).show();
-                }
-            });
-        }
-        else if (deg >= 259 && deg <= 281) {
-            directionView.setText(getActivity().getString(R.string.left));
-            directionView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Snackbar.make(view , "Wind blowing towards West" , Snackbar.LENGTH_SHORT).show();
-                }
-            });
-        }
-        else {
-            directionView.setText(getActivity().getString(R.string.top_left));
-            directionView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Snackbar.make(view , "Wind blowing in the North-West direction" , Snackbar.LENGTH_SHORT).show();
-                }
-            });
-        }
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == 0) {
-            cc = new CheckConnection(getContext());
-            if (!cc.isNetworkAvailable())
-                showNoInternet();
-            else {
-                pd.show();
-                updateWeatherData(preferences.getCity(), null, null);
-            }
+        int index = (int) Math.abs(Math.round(deg % 360) / 45);
+        switch (index) {
+            case 0 : directionView.setText(getActivity().getString(R.string.top));
+                directionView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Snackbar.make(view , "Wind blowing towards North" , Snackbar.LENGTH_SHORT).show();
+                    }
+                });
+                break;
+            case 1 : directionView.setText(getActivity().getString(R.string.top_right));
+                directionView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Snackbar.make(view , "Wind blowing in the North-East direction" , Snackbar.LENGTH_SHORT).show();
+                    }
+                });
+                break;
+            case 2 : directionView.setText(getActivity().getString(R.string.right));
+                directionView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Snackbar.make(view , "Wind blowing towards East" , Snackbar.LENGTH_SHORT).show();
+                    }
+                });
+                break;
+            case 3 : directionView.setText(getActivity().getString(R.string.bottom_right));
+                directionView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Snackbar.make(view , "Wind blowing in the South-East direction" , Snackbar.LENGTH_SHORT).show();
+                    }
+                });
+                break;
+            case 4 : directionView.setText(getActivity().getString(R.string.down));
+                directionView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Snackbar.make(view , "Wind blowing towards South" , Snackbar.LENGTH_SHORT).show();
+                    }
+                });
+                break;
+            case 5 : directionView.setText(getActivity().getString(R.string.bottom_left));
+                directionView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Snackbar.make(view , "Wind blowing in the South-West direction" , Snackbar.LENGTH_SHORT).show();
+                    }
+                });
+                break;
+            case 6 : directionView.setText(getActivity().getString(R.string.left));
+                directionView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Snackbar.make(view , "Wind blowing towards West" , Snackbar.LENGTH_SHORT).show();
+                    }
+                });
+                break;
+            case 7 : directionView.setText(getActivity().getString(R.string.top_left));
+                directionView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Snackbar.make(view , "Wind blowing in the North-West direction" , Snackbar.LENGTH_SHORT).show();
+                    }
+                });
+                break;
         }
     }
 }
