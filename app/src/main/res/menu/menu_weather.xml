@@ -20,9 +20,9 @@
         android:orderInCategory="2"
         app:showAsAction="never"/>
     <item
-        android:id="@+id/about_page"
+        android:id="@+id/show_bottom"
         android:orderInCategory="5"
-        android:title="@string/about_page"
+        android:title="Show Bottom"
         app:showAsAction="never"/>
 
 </menu>

@@ -28,8 +28,8 @@ public class DetailFragment extends Fragment {
     Typeface weatherFont;
     View rootView;
     TextView cityField;
-    TextView dateText , tempText, humidityText, dayText, nightText, speedText, pressureText, sunriseText, sunsetText;
-    TextView weatherIcon, humidityIcon, dayIcon, nightIcon, speedIcon, pressureIcon, sunriseIcon, sunsetIcon;
+    TextView dateText , tempText, humidityText, dayText, nightText, speedText, pressureText;
+    TextView weatherIcon, humidityIcon, dayIcon, nightIcon, speedIcon, pressureIcon;
     JSONObject obj;
     Intent intent;
 
@@ -198,49 +198,6 @@ public class DetailFragment extends Fragment {
                         + obj.getJSONObject("temp").getLong("min") + "°" + "\n");
         ss1.setSpan(new RelativeSizeSpan(1.4f) , 0 , 3 , 0);
         tempText.setText(ss1);
-
-        long sr = intent.getLongExtra("sunrise" , 0);
-        long ss = intent.getLongExtra("sunset" , 0);
-        final String d1 = new java.text.SimpleDateFormat("hh:mm a" , Locale.US).format(new Date(sr * 1000));
-        final String d2 = new java.text.SimpleDateFormat("hh:mm a" , Locale.US).format(new Date(ss * 1000));
-        sunriseText.setText(d1);
-        sunriseText.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Snackbar.make(view, "Sunrise Time : " + d1, Snackbar.LENGTH_SHORT)
-                                .show();
-                    }
-                }
-        );
-        sunriseIcon.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Snackbar.make(view, "Sunrise Time : " + d1, Snackbar.LENGTH_SHORT)
-                                .show();
-                    }
-                }
-        );
-        sunsetText.setText(d2);
-        sunsetText.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Snackbar.make(view, "Sunset Time : " + d2, Snackbar.LENGTH_SHORT)
-                                .show();
-                    }
-                }
-        );
-        sunsetIcon.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Snackbar.make(view, "Sunset Time : " + d2, Snackbar.LENGTH_SHORT)
-                                .show();
-                    }
-                }
-        );
     }
 
     private void initIcons() throws JSONException{
@@ -250,8 +207,6 @@ public class DetailFragment extends Fragment {
         dayIcon.setText(getActivity().getString(R.string.day_icon));
         speedIcon.setText(getActivity().getString(R.string.speed_icon));
         pressureIcon.setText(getActivity().getString(R.string.pressure_icon));
-        sunriseIcon.setText(getActivity().getString(R.string.sunrise_icon));
-        sunsetIcon.setText(getActivity().getString(R.string.sunset_icon));
     }
 
     private boolean checkDay() {
@@ -523,13 +478,6 @@ public class DetailFragment extends Fragment {
         pressureIcon = (TextView) rootView.findViewById(R.id.pressure_icon);
         pressureIcon.setTypeface(weatherFont);
         pressureText = (TextView) rootView.findViewById(R.id.pressure_text);
-
-        sunriseIcon = (TextView) rootView.findViewById(R.id.sunrise_icon);
-        sunriseIcon.setTypeface(weatherFont);
-        sunsetIcon = (TextView) rootView.findViewById(R.id.sunset_icon);
-        sunsetIcon.setTypeface(weatherFont);
-        sunriseText = (TextView) rootView.findViewById(R.id.sunrise_text);
-        sunsetText = (TextView) rootView.findViewById(R.id.sunset_text);
 
         dayIcon = (TextView) rootView.findViewById(R.id.day_icon);
         dayIcon.setTypeface(weatherFont);

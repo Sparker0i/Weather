@@ -59,93 +59,74 @@
         android:id="@+id/date_text" />
 
     <LinearLayout
-        android:baselineAligned="false"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_below="@+id/sun_rise_set"
-        android:layout_alignEnd="@+id/weather_icon"
-        android:layout_marginTop="30dp"
-        android:layout_height="120sp"
-        android:id="@+id/detail">
-
+        android:layout_height="wrap_content"
+        android:id="@+id/detail"
+        android:layout_below="@+id/day_night"
+        android:layout_marginTop="24dp"
+        android:orientation="vertical">
         <LinearLayout
-            android:layout_width="87sp"
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:layout_height="match_parent">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1">
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
                 android:id="@+id/humidity_icon"
-                android:layout_weight="2"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:layout_width="180sp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
                 android:textAlignment="center"
-                android:textColor="#FFFFFF"
-                android:textSize="65sp" />
+                android:textSize="40sp" />
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:id="@+id/humidity_text"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textAlignment="center"
-                android:textSize="16sp"
-                android:textColor="#FFFFFF" />
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="bottom|center|start"
+                android:layout_weight="1"
+                android:textAlignment="center" />
         </LinearLayout>
 
         <LinearLayout
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:layout_width="87sp"
-            android:layout_height="match_parent">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1">
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
                 android:id="@+id/speed_icon"
-                android:layout_weight="2"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:layout_width="180sp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
                 android:textAlignment="center"
-                android:textColor="#FFFFFF"
-                android:textSize="65sp" />
-
+                android:textSize="40sp" />
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
                 android:id="@+id/speed_text"
-                android:textSize="16sp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textAlignment="center"
-                android:textColor="#FFFFFF" />
+                android:layout_weight="2"/>
         </LinearLayout>
 
         <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="87sp"
-            android:layout_weight="1"
-            android:layout_height="match_parent">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1">
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
                 android:id="@+id/pressure_icon"
-                android:layout_weight="2"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:layout_width="180sp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
                 android:textAlignment="center"
-                android:textColor="#FFFFFF"
-                android:textSize="65sp" />
-
+                android:textSize="40sp" />
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
                 android:id="@+id/pressure_text"
-                android:textSize="16sp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textAlignment="center"
-                android:textColor="#FFFFFF" />
+                android:layout_weight="2"/>
         </LinearLayout>
-
     </LinearLayout>
 
     <LinearLayout
@@ -218,79 +199,6 @@
                 android:textAlignment="center"
                 android:textColor="#FFFFFF" />
         </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/sun_rise_set"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="120sp"
-        android:layout_marginTop="15sp"
-        android:layout_below="@+id/temp_text"
-        android:layout_alignEnd="@+id/temp_text">
-
-        <LinearLayout
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:layout_height="match_parent"
-            android:layout_width="wrap_content" />
-        <LinearLayout
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:layout_height="match_parent"
-            android:layout_width="wrap_content" >
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:id="@+id/sunrise_icon"
-                android:layout_weight="2"
-                android:gravity="center_vertical"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textAlignment="center"
-                android:textColor="#FFFFFF"
-                android:textSize="65sp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/sunrise_text"
-                android:gravity="bottom"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textAlignment="center"
-                android:textSize="16sp"
-                android:textColor="#FFFFFF" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:layout_height="match_parent"
-            android:layout_width="wrap_content" >
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:id="@+id/sunset_icon"
-                android:layout_weight="2"
-                android:gravity="center_vertical"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textAlignment="center"
-                android:textColor="#FFFFFF"
-                android:textSize="65sp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/sunset_text"
-                android:gravity="bottom"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textAlignment="center"
-                android:textSize="16sp"
-                android:textColor="#FFFFFF" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:layout_height="match_parent"
-            android:layout_width="wrap_content" />
     </LinearLayout>
 </RelativeLayout>
 </ScrollView>

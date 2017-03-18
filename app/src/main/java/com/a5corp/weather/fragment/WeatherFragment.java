@@ -7,6 +7,7 @@ import android.graphics.Typeface;
 import android.os.Handler;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomSheetDialogFragment;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -40,7 +41,6 @@ import com.afollestad.materialdialogs.MaterialDialog;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -175,8 +175,8 @@ public class WeatherFragment extends Fragment {
         switch (item.getItemId()) {
             case R.id.change_city : showInputDialog();
                 break;
-            case R.id.about_page : Intent intent = new Intent(getActivity() , AboutActivity.class);
-                startActivity(intent);
+            case R.id.show_bottom : BottomSheetDialogFragment bottomSheetDialogFragment = new CustomBottomSheetDialogFragment();
+                bottomSheetDialogFragment.show(getActivity().getSupportFragmentManager(), bottomSheetDialogFragment.getTag());
                 break;
             case R.id.refresh : changeCity(GlobalActivity.cp.getCity());
                 break;

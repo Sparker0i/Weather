@@ -51,4 +51,5 @@ dependencies {
     compile 'com.github.gabrielemariotti.cards:cardslib-cards:2.1.0'
     compile 'com.github.gabrielemariotti.cards:cardslib-recyclerview:2.1.0'
     compile 'com.android.support:support-vector-drawable:25.2.0'
+    compile 'com.android.support.constraint:constraint-layout:+'
 }
