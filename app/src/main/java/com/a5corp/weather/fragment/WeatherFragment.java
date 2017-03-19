@@ -887,7 +887,11 @@ public class WeatherFragment extends Fragment {
                 }
             });
             Log.i("Humidity Loaded" , "Done");
-            String wind = json0.getJSONObject("wind").getDouble("speed") + " m/s";
+            String wind = json0.getJSONObject("wind").getDouble("speed") + " m/";
+            if (preferences.getUnits().equals("imperial"))
+                wind = wind + "h";
+            else
+                wind = wind + "s";
             windView.setText(wind);
             windIcon.setOnClickListener(new View.OnClickListener() {
                 @Override
