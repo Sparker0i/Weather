@@ -149,7 +149,7 @@ public class CustomBottomSheetDialogFragment extends BottomSheetDialogFragment {
                 snowText.setText("Snow : 0 mm");
             }
             humidityText.setText("Humidity : " + json.getDouble("humidity") + " %");
-            pressureText.setText("Pressure : " + json.getDouble("pressure") + " Pa");
+            pressureText.setText("Pressure : " + json.getDouble("pressure") + " hPa");
         }
         catch (JSONException ex) {
             ex.printStackTrace();

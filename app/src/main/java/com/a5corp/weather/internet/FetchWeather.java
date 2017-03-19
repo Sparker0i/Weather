@@ -47,9 +47,6 @@ public class FetchWeather extends AsyncTask<String , Void , JSONObject[]> {
         else
             coordinates(params);
         try {
-            preferences = new Preferences(context);
-            UNITS_VALUE = preferences.getUnits();
-            System.out.println(UNITS_VALUE);
             Log.d(LOG_TAG , "Execution");
             URL day = new URL(builtDay.toString());
             Log.i("day" , day.toString());
@@ -98,7 +95,6 @@ public class FetchWeather extends AsyncTask<String , Void , JSONObject[]> {
     }
 
     private void city(String... params) {
-        preferences = new Preferences(context);
         UNITS_VALUE = preferences.getUnits();
         System.out.println(UNITS_VALUE);
         builtDay = Uri.parse(OPEN_WEATHER_MAP_DAILY_API).buildUpon()
@@ -116,7 +112,6 @@ public class FetchWeather extends AsyncTask<String , Void , JSONObject[]> {
     }
 
     private void coordinates(String... params) {
-        preferences = new Preferences(context);
         UNITS_VALUE = preferences.getUnits();
         builtDay = Uri.parse(OPEN_WEATHER_MAP_DAILY_API).buildUpon()
                 .appendQueryParameter(LAT_PARAM , params[0])
