@@ -32,17 +32,6 @@ public class AboutActivity extends AppCompatActivity {
             }
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        /*Libs libs = new Libs(getApplicationContext());
-        libs.getLibraries();
-        new LibsBuilder()
-                //provide a style (optional) (LIGHT, DARK, LIGHT_DARK_TOOLBAR)
-                .withActivityStyle(Libs.ActivityStyle.LIGHT_DARK_TOOLBAR)
-                .withAboutIconShown(true)
-                .withLibraries(libs.toString())
-                .withAboutVersionShown(true)
-                .withAboutDescription("This is a small sample which can be set in the about my app description file.<br /><b>You can style this with html markup :D</b>")
-                //start the activity
-                .start(this);*/
     }
 
     @Override

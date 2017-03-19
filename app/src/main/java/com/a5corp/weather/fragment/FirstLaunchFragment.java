@@ -11,11 +11,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.a5corp.weather.GlobalActivity;
+import com.a5corp.weather.activity.GlobalActivity;
 import com.a5corp.weather.R;
-import com.a5corp.weather.activity.FirstLaunch;
 import com.a5corp.weather.activity.WeatherActivity;
 import com.a5corp.weather.preferences.Preferences;
 

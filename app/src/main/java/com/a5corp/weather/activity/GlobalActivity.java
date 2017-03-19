@@ -1,12 +1,11 @@
-package com.a5corp.weather;
+package com.a5corp.weather.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-import com.a5corp.weather.activity.WeatherActivity;
-import com.a5corp.weather.activity.FirstLaunch;
+import com.a5corp.weather.R;
 import com.a5corp.weather.preferences.Preferences;
 
 public class GlobalActivity extends AppCompatActivity {

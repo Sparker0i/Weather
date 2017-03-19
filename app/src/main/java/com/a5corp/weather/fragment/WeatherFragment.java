@@ -24,7 +24,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.a5corp.weather.GlobalActivity;
+import com.a5corp.weather.activity.GlobalActivity;
 import com.a5corp.weather.R;
 import com.a5corp.weather.activity.FirstLaunch;
 import com.a5corp.weather.activity.WeatherActivity;
@@ -650,9 +650,71 @@ public class WeatherFragment extends Fragment {
             int deg = json0.getJSONObject("wind").getInt("deg");
             setDeg(deg);
             setWeatherIcon(json0.getJSONArray("weather").getJSONObject(0).getInt("id"),10);
-            humidityView.setText(json0.getJSONObject("main").getInt("humidity") + "%");
+            String humidity = json0.getJSONObject("main").getInt("humidity") + "%";
+            humidityView.setText(humidity);
+            humidityIcon.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Snackbar.make(rootView , "Humidity : " + humidityView.getText() , Snackbar.LENGTH_SHORT).show();
+                }
+            });
+            humidityView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Snackbar.make(rootView , "Humidity : " + humidityView.getText() , Snackbar.LENGTH_SHORT).show();
+                }
+            });
             Log.i("Humidity Loaded" , "Done");
-            windView.setText(json0.getJSONObject("wind").getDouble("speed") + " m/s");
+            String wind = json0.getJSONObject("wind").getDouble("speed") + " m/s";
+            windView.setText(wind);
+            windIcon.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Snackbar.make(rootView , "Wind Speed : " + windView.getText() , Snackbar.LENGTH_SHORT).show();
+                }
+            });
+            windView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Snackbar.make(rootView , "Wind Speed : " + windView.getText() , Snackbar.LENGTH_SHORT).show();
+                }
+            });
+            humidityIcon.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Snackbar.make(rootView , "Humidity : " + humidityView.getText() , Snackbar.LENGTH_SHORT).show();
+                }
+            });
+            humidityView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Snackbar.make(rootView , "Humidity : " + humidityView.getText() , Snackbar.LENGTH_SHORT).show();
+                }
+            });
+            sunriseIcon.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Snackbar.make(rootView , "Sunrise at : " + sunriseView.getText() , Snackbar.LENGTH_SHORT).show();
+                }
+            });
+            sunriseView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Snackbar.make(rootView , "Sunrise at : " + sunriseView.getText() , Snackbar.LENGTH_SHORT).show();
+                }
+            });
+            sunsetIcon.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Snackbar.make(rootView , "Sunset at : " + sunsetView.getText() , Snackbar.LENGTH_SHORT).show();
+                }
+            });
+            sunsetView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Snackbar.make(rootView , "Sunset at : " + sunsetView.getText() , Snackbar.LENGTH_SHORT).show();
+                }
+            });
             Log.i("Wind Loaded" , "Done");
             Log.i("10" , "Weather Icon 11 Set");
             weatherIcon[10].setOnClickListener(new View.OnClickListener()
@@ -677,14 +739,13 @@ public class WeatherFragment extends Fragment {
             });
             String r1 = Integer.toString(a) + "°";
             button.setText(r1);
-            button.setClickable(false);
         }catch(Exception e){
             Log.e("SimpleWeather", "One or more fields not found in the JSON data");
         }
     }
 
     private void setDeg(int deg) {
-        int index = (int) Math.abs(Math.round(deg % 360) / 45);
+        int index = Math.abs(Math.round(deg % 360) / 45);
         switch (index) {
             case 0 : directionView.setText(getActivity().getString(R.string.top));
                 directionView.setOnClickListener(new View.OnClickListener() {
