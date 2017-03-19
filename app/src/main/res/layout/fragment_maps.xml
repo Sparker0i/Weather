@@ -1,30 +1,22 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.a5corp.weather.fragment.MapsFragment">
+    tools:context="com.a5corp.weather.activity.WeatherActivity">
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <WebView
+        android:id="@+id/webView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context="cz.martykan.forecastie.activities.MapActivity">
+        android:layout_height="match_parent" />
 
-        <WebView
-            android:id="@+id/webView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+    <com.roughike.bottombar.BottomBar
+        android:id="@+id/bottomBar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/md_pink_400"
+        app:bb_behavior="shifting"
+        app:bb_tabXmlResource="@xml/bottombar_tabs" />
 
-        <com.roughike.bottombar.BottomBar
-            android:id="@+id/bottomBar"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_alignParentBottom="true"
-            android:background="@color/md_pink_400"
-            app:bb_behavior="shifting"
-            app:bb_tabXmlResource="@xml/bottombar_tabs" />
-
-    </RelativeLayout>
-
-</FrameLayout>
+</RelativeLayout>

@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.a5corp.weather.R;
+import com.a5corp.weather.preferences.Preferences;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,12 +30,14 @@ public class FetchWeather extends AsyncTask<String , Void , JSONObject[]> {
     final String LAT_PARAM = "lat";
     final String LON_PARAM = "lon";
     private final String UNITS_PARAM = "units";
-    private final String UNITS_VALUE = "metric";
+    private String UNITS_VALUE;
     private final String DAYS_PARAM = "cnt";
     private Uri builtDay , builtFort;
+    private Preferences preferences;
 
     public FetchWeather(Context mContext) {
         context = mContext;
+        preferences = new Preferences(context);
     }
 
     @Override
@@ -44,9 +47,14 @@ public class FetchWeather extends AsyncTask<String , Void , JSONObject[]> {
         else
             coordinates(params);
         try {
-            Log.d(LOG_TAG , "Execution Fcked");
+            preferences = new Preferences(context);
+            UNITS_VALUE = preferences.getUnits();
+            System.out.println(UNITS_VALUE);
+            Log.d(LOG_TAG , "Execution");
             URL day = new URL(builtDay.toString());
+            Log.i("day" , day.toString());
             URL fort = new URL(builtFort.toString());
+            Log.i("fort" , fort.toString());
             Log.d(LOG_TAG , "URI Ready");
             HttpURLConnection connection0 = (HttpURLConnection)day.openConnection();
             HttpURLConnection connection1 = (HttpURLConnection)fort.openConnection();
@@ -90,6 +98,9 @@ public class FetchWeather extends AsyncTask<String , Void , JSONObject[]> {
     }
 
     private void city(String... params) {
+        preferences = new Preferences(context);
+        UNITS_VALUE = preferences.getUnits();
+        System.out.println(UNITS_VALUE);
         builtDay = Uri.parse(OPEN_WEATHER_MAP_DAILY_API).buildUpon()
                 .appendQueryParameter(QUERY_PARAM , params[0])
                 .appendQueryParameter(FORMAT_PARAM , FORMAT_VALUE)
@@ -105,6 +116,8 @@ public class FetchWeather extends AsyncTask<String , Void , JSONObject[]> {
     }
 
     private void coordinates(String... params) {
+        preferences = new Preferences(context);
+        UNITS_VALUE = preferences.getUnits();
         builtDay = Uri.parse(OPEN_WEATHER_MAP_DAILY_API).buildUpon()
                 .appendQueryParameter(LAT_PARAM , params[0])
                 .appendQueryParameter(LON_PARAM , params[1])

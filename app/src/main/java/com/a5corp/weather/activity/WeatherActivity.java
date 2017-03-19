@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.CompoundButton;
 
 import com.a5corp.weather.BuildConfig;
 import com.a5corp.weather.R;
@@ -24,6 +25,7 @@ import com.a5corp.weather.fragment.MapsFragment;
 import com.a5corp.weather.fragment.WeatherFragment;
 import com.a5corp.weather.permissions.GPSTracker;
 import com.a5corp.weather.permissions.Permissions;
+import com.a5corp.weather.preferences.Preferences;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.mikepenz.google_material_typeface_library.GoogleMaterial;
@@ -32,9 +34,13 @@ import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
+import com.mikepenz.materialdrawer.interfaces.OnCheckedChangeListener;
 import com.mikepenz.materialdrawer.model.DividerDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
+import com.mikepenz.materialdrawer.model.SecondarySwitchDrawerItem;
+import com.mikepenz.materialdrawer.model.SecondaryToggleDrawerItem;
+import com.mikepenz.materialdrawer.model.ToggleDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import com.mikepenz.weather_icons_typeface_library.WeatherIcons;
@@ -43,14 +49,17 @@ import com.readystatesoftware.systembartint.SystemBarTintManager;
 public class WeatherActivity extends AppCompatActivity {
 
     Permissions permission;
+    Preferences preferences;
     String lat, lon;
     GPSTracker gps;
     FloatingActionButton fab;
     WeatherFragment wf;
     Toolbar toolbar;
+    Drawer drawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        preferences = new Preferences(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather);
         wf = new WeatherFragment();
@@ -111,17 +120,28 @@ public class WeatherActivity extends AppCompatActivity {
                 .withIcon(new IconicsDrawable(this)
                         .icon(GoogleMaterial.Icon.gmd_map)
                         .sizeRes(R.dimen.activity_horizontal_margin));
-        SecondaryDrawerItem item4 = new SecondaryDrawerItem().withIdentifier(4).withName(R.string.drawer_item_settings)
-                .withIcon(new IconicsDrawable(this)
-                        .icon(GoogleMaterial.Icon.gmd_settings)
-                        .sizeRes(R.dimen.activity_horizontal_margin))
-                .withSelectable(false);
         SecondaryDrawerItem item5 = new SecondaryDrawerItem().withIdentifier(5).withName(R.string.drawer_item_about)
                 .withIcon(new IconicsDrawable(this)
                         .icon(GoogleMaterial.Icon.gmd_info)
                         .sizeRes(R.dimen.activity_horizontal_margin))
                 .withSelectable(false);
-        new DrawerBuilder()
+        final SecondarySwitchDrawerItem item4 = new SecondarySwitchDrawerItem().withIdentifier(6).withName("Use Fahrenheit")
+                .withIcon(new IconicsDrawable(this)
+                        .icon(WeatherIcons.Icon.wic_fahrenheit)
+                        .sizeRes(R.dimen.activity_horizontal_margin))
+                .withSelectable(false);
+        item4.withOnCheckedChangeListener(new OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(IDrawerItem drawerItem, CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    preferences.setUnits("imperial");
+                }
+                else {
+                    preferences.setUnits("metric");
+                }
+            }
+        });
+        drawer = new DrawerBuilder()
                 .withActivity(this)
                 .withToolbar(toolbar)
                 .withSelectedItem(1)
@@ -162,9 +182,6 @@ public class WeatherActivity extends AppCompatActivity {
                                 getSupportFragmentManager().beginTransaction()
                                         .replace(R.id.fragment, mapsFragment)
                                         .commit();
-                            }
-                            else if (drawerItem.getIdentifier() == 4) {
-                                startActivity(new Intent(WeatherActivity.this, SettingsActivity.class));
                             }
                             else if (drawerItem.getIdentifier() == 5) {
                                 startActivity(new Intent(WeatherActivity.this, AboutActivity.class));

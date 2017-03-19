@@ -838,7 +838,7 @@ public class WeatherFragment extends Fragment {
                         + details[i].getJSONObject("temp").getLong("max") + "°" + "      "
                         + details[i].getJSONObject("temp").getLong("min") + "°" + "\n");
                 ss1.setSpan(new RelativeSizeSpan(1.1f) , 0 , 7 , 0); // set size
-                ss1.setSpan(new RelativeSizeSpan(1.4f) , 8 , 11 , 0);
+                ss1.setSpan(new RelativeSizeSpan(1.4f) , 8 , 12 , 0);
                 detailsField[i].setText(ss1);
                 Log.i("Details[" + Integer.toString(i) + "]", "Information String " + Integer.toString(i + 1) + " loaded");
                 setWeatherIcon(details[i].getJSONArray("weather").getJSONObject(0).getInt("id") , i);

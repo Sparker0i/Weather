@@ -3,6 +3,7 @@ package com.a5corp.weather.preferences;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 public class Preferences {
     private static SharedPreferences prefs;
@@ -56,5 +57,14 @@ public class Preferences {
 
     public float getLongitude() {
         return prefs.getFloat("lon" , 0);
+    }
+
+    public void setUnits(String string) {
+        prefs.edit().putString("units" , string).apply();
+        Log.i("units" , string);
+    }
+
+    public String getUnits() {
+        return prefs.getString("units" , "metric");
     }
 }
