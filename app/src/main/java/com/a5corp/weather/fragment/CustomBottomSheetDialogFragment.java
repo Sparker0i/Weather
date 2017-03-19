@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.a5corp.weather.R;
+import com.a5corp.weather.preferences.Preferences;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,6 +26,7 @@ public class CustomBottomSheetDialogFragment extends BottomSheetDialogFragment {
     TextView nightValue , mornValue , dayValue , eveValue;
     TextView condition;
     View rootView;
+    Preferences preferences;
     Bundle bundle;
     Typeface weatherFont;
     JSONObject json;
@@ -47,6 +49,7 @@ public class CustomBottomSheetDialogFragment extends BottomSheetDialogFragment {
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.dialog_modal , container, false);
         condition = (TextView) rootView.findViewById(R.id.description);
+        preferences = new Preferences(getContext());
         nightValue = (TextView) rootView.findViewById(R.id.night_temperature);
         mornValue = (TextView) rootView.findViewById(R.id.morning_temperature);
         dayValue = (TextView) rootView.findViewById(R.id.day_temperature);
@@ -127,7 +130,12 @@ public class CustomBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
     public void setOthers() {
         try {
-            windText.setText("Speed : " + json.getDouble("speed") + " m/s");
+            String wind = "Speed : " + json.getDouble("speed") + " m/";
+            if (preferences.getUnits().equals("imperial"))
+                wind = wind + "h";
+            else
+                wind = wind + "s";
+            windText.setText(wind);
             try {
                 rainText.setText("Rain : " + json.getDouble("rain") + " mm");
             }
