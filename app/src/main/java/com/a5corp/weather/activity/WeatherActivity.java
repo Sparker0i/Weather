@@ -125,11 +125,21 @@ public class WeatherActivity extends AppCompatActivity {
                         .icon(GoogleMaterial.Icon.gmd_info)
                         .sizeRes(R.dimen.activity_horizontal_margin))
                 .withSelectable(false);
-        final SecondarySwitchDrawerItem item4 = new SecondarySwitchDrawerItem().withIdentifier(6).withName("Use Fahrenheit")
-                .withIcon(new IconicsDrawable(this)
-                        .icon(WeatherIcons.Icon.wic_fahrenheit)
-                        .sizeRes(R.dimen.activity_horizontal_margin))
-                .withSelectable(false);
+        final SecondarySwitchDrawerItem item4;
+        if (preferences.getUnits().equals("imperial"))
+            item4 = new SecondarySwitchDrawerItem().withIdentifier(6).withName("Use Fahrenheit")
+                    .withChecked(true)
+                    .withIcon(new IconicsDrawable(this)
+                            .icon(WeatherIcons.Icon.wic_fahrenheit)
+                            .sizeRes(R.dimen.activity_horizontal_margin))
+                    .withSelectable(false);
+        else
+            item4 = new SecondarySwitchDrawerItem().withIdentifier(6).withName("Use Fahrenheit")
+                    .withChecked(false)
+                    .withIcon(new IconicsDrawable(this)
+                            .icon(WeatherIcons.Icon.wic_fahrenheit)
+                            .sizeRes(R.dimen.activity_horizontal_margin))
+                    .withSelectable(false);
         item4.withOnCheckedChangeListener(new OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(IDrawerItem drawerItem, CompoundButton buttonView, boolean isChecked) {
@@ -139,6 +149,10 @@ public class WeatherActivity extends AppCompatActivity {
                 else {
                     preferences.setUnits("metric");
                 }
+                drawer.closeDrawer();
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment, new WeatherFragment())
+                        .commit();
             }
         });
         drawer = new DrawerBuilder()
