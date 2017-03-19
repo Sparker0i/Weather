@@ -19,10 +19,5 @@
         android:title="@string/refresh"
         android:orderInCategory="2"
         app:showAsAction="never"/>
-    <item
-        android:id="@+id/show_bottom"
-        android:orderInCategory="5"
-        android:title="Show Bottom"
-        app:showAsAction="never"/>
 
 </menu>
