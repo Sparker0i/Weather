@@ -246,6 +246,7 @@ public class WeatherFragment extends Fragment {
                 else {
                     handler.post(new Runnable() {
                         public void run() {
+                            //getActivity().startService
                             preferences.setLaunched();
                             renderWeather(json);
                             Snackbar snackbar = Snackbar.make(rootView, "Loaded Weather Data", 500);

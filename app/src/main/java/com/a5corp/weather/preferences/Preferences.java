@@ -67,4 +67,12 @@ public class Preferences {
     public String getUnits() {
         return prefs.getString("units" , "metric");
     }
+
+    public void setNotifs(Boolean bool) {
+        prefs.edit().putBoolean("notif" , bool).apply();
+    }
+
+    public Boolean getNotifs() {
+        return prefs.getBoolean("notif" , true);
+    }
 }

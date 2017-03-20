@@ -55,6 +55,7 @@ public class WeatherActivity extends AppCompatActivity {
     FloatingActionButton fab;
     WeatherFragment wf;
     Toolbar toolbar;
+    public boolean showNotifs;
     Drawer drawer;
 
     @Override
@@ -125,7 +126,7 @@ public class WeatherActivity extends AppCompatActivity {
                         .icon(GoogleMaterial.Icon.gmd_info)
                         .sizeRes(R.dimen.activity_horizontal_margin))
                 .withSelectable(false);
-        final SecondarySwitchDrawerItem item4;
+        final SecondarySwitchDrawerItem item4 , item6;
         if (preferences.getUnits().equals("imperial"))
             item4 = new SecondarySwitchDrawerItem().withIdentifier(6).withName("Use Fahrenheit")
                     .withChecked(true)
@@ -136,6 +137,20 @@ public class WeatherActivity extends AppCompatActivity {
         else
             item4 = new SecondarySwitchDrawerItem().withIdentifier(6).withName("Use Fahrenheit")
                     .withChecked(false)
+                    .withIcon(new IconicsDrawable(this)
+                            .icon(WeatherIcons.Icon.wic_fahrenheit)
+                            .sizeRes(R.dimen.activity_horizontal_margin))
+                    .withSelectable(false);
+        if (preferences.getNotifs())
+            item6 = new SecondarySwitchDrawerItem().withIdentifier(6).withName("Show Notifications")
+                    .withChecked(true)
+                    .withIcon(new IconicsDrawable(this)
+                            .icon(WeatherIcons.Icon.wic_fahrenheit)
+                            .sizeRes(R.dimen.activity_horizontal_margin))
+                    .withSelectable(false);
+        else
+            item6 = new SecondarySwitchDrawerItem().withIdentifier(6).withName("Use Fahrenheit")
+                    .withChecked(true)
                     .withIcon(new IconicsDrawable(this)
                             .icon(WeatherIcons.Icon.wic_fahrenheit)
                             .sizeRes(R.dimen.activity_horizontal_margin))
