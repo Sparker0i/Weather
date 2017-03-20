@@ -39,7 +39,7 @@ public class CurrentWeatherService extends IntentService {
         pendingIntent = PendingIntent.getBroadcast(this, 0, myIntent,0);
 
         AlarmManager am = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
-        long recurring = (1 * 60000);  // in milliseconds
+        long recurring = (60 * 60000);  // in milliseconds
         if (preferences.getNotifs())
             am.setRepeating(AlarmManager.RTC, Calendar.getInstance().getTimeInMillis(), recurring, pendingIntent);
     }
