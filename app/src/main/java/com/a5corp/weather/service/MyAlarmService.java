@@ -48,7 +48,6 @@ public class MyAlarmService extends Service
         builder.setSmallIcon(R.mipmap.ic_launcher_dark);
         builder.setContentIntent(pendingIntent);
         builder.setOngoing(false);
-        builder.setSubText("This is subtext...");
         builder.build();
         myNotification = builder.build();
         mManager.notify(0, myNotification);

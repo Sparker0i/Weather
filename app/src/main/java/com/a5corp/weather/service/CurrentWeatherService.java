@@ -3,6 +3,7 @@ package com.a5corp.weather.service;
 import android.app.AlarmManager;
 import android.app.IntentService;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 
 import com.a5corp.weather.receiver.MyReceiver;
@@ -34,7 +35,8 @@ public class CurrentWeatherService extends IntentService {
         Intent myIntent = new Intent(this, MyReceiver.class);
         pendingIntent = PendingIntent.getBroadcast(this, 0, myIntent,0);
 
-        AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis(), pendingIntent);
+        AlarmManager am = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
+        long recurring = (1 * 60000);  // in milliseconds
+        am.setRepeating(AlarmManager.RTC, Calendar.getInstance().getTimeInMillis(), recurring, pendingIntent);
     }
 }
