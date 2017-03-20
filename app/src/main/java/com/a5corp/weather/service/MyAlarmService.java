@@ -104,8 +104,8 @@ public class MyAlarmService extends Service
         builder.setContentText(temp + ut + " at " + city);
         builder.setStyle(new Notification.BigTextStyle().bigText("City : " + city
                 + "\nTemperature : " + temp + ut
-                + "\nPressure : " + pressure
-                + "\nHumidity : " + humidity));
+                + "\nPressure : " + pressure + " hPa"
+                + "\nHumidity : " + humidity + "%"));
         builder.setSmallIcon(R.mipmap.ic_launcher_dark);
         builder.setContentIntent(pendingIntent);
         builder.setOngoing(false);
