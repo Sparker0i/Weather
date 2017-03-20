@@ -139,14 +139,14 @@ public class WeatherActivity extends AppCompatActivity {
                             .sizeRes(R.dimen.activity_horizontal_margin))
                     .withSelectable(false);
         if (preferences.getNotifs())
-            item6 = new SecondarySwitchDrawerItem().withIdentifier(6).withName("Show Notifications")
+            item6 = new SecondarySwitchDrawerItem().withIdentifier(6).withName("Show Hourly Notifications")
                     .withChecked(true)
                     .withIcon(new IconicsDrawable(this)
                             .icon(GoogleMaterial.Icon.gmd_notifications)
                             .sizeRes(R.dimen.activity_horizontal_margin))
                     .withSelectable(false);
         else
-            item6 = new SecondarySwitchDrawerItem().withIdentifier(6).withName("Show Notifications")
+            item6 = new SecondarySwitchDrawerItem().withIdentifier(6).withName("Show Hourly Notifications")
                     .withChecked(false)
                     .withIcon(new IconicsDrawable(this)
                             .icon(GoogleMaterial.Icon.gmd_notifications)
