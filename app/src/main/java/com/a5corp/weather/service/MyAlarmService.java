@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Handler;
 import android.os.IBinder;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -98,12 +99,13 @@ public class MyAlarmService extends Service
         else
             ut = "°F";
         builder.setAutoCancel(false);
-        builder.setTicker(temp + " " + ut + " at " + city);
+        builder.setTicker(temp + ut + " at " + city);
         builder.setContentTitle("Weather Notification");
-        builder.setContentText("City : " + city
-                + "\nTemperature : " + temp
+        builder.setContentText(temp + ut + " at " + city);
+        builder.setStyle(new Notification.BigTextStyle().bigText("City : " + city
+                + "\nTemperature : " + temp + ut
                 + "\nPressure : " + pressure
-                + "\nHumidity : " + humidity);
+                + "\nHumidity : " + humidity));
         builder.setSmallIcon(R.mipmap.ic_launcher_dark);
         builder.setContentIntent(pendingIntent);
         builder.setOngoing(false);
