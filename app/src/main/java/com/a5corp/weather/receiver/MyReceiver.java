@@ -4,6 +4,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
+import com.a5corp.weather.service.MyAlarmService;
+
 public class MyReceiver extends BroadcastReceiver
 {
 

@@ -32,6 +32,7 @@ import com.a5corp.weather.internet.CheckConnection;
 import com.a5corp.weather.internet.FetchWeather;
 import com.a5corp.weather.permissions.Permissions;
 import com.a5corp.weather.preferences.Preferences;
+import com.a5corp.weather.service.CurrentWeatherService;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 
@@ -246,7 +247,7 @@ public class WeatherFragment extends Fragment {
                 else {
                     handler.post(new Runnable() {
                         public void run() {
-                            //getActivity().startService
+                            getActivity().startService(new Intent(getActivity() , CurrentWeatherService.class));
                             preferences.setLaunched();
                             renderWeather(json);
                             Snackbar snackbar = Snackbar.make(rootView, "Loaded Weather Data", 500);

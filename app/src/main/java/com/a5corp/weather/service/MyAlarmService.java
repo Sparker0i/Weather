@@ -1,4 +1,4 @@
-package com.a5corp.weather.receiver;
+package com.a5corp.weather.service;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
+import android.util.Log;
 
 import com.a5corp.weather.R;
 import com.a5corp.weather.activity.WeatherActivity;
@@ -46,11 +47,12 @@ public class MyAlarmService extends Service
         builder.setContentText("You have a new message");
         builder.setSmallIcon(R.mipmap.ic_launcher_dark);
         builder.setContentIntent(pendingIntent);
-        builder.setOngoing(true);
+        builder.setOngoing(false);
         builder.setSubText("This is subtext...");
         builder.build();
         myNotification = builder.build();
         mManager.notify(0, myNotification);
+        Log.i("Built" , "Notification");
     }
 
     @Override

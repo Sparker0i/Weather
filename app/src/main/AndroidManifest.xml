@@ -39,6 +39,17 @@
         <activity
             android:name=".activity.FirstLaunch"
             android:label="Enter City" />
+
+        <receiver android:name=".receiver.MyReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+
+        <service android:name=".service.CurrentWeatherService"
+            android:enabled="true"/>
+        <service android:name=".service.MyAlarmService"
+            android:enabled="true"/>
     </application>
 
 </manifest>

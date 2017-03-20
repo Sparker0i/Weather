@@ -90,6 +90,7 @@ public class FetchWeather extends AsyncTask<String , Void , JSONObject[]> {
         }
         catch(IOException e){
             Log.e(LOG_TAG , "Execution Failed IO");
+            e.printStackTrace();
             return null;
         }
     }
