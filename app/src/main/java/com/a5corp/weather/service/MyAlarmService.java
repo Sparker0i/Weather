@@ -10,10 +10,11 @@ import android.util.Log;
 
 import com.a5corp.weather.R;
 import com.a5corp.weather.activity.WeatherActivity;
+import com.a5corp.weather.preferences.Preferences;
 
 public class MyAlarmService extends Service
 {
-
+    Preferences preferences;
     NotificationManager mManager;
 
     @Override
@@ -26,6 +27,7 @@ public class MyAlarmService extends Service
     public void onCreate()
     {
         super.onCreate();
+        preferences = new Preferences(this);
     }
 
     @SuppressWarnings("static-access")
@@ -50,7 +52,8 @@ public class MyAlarmService extends Service
         builder.setOngoing(false);
         builder.build();
         myNotification = builder.build();
-        mManager.notify(0, myNotification);
+        if (preferences.getNotifs())
+            mManager.notify(0, myNotification);
         Log.i("Built" , "Notification");
     }
 

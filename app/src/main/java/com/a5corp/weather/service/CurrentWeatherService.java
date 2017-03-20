@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 
+import com.a5corp.weather.preferences.Preferences;
 import com.a5corp.weather.receiver.MyReceiver;
 
 import java.util.Calendar;
@@ -13,7 +14,8 @@ import java.util.Calendar;
 public class CurrentWeatherService extends IntentService {
 
     private static final String TAG = "CurrentWeatherService";
-    private PendingIntent pendingIntent;
+    PendingIntent pendingIntent;
+    Preferences preferences;
 
     public CurrentWeatherService() {
         super(TAG);
@@ -21,6 +23,7 @@ public class CurrentWeatherService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
+        preferences = new Preferences(this);
         Calendar calendar = Calendar.getInstance();
 
         calendar.set(Calendar.MONTH, 6);
@@ -37,6 +40,7 @@ public class CurrentWeatherService extends IntentService {
 
         AlarmManager am = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
         long recurring = (1 * 60000);  // in milliseconds
-        am.setRepeating(AlarmManager.RTC, Calendar.getInstance().getTimeInMillis(), recurring, pendingIntent);
+        if (preferences.getNotifs())
+            am.setRepeating(AlarmManager.RTC, Calendar.getInstance().getTimeInMillis(), recurring, pendingIntent);
     }
 }

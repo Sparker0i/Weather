@@ -39,8 +39,6 @@ import com.mikepenz.materialdrawer.model.DividerDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondarySwitchDrawerItem;
-import com.mikepenz.materialdrawer.model.SecondaryToggleDrawerItem;
-import com.mikepenz.materialdrawer.model.ToggleDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import com.mikepenz.weather_icons_typeface_library.WeatherIcons;
@@ -55,7 +53,6 @@ public class WeatherActivity extends AppCompatActivity {
     FloatingActionButton fab;
     WeatherFragment wf;
     Toolbar toolbar;
-    public boolean showNotifs;
     Drawer drawer;
 
     @Override
@@ -145,14 +142,14 @@ public class WeatherActivity extends AppCompatActivity {
             item6 = new SecondarySwitchDrawerItem().withIdentifier(6).withName("Show Notifications")
                     .withChecked(true)
                     .withIcon(new IconicsDrawable(this)
-                            .icon(WeatherIcons.Icon.wic_fahrenheit)
+                            .icon(GoogleMaterial.Icon.gmd_notifications)
                             .sizeRes(R.dimen.activity_horizontal_margin))
                     .withSelectable(false);
         else
-            item6 = new SecondarySwitchDrawerItem().withIdentifier(6).withName("Use Fahrenheit")
-                    .withChecked(true)
+            item6 = new SecondarySwitchDrawerItem().withIdentifier(6).withName("Show Notifications")
+                    .withChecked(false)
                     .withIcon(new IconicsDrawable(this)
-                            .icon(WeatherIcons.Icon.wic_fahrenheit)
+                            .icon(GoogleMaterial.Icon.gmd_notifications)
                             .sizeRes(R.dimen.activity_horizontal_margin))
                     .withSelectable(false);
         item4.withOnCheckedChangeListener(new OnCheckedChangeListener() {
@@ -170,6 +167,18 @@ public class WeatherActivity extends AppCompatActivity {
                         .commit();
             }
         });
+        item6.withOnCheckedChangeListener(new OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(IDrawerItem drawerItem, CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    preferences.setNotifs(true);
+                }
+                else {
+                    preferences.setNotifs(false);
+                }
+                drawer.closeDrawer();
+            }
+        });
         drawer = new DrawerBuilder()
                 .withActivity(this)
                 .withToolbar(toolbar)
@@ -182,6 +191,7 @@ public class WeatherActivity extends AppCompatActivity {
                         item3,
                         new DividerDrawerItem(),
                         item4,
+                        item6,
                         item5
                 )
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {

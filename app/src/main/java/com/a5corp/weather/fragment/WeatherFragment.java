@@ -247,7 +247,8 @@ public class WeatherFragment extends Fragment {
                 else {
                     handler.post(new Runnable() {
                         public void run() {
-                            getActivity().startService(new Intent(getActivity() , CurrentWeatherService.class));
+                            if (preferences.getNotifs())
+                                getActivity().startService(new Intent(getActivity() , CurrentWeatherService.class));
                             preferences.setLaunched();
                             renderWeather(json);
                             Snackbar snackbar = Snackbar.make(rootView, "Loaded Weather Data", 500);
