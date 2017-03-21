@@ -103,7 +103,7 @@ public class MyAlarmService extends Service
                 + "\nTemperature : " + temp + ut
                 + "\nPressure : " + pressure + " hPa"
                 + "\nHumidity : " + humidity + "%"));
-        builder.setSmallIcon(R.mipmap.ic_launcher_dark);
+        builder.setSmallIcon(R.drawable.ic_notification_icon);
         builder.setContentIntent(pendingIntent);
         builder.setOngoing(false);
         myNotification = builder.build();
@@ -125,11 +125,7 @@ public class MyAlarmService extends Service
         List<ActivityManager.RunningTaskInfo> taskInfo = am.getRunningTasks(1);
 
         ComponentName componentInfo = taskInfo.get(0).topActivity;
-        if (componentInfo.getPackageName().equalsIgnoreCase("com.a5corp.weather")) {
-            return true;
-        } else {
-            return false;
-        }
+        return componentInfo.getPackageName().equalsIgnoreCase("com.a5corp.weather");
     }
 
     @Override
