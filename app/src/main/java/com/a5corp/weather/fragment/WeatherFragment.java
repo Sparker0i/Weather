@@ -1,5 +1,6 @@
 package com.a5corp.weather.fragment;
 
+import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -42,8 +43,11 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.ExecutionException;
+
+import static android.content.Context.ACTIVITY_SERVICE;
 
 public class WeatherFragment extends Fragment {
     Typeface weatherFont;

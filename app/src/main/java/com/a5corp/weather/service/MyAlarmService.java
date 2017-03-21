@@ -1,27 +1,24 @@
 package com.a5corp.weather.service;
 
+import android.app.ActivityManager;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.ComponentName;
 import android.content.Intent;
-import android.os.Handler;
 import android.os.IBinder;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.NotificationCompat;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.a5corp.weather.R;
-import com.a5corp.weather.activity.GlobalActivity;
 import com.a5corp.weather.activity.WeatherActivity;
-import com.a5corp.weather.internet.CheckConnection;
 import com.a5corp.weather.internet.FetchWeather;
 import com.a5corp.weather.preferences.Preferences;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public class MyAlarmService extends Service
@@ -111,9 +108,27 @@ public class MyAlarmService extends Service
         builder.setOngoing(false);
         myNotification = builder.build();
 
-        if (preferences.getNotifs()) {
+        if (preferences.getNotifs() && !checkApp()) {
             mManager.notify(0, myNotification);
             Log.i("Built", "Notification");
+        }
+        else {
+            Log.i("Cannot Build" , "Notification");
+        }
+    }
+
+    public boolean checkApp(){
+        ActivityManager am = (ActivityManager) this
+                .getSystemService(ACTIVITY_SERVICE);
+
+        // get the info from the currently running task
+        List<ActivityManager.RunningTaskInfo> taskInfo = am.getRunningTasks(1);
+
+        ComponentName componentInfo = taskInfo.get(0).topActivity;
+        if (componentInfo.getPackageName().equalsIgnoreCase("com.a5corp.weather")) {
+            return true;
+        } else {
+            return false;
         }
     }
 
