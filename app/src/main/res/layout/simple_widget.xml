@@ -4,12 +4,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/cardview_dark_background">
+    android:background="@color/colorPrimary">
 
     <LinearLayout
         android:id="@+id/header_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="24dp"
         android:background="@color/colorPrimary"
         android:orientation="horizontal">
 
@@ -20,6 +20,7 @@
             android:layout_weight="1"
             android:ellipsize="end"
             android:lines="1"
+            android:layout_gravity="center"
             android:paddingEnd="8dp"
             android:paddingLeft="8dp"
             android:paddingRight="8dp"
@@ -75,6 +76,7 @@
                 android:ellipsize="end"
                 android:gravity="center_horizontal"
                 android:lines="1"
+                android:textColor="@color/textColor"
                 android:textSize="30sp"/>
 
             <TextView
@@ -84,6 +86,7 @@
                 android:ellipsize="end"
                 android:gravity="center_horizontal"
                 android:lines="1"
+                android:textColor="@color/textColor"
                 android:textSize="14sp"/>
         </LinearLayout>
 
