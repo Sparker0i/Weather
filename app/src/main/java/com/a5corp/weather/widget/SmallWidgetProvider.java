@@ -47,7 +47,7 @@ public class SmallWidgetProvider extends AppWidgetProvider {
                 remoteViews.setTextViewText(R.id.widget_temperature, Integer.toString((int) temp) + "°" + ut);
                 setWeatherIcon(json.getJSONArray("weather").getJSONObject(0).getInt("id") , context , remoteViews);
 
-                String rs = json.getJSONArray("weather").getJSONObject(0).getString("description");
+                /*String rs = json.getJSONArray("weather").getJSONObject(0).getString("description");
                 String[] strArray = rs.split(" ");
                 StringBuilder builder = new StringBuilder();
                 for (String s : strArray) {
@@ -55,7 +55,7 @@ public class SmallWidgetProvider extends AppWidgetProvider {
                     builder.append(cap.concat(" "));
                 }
 
-                remoteViews.setTextViewText(R.id.widget_description , builder.toString());
+                remoteViews.setTextViewText(R.id.widget_description , builder.toString());*/
 
                 Intent intent = new Intent(context, SmallWidgetProvider.class);
                 intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
