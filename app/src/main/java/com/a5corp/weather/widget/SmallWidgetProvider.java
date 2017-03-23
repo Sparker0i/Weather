@@ -24,7 +24,7 @@ import java.util.concurrent.ExecutionException;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
-public class SimpleWidgetProvider extends AppWidgetProvider {
+public class SmallWidgetProvider extends AppWidgetProvider {
 
     JSONObject json;
 
@@ -43,7 +43,8 @@ public class SimpleWidgetProvider extends AppWidgetProvider {
                 RemoteViews remoteViews = new RemoteViews(context.getPackageName(),
                         R.layout.simple_widget);
                 remoteViews.setTextViewText(R.id.widget_city, number);
-                remoteViews.setTextViewText(R.id.widget_temperature, Integer.toString((int) temp));
+                String ut = new Preferences(context).getUnits().equals("metric") ? "C" : "F";
+                remoteViews.setTextViewText(R.id.widget_temperature, Integer.toString((int) temp) + "°" + ut);
                 setWeatherIcon(json.getJSONArray("weather").getJSONObject(0).getInt("id") , context , remoteViews);
 
                 String rs = json.getJSONArray("weather").getJSONObject(0).getString("description");
@@ -56,7 +57,7 @@ public class SimpleWidgetProvider extends AppWidgetProvider {
 
                 remoteViews.setTextViewText(R.id.widget_description , builder.toString());
 
-                Intent intent = new Intent(context, SimpleWidgetProvider.class);
+                Intent intent = new Intent(context, SmallWidgetProvider.class);
                 intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
                 intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds);
                 PendingIntent pendingIntent = PendingIntent.getBroadcast(context,

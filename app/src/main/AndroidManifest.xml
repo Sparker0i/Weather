@@ -51,7 +51,7 @@
         <service android:name=".service.MyAlarmService"
             android:enabled="true"/>
 
-        <receiver android:name=".widget.SimpleWidgetProvider" >
+        <receiver android:name=".widget.SmallWidgetProvider" >
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
