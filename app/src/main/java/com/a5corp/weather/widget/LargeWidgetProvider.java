@@ -36,7 +36,7 @@ public class LargeWidgetProvider extends AppWidgetProvider {
                 String number = json.getString("name");
                 double temp = json.getJSONObject("main").getDouble("temp");
                 RemoteViews remoteViews = new RemoteViews(context.getPackageName(),
-                        R.layout.widget_small);
+                        R.layout.widget_large);
                 remoteViews.setTextViewText(R.id.widget_city, number);
                 String ut = new Preferences(context).getUnits().equals("metric") ? "C" : "F";
                 remoteViews.setTextViewText(R.id.widget_temperature, Integer.toString((int) temp) + "°" + ut);
@@ -54,9 +54,9 @@ public class LargeWidgetProvider extends AppWidgetProvider {
                 remoteViews.setTextViewText(R.id.widget_humidity , "Humidity : " + json.getJSONObject("main").getLong("humidity") + " %");
                 remoteViews.setTextViewText(R.id.widget_pressure , "Pressure : " + json.getJSONObject("main").getLong("pressure") + " hPa");
 
-                Intent intent = new Intent(context, SmallWidgetProvider.class);
+                Intent intent = new Intent(context, LargeWidgetProvider.class);
                 intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
-                intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds);
+                intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetIds);
                 PendingIntent pendingIntent = PendingIntent.getBroadcast(context,
                         0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
                 remoteViews.setOnClickPendingIntent(R.id.widget_button_refresh, pendingIntent);

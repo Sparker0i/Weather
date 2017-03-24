@@ -10,6 +10,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.widget.RemoteViews;
 
 import com.a5corp.weather.R;
@@ -21,8 +22,6 @@ import org.json.JSONObject;
 
 import java.util.Calendar;
 import java.util.concurrent.ExecutionException;
-
-import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 public class SmallWidgetProvider extends AppWidgetProvider {
 
@@ -43,23 +42,15 @@ public class SmallWidgetProvider extends AppWidgetProvider {
                 remoteViews.setTextViewText(R.id.widget_temperature, Integer.toString((int) temp) + "°" + ut);
                 setWeatherIcon(json.getJSONArray("weather").getJSONObject(0).getInt("id") , context , remoteViews);
 
-                /*String rs = json.getJSONArray("weather").getJSONObject(0).getString("description");
-                String[] strArray = rs.split(" ");
-                StringBuilder builder = new StringBuilder();
-                for (String s : strArray) {
-                    String cap = s.substring(0, 1).toUpperCase() + s.substring(1);
-                    builder.append(cap.concat(" "));
-                }
-
-                remoteViews.setTextViewText(R.id.widget_description , builder.toString());*/
-
                 Intent intent = new Intent(context, SmallWidgetProvider.class);
                 intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
-                intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds);
+                intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetIds);
                 PendingIntent pendingIntent = PendingIntent.getBroadcast(context,
                         0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
                 remoteViews.setOnClickPendingIntent(R.id.widget_button_refresh, pendingIntent);
                 appWidgetManager.updateAppWidget(widgetId, remoteViews);
+
+                Log.i("In" , "Small Widget");
             }
         }
         catch (JSONException | InterruptedException | ExecutionException ex) {
