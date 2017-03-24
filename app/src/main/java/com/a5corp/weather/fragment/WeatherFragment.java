@@ -340,6 +340,7 @@ public class WeatherFragment extends Fragment {
     private void setWeatherIcon(int id , int i) {
         String icon = "";
         if (i == 10) {
+            Log.i("Here" , "Entered");
             if (checkDay())
                 switch (id) {
                     case 501:
@@ -876,9 +877,6 @@ public class WeatherFragment extends Fragment {
             DateFormat df = DateFormat.getDateTimeInstance();
             String updatedOn = "Last update: " + df.format(new Date(json0.getLong("dt")*1000));
             updatedField.setText(updatedOn);
-            int deg = json0.getJSONObject("wind").getInt("deg");
-            setDeg(deg);
-            setWeatherIcon(json0.getJSONArray("weather").getJSONObject(0).getInt("id"),10);
             String humidity = json0.getJSONObject("main").getInt("humidity") + "%";
             humidityView.setText(humidity);
             humidityIcon.setOnClickListener(new View.OnClickListener() {
@@ -950,6 +948,8 @@ public class WeatherFragment extends Fragment {
             });
             Log.i("Wind Loaded" , "Done");
             Log.i("10" , "Weather Icon 11 Set");
+            setWeatherIcon(json0.getJSONArray("weather").getJSONObject(0).getInt("id"),10);
+            Log.i("Set" , "Main Weather Icon");
             weatherIcon[10].setOnClickListener(new View.OnClickListener()
             {
                 public void onClick (View v)
@@ -972,6 +972,8 @@ public class WeatherFragment extends Fragment {
             });
             String r1 = Integer.toString(a) + "°";
             button.setText(r1);
+            int deg = json0.getJSONObject("wind").getInt("deg");
+            setDeg(deg);
         }catch(Exception e){
             Log.e("SimpleWeather", "One or more fields not found in the JSON data");
         }
