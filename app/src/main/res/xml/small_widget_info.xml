@@ -3,5 +3,5 @@
     android:minWidth="180dp"
     android:minHeight="60dp"
     android:updatePeriodMillis="3600000"
-    android:initialLayout="@layout/simple_widget"
+    android:initialLayout="@layout/widget_small"
     android:resizeMode="horizontal|vertical" />

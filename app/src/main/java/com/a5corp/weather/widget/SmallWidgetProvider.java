@@ -30,10 +30,6 @@ public class SmallWidgetProvider extends AppWidgetProvider {
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
-                .setDefaultFontPath("fonts/weather.ttf")
-                .setFontAttrId(R.attr.fontPath)
-                .build());
         try {
             for (int widgetId : appWidgetIds) {
                 FetchWeather wt = new FetchWeather(context);
@@ -41,7 +37,7 @@ public class SmallWidgetProvider extends AppWidgetProvider {
                 String number = json.getString("name");
                 double temp = json.getJSONObject("main").getDouble("temp");
                 RemoteViews remoteViews = new RemoteViews(context.getPackageName(),
-                        R.layout.simple_widget);
+                        R.layout.widget_small);
                 remoteViews.setTextViewText(R.id.widget_city, number);
                 String ut = new Preferences(context).getUnits().equals("metric") ? "C" : "F";
                 remoteViews.setTextViewText(R.id.widget_temperature, Integer.toString((int) temp) + "°" + ut);
