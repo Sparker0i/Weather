@@ -117,7 +117,7 @@ public class MyAlarmService extends Service
         builder.setContentIntent(pendingIntent);
         builder.setOngoing(false);
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
-            builder.setColor(Color.YELLOW);
+            builder.setColor(Color.parseColor("#ff0000"));
         myNotification = builder.build();
         mManager.notify(0, myNotification);
         Log.i("Built", "Notification");
