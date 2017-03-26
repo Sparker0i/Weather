@@ -21,6 +21,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Calendar;
+import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
 public class LargeWidgetProvider extends AppWidgetProvider {
@@ -33,11 +34,12 @@ public class LargeWidgetProvider extends AppWidgetProvider {
             for (int widgetId : appWidgetIds) {
                 FetchWeather wt = new FetchWeather(context);
                 json = wt.execute(new Preferences(context).getCity()).get()[0];
-                String number = json.getString("name");
                 double temp = json.getJSONObject("main").getDouble("temp");
                 RemoteViews remoteViews = new RemoteViews(context.getPackageName(),
                         R.layout.widget_large);
-                remoteViews.setTextViewText(R.id.widget_city, number);
+                remoteViews.setTextViewText(R.id.widget_city, json.getString("name") +
+                        ", " +
+                        json.getJSONObject("sys").getString("country"));
                 String ut = new Preferences(context).getUnits().equals("metric") ? "C" : "F";
                 remoteViews.setTextViewText(R.id.widget_temperature, Integer.toString((int) temp) + "°" + ut);
                 setWeatherIcon(json.getJSONArray("weather").getJSONObject(0).getInt("id") , context , remoteViews);
