@@ -8,6 +8,9 @@ import android.app.Service;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.os.IBinder;
+import android.os.SystemClock;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.util.Log;
 
 import com.a5corp.weather.R;
@@ -24,11 +27,11 @@ import java.util.concurrent.ExecutionException;
 public class MyAlarmService extends Service
 {
     Preferences preferences;
-    NotificationManager mManager;
+    NotificationManagerCompat mManager;
     FetchWeather wt;
     Notification myNotification;
     PendingIntent pendingIntent;
-    Notification.Builder builder;
+    NotificationCompat.Builder builder;
     JSONObject json;
 
     @Override
@@ -50,11 +53,16 @@ public class MyAlarmService extends Service
     {
         super.onStart(intent, startId);
 
-        mManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        mManager = NotificationManagerCompat.from(this);
         Intent intent1 = new Intent(this , WeatherActivity.class);
 
         pendingIntent = PendingIntent.getActivity(this, 1, intent1 , 0);
-        getWeather();
+        if (preferences.getNotifs() && !checkApp()) {
+            getWeather();
+        }
+        else {
+            Log.i("Cannot Build" , "Notification");
+        }
     }
 
     public void getWeather() {
@@ -89,17 +97,17 @@ public class MyAlarmService extends Service
     }
 
     public void buildNotification(double temp , double pressure , double humidity , String city) {
-        builder = new Notification.Builder(this);
+        builder = new NotificationCompat.Builder(this);
         String ut;
         if (preferences.getUnits().equals("metric"))
             ut = "°C";
         else
             ut = "°F";
-        builder.setAutoCancel(false);
+        builder.setAutoCancel(true);
         builder.setTicker(temp + ut + " at " + city);
         builder.setContentTitle("Weather Notification");
         builder.setContentText(temp + ut + " at " + city);
-        builder.setStyle(new Notification.BigTextStyle().bigText("City : " + city
+        builder.setStyle(new NotificationCompat.BigTextStyle().bigText("City : " + city
                 + "\nTemperature : " + temp + ut
                 + "\nPressure : " + pressure + " hPa"
                 + "\nHumidity : " + humidity + "%"));
@@ -107,14 +115,8 @@ public class MyAlarmService extends Service
         builder.setContentIntent(pendingIntent);
         builder.setOngoing(false);
         myNotification = builder.build();
-
-        if (preferences.getNotifs() && !checkApp()) {
-            mManager.notify(0, myNotification);
-            Log.i("Built", "Notification");
-        }
-        else {
-            Log.i("Cannot Build" , "Notification");
-        }
+        mManager.notify(0, myNotification);
+        Log.i("Built", "Notification");
     }
 
     public boolean checkApp(){
