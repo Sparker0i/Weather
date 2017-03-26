@@ -1,62 +1,38 @@
 language: android
 jdk: oraclejdk8
-sudo: false
+os: linux
+sudo: required
+
+android:
+  components:
+    - tools
+    - tools
+    - platfom-tools
+    - build-tools-25.0.2
+    - android-25
+    - extra-android-m2repository
+  licenses:
+    - 'android-sdk-preview-license-.+'
+    - 'android-sdk-license-.+'
+
+# Accept ConstraintLayout license
+before_install:
+  - mkdir "$ANDROID_HOME/licenses" || true
+  - echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55" > "$ANDROID_HOME/licenses/android-sdk-license"
+  - echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "$ANDROID_HOME/licenses/android-sdk-preview-license"
+  - chmod +x gradlew
+  - ./gradlew dependencies || true
+
+script: ./gradlew build --stacktrace
 
 notifications:  #Optional
     email:
         - AadityaMenon007@gmail.com #Add your email address
 
-env:
-  matrix:
-    - ANDROID_TARGET=android-19 ANDROID_ABI=armeabi-v7a
-    - ANDROID_TARGET=android-21 ANDROID_ABI=armeabi-v7a
-  global:   #Optional
-    - ADB_INSTALL_TIMEOUT=10    #Time out to 10 mins
-
-android:
-    update_sdk: true  #Check for the updates each time you run the build.
-    components:
-        - platform-tools
-        - tools
-        - build-tools-25.0.2    #Build tool version
-        - android-25            #targate api version
-
-        # Additional components
-        - extra-google-google_play_services
-        - extra-google-m2repository
-        - extra-android-m2repository
-
-        #system images for emulator
-        - sys-img-armeabi-v7a-android-19
-        - sys-img-armeabi-v7a-android-21
-
 licenses:
     - 'android-sdk-preview-license-52d11cd2'
     - 'android-sdk-license-.+'
     - 'google-gdk-license-.+'
-
-before_cache:
-    - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
-
-cache:
-  directories:      #Cache all dirs under .gradle folder
-    - $HOME/.gradle/daemon      #Cache daemon logs
-    - $HOME/.gradle/native      #Cache library downloaded from the gradle dependency
-    - $HOME/.gradle/wrapper     #Cache the gradle
-
-before_script:
-    - chmod +x gradlew      #Grant permissions
-    - android list targets
-    - echo no | android create avd --force --name test --target $ANDROID_TARGET --abi $ANDROID_ABI    #Create AVD for given api
-    - emulator -avd test -no-skin -no-audio -no-window &    #Start emulator
-
-script:
-    - echo "Travis branch is $TRAVIS_BRANCH"    #Print out which branch it is.
-    - echo "Travis branch is in pull request $TRAVIS_PULL+REQUEST"    #Print out pull request number.
-    - android-wait-for-emulator             #Run wait for the emulator script.
-    - adb devices                           #Display list of devices
-    - adb shell input keyevent 82 &
-    - ./gradlew connectedAndroidTest -PdisablePreDex --stacktrace
 
 before_install:
     - pip install --user codecov    #Install codecov
