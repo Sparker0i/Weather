@@ -30,7 +30,7 @@ public class CurrentWeatherService extends IntentService {
         pendingIntent = PendingIntent.getBroadcast(this, 0, myIntent,0);
 
         AlarmManager am = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
-        if (preferences.getNotifs())
+        if (preferences.getNotifs())            //If notification enabled
             am.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
                     SystemClock.elapsedRealtime() + AlarmManager.INTERVAL_HOUR,
                     AlarmManager.INTERVAL_HOUR,
