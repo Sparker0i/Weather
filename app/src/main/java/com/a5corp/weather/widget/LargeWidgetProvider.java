@@ -3,17 +3,20 @@ package com.a5corp.weather.widget;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Typeface;
+import android.icu.text.AlphabeticIndex;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.widget.RemoteViews;
 
 import com.a5corp.weather.R;
+import com.a5corp.weather.internet.CheckConnection;
 import com.a5corp.weather.internet.FetchWeather;
 import com.a5corp.weather.preferences.Preferences;
 
@@ -27,11 +30,27 @@ public class LargeWidgetProvider extends AppWidgetProvider {
     JSONObject json;
 
     @Override
+    public void onEnabled(Context context) {
+        super.onEnabled(context);
+        int[] allids = AppWidgetManager
+                .getInstance(context)
+                .getAppWidgetIds(new ComponentName(context, LargeWidgetProvider.class));
+        Intent intent = new Intent(context , LargeWidgetProvider.class);
+        intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, allids);
+        context.sendBroadcast(intent);
+    }
+
+    @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
+        super.onUpdate(context, appWidgetManager, appWidgetIds);
         try {
             Preferences preferences = new Preferences(context);
+            CheckConnection connection = new CheckConnection(context);
             for (int widgetId : appWidgetIds) {
                 FetchWeather wt = new FetchWeather(context);
+                if (!connection.isNetworkAvailable())
+                    return;
                 json = wt.execute(new Preferences(context).getCity()).get()[0];
                 double temp = json.getJSONObject("main").getDouble("temp");
                 RemoteViews remoteViews = new RemoteViews(context.getPackageName(),
