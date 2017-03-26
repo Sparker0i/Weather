@@ -111,12 +111,12 @@ public class WeatherActivity extends AppCompatActivity {
                 .withIcon(new IconicsDrawable(this)
                         .icon(GoogleMaterial.Icon.gmd_map)
                         .sizeRes(R.dimen.activity_horizontal_margin));
-        SecondaryDrawerItem item5 = new SecondaryDrawerItem().withIdentifier(5).withName(R.string.drawer_item_about)
+        SecondaryDrawerItem item6 = new SecondaryDrawerItem().withIdentifier(5).withName(R.string.drawer_item_about)
                 .withIcon(new IconicsDrawable(this)
                         .icon(GoogleMaterial.Icon.gmd_info)
                         .sizeRes(R.dimen.activity_horizontal_margin))
                 .withSelectable(false);
-        final SecondarySwitchDrawerItem item4 , item6;
+        final SecondarySwitchDrawerItem item4 , item5;
         if (preferences.getUnits().equals("imperial"))
             item4 = new SecondarySwitchDrawerItem().withIdentifier(6).withName("Use Fahrenheit")
                     .withChecked(true)
@@ -132,14 +132,14 @@ public class WeatherActivity extends AppCompatActivity {
                             .sizeRes(R.dimen.activity_horizontal_margin))
                     .withSelectable(false);
         if (preferences.getNotifs())
-            item6 = new SecondarySwitchDrawerItem().withIdentifier(6).withName("Show Hourly Notifications")
+            item5 = new SecondarySwitchDrawerItem().withIdentifier(6).withName("Show Hourly Notifications")
                     .withChecked(true)
                     .withIcon(new IconicsDrawable(this)
                             .icon(GoogleMaterial.Icon.gmd_notifications)
                             .sizeRes(R.dimen.activity_horizontal_margin))
                     .withSelectable(false);
         else
-            item6 = new SecondarySwitchDrawerItem().withIdentifier(6).withName("Show Hourly Notifications")
+            item5 = new SecondarySwitchDrawerItem().withIdentifier(6).withName("Show Hourly Notifications")
                     .withChecked(false)
                     .withIcon(new IconicsDrawable(this)
                             .icon(GoogleMaterial.Icon.gmd_notifications)
@@ -160,7 +160,7 @@ public class WeatherActivity extends AppCompatActivity {
                         .commit();
             }
         });
-        item6.withOnCheckedChangeListener(new OnCheckedChangeListener() {
+        item5.withOnCheckedChangeListener(new OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(IDrawerItem drawerItem, CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
@@ -184,8 +184,9 @@ public class WeatherActivity extends AppCompatActivity {
                         item3,
                         new DividerDrawerItem(),
                         item4,
-                        item6,
-                        item5
+                        item5,
+                        new DividerDrawerItem(),
+                        item6
                 )
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override

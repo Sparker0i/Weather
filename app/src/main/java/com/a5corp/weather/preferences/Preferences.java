@@ -73,6 +73,6 @@ public class Preferences {
     }
 
     public Boolean getNotifs() {
-        return prefs.getBoolean("notif" , true);
+        return prefs.getBoolean("notif" , false);
     }
 }
