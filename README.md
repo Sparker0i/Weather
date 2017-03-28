@@ -46,4 +46,4 @@ To request for a new feature, create a new Issue in the issues tab in this forma
 - Maybe you can also provide an example code of how to implement it
 - Do not make a new PR for a Feature Request
 
-[<img src='/img/Weather App.png' width='1080' heigh='1920'>](/img/Weather App.png)
+<img src='/img/Weather App.png' width='1080' heigh='1920'>
