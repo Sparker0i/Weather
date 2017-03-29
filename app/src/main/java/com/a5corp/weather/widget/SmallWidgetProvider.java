@@ -436,9 +436,7 @@ public class SmallWidgetProvider extends AppWidgetProvider {
         else
             return;
         double temp = json.getJSONObject("main").getDouble("temp");
-                /*
-                    PROTECTED : DO NOT TOUCH THE SECTION BELOW
-                 */
+
         Intent intent = new Intent(context, SmallWidgetProvider.class);
         intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds);
