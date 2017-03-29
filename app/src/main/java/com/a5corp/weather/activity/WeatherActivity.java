@@ -169,7 +169,6 @@ public class WeatherActivity extends AppCompatActivity {
                 else {
                     preferences.setNotifs(false);
                 }
-                drawer.closeDrawer();
             }
         });
         drawer = new DrawerBuilder()
