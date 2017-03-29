@@ -10,6 +10,6 @@
         android:id="@+id/list_cardId"
         style="@style/about_card"
         card:card_layout_resourceID="@layout/about_card_inner_layout"
-        android:layout_marginBottom="@dimen/margin_normal"/>
+        android:layout_marginBottom="6dp"/>
 
 </LinearLayout>

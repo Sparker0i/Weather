@@ -9,7 +9,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/margin_normal"
-        android:paddingBottom="@dimen/margin_medium"
         android:text="@string/author_header"
         android:textColor="@color/accent"
         android:textSize="@dimen/font_normal"/>
@@ -44,7 +43,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:background="?android:attr/selectableItemBackground"
             android:text="@string/other_apps"
             android:textSize="@dimen/font_normal"

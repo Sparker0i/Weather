@@ -58,7 +58,6 @@ public class AboutActivity extends AppCompatActivity
         cards.add(new AboutCard(this,R.layout.about_card_layout_1,1));
         cards.add(new AboutCard(this,R.layout.about_card_layout_2,2));
         cards.add(new AboutCard(this,R.layout.about_card_layout_3,3));
-        cards.add(new AboutCard(this,R.layout.about_card_layout_4,4));
         cards.add(new AboutCard(this,R.layout.about_card_layout_5,5));
 
         cardArrayAdapter = new CardArrayAdapter(this, cards);

@@ -15,7 +15,9 @@
             android:id="@+id/card_main_content_layout"
             style="@style/about_card_inner"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:paddingEnd="0dp"
+            android:paddingBottom="0dp"/>
 
     </it.gmariotti.cardslib.library.view.ForegroundLinearLayout>
 
