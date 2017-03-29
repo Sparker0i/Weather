@@ -28,6 +28,7 @@ import java.util.concurrent.ExecutionException;
 
 public class LargeWidgetProvider extends AppWidgetProvider {
     JSONObject json;
+    Context context;
 
     @Override
     public void onEnabled(Context context) {
@@ -44,17 +45,30 @@ public class LargeWidgetProvider extends AppWidgetProvider {
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         super.onUpdate(context, appWidgetManager, appWidgetIds);
+        this.context = context;
         try {
             Preferences preferences = new Preferences(context);
             CheckConnection connection = new CheckConnection(context);
             for (int widgetId : appWidgetIds) {
+                RemoteViews remoteViews = new RemoteViews(context.getPackageName(),
+                        R.layout.widget_large);
+                loadFromPreference(preferences , remoteViews , appWidgetManager , appWidgetIds , widgetId);
                 FetchWeather wt = new FetchWeather(context);
                 if (!connection.isNetworkAvailable())
                     return;
                 json = wt.execute(new Preferences(context).getCity()).get()[0];
+                preferences.storeLargeWidget(json.toString());
                 double temp = json.getJSONObject("main").getDouble("temp");
-                RemoteViews remoteViews = new RemoteViews(context.getPackageName(),
-                        R.layout.widget_large);
+                /*
+                    PROTECTED : DO NOT TOUCH THE SECTION BELOW
+                 */
+                Intent intent = new Intent(context, LargeWidgetProvider.class);
+                intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+                intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds);
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(context,
+                        0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                remoteViews.setOnClickPendingIntent(R.id.widget_button_refresh, pendingIntent);
+
                 remoteViews.setTextViewText(R.id.widget_city, json.getString("name") +
                         ", " +
                         json.getJSONObject("sys").getString("country"));
@@ -74,15 +88,6 @@ public class LargeWidgetProvider extends AppWidgetProvider {
                 remoteViews.setTextViewText(R.id.widget_humidity , "Humidity : " + json.getJSONObject("main").getLong("humidity") + " %");
                 remoteViews.setTextViewText(R.id.widget_pressure , "Pressure : " + json.getJSONObject("main").getLong("pressure") + " hPa");
 
-                /*
-                    PROTECTED : DO NOT TOUCH THE SECTION BELOW
-                 */
-                Intent intent = new Intent(context, LargeWidgetProvider.class);
-                intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
-                intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds);
-                PendingIntent pendingIntent = PendingIntent.getBroadcast(context,
-                        0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-                remoteViews.setOnClickPendingIntent(R.id.widget_button_refresh, pendingIntent);
                 appWidgetManager.updateAppWidget(widgetId, remoteViews);
 
                 Log.i("In" , "Large Widget");
@@ -435,6 +440,44 @@ public class LargeWidgetProvider extends AppWidgetProvider {
                     break;
             }
         remoteViews.setImageViewBitmap(R.id.widget_icon , createWeatherIcon(mContext , icon));
+    }
+
+    private void loadFromPreference(Preferences preferences , RemoteViews remoteViews , AppWidgetManager appWidgetManager , int[] appWidgetIds , int widgetId) throws JSONException{
+        if (preferences.getLargeWidget() != null)
+            json = new JSONObject(preferences.getLargeWidget());
+        else
+            return;
+        double temp = json.getJSONObject("main").getDouble("temp");
+                /*
+                    PROTECTED : DO NOT TOUCH THE SECTION BELOW
+                 */
+        Intent intent = new Intent(context, LargeWidgetProvider.class);
+        intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context,
+                0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        remoteViews.setOnClickPendingIntent(R.id.widget_button_refresh, pendingIntent);
+
+        remoteViews.setTextViewText(R.id.widget_city, json.getString("name") +
+                ", " +
+                json.getJSONObject("sys").getString("country"));
+        String ut = new Preferences(context).getUnits().equals("metric") ? "C" : "F";
+        remoteViews.setTextViewText(R.id.widget_temperature, Integer.toString((int) temp) + "°" + ut);
+        setWeatherIcon(json.getJSONArray("weather").getJSONObject(0).getInt("id") , context , remoteViews);
+        String rs = json.getJSONArray("weather").getJSONObject(0).getString("description");
+        String[] strArray = rs.split(" ");
+        StringBuilder builder = new StringBuilder();
+        for (String s : strArray) {
+            String cap = s.substring(0, 1).toUpperCase() + s.substring(1);
+            builder.append(cap.concat(" "));
+        }
+
+        remoteViews.setTextViewText(R.id.widget_description , builder.toString());
+        remoteViews.setTextViewText(R.id.widget_wind , "Wind : " + json.getJSONObject("wind").getLong("speed") + " m/" + (preferences.getUnits().equals("metric") ? "s" : "h"));
+        remoteViews.setTextViewText(R.id.widget_humidity , "Humidity : " + json.getJSONObject("main").getLong("humidity") + " %");
+        remoteViews.setTextViewText(R.id.widget_pressure , "Pressure : " + json.getJSONObject("main").getLong("pressure") + " hPa");
+
+        appWidgetManager.updateAppWidget(widgetId, remoteViews);
     }
 
     public static Bitmap createWeatherIcon(Context context, String text) {

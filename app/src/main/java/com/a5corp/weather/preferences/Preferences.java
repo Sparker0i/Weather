@@ -75,4 +75,20 @@ public class Preferences {
     public Boolean getNotifs() {
         return prefs.getBoolean("notif" , false);
     }
+
+    public void storeSmallWidget(String json) {
+        prefs.edit().putString("jsonsmall" , json).apply();
+    }
+
+    public String getSmallWidget() {
+        return prefs.getString("jsonsmall" , null);
+    }
+
+    public void storeLargeWidget(String json) {
+        prefs.edit().putString("jsonlarge" , json).apply();
+    }
+
+    public String getLargeWidget() {
+        return prefs.getString("jsonlarge" , null);
+    }
 }

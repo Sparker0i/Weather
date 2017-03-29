@@ -50,6 +50,7 @@ public class SmallWidgetProvider extends AppWidgetProvider {
                 CheckConnection connection = new CheckConnection(context);
                 if (!connection.isNetworkAvailable())
                     return;
+
                 json = wt.execute(new Preferences(context).getCity()).get()[0];
                 double temp = json.getJSONObject("main").getDouble("temp");
                 RemoteViews remoteViews = new RemoteViews(context.getPackageName(),
