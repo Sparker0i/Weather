@@ -3,14 +3,14 @@ package com.a5corp.weather.preferences;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 public class Preferences {
     private static SharedPreferences prefs;
-    private final String USER_PREFS = "Prefs";
 
     public Preferences(Context context) {
-        prefs = context.getSharedPreferences(USER_PREFS , Context.MODE_PRIVATE);
+        prefs = PreferenceManager.getDefaultSharedPreferences(context);
     }
 
     public SharedPreferences getPrefs() {

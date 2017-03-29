@@ -9,4 +9,5 @@
     <color name="yellow">#ffea00</color>
     <color name="orange">#FF9900</color>
     <color name="textColor">#FFFFFF</color>
+    <color name="card_text_primary">#000000</color>
 </resources>

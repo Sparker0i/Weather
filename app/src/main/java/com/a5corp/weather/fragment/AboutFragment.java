@@ -85,7 +85,7 @@ public class AboutFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_about, container, false);
-        TextView madeBy = (TextView) rootView.findViewById(R.id.made_by);
+        /*TextView madeBy = (TextView) rootView.findViewById(R.id.made_by);
         TextView sourceAt = (TextView) rootView.findViewById(R.id.source_at);
         TextView appIcon = (TextView) rootView.findViewById(R.id.app_icon);
         TextView verText = (TextView) rootView.findViewById(R.id.ver_text);
@@ -99,7 +99,7 @@ public class AboutFragment extends Fragment {
         appIcon.setText(getString(R.string.app_icon));
         String verId = "Version " + BuildConfig.VERSION_NAME;
         verText.setText(verId);
-        constructCards();
+        constructCards();*/
         return rootView;
     }
 

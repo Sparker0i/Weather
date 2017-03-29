@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/margin_normal"
+        android:paddingBottom="@dimen/margin_medium"
+        android:paddingLeft="@dimen/margin_large"
+        android:text="@string/legal_header"
+        android:textColor="@color/accent"
+        android:textSize="@dimen/font_normal"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/margin_normal"
+        android:paddingBottom="@dimen/margin_normal"
+        android:paddingLeft="@dimen/margin_large"
+        android:background="?android:attr/selectableItemBackground"
+        android:id="@+id/legal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/source_header"
+            android:textColor="@color/card_text_primary"
+            android:textSize="@dimen/font_normal"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/font_normal"
+            android:text="@string/source_content"/>
+
+    </LinearLayout>
+
+</LinearLayout>

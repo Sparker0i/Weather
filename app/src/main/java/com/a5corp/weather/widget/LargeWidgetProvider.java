@@ -448,7 +448,7 @@ public class LargeWidgetProvider extends AppWidgetProvider {
         else
             return;
         double temp = json.getJSONObject("main").getDouble("temp");
-        
+
         Intent intent = new Intent(context, LargeWidgetProvider.class);
         intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds);

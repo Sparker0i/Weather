@@ -138,4 +138,103 @@
     <string name="widget_weather_icon_description">Current weather icon</string>
     <string name="widget_refresh_button">Widget refresh button</string>
 
+    !-- About -->
+    <string name="about_header">about mini RTO</string>
+    <string name="rate">RATE</string>
+    <string name="github">GITHUB</string>
+    <string name="other_apps">OTHER APPS</string>
+    <string name="author_header">AUTHOR</string>
+    <string name="credits_header">CREDITS</string>
+    <string name="libraries_header">OPEN SOURCE LICENSES</string>
+    <string name="legal_header">LEGAL</string>
+    <string name="source_header">Source &amp; permission</string>
+    <string name="source_content">Parivahan Sewa</string>
+    <string name="version_header">VERSION</string>
+    <string name="build_version">Build version</string>
+    <string name="database_version">Database version</string>
+    <string name="dev_1_title">Aaditya Menon</string>
+    <string name="dev_1_name">\@Sparker0i</string>
+    <string name="dev_1_link">http://sparker0i.in</string>
+    <string name="dev_2_title">RegEx validation</string>
+    <string name="dev_2_name">Arjun Sanker</string>
+    <string name="dev_2_link">https://www.linkedin.com/in/arjun-sanker-55a5a612a/</string>
+
+    <string name="lib_1">jsoup Java HTML Parser</string>
+    <string name="lib_1_author">Jonathan Hedley</string>
+    <string name="lib_1_link">https://github.com/jhy/jsoup/</string>
+    <string name="lib_1_license"><![CDATA[
+    Copyright © 2009 - 2016 Jonathan Hedley (jonathan@hedley.net)]]>
+    </string>
+
+    <string name="lib_2">Android SQLiteAssetHelper</string>
+    <string name="lib_2_author">Jeff Gilfelt</string>
+    <string name="lib_2_link">https://github.com/jgilfelt/android-sqlite-asset-helper</string>
+    <string name="lib_2_license"><![CDATA[
+    Copyright © 2011 readyState Software Ltd
+    <br>Copyright © 2007 The Android Open Source Project]]></string>
+
+    <string name="lib_3">Card Library</string>
+    <string name="lib_3_author">Gabriele Mariotti</string>
+    <string name="lib_3_link">https://github.com/gabrielemariotti/cardslib</string>
+    <string name="lib_3_license"><![CDATA[Copyright © 2013-2014 Gabriele Mariotti]]>
+    </string>
+
+    <string name="lib_4">Sticky Headers RecyclerView</string>
+    <string name="lib_4_author">Timehop</string>
+    <string name="lib_4_link">https://github.com/timehop/sticky-headers-recyclerview</string>
+    <string name="lib_4_license"><![CDATA[Copyright © 2014 Jacob Tabak - Timehop ]]>
+    </string>
+
+    <string name="lib_5">RecyclerView FastScroll</string>
+    <string name="lib_5_author">Tim Malseed</string>
+    <string name="lib_5_link">https://github.com/timusus/RecyclerView-FastScroll</string>
+    <string name="lib_5_license"><![CDATA[
+    Copyright © 2016 Tim Malseed
+    <br>Copyright © 2010 The Android Open Source Project]]></string>
+
+    <string name="lib_6">Material Dialogs</string>
+    <string name="lib_6_author">Aidan Follestad</string>
+    <string name="lib_6_link">https://github.com/afollestad/material-dialogs</string>
+    <string name="lib_6_license"><![CDATA[Copyright © 2014–2016 Aidan Michael Follestad]]></string>
+
+
+    <string name="lib_7">Floating Action Button</string>
+    <string name="lib_7_author">Dmytro Tarianyk</string>
+    <string name="lib_7_link">https://github.com/Clans/FloatingActionButton</string>
+    <string name="lib_7_license"><![CDATA[Copyright © 2015 Dmytro Tarianyk]]></string>
+
+    <string name="lib_8">Material Tap Target Prompt</string>
+    <string name="lib_8_author">Samuel Wall</string>
+    <string name="lib_8_link">https://github.com/sjwall/MaterialTapTargetPrompt</string>
+    <string name="lib_8_license"><![CDATA[Copyright © 2016 Samuel Wall ]]></string>
+
+    <string name="lib_9">Android Tooltip</string>
+    <string name="lib_9_author">Alessandro Crugnola</string>
+    <string name="lib_9_link">https://github.com/sephiroth74/android-target-tooltip</string>
+    <string name="lib_9_license"><![CDATA[Copyright © 2016 Alessandro Crugnola ]]></string>
+
+    <string name="lib_10">Material Icons</string>
+    <string name="lib_10_author">Google</string>
+    <string name="lib_10_link">https://github.com/google/material-design-icons/</string>
+    <string name="lib_10_license"><![CDATA[Copyright © 2016 Google ]]></string>
+
+    <string name="lib_11">Commons Lang</string>
+    <string name="lib_11_author">Apache</string>
+    <string name="lib_11_link">https://github.com/apache/commons-lang</string>
+    <string name="lib_11_license"><![CDATA[Copyright © 2016 The Apache Software Foundation]]></string>
+
+    <string name="mit_license"><![CDATA[
+    <br><br>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+    <br><br>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+    <br><br>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+    ]]></string>
+
+    <string name="apache_license"><![CDATA[
+    <br><br>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+    <br><br><a href="http://www.apache.org/licenses/LICENSE-2.0">http://www.apache.org/licenses/LICENSE-2.0</a>
+    <br><br>Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+    ]]></string>
+
+    <string name="other_apps_link">http://play.google.com/store/apps/dev?id=5632908098427880446</string>
+    <string name="app_link_direct">https://play.google.com/store/apps/details?id=com.a5corp.weather</string>
 </resources>
