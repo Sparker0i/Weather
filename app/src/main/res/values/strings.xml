@@ -159,19 +159,17 @@
     <string name="dev_2_name">Arjun Sanker</string>
     <string name="dev_2_link">https://www.linkedin.com/in/arjun-sanker-55a5a612a/</string>
 
-    <string name="lib_1">jsoup Java HTML Parser</string>
-    <string name="lib_1_author">Jonathan Hedley</string>
-    <string name="lib_1_link">https://github.com/jhy/jsoup/</string>
+    <string name="lib_1">Weather Icons</string>
+    <string name="lib_1_author">Erik Flowers</string>
+    <string name="lib_1_link">https://github.com/erikflowers/weather-icons/</string>
     <string name="lib_1_license"><![CDATA[
-    Copyright © 2009 - 2016 Jonathan Hedley (jonathan@hedley.net)]]>
+    Weather Icons licensed under SIL OFL 1.1]]>
     </string>
 
-    <string name="lib_2">Android SQLiteAssetHelper</string>
-    <string name="lib_2_author">Jeff Gilfelt</string>
-    <string name="lib_2_link">https://github.com/jgilfelt/android-sqlite-asset-helper</string>
-    <string name="lib_2_license"><![CDATA[
-    Copyright © 2011 readyState Software Ltd
-    <br>Copyright © 2007 The Android Open Source Project]]></string>
+    <string name="lib_2">Material Drawer</string>
+    <string name="lib_2_author">Mike Penz</string>
+    <string name="lib_2_link">https://github.com/mikepenz/MaterialDrawer</string>
+    <string name="lib_2_license"><![CDATA[Copyright 2016 Mike Penz]]></string>
 
     <string name="lib_3">Card Library</string>
     <string name="lib_3_author">Gabriele Mariotti</string>
@@ -179,18 +177,16 @@
     <string name="lib_3_license"><![CDATA[Copyright © 2013-2014 Gabriele Mariotti]]>
     </string>
 
-    <string name="lib_4">Sticky Headers RecyclerView</string>
-    <string name="lib_4_author">Timehop</string>
-    <string name="lib_4_link">https://github.com/timehop/sticky-headers-recyclerview</string>
-    <string name="lib_4_license"><![CDATA[Copyright © 2014 Jacob Tabak - Timehop ]]>
+    <string name="lib_4">Android Iconics</string>
+    <string name="lib_4_author">Mike Penz</string>
+    <string name="lib_4_link">https://github.com/mikepenz/Android-Iconics</string>
+    <string name="lib_4_license"><![CDATA[Copyright 2016 Mike Penz]]>
     </string>
 
-    <string name="lib_5">RecyclerView FastScroll</string>
-    <string name="lib_5_author">Tim Malseed</string>
-    <string name="lib_5_link">https://github.com/timusus/RecyclerView-FastScroll</string>
-    <string name="lib_5_license"><![CDATA[
-    Copyright © 2016 Tim Malseed
-    <br>Copyright © 2010 The Android Open Source Project]]></string>
+    <string name="lib_5">MPAndroidChart</string>
+    <string name="lib_5_author">Philipp Jahoda</string>
+    <string name="lib_5_link">https://github.com/PhilJay/MPAndroidChart/</string>
+    <string name="lib_5_license"><![CDATA[Copyright 2016 Philipp Jahoda]]></string>
 
     <string name="lib_6">Material Dialogs</string>
     <string name="lib_6_author">Aidan Follestad</string>
@@ -198,10 +194,11 @@
     <string name="lib_6_license"><![CDATA[Copyright © 2014–2016 Aidan Michael Follestad]]></string>
 
 
-    <string name="lib_7">Floating Action Button</string>
-    <string name="lib_7_author">Dmytro Tarianyk</string>
-    <string name="lib_7_link">https://github.com/Clans/FloatingActionButton</string>
-    <string name="lib_7_license"><![CDATA[Copyright © 2015 Dmytro Tarianyk]]></string>
+    <string name="lib_7">Bottom Bar</string>
+    <string name="lib_7_author">Iiro Krankka</string>
+    <string name="lib_7_link">https://github.com/roughike/BottomBar</string>
+    <string name="lib_7_license"><![CDATA[BottomBar library for Android
+Copyright © 2016 Iiro Krankka]]></string>
 
     <string name="lib_8">Material Tap Target Prompt</string>
     <string name="lib_8_author">Samuel Wall</string>
@@ -235,6 +232,6 @@
     <br><br>Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
     ]]></string>
 
-    <string name="other_apps_link">http://play.google.com/store/apps/dev?id=5632908098427880446</string>
+    <string name="other_apps_link">https://play.google.com/store/apps/dev?id=6116967233401290402</string>
     <string name="app_link_direct">https://play.google.com/store/apps/details?id=com.a5corp.weather</string>
 </resources>

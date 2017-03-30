@@ -186,7 +186,7 @@ public class AboutCard extends Card
 
             case 5:
             {
-                //((TextView)parent.findViewById(R.id.build_version)).setText(BuildConfig.VERSION_NAME);
+                ((TextView)parent.findViewById(R.id.build_version)).setText(BuildConfig.VERSION_NAME);
                 break;
             }
         }
