@@ -155,9 +155,9 @@
     <string name="dev_1_title">Aaditya Menon</string>
     <string name="dev_1_name">\@Sparker0i</string>
     <string name="dev_1_link">http://sparker0i.in</string>
-    <string name="dev_2_title">RegEx validation</string>
-    <string name="dev_2_name">Arjun Sanker</string>
-    <string name="dev_2_link">https://www.linkedin.com/in/arjun-sanker-55a5a612a/</string>
+    <string name="dev_2_title">OpenWeatherMap</string>
+    <string name="dev_2_name">OpenWeatherMap Inc.</string>
+    <string name="dev_2_link">https://openweathermap.org/</string>
 
     <string name="lib_1">Weather Icons</string>
     <string name="lib_1_author">Erik Flowers</string>

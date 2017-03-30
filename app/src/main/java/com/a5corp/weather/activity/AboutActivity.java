@@ -4,17 +4,15 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AbsListView;
-import android.widget.Button;
-import android.widget.TextView;
 
 import com.a5corp.weather.R;
 import com.a5corp.weather.cards.AboutCard;
+import com.github.clans.fab.FloatingActionButton;
 
 import java.util.ArrayList;
 
@@ -47,6 +45,7 @@ public class AboutActivity extends AppCompatActivity
         }
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.hide(false);
         initCards();
         initFab();
     }
@@ -69,11 +68,10 @@ public class AboutActivity extends AppCompatActivity
 
     public void initFab()
     {
-        fab.hide();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                fab.show();
+                fab.show(true);
             }
         }, 500);
 
@@ -94,9 +92,9 @@ public class AboutActivity extends AppCompatActivity
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount)
             {
                 if (firstVisibleItem > previousVisibleItem)
-                    fab.hide();
+                    fab.hide(true);
                 else if (firstVisibleItem < previousVisibleItem)
-                    fab.show();
+                    fab.show(true);
 
                 previousVisibleItem = firstVisibleItem;
             }

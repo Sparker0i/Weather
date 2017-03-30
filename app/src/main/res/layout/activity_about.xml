@@ -41,12 +41,12 @@
             android:layout_height="4dp"
             android:background="@drawable/toolbar_shadow" />
 
-        <android.support.design.widget.FloatingActionButton
+        <com.github.clans.fab.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_margin="@dimen/fab_margin"
-            app:srcCompat="@drawable/ic_email_white_24dp"
+            android:src="@drawable/ic_email_white_24dp"
             android:id="@+id/fab"/>
 
     </FrameLayout>

@@ -27,14 +27,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="OpenWeatherMap"
+            android:text="@string/dev_2_title"
             android:textColor="@color/card_text_primary"
             android:textSize="@dimen/font_normal"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="OpenWeatherMap Inc."
+            android:text="@string/dev_2_name"
             android:textSize="@dimen/font_normal"/>
 
     </LinearLayout>

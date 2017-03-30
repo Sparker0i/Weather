@@ -251,6 +251,7 @@ public class WeatherFragment extends Fragment {
                 else {
                     handler.post(new Runnable() {
                         public void run() {
+                            ((WeatherActivity) getActivity()).showFab();
                             getActivity().startService(new Intent(getActivity() , CurrentWeatherService.class));
                             preferences.setLaunched();
                             renderWeather(json);
