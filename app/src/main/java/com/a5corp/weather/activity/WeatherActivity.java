@@ -171,6 +171,7 @@ public class WeatherActivity extends AppCompatActivity {
                 .withActivity(this)
                 .withToolbar(toolbar)
                 .withSelectedItem(1)
+                .withTranslucentStatusBar(true)
                 .withAccountHeader(headerResult)
                 .withActionBarDrawerToggleAnimated(true)
                 .addDrawerItems(

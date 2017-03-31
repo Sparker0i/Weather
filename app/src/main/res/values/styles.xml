@@ -1,8 +1,4 @@
 <resources>
-
-    <drawable name="statusbar_background">@color/colorPrimary</drawable>
-    <drawable name="window_background">@color/colorPrimary</drawable>
-
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
