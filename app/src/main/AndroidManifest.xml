@@ -41,36 +41,42 @@
 
         <receiver android:name=".receiver.MyReceiver">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
 
-        <service android:name=".service.CurrentWeatherService"
-            android:enabled="true"/>
-        <service android:name=".service.MyAlarmService"
-            android:enabled="true"/>
+        <service
+            android:name=".service.CurrentWeatherService"
+            android:enabled="true" />
+        <service
+            android:name=".service.MyAlarmService"
+            android:enabled="true" />
 
-        <receiver android:name=".widget.SmallWidgetProvider" >
+        <receiver android:name=".widget.SmallWidgetProvider">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
-            <meta-data android:name="android.appwidget.provider"
+
+            <meta-data
+                android:name="android.appwidget.provider"
                 android:resource="@xml/small_widget_info" />
         </receiver>
-
-        <receiver android:name=".widget.LargeWidgetProvider" >
+        <receiver android:name=".widget.LargeWidgetProvider">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
-            <meta-data android:name="android.appwidget.provider"
+
+            <meta-data
+                android:name="android.appwidget.provider"
                 android:resource="@xml/large_widget_info" />
         </receiver>
-
         <receiver android:name=".receiver.StartupReceiver">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
+
+        <activity android:name=".activity.LicenseActivity"></activity>
     </application>
 
 </manifest>

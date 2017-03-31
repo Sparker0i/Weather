@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.a5corp.weather.BuildConfig;
 import com.a5corp.weather.R;
+import com.a5corp.weather.activity.LicenseActivity;
 
 import it.gmariotti.cardslib.library.internal.Card;
 
@@ -170,20 +171,6 @@ public class AboutCard extends Card
                 break;
             }
 
-            case 4:
-            {
-                /*parent.findViewById(R.id.legal).setOnClickListener(new View.OnClickListener()
-                {
-                    @Override
-                    public void onClick(View v)
-                    {
-                        Intent intent = new Intent(context, FetchActivity.class);
-                        context.startActivity(intent);
-                    }
-                });
-                break;*/
-            }
-
             case 5:
             {
                 ((TextView)parent.findViewById(R.id.build_version)).setText(BuildConfig.VERSION_NAME);
@@ -194,8 +181,8 @@ public class AboutCard extends Card
 
     public void showLicense(int libId)
     {
-        /*Intent intent = new Intent(context, LicenseActivity.class);
+        Intent intent = new Intent(context, LicenseActivity.class);
         intent.putExtra("libId", libId);
-        context.startActivity(intent);*/
+        context.startActivity(intent);
     }
 }

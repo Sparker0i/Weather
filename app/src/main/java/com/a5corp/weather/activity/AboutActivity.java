@@ -1,18 +1,24 @@
 package com.a5corp.weather.activity;
 
 import android.content.Intent;
+import android.graphics.Rect;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.AbsListView;
 
 import com.a5corp.weather.R;
 import com.a5corp.weather.cards.AboutCard;
 import com.github.clans.fab.FloatingActionButton;
+import com.mikepenz.materialdrawer.DrawerBuilder;
 
 import java.util.ArrayList;
 
@@ -39,12 +45,19 @@ public class AboutActivity extends AppCompatActivity
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        CoordinatorLayout root = (CoordinatorLayout) findViewById(R.id.root);
+
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+
         if(getSupportActionBar() != null)
         {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setColorNormal(getResources().getColor(R.color.accent));
         fab.hide(false);
         initCards();
         initFab();

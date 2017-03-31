@@ -10,9 +10,9 @@
         android:paddingTop="@dimen/margin_medium"
         android:paddingBottom="@dimen/margin_medium"
         android:layout_centerVertical="true"
-        android:textSize="@dimen/font_large"
-        android:textColor="@color/card_backgroundExpand"
+        android:textColor="#FFFFFF"
         android:text="About"
+        android:textSize="18sp"
         android:id="@+id/toolbar_text"/>
 
     <Button
@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:background="?android:attr/selectableItemBackground"
-        android:textColor="@color/card_backgroundExpand"
+        android:textColor="#FFFFFF"
         android:id="@+id/toolbar_button"/>
 
 </RelativeLayout>

@@ -1,40 +1,44 @@
-<?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:id="@+id/root"
-    xmlns:card="http://schemas.android.com/apk/res-auto"
     tools:context="com.a5corp.weather.activity.AboutActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.NoActionBar.AppBarOverlay">
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:elevation="0dp"
+        android:id="@+id/top_bar">
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.NoActionBar.PopupOverlay" />
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            android:id="@+id/toolbar"/>
 
     </android.support.design.widget.AppBarLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:paddingTop="?attr/actionBarSize"
-        android:layout_margin="0dp">
+        android:layout_height="wrap_content">
 
-        <it.gmariotti.cardslib.library.view.CardListView
+        <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:animateLayoutChanges="true"
-            card:list_card_layout_resourceID="@layout/about_card"
-            android:id="@+id/about_list"/>
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/margin_normal"
+                android:autoLink="web"
+                android:id="@+id/license"/>
+
+        </android.support.v4.widget.NestedScrollView>
 
         <View
             android:id="@+id/toolbar_shadow"
@@ -42,14 +46,5 @@
             android:layout_height="4dp"
             android:background="@drawable/toolbar_shadow" />
 
-        <com.github.clans.fab.FloatingActionButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="@dimen/fab_margin"
-            android:src="@drawable/ic_email_white_24dp"
-            android:id="@+id/fab"/>
-
     </FrameLayout>
-
 </android.support.design.widget.CoordinatorLayout>
