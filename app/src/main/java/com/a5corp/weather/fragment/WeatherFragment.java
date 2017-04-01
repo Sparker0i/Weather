@@ -1,9 +1,7 @@
 package com.a5corp.weather.fragment;
 
-import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Handler;
 import android.provider.Settings;
@@ -45,13 +43,10 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
 import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
-
-import static android.content.Context.ACTIVITY_SERVICE;
 
 public class WeatherFragment extends Fragment {
     Typeface weatherFont;
@@ -262,32 +257,7 @@ public class WeatherFragment extends Fragment {
                             Snackbar snackbar = Snackbar.make(rootView, "Loaded Weather Data", 500);
                             snackbar.show();
                             if (!preferences.getv3TargetShown())
-                                new Handler().postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        new MaterialTapTargetPrompt.Builder(getActivity())
-                                                .setTarget(((WeatherActivity) getActivity()).getFab())
-                                                .setBackgroundColour(ContextCompat.getColor(getContext() , R.color.md_light_blue_400))
-                                                .setPrimaryText("Search for a city")
-                                                .setSecondaryText("Search for weather data from over a 200,000 cities and towns")
-                                                .setOnHidePromptListener(new MaterialTapTargetPrompt.OnHidePromptListener()
-                                                {
-                                                    @Override
-                                                    public void onHidePrompt(MotionEvent event, boolean tappedTarget)
-                                                    {
-                                                        //preferences.setv3SearchShown(false);
-                                                    }
-
-                                                    @Override
-                                                    public void onHidePromptComplete()
-                                                    {
-                                                        //preferences.setv3SearchShown(false);
-                                                    }
-                                                })
-                                                .show();
-                                    }
-                                }, 1500);
-
+                                showTargets();
                             pd.dismiss();
                             preferences.setLastCity(city);
                         }
@@ -342,6 +312,57 @@ public class WeatherFragment extends Fragment {
                 })
                 .cancelable(false)
                 .show();
+    }
+
+    private void showTargets() {
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    new MaterialTapTargetPrompt.Builder(getActivity())
+                            .setTarget(((WeatherActivity) getActivity()).getFab())
+                            .setBackgroundColour(ContextCompat.getColor(getContext() , R.color.md_light_blue_400))
+                            .setFocalColour(ContextCompat.getColor(getContext() , R.color.colorAccent))
+                            .setPrimaryText("Search for a city")
+                            .setSecondaryText("Search for weather data from over a 200,000 cities and towns")
+                            .setIconDrawableColourFilter(ContextCompat.getColor(getContext() , R.color.md_black_1000))
+                            .setOnHidePromptListener(new MaterialTapTargetPrompt.OnHidePromptListener()
+                            {
+                                @Override
+                                public void onHidePrompt(MotionEvent event, boolean tappedTarget)
+                                {
+
+                                }
+
+                                @Override
+                                public void onHidePromptComplete()
+                                {
+                                    //preferences.setv3SearchShown(false);
+                                    new MaterialTapTargetPrompt.Builder(getActivity())
+                                            .setTarget(R.id.location)
+                                            .setBackgroundColour(ContextCompat.getColor(getContext() , R.color.md_light_blue_400))
+                                            .setPrimaryText("Search for a city")
+                                            .setFocalColour(ContextCompat.getColor(getContext() , R.color.colorAccent))
+                                            .setSecondaryText("Search for weather data from over a 200,000 cities and towns")
+                                            .setOnHidePromptListener(new MaterialTapTargetPrompt.OnHidePromptListener()
+                                            {
+                                                @Override
+                                                public void onHidePrompt(MotionEvent event, boolean tappedTarget)
+                                                {
+                                                    preferences.setv3TargetShown(true);
+                                                }
+
+                                                @Override
+                                                public void onHidePromptComplete()
+                                                {
+                                                    preferences.setv3TargetShown(true);
+                                                }
+                                            })
+                                            .show();
+                                }
+                            })
+                            .show();
+                }
+            }, 1500);
     }
 
     public void showNoInternet() {
@@ -820,7 +841,6 @@ public class WeatherFragment extends Fragment {
                     break;
             }
         }
-
         Log.i(Integer.toString(id) , Integer.toString(i));
         weatherIcon[i].setText(icon);
     }
