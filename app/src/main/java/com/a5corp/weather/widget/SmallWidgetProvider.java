@@ -69,6 +69,7 @@ public class SmallWidgetProvider extends AppWidgetProvider {
                     return;
 
                 json = wt.execute(new Preferences(context).getCity()).get()[0];
+                preferences.storeSmallWidget(json.toString());
                 double temp = json.getJSONObject("main").getDouble("temp");
                 remoteViews.setTextViewText(R.id.widget_city, json.getString("name") +
                         ", " +
@@ -431,8 +432,8 @@ public class SmallWidgetProvider extends AppWidgetProvider {
     }
 
     private void loadFromPreference(Preferences preferences , RemoteViews remoteViews , AppWidgetManager appWidgetManager , int[] appWidgetIds , int widgetId) throws JSONException{
-        if (preferences.getLargeWidget() != null)
-            json = new JSONObject(preferences.getLargeWidget());
+        if (preferences.getSmallWidget() != null)
+            json = new JSONObject(preferences.getSmallWidget());
         else
             return;
         double temp = json.getJSONObject("main").getDouble("temp");
