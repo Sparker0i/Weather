@@ -64,6 +64,7 @@ public class WeatherActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setColorNormal(ContextCompat.getColor(this , R.color.accent));
         fab.hide(false);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
