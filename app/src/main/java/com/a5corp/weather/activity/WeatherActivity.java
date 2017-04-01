@@ -83,6 +83,10 @@ public class WeatherActivity extends AppCompatActivity {
         fab.show(true);
     }
 
+    public FloatingActionButton getFab() {
+        return fab;
+    }
+
     public void initDrawer() {
         final IProfile profile = new ProfileDrawerItem().withName("Simple Weather")
                 .withEmail("Version : " + BuildConfig.VERSION_NAME)

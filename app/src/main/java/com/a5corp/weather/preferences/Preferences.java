@@ -91,4 +91,12 @@ public class Preferences {
     public String getLargeWidget() {
         return prefs.getString("jsonlarge" , null);
     }
+
+    public void setv3TargetShown(boolean bool) {
+        prefs.edit().putBoolean("search-v3-shown" , bool).apply();
+    }
+
+    public boolean getv3TargetShown() {
+        return prefs.getBoolean("search-v3-shown" , false);
+    }
 }
