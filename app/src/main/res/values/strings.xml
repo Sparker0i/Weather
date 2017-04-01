@@ -139,19 +139,13 @@
     <string name="widget_refresh_button">Widget refresh button</string>
 
     !-- About -->
-    <string name="about_header">about mini RTO</string>
-    <string name="rate">RATE</string>
     <string name="github">GITHUB</string>
     <string name="other_apps">OTHER APPS</string>
     <string name="author_header">AUTHOR</string>
     <string name="credits_header">CREDITS</string>
     <string name="libraries_header">OPEN SOURCE LICENSES</string>
-    <string name="legal_header">LEGAL</string>
-    <string name="source_header">Source &amp; permission</string>
-    <string name="source_content">Parivahan Sewa</string>
     <string name="version_header">VERSION</string>
     <string name="build_version">Build version</string>
-    <string name="database_version">Database version</string>
     <string name="dev_1_title">Aaditya Menon</string>
     <string name="dev_1_name">\@Sparker0i</string>
     <string name="dev_1_link">http://sparker0i.in</string>
