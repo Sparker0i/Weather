@@ -18,6 +18,7 @@ import android.widget.AbsListView;
 
 import com.a5corp.weather.R;
 import com.a5corp.weather.cards.AboutCard;
+import com.a5corp.weather.utils.Constants;
 import com.github.clans.fab.FloatingActionButton;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 
@@ -88,9 +89,8 @@ public class AboutActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse(getString(R.string.app_link_direct)));
-                startActivity(intent);
+                Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:" + Constants.MAIL));
+                startActivity(Intent.createChooser(intent , "Choose an app"));
             }
         });
 

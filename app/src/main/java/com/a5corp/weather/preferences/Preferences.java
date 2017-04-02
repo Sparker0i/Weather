@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
+import com.a5corp.weather.utils.Constants;
+
 public class Preferences {
     private static SharedPreferences prefs;
 
@@ -17,85 +19,84 @@ public class Preferences {
     }
 
     public String getCity() {
-        return prefs.getString("city", null);
+        return prefs.getString(Constants.CITY , null);
     }
 
     public void setCity(String city) {
         SharedPreferences.Editor prefsEditor = prefs.edit();
-        prefsEditor.putString("city", city);
+        prefsEditor.putString(Constants.CITY , city);
         prefsEditor.apply();
     }
 
     public void setLaunched() {
-        prefs.edit().putBoolean("first" , false).apply();
+        prefs.edit().putBoolean(Constants.FIRST , false).apply();
     }
 
     public boolean getLaunched() {
-        return prefs.getBoolean("first" , true);
+        return prefs.getBoolean(Constants.FIRST , true);
     }
 
     public void setLastCity(String city) {
-        prefs.edit().putString("lcity" , city).apply();
+        prefs.edit().putString(Constants.LASTCITY , city).apply();
     }
 
     public String getLastCity() {
-        return prefs.getString("lcity" , null);
+        return prefs.getString(Constants.LASTCITY , null);
     }
 
     public void setLatitude(float lat) {
-        prefs.edit().putFloat("lat" , lat).apply();
+        prefs.edit().putFloat(Constants.LATITUDE , lat).apply();
     }
 
     public float getLatitude() {
-        return prefs.getFloat("lat" , 0);
+        return prefs.getFloat(Constants.LATITUDE , 0);
     }
 
     public void setLongitude(float lon) {
-        prefs.edit().putFloat("lon" , lon).apply();
+        prefs.edit().putFloat(Constants.LONGITUDE , lon).apply();
     }
 
     public float getLongitude() {
-        return prefs.getFloat("lon" , 0);
+        return prefs.getFloat(Constants.LONGITUDE , 0);
     }
 
     public void setUnits(String string) {
-        prefs.edit().putString("units" , string).apply();
-        Log.i("units" , string);
+        prefs.edit().putString(Constants.UNITS , string).apply();
     }
 
     public String getUnits() {
-        return prefs.getString("units" , "metric");
+        return prefs.getString(Constants.UNITS , "metric");
     }
 
     public void setNotifs(Boolean bool) {
-        prefs.edit().putBoolean("notif" , bool).apply();
+        prefs.edit().putBoolean(Constants.NOTIFICATIONS , bool).apply();
     }
 
     public Boolean getNotifs() {
-        return prefs.getBoolean("notif" , false);
+        return prefs.getBoolean(Constants.NOTIFICATIONS , false);
     }
 
     public void storeSmallWidget(String json) {
-        prefs.edit().putString("jsonsmall" , json).apply();
+        prefs.edit().putString(Constants.SMALLWIDGET , json).apply();
     }
 
     public String getSmallWidget() {
-        return prefs.getString("jsonsmall" , null);
+        return prefs.getString(Constants.SMALLWIDGET , null);
     }
 
     public void storeLargeWidget(String json) {
-        prefs.edit().putString("jsonlarge" , json).apply();
+        prefs.edit().putString(Constants.LARGEWIDGET , json).apply();
     }
 
     public String getLargeWidget() {
-        return prefs.getString("jsonlarge" , null);
+        return prefs.getString(Constants.LARGEWIDGET , null);
     }
 
     public void setv3TargetShown(boolean bool) {
-        prefs.edit().putBoolean("search-v3-shown" , bool).apply();
+        prefs.edit().putBoolean(Constants.V3TUTORIAL , bool).apply();
     }
 
     public boolean getv3TargetShown() {
-        return prefs.getBoolean("search-v3-shown" , false);
+        return prefs.getBoolean(Constants.V3TUTORIAL , false);
     }
 }
