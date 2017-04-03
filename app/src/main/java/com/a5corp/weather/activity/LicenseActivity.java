@@ -15,8 +15,8 @@ import com.a5corp.weather.R;
 
 public class LicenseActivity extends AppCompatActivity
 {
-    private int libID;
-    private Toolbar toolbar;
+    int libID;
+    Toolbar toolbar;
     private String license;
     private String library;
     private String link;
