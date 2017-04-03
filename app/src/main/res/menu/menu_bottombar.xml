@@ -8,15 +8,15 @@
         android:id="@+id/map_rain"
         android:icon="@drawable/ic_action_water"
         android:color="@color/md_blue_700"
-        android:title="Rain" />
+        android:title="@string/bottom_rain" />
     <item
         android:id="@+id/map_wind"
         android:icon="@drawable/ic_action_wind"
         android:color="@color/md_green_700"
-        android:title="Wind" />
+        android:title="@string/bottom_wind" />
     <item
         android:id="@+id/map_temperature"
         android:color="@color/md_orange_700"
         android:icon="@drawable/ic_action_temperature"
-        android:title="Temperature" />
+        android:title="@string/bottom_temperature" />
 </menu>

@@ -135,7 +135,12 @@
     <string name="widget_weather_icon_description">Current weather icon</string>
     <string name="widget_refresh_button">Widget refresh button</string>
 
-    !-- About -->
+    <!-- Bottom Bar Strings -->
+    <string name="bottom_rain">Rain</string>
+    <string name="bottom_wind">Wind</string>
+    <string name="bottom_temperature">Temperature</string>
+
+    <!-- About -->
     <string name="github">GITHUB</string>
     <string name="other_apps">OTHER APPS</string>
     <string name="author_header">AUTHOR</string>
