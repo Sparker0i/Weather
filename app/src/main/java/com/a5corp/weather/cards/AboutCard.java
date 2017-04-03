@@ -160,14 +160,6 @@ public class AboutCard extends Card
                     }
                 });
 
-                parent.findViewById(R.id.lib_11).setOnClickListener(new View.OnClickListener()
-                {
-                    @Override
-                    public void onClick(View v)
-                    {
-                        showLicense(11);
-                    }
-                });
                 break;
             }
 
@@ -179,7 +171,7 @@ public class AboutCard extends Card
         }
     }
 
-    public void showLicense(int libId)
+    private void showLicense(int libId)
     {
         Intent intent = new Intent(context, LicenseActivity.class);
         intent.putExtra("libId", libId);

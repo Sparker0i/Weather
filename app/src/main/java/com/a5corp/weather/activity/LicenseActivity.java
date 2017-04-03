@@ -76,7 +76,7 @@ public class LicenseActivity extends AppCompatActivity
             case 7:
             {
                 library = getString(R.string.lib_7);
-                license = getString(R.string.lib_7_license) + getString(R.string.apache_license);
+                license = getString(R.string.lib_7_license) + getString(R.string.mit_license);
                 link = getString(R.string.lib_7_link);
                 break;
             }
@@ -99,13 +99,6 @@ public class LicenseActivity extends AppCompatActivity
                 library = getString(R.string.lib_10);
                 license = getString(R.string.lib_10_license) + getString(R.string.apache_license);
                 link = getString(R.string.lib_10_link);
-                break;
-            }
-            case 11:
-            {
-                library = getString(R.string.lib_11);
-                license = getString(R.string.lib_11_license) + getString(R.string.apache_license);
-                link = getString(R.string.lib_11_link);
                 break;
             }
         }

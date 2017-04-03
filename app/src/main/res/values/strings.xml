@@ -184,12 +184,10 @@
     <string name="lib_6_link">https://github.com/afollestad/material-dialogs</string>
     <string name="lib_6_license"><![CDATA[Copyright © 2014–2016 Aidan Michael Follestad]]></string>
 
-
-    <string name="lib_7">Bottom Bar</string>
-    <string name="lib_7_author">Iiro Krankka</string>
-    <string name="lib_7_link">https://github.com/roughike/BottomBar</string>
-    <string name="lib_7_license"><![CDATA[BottomBar library for Android
-Copyright © 2016 Iiro Krankka]]></string>
+    <string name="lib_7">Material Bottom Navigation</string>
+    <string name="lib_7_author">Alessandro Crugnola</string>
+    <string name="lib_7_link">https://github.com/sephiroth74/Material-BottomNavigation</string>
+    <string name="lib_7_license"><![CDATA[Copyright © 2016 Alessandro Crugnola]]></string>
 
     <string name="lib_8">Material Tap Target Prompt</string>
     <string name="lib_8_author">Samuel Wall</string>
@@ -205,11 +203,6 @@ Copyright © 2016 Iiro Krankka]]></string>
     <string name="lib_10_author">Google</string>
     <string name="lib_10_link">https://github.com/google/material-design-icons/</string>
     <string name="lib_10_license"><![CDATA[Copyright © 2016 Google ]]></string>
-
-    <string name="lib_11">Commons Lang</string>
-    <string name="lib_11_author">Apache</string>
-    <string name="lib_11_link">https://github.com/apache/commons-lang</string>
-    <string name="lib_11_license"><![CDATA[Copyright © 2016 The Apache Software Foundation]]></string>
 
     <string name="mit_license"><![CDATA[
     <br><br>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:

@@ -11,14 +11,14 @@ import android.webkit.WebView;
 import com.a5corp.weather.R;
 import com.a5corp.weather.activity.WeatherActivity;
 import com.a5corp.weather.preferences.Preferences;
-import com.roughike.bottombar.BottomBar;
-import com.roughike.bottombar.OnTabSelectListener;
+
+import it.sephiroth.android.library.bottomnavigation.BottomNavigation;
 
 public class MapsFragment extends Fragment {
 
     public View rootView;
     WebView webView;
-    BottomBar mBottomBar;
+    BottomNavigation mBottomBar;
     Preferences prefs;
 
     public MapsFragment() {
@@ -48,17 +48,22 @@ public class MapsFragment extends Fragment {
         webView.setInitialScale(1);
         webView.getSettings().setLoadWithOverviewMode(true);
         webView.getSettings().setUseWideViewPort(true);
-        mBottomBar = (BottomBar) rootView.findViewById(R.id.bottomBar);
-        mBottomBar.setOnTabSelectListener(new OnTabSelectListener() {
+        mBottomBar = (BottomNavigation) rootView.findViewById(R.id.bottomBar);
+        mBottomBar.setOnMenuItemClickListener(new BottomNavigation.OnMenuItemSelectionListener() {
             @Override
-            public void onTabSelected(@IdRes int menuItemId) {
-                if (menuItemId == R.id.map_rain) {
+            public void onMenuItemSelect(@IdRes int i, int i1, boolean b) {
+                if (i == R.id.map_rain) {
                     webView.loadUrl("javascript:map.removeLayer(windLayer);map.removeLayer(tempLayer);map.addLayer(rainLayer);");
-                } else if (menuItemId == R.id.map_wind) {
+                } else if (i == R.id.map_wind) {
                     webView.loadUrl("javascript:map.removeLayer(rainLayer);map.removeLayer(tempLayer);map.addLayer(windLayer);");
-                } else if (menuItemId == R.id.map_temperature) {
+                } else if (i == R.id.map_temperature) {
                     webView.loadUrl("javascript:map.removeLayer(windLayer);map.removeLayer(rainLayer);map.addLayer(tempLayer);");
                 }
+            }
+
+            @Override
+            public void onMenuItemReselect(@IdRes int i, int i1, boolean b) {
+
             }
         });
     }
