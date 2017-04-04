@@ -199,15 +199,10 @@
     <string name="lib_8_link">https://github.com/sjwall/MaterialTapTargetPrompt</string>
     <string name="lib_8_license"><![CDATA[Copyright © 2016 Samuel Wall ]]></string>
 
-    <string name="lib_9">Android Tooltip</string>
-    <string name="lib_9_author">Alessandro Crugnola</string>
-    <string name="lib_9_link">https://github.com/sephiroth74/android-target-tooltip</string>
-    <string name="lib_9_license"><![CDATA[Copyright © 2016 Alessandro Crugnola ]]></string>
-
-    <string name="lib_10">Material Icons</string>
-    <string name="lib_10_author">Google</string>
-    <string name="lib_10_link">https://github.com/google/material-design-icons/</string>
-    <string name="lib_10_license"><![CDATA[Copyright © 2016 Google ]]></string>
+    <string name="lib_9">Material Icons</string>
+    <string name="lib_9_author">Google</string>
+    <string name="lib_9_link">https://github.com/google/material-design-icons/</string>
+    <string name="lib_9_license"><![CDATA[Copyright © 2016 Google ]]></string>
 
     <string name="mit_license"><![CDATA[
     <br><br>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
