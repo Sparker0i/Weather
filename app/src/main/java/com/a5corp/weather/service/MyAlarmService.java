@@ -57,7 +57,7 @@ public class MyAlarmService extends Service
         Intent intent1 = new Intent(this , WeatherActivity.class);
 
         pendingIntent = PendingIntent.getActivity(this, 1, intent1 , 0);
-        if (preferences.getNotifs() && !checkApp()) {
+        if (preferences.getNotifs()) {
             getWeather();
         }
         else {
@@ -105,11 +105,11 @@ public class MyAlarmService extends Service
         else
             ut = "°F";
         builder.setAutoCancel(true);
-        builder.setTicker(temp + ut + " at " + city);
+        builder.setTicker(Math.round(temp) + ut + " at " + city);
         builder.setContentTitle("Weather Notification");
-        builder.setContentText(temp + ut + " at " + city);
+        builder.setContentText(Math.round(temp) + ut + " at " + city);
         builder.setStyle(new NotificationCompat.BigTextStyle().bigText("City : " + city
-                + "\nTemperature : " + temp + ut
+                + "\nTemperature : " + Math.round(temp) + ut
                 + "\nPressure : " + pressure + " hPa"
                 + "\nHumidity : " + humidity + "%"));
         builder.setSmallIcon(R.drawable.ic_notification_icon);
@@ -120,17 +120,6 @@ public class MyAlarmService extends Service
         myNotification = builder.build();
         mManager.notify(0, myNotification);
         Log.i("Built", "Notification");
-    }
-
-    public boolean checkApp(){
-        ActivityManager am = (ActivityManager) this
-                .getSystemService(ACTIVITY_SERVICE);
-
-        // get the info from the currently running task
-        List<ActivityManager.RunningTaskInfo> taskInfo = am.getRunningTasks(1);
-
-        ComponentName componentInfo = taskInfo.get(0).topActivity;
-        return componentInfo.getPackageName().equalsIgnoreCase("com.a5corp.weather");
     }
 
     @Override
