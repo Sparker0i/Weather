@@ -21,6 +21,8 @@ import com.a5corp.weather.fragment.WeatherFragment;
 import com.a5corp.weather.permissions.GPSTracker;
 import com.a5corp.weather.permissions.Permissions;
 import com.a5corp.weather.preferences.Preferences;
+import com.a5corp.weather.service.CurrentWeatherService;
+import com.a5corp.weather.utils.Constants;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.github.clans.fab.FloatingActionButton;
@@ -170,6 +172,7 @@ public class WeatherActivity extends AppCompatActivity {
                 else {
                     preferences.setNotifs(false);
                 }
+                startService(new Intent(getBaseContext() , CurrentWeatherService.class));
             }
         });
         drawer = new DrawerBuilder()
@@ -230,7 +233,7 @@ public class WeatherActivity extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode,@NonNull String permissions[],@NonNull int[] grantResults) {
         switch (requestCode) {
-            case 20: {
+            case Constants.READ_COARSE_LOCATION: {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {

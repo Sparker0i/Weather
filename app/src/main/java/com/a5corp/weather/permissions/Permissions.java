@@ -12,17 +12,17 @@ import android.util.Log;
 import android.view.View;
 
 import com.a5corp.weather.R;
+import com.a5corp.weather.utils.Constants;
 
 public class Permissions {
     private Context mContext;
-    final int READ_COARSE_LOCATION = 20;
 
     public Permissions(Context context) {
         mContext = context;
     }
 
     public void checkPermission() {
-        ActivityCompat.requestPermissions((Activity) mContext, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, READ_COARSE_LOCATION);
+        ActivityCompat.requestPermissions((Activity) mContext, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, Constants.READ_COARSE_LOCATION);
     }
 
     private void showNoRationale() {
