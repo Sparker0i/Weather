@@ -102,7 +102,7 @@ public class NotificationBuilderService extends Service
             ut = "°C";
         else
             ut = "°F";
-        builder.setAutoCancel(true);
+        builder.setAutoCancel(false);
         builder.setTicker(Math.round(temp) + ut + " at " + city);
         builder.setContentTitle("Weather Notification");
         builder.setContentText(Math.round(temp) + ut + " at " + city);
