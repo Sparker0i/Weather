@@ -16,7 +16,6 @@ import android.view.ViewGroup;
 
 import com.a5corp.weather.R;
 import com.a5corp.weather.activity.WeatherActivity;
-import com.a5corp.weather.internet.FetchWeather;
 import com.a5corp.weather.preferences.Preferences;
 import com.a5corp.weather.utils.CustomFormatter;
 import com.a5corp.weather.utils.XFormatter;
@@ -42,8 +41,11 @@ public class GraphsFragment extends Fragment {
     View rootView;
     Handler handler;
     LineChart temperatureChart , rainChart, pressureChart, snowChart, windChart;
-    List<Entry> tempEntries = new ArrayList<>() , rainEntries = new ArrayList<>() , pressureEntries = new ArrayList<>() , snowEntries = new ArrayList<>() , windEntries = new ArrayList<>();
-    FetchWeather fw;
+    List<Entry> tempEntries = new ArrayList<>() ,
+            rainEntries = new ArrayList<>() ,
+            pressureEntries = new ArrayList<>() ,
+            snowEntries = new ArrayList<>() ,
+            windEntries = new ArrayList<>();
     Preferences pf;
     Bundle bundle;
     CustomFormatter mValueFormatter;
@@ -59,8 +61,7 @@ public class GraphsFragment extends Fragment {
     public void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mValueFormatter = new CustomFormatter();
-        fw = new FetchWeather(getContext());
-            pf = new Preferences(getContext());
+        pf = new Preferences(getContext());
         setHasOptionsMenu(true);
     }
 

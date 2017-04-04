@@ -16,7 +16,7 @@ import android.widget.RemoteViews;
 
 import com.a5corp.weather.R;
 import com.a5corp.weather.internet.CheckConnection;
-import com.a5corp.weather.internet.FetchWeather;
+import com.a5corp.weather.internet.FetchWeatherOther;
 import com.a5corp.weather.preferences.Preferences;
 
 import org.json.JSONException;
@@ -63,7 +63,7 @@ public class SmallWidgetProvider extends AppWidgetProvider {
                         0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
                 remoteViews.setOnClickPendingIntent(R.id.widget_button_refresh, pendingIntent);
 
-                FetchWeather wt = new FetchWeather(context);
+                FetchWeatherOther wt = new FetchWeatherOther(context);
                 CheckConnection connection = new CheckConnection(context);
                 if (!connection.isNetworkAvailable())
                     return;

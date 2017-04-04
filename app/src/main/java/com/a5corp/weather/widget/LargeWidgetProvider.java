@@ -10,14 +10,13 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Typeface;
-import android.icu.text.AlphabeticIndex;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.widget.RemoteViews;
 
 import com.a5corp.weather.R;
 import com.a5corp.weather.internet.CheckConnection;
-import com.a5corp.weather.internet.FetchWeather;
+import com.a5corp.weather.internet.FetchWeatherOther;
 import com.a5corp.weather.preferences.Preferences;
 
 import org.json.JSONException;
@@ -53,7 +52,7 @@ public class LargeWidgetProvider extends AppWidgetProvider {
                 RemoteViews remoteViews = new RemoteViews(context.getPackageName(),
                         R.layout.widget_large);
                 loadFromPreference(preferences , remoteViews , appWidgetManager , appWidgetIds , widgetId);
-                FetchWeather wt = new FetchWeather(context);
+                FetchWeatherOther wt = new FetchWeatherOther(context);
                 if (!connection.isNetworkAvailable())
                     return;
                 json = wt.execute(new Preferences(context).getCity()).get()[0];

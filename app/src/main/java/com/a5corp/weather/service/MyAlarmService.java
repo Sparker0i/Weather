@@ -2,7 +2,6 @@ package com.a5corp.weather.service;
 
 import android.app.ActivityManager;
 import android.app.Notification;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.ComponentName;
@@ -10,14 +9,13 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.IBinder;
-import android.os.SystemClock;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.util.Log;
 
 import com.a5corp.weather.R;
 import com.a5corp.weather.activity.WeatherActivity;
-import com.a5corp.weather.internet.FetchWeather;
+import com.a5corp.weather.internet.FetchWeatherOther;
 import com.a5corp.weather.preferences.Preferences;
 
 import org.json.JSONException;
@@ -30,7 +28,7 @@ public class MyAlarmService extends Service
 {
     Preferences preferences;
     NotificationManagerCompat mManager;
-    FetchWeather wt;
+    FetchWeatherOther wt;
     Notification myNotification;
     PendingIntent pendingIntent;
     NotificationCompat.Builder builder;
@@ -51,9 +49,9 @@ public class MyAlarmService extends Service
 
     @SuppressWarnings("static-access")
     @Override
-    public void onStart(Intent intent, int startId)
+    public int onStartCommand(Intent intent, int flag, int startId)
     {
-        super.onStart(intent, startId);
+        super.onStartCommand(intent, 0, startId);
 
         mManager = NotificationManagerCompat.from(this);
         Intent intent1 = new Intent(this , WeatherActivity.class);
@@ -65,10 +63,11 @@ public class MyAlarmService extends Service
         else {
             Log.i("Cannot Build" , "Notification");
         }
+        return Service.START_NOT_STICKY;
     }
 
     public void getWeather() {
-        wt = new FetchWeather(this);
+        wt = new FetchWeatherOther(this);
         new Thread() {
             public void run() {
                 try {
