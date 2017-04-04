@@ -81,7 +81,8 @@ public class WeatherActivity extends AppCompatActivity {
             }
         });
         initDrawer();
-        buildNotification();
+        if (preferences.getNotifs())
+            buildNotification();
     }
 
     public void hideFab() {
