@@ -11,13 +11,13 @@ import com.a5corp.weather.receiver.MyReceiver;
 
 import java.util.Calendar;
 
-public class CurrentWeatherService extends IntentService {
+public class AlarmTriggerService extends IntentService {
 
-    private static final String TAG = "CurrentWeatherService";
+    private static final String TAG = "AlarmTriggerService";
     PendingIntent pendingIntent;
     Preferences preferences;
 
-    public CurrentWeatherService() {
+    public AlarmTriggerService() {
         super(TAG);
     }
 
@@ -29,14 +29,9 @@ public class CurrentWeatherService extends IntentService {
         pendingIntent = PendingIntent.getBroadcast(this, 0, myIntent,0);
 
         AlarmManager am = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
-        if (preferences.getNotifs())
-            am.setInexactRepeating(AlarmManager.RTC,
-                    Calendar.getInstance().getTimeInMillis(),
-                    AlarmManager.INTERVAL_HOUR,
-                    pendingIntent);
-        else {
-            am.cancel(pendingIntent);
-            pendingIntent.cancel();
-        }
+        am.setInexactRepeating(AlarmManager.RTC,
+                Calendar.getInstance().getTimeInMillis(),
+                AlarmManager.INTERVAL_HOUR,
+                pendingIntent);
     }
 }

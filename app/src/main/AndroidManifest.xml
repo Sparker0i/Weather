@@ -46,10 +46,10 @@
         </receiver>
 
         <service
-            android:name=".service.CurrentWeatherService"
+            android:name=".service.AlarmTriggerService"
             android:enabled="true" />
         <service
-            android:name=".service.MyAlarmService"
+            android:name=".service.NotificationBuilderService"
             android:enabled="true" />
 
         <receiver android:name=".widget.SmallWidgetProvider">

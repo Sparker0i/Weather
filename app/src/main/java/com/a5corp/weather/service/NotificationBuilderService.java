@@ -1,10 +1,8 @@
 package com.a5corp.weather.service;
 
-import android.app.ActivityManager;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
-import android.content.ComponentName;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
@@ -21,10 +19,9 @@ import com.a5corp.weather.preferences.Preferences;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-public class MyAlarmService extends Service
+public class NotificationBuilderService extends Service
 {
     Preferences preferences;
     NotificationManagerCompat mManager;
@@ -99,6 +96,7 @@ public class MyAlarmService extends Service
 
     public void buildNotification(double temp , double pressure , double humidity , String city) {
         builder = new NotificationCompat.Builder(this);
+        mManager.cancelAll();
         String ut;
         if (preferences.getUnits().equals("metric"))
             ut = "°C";

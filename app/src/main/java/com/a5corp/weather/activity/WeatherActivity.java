@@ -1,11 +1,15 @@
 package com.a5corp.weather.activity;
 
+import android.app.Notification;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -21,7 +25,7 @@ import com.a5corp.weather.fragment.WeatherFragment;
 import com.a5corp.weather.permissions.GPSTracker;
 import com.a5corp.weather.permissions.Permissions;
 import com.a5corp.weather.preferences.Preferences;
-import com.a5corp.weather.service.CurrentWeatherService;
+import com.a5corp.weather.service.AlarmTriggerService;
 import com.a5corp.weather.utils.Constants;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -51,9 +55,11 @@ public class WeatherActivity extends AppCompatActivity {
     WeatherFragment wf;
     Toolbar toolbar;
     Drawer drawer;
+    NotificationManagerCompat mManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        mManager = NotificationManagerCompat.from(this);
         preferences = new Preferences(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather);
@@ -75,6 +81,7 @@ public class WeatherActivity extends AppCompatActivity {
             }
         });
         initDrawer();
+        buildNotification();
     }
 
     public void hideFab() {
@@ -89,7 +96,19 @@ public class WeatherActivity extends AppCompatActivity {
         return fab;
     }
 
+    private void buildNotification() {
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
+        builder.setAutoCancel(true);
+        builder.setContentTitle("Weather Notification");
+        builder.setSmallIcon(R.drawable.ic_notification_icon);
+        builder.setContentText("Please wait while the weather is loading");
+        Notification myNotification = builder.build();
+        NotificationManagerCompat mManager = NotificationManagerCompat.from(this);
+        mManager.notify(0, myNotification);
+    }
+
     public void initDrawer() {
+        final Context context = this;
         final IProfile profile = new ProfileDrawerItem().withName("Simple Weather")
                 .withEmail("Version : " + BuildConfig.VERSION_NAME)
                 .withIcon(R.drawable.ic_launcher_dark);
@@ -135,14 +154,14 @@ public class WeatherActivity extends AppCompatActivity {
                             .sizeRes(R.dimen.activity_horizontal_margin))
                     .withSelectable(false);
         if (preferences.getNotifs())
-            item5 = new SecondarySwitchDrawerItem().withIdentifier(6).withName("Show Hourly Notifications")
+            item5 = new SecondarySwitchDrawerItem().withIdentifier(6).withName("Show Ongoing Notification")
                     .withChecked(true)
                     .withIcon(new IconicsDrawable(this)
                             .icon(GoogleMaterial.Icon.gmd_notifications)
                             .sizeRes(R.dimen.activity_horizontal_margin))
                     .withSelectable(false);
         else
-            item5 = new SecondarySwitchDrawerItem().withIdentifier(6).withName("Show Hourly Notifications")
+            item5 = new SecondarySwitchDrawerItem().withIdentifier(6).withName("Show Ongoing Notification")
                     .withChecked(false)
                     .withIcon(new IconicsDrawable(this)
                             .icon(GoogleMaterial.Icon.gmd_notifications)
@@ -168,11 +187,13 @@ public class WeatherActivity extends AppCompatActivity {
             public void onCheckedChanged(IDrawerItem drawerItem, CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     preferences.setNotifs(true);
+                    buildNotification();
                 }
                 else {
                     preferences.setNotifs(false);
+                    mManager.cancelAll();
                 }
-                startService(new Intent(getBaseContext() , CurrentWeatherService.class));
+                startService(new Intent(context , AlarmTriggerService.class));
             }
         });
         drawer = new DrawerBuilder()
