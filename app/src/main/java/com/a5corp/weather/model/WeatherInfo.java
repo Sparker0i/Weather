@@ -6,13 +6,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WeatherInfo {
-    public Coordinates coord = new Coordinates();
-    public Main main = new Main();
-    public String name;
-    public Sys sys = new Sys();
-    public Wind wind = new Wind();
-    public long dt;
-    public List<Weather> weather = new ArrayList<Weather>();
+    private Coordinates coord = new Coordinates();
+    private Main main = new Main();
+    private String name;
+    private Sys sys = new Sys();
+    private Wind wind = new Wind();
+    private long dt;
+    private int cod;
+    private List<Weather> weather = new ArrayList<Weather>();
 
     public void setName (String str) {
         name = str;
@@ -28,6 +29,14 @@ public class WeatherInfo {
 
     public long getDt() {
         return dt;
+    }
+
+    public void setCod(int cod) {
+        this.cod = cod;
+    }
+
+    public long getCod() {
+        return cod;
     }
 }
 
@@ -98,6 +107,7 @@ class Wind {
 class Sys {
     private long sunrise;
     private long sunset;
+    private String country;
 
     public long getSunrise() {
         return sunrise;
@@ -113,6 +123,14 @@ class Sys {
 
     public void setSunset(long sunset) {
         this.sunset = sunset;
+    }
+
+    private String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 }
 
