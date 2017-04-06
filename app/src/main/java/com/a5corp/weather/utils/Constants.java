@@ -21,4 +21,6 @@ public class Constants {
     public static final String MAIL = "aadityamenon007@gmail.com";
 
     public static final int READ_COARSE_LOCATION = 20;
+
+    public static final int MY_NOTIFICATION_ID = 32094;
 }

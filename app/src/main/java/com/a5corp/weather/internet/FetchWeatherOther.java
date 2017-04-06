@@ -18,8 +18,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class FetchWeatherOther extends AsyncTask<String , Void , JSONObject[]> {
-
-    private static final String OPEN_WEATHER_MAP_FORECAST_API = "http://api.openweathermap.org/data/2.5/forecast/daily?";
     private static final String OPEN_WEATHER_MAP_DAILY_API = "http://api.openweathermap.org/data/2.5/weather?";
     private final String LOG_TAG = FetchWeatherOther.class.getSimpleName();
 
@@ -30,7 +28,7 @@ public class FetchWeatherOther extends AsyncTask<String , Void , JSONObject[]> {
     private final String UNITS_PARAM = "units";
     private String UNITS_VALUE;
     private final String DAYS_PARAM = "cnt";
-    private Uri builtDay , builtFort;
+    private Uri builtDay;
     private Preferences preferences;
 
     public FetchWeatherOther(Context mContext) {
@@ -45,8 +43,6 @@ public class FetchWeatherOther extends AsyncTask<String , Void , JSONObject[]> {
             Log.d(LOG_TAG , "Execution");
             URL day = new URL(builtDay.toString());
             Log.i("day" , day.toString());
-            URL fort = new URL(builtFort.toString());
-            Log.i("fort" , fort.toString());
             Log.d(LOG_TAG , "URI Ready");
             HttpURLConnection connection0 = (HttpURLConnection)day.openConnection();
             connection0.addRequestProperty("x-api-key", context.getString(R.string.open_weather_maps_app_id));
@@ -86,12 +82,6 @@ public class FetchWeatherOther extends AsyncTask<String , Void , JSONObject[]> {
         UNITS_VALUE = preferences.getUnits();
         System.out.println(UNITS_VALUE);
         builtDay = Uri.parse(OPEN_WEATHER_MAP_DAILY_API).buildUpon()
-                .appendQueryParameter(QUERY_PARAM , params[0])
-                .appendQueryParameter(FORMAT_PARAM , FORMAT_VALUE)
-                .appendQueryParameter(UNITS_PARAM , UNITS_VALUE)
-                .appendQueryParameter(DAYS_PARAM , Integer.toString(10))
-                .build();
-        builtFort = Uri.parse(OPEN_WEATHER_MAP_FORECAST_API).buildUpon()
                 .appendQueryParameter(QUERY_PARAM , params[0])
                 .appendQueryParameter(FORMAT_PARAM , FORMAT_VALUE)
                 .appendQueryParameter(UNITS_PARAM , UNITS_VALUE)

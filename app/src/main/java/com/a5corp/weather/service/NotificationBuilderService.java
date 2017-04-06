@@ -15,6 +15,7 @@ import com.a5corp.weather.R;
 import com.a5corp.weather.activity.WeatherActivity;
 import com.a5corp.weather.internet.FetchWeatherOther;
 import com.a5corp.weather.preferences.Preferences;
+import com.a5corp.weather.utils.Constants;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -116,7 +117,7 @@ public class NotificationBuilderService extends Service
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
             builder.setColor(Color.parseColor("#ff0000"));
         myNotification = builder.build();
-        mManager.notify(0, myNotification);
+        mManager.notify(Constants.MY_NOTIFICATION_ID , myNotification);
         Log.i("Built", "Notification");
     }
 

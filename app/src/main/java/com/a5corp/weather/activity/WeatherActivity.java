@@ -1,6 +1,7 @@
 package com.a5corp.weather.activity;
 
 import android.app.Notification;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -81,8 +82,6 @@ public class WeatherActivity extends AppCompatActivity {
             }
         });
         initDrawer();
-        if (preferences.getNotifs())
-            buildNotification();
     }
 
     public void hideFab() {
@@ -99,13 +98,14 @@ public class WeatherActivity extends AppCompatActivity {
 
     private void buildNotification() {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
-        builder.setAutoCancel(true);
-        builder.setContentTitle("Weather Notification");
-        builder.setSmallIcon(R.drawable.ic_notification_icon);
-        builder.setContentText("Please wait while the weather is loading");
+        builder.setAutoCancel(true)
+                .setContentTitle("Weather Notification")
+                .setSmallIcon(R.drawable.ic_notification_icon)
+                .setContentText("Please wait while the weather is loading")
+                .setOngoing(true);
         Notification myNotification = builder.build();
         NotificationManagerCompat mManager = NotificationManagerCompat.from(this);
-        mManager.notify(0, myNotification);
+        mManager.notify(Constants.MY_NOTIFICATION_ID, myNotification);
     }
 
     public void initDrawer() {
