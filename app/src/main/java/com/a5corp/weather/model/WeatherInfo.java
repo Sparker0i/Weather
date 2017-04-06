@@ -7,12 +7,12 @@ import java.util.List;
 
 public class WeatherInfo {
     public Coordinates coord = new Coordinates();
-    public List<Weather> weather = new ArrayList<Weather>();
     public Main main = new Main();
     public String name;
     public Sys sys = new Sys();
     public Wind wind = new Wind();
     public long dt;
+    public List<Weather> weather = new ArrayList<Weather>();
 
     public void setName (String str) {
         name = str;

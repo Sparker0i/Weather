@@ -8,6 +8,7 @@ import android.util.Log;
 import com.a5corp.weather.R;
 import com.a5corp.weather.model.WeatherInfo;
 import com.a5corp.weather.preferences.Preferences;
+import com.a5corp.weather.utils.Constants;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -27,9 +28,6 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class FetchWeather extends AsyncTask<String , Void , JSONObject[]> {
 
@@ -114,6 +112,7 @@ public class FetchWeather extends AsyncTask<String , Void , JSONObject[]> {
                 .appendQueryParameter(FORMAT_PARAM , FORMAT_VALUE)
                 .appendQueryParameter(UNITS_PARAM , UNITS_VALUE)
                 .appendQueryParameter(DAYS_PARAM , Integer.toString(10))
+                .appendQueryParameter("appId" , context.getString(R.string.open_weather_maps_app_id))
                 .build();
         builtFort = Uri.parse(OPEN_WEATHER_MAP_FORECAST_API).buildUpon()
                 .appendQueryParameter(QUERY_PARAM , params[0])
@@ -142,15 +141,11 @@ public class FetchWeather extends AsyncTask<String , Void , JSONObject[]> {
     }
 
     private String gsonWeather() throws IOException {
-        HttpClient client = new DefaultHttpClient();
-        HttpPost post = new HttpPost(builtDay.toString());
-        System.out.println(builtDay.toString());
+        URL day = new URL(builtDay.toString());
+        HttpURLConnection connection1 = (HttpURLConnection) day.openConnection();
+        connection1.addRequestProperty("x-api-key", context.getString(R.string.open_weather_maps_app_id));
 
-        //Perform the request and check the status code
-        HttpResponse response = client.execute(post);
-        StatusLine statusLine = response.getStatusLine();
-        HttpEntity entity = response.getEntity();
-        InputStream content = entity.getContent();
+        InputStream content = connection1.getInputStream();
 
         try {
             //Read the server response and attempt to parse it as JSON
