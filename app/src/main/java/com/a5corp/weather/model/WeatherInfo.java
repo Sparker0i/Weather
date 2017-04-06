@@ -2,15 +2,16 @@ package com.a5corp.weather.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class WeatherInfo {
-    public Coordinates coord;
-    public List<Weather> weather;
-    public Main main;
+    public Coordinates coord = new Coordinates();
+    public List<Weather> weather = new ArrayList<Weather>();
+    public Main main = new Main();
     public String name;
-    public Sys sys;
-    public Wind wind;
+    public Sys sys = new Sys();
+    public Wind wind = new Wind();
     public long dt;
 
     public void setName (String str) {

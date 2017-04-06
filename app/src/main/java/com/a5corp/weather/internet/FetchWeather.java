@@ -6,16 +6,30 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.a5corp.weather.R;
+import com.a5corp.weather.model.WeatherInfo;
 import com.a5corp.weather.preferences.Preferences;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.StatusLine;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.apache.http.HttpEntity;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Reader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class FetchWeather extends AsyncTask<String , Void , JSONObject[]> {
 
@@ -48,33 +62,30 @@ public class FetchWeather extends AsyncTask<String , Void , JSONObject[]> {
             coordinates(params);
         try {
             Log.d(LOG_TAG , "Execution");
-            URL day = new URL(builtDay.toString());
-            Log.i("day" , day.toString());
             URL fort = new URL(builtFort.toString());
             Log.i("fort" , fort.toString());
             Log.d(LOG_TAG , "URI Ready");
-            HttpURLConnection connection0 = (HttpURLConnection)day.openConnection();
             HttpURLConnection connection1 = (HttpURLConnection)fort.openConnection();
-            connection0.addRequestProperty("x-api-key", context.getString(R.string.open_weather_maps_app_id));
             connection1.addRequestProperty("x-api-key", context.getString(R.string.open_weather_maps_app_id));
             BufferedReader reader;
-            StringBuilder json = new StringBuilder(1024) , json1 = new StringBuilder(1024);
-
-            reader= new BufferedReader(new InputStreamReader(connection0.getInputStream()));
-            String tmp;
-            while((tmp = reader.readLine())!=null)
-                json.append(tmp).append("\n");
-            reader.close();
+            StringBuilder json1 = new StringBuilder(1024);
+            String tmp = "";
 
             reader = new BufferedReader(new InputStreamReader(connection1.getInputStream()));
             while((tmp = reader.readLine())!=null)
                 json1.append(tmp).append("\n");
             reader.close();
 
-            JSONObject data = new JSONObject(json.toString()) , data1 = new JSONObject(json1.toString());
+            JSONObject data = null;
+
+            if (gsonWeather() == null)
+                Log.e("Null" , "GSON");
+            else
+                data = new JSONObject(gsonWeather());
+            JSONObject data1 = new JSONObject(json1.toString());
 
             // This value will be 404 if the request was not successful
-            if(data.getInt("cod") != 200 || data1.getInt("cod") != 200){
+            if(data1.getInt("cod") != 200){
                 Log.e(LOG_TAG , "Execution Failed");
                 return null;
             }
@@ -128,5 +139,34 @@ public class FetchWeather extends AsyncTask<String , Void , JSONObject[]> {
                 .appendQueryParameter(UNITS_PARAM , UNITS_VALUE)
                 .appendQueryParameter(DAYS_PARAM , Integer.toString(10))
                 .build();
+    }
+
+    private String gsonWeather() throws IOException {
+        HttpClient client = new DefaultHttpClient();
+        HttpPost post = new HttpPost(builtDay.toString());
+        System.out.println(builtDay.toString());
+
+        //Perform the request and check the status code
+        HttpResponse response = client.execute(post);
+        StatusLine statusLine = response.getStatusLine();
+        HttpEntity entity = response.getEntity();
+        InputStream content = entity.getContent();
+
+        try {
+            //Read the server response and attempt to parse it as JSON
+            Reader reader = new InputStreamReader(content);
+
+            GsonBuilder gsonBuilder = new GsonBuilder();
+            gsonBuilder.setDateFormat("M/d/yy hh:mm a");
+            Gson gson = gsonBuilder.create();
+            WeatherInfo posts = gson.fromJson(reader, WeatherInfo.class);
+            System.out.println(gson.toJson(posts));
+            content.close();
+
+            return gson.toJson(posts);
+        } catch (Exception ex) {
+            Log.e("FetchWeather", "Failed to parse JSON due to: " + ex);
+        }
+        return null;
     }
 }
