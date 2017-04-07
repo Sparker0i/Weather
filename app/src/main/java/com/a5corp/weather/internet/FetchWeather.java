@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.a5corp.weather.R;
+import com.a5corp.weather.model.WeatherFort;
 import com.a5corp.weather.model.WeatherInfo;
 import com.a5corp.weather.preferences.Preferences;
 import com.a5corp.weather.utils.Constants;
@@ -63,27 +64,12 @@ public class FetchWeather extends AsyncTask<String , Void , JSONObject[]> {
             URL fort = new URL(builtFort.toString());
             Log.i("fort" , fort.toString());
             Log.d(LOG_TAG , "URI Ready");
-            HttpURLConnection connection1 = (HttpURLConnection)fort.openConnection();
-            connection1.addRequestProperty("x-api-key", context.getString(R.string.open_weather_maps_app_id));
-            BufferedReader reader;
-            StringBuilder json1 = new StringBuilder(1024);
-            String tmp = "";
 
-            reader = new BufferedReader(new InputStreamReader(connection1.getInputStream()));
-            while((tmp = reader.readLine())!=null)
-                json1.append(tmp).append("\n");
-            reader.close();
-
-            JSONObject data = null;
-
-            if (gsonWeather() == null)
-                Log.e("Null" , "GSON");
-            else
-                data = new JSONObject(gsonWeather());
-            JSONObject data1 = new JSONObject(json1.toString());
+            JSONObject data = new JSONObject(gsonWeather());
+            JSONObject data1 = new JSONObject(gsonFort());
 
             // This value will be 404 if the request was not successful
-            if(data1.getInt("cod") != 200){
+            if(data.getInt("cod") != 200 | data1.getInt("cod") != 200) {
                 Log.e(LOG_TAG , "Execution Failed");
                 return null;
             }
@@ -155,6 +141,31 @@ public class FetchWeather extends AsyncTask<String , Void , JSONObject[]> {
             gsonBuilder.setDateFormat("M/d/yy hh:mm a");
             Gson gson = gsonBuilder.create();
             WeatherInfo posts = gson.fromJson(reader, WeatherInfo.class);
+            System.out.println(gson.toJson(posts));
+            content.close();
+
+            return gson.toJson(posts);
+        } catch (Exception ex) {
+            Log.e("FetchWeather", "Failed to parse JSON due to: " + ex);
+        }
+        return null;
+    }
+
+    private String gsonFort() throws IOException{
+        URL fort = new URL(builtFort.toString());
+        HttpURLConnection connection1 = (HttpURLConnection) fort.openConnection();
+        connection1.addRequestProperty("x-api-key", context.getString(R.string.open_weather_maps_app_id));
+
+        InputStream content = connection1.getInputStream();
+
+        try {
+            //Read the server response and attempt to parse it as JSON
+            Reader reader = new InputStreamReader(content);
+
+            GsonBuilder gsonBuilder = new GsonBuilder();
+            gsonBuilder.setDateFormat("M/d/yy hh:mm a");
+            Gson gson = gsonBuilder.create();
+            WeatherFort posts = gson.fromJson(reader, WeatherFort.class);
             System.out.println(gson.toJson(posts));
             content.close();
 

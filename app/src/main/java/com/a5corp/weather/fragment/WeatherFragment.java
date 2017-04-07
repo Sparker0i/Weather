@@ -34,6 +34,7 @@ import com.a5corp.weather.internet.FetchWeather;
 import com.a5corp.weather.permissions.Permissions;
 import com.a5corp.weather.preferences.Preferences;
 import com.a5corp.weather.service.AlarmTriggerService;
+import com.a5corp.weather.utils.Constants;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 

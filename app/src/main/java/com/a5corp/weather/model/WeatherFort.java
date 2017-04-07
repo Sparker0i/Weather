@@ -1,5 +1,6 @@
 package com.a5corp.weather.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class WeatherFort {
@@ -16,14 +17,13 @@ class City {
 
 class WeatherList {
     private int dt;
-    //private Temp temp;
+    private Temp temp;
     private double pressure;
     private double humidity;
     private double speed;
     private double deg;
-    private int clouds;
-    private int rain;
-    private Weather weather = new Weather();
+    private double rain;
+    private List<Weather> weather = new ArrayList<Weather>();
 }
 
 class Temp {
