@@ -63,10 +63,11 @@ public class AboutActivity extends AppCompatActivity
     {
         cards = new ArrayList<>();
 
-        cards.add(new AboutCard(this,R.layout.about_card_layout_1,1));
-        cards.add(new AboutCard(this,R.layout.about_card_layout_2,2));
-        cards.add(new AboutCard(this,R.layout.about_card_layout_3,3));
-        cards.add(new AboutCard(this,R.layout.about_card_layout_5,5));
+        cards.add(new AboutCard(this , R.layout.about_card_layout_1 , 1));
+        cards.add(new AboutCard(this , R.layout.about_card_layout_2 , 2));
+        cards.add(new AboutCard(this , R.layout.about_card_layout_3 , 3));
+        cards.add(new AboutCard(this , R.layout.about_card_layout_5 , 5));
+        cards.add(new AboutCard(this , R.layout.about_card_layout_6 , 6));
 
         cardArrayAdapter = new CardArrayAdapter(this, cards);
         aboutList = (CardListView) findViewById(R.id.about_list);

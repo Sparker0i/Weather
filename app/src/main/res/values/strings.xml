@@ -20,9 +20,6 @@
     <string name="credits"><u>CREDITS</u></string>
     <string name="refresh">Refresh</string>
 
-    <!-- My OpenWeatherMap API key -->
-    <string name="open_weather_maps_app_id">4c08a22b02c58467e6241629c1d08717</string>
-
     <string name="humidity_icon">&#xf07a;</string>
     <string name="pressure_icon">&#xf079;</string>
     <string name="speed_icon">&#xf050;</string>
@@ -147,6 +144,7 @@
     <string name="credits_header">CREDITS</string>
     <string name="libraries_header">OPEN SOURCE LICENSES</string>
     <string name="version_header">VERSION</string>
+    <string name="inspiration_header">INSPIRATION</string>
     <string name="build_version">Build version</string>
     <string name="dev_1_title">Aaditya Menon</string>
     <string name="dev_1_name">\@Sparker0i</string>
@@ -203,6 +201,18 @@
     <string name="lib_9_author">Google</string>
     <string name="lib_9_link">https://github.com/google/material-design-icons/</string>
     <string name="lib_9_license"><![CDATA[Copyright © 2016 Google ]]></string>
+
+    <string name="insp_1">Good Weather</string>
+    <string name="insp_1_author">AsdTm</string>
+    <string name="insp_1_link">https://play.google.com/store/apps/details?id=org.asdtm.goodweather</string>
+
+    <string name="insp_2">Forecastie</string>
+    <string name="insp_2_author">Castica Labs</string>
+    <string name="insp_2_link">https://play.google.com/store/apps/details?id=com.casticalabs.forecastie</string>
+
+    <string name="insp_3">Mini RTO</string>
+        <string name="insp_3_author">chandruscm</string>
+    <string name="insp_3_link">https://play.google.com/store/apps/details?id=com.chandruscm.minirto</string>
 
     <string name="mit_license"><![CDATA[
     <br><br>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:

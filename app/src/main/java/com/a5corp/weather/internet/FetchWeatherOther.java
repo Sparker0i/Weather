@@ -7,6 +7,7 @@ import android.util.Log;
 
 import com.a5corp.weather.R;
 import com.a5corp.weather.preferences.Preferences;
+import com.a5corp.weather.utils.Constants;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -45,7 +46,7 @@ public class FetchWeatherOther extends AsyncTask<String , Void , JSONObject[]> {
             Log.i("day" , day.toString());
             Log.d(LOG_TAG , "URI Ready");
             HttpURLConnection connection0 = (HttpURLConnection)day.openConnection();
-            connection0.addRequestProperty("x-api-key", context.getString(R.string.open_weather_maps_app_id));
+            connection0.addRequestProperty("x-api-key", Constants.OWM_APP_ID);
             BufferedReader reader;
             StringBuilder json = new StringBuilder(1024);
 

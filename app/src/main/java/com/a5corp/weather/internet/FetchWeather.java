@@ -10,6 +10,7 @@ import com.a5corp.weather.model.Info;
 import com.a5corp.weather.model.WeatherFort;
 import com.a5corp.weather.model.WeatherInfo;
 import com.a5corp.weather.preferences.Preferences;
+import com.a5corp.weather.utils.Constants;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -82,7 +83,6 @@ public class FetchWeather extends AsyncTask<String , Void , Info> {
                 .appendQueryParameter(FORMAT_PARAM , FORMAT_VALUE)
                 .appendQueryParameter(UNITS_PARAM , UNITS_VALUE)
                 .appendQueryParameter(DAYS_PARAM , Integer.toString(10))
-                .appendQueryParameter("appId" , context.getString(R.string.open_weather_maps_app_id))
                 .build();
         builtFort = Uri.parse(OPEN_WEATHER_MAP_FORECAST_API).buildUpon()
                 .appendQueryParameter(QUERY_PARAM , params[0])
@@ -113,7 +113,7 @@ public class FetchWeather extends AsyncTask<String , Void , Info> {
     private WeatherInfo gsonWeather() throws IOException {
         URL day = new URL(builtDay.toString());
         HttpURLConnection connection1 = (HttpURLConnection) day.openConnection();
-        connection1.addRequestProperty("x-api-key", context.getString(R.string.open_weather_maps_app_id));
+        connection1.addRequestProperty("x-api-key", Constants.OWM_APP_ID);
 
         InputStream content = connection1.getInputStream();
 
@@ -137,7 +137,7 @@ public class FetchWeather extends AsyncTask<String , Void , Info> {
     private WeatherFort gsonFort() throws IOException{
         URL fort = new URL(builtFort.toString());
         HttpURLConnection connection1 = (HttpURLConnection) fort.openConnection();
-        connection1.addRequestProperty("x-api-key", context.getString(R.string.open_weather_maps_app_id));
+        connection1.addRequestProperty("x-api-key", Constants.OWM_APP_ID);
 
         InputStream content = connection1.getInputStream();
 

@@ -11,6 +11,7 @@ import android.webkit.WebView;
 import com.a5corp.weather.R;
 import com.a5corp.weather.activity.WeatherActivity;
 import com.a5corp.weather.preferences.Preferences;
+import com.a5corp.weather.utils.Constants;
 
 import it.sephiroth.android.library.bottomnavigation.BottomNavigation;
 
@@ -44,7 +45,7 @@ public class MapsFragment extends Fragment {
 
     public void loadMap() {
         webView.getSettings().setJavaScriptEnabled(true);
-        webView.loadUrl("file:///android_asset/map.html?lat=" + prefs.getLatitude() + "&lon=" + prefs.getLongitude() + "&k=2.0" + "&appid=" + getString(R.string.open_weather_maps_app_id));
+        webView.loadUrl("file:///android_asset/map.html?lat=" + prefs.getLatitude() + "&lon=" + prefs.getLongitude() + "&k=2.0" + "&appid=" + Constants.OWM_APP_ID);
         webView.setInitialScale(1);
         webView.getSettings().setLoadWithOverviewMode(true);
         webView.getSettings().setUseWideViewPort(true);
