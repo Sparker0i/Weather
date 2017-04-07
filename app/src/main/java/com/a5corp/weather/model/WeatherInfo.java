@@ -2,6 +2,7 @@ package com.a5corp.weather.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
 @SuppressWarnings("unused")
@@ -56,7 +57,7 @@ public class WeatherInfo {
         }
     }
 
-    public class Weather {
+    public static class Weather implements Serializable{
         private int id;
         private String description;
 

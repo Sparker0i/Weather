@@ -17,7 +17,7 @@ public class WeatherFort implements Serializable{
         return city;
     }
 
-    public class City {
+    public static class City implements Serializable{
         private String name;
         private WeatherInfo.Coordinates coord;
         private String country;
@@ -39,7 +39,7 @@ public class WeatherFort implements Serializable{
         return list;
     }
 
-    public class WeatherList implements Serializable{
+    public static class WeatherList implements Serializable{
         private long dt;
         private Temp temp;
         private double pressure;
@@ -87,7 +87,7 @@ public class WeatherFort implements Serializable{
         }
     }
 
-    public class Temp {
+    public static class Temp implements Serializable{
         private double day;
         private double min;
         private double max;
