@@ -7,6 +7,10 @@ public class WeatherFort {
     private City city = new City();
     private int cod;
     private List<WeatherList> list;
+
+    public int getCod() {
+        return cod;
+    }
 }
 
 class City {
