@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.a5corp.weather.R;
+import com.a5corp.weather.model.WeatherFort;
 import com.a5corp.weather.preferences.Preferences;
 
 import org.json.JSONException;
@@ -29,18 +30,16 @@ public class CustomBottomSheetDialogFragment extends BottomSheetDialogFragment {
     Preferences preferences;
     Bundle bundle;
     Typeface weatherFont;
-    JSONObject json;
+    WeatherFort.WeatherList json;
+    private static final String DESCRIBABLE_KEY = "describable_key";
+    private WeatherFort.WeatherList mDescribable;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        bundle = this.getArguments();
-        try {
-            json = new JSONObject(bundle.getString("json"));
-        }
-        catch (JSONException ex) {
-            ex.printStackTrace();
-        }
+        mDescribable = (WeatherFort.WeatherList) getArguments().getSerializable(
+                DESCRIBABLE_KEY);
+        json = mDescribable;
         weatherFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/weather.ttf");
     }
 
@@ -89,6 +88,7 @@ public class CustomBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
         @Override
         public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+
         }
     };
 
@@ -113,8 +113,7 @@ public class CustomBottomSheetDialogFragment extends BottomSheetDialogFragment {
     }
 
     public void setCondition() {
-        try {
-            String cond = json.getJSONArray("weather").getJSONObject(0).getString("description");
+            String cond = json.getWeather().get(0).getDescription();
             String[] strArray = cond.split(" ");
             final StringBuilder builder = new StringBuilder();
             for (String s : strArray) {
@@ -122,49 +121,40 @@ public class CustomBottomSheetDialogFragment extends BottomSheetDialogFragment {
                 builder.append(cap.concat(" "));
             }
             condition.setText(builder.toString());
-        }
-        catch (JSONException ex) {
-            ex.printStackTrace();
-        }
     }
 
     public void setOthers() {
         try {
-            String wind = "Speed : " + json.getDouble("speed") + " m/";
+            String wind = "Speed : " + json.getSpeed() + " m/";
             if (preferences.getUnits().equals("imperial"))
                 wind = wind + "h";
             else
                 wind = wind + "s";
             windText.setText(wind);
             try {
-                rainText.setText("Rain : " + json.getDouble("rain") + " mm");
+                rainText.setText("Rain : " + json.getRain() + " mm");
             }
-            catch (JSONException ex) {
+            catch (Exception ex) {
                 rainText.setText("Rain : 0 mm");
             }
             try {
-                snowText.setText("Snow : " + json.getDouble("snow") + " mm");
+                snowText.setText("Snow : " + json.getSnow() + " mm");
             }
-            catch (JSONException ex) {
+            catch (Exception ex) {
                 snowText.setText("Snow : 0 mm");
             }
-            humidityText.setText("Humidity : " + json.getDouble("humidity") + " %");
-            pressureText.setText("Pressure : " + json.getDouble("pressure") + " hPa");
+            humidityText.setText("Humidity : " + json.getHumidity() + " %");
+            pressureText.setText("Pressure : " + json.getPressure() + " hPa");
         }
-        catch (JSONException ex) {
+        catch (Exception ex) {
             ex.printStackTrace();
         }
     }
 
     public void setTemperatures() {
-        try {
-            dayValue.setText(Double.toString(json.getJSONObject("temp").getDouble("day")) + "°");
-            mornValue.setText(Double.toString(json.getJSONObject("temp").getDouble("morn")) + "°");
-            eveValue.setText(Double.toString(json.getJSONObject("temp").getDouble("eve")) + "°");
-            nightValue.setText(Double.toString(json.getJSONObject("temp").getDouble("night")) + "°");
-        }
-        catch (JSONException ex) {
-            ex.printStackTrace();
-        }
+        dayValue.setText(json.getTemp().getDay() + "°");
+        mornValue.setText(json.getTemp().getMorn() + "°");
+        eveValue.setText(json.getTemp().getEve() + "°");
+        nightValue.setText(json.getTemp().getNight() + "°");
     }
 }

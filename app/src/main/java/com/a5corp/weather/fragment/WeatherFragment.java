@@ -907,20 +907,14 @@ public class WeatherFragment extends Fragment {
                 setWeatherIcon(J.getWeather().get(0).getId() , i);
                 detailsField[i].setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
-                        bundle = new Bundle();
-                        bundle.putString("json" , J.toString());
-                        bottomSheetDialogFragment = new CustomBottomSheetDialogFragment();
-                        bottomSheetDialogFragment.setArguments(bundle);
+                        bottomSheetDialogFragment = newInstance(J);
                         bottomSheetDialogFragment.show(getActivity().getSupportFragmentManager(), bottomSheetDialogFragment.getTag());
                     }
                 });
                 weatherIcon[i].setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v)
                     {
-                        bundle = new Bundle();
-                        bundle.putString("json" , J.toString());
-                        bottomSheetDialogFragment = new CustomBottomSheetDialogFragment();
-                        bottomSheetDialogFragment.setArguments(bundle);
+                        bottomSheetDialogFragment = newInstance(J);
                         bottomSheetDialogFragment.show(getActivity().getSupportFragmentManager(), bottomSheetDialogFragment.getTag());
                     }
                 });
@@ -1102,5 +1096,16 @@ public class WeatherFragment extends Fragment {
                 });
                 break;
         }
+    }
+
+    private static final String DESCRIBABLE_KEY = "describable_key";
+
+    public static CustomBottomSheetDialogFragment newInstance(WeatherFort.WeatherList describable) {
+        CustomBottomSheetDialogFragment fragment = new CustomBottomSheetDialogFragment();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(DESCRIBABLE_KEY, describable);
+        fragment.setArguments(bundle);
+
+        return fragment;
     }
 }
