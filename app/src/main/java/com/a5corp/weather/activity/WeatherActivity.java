@@ -230,9 +230,7 @@ public class WeatherActivity extends AppCompatActivity {
                                             .replace(R.id.fragment, graphsFragment)
                                             .commit();
                                 } else if (drawerItem.getIdentifier() == 3) {
-                                    bundle.putString("json", wf.getDailyJson().toString());
                                     MapsFragment mapsFragment = new MapsFragment();
-                                    mapsFragment.setArguments(bundle);
                                     getSupportFragmentManager().beginTransaction()
                                             .replace(R.id.fragment, mapsFragment)
                                             .commit();
