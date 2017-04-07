@@ -72,14 +72,14 @@ public class WeatherInfo {
     public class Wind {
         private float speed;
         @SerializedName("deg")
-        private int direction;
+        private float direction;
 
         public float getSpeed() {
             return speed;
         }
 
         public int getDirection() {
-            return direction;
+            return (int) direction;
         }
     }
 

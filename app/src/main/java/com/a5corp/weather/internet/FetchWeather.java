@@ -64,7 +64,7 @@ public class FetchWeather extends AsyncTask<String , Void , Info> {
                 Log.e(LOG_TAG , "Execution Failed");
                 return null;
             }
-            
+
             return array;
         }
         catch(IOException e){

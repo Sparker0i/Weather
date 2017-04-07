@@ -279,6 +279,7 @@ public class WeatherFragment extends Fragment {
     }
 
     public List<WeatherFort.WeatherList> getDailyJson() {
+        Log.i("list" , json.fort.getList().toString());
         return json.fort.getList();
     }
 
@@ -885,7 +886,8 @@ public class WeatherFragment extends Fragment {
             List<WeatherFort.WeatherList> details = json1.getList();
             for (int i = 0; i < 10; ++i)
             {
-                details.add(i ,  json1.getList().get(i));
+                details.set(i , json1.getList().get(i));
+                Log.i("listItem" , i + " " + json1.getList().get(i).toString());
             }
             Log.i("Objects" , "JSON Objects Created");
             for (int i = 0; i < 10; ++i)

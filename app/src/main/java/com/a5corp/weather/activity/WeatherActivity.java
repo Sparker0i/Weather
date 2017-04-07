@@ -218,7 +218,6 @@ public class WeatherActivity extends AppCompatActivity {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
                         // do something with the clicked item :D
-                        Bundle bundle = new Bundle();
                             if (drawerItem != null) {
                                 if (drawerItem.getIdentifier() == 1) {
                                     getSupportFragmentManager().beginTransaction()

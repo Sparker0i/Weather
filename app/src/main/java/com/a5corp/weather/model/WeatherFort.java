@@ -7,7 +7,7 @@ import java.util.List;
 public class WeatherFort implements Serializable{
     private City city = new City();
     private int cod;
-    private List<WeatherList> list;
+    private ArrayList<WeatherList> list;
 
     public int getCod() {
         return cod;
@@ -35,7 +35,7 @@ public class WeatherFort implements Serializable{
         }
     }
 
-    public List<WeatherList> getList() {
+    public ArrayList<WeatherList> getList() {
         return list;
     }
 
