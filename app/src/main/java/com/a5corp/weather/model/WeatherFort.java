@@ -11,30 +11,70 @@ public class WeatherFort {
     public int getCod() {
         return cod;
     }
-}
 
-class City {
-    private String name;
-    private Coordinates coord = new Coordinates();
-    private String country;
-}
+    public City getCity() {
+        return city;
+    }
 
-class WeatherList {
-    private int dt;
-    private Temp temp;
-    private double pressure;
-    private double humidity;
-    private double speed;
-    private double deg;
-    private double rain;
-    private List<Weather> weather = new ArrayList<Weather>();
-}
+    public class City {
+        private String name;
+        private WeatherInfo.Coordinates coord;
+        private String country;
 
-class Temp {
-    private double day;
-    private double min;
-    private double max;
-    private double night;
-    private double eve;
-    private double morn;
+        public WeatherInfo.Coordinates getCoord() {
+            return coord;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public String getCountry() {
+            return country;
+        }
+    }
+
+    public List<WeatherList> getList() {
+        return list;
+    }
+
+    public class WeatherList {
+        private long dt;
+        private Temp temp;
+        private double pressure;
+        private double humidity;
+        private double speed;
+        private double deg;
+        private double rain;
+        private List<WeatherInfo.Weather> weather = new ArrayList<>();
+
+        public List<WeatherInfo.Weather> getWeather() {
+            return weather;
+        }
+
+        public long getDt() {
+            return dt;
+        }
+
+        public Temp getTemp() {
+            return temp;
+        }
+    }
+
+    public class Temp {
+        private double day;
+        private double min;
+        private double max;
+        private double night;
+        private double eve;
+        private double morn;
+
+        public int getMax() {
+            return (int) max;
+        }
+
+        public int getMin() {
+            return (int) min;
+        }
+    }
 }

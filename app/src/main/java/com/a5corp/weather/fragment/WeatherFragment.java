@@ -31,19 +31,23 @@ import com.a5corp.weather.activity.FirstLaunch;
 import com.a5corp.weather.activity.WeatherActivity;
 import com.a5corp.weather.internet.CheckConnection;
 import com.a5corp.weather.internet.FetchWeather;
+import com.a5corp.weather.model.Info;
+import com.a5corp.weather.model.WeatherFort;
+import com.a5corp.weather.model.WeatherInfo;
 import com.a5corp.weather.permissions.Permissions;
 import com.a5corp.weather.preferences.Preferences;
 import com.a5corp.weather.service.AlarmTriggerService;
-import com.a5corp.weather.utils.Constants;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
@@ -58,11 +62,12 @@ public class WeatherFragment extends Fragment {
     double tc;
     Handler handler;
     BottomSheetDialogFragment bottomSheetDialogFragment;
-    JSONObject json1 , json0;
+    WeatherInfo json0;
+    WeatherFort json1;
     SwipeRefreshLayout swipeView;
     CheckConnection cc;
     int Clicks = 0;
-    JSONObject[] json;
+    Info json;
     MaterialDialog pd;
     FetchWeather wt;
     Preferences preferences;
@@ -276,8 +281,8 @@ public class WeatherFragment extends Fragment {
         startActivity(intent);
     }
 
-    public JSONObject getDailyJson() {
-        return json[1];
+    public JSONObject getDailyJson() throws JSONException {
+        return new JSONObject(json.fort.toString());
     }
 
     public void changeCity(String city)
@@ -853,27 +858,25 @@ public class WeatherFragment extends Fragment {
         return !(hours >= 18 || hours <= 6);
     }
 
-    private void renderWeather(JSONObject[] jsonObj){
+    private void renderWeather(Info jsonObj){
         try {
             Clicks = 0;
             Log.i("Showed" , "Done");
-            json0 = jsonObj[0];
+            json0 = jsonObj.day;
             Log.i("Json 0" , json0.toString());
-            json1 = jsonObj[1];
+            json1 = jsonObj.fort;
             Log.i("Json 1" , json1.toString());
-            tc = json0.getJSONObject("main").getDouble("temp");
-            preferences.setLatitude((float) json1.getJSONObject("city").getJSONObject("coord").getDouble("lat"));
-            Log.i("Lat", Float.toString((float) json1.getJSONObject("city").getJSONObject("coord").getDouble("lat")));
-            preferences.setLongitude((float) json1.getJSONObject("city").getJSONObject("coord").getDouble("lon"));
-            Log.i("Lon", Float.toString((float) json1.getJSONObject("city").getJSONObject("coord").getDouble("lon")));
-            preferences.setCity(json1.getJSONObject("city").getString("name"));
-            int a = (int) Math.round(json0.getJSONObject("main").getDouble("temp"));                        //℃
-            cityField.setText(json1.getJSONObject("city").getString("name").toUpperCase(Locale.US) +
+            tc = json0.getMain().getTemp();
+            preferences.setLatitude((float) json1.getCity().getCoord().getLatitude());
+            Log.i("Lat", Float.toString((float) json1.getCity().getCoord().getLatitude()));
+            preferences.setLongitude((float) json1.getCity().getCoord().getLongitude());
+            Log.i("Lon", Float.toString((float) json1.getCity().getCoord().getLongitude()));
+            preferences.setCity(json1.getCity().getName());
+            int a = (int) Math.round(json0.getMain().getTemp());                        //℃
+            final String city = json1.getCity().getName().toUpperCase(Locale.US) +
                     ", " +
-                    json1.getJSONObject("city").getString("country"));
-            final String city = json1.getJSONObject("city").getString("name").toUpperCase(Locale.US) +
-                    ", " +
-                    json1.getJSONObject("city").getString("country");
+                    json1.getCity().getCountry();
+            cityField.setText(city);
             cityField.setOnClickListener(new View.OnClickListener()
             {
                 public void onClick(View v) {
@@ -882,26 +885,26 @@ public class WeatherFragment extends Fragment {
                 }
             });
             Log.i("Location" , "Location Received");
-            JSONObject details[] = new JSONObject[10];
+            List<WeatherFort.WeatherList> details = json1.getList();
             for (int i = 0; i < 10; ++i)
             {
-                details[i] = json1.getJSONArray("list").getJSONObject(i);
+                details.add(i ,  json1.getList().get(i));
             }
             Log.i("Objects" , "JSON Objects Created");
             for (int i = 0; i < 10; ++i)
             {
-                final JSONObject J = details[i];
-                String date1 = details[i].getString("dt");
-                Date expiry = new Date(Long.parseLong(date1) * 1000);
+                final WeatherFort.WeatherList J = details.get(i);
+                long date1 = J.getDt();
+                Date expiry = new Date(date1 * 1000);
                 String date = new SimpleDateFormat("EE, dd" , Locale.US).format(expiry);
                 SpannableString ss1 = new SpannableString(date + "\n"
-                        + details[i].getJSONObject("temp").getLong("max") + "°" + "      "
-                        + details[i].getJSONObject("temp").getLong("min") + "°" + "\n");
+                        + J.getTemp().getMax() + "°" + "      "
+                        + J.getTemp().getMin() + "°" + "\n");
                 ss1.setSpan(new RelativeSizeSpan(1.1f) , 0 , 7 , 0); // set size
                 ss1.setSpan(new RelativeSizeSpan(1.4f) , 8 , 12 , 0);
                 detailsField[i].setText(ss1);
                 Log.i("Details[" + Integer.toString(i) + "]", "Information String " + Integer.toString(i + 1) + " loaded");
-                setWeatherIcon(details[i].getJSONArray("weather").getJSONObject(0).getInt("id") , i);
+                setWeatherIcon(J.getWeather().get(0).getId() , i);
                 detailsField[i].setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
                         bundle = new Bundle();
@@ -922,14 +925,14 @@ public class WeatherFragment extends Fragment {
                     }
                 });
             }
-            final String d1 = new java.text.SimpleDateFormat("hh:mm a" , Locale.US).format(new Date(json0.getJSONObject("sys").getLong("sunrise") * 1000));
-            final String d2 = new java.text.SimpleDateFormat("hh:mm a" , Locale.US).format(new Date(json0.getJSONObject("sys").getLong("sunset") * 1000));
+            final String d1 = new java.text.SimpleDateFormat("hh:mm a" , Locale.US).format(new Date(json0.getSys().getSunrise() * 1000));
+            final String d2 = new java.text.SimpleDateFormat("hh:mm a" , Locale.US).format(new Date(json0.getSys().getSunset() * 1000));
             sunriseView.setText(d1);
             sunsetView.setText(d2);
             DateFormat df = DateFormat.getDateTimeInstance();
-            String updatedOn = "Last update: " + df.format(new Date(json0.getLong("dt")*1000));
+            String updatedOn = "Last update: " + df.format(new Date(json0.getDt() * 1000));
             updatedField.setText(updatedOn);
-            String humidity = json0.getJSONObject("main").getInt("humidity") + "%";
+            String humidity = json0.getMain().getHumidity() + "%";
             humidityView.setText(humidity);
             humidityIcon.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -944,7 +947,7 @@ public class WeatherFragment extends Fragment {
                 }
             });
             Log.i("Humidity Loaded" , "Done");
-            String wind = json0.getJSONObject("wind").getDouble("speed") + " m/";
+            String wind = json0.getWind().getSpeed() + " m/";
             if (preferences.getUnits().equals("imperial"))
                 wind = wind + "h";
             else
@@ -1000,14 +1003,14 @@ public class WeatherFragment extends Fragment {
             });
             Log.i("Wind Loaded" , "Done");
             Log.i("10" , "Weather Icon 11 Set");
-            setWeatherIcon(json0.getJSONArray("weather").getJSONObject(0).getInt("id"),10);
+            setWeatherIcon(json0.getWeather().get(0).getId() , 10);
             Log.i("Set" , "Main Weather Icon");
             weatherIcon[10].setOnClickListener(new View.OnClickListener()
             {
                 public void onClick (View v)
                 {
                     try {
-                        String rs = json0.getJSONArray("weather").getJSONObject(0).getString("description");
+                        String rs = json0.getWeather().get(0).getDescription();
                         String[] strArray = rs.split(" ");
                         StringBuilder builder = new StringBuilder();
                         for (String s : strArray) {
@@ -1024,7 +1027,7 @@ public class WeatherFragment extends Fragment {
             });
             String r1 = Integer.toString(a) + "°";
             button.setText(r1);
-            int deg = json0.getJSONObject("wind").getInt("deg");
+            int deg = json0.getWind().getDirection();
             setDeg(deg);
         }catch(Exception e){
             Log.e("SimpleWeather", "One or more fields not found in the JSON data");

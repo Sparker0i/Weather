@@ -45,6 +45,8 @@ import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import com.mikepenz.weather_icons_typeface_library.WeatherIcons;
 
+import org.json.JSONException;
+
 public class WeatherActivity extends AppCompatActivity {
 
     Permissions permission;
@@ -217,32 +219,34 @@ public class WeatherActivity extends AppCompatActivity {
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
                         // do something with the clicked item :D
                         Bundle bundle = new Bundle();
-                        if (drawerItem != null) {
-                            if (drawerItem.getIdentifier() == 1) {
-                                getSupportFragmentManager().beginTransaction()
-                                        .replace(R.id.fragment, new WeatherFragment())
-                                        .commit();
+                        try {
+                            if (drawerItem != null) {
+                                if (drawerItem.getIdentifier() == 1) {
+                                    getSupportFragmentManager().beginTransaction()
+                                            .replace(R.id.fragment, new WeatherFragment())
+                                            .commit();
+                                } else if (drawerItem.getIdentifier() == 2) {
+                                    GraphsFragment graphsFragment = new GraphsFragment();
+                                    bundle.putString("json", wf.getDailyJson().toString());
+                                    graphsFragment.setArguments(bundle);
+                                    Log.i("jsonz", wf.getDailyJson().toString());
+                                    getSupportFragmentManager().beginTransaction()
+                                            .replace(R.id.fragment, graphsFragment)
+                                            .commit();
+                                } else if (drawerItem.getIdentifier() == 3) {
+                                    bundle.putString("json", wf.getDailyJson().toString());
+                                    MapsFragment mapsFragment = new MapsFragment();
+                                    mapsFragment.setArguments(bundle);
+                                    getSupportFragmentManager().beginTransaction()
+                                            .replace(R.id.fragment, mapsFragment)
+                                            .commit();
+                                } else if (drawerItem.getIdentifier() == 5) {
+                                    startActivity(new Intent(WeatherActivity.this, AboutActivity.class));
+                                }
                             }
-                            else if (drawerItem.getIdentifier() == 2) {
-                                GraphsFragment graphsFragment = new GraphsFragment();
-                                bundle.putString("json" , wf.getDailyJson().toString());
-                                graphsFragment.setArguments(bundle);
-                                Log.i("jsonz" , wf.getDailyJson().toString());
-                                getSupportFragmentManager().beginTransaction()
-                                        .replace(R.id.fragment, graphsFragment)
-                                        .commit();
-                            }
-                            else if (drawerItem.getIdentifier() == 3) {
-                                bundle.putString("json" , wf.getDailyJson().toString());
-                                MapsFragment mapsFragment = new MapsFragment();
-                                mapsFragment.setArguments(bundle);
-                                getSupportFragmentManager().beginTransaction()
-                                        .replace(R.id.fragment, mapsFragment)
-                                        .commit();
-                            }
-                            else if (drawerItem.getIdentifier() == 5) {
-                                startActivity(new Intent(WeatherActivity.this, AboutActivity.class));
-                            }
+                        }
+                        catch (JSONException jex) {
+                            jex.printStackTrace();
                         }
                         return false;
                     }
