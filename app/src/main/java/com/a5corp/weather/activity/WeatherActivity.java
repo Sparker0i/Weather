@@ -1,7 +1,6 @@
 package com.a5corp.weather.activity;
 
 import android.app.Notification;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -9,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.content.ContextCompat;
@@ -30,7 +30,6 @@ import com.a5corp.weather.service.AlarmTriggerService;
 import com.a5corp.weather.utils.Constants;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.github.clans.fab.FloatingActionButton;
 import com.mikepenz.google_material_typeface_library.GoogleMaterial;
 import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.materialdrawer.AccountHeader;
@@ -73,8 +72,7 @@ public class WeatherActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setColorNormal(ContextCompat.getColor(this , R.color.accent));
-        fab.hide(false);
+        fab.hide();
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -85,11 +83,11 @@ public class WeatherActivity extends AppCompatActivity {
     }
 
     public void hideFab() {
-        fab.hide(true);
+        fab.hide();
     }
 
     public void showFab() {
-        fab.show(true);
+        fab.show();
     }
 
     public FloatingActionButton getFab() {
@@ -269,7 +267,7 @@ public class WeatherActivity extends AppCompatActivity {
     }
 
     private void fabClick() {
-        fab.hide(true);
+        fab.hide();
         showInputDialog();
     }
 
@@ -288,13 +286,13 @@ public class WeatherActivity extends AppCompatActivity {
                 .onAny(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                        fab.show(true);
+                        fab.show();
                     }
                 })
                 .dismissListener(new DialogInterface.OnDismissListener() {
                     @Override
                     public void onDismiss(DialogInterface dialogInterface) {
-                        fab.show(true);
+                        fab.show();
                     }
                 })
                 .negativeText("CANCEL")
@@ -302,14 +300,14 @@ public class WeatherActivity extends AppCompatActivity {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog , @NonNull DialogAction which) {
                         dialog.dismiss();
-                        fab.show(true);
+                        fab.show();
                     }
                 })
                 .input(null, null, new MaterialDialog.InputCallback() {
                     @Override
                     public void onInput(@NonNull MaterialDialog dialog, @NonNull CharSequence input) {
                         changeCity(input.toString());
-                        fab.show(true);
+                        fab.show();
                     }
                 }).show();
     }
