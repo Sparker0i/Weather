@@ -40,11 +40,9 @@ import com.a5corp.weather.service.AlarmTriggerService;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -71,7 +69,6 @@ public class WeatherFragment extends Fragment {
     MaterialDialog pd;
     FetchWeather wt;
     Preferences preferences;
-    Bundle bundle;
     View rootView;
 
     public WeatherFragment() {
@@ -281,8 +278,8 @@ public class WeatherFragment extends Fragment {
         startActivity(intent);
     }
 
-    public JSONObject getDailyJson() throws JSONException {
-        return new JSONObject(json.fort.toString());
+    public List<WeatherFort.WeatherList> getDailyJson() {
+        return json.fort.getList();
     }
 
     public void changeCity(String city)

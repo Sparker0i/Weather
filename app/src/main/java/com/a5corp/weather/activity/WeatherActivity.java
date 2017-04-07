@@ -14,7 +14,6 @@ import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 
@@ -23,6 +22,7 @@ import com.a5corp.weather.R;
 import com.a5corp.weather.fragment.GraphsFragment;
 import com.a5corp.weather.fragment.MapsFragment;
 import com.a5corp.weather.fragment.WeatherFragment;
+import com.a5corp.weather.model.WeatherFort;
 import com.a5corp.weather.permissions.GPSTracker;
 import com.a5corp.weather.permissions.Permissions;
 import com.a5corp.weather.preferences.Preferences;
@@ -45,7 +45,7 @@ import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import com.mikepenz.weather_icons_typeface_library.WeatherIcons;
 
-import org.json.JSONException;
+import java.util.ArrayList;
 
 public class WeatherActivity extends AppCompatActivity {
 
@@ -219,17 +219,13 @@ public class WeatherActivity extends AppCompatActivity {
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
                         // do something with the clicked item :D
                         Bundle bundle = new Bundle();
-                        try {
                             if (drawerItem != null) {
                                 if (drawerItem.getIdentifier() == 1) {
                                     getSupportFragmentManager().beginTransaction()
                                             .replace(R.id.fragment, new WeatherFragment())
                                             .commit();
                                 } else if (drawerItem.getIdentifier() == 2) {
-                                    GraphsFragment graphsFragment = new GraphsFragment();
-                                    bundle.putString("json", wf.getDailyJson().toString());
-                                    graphsFragment.setArguments(bundle);
-                                    Log.i("jsonz", wf.getDailyJson().toString());
+                                    GraphsFragment graphsFragment = newGraphInstance(new ArrayList<>(wf.getDailyJson()));
                                     getSupportFragmentManager().beginTransaction()
                                             .replace(R.id.fragment, graphsFragment)
                                             .commit();
@@ -244,10 +240,6 @@ public class WeatherActivity extends AppCompatActivity {
                                     startActivity(new Intent(WeatherActivity.this, AboutActivity.class));
                                 }
                             }
-                        }
-                        catch (JSONException jex) {
-                            jex.printStackTrace();
-                        }
                         return false;
                     }
                 })
@@ -354,5 +346,25 @@ public class WeatherActivity extends AppCompatActivity {
     @Override
     public void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
+    }
+
+    private static final String DESCRIBABLE_KEY = "describable_key";
+
+    public static GraphsFragment newGraphInstance(ArrayList<WeatherFort.WeatherList> describable) {
+        GraphsFragment fragment = new GraphsFragment();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(DESCRIBABLE_KEY, describable);
+        fragment.setArguments(bundle);
+
+        return fragment;
+    }
+
+    public static MapsFragment newMapsInstance(WeatherFort.WeatherList describable) {
+        MapsFragment fragment = new MapsFragment();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(DESCRIBABLE_KEY, describable);
+        fragment.setArguments(bundle);
+
+        return fragment;
     }
 }

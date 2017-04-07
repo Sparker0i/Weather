@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 
 import com.a5corp.weather.R;
 import com.a5corp.weather.activity.WeatherActivity;
+import com.a5corp.weather.model.WeatherFort;
 import com.a5corp.weather.preferences.Preferences;
 import com.a5corp.weather.utils.CustomFormatter;
 import com.a5corp.weather.utils.XFormatter;
@@ -26,10 +27,6 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.IDataSet;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -52,6 +49,8 @@ public class GraphsFragment extends Fragment {
     String[] dates = new String[10];
     private Menu menu;
     int i = 0;
+    private static final String DESCRIBABLE_KEY = "describable_key";
+    private ArrayList<WeatherFort.WeatherList> mDescribable;
 
     public GraphsFragment() {
         handler = new Handler();
@@ -69,6 +68,8 @@ public class GraphsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        mDescribable = (ArrayList<WeatherFort.WeatherList>) getArguments().getSerializable(
+                DESCRIBABLE_KEY);
         rootView = inflater.inflate(R.layout.fragment_graphs, container, false);
         Log.i("Loaded" , "Fragment");
         temperatureChart = (LineChart) rootView.findViewById(R.id.temperature_chart);
@@ -418,30 +419,28 @@ public class GraphsFragment extends Fragment {
     }
 
     public void createEntries() {
-        JSONObject str;
-        JSONArray list;
+        ArrayList<WeatherFort.WeatherList> list;
         try {
-            str = new JSONObject(bundle.getString("json", null));
-            list = str.getJSONArray("list");
+            list = mDescribable;
             for (int i = 0; i < 10; ++i) {
-                long day = list.getJSONObject(i).getLong("dt");
-                long temp = list.getJSONObject(i).getJSONObject("temp").getLong("day");
-                long pressure = list.getJSONObject(i).getLong("pressure");
+                long day = list.get(i).getDt();
+                long temp = list.get(i).getTemp().getDay();
+                long pressure = (long) list.get(i).getPressure();
                 long rain;
                 try {
-                    rain = list.getJSONObject(i).getLong("rain");
+                    rain = (long) list.get(i).getRain();
                 }
-                catch (JSONException ex) {
+                catch (Exception ex) {
                     rain = 0;
                 }
                 long snow;
                 try {
-                    snow = list.getJSONObject(i).getLong("snow");
+                    snow = (long) list.get(i).getSnow();
                 }
-                catch (JSONException ex) {
+                catch (Exception ex) {
                     snow = 0;
                 }
-                long wind = list.getJSONObject(i).getLong("speed");
+                long wind = (long) list.get(i).getSpeed();
                 tempEntries.add(new Entry(i , temp));
                 rainEntries.add(new Entry(i , rain));
                 pressureEntries.add(new Entry(i , pressure));
@@ -451,7 +450,7 @@ public class GraphsFragment extends Fragment {
                 dates[i] = getDay(day);
                 Log.i("Added" , "Day : " + dates[i]);
             }
-        } catch (JSONException ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
             Log.i("Caught" , "JSON Ex");
         }
