@@ -17,7 +17,9 @@ import android.widget.RemoteViews;
 import com.a5corp.weather.R;
 import com.a5corp.weather.internet.CheckConnection;
 import com.a5corp.weather.internet.FetchWeatherOther;
+import com.a5corp.weather.model.WeatherInfo;
 import com.a5corp.weather.preferences.Preferences;
+import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,7 +29,7 @@ import java.util.concurrent.ExecutionException;
 
 public class SmallWidgetProvider extends AppWidgetProvider {
 
-    JSONObject json;
+    WeatherInfo json;
     Context context;
     Preferences preferences;
 
@@ -68,15 +70,15 @@ public class SmallWidgetProvider extends AppWidgetProvider {
                 if (!connection.isNetworkAvailable())
                     return;
 
-                json = wt.execute(new Preferences(context).getCity()).get()[0];
-                preferences.storeSmallWidget(json.toString());
-                double temp = json.getJSONObject("main").getDouble("temp");
-                remoteViews.setTextViewText(R.id.widget_city, json.getString("name") +
+                json = wt.execute(new Preferences(context).getCity()).get();
+                preferences.storeSmallWidget(new Gson().toJson(json));
+                double temp = json.getMain().getTemp();
+                remoteViews.setTextViewText(R.id.widget_city, json.getName() +
                         ", " +
-                        json.getJSONObject("sys").getString("country"));
+                        json.getSys().getCountry());
                 String ut = new Preferences(context).getUnits().equals("metric") ? "C" : "F";
                 remoteViews.setTextViewText(R.id.widget_temperature, Integer.toString((int) temp) + "°" + ut);
-                setWeatherIcon(json.getJSONArray("weather").getJSONObject(0).getInt("id") , context , remoteViews);
+                setWeatherIcon(json.getWeather().get(0).getId() , context , remoteViews);
 
                 appWidgetManager.updateAppWidget(widgetId, remoteViews);
                 Log.i("In" , "Small Widget");
@@ -432,6 +434,7 @@ public class SmallWidgetProvider extends AppWidgetProvider {
     }
 
     private void loadFromPreference(Preferences preferences , RemoteViews remoteViews , AppWidgetManager appWidgetManager , int[] appWidgetIds , int widgetId) throws JSONException{
+        JSONObject json;
         if (preferences.getSmallWidget() != null)
             json = new JSONObject(preferences.getSmallWidget());
         else

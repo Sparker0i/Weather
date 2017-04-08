@@ -17,7 +17,9 @@ import android.widget.RemoteViews;
 import com.a5corp.weather.R;
 import com.a5corp.weather.internet.CheckConnection;
 import com.a5corp.weather.internet.FetchWeatherOther;
+import com.a5corp.weather.model.WeatherInfo;
 import com.a5corp.weather.preferences.Preferences;
+import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,7 +28,7 @@ import java.util.Calendar;
 import java.util.concurrent.ExecutionException;
 
 public class LargeWidgetProvider extends AppWidgetProvider {
-    JSONObject json;
+    WeatherInfo json;
     Context context;
 
     @Override
@@ -55,9 +57,9 @@ public class LargeWidgetProvider extends AppWidgetProvider {
                 FetchWeatherOther wt = new FetchWeatherOther(context);
                 if (!connection.isNetworkAvailable())
                     return;
-                json = wt.execute(new Preferences(context).getCity()).get()[0];
-                preferences.storeLargeWidget(json.toString());
-                double temp = json.getJSONObject("main").getDouble("temp");
+                json = wt.execute(new Preferences(context).getCity()).get();
+                preferences.storeLargeWidget(new Gson().toJson(json));
+                double temp = json.getMain().getTemp();
                 /*
                     PROTECTED : DO NOT TOUCH THE SECTION BELOW
                  */
@@ -68,13 +70,13 @@ public class LargeWidgetProvider extends AppWidgetProvider {
                         0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
                 remoteViews.setOnClickPendingIntent(R.id.widget_button_refresh, pendingIntent);
 
-                remoteViews.setTextViewText(R.id.widget_city, json.getString("name") +
+                remoteViews.setTextViewText(R.id.widget_city, json.getName() +
                         ", " +
-                        json.getJSONObject("sys").getString("country"));
+                        json.getSys().getCountry());
                 String ut = new Preferences(context).getUnits().equals("metric") ? "C" : "F";
                 remoteViews.setTextViewText(R.id.widget_temperature, Integer.toString((int) temp) + "°" + ut);
-                setWeatherIcon(json.getJSONArray("weather").getJSONObject(0).getInt("id") , context , remoteViews);
-                String rs = json.getJSONArray("weather").getJSONObject(0).getString("description");
+                setWeatherIcon(json.getWeather().get(0).getId() , context , remoteViews);
+                String rs = json.getWeather().get(0).getDescription();
                 String[] strArray = rs.split(" ");
                 StringBuilder builder = new StringBuilder();
                 for (String s : strArray) {
@@ -83,9 +85,9 @@ public class LargeWidgetProvider extends AppWidgetProvider {
                 }
 
                 remoteViews.setTextViewText(R.id.widget_description , builder.toString());
-                remoteViews.setTextViewText(R.id.widget_wind , "Wind : " + json.getJSONObject("wind").getLong("speed") + " m/" + (preferences.getUnits().equals("metric") ? "s" : "h"));
-                remoteViews.setTextViewText(R.id.widget_humidity , "Humidity : " + json.getJSONObject("main").getLong("humidity") + " %");
-                remoteViews.setTextViewText(R.id.widget_pressure , "Pressure : " + json.getJSONObject("main").getLong("pressure") + " hPa");
+                remoteViews.setTextViewText(R.id.widget_wind , "Wind : " + json.getWind().getSpeed() + " m/" + (preferences.getUnits().equals("metric") ? "s" : "h"));
+                remoteViews.setTextViewText(R.id.widget_humidity , "Humidity : " + json.getMain().getHumidity() + " %");
+                remoteViews.setTextViewText(R.id.widget_pressure , "Pressure : " + json.getMain().getPressure() + " hPa");
 
                 appWidgetManager.updateAppWidget(widgetId, remoteViews);
 
@@ -442,6 +444,7 @@ public class LargeWidgetProvider extends AppWidgetProvider {
     }
 
     private void loadFromPreference(Preferences preferences , RemoteViews remoteViews , AppWidgetManager appWidgetManager , int[] appWidgetIds , int widgetId) throws JSONException{
+        JSONObject json;
         if (preferences.getLargeWidget() != null)
             json = new JSONObject(preferences.getLargeWidget());
         else

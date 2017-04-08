@@ -102,7 +102,7 @@ public class WeatherInfo {
             return sunset;
         }
 
-        private String getCountry() {
+        public String getCountry() {
             return country;
         }
     }
