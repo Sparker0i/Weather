@@ -66,9 +66,11 @@
                                 android:layout_height="wrap_content"
                                 android:textAppearance="?android:attr/textAppearanceLarge"
                                 android:id="@+id/weather_icon1"
+                                android:gravity="center"
+                                android:textAlignment="center"
+                                android:layout_gravity="center_horizontal"
                                 android:textSize="70sp"
-                                android:textColor="#FFFFFF"
-                                android:layout_gravity="center" />
+                                android:textColor="#FFFFFF" />
 
                             <TextView
                                 android:layout_width="match_parent"
@@ -93,6 +95,8 @@
                                 android:id="@+id/weather_icon2"
                                 android:textColor="#FFFFFF"
                                 android:textSize="70sp"
+                                android:gravity="center"
+                                android:textAlignment="center"
                                 android:layout_gravity="center_horizontal" />
 
                             <TextView
@@ -118,6 +122,8 @@
                                 android:id="@+id/weather_icon3"
                                 android:textColor="#FFFFFF"
                                 android:textSize="70sp"
+                                android:gravity="center"
+                                android:textAlignment="center"
                                 android:layout_gravity="center_horizontal" />
 
                             <TextView
@@ -141,6 +147,8 @@
                                 android:layout_height="wrap_content"
                                 android:textAppearance="?android:attr/textAppearanceLarge"
                                 android:id="@+id/weather_icon4"
+                                android:gravity="center"
+                                android:textAlignment="center"
                                 android:layout_gravity="center_horizontal"
                                 android:textColor="#FFFFFF"
                                 android:textSize="70sp" />
@@ -166,6 +174,8 @@
                                 android:layout_height="wrap_content"
                                 android:textAppearance="?android:attr/textAppearanceLarge"
                                 android:id="@+id/weather_icon5"
+                                android:gravity="center"
+                                android:textAlignment="center"
                                 android:layout_gravity="center_horizontal"
                                 android:textColor="#FFFFFF"
                                 android:textSize="70sp" />
@@ -191,6 +201,8 @@
                                 android:layout_height="wrap_content"
                                 android:textAppearance="?android:attr/textAppearanceLarge"
                                 android:id="@+id/weather_icon6"
+                                android:gravity="center"
+                                android:textAlignment="center"
                                 android:layout_gravity="center_horizontal"
                                 android:textColor="#FFFFFF"
                                 android:textSize="70sp" />
@@ -216,6 +228,8 @@
                                 android:layout_height="wrap_content"
                                 android:textAppearance="?android:attr/textAppearanceLarge"
                                 android:id="@+id/weather_icon7"
+                                android:gravity="center"
+                                android:textAlignment="center"
                                 android:layout_gravity="center_horizontal"
                                 android:textColor="#FFFFFF"
                                 android:textSize="70sp" />
@@ -241,6 +255,8 @@
                                 android:layout_height="wrap_content"
                                 android:textAppearance="?android:attr/textAppearanceLarge"
                                 android:id="@+id/weather_icon8"
+                                android:gravity="center"
+                                android:textAlignment="center"
                                 android:layout_gravity="center_horizontal"
                                 android:textColor="#FFFFFF"
                                 android:textSize="70sp" />
@@ -266,6 +282,8 @@
                                 android:layout_height="wrap_content"
                                 android:textAppearance="?android:attr/textAppearanceLarge"
                                 android:id="@+id/weather_icon9"
+                                android:gravity="center"
+                                android:textAlignment="center"
                                 android:layout_gravity="center_horizontal"
                                 android:textColor="#FFFFFF"
                                 android:textSize="70sp" />
@@ -291,6 +309,8 @@
                                 android:layout_height="wrap_content"
                                 android:textAppearance="?android:attr/textAppearanceLarge"
                                 android:id="@+id/weather_icon10"
+                                android:gravity="center"
+                                android:textAlignment="center"
                                 android:layout_gravity="center_horizontal"
                                 android:textColor="#FFFFFF"
                                 android:textSize="70sp" />
