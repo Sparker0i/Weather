@@ -6,19 +6,24 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.a5corp.weather.R;
+import com.a5corp.weather.model.WeatherInfo;
 import com.a5corp.weather.preferences.Preferences;
 import com.a5corp.weather.utils.Constants;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Reader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class FetchWeatherOther extends AsyncTask<String , Void , JSONObject[]> {
+public class FetchWeatherOther extends AsyncTask<String , Void , WeatherInfo> {
     private static final String OPEN_WEATHER_MAP_DAILY_API = "http://api.openweathermap.org/data/2.5/weather?";
     private final String LOG_TAG = FetchWeatherOther.class.getSimpleName();
 
@@ -38,39 +43,18 @@ public class FetchWeatherOther extends AsyncTask<String , Void , JSONObject[]> {
     }
 
     @Override
-    public JSONObject[] doInBackground(String... params) {
+    public WeatherInfo doInBackground(String... params) {
         city(params);
         try {
             Log.d(LOG_TAG , "Execution");
             URL day = new URL(builtDay.toString());
             Log.i("day" , day.toString());
             Log.d(LOG_TAG , "URI Ready");
-            HttpURLConnection connection0 = (HttpURLConnection)day.openConnection();
-            connection0.addRequestProperty("x-api-key", preferences.getWeatherKey());
-            BufferedReader reader;
-            StringBuilder json = new StringBuilder(1024);
 
-            reader= new BufferedReader(new InputStreamReader(connection0.getInputStream()));
-            String tmp;
-            while((tmp = reader.readLine())!=null)
-                json.append(tmp).append("\n");
-            reader.close();
-
-            JSONObject data = new JSONObject(json.toString());
-
-            // This value will be 404 if the request was not successful
-            if(data.getInt("cod") != 200){
-                Log.e(LOG_TAG , "Execution Failed");
+            WeatherInfo weather = gsonWeather();
+            if (weather.getCod() != 200)
                 return null;
-            }
-
-            JSONObject array[] = new JSONObject[2];
-            array[0] = data;
-            Log.d(LOG_TAG , "Array Ready");
-            return array;
-        }catch(JSONException e){
-            Log.e(LOG_TAG , "Execution Failed JSON");
-            return null;
+            return weather;
         }
         catch(IOException e){
             Log.e(LOG_TAG , "Execution Failed IO");
@@ -88,5 +72,29 @@ public class FetchWeatherOther extends AsyncTask<String , Void , JSONObject[]> {
                 .appendQueryParameter(UNITS_PARAM , UNITS_VALUE)
                 .appendQueryParameter(DAYS_PARAM , Integer.toString(10))
                 .build();
+    }
+
+    private WeatherInfo gsonWeather() throws IOException {
+        URL day = new URL(builtDay.toString());
+        HttpURLConnection connection1 = (HttpURLConnection) day.openConnection();
+        connection1.addRequestProperty("x-api-key", preferences.getWeatherKey());
+
+        InputStream content = connection1.getInputStream();
+
+        try {
+            //Read the server response and attempt to parse it as JSON
+            Reader reader = new InputStreamReader(content);
+
+            GsonBuilder gsonBuilder = new GsonBuilder();
+            gsonBuilder.setDateFormat("M/d/yy hh:mm a");
+            Gson gson = gsonBuilder.create();
+            WeatherInfo posts = gson.fromJson(reader, WeatherInfo.class);
+            System.out.println(gson.toJson(posts));
+            content.close();
+            return posts;
+        } catch (Exception ex) {
+            Log.e("FetchWeather", "Failed to parse JSON due to: " + ex);
+        }
+        return null;
     }
 }

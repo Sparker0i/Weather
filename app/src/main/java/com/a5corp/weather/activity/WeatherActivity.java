@@ -235,7 +235,9 @@ public class WeatherActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode,@NonNull String permissions[],@NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode ,
+                                           @NonNull String permissions[] ,
+                                           @NonNull int[] grantResults) {
         switch (requestCode) {
             case Constants.READ_COARSE_LOCATION: {
                 // If request is cancelled, the result arrays are empty.

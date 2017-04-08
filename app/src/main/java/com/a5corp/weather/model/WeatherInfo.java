@@ -47,6 +47,7 @@ public class WeatherInfo {
     public class Main {
         private double temp;
         private double humidity;
+        private double pressure;
 
         public double getTemp() {
             return temp;
@@ -54,6 +55,10 @@ public class WeatherInfo {
 
         public int getHumidity() {
             return (int) humidity;
+        }
+
+        public double getPressure() {
+            return pressure;
         }
     }
 

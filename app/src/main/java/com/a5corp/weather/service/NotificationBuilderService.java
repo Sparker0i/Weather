@@ -14,11 +14,9 @@ import android.util.Log;
 import com.a5corp.weather.R;
 import com.a5corp.weather.activity.WeatherActivity;
 import com.a5corp.weather.internet.FetchWeatherOther;
+import com.a5corp.weather.model.WeatherInfo;
 import com.a5corp.weather.preferences.Preferences;
 import com.a5corp.weather.utils.Constants;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.concurrent.ExecutionException;
 
@@ -30,7 +28,7 @@ public class NotificationBuilderService extends Service
     Notification myNotification;
     PendingIntent pendingIntent;
     NotificationCompat.Builder builder;
-    JSONObject json;
+    WeatherInfo json;
 
     @Override
     public IBinder onBind(Intent arg0)
@@ -69,7 +67,7 @@ public class NotificationBuilderService extends Service
         new Thread() {
             public void run() {
                 try {
-                    json = wt.execute(preferences.getLastCity()).get()[0];
+                    json = wt.execute(preferences.getLastCity()).get();
                 }
                 catch (InterruptedException iex) {
                     Log.e("InterruptedException" , "iex");
@@ -83,16 +81,11 @@ public class NotificationBuilderService extends Service
     }
 
     public void getObjects() {
-        try {
-            double temp = json.getJSONObject("main").getDouble("temp");
-            String city = json.getString("name");
-            double pressure = json.getJSONObject("main").getDouble("pressure");
-            double humidity = json.getJSONObject("main").getDouble("humidity");
-            buildNotification(temp , pressure , humidity , city);
-        }
-        catch (JSONException jex) {
-            jex.printStackTrace();
-        }
+        double temp = json.getMain().getTemp();
+        String city = json.getName();
+        double pressure = json.getMain().getPressure();
+        double humidity = json.getMain().getHumidity();
+        buildNotification(temp , pressure , humidity , city);
     }
 
     public void buildNotification(double temp , double pressure , double humidity , String city) {
