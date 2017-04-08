@@ -18,6 +18,8 @@ public class Constants {
 
     public static final String V3TUTORIAL = "tut-v3-shown";
 
+    public static final String OWM_KEY = "owm_key";
+
     public static final String MAIL = "aadityamenon007@gmail.com";
 
     public static final int READ_COARSE_LOCATION = 20;

@@ -46,7 +46,7 @@ public class FetchWeatherOther extends AsyncTask<String , Void , JSONObject[]> {
             Log.i("day" , day.toString());
             Log.d(LOG_TAG , "URI Ready");
             HttpURLConnection connection0 = (HttpURLConnection)day.openConnection();
-            connection0.addRequestProperty("x-api-key", Constants.OWM_APP_ID);
+            connection0.addRequestProperty("x-api-key", preferences.getWeatherKey());
             BufferedReader reader;
             StringBuilder json = new StringBuilder(1024);
 

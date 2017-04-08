@@ -99,4 +99,12 @@ public class Preferences {
     public boolean getv3TargetShown() {
         return prefs.getBoolean(Constants.V3TUTORIAL , false);
     }
+
+    public void setWeatherKey(String str) {
+        prefs.edit().putString(Constants.OWM_KEY , str).apply();
+    }
+
+    public String getWeatherKey() {
+        return prefs.getString(Constants.OWM_KEY , Constants.OWM_APP_ID);
+    }
 }

@@ -113,7 +113,7 @@ public class FetchWeather extends AsyncTask<String , Void , Info> {
     private WeatherInfo gsonWeather() throws IOException {
         URL day = new URL(builtDay.toString());
         HttpURLConnection connection1 = (HttpURLConnection) day.openConnection();
-        connection1.addRequestProperty("x-api-key", Constants.OWM_APP_ID);
+        connection1.addRequestProperty("x-api-key", preferences.getWeatherKey());
 
         InputStream content = connection1.getInputStream();
 
@@ -137,7 +137,7 @@ public class FetchWeather extends AsyncTask<String , Void , Info> {
     private WeatherFort gsonFort() throws IOException{
         URL fort = new URL(builtFort.toString());
         HttpURLConnection connection1 = (HttpURLConnection) fort.openConnection();
-        connection1.addRequestProperty("x-api-key", Constants.OWM_APP_ID);
+        connection1.addRequestProperty("x-api-key", preferences.getWeatherKey());
 
         InputStream content = connection1.getInputStream();
 
