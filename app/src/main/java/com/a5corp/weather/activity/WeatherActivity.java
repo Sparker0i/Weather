@@ -124,50 +124,32 @@ public class WeatherActivity extends AppCompatActivity {
                 .build();
         SecondaryDrawerItem item1 = new SecondaryDrawerItem().withIdentifier(1).withName(R.string.drawer_item_home)
                 .withIcon(new IconicsDrawable(this)
-                        .icon(WeatherIcons.Icon.wic_day_sunny)
-                        .sizeRes(R.dimen.activity_horizontal_margin));
+                        .icon(WeatherIcons.Icon.wic_day_sunny));
         SecondaryDrawerItem item2 = new SecondaryDrawerItem().withIdentifier(2).withName(R.string.drawer_item_graph)
                 .withIcon(new IconicsDrawable(this)
-                        .icon(GoogleMaterial.Icon.gmd_trending_up)
-                        .sizeRes(R.dimen.activity_horizontal_margin));
+                        .icon(GoogleMaterial.Icon.gmd_trending_up));
         SecondaryDrawerItem item3 = new SecondaryDrawerItem().withIdentifier(3).withName(R.string.drawer_item_map)
                 .withIcon(new IconicsDrawable(this)
                         .icon(GoogleMaterial.Icon.gmd_map)
                         .sizeRes(R.dimen.activity_horizontal_margin));
-        SecondaryDrawerItem item6 = new SecondaryDrawerItem().withIdentifier(5).withName(R.string.drawer_item_about)
+        SecondaryDrawerItem item7 = new SecondaryDrawerItem().withIdentifier(7).withName(R.string.drawer_item_about)
                 .withIcon(new IconicsDrawable(this)
-                        .icon(GoogleMaterial.Icon.gmd_info)
-                        .sizeRes(R.dimen.activity_horizontal_margin))
+                        .icon(GoogleMaterial.Icon.gmd_info))
                 .withSelectable(false);
-        final SecondarySwitchDrawerItem item4 , item5;
-        if (preferences.getUnits().equals("imperial"))
-            item4 = new SecondarySwitchDrawerItem().withIdentifier(6).withName("Use Fahrenheit")
-                    .withChecked(true)
-                    .withIcon(new IconicsDrawable(this)
-                            .icon(WeatherIcons.Icon.wic_fahrenheit)
-                            .sizeRes(R.dimen.activity_horizontal_margin))
-                    .withSelectable(false);
-        else
-            item4 = new SecondarySwitchDrawerItem().withIdentifier(6).withName("Use Fahrenheit")
-                    .withChecked(false)
-                    .withIcon(new IconicsDrawable(this)
-                            .icon(WeatherIcons.Icon.wic_fahrenheit)
-                            .sizeRes(R.dimen.activity_horizontal_margin))
-                    .withSelectable(false);
-        if (preferences.getNotifs())
-            item5 = new SecondarySwitchDrawerItem().withIdentifier(6).withName("Show Ongoing Notification")
-                    .withChecked(true)
-                    .withIcon(new IconicsDrawable(this)
-                            .icon(GoogleMaterial.Icon.gmd_notifications)
-                            .sizeRes(R.dimen.activity_horizontal_margin))
-                    .withSelectable(false);
-        else
-            item5 = new SecondarySwitchDrawerItem().withIdentifier(6).withName("Show Ongoing Notification")
-                    .withChecked(false)
-                    .withIcon(new IconicsDrawable(this)
-                            .icon(GoogleMaterial.Icon.gmd_notifications)
-                            .sizeRes(R.dimen.activity_horizontal_margin))
-                    .withSelectable(false);
+        SecondaryDrawerItem item6 = new SecondaryDrawerItem().withIdentifier(6).withName("Custom OpenWeatherMap Key")
+                .withIcon(new IconicsDrawable(this)
+                        .icon(GoogleMaterial.Icon.gmd_create))
+                .withSelectable(false);
+        SecondarySwitchDrawerItem item4 = new SecondarySwitchDrawerItem().withIdentifier(4).withName("Use Fahrenheit")
+                .withChecked(preferences.getUnits().equals("imperial"))
+                .withIcon(new IconicsDrawable(this)
+                        .icon(WeatherIcons.Icon.wic_fahrenheit))
+                .withSelectable(false);
+        SecondarySwitchDrawerItem item5 = new SecondarySwitchDrawerItem().withIdentifier(5).withName("Show Ongoing Notification")
+                .withChecked(preferences.getNotifs())
+                .withIcon(new IconicsDrawable(this)
+                        .icon(GoogleMaterial.Icon.gmd_notifications))
+                .withSelectable(false);
         item4.withOnCheckedChangeListener(new OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(IDrawerItem drawerItem, CompoundButton buttonView, boolean isChecked) {
@@ -212,29 +194,38 @@ public class WeatherActivity extends AppCompatActivity {
                         item4,
                         item5,
                         new DividerDrawerItem(),
-                        item6
+                        item6,
+                        item7
                 )
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
                         // do something with the clicked item :D
                             if (drawerItem != null) {
-                                if (drawerItem.getIdentifier() == 1) {
-                                    getSupportFragmentManager().beginTransaction()
-                                            .replace(R.id.fragment, new WeatherFragment())
-                                            .commit();
-                                } else if (drawerItem.getIdentifier() == 2) {
-                                    GraphsFragment graphsFragment = newGraphInstance(new ArrayList<>(wf.getDailyJson()));
-                                    getSupportFragmentManager().beginTransaction()
-                                            .replace(R.id.fragment, graphsFragment)
-                                            .commit();
-                                } else if (drawerItem.getIdentifier() == 3) {
-                                    MapsFragment mapsFragment = new MapsFragment();
-                                    getSupportFragmentManager().beginTransaction()
-                                            .replace(R.id.fragment, mapsFragment)
-                                            .commit();
-                                } else if (drawerItem.getIdentifier() == 5) {
-                                    startActivity(new Intent(WeatherActivity.this, AboutActivity.class));
+                                switch((int) drawerItem.getIdentifier()) {
+                                    case 1:
+                                        getSupportFragmentManager().beginTransaction()
+                                                .replace(R.id.fragment, new WeatherFragment())
+                                                .commit();
+                                        break;
+                                    case 2:
+                                        GraphsFragment graphsFragment = newGraphInstance(new ArrayList<>(wf.getDailyJson()));
+                                        getSupportFragmentManager().beginTransaction()
+                                                .replace(R.id.fragment, graphsFragment)
+                                                .commit();
+                                        break;
+                                    case 3:
+                                        MapsFragment mapsFragment = new MapsFragment();
+                                        getSupportFragmentManager().beginTransaction()
+                                                .replace(R.id.fragment, mapsFragment)
+                                                .commit();
+                                        break;
+                                    case 6:
+                                        showApiKeyBox();
+                                        break;
+                                    case 7:
+                                        startActivity(new Intent(WeatherActivity.this, AboutActivity.class));
+                                        break;
                                 }
                             }
                         return false;
@@ -262,6 +253,48 @@ public class WeatherActivity extends AppCompatActivity {
     private void fabClick() {
         fab.hide();
         showInputDialog();
+    }
+
+    private void showApiKeyBox() {
+        new MaterialDialog.Builder(this)
+                .title("Change OWM API Key")
+                .content("You can enter your own custom OpenWeatherMap API key, and help reduce the load from my API Key\n\n" +
+                        "BEWARE: Entering a wrong API Key may result in a weird behaviour of the app. Do this at your own risk")
+                .onAny(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        fab.show();
+                    }
+                })
+                .dismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialogInterface) {
+                        fab.show();
+                    }
+                })
+                .neutralText("RESET")
+                .onNeutral(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        preferences.setWeatherKey(Constants.OWM_APP_ID);
+                        fab.show();
+                    }
+                })
+                .negativeText("CANCEL")
+                .onNegative(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog , @NonNull DialogAction which) {
+                        dialog.dismiss();
+                        fab.show();
+                    }
+                })
+                .input(null, null, new MaterialDialog.InputCallback() {
+                    @Override
+                    public void onInput(@NonNull MaterialDialog dialog, @NonNull CharSequence input) {
+                        preferences.setWeatherKey(input.toString());
+                        fab.show();
+                    }
+                }).show();
     }
 
     @Override
