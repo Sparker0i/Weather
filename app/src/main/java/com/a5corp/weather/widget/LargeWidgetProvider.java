@@ -444,12 +444,12 @@ public class LargeWidgetProvider extends AppWidgetProvider {
     }
 
     private void loadFromPreference(Preferences preferences , RemoteViews remoteViews , AppWidgetManager appWidgetManager , int[] appWidgetIds , int widgetId) throws JSONException{
-        JSONObject json;
+        WeatherInfo json;
         if (preferences.getLargeWidget() != null)
-            json = new JSONObject(preferences.getLargeWidget());
+            json = new Gson().fromJson(preferences.getLargeWidget() , WeatherInfo.class);
         else
             return;
-        double temp = json.getJSONObject("main").getDouble("temp");
+        double temp = json.getMain().getTemp();
 
         Intent intent = new Intent(context, LargeWidgetProvider.class);
         intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
@@ -458,13 +458,13 @@ public class LargeWidgetProvider extends AppWidgetProvider {
                 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         remoteViews.setOnClickPendingIntent(R.id.widget_button_refresh, pendingIntent);
 
-        remoteViews.setTextViewText(R.id.widget_city, json.getString("name") +
+        remoteViews.setTextViewText(R.id.widget_city, json.getName() +
                 ", " +
-                json.getJSONObject("sys").getString("country"));
+                json.getSys().getCountry());
         String ut = new Preferences(context).getUnits().equals("metric") ? "C" : "F";
         remoteViews.setTextViewText(R.id.widget_temperature, Integer.toString((int) temp) + "°" + ut);
-        setWeatherIcon(json.getJSONArray("weather").getJSONObject(0).getInt("id") , context , remoteViews);
-        String rs = json.getJSONArray("weather").getJSONObject(0).getString("description");
+        setWeatherIcon(json.getWeather().get(0).getId() , context , remoteViews);
+        String rs = json.getWeather().get(0).getDescription();
         String[] strArray = rs.split(" ");
         StringBuilder builder = new StringBuilder();
         for (String s : strArray) {
@@ -473,9 +473,9 @@ public class LargeWidgetProvider extends AppWidgetProvider {
         }
 
         remoteViews.setTextViewText(R.id.widget_description , builder.toString());
-        remoteViews.setTextViewText(R.id.widget_wind , "Wind : " + json.getJSONObject("wind").getLong("speed") + " m/" + (preferences.getUnits().equals("metric") ? "s" : "h"));
-        remoteViews.setTextViewText(R.id.widget_humidity , "Humidity : " + json.getJSONObject("main").getLong("humidity") + " %");
-        remoteViews.setTextViewText(R.id.widget_pressure , "Pressure : " + json.getJSONObject("main").getLong("pressure") + " hPa");
+        remoteViews.setTextViewText(R.id.widget_wind , "Wind : " + json.getWind().getSpeed() + " m/" + (preferences.getUnits().equals("metric") ? "s" : "h"));
+        remoteViews.setTextViewText(R.id.widget_humidity , "Humidity : " + json.getMain().getHumidity() + " %");
+        remoteViews.setTextViewText(R.id.widget_pressure , "Pressure : " + json.getMain().getPressure() + " hPa");
 
         appWidgetManager.updateAppWidget(widgetId, remoteViews);
     }
