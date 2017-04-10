@@ -21,9 +21,6 @@ import com.a5corp.weather.model.WeatherInfo;
 import com.a5corp.weather.preferences.Preferences;
 import com.google.gson.Gson;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.Calendar;
 import java.util.concurrent.ExecutionException;
 
@@ -94,7 +91,7 @@ public class LargeWidgetProvider extends AppWidgetProvider {
                 Log.i("In" , "Large Widget");
             }
         }
-        catch (JSONException | InterruptedException | ExecutionException ex) {
+        catch (InterruptedException | ExecutionException ex) {
             ex.printStackTrace();
         }
     }
@@ -443,7 +440,7 @@ public class LargeWidgetProvider extends AppWidgetProvider {
         remoteViews.setImageViewBitmap(R.id.widget_icon , createWeatherIcon(mContext , icon));
     }
 
-    private void loadFromPreference(Preferences preferences , RemoteViews remoteViews , AppWidgetManager appWidgetManager , int[] appWidgetIds , int widgetId) throws JSONException{
+    private void loadFromPreference(Preferences preferences , RemoteViews remoteViews , AppWidgetManager appWidgetManager , int[] appWidgetIds , int widgetId) {
         WeatherInfo json;
         if (preferences.getLargeWidget() != null)
             json = new Gson().fromJson(preferences.getLargeWidget() , WeatherInfo.class);

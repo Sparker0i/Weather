@@ -234,24 +234,6 @@ public class WeatherActivity extends AppCompatActivity {
                 .build();
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode ,
-                                           @NonNull String permissions[] ,
-                                           @NonNull int[] grantResults) {
-        switch (requestCode) {
-            case Constants.READ_COARSE_LOCATION: {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    showCity();
-                } else {
-                    permission.permissionDenied();
-                }
-                break;
-            }
-        }
-    }
-
     private void fabClick() {
         fab.hide();
         showInputDialog();
@@ -347,34 +329,6 @@ public class WeatherActivity extends AppCompatActivity {
         GlobalActivity.cp.setCity(city);
     }
 
-    public void changeCity(String lat, String lon) {
-        WeatherFragment wf = (WeatherFragment)getSupportFragmentManager()
-                .findFragmentById(R.id.fragment);
-        wf.changeCity(lat , lon);
-    }
-
-    private void showCity() {
-        gps = new GPSTracker(this);
-        if (!gps.canGetLocation())
-            new MaterialDialog.Builder(this)
-                    .content("GPS Needs to be enabled to view Weather Data of your Location")
-                    .title("Enable GPS")
-                    .positiveText("ENABLE")
-                    .onPositive(new MaterialDialog.SingleButtonCallback() {
-                        @Override
-                        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                            startActivity(intent);
-                        }
-                    })
-                    .show();
-        else {
-            lat = gps.getLatitude();
-            lon = gps.getLongitude();
-            changeCity(lat, lon);
-        }
-    }
-
     @Override
     public void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
@@ -384,15 +338,6 @@ public class WeatherActivity extends AppCompatActivity {
 
     public static GraphsFragment newGraphInstance(ArrayList<WeatherFort.WeatherList> describable) {
         GraphsFragment fragment = new GraphsFragment();
-        Bundle bundle = new Bundle();
-        bundle.putSerializable(DESCRIBABLE_KEY, describable);
-        fragment.setArguments(bundle);
-
-        return fragment;
-    }
-
-    public static MapsFragment newMapsInstance(WeatherFort.WeatherList describable) {
-        MapsFragment fragment = new MapsFragment();
         Bundle bundle = new Bundle();
         bundle.putSerializable(DESCRIBABLE_KEY, describable);
         fragment.setArguments(bundle);

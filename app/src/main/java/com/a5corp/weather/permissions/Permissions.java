@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.a5corp.weather.R;
+import com.a5corp.weather.activity.WeatherActivity;
 import com.a5corp.weather.utils.Constants;
 
 public class Permissions {
@@ -22,6 +23,7 @@ public class Permissions {
     }
 
     public void checkPermission() {
+        Log.i("Ask" , "Permission");
         ActivityCompat.requestPermissions((Activity) mContext, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, Constants.READ_COARSE_LOCATION);
     }
 
@@ -46,7 +48,7 @@ public class Permissions {
     }
 
     private void showRationale() {
-        View rootView = ((Activity) mContext).getWindow().getDecorView().findViewById(R.id.fragment);
+        View rootView = ((WeatherActivity) mContext).getWindow().getDecorView().findViewById(R.id.fragment);
         Snackbar.make(rootView , "This Permission Is Required to access Weather Data of your location" , Snackbar.LENGTH_LONG).show();
         Log.i("Permissions" , "showRationale");
     }
@@ -56,6 +58,7 @@ public class Permissions {
         // permission is denied (this is the first time, when "never ask again" is not checked) so ask again explaining the usage of permission
         // shouldShowRequestPermissionRationale will return true
         //show the dialog or snackbar saying its necessary and try again otherwise proceed with setup.
+        Log.i("Denied" , "Permission");
         if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) mContext,
                 Manifest.permission.ACCESS_COARSE_LOCATION)) {
             showRationale();

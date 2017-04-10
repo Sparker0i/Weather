@@ -2,6 +2,7 @@ package com.a5corp.weather.fragment;
 
 import android.content.ComponentName;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.os.Handler;
 import android.provider.Settings;
@@ -34,9 +35,11 @@ import com.a5corp.weather.internet.FetchWeather;
 import com.a5corp.weather.model.Info;
 import com.a5corp.weather.model.WeatherFort;
 import com.a5corp.weather.model.WeatherInfo;
+import com.a5corp.weather.permissions.GPSTracker;
 import com.a5corp.weather.permissions.Permissions;
 import com.a5corp.weather.preferences.Preferences;
 import com.a5corp.weather.service.AlarmTriggerService;
+import com.a5corp.weather.utils.Constants;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 
@@ -47,6 +50,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.ExecutionException;
+import java.util.jar.Manifest;
 
 import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
 
@@ -69,6 +73,7 @@ public class WeatherFragment extends Fragment {
     FetchWeather wt;
     Preferences preferences;
     View rootView;
+    Permissions permission;
 
     public WeatherFragment() {
         handler = new Handler();
@@ -181,8 +186,9 @@ public class WeatherFragment extends Fragment {
             case R.id.refresh : changeCity(GlobalActivity.cp.getCity());
                 break;
             case R.id.location :
-                Permissions permission = new Permissions(getContext());
-                permission.checkPermission();
+                permission = new Permissions(getContext());
+                //permission.checkPermission();
+                requestPermissions(new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION} , Constants.READ_COARSE_LOCATION);
                 break;
         }
         return true;
@@ -390,6 +396,46 @@ public class WeatherFragment extends Fragment {
                     }
                 })
                 .show();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode ,
+                                           @NonNull String permissions[] ,
+                                           @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case Constants.READ_COARSE_LOCATION: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    showCity();
+                } else {
+                    permission.permissionDenied();
+                }
+                break;
+            }
+        }
+    }
+
+    private void showCity() {
+        GPSTracker gps = new GPSTracker(getContext());
+        if (!gps.canGetLocation())
+            new MaterialDialog.Builder(getContext())
+                    .content("GPS Needs to be enabled to view Weather Data of your Location")
+                    .title("Enable GPS")
+                    .positiveText("ENABLE")
+                    .onPositive(new MaterialDialog.SingleButtonCallback() {
+                        @Override
+                        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                            startActivity(intent);
+                        }
+                    })
+                    .show();
+        else {
+            String lat = gps.getLatitude();
+            String lon = gps.getLongitude();
+            changeCity(lat, lon);
+        }
     }
 
     private void setWeatherIcon(int id , int i) {
