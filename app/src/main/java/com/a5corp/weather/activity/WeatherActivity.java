@@ -4,9 +4,7 @@ import android.app.Notification;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.NotificationCompat;
@@ -23,8 +21,6 @@ import com.a5corp.weather.fragment.GraphsFragment;
 import com.a5corp.weather.fragment.MapsFragment;
 import com.a5corp.weather.fragment.WeatherFragment;
 import com.a5corp.weather.model.WeatherFort;
-import com.a5corp.weather.permissions.GPSTracker;
-import com.a5corp.weather.permissions.Permissions;
 import com.a5corp.weather.preferences.Preferences;
 import com.a5corp.weather.service.AlarmTriggerService;
 import com.a5corp.weather.utils.Constants;
@@ -48,11 +44,7 @@ import com.mikepenz.weather_icons_typeface_library.WeatherIcons;
 import java.util.ArrayList;
 
 public class WeatherActivity extends AppCompatActivity {
-
-    Permissions permission;
     Preferences preferences;
-    String lat, lon;
-    GPSTracker gps;
     FloatingActionButton fab;
     WeatherFragment wf;
     Toolbar toolbar;

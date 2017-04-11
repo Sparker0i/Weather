@@ -202,6 +202,11 @@
     <string name="lib_9_link">https://github.com/google/material-design-icons/</string>
     <string name="lib_9_license"><![CDATA[Copyright © 2016 Google ]]></string>
 
+    <string name="lib_10">Gson</string>
+    <string name="lib_10_author">Google</string>
+    <string name="lib_10_link">https://github.com/google/gson/</string>
+    <string name="lib_10_license"><![CDATA[Copyright © 2016 Google ]]></string>
+
     <string name="insp_1">Good Weather</string>
     <string name="insp_1_author">AsdTm</string>
     <string name="insp_1_link">https://play.google.com/store/apps/details?id=org.asdtm.goodweather</string>
