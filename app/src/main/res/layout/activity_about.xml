@@ -42,7 +42,7 @@
             android:layout_height="4dp"
             android:background="@drawable/toolbar_shadow" />
 
-        <com.github.clans.fab.FloatingActionButton
+        <android.support.design.widget.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"

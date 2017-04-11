@@ -1,26 +1,19 @@
 package com.a5corp.weather.activity;
 
 import android.content.Intent;
-import android.graphics.Rect;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.v4.content.ContextCompat;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.widget.AbsListView;
 
 import com.a5corp.weather.R;
 import com.a5corp.weather.cards.AboutCard;
 import com.a5corp.weather.utils.Constants;
-import com.github.clans.fab.FloatingActionButton;
-import com.mikepenz.materialdrawer.DrawerBuilder;
 
 import java.util.ArrayList;
 
@@ -53,8 +46,6 @@ public class AboutActivity extends AppCompatActivity
         }
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setColorNormal(ContextCompat.getColor(this , R.color.accent));
-        fab.hide(false);
         initCards();
         initFab();
     }
@@ -81,7 +72,7 @@ public class AboutActivity extends AppCompatActivity
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                fab.show(true);
+                fab.show();
             }
         }, 500);
 
@@ -101,9 +92,9 @@ public class AboutActivity extends AppCompatActivity
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount)
             {
                 if (firstVisibleItem > previousVisibleItem)
-                    fab.hide(true);
+                    fab.hide();
                 else if (firstVisibleItem < previousVisibleItem)
-                    fab.show(true);
+                    fab.show();
 
                 previousVisibleItem = firstVisibleItem;
             }
