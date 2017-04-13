@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.a5corp.weather.activity.GlobalActivity;
 import com.a5corp.weather.R;
 import com.a5corp.weather.activity.WeatherActivity;
+import com.a5corp.weather.internet.CheckConnection;
 import com.a5corp.weather.preferences.Preferences;
 
 public class FirstLaunchFragment extends Fragment {
@@ -42,7 +43,10 @@ public class FirstLaunchFragment extends Fragment {
         goButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (cityInput.getText().length() > 0) {
+                if (!new CheckConnection(getContext()).isNetworkAvailable()) {
+                    Snackbar.make(rootView , "Please check your Internet connection." , Snackbar.LENGTH_SHORT).show();
+                }
+                else if (cityInput.getText().length() > 0) {
                     preferences.setCity(cityInput.getText().toString());
                     Intent intent = new Intent(getActivity(), WeatherActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

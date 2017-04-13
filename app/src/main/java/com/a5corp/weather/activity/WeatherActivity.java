@@ -113,6 +113,7 @@ public class WeatherActivity extends AppCompatActivity {
                         profile
                 )
                 .withSelectionListEnabled(false)
+                .withProfileImagesClickable(false)
                 .build();
         SecondaryDrawerItem item1 = new SecondaryDrawerItem().withIdentifier(1).withName(R.string.drawer_item_home)
                 .withIcon(new IconicsDrawable(this)
