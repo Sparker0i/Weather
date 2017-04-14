@@ -17,6 +17,9 @@ import com.a5corp.weather.utils.Constants;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.internal.CardArrayAdapter;
 import it.gmariotti.cardslib.library.view.CardListView;
@@ -24,11 +27,15 @@ import it.gmariotti.cardslib.library.view.listener.SwipeOnScrollListener;
 
 public class AboutActivity extends AppCompatActivity
 {
-    Toolbar toolbar;
-    private CardListView aboutList;
+    @BindView(R.id.toolbar) Toolbar toolbar;
+    @BindView(R.id.about_list) CardListView aboutList;
     CardArrayAdapter cardArrayAdapter;
     ArrayList<Card> cards;
-    private FloatingActionButton fab;
+    @BindView(R.id.fab) FloatingActionButton fab;
+    @OnClick(R.id.fab) void onClick() {
+        Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:" + Constants.MAIL));
+        startActivity(Intent.createChooser(intent , "Choose an app"));
+    }
     private int previousVisibleItem;
 
     @Override
@@ -36,8 +43,7 @@ public class AboutActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
-
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        ButterKnife.bind(this);
         setSupportActionBar(toolbar);
 
         if(getSupportActionBar() != null)
@@ -45,9 +51,7 @@ public class AboutActivity extends AppCompatActivity
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        fab = (FloatingActionButton) findViewById(R.id.fab);
         initCards();
-        initFab();
     }
 
     public void initCards()
@@ -61,44 +65,23 @@ public class AboutActivity extends AppCompatActivity
         cards.add(new AboutCard(this , R.layout.about_card_layout_6 , 6));
 
         cardArrayAdapter = new CardArrayAdapter(this, cards);
-        aboutList = (CardListView) findViewById(R.id.about_list);
 
-        if(aboutList != null)
+        if(aboutList != null) {
             aboutList.setAdapter(cardArrayAdapter);
-    }
-
-    public void initFab()
-    {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                fab.show();
-            }
-        }, 500);
-
-        fab.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
+            aboutList.setOnScrollListener(new SwipeOnScrollListener()
             {
-                Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:" + Constants.MAIL));
-                startActivity(Intent.createChooser(intent , "Choose an app"));
-            }
-        });
+                @Override
+                public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount)
+                {
+                    if (firstVisibleItem > previousVisibleItem)
+                        fab.hide();
+                    else if (firstVisibleItem < previousVisibleItem)
+                        fab.show();
 
-        aboutList.setOnScrollListener(new SwipeOnScrollListener()
-        {
-            @Override
-            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount)
-            {
-                if (firstVisibleItem > previousVisibleItem)
-                    fab.hide();
-                else if (firstVisibleItem < previousVisibleItem)
-                    fab.show();
-
-                previousVisibleItem = firstVisibleItem;
-            }
-        });
+                    previousVisibleItem = firstVisibleItem;
+                }
+            });
+        }
     }
 
 
