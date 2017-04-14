@@ -87,7 +87,7 @@ public class FetchWeatherOther extends AsyncTask<String , Void , WeatherInfo> {
             content.close();
             return posts;
         } catch (Exception ex) {
-            Log.e("FetchWeather", "Failed to parse JSON due to: " + ex);
+            Log.e(LOG_TAG, "Failed to parse JSON due to: " + ex);
         }
         return null;
     }

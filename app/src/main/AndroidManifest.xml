@@ -76,7 +76,7 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".activity.LicenseActivity"></activity>
+        <activity android:name=".activity.LicenseActivity" />
     </application>
 
 </manifest>
