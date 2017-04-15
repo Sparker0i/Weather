@@ -10,6 +10,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -123,8 +124,7 @@ public class WeatherActivity extends AppCompatActivity {
                         .icon(GoogleMaterial.Icon.gmd_trending_up));
         SecondaryDrawerItem item3 = new SecondaryDrawerItem().withIdentifier(3).withName(R.string.drawer_item_map)
                 .withIcon(new IconicsDrawable(this)
-                        .icon(GoogleMaterial.Icon.gmd_map)
-                        .sizeRes(R.dimen.activity_horizontal_margin));
+                        .icon(GoogleMaterial.Icon.gmd_map));
         SecondaryDrawerItem item7 = new SecondaryDrawerItem().withIdentifier(7).withName(R.string.drawer_item_about)
                 .withIcon(new IconicsDrawable(this)
                         .icon(GoogleMaterial.Icon.gmd_info))
@@ -225,6 +225,10 @@ public class WeatherActivity extends AppCompatActivity {
                     }
                 })
                 .build();
+    }
+
+    public ActionBarDrawerToggle getToggle() {
+        return drawer.getActionBarDrawerToggle();
     }
 
     private void fabClick() {

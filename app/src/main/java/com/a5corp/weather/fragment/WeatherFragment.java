@@ -50,7 +50,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.ExecutionException;
-import java.util.jar.Manifest;
 
 import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
 
@@ -187,7 +186,6 @@ public class WeatherFragment extends Fragment {
                 break;
             case R.id.location :
                 permission = new Permissions(getContext());
-                //permission.checkPermission();
                 requestPermissions(new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION} , Constants.READ_COARSE_LOCATION);
                 break;
         }
@@ -332,7 +330,7 @@ public class WeatherFragment extends Fragment {
                             .setBackgroundColour(ContextCompat.getColor(getContext() , R.color.md_light_blue_400))
                             .setFocalColour(ContextCompat.getColor(getContext() , R.color.colorAccent))
                             .setPrimaryText("Search for a city")
-                            .setSecondaryText("Search for weather data from over a 200,000 cities and towns")
+                            .setSecondaryText("Search for weather data from over 200,000 cities and towns")
                             .setIconDrawableColourFilter(ContextCompat.getColor(getContext() , R.color.md_black_1000))
                             .setOnHidePromptListener(new MaterialTapTargetPrompt.OnHidePromptListener()
                             {
@@ -345,33 +343,36 @@ public class WeatherFragment extends Fragment {
                                 @Override
                                 public void onHidePromptComplete()
                                 {
-                                    //preferences.setv3SearchShown(false);
-                                    new MaterialTapTargetPrompt.Builder(getActivity())
-                                            .setTarget(R.id.location)
-                                            .setBackgroundColour(ContextCompat.getColor(getContext() , R.color.md_light_blue_400))
-                                            .setPrimaryText("Search for a city")
-                                            .setFocalColour(ContextCompat.getColor(getContext() , R.color.colorAccent))
-                                            .setSecondaryText("Search for weather data from over a 200,000 cities and towns")
-                                            .setOnHidePromptListener(new MaterialTapTargetPrompt.OnHidePromptListener()
-                                            {
-                                                @Override
-                                                public void onHidePrompt(MotionEvent event, boolean tappedTarget)
-                                                {
-                                                    preferences.setv3TargetShown(true);
-                                                }
-
-                                                @Override
-                                                public void onHidePromptComplete()
-                                                {
-                                                    preferences.setv3TargetShown(true);
-                                                }
-                                            })
-                                            .show();
+                                    showLocTarget();
                                 }
                             })
                             .show();
                 }
             }, 1500);
+    }
+
+    private void showLocTarget() {
+        new MaterialTapTargetPrompt.Builder(getActivity())
+                .setTarget(R.id.location)
+                .setBackgroundColour(ContextCompat.getColor(getContext() , R.color.md_light_blue_400))
+                .setPrimaryText("Search data of your location")
+                .setFocalColour(ContextCompat.getColor(getContext() , R.color.colorAccent))
+                .setSecondaryText("Tap to check the weather of the location you are at right now. Swipe from the left edge of the screen to the right to see more options")
+                .setOnHidePromptListener(new MaterialTapTargetPrompt.OnHidePromptListener()
+                {
+                    @Override
+                    public void onHidePrompt(MotionEvent event, boolean tappedTarget)
+                    {
+                        preferences.setv3TargetShown(true);
+                    }
+
+                    @Override
+                    public void onHidePromptComplete()
+                    {
+                        preferences.setv3TargetShown(true);
+                    }
+                })
+                .show();
     }
 
     public void showNoInternet() {
@@ -419,18 +420,7 @@ public class WeatherFragment extends Fragment {
     private void showCity() {
         GPSTracker gps = new GPSTracker(getContext());
         if (!gps.canGetLocation())
-            new MaterialDialog.Builder(getContext())
-                    .content("GPS Needs to be enabled to view Weather Data of your Location")
-                    .title("Enable GPS")
-                    .positiveText("ENABLE")
-                    .onPositive(new MaterialDialog.SingleButtonCallback() {
-                        @Override
-                        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                            startActivity(intent);
-                        }
-                    })
-                    .show();
+            gps.showSettingsAlert();
         else {
             String lat = gps.getLatitude();
             String lon = gps.getLongitude();

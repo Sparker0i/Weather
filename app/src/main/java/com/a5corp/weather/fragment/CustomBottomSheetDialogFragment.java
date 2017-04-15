@@ -17,9 +17,6 @@ import com.a5corp.weather.R;
 import com.a5corp.weather.model.WeatherFort;
 import com.a5corp.weather.preferences.Preferences;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 public class CustomBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
     TextView windIcon , rainIcon , snowIcon , humidityIcon , pressureIcon;
@@ -28,11 +25,10 @@ public class CustomBottomSheetDialogFragment extends BottomSheetDialogFragment {
     TextView condition;
     View rootView;
     Preferences preferences;
-    Bundle bundle;
     Typeface weatherFont;
     WeatherFort.WeatherList json;
     private static final String DESCRIBABLE_KEY = "describable_key";
-    private WeatherFort.WeatherList mDescribable;
+    WeatherFort.WeatherList mDescribable;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -152,9 +148,9 @@ public class CustomBottomSheetDialogFragment extends BottomSheetDialogFragment {
     }
 
     public void setTemperatures() {
-        dayValue.setText(json.getTemp().getDay() + "°");
-        mornValue.setText(json.getTemp().getMorn() + "°");
-        eveValue.setText(json.getTemp().getEve() + "°");
-        nightValue.setText(json.getTemp().getNight() + "°");
+        dayValue.setText(String.format("%s°" , json.getTemp().getDay()));
+        mornValue.setText(String.format("%s°" ,json.getTemp().getMorn()));
+        eveValue.setText(String.format("%s°" , json.getTemp().getEve()));
+        nightValue.setText(String.format("%s°" , json.getTemp().getNight()));
     }
 }
