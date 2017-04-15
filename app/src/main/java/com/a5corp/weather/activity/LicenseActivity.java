@@ -114,6 +114,13 @@ public class LicenseActivity extends AppCompatActivity
                 link = getString(R.string.lib_10_link);
                 break;
             }
+            case 11 :
+            {
+                library = getString(R.string.lib_11);
+                license = getString(R.string.lib_11_license) + getString(R.string.apache_license);
+                link = getString(R.string.lib_11_link);
+                break;
+            }
         }
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);

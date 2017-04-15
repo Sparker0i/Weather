@@ -156,6 +156,12 @@ public class AboutCard extends Card
                         showLicense(10);
                     }
                 });
+                parent.findViewById(R.id.lib_11).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showLicense(11);
+                    }
+                });
                 break;
             }
 
