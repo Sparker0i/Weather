@@ -117,11 +117,12 @@ public class LicenseActivity extends AppCompatActivity
         }
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle(library);
         setSupportActionBar(toolbar);
 
-        if(getSupportActionBar() != null)
+        if(getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setTitle(library);
+        }
 
         fab.setImageDrawable(new IconicsDrawable(this)
                             .icon(MaterialDesignIconic.Icon.gmi_github)
