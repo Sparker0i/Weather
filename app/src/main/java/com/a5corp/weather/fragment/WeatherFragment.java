@@ -51,22 +51,33 @@ import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
 
 public class WeatherFragment extends Fragment {
     Typeface weatherFont;
-    TextView button;
+    @BindView(R.id.button1) TextView button;
     TextView detailsField[] = new TextView[10] , weatherIcon[] = new TextView[11];
-    TextView windView , humidityView , directionView, dailyView, updatedField, cityField, sunriseView , sunsetView;
-    TextView sunriseIcon , sunsetIcon , windIcon , humidityIcon;
+    @BindView(R.id.wind_view) TextView windView;
+    @BindView(R.id.humidity_view) TextView humidityView;
+    @BindView(R.id.direction_view) TextView directionView;
+    @BindView(R.id.daily_view) TextView dailyView;
+    @BindView(R.id.updated_field) TextView updatedField;
+    @BindView(R.id.city_field) TextView cityField;
+    @BindView(R.id.sunrise_view) TextView sunriseView;
+    @BindView(R.id.sunset_view) TextView sunsetView;
+    @BindView(R.id.sunrise_icon) TextView sunriseIcon;
+    @BindView(R.id.sunset_icon) TextView sunsetIcon;
+    @BindView(R.id.wind_icon) TextView windIcon;
+    @BindView(R.id.humidity_icon) TextView humidityIcon;
     double tc;
     Handler handler;
     BottomSheetDialogFragment bottomSheetDialogFragment;
     WeatherInfo json0;
     WeatherFort json1;
-    SwipeRefreshLayout swipeView;
+    @BindView(R.id.swipe) SwipeRefreshLayout swipeView;
     CheckConnection cc;
-    int Clicks = 0;
     Info json;
     MaterialDialog pd;
     FetchWeather wt;
@@ -82,33 +93,23 @@ public class WeatherFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_weather, container, false);
-        cityField = (TextView)rootView.findViewById(R.id.city_field);
+        ButterKnife.bind(this , rootView);
         cityField.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
-        updatedField = (TextView)rootView.findViewById(R.id.updated_field);
         updatedField.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
-        humidityView = (TextView) rootView.findViewById(R.id.humidity_view);
         humidityView.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
-        sunriseIcon = (TextView) rootView.findViewById(R.id.sunrise_icon);
         sunriseIcon.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
         sunriseIcon.setTypeface(weatherFont);
         sunriseIcon.setText(getActivity().getString(R.string.sunrise_icon));
-        sunsetIcon = (TextView) rootView.findViewById(R.id.sunset_icon);
         sunsetIcon.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
         sunsetIcon.setTypeface(weatherFont);
         sunsetIcon.setText(getActivity().getString(R.string.sunset_icon));
-        windIcon = (TextView) rootView.findViewById(R.id.wind_icon);
         windIcon.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
         windIcon.setTypeface(weatherFont);
         windIcon.setText(getActivity().getString(R.string.speed_icon));
-        humidityIcon = (TextView) rootView.findViewById(R.id.humidity_icon);
         humidityIcon.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
         humidityIcon.setTypeface(weatherFont);
         humidityIcon.setText(getActivity().getString(R.string.humidity_icon));
-        windView = (TextView) rootView.findViewById(R.id.wind_view);
         windView.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
-        directionView = (TextView)rootView.findViewById(R.id.direction_view);
-        directionView.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
-        swipeView = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe);
         swipeView.setColorSchemeResources(R.color.red, R.color.green , R.color.blue , R.color.yellow , R.color.orange);
         swipeView.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -131,14 +132,10 @@ public class WeatherFragment extends Fragment {
         ((WeatherActivity) getActivity()).showFab();
         directionView.setTypeface(weatherFont);
         directionView.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
-        dailyView = (TextView)rootView.findViewById(R.id.daily_view);
         dailyView.setText(getString(R.string.daily));
         dailyView.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
-        sunriseView = (TextView) rootView.findViewById(R.id.sunrise_view);
         sunriseView.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
-        sunsetView = (TextView) rootView.findViewById(R.id.sunset_view);
         sunsetView.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
-        button = (TextView) rootView.findViewById(R.id.button1);
         button.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
         pd.show();
         for (int i = 0; i < 11; ++i)
@@ -893,7 +890,6 @@ public class WeatherFragment extends Fragment {
 
     private void renderWeather(Info jsonObj){
         try {
-            Clicks = 0;
             Log.i("Showed" , "Done");
             json0 = jsonObj.day;
             Log.i("Json 0" , json0.toString());

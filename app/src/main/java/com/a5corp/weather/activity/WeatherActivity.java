@@ -44,9 +44,18 @@ import com.mikepenz.weather_icons_typeface_library.WeatherIcons;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 public class WeatherActivity extends AppCompatActivity {
     Preferences preferences;
-    FloatingActionButton fab;
+
+    @BindView(R.id.fab) FloatingActionButton fab;
+    @OnClick(R.id.fab) void fabClick() {
+        fab.hide();
+        showInputDialog();
+    }
     WeatherFragment wf;
     Toolbar toolbar;
     Drawer drawer;
@@ -58,6 +67,8 @@ public class WeatherActivity extends AppCompatActivity {
         preferences = new Preferences(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather);
+        ButterKnife.bind(this);
+
         wf = new WeatherFragment();
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
@@ -66,14 +77,7 @@ public class WeatherActivity extends AppCompatActivity {
         }
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.hide();
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                fabClick();
-            }
-        });
         initDrawer();
     }
 
@@ -229,11 +233,6 @@ public class WeatherActivity extends AppCompatActivity {
 
     public ActionBarDrawerToggle getToggle() {
         return drawer.getActionBarDrawerToggle();
-    }
-
-    private void fabClick() {
-        fab.hide();
-        showInputDialog();
     }
 
     private void showApiKeyBox() {
