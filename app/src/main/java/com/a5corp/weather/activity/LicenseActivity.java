@@ -1,17 +1,23 @@
 package com.a5corp.weather.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.a5corp.weather.R;
+import com.mikepenz.iconics.IconicsDrawable;
+import com.mikepenz.material_design_iconic_typeface_library.MaterialDesignIconic;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class LicenseActivity extends AppCompatActivity
 {
@@ -20,13 +26,20 @@ public class LicenseActivity extends AppCompatActivity
     private String license;
     private String library;
     private String link;
+    @BindView(R.id.license) TextView licText;
+    @BindView(R.id.fab) FloatingActionButton fab;
+    @OnClick(R.id.fab) void onClick() {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse(link));
+        startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_license);
-
+        ButterKnife.bind(this);
         libID = getIntent().getExtras().getInt("libId");
 
         switch (libID)
@@ -107,33 +120,13 @@ public class LicenseActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         if(getSupportActionBar() != null)
-        {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
-            getSupportActionBar().setDisplayShowTitleEnabled(false);
-        }
+        toolbar.setTitle(library);
 
-        View customToolbar = getLayoutInflater().inflate(R.layout.custom_toolbar_2,null);
-        ((TextView)customToolbar.findViewById(R.id.toolbar_text)).setText(library);
-
-        Button button = (Button) customToolbar.findViewById(R.id.toolbar_button);
-        button.setText(getString(R.string.github));
-        button.setOnClickListener(
-                new View.OnClickListener()
-                {
-                    @Override
-                    public void onClick(View v)
-                    {
-                        Intent intent = new Intent(Intent.ACTION_VIEW);
-                        intent.setData(Uri.parse(link));
-                        startActivity(intent);
-                    }
-                }
-        );
-
-        toolbar.addView(customToolbar);
-
-        ((TextView)findViewById(R.id.license)).setText(Html.fromHtml(license));
+        fab.setImageDrawable(new IconicsDrawable(this)
+                            .icon(MaterialDesignIconic.Icon.gmi_github)
+                            .color(Color.WHITE));
+        licText.setText(Html.fromHtml(license));
     }
 
     @Override

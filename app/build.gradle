@@ -47,6 +47,7 @@ dependencies {
     compile 'com.github.gabrielemariotti.cards:cardslib-cards:2.1.0'
     compile 'com.github.gabrielemariotti.cards:cardslib-recyclerview:2.1.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.mikepenz:material-design-iconic-typeface:2.2.0.2@aar'
     compile 'com.jakewharton:butterknife:8.5.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
 }
