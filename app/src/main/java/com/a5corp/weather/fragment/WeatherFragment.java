@@ -178,10 +178,6 @@ public class WeatherFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.change_city : showInputDialog();
-                break;
-            case R.id.refresh : changeCity(GlobalActivity.cp.getCity());
-                break;
             case R.id.location :
                 permission = new Permissions(getContext());
                 requestPermissions(new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION} , Constants.READ_COARSE_LOCATION);

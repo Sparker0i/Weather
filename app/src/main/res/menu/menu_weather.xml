@@ -9,15 +9,4 @@
         android:title="@string/location"
         app:showAsAction="ifRoom"/>
 
-    <item
-        android:id="@+id/change_city"
-        android:orderInCategory="4"
-        android:title="@string/change_city"
-        app:showAsAction="never"/>
-    <item
-        android:id="@+id/refresh"
-        android:title="@string/refresh"
-        android:orderInCategory="2"
-        app:showAsAction="never"/>
-
 </menu>
