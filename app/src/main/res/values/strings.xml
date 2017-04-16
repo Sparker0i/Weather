@@ -210,7 +210,7 @@
     <string name="lib_11">Butterknife</string>
     <string name="lib_11_author">Jake Wharton</string>
     <string name="lib_11_link">https://github.com/JakeWharton/butterknife</string>
-    <string name="lib_11_license"><![CDATA[Copyright © 2016 Google ]]></string>
+    <string name="lib_11_license"><![CDATA[Copyright 2013 Jake Wharton ]]></string>
 
     <string name="insp_1">Good Weather</string>
     <string name="insp_1_author">AsdTm</string>
@@ -238,4 +238,5 @@
 
     <string name="other_apps_link">https://play.google.com/store/apps/dev?id=6116967233401290402</string>
     <string name="app_link_direct">https://play.google.com/store/apps/details?id=com.a5corp.weather</string>
+    <string name="github_link">https://github.com/Sparker0i</string>
 </resources>

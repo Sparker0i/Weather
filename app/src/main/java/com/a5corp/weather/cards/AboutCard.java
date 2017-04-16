@@ -46,7 +46,18 @@ public class AboutCard extends Card
                             }
                         }
                 );
-
+                (parent.findViewById(R.id.name)).setOnClickListener(
+                        new View.OnClickListener()
+                        {
+                            @Override
+                            public void onClick(View v)
+                            {
+                                Intent intent = new Intent(Intent.ACTION_VIEW);
+                                intent.setData(Uri.parse(context.getString(R.string.github_link)));
+                                context.startActivity(intent);
+                            }
+                        }
+                );
                 break;
             }
 

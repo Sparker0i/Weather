@@ -5,6 +5,7 @@ import android.app.IntentService;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.SystemClock;
 
 import com.a5corp.weather.preferences.Preferences;
 import com.a5corp.weather.receiver.MyReceiver;
@@ -26,11 +27,11 @@ public class AlarmTriggerService extends IntentService {
         preferences = new Preferences(this);
 
         Intent myIntent = new Intent(this, MyReceiver.class);
-        pendingIntent = PendingIntent.getBroadcast(this, 0, myIntent,0);
+        pendingIntent = PendingIntent.getBroadcast(this, 0, myIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         AlarmManager am = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
-        am.setInexactRepeating(AlarmManager.RTC,
-                Calendar.getInstance().getTimeInMillis(),
+        am.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
+                SystemClock.elapsedRealtime(),
                 AlarmManager.INTERVAL_HOUR,
                 pendingIntent);
     }

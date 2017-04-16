@@ -1,8 +1,5 @@
 apply plugin: 'com.android.application'
 
-repositories {
-    mavenCentral()
-}
 android {
     compileSdkVersion 25
     buildToolsVersion '25.0.2'
@@ -11,8 +8,8 @@ android {
         applicationId "com.a5corp.weather"
         minSdkVersion 17
         targetSdkVersion 25
-        versionCode 473
-        versionName "3.0"
+        versionCode 475
+        versionName "3.0-Beta"
     }
     buildTypes {
         release {

@@ -40,6 +40,7 @@ import com.a5corp.weather.permissions.Permissions;
 import com.a5corp.weather.preferences.Preferences;
 import com.a5corp.weather.service.AlarmTriggerService;
 import com.a5corp.weather.utils.Constants;
+import com.a5corp.weather.utils.Utils;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 
@@ -254,7 +255,8 @@ public class WeatherFragment extends Fragment {
                     handler.post(new Runnable() {
                         public void run() {
                             ((WeatherActivity) getActivity()).showFab();
-                            getActivity().startService(new Intent(getActivity() , AlarmTriggerService.class));
+                            if (new Utils(getContext()).isInstallFromUpdate() && preferences.getNotifs())
+                                getActivity().startService(new Intent(getActivity() , AlarmTriggerService.class));
                             preferences.setLaunched();
                             renderWeather(json);
                             Snackbar snackbar = Snackbar.make(rootView, "Loaded Weather Data", 500);
