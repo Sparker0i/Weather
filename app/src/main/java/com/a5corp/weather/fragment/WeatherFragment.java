@@ -342,7 +342,7 @@ public class WeatherFragment extends Fragment {
                                 @Override
                                 public void onHidePromptComplete()
                                 {
-                                    showLocTarget();
+                                    showRefresh();
                                 }
                             })
                             .show();
@@ -369,6 +369,30 @@ public class WeatherFragment extends Fragment {
                     public void onHidePromptComplete()
                     {
                         preferences.setv3TargetShown(true);
+                    }
+                })
+                .show();
+    }
+
+    private void showRefresh() {
+        new MaterialTapTargetPrompt.Builder(getActivity())
+                .setTarget(R.id.location)
+                .setBackgroundColour(ContextCompat.getColor(getContext() , R.color.md_light_blue_400))
+                .setPrimaryText("Search data of your location")
+                .setFocalColour(ContextCompat.getColor(getContext() , R.color.colorAccent))
+                .setSecondaryText("Tap to check the weather of the location you are at right now. Swipe from the left edge of the screen to the right to see more options")
+                .setOnHidePromptListener(new MaterialTapTargetPrompt.OnHidePromptListener()
+                {
+                    @Override
+                    public void onHidePrompt(MotionEvent event, boolean tappedTarget)
+                    {
+
+                    }
+
+                    @Override
+                    public void onHidePromptComplete()
+                    {
+                        showLocTarget();
                     }
                 })
                 .show();
