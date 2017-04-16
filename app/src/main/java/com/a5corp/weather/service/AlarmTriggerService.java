@@ -10,8 +10,6 @@ import android.os.SystemClock;
 import com.a5corp.weather.preferences.Preferences;
 import com.a5corp.weather.receiver.MyReceiver;
 
-import java.util.Calendar;
-
 public class AlarmTriggerService extends IntentService {
 
     private static final String TAG = "AlarmTriggerService";
