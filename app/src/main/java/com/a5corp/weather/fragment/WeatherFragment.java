@@ -372,11 +372,11 @@ public class WeatherFragment extends Fragment {
 
     private void showRefresh() {
         new MaterialTapTargetPrompt.Builder(getActivity())
-                .setTarget(R.id.location)
+                .setTarget(R.id.toolbar)
                 .setBackgroundColour(ContextCompat.getColor(getContext() , R.color.md_light_blue_400))
-                .setPrimaryText("Search data of your location")
+                .setPrimaryText("Refresh")
                 .setFocalColour(ContextCompat.getColor(getContext() , R.color.colorAccent))
-                .setSecondaryText("Tap to check the weather of the location you are at right now. Swipe from the left edge of the screen to the right to see more options")
+                .setSecondaryText("Swipe from the top to refresh")
                 .setOnHidePromptListener(new MaterialTapTargetPrompt.OnHidePromptListener()
                 {
                     @Override
