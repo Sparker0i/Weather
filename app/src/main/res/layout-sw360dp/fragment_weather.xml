@@ -405,7 +405,7 @@
                         android:gravity="start"
                         android:textAlignment="center"
                         android:layout_gravity="center_horizontal"
-                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textColor="#FFFFFF" />
                 </LinearLayout>
 
@@ -430,7 +430,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
                         android:id="@+id/humidity_view"
                         android:textColor="#FFFFFF"
                         android:layout_gravity="center_horizontal"
@@ -458,7 +458,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
                         android:id="@+id/sunrise_view"
                         android:textColor="#FFFFFF"
                         android:layout_gravity="center_horizontal"
@@ -486,7 +486,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
                         android:id="@+id/sunset_view"
                         android:layout_gravity="center_horizontal"
                         android:textColor="#FFFFFF"
