@@ -107,8 +107,7 @@ public class NotificationBuilderService extends Service
         builder.setSmallIcon(R.drawable.ic_notification_icon);
         builder.setContentIntent(pendingIntent);
         builder.setOngoing(true);
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
-            builder.setColor(Color.parseColor("#ff0000"));
+        builder.setColor(Color.parseColor("#ff0000"));
         myNotification = builder.build();
         mManager.notify(Constants.MY_NOTIFICATION_ID , myNotification);
         Log.i("Built", "Notification");
