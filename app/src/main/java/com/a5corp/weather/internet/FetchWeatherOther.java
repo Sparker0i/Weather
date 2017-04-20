@@ -7,6 +7,7 @@ import android.util.Log;
 
 import com.a5corp.weather.model.WeatherInfo;
 import com.a5corp.weather.preferences.Preferences;
+import com.a5corp.weather.utils.Constants;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -21,18 +22,10 @@ public class FetchWeatherOther extends AsyncTask<String , Void , WeatherInfo> {
     private static final String OPEN_WEATHER_MAP_DAILY_API = "http://api.openweathermap.org/data/2.5/weather?";
     private final String LOG_TAG = FetchWeatherOther.class.getSimpleName();
 
-    private Context context;
-    private final String QUERY_PARAM = "q";
-    private final String FORMAT_PARAM = "mode";
-    private final String FORMAT_VALUE = "json";
-    private final String UNITS_PARAM = "units";
-    private String UNITS_VALUE;
-    private final String DAYS_PARAM = "cnt";
     private Uri builtDay;
     private Preferences preferences;
 
-    public FetchWeatherOther(Context mContext) {
-        context = mContext;
+    public FetchWeatherOther(Context context) {
         preferences = new Preferences(context);
     }
 
@@ -46,8 +39,10 @@ public class FetchWeatherOther extends AsyncTask<String , Void , WeatherInfo> {
             Log.d(LOG_TAG , "URI Ready");
 
             WeatherInfo weather = gsonWeather();
-            if (weather.getCod() != 200)
+            if (weather.getCod() != 200) {
+                Log.e(LOG_TAG , "cod is 0");
                 return null;
+            }
             return weather;
         }
         catch(IOException e){
@@ -58,13 +53,13 @@ public class FetchWeatherOther extends AsyncTask<String , Void , WeatherInfo> {
     }
 
     private void city(String... params) {
-        UNITS_VALUE = preferences.getUnits();
+        String UNITS_VALUE = preferences.getUnits();
         System.out.println(UNITS_VALUE);
         builtDay = Uri.parse(OPEN_WEATHER_MAP_DAILY_API).buildUpon()
-                .appendQueryParameter(QUERY_PARAM , params[0])
-                .appendQueryParameter(FORMAT_PARAM , FORMAT_VALUE)
-                .appendQueryParameter(UNITS_PARAM , UNITS_VALUE)
-                .appendQueryParameter(DAYS_PARAM , Integer.toString(10))
+                .appendQueryParameter(Constants.QUERY_PARAM , params[0])
+                .appendQueryParameter(Constants.FORMAT_PARAM , Constants.FORMAT_VALUE)
+                .appendQueryParameter(Constants.UNITS_PARAM , UNITS_VALUE)
+                .appendQueryParameter(Constants.DAYS_PARAM , Integer.toString(10))
                 .build();
     }
 

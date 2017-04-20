@@ -1,6 +1,12 @@
 package com.a5corp.weather.utils;
 
 public class Constants {
+    public static final String QUERY_PARAM = "q";
+    public static final String FORMAT_PARAM = "mode";
+    public static final String FORMAT_VALUE = "json";
+    public static final String UNITS_PARAM = "units";
+    public static final String DAYS_PARAM = "cnt";
+    
     public static final String CITY = "city";
     public static final String LASTCITY = "lcity";
 

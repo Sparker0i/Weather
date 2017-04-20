@@ -27,20 +27,10 @@ public class FetchWeather extends AsyncTask<String , Void , Info> {
     private static final String OPEN_WEATHER_MAP_DAILY_API = "http://api.openweathermap.org/data/2.5/weather?";
     private final String LOG_TAG = FetchWeather.class.getSimpleName();
 
-    private Context context;
-    private final String QUERY_PARAM = "q";
-    private final String FORMAT_PARAM = "mode";
-    private final String FORMAT_VALUE = "json";
-    final String LAT_PARAM = "lat";
-    final String LON_PARAM = "lon";
-    private final String UNITS_PARAM = "units";
-    private String UNITS_VALUE;
-    private final String DAYS_PARAM = "cnt";
     private Uri builtDay , builtFort;
     private Preferences preferences;
 
-    public FetchWeather(Context mContext) {
-        context = mContext;
+    public FetchWeather(Context context) {
         preferences = new Preferences(context);
     }
 
@@ -76,37 +66,37 @@ public class FetchWeather extends AsyncTask<String , Void , Info> {
     }
 
     private void city(String... params) {
-        UNITS_VALUE = preferences.getUnits();
+        String UNITS_VALUE = preferences.getUnits();
         System.out.println(UNITS_VALUE);
         builtDay = Uri.parse(OPEN_WEATHER_MAP_DAILY_API).buildUpon()
-                .appendQueryParameter(QUERY_PARAM , params[0])
-                .appendQueryParameter(FORMAT_PARAM , FORMAT_VALUE)
-                .appendQueryParameter(UNITS_PARAM , UNITS_VALUE)
-                .appendQueryParameter(DAYS_PARAM , Integer.toString(10))
+                .appendQueryParameter(Constants.QUERY_PARAM , params[0])
+                .appendQueryParameter(Constants.FORMAT_PARAM , Constants.FORMAT_VALUE)
+                .appendQueryParameter(Constants.UNITS_PARAM , UNITS_VALUE)
+                .appendQueryParameter(Constants.DAYS_PARAM , Integer.toString(10))
                 .build();
         builtFort = Uri.parse(OPEN_WEATHER_MAP_FORECAST_API).buildUpon()
-                .appendQueryParameter(QUERY_PARAM , params[0])
-                .appendQueryParameter(FORMAT_PARAM , FORMAT_VALUE)
-                .appendQueryParameter(UNITS_PARAM , UNITS_VALUE)
-                .appendQueryParameter(DAYS_PARAM , Integer.toString(10))
+                .appendQueryParameter(Constants.QUERY_PARAM , params[0])
+                .appendQueryParameter(Constants.FORMAT_PARAM , Constants.FORMAT_VALUE)
+                .appendQueryParameter(Constants.UNITS_PARAM , UNITS_VALUE)
+                .appendQueryParameter(Constants.DAYS_PARAM , Integer.toString(10))
                 .build();
     }
 
     private void coordinates(String... params) {
-        UNITS_VALUE = preferences.getUnits();
+        String UNITS_VALUE = preferences.getUnits();
         builtDay = Uri.parse(OPEN_WEATHER_MAP_DAILY_API).buildUpon()
-                .appendQueryParameter(LAT_PARAM , params[0])
-                .appendQueryParameter(LON_PARAM , params[1])
-                .appendQueryParameter(FORMAT_PARAM , FORMAT_VALUE)
-                .appendQueryParameter(UNITS_PARAM , UNITS_VALUE)
-                .appendQueryParameter(DAYS_PARAM , Integer.toString(10))
+                .appendQueryParameter(Constants.LATITUDE , params[0])
+                .appendQueryParameter(Constants.LONGITUDE , params[1])
+                .appendQueryParameter(Constants.FORMAT_PARAM , Constants.FORMAT_VALUE)
+                .appendQueryParameter(Constants.UNITS_PARAM , UNITS_VALUE)
+                .appendQueryParameter(Constants.DAYS_PARAM , Integer.toString(10))
                 .build();
         builtFort = Uri.parse(OPEN_WEATHER_MAP_FORECAST_API).buildUpon()
-                .appendQueryParameter(LAT_PARAM , params[0])
-                .appendQueryParameter(LON_PARAM , params[1])
-                .appendQueryParameter(FORMAT_PARAM , FORMAT_VALUE)
-                .appendQueryParameter(UNITS_PARAM , UNITS_VALUE)
-                .appendQueryParameter(DAYS_PARAM , Integer.toString(10))
+                .appendQueryParameter(Constants.LATITUDE , params[0])
+                .appendQueryParameter(Constants.LONGITUDE , params[1])
+                .appendQueryParameter(Constants.FORMAT_PARAM , Constants.FORMAT_VALUE)
+                .appendQueryParameter(Constants.UNITS_PARAM , UNITS_VALUE)
+                .appendQueryParameter(Constants.DAYS_PARAM , Integer.toString(10))
                 .build();
     }
 
