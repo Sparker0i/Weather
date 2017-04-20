@@ -6,6 +6,7 @@ Welcome to my Open Source, easy to use Weather app, built using Android Studio f
 
 Get it on Google Play:
 
+[<img src="https://f-droid.org/badge/get-it-on.png" alt="Get it on F-Droid" height="80">](https://f-droid.org/repository/browse/?fdid=com.a5corp.weather)
 [<img src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png' alt='Get it on Google Play' width='210' height='80'>](https://play.google.com/store/apps/details?id=com.a5corp.weather)
 
 ## To-Do
