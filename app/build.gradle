@@ -12,8 +12,8 @@ android {
         applicationId "com.a5corp.weather"
         minSdkVersion 17
         targetSdkVersion 25
-        versionCode 491
-        versionName "3.0.1-Beta"
+        versionCode 492
+        versionName "3.1"
     }
     buildTypes {
         release {
