@@ -56,9 +56,10 @@ public class NotificationBuilderService extends Service
             getWeather();
         }
         else {
+            mManager.cancelAll();
             Log.i("Cannot Build" , "Notification");
         }
-        return Service.START_NOT_STICKY;
+        return Service.START_STICKY;
     }
 
     public void getWeather() {
@@ -111,11 +112,4 @@ public class NotificationBuilderService extends Service
         mManager.notify(Constants.MY_NOTIFICATION_ID , myNotification);
         Log.i("Built", "Notification");
     }
-
-    @Override
-    public void onDestroy()
-    {
-        super.onDestroy();
-    }
-
 }

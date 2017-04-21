@@ -17,6 +17,7 @@ import com.a5corp.weather.R;
 import com.a5corp.weather.activity.WeatherActivity;
 import com.a5corp.weather.internet.CheckConnection;
 import com.a5corp.weather.preferences.Preferences;
+import com.a5corp.weather.utils.Utils;
 
 public class FirstLaunchFragment extends Fragment {
 
@@ -32,6 +33,9 @@ public class FirstLaunchFragment extends Fragment {
         preferences = new Preferences(getContext());
         cityInput = (EditText) rootView.findViewById(R.id.city_input);
         message = (TextView) rootView.findViewById(R.id.intro_text);
+        if (new Utils(getContext()).isInstallFromUpdate()) {
+            Log.i("Update" , "True");
+        }
         if (GlobalActivity.i == 0) {
             message.setText(getString(R.string.pick_city));
         }

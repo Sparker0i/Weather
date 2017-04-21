@@ -93,18 +93,6 @@ public class WeatherActivity extends AppCompatActivity {
         return fab;
     }
 
-    private void buildNotification() {
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
-        builder.setAutoCancel(true)
-                .setContentTitle("Weather Notification")
-                .setSmallIcon(R.drawable.ic_notification_icon)
-                .setContentText("Please wait while the weather is loading")
-                .setOngoing(true);
-        Notification myNotification = builder.build();
-        NotificationManagerCompat mManager = NotificationManagerCompat.from(this);
-        mManager.notify(Constants.MY_NOTIFICATION_ID, myNotification);
-    }
-
     public void initDrawer() {
         final Context context = this;
         final IProfile profile = new ProfileDrawerItem().withName("Simple Weather")
@@ -133,16 +121,16 @@ public class WeatherActivity extends AppCompatActivity {
                 .withIcon(new IconicsDrawable(this)
                         .icon(GoogleMaterial.Icon.gmd_info))
                 .withSelectable(false);
-        SecondaryDrawerItem item6 = new SecondaryDrawerItem().withIdentifier(6).withName("Custom OpenWeatherMap Key")
+        SecondaryDrawerItem item6 = new SecondaryDrawerItem().withIdentifier(6).withName(getString(R.string.drawer_item_custom_key))
                 .withIcon(new IconicsDrawable(this)
                         .icon(GoogleMaterial.Icon.gmd_create))
                 .withSelectable(false);
-        SecondarySwitchDrawerItem item4 = new SecondarySwitchDrawerItem().withIdentifier(4).withName("Use Fahrenheit")
+        SecondarySwitchDrawerItem item4 = new SecondarySwitchDrawerItem().withIdentifier(4).withName(getString(R.string.drawer_item_fahrenheit))
                 .withChecked(preferences.getUnits().equals("imperial"))
                 .withIcon(new IconicsDrawable(this)
                         .icon(WeatherIcons.Icon.wic_fahrenheit))
                 .withSelectable(false);
-        SecondarySwitchDrawerItem item5 = new SecondarySwitchDrawerItem().withIdentifier(5).withName("Show Ongoing Notification")
+        SecondarySwitchDrawerItem item5 = new SecondarySwitchDrawerItem().withIdentifier(5).withName(getString(R.string.drawer_item_notifications))
                 .withChecked(preferences.getNotifs())
                 .withIcon(new IconicsDrawable(this)
                         .icon(GoogleMaterial.Icon.gmd_notifications))
@@ -167,13 +155,13 @@ public class WeatherActivity extends AppCompatActivity {
             public void onCheckedChanged(IDrawerItem drawerItem, CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     preferences.setNotifs(true);
-                    buildNotification();
+                    startService(new Intent(context , AlarmTriggerService.class));
                 }
                 else {
                     preferences.setNotifs(false);
+                    stopService(new Intent(context , AlarmTriggerService.class));
                     mManager.cancelAll();
                 }
-                startService(new Intent(context , AlarmTriggerService.class));
             }
         });
         drawer = new DrawerBuilder()

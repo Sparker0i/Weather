@@ -28,9 +28,10 @@ public class AlarmTriggerService extends IntentService {
         pendingIntent = PendingIntent.getBroadcast(this, 0, myIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         AlarmManager am = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
-        am.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
-                SystemClock.elapsedRealtime(),
-                AlarmManager.INTERVAL_HOUR,
-                pendingIntent);
+        if (preferences.getNotifs())
+            am.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
+                    SystemClock.elapsedRealtime(),
+                    AlarmManager.INTERVAL_HOUR,
+                    pendingIntent);
     }
 }
