@@ -10,15 +10,6 @@ Get it on Google Play and F-Droid:
 [<img src="https://f-droid.org/badge/get-it-on.png" alt="Get it on F-Droid" height="80">](https://f-droid.org/repository/browse/?fdid=com.a5corp.weather)
 [<img src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png' alt='Get it on Google Play' width='210' height='80'>](https://play.google.com/store/apps/details?id=com.a5corp.weather)
 
-## To-Do
-
-- [x] Auto Detect Location
-- [x] Refreshed Look
-- [ ] Add Material Design Components
-- [ ] Use Of Databases
-- [ ] Widgets
-- [ ] Ability to change colors from within the app
-
 ## Changelog:
 
 (Version 3.x)
@@ -31,14 +22,7 @@ Get it on Google Play and F-Droid:
 - Material Drawer and new About Screen
 - Fixed bug where disabling location permission caused the app to crash
 
-(Version 2.x)
-- Added Auto Detect Location
-- Dropped Support for Android 4.1 and below
-- Refreshed Look When a Day View is selected
-- Refreshed UI Colors
-- Added Support to Search via ZIP Code/PIN
-- Polished View when the City is selected or when the main weather icon is selected
-- Added Swipe to Refresh in the Weather Main Screen
+For previous versions, please refer Changelog file.
 
 ## Contributing
 
