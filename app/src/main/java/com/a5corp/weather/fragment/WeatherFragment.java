@@ -7,6 +7,7 @@ import android.graphics.Typeface;
 import android.os.Handler;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BaseTransientBottomBar;
 import android.support.design.widget.BottomSheetDialogFragment;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -38,9 +39,7 @@ import com.a5corp.weather.model.WeatherInfo;
 import com.a5corp.weather.permissions.GPSTracker;
 import com.a5corp.weather.permissions.Permissions;
 import com.a5corp.weather.preferences.Preferences;
-import com.a5corp.weather.service.AlarmTriggerService;
 import com.a5corp.weather.utils.Constants;
-import com.a5corp.weather.utils.Utils;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 
@@ -255,6 +254,7 @@ public class WeatherFragment extends Fragment {
                             renderWeather(json);
                             Snackbar snackbar = Snackbar.make(rootView, "Loaded Weather Data", 500);
                             snackbar.show();
+                            //function();
                             if (!preferences.getv3TargetShown())
                                 showTargets();
                             pd.dismiss();
@@ -272,6 +272,20 @@ public class WeatherFragment extends Fragment {
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         Log.i("Loaded", "Weather");
         startActivity(intent);
+    }
+
+    private void function() {
+        if (!preferences.getv3ResetShown()) {
+            final Snackbar snackbar = Snackbar.make(rootView, "Due to some internal changes, your last loaded city has been reset. This won't happen again", Snackbar.LENGTH_INDEFINITE);
+            snackbar.setAction("OK", new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    snackbar.dismiss();
+                }
+            });
+            snackbar.show();
+           // preferences.setv3ResetShown(true);
+        }
     }
 
     public List<WeatherFort.WeatherList> getDailyJson() {
@@ -357,12 +371,14 @@ public class WeatherFragment extends Fragment {
                     public void onHidePrompt(MotionEvent event, boolean tappedTarget)
                     {
                         preferences.setv3TargetShown(true);
+                        function();
                     }
 
                     @Override
                     public void onHidePromptComplete()
                     {
                         preferences.setv3TargetShown(true);
+                        function();
                     }
                 })
                 .show();

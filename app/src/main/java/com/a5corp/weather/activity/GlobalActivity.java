@@ -7,6 +7,7 @@ import android.util.Log;
 
 import com.a5corp.weather.R;
 import com.a5corp.weather.preferences.Preferences;
+import com.a5corp.weather.utils.Utils;
 
 public class GlobalActivity extends AppCompatActivity {
 
@@ -25,7 +26,7 @@ public class GlobalActivity extends AppCompatActivity {
         cp = new Preferences(this);
         super.onResume();
 
-        if (!cp.getPrefs().getBoolean("first" , true)) {
+        if (!new Utils(this).isFirstInstall()) {
             Intent intent = new Intent(GlobalActivity.this, WeatherActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             Log.i("Loaded" , "Weather");
