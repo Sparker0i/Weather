@@ -22,6 +22,8 @@ public class Constants {
     public static final String SMALLWIDGET = "jsonSmall";
     public static final String LARGEWIDGET = "jsonLarge";
 
+    public static final String V3RESET = "v3-city-reset";
+
     public static final String V3TUTORIAL = "tut-v3-shown";
 
     public static final String OWM_KEY = "owm_key";
