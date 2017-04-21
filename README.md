@@ -5,7 +5,7 @@
 
 Welcome to my Open Source, easy to use Weather app, built using Android Studio for Android 4.1+
 
-Get it on Google Play:
+Get it on Google Play and F-Droid:
 
 [<img src="https://f-droid.org/badge/get-it-on.png" alt="Get it on F-Droid" height="80">](https://f-droid.org/repository/browse/?fdid=com.a5corp.weather)
 [<img src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png' alt='Get it on Google Play' width='210' height='80'>](https://play.google.com/store/apps/details?id=com.a5corp.weather)
@@ -19,7 +19,19 @@ Get it on Google Play:
 - [ ] Widgets
 - [ ] Ability to change colors from within the app
 
-## Latest Update:
+## Changelog:
+
+(Version 3.x)
+- Added Widget Option
+- Added Weather Notification
+- Added Fahrenheit Temperature Option
+- Added Weather Graphs and Maps
+- New Look for Weather Details Screen
+- Added Custom OWM Key Option
+- Material Drawer and new About Screen
+- Fixed bug where disabling location permission caused the app to crash
+
+(Version 2.x)
 - Added Auto Detect Location
 - Dropped Support for Android 4.1 and below
 - Refreshed Look When a Day View is selected
