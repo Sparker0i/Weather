@@ -5,6 +5,7 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
@@ -107,7 +108,8 @@ public class NotificationBuilderService extends Service
         builder.setSmallIcon(R.drawable.ic_notification_icon);
         builder.setContentIntent(pendingIntent);
         builder.setOngoing(true);
-        builder.setColor(Color.parseColor("#ff0000"));
+        if (Build.VERSION.SDK_INT >= 24)
+            builder.setColor(Color.parseColor("#ff0000"));
         myNotification = builder.build();
         mManager.notify(Constants.MY_NOTIFICATION_ID , myNotification);
         Log.i("Built", "Notification");
