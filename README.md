@@ -28,7 +28,7 @@ For previous versions, please refer Changelog file.
 
 - Create a new PR with a feature you want to add, or fix a bug in an already existing feature
 
-![Weather App](/img/Weather App.png)
+![Weather App](/img/App.png)
 
 ## License
 ```
