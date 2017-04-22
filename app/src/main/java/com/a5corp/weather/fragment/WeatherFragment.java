@@ -40,6 +40,7 @@ import com.a5corp.weather.permissions.GPSTracker;
 import com.a5corp.weather.permissions.Permissions;
 import com.a5corp.weather.preferences.Preferences;
 import com.a5corp.weather.utils.Constants;
+import com.a5corp.weather.utils.Utils;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 
@@ -275,7 +276,7 @@ public class WeatherFragment extends Fragment {
     }
 
     private void function() {
-        if (!preferences.getv3ResetShown()) {
+        if (!preferences.getv3ResetShown() && new Utils(getContext()).isInstallFromUpdate()) {
             final Snackbar snackbar = Snackbar.make(rootView, "Due to some internal changes, your last loaded city has been reset. This won't happen again", Snackbar.LENGTH_INDEFINITE);
             snackbar.setAction("OK", new View.OnClickListener() {
                 @Override
