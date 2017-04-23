@@ -27,11 +27,15 @@ public class GlobalActivity extends AppCompatActivity {
     protected void onResume() {
         cp = new Preferences(this);
         prefs = new Prefs(this);
+        super.onResume();
 
-        if (cp.getLaunched()) {
+        if (!cp.getPrefs().getBoolean("first" , true)) {
             prefs.setLaunched();
             prefs.setCity(cp.getCity());
+            Log.i("Yeah" , "True");
         }
+        else
+            Log.i("No" , "False");
 
         super.onResume();
 
