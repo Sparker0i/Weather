@@ -26,7 +26,7 @@ public class GlobalActivity extends AppCompatActivity {
         cp = new Preferences(this);
         super.onResume();
 
-        if (!new Utils(this).isFirstInstall()) {
+        if (cp.getLaunched()) {
             Intent intent = new Intent(GlobalActivity.this, WeatherActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             Log.i("Loaded" , "Weather");
