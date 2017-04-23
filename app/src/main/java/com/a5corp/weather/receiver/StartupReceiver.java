@@ -6,9 +6,8 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 
-import com.a5corp.weather.preferences.Preferences;
+import com.a5corp.weather.preferences.Prefs;
 import com.a5corp.weather.service.AlarmTriggerService;
-import com.a5corp.weather.service.NotificationBuilderService;
 import com.a5corp.weather.widget.LargeWidgetProvider;
 import com.a5corp.weather.widget.SmallWidgetProvider;
 
@@ -28,7 +27,7 @@ public class StartupReceiver extends BroadcastReceiver {
         intent2.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS,ids);
         context.sendBroadcast(intent2);
 
-        if (new Preferences(context).getNotifs()) {
+        if (new Prefs(context).getNotifs()) {
             Intent i = new Intent("com.a5corp.weather.service.AlarmTriggerService");
             i.setClass(context, AlarmTriggerService.class);
             context.startService(i);

@@ -15,14 +15,14 @@ import com.a5corp.weather.R;
 import com.a5corp.weather.activity.WeatherActivity;
 import com.a5corp.weather.internet.FetchWeatherOther;
 import com.a5corp.weather.model.WeatherInfo;
-import com.a5corp.weather.preferences.Preferences;
+import com.a5corp.weather.preferences.Prefs;
 import com.a5corp.weather.utils.Constants;
 
 import java.util.concurrent.ExecutionException;
 
 public class NotificationBuilderService extends Service
 {
-    Preferences preferences;
+    Prefs preferences;
     NotificationManagerCompat mManager;
     FetchWeatherOther wt;
     Notification myNotification;
@@ -40,7 +40,7 @@ public class NotificationBuilderService extends Service
     public void onCreate()
     {
         super.onCreate();
-        preferences = new Preferences(this);
+        preferences = new Prefs(this);
     }
 
     @SuppressWarnings("static-access")

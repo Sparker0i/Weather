@@ -12,24 +12,24 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.a5corp.weather.activity.GlobalActivity;
+import com.a5corp.weather.GlobalActivity;
 import com.a5corp.weather.R;
 import com.a5corp.weather.activity.WeatherActivity;
 import com.a5corp.weather.internet.CheckConnection;
-import com.a5corp.weather.preferences.Preferences;
+import com.a5corp.weather.preferences.Prefs;
 
 public class FirstLaunchFragment extends Fragment {
 
     View rootView;
     EditText cityInput;
     TextView message;
-    Preferences preferences;
+    Prefs preferences;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_first_launch, container, false);
-        preferences = new Preferences(getContext());
+        preferences = new Prefs(getContext());
         cityInput = (EditText) rootView.findViewById(R.id.city_input);
         message = (TextView) rootView.findViewById(R.id.intro_text);
         if (GlobalActivity.i == 0) {

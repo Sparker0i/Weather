@@ -7,14 +7,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.SystemClock;
 
-import com.a5corp.weather.preferences.Preferences;
+import com.a5corp.weather.preferences.Prefs;
 import com.a5corp.weather.receiver.MyReceiver;
 
 public class AlarmTriggerService extends IntentService {
 
     private static final String TAG = "AlarmTriggerService";
     PendingIntent pendingIntent;
-    Preferences preferences;
+    Prefs preferences;
 
     public AlarmTriggerService() {
         super(TAG);
@@ -22,7 +22,7 @@ public class AlarmTriggerService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        preferences = new Preferences(this);
+        preferences = new Prefs(this);
 
         Intent myIntent = new Intent(this, MyReceiver.class);
         pendingIntent = PendingIntent.getBroadcast(this, 0, myIntent, PendingIntent.FLAG_UPDATE_CURRENT);

@@ -17,7 +17,7 @@ import android.view.ViewGroup;
 import com.a5corp.weather.R;
 import com.a5corp.weather.activity.WeatherActivity;
 import com.a5corp.weather.model.WeatherFort;
-import com.a5corp.weather.preferences.Preferences;
+import com.a5corp.weather.preferences.Prefs;
 import com.a5corp.weather.utils.CustomFormatter;
 import com.a5corp.weather.utils.XFormatter;
 import com.github.mikephil.charting.charts.LineChart;
@@ -43,7 +43,7 @@ public class GraphsFragment extends Fragment {
             pressureEntries = new ArrayList<>() ,
             snowEntries = new ArrayList<>() ,
             windEntries = new ArrayList<>();
-    Preferences pf;
+    Prefs pf;
     Bundle bundle;
     CustomFormatter mValueFormatter;
     String[] dates = new String[10];
@@ -60,7 +60,7 @@ public class GraphsFragment extends Fragment {
     public void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mValueFormatter = new CustomFormatter();
-        pf = new Preferences(getContext());
+        pf = new Prefs(getContext());
         setHasOptionsMenu(true);
     }
 

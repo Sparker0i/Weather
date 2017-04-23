@@ -6,7 +6,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.a5corp.weather.model.WeatherInfo;
-import com.a5corp.weather.preferences.Preferences;
+import com.a5corp.weather.preferences.Prefs;
 import com.a5corp.weather.utils.Constants;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -23,10 +23,10 @@ public class FetchWeatherOther extends AsyncTask<String , Void , WeatherInfo> {
     private final String LOG_TAG = FetchWeatherOther.class.getSimpleName();
 
     private Uri builtDay;
-    private Preferences preferences;
+    private Prefs preferences;
 
     public FetchWeatherOther(Context context) {
-        preferences = new Preferences(context);
+        preferences = new Prefs(context);
     }
 
     @Override

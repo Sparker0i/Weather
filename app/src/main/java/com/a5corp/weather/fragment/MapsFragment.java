@@ -10,8 +10,7 @@ import android.webkit.WebView;
 
 import com.a5corp.weather.R;
 import com.a5corp.weather.activity.WeatherActivity;
-import com.a5corp.weather.preferences.Preferences;
-import com.a5corp.weather.utils.Constants;
+import com.a5corp.weather.preferences.Prefs;
 
 import it.sephiroth.android.library.bottomnavigation.BottomNavigation;
 
@@ -20,7 +19,7 @@ public class MapsFragment extends Fragment {
     public View rootView;
     WebView webView;
     BottomNavigation mBottomBar;
-    Preferences prefs;
+    Prefs prefs;
 
     public MapsFragment() {
         // Required empty public constructor
@@ -32,7 +31,7 @@ public class MapsFragment extends Fragment {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_maps, container, false);
         webView = (WebView) rootView.findViewById(R.id.webView);
-        prefs = new Preferences(getContext());
+        prefs = new Prefs(getContext());
         loadMap();
         ((WeatherActivity) getActivity()).hideFab();
         return rootView;

@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import com.a5corp.weather.R;
 import com.a5corp.weather.model.WeatherFort;
-import com.a5corp.weather.preferences.Preferences;
+import com.a5corp.weather.preferences.Prefs;
 
 public class CustomBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
@@ -24,7 +24,7 @@ public class CustomBottomSheetDialogFragment extends BottomSheetDialogFragment {
     TextView nightValue , mornValue , dayValue , eveValue;
     TextView condition;
     View rootView;
-    Preferences preferences;
+    Prefs preferences;
     Typeface weatherFont;
     WeatherFort.WeatherList json;
     private static final String DESCRIBABLE_KEY = "describable_key";
@@ -44,7 +44,7 @@ public class CustomBottomSheetDialogFragment extends BottomSheetDialogFragment {
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.dialog_modal , container, false);
         condition = (TextView) rootView.findViewById(R.id.description);
-        preferences = new Preferences(getContext());
+        preferences = new Prefs(getContext());
         nightValue = (TextView) rootView.findViewById(R.id.night_temperature);
         mornValue = (TextView) rootView.findViewById(R.id.morning_temperature);
         dayValue = (TextView) rootView.findViewById(R.id.day_temperature);

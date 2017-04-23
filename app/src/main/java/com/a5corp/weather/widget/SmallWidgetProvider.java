@@ -18,7 +18,7 @@ import com.a5corp.weather.R;
 import com.a5corp.weather.internet.CheckConnection;
 import com.a5corp.weather.internet.FetchWeatherOther;
 import com.a5corp.weather.model.WeatherInfo;
-import com.a5corp.weather.preferences.Preferences;
+import com.a5corp.weather.preferences.Prefs;
 import com.google.gson.Gson;
 
 import org.json.JSONException;
@@ -31,7 +31,7 @@ public class SmallWidgetProvider extends AppWidgetProvider {
 
     WeatherInfo json;
     Context context;
-    Preferences preferences;
+    Prefs preferences;
 
     @Override
     public void onEnabled(Context context) {
@@ -50,7 +50,7 @@ public class SmallWidgetProvider extends AppWidgetProvider {
         try {
             for (int widgetId : appWidgetIds) {
                 this.context = context;
-                preferences = new Preferences(context);
+                preferences = new Prefs(context);
                 RemoteViews remoteViews = new RemoteViews(context.getPackageName(),
                         R.layout.widget_small);
                 loadFromPreference(preferences, remoteViews, appWidgetManager, appWidgetIds, widgetId);
@@ -70,13 +70,13 @@ public class SmallWidgetProvider extends AppWidgetProvider {
                 if (!connection.isNetworkAvailable())
                     return;
 
-                json = wt.execute(new Preferences(context).getCity()).get();
+                json = wt.execute(new Prefs(context).getCity()).get();
                 preferences.storeSmallWidget(new Gson().toJson(json));
                 double temp = json.getMain().getTemp();
                 remoteViews.setTextViewText(R.id.widget_city, json.getName() +
                         ", " +
                         json.getSys().getCountry());
-                String ut = new Preferences(context).getUnits().equals("metric") ? "C" : "F";
+                String ut = new Prefs(context).getUnits().equals("metric") ? "C" : "F";
                 remoteViews.setTextViewText(R.id.widget_temperature, Integer.toString((int) temp) + "°" + ut);
                 setWeatherIcon(json.getWeather().get(0).getId() , context , remoteViews);
 
@@ -433,7 +433,7 @@ public class SmallWidgetProvider extends AppWidgetProvider {
         remoteViews.setImageViewBitmap(R.id.widget_icon , createWeatherIcon(mContext , icon));
     }
 
-    private void loadFromPreference(Preferences preferences , RemoteViews remoteViews , AppWidgetManager appWidgetManager , int[] appWidgetIds , int widgetId) throws JSONException{
+    private void loadFromPreference(Prefs preferences , RemoteViews remoteViews , AppWidgetManager appWidgetManager , int[] appWidgetIds , int widgetId) throws JSONException{
         JSONObject json;
         if (preferences.getSmallWidget() != null)
             json = new JSONObject(preferences.getSmallWidget());
@@ -451,7 +451,7 @@ public class SmallWidgetProvider extends AppWidgetProvider {
         remoteViews.setTextViewText(R.id.widget_city, json.getString("name") +
                 ", " +
                 json.getJSONObject("sys").getString("country"));
-        String ut = new Preferences(context).getUnits().equals("metric") ? "C" : "F";
+        String ut = new Prefs(context).getUnits().equals("metric") ? "C" : "F";
         remoteViews.setTextViewText(R.id.widget_temperature, Integer.toString((int) temp) + "°" + ut);
         setWeatherIcon(json.getJSONArray("weather").getJSONObject(0).getInt("id") , context , remoteViews);
 

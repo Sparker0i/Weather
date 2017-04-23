@@ -3,14 +3,13 @@ package com.a5corp.weather.preferences;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.util.Log;
 
 import com.a5corp.weather.utils.Constants;
 
-public class Preferences {
+public class Prefs {
     private static SharedPreferences prefs;
 
-    public Preferences(Context context) {
+    public Prefs(Context context) {
         prefs = PreferenceManager.getDefaultSharedPreferences(context);
     }
 
@@ -19,6 +18,7 @@ public class Preferences {
     }
 
     public String getCity() {
+        String city = null;
         return prefs.getString(Constants.CITY , null);
     }
 

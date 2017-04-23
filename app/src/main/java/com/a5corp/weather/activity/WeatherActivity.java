@@ -1,13 +1,11 @@
 package com.a5corp.weather.activity;
 
-import android.app.Notification;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -17,12 +15,13 @@ import android.view.View;
 import android.widget.CompoundButton;
 
 import com.a5corp.weather.BuildConfig;
+import com.a5corp.weather.GlobalActivity;
 import com.a5corp.weather.R;
 import com.a5corp.weather.fragment.GraphsFragment;
 import com.a5corp.weather.fragment.MapsFragment;
 import com.a5corp.weather.fragment.WeatherFragment;
 import com.a5corp.weather.model.WeatherFort;
-import com.a5corp.weather.preferences.Preferences;
+import com.a5corp.weather.preferences.Prefs;
 import com.a5corp.weather.service.AlarmTriggerService;
 import com.a5corp.weather.utils.Constants;
 import com.afollestad.materialdialogs.DialogAction;
@@ -49,7 +48,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class WeatherActivity extends AppCompatActivity {
-    Preferences preferences;
+    Prefs preferences;
 
     @BindView(R.id.fab) FloatingActionButton fab;
     @OnClick(R.id.fab) void fabClick() {
@@ -64,7 +63,7 @@ public class WeatherActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         mManager = NotificationManagerCompat.from(this);
-        preferences = new Preferences(this);
+        preferences = new Prefs(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather);
         ButterKnife.bind(this);
@@ -310,7 +309,7 @@ public class WeatherActivity extends AppCompatActivity {
         WeatherFragment wf = (WeatherFragment)getSupportFragmentManager()
                 .findFragmentById(R.id.fragment);
         wf.changeCity(city);
-        GlobalActivity.cp.setCity(city);
+        preferences.setCity(city);
     }
 
     @Override

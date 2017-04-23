@@ -18,7 +18,7 @@ import com.a5corp.weather.R;
 import com.a5corp.weather.internet.CheckConnection;
 import com.a5corp.weather.internet.FetchWeatherOther;
 import com.a5corp.weather.model.WeatherInfo;
-import com.a5corp.weather.preferences.Preferences;
+import com.a5corp.weather.preferences.Prefs;
 import com.google.gson.Gson;
 
 import java.util.Calendar;
@@ -45,7 +45,7 @@ public class LargeWidgetProvider extends AppWidgetProvider {
         super.onUpdate(context, appWidgetManager, appWidgetIds);
         this.context = context;
         try {
-            Preferences preferences = new Preferences(context);
+            Prefs preferences = new Prefs(context);
             CheckConnection connection = new CheckConnection(context);
             for (int widgetId : appWidgetIds) {
                 RemoteViews remoteViews = new RemoteViews(context.getPackageName(),
@@ -54,7 +54,7 @@ public class LargeWidgetProvider extends AppWidgetProvider {
                 FetchWeatherOther wt = new FetchWeatherOther(context);
                 if (!connection.isNetworkAvailable())
                     return;
-                json = wt.execute(new Preferences(context).getCity()).get();
+                json = wt.execute(new Prefs(context).getCity()).get();
                 preferences.storeLargeWidget(new Gson().toJson(json));
                 double temp = json.getMain().getTemp();
                 /*
@@ -70,7 +70,7 @@ public class LargeWidgetProvider extends AppWidgetProvider {
                 remoteViews.setTextViewText(R.id.widget_city, json.getName() +
                         ", " +
                         json.getSys().getCountry());
-                String ut = new Preferences(context).getUnits().equals("metric") ? "C" : "F";
+                String ut = new Prefs(context).getUnits().equals("metric") ? "C" : "F";
                 remoteViews.setTextViewText(R.id.widget_temperature, Integer.toString((int) temp) + "°" + ut);
                 setWeatherIcon(json.getWeather().get(0).getId() , context , remoteViews);
                 String rs = json.getWeather().get(0).getDescription();
@@ -440,7 +440,7 @@ public class LargeWidgetProvider extends AppWidgetProvider {
         remoteViews.setImageViewBitmap(R.id.widget_icon , createWeatherIcon(mContext , icon));
     }
 
-    private void loadFromPreference(Preferences preferences , RemoteViews remoteViews , AppWidgetManager appWidgetManager , int[] appWidgetIds , int widgetId) {
+    private void loadFromPreference(Prefs preferences , RemoteViews remoteViews , AppWidgetManager appWidgetManager , int[] appWidgetIds , int widgetId) {
         WeatherInfo json;
         if (preferences.getLargeWidget() != null)
             json = new Gson().fromJson(preferences.getLargeWidget() , WeatherInfo.class);
@@ -458,7 +458,7 @@ public class LargeWidgetProvider extends AppWidgetProvider {
         remoteViews.setTextViewText(R.id.widget_city, json.getName() +
                 ", " +
                 json.getSys().getCountry());
-        String ut = new Preferences(context).getUnits().equals("metric") ? "C" : "F";
+        String ut = new Prefs(context).getUnits().equals("metric") ? "C" : "F";
         remoteViews.setTextViewText(R.id.widget_temperature, Integer.toString((int) temp) + "°" + ut);
         setWeatherIcon(json.getWeather().get(0).getId() , context , remoteViews);
         String rs = json.getWeather().get(0).getDescription();

@@ -7,7 +7,6 @@ import android.graphics.Typeface;
 import android.os.Handler;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
-import android.support.design.widget.BaseTransientBottomBar;
 import android.support.design.widget.BottomSheetDialogFragment;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -27,7 +26,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.a5corp.weather.activity.GlobalActivity;
+import com.a5corp.weather.GlobalActivity;
 import com.a5corp.weather.R;
 import com.a5corp.weather.activity.FirstLaunch;
 import com.a5corp.weather.activity.WeatherActivity;
@@ -38,7 +37,7 @@ import com.a5corp.weather.model.WeatherFort;
 import com.a5corp.weather.model.WeatherInfo;
 import com.a5corp.weather.permissions.GPSTracker;
 import com.a5corp.weather.permissions.Permissions;
-import com.a5corp.weather.preferences.Preferences;
+import com.a5corp.weather.preferences.Prefs;
 import com.a5corp.weather.utils.Constants;
 import com.a5corp.weather.utils.Utils;
 import com.afollestad.materialdialogs.DialogAction;
@@ -82,7 +81,7 @@ public class WeatherFragment extends Fragment {
     Info json;
     MaterialDialog pd;
     FetchWeather wt;
-    Preferences preferences;
+    Prefs preferences;
     View rootView;
     Permissions permission;
 
@@ -165,7 +164,7 @@ public class WeatherFragment extends Fragment {
                 .progress(true , 0);
         pd = builder.build();
         setHasOptionsMenu(true);
-        preferences = new Preferences(getContext());
+        preferences = new Prefs(getContext());
         weatherFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/weather.ttf");
         updateWeatherData(preferences.getCity(), null, null);
     }
@@ -232,7 +231,7 @@ public class WeatherFragment extends Fragment {
                                     getActivity().getString(R.string.place_not_found),
                                     Toast.LENGTH_LONG).show();
                             GlobalActivity.i = 1;
-                            if (preferences.getLaunched()) {
+                            if (!preferences.getLaunched()) {
                                 FirstStart();
                             } else {
                                 cc = new CheckConnection(getContext());
@@ -285,7 +284,7 @@ public class WeatherFragment extends Fragment {
                 }
             });
             snackbar.show();
-           // preferences.setv3ResetShown(true);
+            preferences.setv3ResetShown(true);
         }
     }
 

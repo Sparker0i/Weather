@@ -17,7 +17,7 @@
         android:resizeableActivity="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity
-            android:name=".activity.GlobalActivity"
+            android:name=".GlobalActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

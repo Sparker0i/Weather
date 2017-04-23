@@ -1,17 +1,19 @@
-package com.a5corp.weather.activity;
+package com.a5corp.weather;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-import com.a5corp.weather.R;
+import com.a5corp.weather.activity.FirstLaunch;
+import com.a5corp.weather.activity.WeatherActivity;
 import com.a5corp.weather.preferences.Preferences;
-import com.a5corp.weather.utils.Utils;
+import com.a5corp.weather.preferences.Prefs;
 
 public class GlobalActivity extends AppCompatActivity {
 
     public static Preferences cp;
+    public static Prefs prefs;
     public static int i = 0;
 
     @Override
@@ -24,9 +26,16 @@ public class GlobalActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         cp = new Preferences(this);
-        super.onResume();
+        prefs = new Prefs(this);
 
         if (cp.getLaunched()) {
+            prefs.setLaunched();
+            prefs.setCity(cp.getCity());
+        }
+
+        super.onResume();
+
+        if (prefs.getLaunched()) {
             Intent intent = new Intent(GlobalActivity.this, WeatherActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             Log.i("Loaded" , "Weather");
