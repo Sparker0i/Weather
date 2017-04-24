@@ -15,7 +15,6 @@ import android.view.View;
 import android.widget.CompoundButton;
 
 import com.a5corp.weather.BuildConfig;
-import com.a5corp.weather.GlobalActivity;
 import com.a5corp.weather.R;
 import com.a5corp.weather.fragment.GraphsFragment;
 import com.a5corp.weather.fragment.MapsFragment;

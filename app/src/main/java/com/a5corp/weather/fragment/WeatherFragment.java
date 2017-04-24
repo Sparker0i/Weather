@@ -23,6 +23,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.HorizontalScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -70,6 +71,7 @@ public class WeatherFragment extends Fragment {
     @BindView(R.id.sunset_icon) TextView sunsetIcon;
     @BindView(R.id.wind_icon) TextView windIcon;
     @BindView(R.id.humidity_icon) TextView humidityIcon;
+    @BindView(R.id.horizontalScrollView) HorizontalScrollView horizontalScrollView;
     double tc;
     Handler handler;
     BottomSheetDialogFragment bottomSheetDialogFragment;
