@@ -107,7 +107,6 @@ public class NotificationBuilderService extends Service
                 + "\nHumidity : " + humidity + "%"));
         builder.setSmallIcon(R.drawable.ic_notification_icon);
         builder.setContentIntent(pendingIntent);
-        builder.setOngoing(true);
         if (Build.VERSION.SDK_INT >= 24)
             builder.setColor(Color.parseColor("#ff0000"));
         myNotification = builder.build();
