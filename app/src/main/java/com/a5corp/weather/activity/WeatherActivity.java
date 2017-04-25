@@ -8,7 +8,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -217,15 +216,11 @@ public class WeatherActivity extends AppCompatActivity {
                 .build();
     }
 
-    public ActionBarDrawerToggle getToggle() {
-        return drawer.getActionBarDrawerToggle();
-    }
-
     private void showApiKeyBox() {
         new MaterialDialog.Builder(this)
                 .title("Change OWM API Key")
                 .content("You can enter your own custom OpenWeatherMap API key, and help reduce the load from my API Key\n\n" +
-                        "BEWARE: Entering a wrong API Key may result in a weird behaviour of the app. Do this at your own risk")
+                        "BEWARE: Entering a wrong API Key may result in the app going haywire. Do this at your own risk")
                 .onAny(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {

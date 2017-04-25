@@ -43,12 +43,10 @@ public class AboutActivity extends AppCompatActivity
         setContentView(R.layout.activity_about);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
-
         if(getSupportActionBar() != null)
         {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-
         initCards();
     }
 
