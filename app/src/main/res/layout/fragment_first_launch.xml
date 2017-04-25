@@ -14,31 +14,31 @@
         android:text="@string/go"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/city_input"
+        android:layout_alignBaseline="@+id/city_input"
         android:id="@+id/go_button"
-        android:layout_alignEnd="@+id/city_input" />
+        android:layout_below="@+id/intro_text"
+        android:layout_alignParentEnd="true"/>
 
     <TextView
-        android:text="@string/pick_city"
+        android:id="@+id/intro_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/city_input"
+        android:text="@string/pick_city"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="64dp"
-        android:id="@+id/intro_text"
-        android:textSize="24sp"
-        android:textColor="#000000" />
+        android:textSize="20sp"
+        android:textColor="#000000"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"/>
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_toStartOf="@id/go_button"
         android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
         android:inputType="textPersonName"
-        android:ems="10"
         android:id="@+id/city_input"
         tools:ignore="LabelFor"
-        android:layout_centerVertical="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_below="@+id/intro_text"
+        android:layout_alignParentStart="true"/>
 
 </RelativeLayout>
