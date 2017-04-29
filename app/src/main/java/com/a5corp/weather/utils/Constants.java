@@ -17,6 +17,9 @@ public class Constants {
 
     public static final String UNITS = "units";
 
+    public static final String HOUR24 = "24-hour";
+    public static final String HOUR24_TIME_STRING = "time-string";
+
     public static final String NOTIFICATIONS = "notifs";
 
     public static final String SMALLWIDGET = "jsonSmall";

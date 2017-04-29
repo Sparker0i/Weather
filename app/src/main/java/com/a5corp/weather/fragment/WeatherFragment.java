@@ -970,8 +970,8 @@ public class WeatherFragment extends Fragment {
                     }
                 });
             }
-            final String d1 = new java.text.SimpleDateFormat("hh:mm a" , Locale.US).format(new Date(json0.getSys().getSunrise() * 1000));
-            final String d2 = new java.text.SimpleDateFormat("hh:mm a" , Locale.US).format(new Date(json0.getSys().getSunset() * 1000));
+            final String d1 = new java.text.SimpleDateFormat(preferences.get24HourTimeString() , Locale.US).format(new Date(json0.getSys().getSunrise() * 1000));
+            final String d2 = new java.text.SimpleDateFormat(preferences.get24HourTimeString() , Locale.US).format(new Date(json0.getSys().getSunset() * 1000));
             sunriseView.setText(d1);
             sunsetView.setText(d2);
             DateFormat df = DateFormat.getDateTimeInstance();
