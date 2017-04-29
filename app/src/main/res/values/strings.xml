@@ -236,4 +236,5 @@
     <string name="app_link_direct">https://play.google.com/store/apps/details?id=com.a5corp.weather</string>
     <string name="github_link">https://github.com/Sparker0i</string>
     <string name="enter_city_hint">Enter city name</string>
+    <string name="drawer_item_24hour">24 Hour mode</string>
 </resources>

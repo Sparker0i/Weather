@@ -123,9 +123,13 @@ public class WeatherActivity extends AppCompatActivity {
                         .icon(GoogleMaterial.Icon.gmd_create))
                 .withSelectable(false);
         SecondarySwitchDrawerItem item4 = new SecondarySwitchDrawerItem().withIdentifier(4).withName(getString(R.string.drawer_item_fahrenheit))
-                .withChecked(preferences.getUnits().equals("imperial"))
+            .withChecked(preferences.getUnits().equals("imperial"))
+            .withIcon(new IconicsDrawable(this)
+                .icon(WeatherIcons.Icon.wic_fahrenheit));
+        SecondarySwitchDrawerItem item24Hour = new SecondarySwitchDrawerItem().withIdentifier(24).withName(getString(R.string.drawer_item_24hour))
+                .withChecked(preferences.is24Hour())
                 .withIcon(new IconicsDrawable(this)
-                        .icon(WeatherIcons.Icon.wic_fahrenheit))
+                        .icon(GoogleMaterial.Icon.gmd_access_time))
                 .withSelectable(false);
         SecondarySwitchDrawerItem item5 = new SecondarySwitchDrawerItem().withIdentifier(5).withName(getString(R.string.drawer_item_notifications))
                 .withChecked(preferences.getNotifs())
@@ -145,6 +149,23 @@ public class WeatherActivity extends AppCompatActivity {
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.fragment, new WeatherFragment())
                         .commit();
+            }
+        });
+        item24Hour.withOnCheckedChangeListener(new OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(IDrawerItem drawerItem, CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    preferences.set24Hour(true);
+                    preferences.set24HourTimeString("HH:mm");
+                }
+                else {
+                    preferences.set24Hour(false);
+                    preferences.set24HourTimeString("hh:mm a");
+                }
+                drawer.closeDrawer();
+                getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment, new WeatherFragment())
+                    .commit();
             }
         });
         item5.withOnCheckedChangeListener(new OnCheckedChangeListener() {
@@ -174,6 +195,7 @@ public class WeatherActivity extends AppCompatActivity {
                         item3,
                         new DividerDrawerItem(),
                         item4,
+                        item24Hour,
                         item5,
                         new DividerDrawerItem(),
                         item6,

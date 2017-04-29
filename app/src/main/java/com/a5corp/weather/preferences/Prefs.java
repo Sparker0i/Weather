@@ -68,6 +68,20 @@ public class Prefs {
         return prefs.getString(Constants.UNITS , "metric");
     }
 
+    public void set24Hour(Boolean hour24) {
+        prefs.edit().putBoolean(Constants.HOUR24, hour24).apply();
+    }
+
+    public Boolean is24Hour() { return prefs.getBoolean(Constants.HOUR24, false); }
+
+    public void set24HourTimeString(String string) {
+        prefs.edit().putString(Constants.HOUR24_TIME_STRING , string).apply();
+    }
+
+    public String get24HourTimeString() {
+        return prefs.getString(Constants.HOUR24_TIME_STRING , "hh:mm a");
+    }
+
     public void setNotifs(Boolean bool) {
         prefs.edit().putBoolean(Constants.NOTIFICATIONS , bool).apply();
     }
