@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -142,8 +143,9 @@ public class WeatherActivity extends AppCompatActivity {
                     preferences.setUnits("metric");
                 }
                 drawer.closeDrawer();
+                wf = new WeatherFragment();
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragment, new WeatherFragment())
+                        .replace(R.id.fragment, wf)
                         .commit();
             }
         });
@@ -186,8 +188,9 @@ public class WeatherActivity extends AppCompatActivity {
                             if (drawerItem != null) {
                                 switch((int) drawerItem.getIdentifier()) {
                                     case 1:
+                                        wf = new WeatherFragment();
                                         getSupportFragmentManager().beginTransaction()
-                                                .replace(R.id.fragment, new WeatherFragment())
+                                                .replace(R.id.fragment, wf)
                                                 .commit();
                                         break;
                                     case 2:
