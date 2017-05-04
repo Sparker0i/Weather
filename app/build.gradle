@@ -44,6 +44,7 @@ dependencies {
     compile 'com.mikepenz:iconics-core:2.8.2@aar'
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.1'
     compile 'com.mikepenz:google-material-typeface:3.0.1.0.original@aar'
+    compile 'com.github.florent37:materialtextfield:1.0.7'
     compile 'com.mikepenz:weather-icons-typeface:2.0.10.2@aar'
     compile 'com.github.gabrielemariotti.cards:cardslib-core:2.1.0'
     compile 'com.github.gabrielemariotti.cards:cardslib-cards:2.1.0'

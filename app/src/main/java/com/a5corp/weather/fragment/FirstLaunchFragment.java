@@ -5,6 +5,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,18 +48,32 @@ public class FirstLaunchFragment extends Fragment {
                     Snackbar.make(rootView , "Please check your Internet connection." , Snackbar.LENGTH_SHORT).show();
                 }
                 else if (cityInput.getText().length() > 0) {
-                    preferences.setCity(cityInput.getText().toString());
-                    Intent intent = new Intent(getActivity(), WeatherActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    Log.i("Loaded", "Weather");
-                    startActivity(intent);
-                    Log.i("Changed", "City");
+                    launchActivity();
                 }
                 else {
                     Snackbar.make(rootView , "Enter a City Name First" , Snackbar.LENGTH_SHORT).show();
                 }
             }
         });
+        cityInput.setOnEditorActionListener(new EditText.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
+                    launchActivity();
+                    return true;
+                }
+                return false;
+            }
+        });
         return rootView;
+    }
+
+    private void launchActivity() {
+        preferences.setCity(cityInput.getText().toString());
+        Intent intent = new Intent(getActivity(), WeatherActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        Log.i("Loaded", "Weather");
+        startActivity(intent);
+        Log.i("Changed", "City");
     }
 }
