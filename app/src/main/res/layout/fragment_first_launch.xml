@@ -18,9 +18,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/go"
-        android:layout_alignBottom="@+id/materialTextField"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="4dp" />
+        android:layout_below="@+id/materialTextField"
+        android:layout_alignParentEnd="true" />
 
     <TextView
         android:id="@+id/intro_text"
@@ -38,22 +37,24 @@
     <com.github.florent37.materialtextfield.MaterialTextField
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:mtf_image="@drawable/icon"
         android:id="@+id/materialTextField"
+        app:mtf_image="@drawable/icon"
+        app:mtf_backgroundColor="@color/md_white_1000"
         app:mtf_openKeyboardOnFocus="true"
         android:layout_centerVertical="true"
         android:layout_alignParentStart="true"
-        android:layout_toStartOf="@+id/go_button">
+        android:layout_toStartOf="@+id/go_button"
+        android:layout_alignParentEnd="true">
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/city_input"
-        android:hint="@string/enter_city_hint"
-        android:textColor="#333"
-        android:maxLines="1"
-        android:textColorHint="#666"
-        android:textSize="15sp" />
+        <EditText
+            android:id="@+id/city_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/materialTextField"
+            android:ems="10"
+            android:hint="@string/enter_city_hint"
+            android:inputType="textPersonName" />
 
     </com.github.florent37.materialtextfield.MaterialTextField>
 
