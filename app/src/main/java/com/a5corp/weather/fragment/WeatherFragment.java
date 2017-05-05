@@ -55,6 +55,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
 
+import static com.a5corp.weather.utils.Constants.DESCRIBABLE_KEY;
+
 public class WeatherFragment extends Fragment {
     Typeface weatherFont;
     @BindView(R.id.button1) TextView button;
@@ -83,6 +85,7 @@ public class WeatherFragment extends Fragment {
     MaterialDialog pd;
     FetchWeather wt;
     Prefs preferences;
+    GPSTracker gps;
     View rootView;
     Permissions permission;
 
@@ -197,6 +200,12 @@ public class WeatherFragment extends Fragment {
                 updateWeatherData(preferences.getCity(), null, null);
             }
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        gps.stopUsingGPS();
     }
 
     private void updateWeatherData(final String city, final String lat, final String lon) {
@@ -436,7 +445,7 @@ public class WeatherFragment extends Fragment {
     }
 
     private void showCity() {
-        GPSTracker gps = new GPSTracker(getContext());
+        gps = new GPSTracker(getContext());
         if (!gps.canGetLocation())
             gps.showSettingsAlert();
         else {
@@ -1148,8 +1157,6 @@ public class WeatherFragment extends Fragment {
                 break;
         }
     }
-
-    private static final String DESCRIBABLE_KEY = "describable_key";
 
     public static CustomBottomSheetDialogFragment newInstance(WeatherFort.WeatherList describable) {
         CustomBottomSheetDialogFragment fragment = new CustomBottomSheetDialogFragment();

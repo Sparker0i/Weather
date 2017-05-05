@@ -33,6 +33,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import static com.a5corp.weather.utils.Constants.DESCRIBABLE_KEY;
+
 public class GraphsFragment extends Fragment {
 
     View rootView;
@@ -49,7 +51,6 @@ public class GraphsFragment extends Fragment {
     String[] dates = new String[10];
     private Menu menu;
     int i = 0;
-    private static final String DESCRIBABLE_KEY = "describable_key";
     private ArrayList<WeatherFort.WeatherList> mDescribable;
 
     public GraphsFragment() {

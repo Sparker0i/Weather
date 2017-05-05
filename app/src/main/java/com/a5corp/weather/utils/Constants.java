@@ -35,4 +35,6 @@ public class Constants {
     public static final int MY_NOTIFICATION_ID = 32094;
 
     public static final String OWM_APP_ID = "4c08a22b02c58467e6241629c1d08717";
+
+    public static final String DESCRIBABLE_KEY = "describable_key";
 }

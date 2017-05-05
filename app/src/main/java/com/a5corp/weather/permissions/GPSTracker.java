@@ -15,19 +15,15 @@ import android.util.Log;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 
-public class GPSTracker extends Service implements LocationListener {
+public class GPSTracker implements LocationListener {
 
     private final Context mContext;
-
-    boolean isGPSEnabled = false;
-
-    boolean isNetworkEnabled = false;
-
-    boolean canGetLocation = false;
-
-    Location location; // location
-    double latitude; // latitude
-    double longitude; // longitude
+    private boolean isGPSEnabled = false;
+    private boolean isNetworkEnabled = false;
+    private boolean canGetLocation = false;
+    private Location location; // location
+    private double latitude; // latitude
+    private double longitude; // longitude
 
     // The minimum distance to change Updates in meters
     private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; // 10 meters
@@ -36,17 +32,17 @@ public class GPSTracker extends Service implements LocationListener {
     private static final long MIN_TIME_BW_UPDATES = 1000 * 60; // 1 minute
 
     // Declaring a Location Manager
-    protected LocationManager locationManager;
+    private LocationManager locationManager;
 
     public GPSTracker(Context context) {
         this.mContext = context;
         getLocation();
     }
 
-    public Location getLocation() {
+    private Location getLocation() {
         try {
             locationManager = (LocationManager) mContext
-                    .getSystemService(LOCATION_SERVICE);
+                    .getSystemService(Service.LOCATION_SERVICE);
 
             // getting GPS status
             isGPSEnabled = locationManager
@@ -191,10 +187,4 @@ public class GPSTracker extends Service implements LocationListener {
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {
     }
-
-    @Override
-    public IBinder onBind(Intent arg0) {
-        return null;
-    }
-
 }
