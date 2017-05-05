@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.a5corp.weather.BuildConfig;
 import com.a5corp.weather.R;
 import com.a5corp.weather.activity.LicenseActivity;
+import com.afollestad.materialdialogs.MaterialDialog;
 
 import it.gmariotti.cardslib.library.internal.Card;
 
@@ -174,6 +175,18 @@ public class AboutCard extends Card
                     }
                 });
                 break;
+            }
+
+            case 4:
+            {
+                parent.findViewById(R.id.license_layout).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(Intent.ACTION_VIEW);
+                        intent.setData(Uri.parse(context.getString(R.string.license_link)));
+                        context.startActivity(intent);
+                    }
+                });
             }
 
             case 5:

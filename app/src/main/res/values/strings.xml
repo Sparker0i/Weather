@@ -140,6 +140,7 @@
     <string name="credits_header">CREDITS</string>
     <string name="libraries_header">OPEN SOURCE LICENSES</string>
     <string name="version_header">VERSION</string>
+    <string name="license_header">LICENSE</string>
     <string name="inspiration_header">INSPIRATION</string>
     <string name="build_version">Build version</string>
     <string name="dev_1_title">Aaditya Menon</string>
@@ -148,6 +149,8 @@
     <string name="dev_2_title">OpenWeatherMap</string>
     <string name="dev_2_name">OpenWeatherMap Inc.</string>
     <string name="dev_2_link">https://openweathermap.org/</string>
+    <string name="app_license">App License</string>
+    <string name="app_license_value">GNU GPL v3</string>
 
     <string name="lib_1">Weather Icons</string>
     <string name="lib_1_author">Erik Flowers</string>
@@ -217,8 +220,10 @@
     <string name="insp_2_link">https://play.google.com/store/apps/details?id=com.casticalabs.forecastie</string>
 
     <string name="insp_3">Mini RTO</string>
-        <string name="insp_3_author">chandruscm</string>
+    <string name="insp_3_author">chandruscm</string>
     <string name="insp_3_link">https://play.google.com/store/apps/details?id=com.chandruscm.minirto</string>
+
+    <string name="license_link">https://www.gnu.org/licenses/gpl-3.0.txt</string>
 
     <string name="mit_license"><![CDATA[
     <br><br>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
