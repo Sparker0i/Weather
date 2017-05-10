@@ -26,7 +26,7 @@ For previous versions, please refer Changelog file.
 
 ## Contributing
 
-- Create a new PR with a feature you want to add, or fix a bug in an already existing feature
+- Create a new PR with a feature you want to add (though this depends upon the discretion of the developer, ie. me), or fix a bug in an already existing feature
 
 ![Weather App](/img/App.png)
 
