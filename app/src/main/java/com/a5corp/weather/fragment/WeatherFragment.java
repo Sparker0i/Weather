@@ -98,6 +98,7 @@ public class WeatherFragment extends Fragment {
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_weather, container, false);
         ButterKnife.bind(this , rootView);
+        gps = new GPSTracker(getContext());
         cityField.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
         updatedField.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
         humidityView.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
