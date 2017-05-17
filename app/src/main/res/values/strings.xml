@@ -7,6 +7,7 @@
     <string name="about_page">About</string>
     <string name="location">Location</string>
     <string name="toggle_values">Toggle Values</string>
+    <string name="search">Search</string>
 
     <string name="first_go_text">GO</string>
     <string name="uh_oh">Uh oh. Seems like the city you entered does not exist on the Database. Please Try Again</string>
