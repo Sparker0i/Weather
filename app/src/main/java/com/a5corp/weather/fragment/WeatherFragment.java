@@ -184,6 +184,9 @@ public class WeatherFragment extends Fragment {
                 permission = new Permissions(getContext());
                 requestPermissions(new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION} , Constants.READ_COARSE_LOCATION);
                 break;
+            case R.id.search :
+                showMenuInputDialog();
+                break;
         }
         return true;
     }
@@ -1163,5 +1166,24 @@ public class WeatherFragment extends Fragment {
         fragment.setArguments(bundle);
 
         return fragment;
+    }
+
+    private void showMenuInputDialog() {
+        new MaterialDialog.Builder(getContext())
+                .title("Change City")
+                .content("You can change the city by entering City name or the ZIP Code")
+                .negativeText("CANCEL")
+                .onNegative(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog , @NonNull DialogAction which) {
+                        dialog.dismiss();
+                    }
+                })
+                .input(null, null, new MaterialDialog.InputCallback() {
+                    @Override
+                    public void onInput(@NonNull MaterialDialog dialog, @NonNull CharSequence input) {
+                        changeCity(input.toString());
+                    }
+                }).show();
     }
 }

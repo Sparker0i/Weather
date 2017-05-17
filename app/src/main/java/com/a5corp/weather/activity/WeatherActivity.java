@@ -1,12 +1,9 @@
 package com.a5corp.weather.activity;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -42,18 +39,10 @@ import com.mikepenz.weather_icons_typeface_library.WeatherIcons;
 
 import java.util.ArrayList;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class WeatherActivity extends AppCompatActivity {
     Prefs preferences;
-
-    @BindView(R.id.fab) FloatingActionButton fab;
-    @OnClick(R.id.fab) void fabClick() {
-        fab.hide();
-        showInputDialog();
-    }
     WeatherFragment wf;
     Toolbar toolbar;
     Drawer drawer;
@@ -211,24 +200,11 @@ public class WeatherActivity extends AppCompatActivity {
                 .title("Change OWM API Key")
                 .content("You can enter your own custom OpenWeatherMap API key, and help reduce the load from my API Key\n\n" +
                         "BEWARE: Entering a wrong API Key may result in the app going haywire. Do this at your own risk")
-                .onAny(new MaterialDialog.SingleButtonCallback() {
-                    @Override
-                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                        fab.show();
-                    }
-                })
-                .dismissListener(new DialogInterface.OnDismissListener() {
-                    @Override
-                    public void onDismiss(DialogInterface dialogInterface) {
-                        fab.show();
-                    }
-                })
                 .neutralText("RESET")
                 .onNeutral(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                         preferences.setWeatherKey(Constants.OWM_APP_ID);
-                        fab.show();
                     }
                 })
                 .negativeText("CANCEL")
@@ -236,14 +212,12 @@ public class WeatherActivity extends AppCompatActivity {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog , @NonNull DialogAction which) {
                         dialog.dismiss();
-                        fab.show();
                     }
                 })
                 .input(null, null, new MaterialDialog.InputCallback() {
                     @Override
                     public void onInput(@NonNull MaterialDialog dialog, @NonNull CharSequence input) {
                         preferences.setWeatherKey(input.toString());
-                        fab.show();
                     }
                 }).show();
     }
@@ -254,46 +228,6 @@ public class WeatherActivity extends AppCompatActivity {
         intent.addCategory(Intent.CATEGORY_HOME);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
-    }
-
-    private void showInputDialog() {
-        new MaterialDialog.Builder(this)
-                .title("Change City")
-                .content("You can change the city by entering City name or the ZIP Code")
-                .onAny(new MaterialDialog.SingleButtonCallback() {
-                    @Override
-                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                        fab.show();
-                    }
-                })
-                .dismissListener(new DialogInterface.OnDismissListener() {
-                    @Override
-                    public void onDismiss(DialogInterface dialogInterface) {
-                        fab.show();
-                    }
-                })
-                .negativeText("CANCEL")
-                .onNegative(new MaterialDialog.SingleButtonCallback() {
-                    @Override
-                    public void onClick(@NonNull MaterialDialog dialog , @NonNull DialogAction which) {
-                        dialog.dismiss();
-                        fab.show();
-                    }
-                })
-                .input(null, null, new MaterialDialog.InputCallback() {
-                    @Override
-                    public void onInput(@NonNull MaterialDialog dialog, @NonNull CharSequence input) {
-                        changeCity(input.toString());
-                        fab.show();
-                    }
-                }).show();
-    }
-
-    public void changeCity(String city){
-        WeatherFragment wf = (WeatherFragment)getSupportFragmentManager()
-                .findFragmentById(R.id.fragment);
-        wf.changeCity(city);
-        preferences.setCity(city);
     }
 
     @Override
