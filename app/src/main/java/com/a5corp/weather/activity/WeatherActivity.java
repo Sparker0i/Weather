@@ -75,20 +75,7 @@ public class WeatherActivity extends AppCompatActivity {
         }
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        fab.hide();
         initDrawer();
-    }
-
-    public void hideFab() {
-        fab.hide();
-    }
-
-    public void showFab() {
-        fab.show();
-    }
-
-    public FloatingActionButton getFab() {
-        return fab;
     }
 
     public void initDrawer() {

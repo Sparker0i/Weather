@@ -30,7 +30,6 @@ import android.widget.Toast;
 import com.a5corp.weather.GlobalActivity;
 import com.a5corp.weather.R;
 import com.a5corp.weather.activity.FirstLaunch;
-import com.a5corp.weather.activity.WeatherActivity;
 import com.a5corp.weather.internet.CheckConnection;
 import com.a5corp.weather.internet.FetchWeather;
 import com.a5corp.weather.model.Info;
@@ -134,7 +133,6 @@ public class WeatherFragment extends Fragment {
                 }, 10000);
             }
         });
-        ((WeatherActivity) getActivity()).showFab();
         directionView.setTypeface(weatherFont);
         directionView.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
         dailyView.setText(getString(R.string.daily));
@@ -260,7 +258,6 @@ public class WeatherFragment extends Fragment {
                 else {
                     handler.post(new Runnable() {
                         public void run() {
-                            ((WeatherActivity) getActivity()).showFab();
                             preferences.setLaunched();
                             renderWeather(json);
                             Snackbar snackbar = Snackbar.make(rootView, "Loaded Weather Data", 500);
@@ -330,7 +327,7 @@ public class WeatherFragment extends Fragment {
                 @Override
                 public void run() {
                     new MaterialTapTargetPrompt.Builder(getActivity())
-                            .setTarget(((WeatherActivity) getActivity()).getFab())
+                            .setTarget(R.id.search)
                             .setBackgroundColour(ContextCompat.getColor(getContext() , R.color.md_light_blue_400))
                             .setFocalColour(ContextCompat.getColor(getContext() , R.color.colorAccent))
                             .setPrimaryText("Search for a city")
