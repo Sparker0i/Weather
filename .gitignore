@@ -1,5 +1,11 @@
 *.iml
+/.gitignore
 .gitignore
+.idea
+.gradle
+/.gradle
+/.gradle/*
+.gradle/*
 /local.properties
 /.idea/
 /.idea

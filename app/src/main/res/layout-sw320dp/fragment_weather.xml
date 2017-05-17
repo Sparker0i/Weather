@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<android.support.v4.widget.SwipeRefreshLayout
+<com.a5corp.weather.widget.OnlyVerticalSwipeRefreshLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -527,4 +527,4 @@
                 android:layout_alignStart="@+id/button1" />
         </RelativeLayout>
     </android.support.v4.widget.NestedScrollView>
-</android.support.v4.widget.SwipeRefreshLayout>
+</com.a5corp.weather.widget.OnlyVerticalSwipeRefreshLayout>
