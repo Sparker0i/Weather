@@ -39,12 +39,15 @@ import com.mikepenz.weather_icons_typeface_library.WeatherIcons;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class WeatherActivity extends AppCompatActivity {
     Prefs preferences;
     WeatherFragment wf;
-    Toolbar toolbar;
+    GraphsFragment gf;
+    MapsFragment mf;
+    @BindView(R.id.toolbar) Toolbar toolbar;
     Drawer drawer;
     NotificationManagerCompat mManager;
 
@@ -55,19 +58,47 @@ public class WeatherActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather);
         ButterKnife.bind(this);
+        setSupportActionBar(toolbar);
 
         wf = new WeatherFragment();
-        if (savedInstanceState == null) {
+        gf = new GraphsFragment();
+        mf = new MapsFragment();
+
+        Intent intent = getIntent();
+        if (intent != null ) {
+            if (savedInstanceState == null) {
+                switch (intent.getIntExtra("drawer", 1)) {
+                    case 1:
+                        getSupportFragmentManager().beginTransaction()
+                                .add(R.id.fragment, wf)
+                                .commit();
+                        break;
+                    case 2:
+                        getSupportFragmentManager().beginTransaction()
+                                .add(R.id.fragment, wf)
+                                .commit();
+                        getSupportFragmentManager().beginTransaction()
+                                .add(R.id.fragment, gf)
+                                .commit();
+                        break;
+                    case 3:
+                        getSupportFragmentManager().beginTransaction()
+                                .add(R.id.fragment, mf)
+                                .commit();
+                        break;
+                }
+                initDrawer(intent.getIntExtra("drawer", 1));
+            }
+        }
+        else {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.fragment, wf)
                     .commit();
+            initDrawer(1);
         }
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        initDrawer();
     }
 
-    public void initDrawer() {
+    public void initDrawer(int pos) {
         final Context context = this;
         final IProfile profile = new ProfileDrawerItem().withName("Simple Weather")
                 .withEmail("Version : " + BuildConfig.VERSION_NAME)
@@ -142,7 +173,7 @@ public class WeatherActivity extends AppCompatActivity {
         drawer = new DrawerBuilder()
                 .withActivity(this)
                 .withToolbar(toolbar)
-                .withSelectedItem(1)
+                .withSelectedItem(pos)
                 .withTranslucentStatusBar(true)
                 .withAccountHeader(headerResult)
                 .withActionBarDrawerToggleAnimated(true)

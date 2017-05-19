@@ -3,7 +3,11 @@ package com.a5corp.weather.fragment;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.pm.ShortcutInfo;
+import android.content.pm.ShortcutManager;
 import android.graphics.Typeface;
+import android.graphics.drawable.Icon;
+import android.os.Build;
 import android.os.Handler;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
@@ -30,6 +34,7 @@ import android.widget.Toast;
 import com.a5corp.weather.GlobalActivity;
 import com.a5corp.weather.R;
 import com.a5corp.weather.activity.FirstLaunch;
+import com.a5corp.weather.activity.WeatherActivity;
 import com.a5corp.weather.internet.CheckConnection;
 import com.a5corp.weather.internet.FetchWeather;
 import com.a5corp.weather.model.Info;
@@ -44,6 +49,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -270,6 +276,7 @@ public class WeatherFragment extends Fragment {
                                 showTargets();
                             pd.dismiss();
                             preferences.setLastCity(city);
+                            //createShortcuts();
                         }
                     });
                 }
@@ -401,6 +408,46 @@ public class WeatherFragment extends Fragment {
                     }
                 })
                 .show();
+    }
+
+    private void createShortcuts() {
+        ShortcutManager manager;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
+            manager = getContext().getSystemService(ShortcutManager.class);
+            ShortcutInfo homeShortcut , graphShortcut , mapShortcut;
+
+            Intent homeIntent = new Intent(getContext() , WeatherActivity.class);
+            homeIntent.putExtra("drawer" , 1);
+            homeIntent.setAction(Intent.ACTION_VIEW);
+            homeShortcut = new ShortcutInfo.Builder(getContext() , "Shortcut")
+                    .setShortLabel("Weather Home")
+                    .setLongLabel("Weather Home")
+                    .setIcon(Icon.createWithResource(getContext() , R.mipmap.ic_launcher_dark))
+                    .setIntent(homeIntent)
+                    .build();
+
+            Intent graphIntent = new Intent(getContext() , WeatherActivity.class);
+            graphIntent.putExtra("drawer" , 2);
+            graphIntent.setAction(Intent.ACTION_VIEW);
+            graphShortcut = new ShortcutInfo.Builder(getContext() , "Shortcut")
+                    .setShortLabel("Weather Graphs")
+                    .setLongLabel("Weather Graphs")
+                    .setIcon(Icon.createWithResource(getContext() , R.mipmap.ic_launcher_dark))
+                    .setIntent(graphIntent)
+                    .build();
+
+            Intent mapIntent = new Intent(getContext() , WeatherActivity.class);
+            mapIntent.putExtra("drawer" , 1);
+            mapIntent.setAction(Intent.ACTION_VIEW);
+            mapShortcut = new ShortcutInfo.Builder(getContext() , "Shortcut")
+                    .setShortLabel("Weather Home")
+                    .setLongLabel("Weather Home")
+                    .setIcon(Icon.createWithResource(getContext() , R.mipmap.ic_launcher_dark))
+                    .setIntent(homeIntent)
+                    .build();
+
+            manager.setDynamicShortcuts(Arrays.asList(homeShortcut , graphShortcut , mapShortcut));
+        }
     }
 
     public void showNoInternet() {
