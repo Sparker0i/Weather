@@ -3,6 +3,7 @@ package com.a5corp.weather.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.content.ContextCompat;
@@ -53,26 +54,36 @@ public class WeatherActivity extends AppCompatActivity {
     @BindView(R.id.toolbar) Toolbar toolbar;
     Drawer drawer;
     NotificationManagerCompat mManager;
+    Handler handler;
 
     @Shortcut(id = "home", icon = R.mipmap.ic_launcher_dark , shortLabel = "Weather Info", rank = 2)
     public void addWeather() {
-        Intent intent = new Intent(WeatherActivity.this , OtherWeatherActivity.class);
-        intent.putExtra("drawer" , 1);
-        startActivity(intent);
+
     }
 
     @Shortcut(id = "graphs", icon = R.mipmap.ic_launcher_dark , shortLabel = "Weather Graphs" , rank = 1)
     public void addGraphs() {
-        Intent intent = new Intent(WeatherActivity.this , OtherWeatherActivity.class);
-        intent.putExtra("drawer" , 2);
-        startActivity(intent);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                GraphsFragment graphsFragment = newGraphInstance(new ArrayList<>(wf.getDailyJson()));
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment, graphsFragment)
+                        .commit();
+            }
+        } , 750);
     }
 
     @Shortcut(id = "maps", icon = R.mipmap.ic_launcher_dark , shortLabel = "Weather Maps")
     public void addMaps() {
-        Intent intent = new Intent(WeatherActivity.this , OtherWeatherActivity.class);
-        intent.putExtra("drawer" , 3);
-        startActivity(intent);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment, mf)
+                        .commit();
+            }
+        } , 750);
     }
 
     @Override
@@ -84,6 +95,7 @@ public class WeatherActivity extends AppCompatActivity {
         setContentView(R.layout.activity_weather);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
+        handler = new Handler();
 
         wf = new WeatherFragment();
         gf = new GraphsFragment();

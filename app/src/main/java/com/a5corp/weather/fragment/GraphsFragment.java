@@ -15,13 +15,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.a5corp.weather.R;
-import com.a5corp.weather.activity.WeatherActivity;
 import com.a5corp.weather.internet.FetchWeather;
 import com.a5corp.weather.model.Info;
 import com.a5corp.weather.model.WeatherFort;
 import com.a5corp.weather.preferences.Prefs;
 import com.a5corp.weather.utils.CustomFormatter;
 import com.a5corp.weather.utils.XFormatter;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
@@ -49,7 +49,7 @@ public class GraphsFragment extends Fragment {
             snowEntries = new ArrayList<>() ,
             windEntries = new ArrayList<>();
     Prefs pf;
-    Bundle bundle;
+    MaterialDialog pd;
     CustomFormatter mValueFormatter;
     String[] dates = new String[10];
     private Menu menu;
@@ -66,6 +66,12 @@ public class GraphsFragment extends Fragment {
         super.onCreate(savedInstanceState);
         mValueFormatter = new CustomFormatter();
         pf = new Prefs(getContext());
+        MaterialDialog.Builder builder = new MaterialDialog.Builder(this.getActivity())
+                .title("Please Wait")
+                .content("Loading")
+                .cancelable(false)
+                .progress(true , 0);
+        pd = builder.build();
         setHasOptionsMenu(true);
     }
 
@@ -73,21 +79,9 @@ public class GraphsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        if (getArguments() == null) {
-            startTask();
-            Log.i("Null" , "Arguements");
-        }
-        else
-            mDescribable = (ArrayList<WeatherFort.WeatherList>) getArguments().getSerializable(
-                    DESCRIBABLE_KEY);
         rootView = inflater.inflate(R.layout.fragment_graphs, container, false);
         Log.i("Loaded" , "Fragment");
-        temperatureChart = (LineChart) rootView.findViewById(R.id.temperature_chart);
-        rainChart = (LineChart) rootView.findViewById(R.id.rain_chart);
-        pressureChart = (LineChart) rootView.findViewById(R.id.pressure_chart);
-        snowChart = (LineChart) rootView.findViewById(R.id.snow_chart);
-        windChart = (LineChart) rootView.findViewById(R.id.wind_chart);
-        function();
+        startTask();
         return rootView;
     }
 
@@ -109,24 +103,44 @@ public class GraphsFragment extends Fragment {
     }
 
     private void startTask() {
-        new Thread() {
-            @Override
-            public void run() {
-                super.run();
-                try {
-                    json = new FetchWeather(getContext()).execute(pf.getCity()).get();
-                }
-                catch (InterruptedException | ExecutionException ex) {
-                    ex.printStackTrace();
-                }
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        mDescribable = json.fort.getList();
+        temperatureChart = (LineChart) rootView.findViewById(R.id.temperature_chart);
+        rainChart = (LineChart) rootView.findViewById(R.id.rain_chart);
+        pressureChart = (LineChart) rootView.findViewById(R.id.pressure_chart);
+        snowChart = (LineChart) rootView.findViewById(R.id.snow_chart);
+        windChart = (LineChart) rootView.findViewById(R.id.wind_chart);
+        if (getArguments() == null) {
+            pd.show();
+            new Thread() {
+                @Override
+                public void run() {
+                    super.run();
+                    try {
+                        json = new FetchWeather(getContext()).execute(pf.getCity()).get();
                     }
-                });
-            }
-        }.start();
+                    catch (InterruptedException | ExecutionException ex) {
+                        ex.printStackTrace();
+                    }
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            pd.dismiss();
+                            mDescribable = json.fort.getList();
+                        }
+                    });
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            function();
+                        }
+                    });
+                }
+            }.start();
+        }
+        else {
+            mDescribable = (ArrayList<WeatherFort.WeatherList>) getArguments().getSerializable(
+                    DESCRIBABLE_KEY);
+            function();
+        }
     }
 
     public void function() {
@@ -172,12 +186,7 @@ public class GraphsFragment extends Fragment {
     }
 
     public void getTemperatures() {
-        bundle = this.getArguments();
-        if (bundle != null) {
-            createEntries();
-        }
-        else
-            Log.e("Null" , "Bundle");
+        createEntries();
     }
 
     public void loadCharts() {
@@ -190,7 +199,7 @@ public class GraphsFragment extends Fragment {
 
     public void loadTemperatureChart() {
         temperatureChart.setDrawGridBackground(false);
-        temperatureChart.setBackgroundColor(Color.WHITE);
+        temperatureChart.setBackgroundColor(Color.BLACK);
         temperatureChart.setTouchEnabled(true);
         temperatureChart.setDragEnabled(true);
         temperatureChart.setMaxHighlightDistance(300);
@@ -198,7 +207,6 @@ public class GraphsFragment extends Fragment {
         temperatureChart.setPadding(2 , 2 , 2 , 2);
         temperatureChart.getLegend().setEnabled(true);
         temperatureChart.getLegend().setTextColor(Color.WHITE);
-        temperatureChart.setBackgroundColor(Color.parseColor("#000000"));
 
         YAxis yAxisRight = temperatureChart.getAxisRight();
         yAxisRight.setDrawGridLines(false);
@@ -242,7 +250,7 @@ public class GraphsFragment extends Fragment {
 
     public void loadRainChart() {
         rainChart.setDrawGridBackground(false);
-        rainChart.setBackgroundColor(Color.WHITE);
+        rainChart.setBackgroundColor(Color.BLACK);
         rainChart.setTouchEnabled(true);
         rainChart.setDragEnabled(true);
         rainChart.setMaxHighlightDistance(300);
@@ -250,7 +258,6 @@ public class GraphsFragment extends Fragment {
         rainChart.setPadding(2 , 2 , 2 , 2);
         rainChart.getLegend().setEnabled(true);
         rainChart.getLegend().setTextColor(Color.WHITE);
-        rainChart.setBackgroundColor(Color.parseColor("#000000"));
 
         YAxis yAxisRight = rainChart.getAxisRight();
         yAxisRight.setDrawGridLines(false);
@@ -294,7 +301,7 @@ public class GraphsFragment extends Fragment {
 
     public void loadPressureChart() {
         pressureChart.setDrawGridBackground(false);
-        pressureChart.setBackgroundColor(Color.WHITE);
+        pressureChart.setBackgroundColor(Color.BLACK);
         pressureChart.setTouchEnabled(true);
         pressureChart.setDragEnabled(true);
         pressureChart.setMaxHighlightDistance(300);
@@ -302,7 +309,6 @@ public class GraphsFragment extends Fragment {
         pressureChart.setPadding(2 , 2 , 2 , 2);
         pressureChart.getLegend().setEnabled(true);
         pressureChart.getLegend().setTextColor(Color.WHITE);
-        pressureChart.setBackgroundColor(Color.parseColor("#000000"));
 
         YAxis yAxisRight = pressureChart.getAxisRight();
         yAxisRight.setDrawGridLines(false);
@@ -346,7 +352,7 @@ public class GraphsFragment extends Fragment {
 
     public void loadSnowChart() {
         snowChart.setDrawGridBackground(false);
-        snowChart.setBackgroundColor(Color.WHITE);
+        snowChart.setBackgroundColor(Color.BLACK);
         snowChart.setTouchEnabled(true);
         snowChart.setDragEnabled(true);
         snowChart.setMaxHighlightDistance(300);
@@ -354,7 +360,6 @@ public class GraphsFragment extends Fragment {
         snowChart.setPadding(2 , 2 , 2 , 2);
         snowChart.getLegend().setEnabled(true);
         snowChart.getLegend().setTextColor(Color.WHITE);
-        snowChart.setBackgroundColor(Color.parseColor("#000000"));
 
         YAxis yAxisRight = snowChart.getAxisRight();
         yAxisRight.setDrawGridLines(false);
@@ -398,7 +403,7 @@ public class GraphsFragment extends Fragment {
 
     public void loadWindChart() {
         windChart.setDrawGridBackground(false);
-        windChart.setBackgroundColor(Color.WHITE);
+        windChart.setBackgroundColor(Color.BLACK);
         windChart.setTouchEnabled(true);
         windChart.setDragEnabled(true);
         windChart.setMaxHighlightDistance(300);
@@ -406,7 +411,6 @@ public class GraphsFragment extends Fragment {
         windChart.setPadding(2 , 2 , 2 , 2);
         windChart.getLegend().setEnabled(true);
         windChart.getLegend().setTextColor(Color.WHITE);
-        windChart.setBackgroundColor(Color.parseColor("#000000"));
 
         YAxis yAxisRight = windChart.getAxisRight();
         yAxisRight.setDrawGridLines(false);
