@@ -56,12 +56,12 @@ public class WeatherActivity extends AppCompatActivity {
     NotificationManagerCompat mManager;
     Handler handler;
 
-    @Shortcut(id = "home", icon = R.mipmap.ic_launcher_dark , shortLabel = "Weather Info", rank = 2)
+    @Shortcut(id = "home", icon = R.drawable.shortcut_home , shortLabel = "Weather Info", rank = 2)
     public void addWeather() {
 
     }
 
-    @Shortcut(id = "graphs", icon = R.mipmap.ic_launcher_dark , shortLabel = "Weather Graphs" , rank = 1)
+    @Shortcut(id = "graphs", icon = R.drawable.shortcut_graph , shortLabel = "Weather Graphs" , rank = 1)
     public void addGraphs() {
         handler.postDelayed(new Runnable() {
             @Override
@@ -75,7 +75,7 @@ public class WeatherActivity extends AppCompatActivity {
         } , 750);
     }
 
-    @Shortcut(id = "maps", icon = R.mipmap.ic_launcher_dark , shortLabel = "Weather Maps")
+    @Shortcut(id = "maps", icon = R.drawable.shortcut_map , shortLabel = "Weather Maps")
     public void addMaps() {
         handler.postDelayed(new Runnable() {
             @Override
