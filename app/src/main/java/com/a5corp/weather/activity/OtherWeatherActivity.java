@@ -53,7 +53,6 @@ public class OtherWeatherActivity extends AppCompatActivity {
     @BindView(R.id.toolbar) Toolbar toolbar;
     Drawer drawer;
     NotificationManagerCompat mManager;
-    int mode = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,18 +81,8 @@ public class OtherWeatherActivity extends AppCompatActivity {
                     break;
                 case 2:
                     getSupportFragmentManager().beginTransaction()
-                            .add(R.id.fragment, wf)
+                            .add(R.id.fragment, gf)
                             .commit();
-                    new Thread() {
-                        @Override
-                        public void run() {
-                            while (mode != 1) {
-                                getSupportFragmentManager().beginTransaction()
-                                        .add(R.id.fragment, gf)
-                                        .commit();
-                            }
-                        }
-                    }.start();
                     break;
                 case 3:
                     getSupportFragmentManager().beginTransaction()

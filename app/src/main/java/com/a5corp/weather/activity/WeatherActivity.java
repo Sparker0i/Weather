@@ -68,7 +68,7 @@ public class WeatherActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    @Shortcut(id = "maps", icon = R.mipmap.ic_launcher_dark , shortLabel = "Weather Maps" , rank = 0)
+    @Shortcut(id = "maps", icon = R.mipmap.ic_launcher_dark , shortLabel = "Weather Maps")
     public void addMaps() {
         Intent intent = new Intent(WeatherActivity.this , OtherWeatherActivity.class);
         intent.putExtra("drawer" , 3);

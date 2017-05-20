@@ -16,6 +16,8 @@ import android.view.ViewGroup;
 
 import com.a5corp.weather.R;
 import com.a5corp.weather.activity.WeatherActivity;
+import com.a5corp.weather.internet.FetchWeather;
+import com.a5corp.weather.model.Info;
 import com.a5corp.weather.model.WeatherFort;
 import com.a5corp.weather.preferences.Prefs;
 import com.a5corp.weather.utils.CustomFormatter;
@@ -32,6 +34,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import static com.a5corp.weather.utils.Constants.DESCRIBABLE_KEY;
 
@@ -52,6 +55,7 @@ public class GraphsFragment extends Fragment {
     private Menu menu;
     int i = 0;
     private ArrayList<WeatherFort.WeatherList> mDescribable;
+    Info json;
 
     public GraphsFragment() {
         handler = new Handler();
@@ -69,8 +73,13 @@ public class GraphsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        mDescribable = (ArrayList<WeatherFort.WeatherList>) getArguments().getSerializable(
-                DESCRIBABLE_KEY);
+        if (getArguments() == null) {
+            startTask();
+            Log.i("Null" , "Arguements");
+        }
+        else
+            mDescribable = (ArrayList<WeatherFort.WeatherList>) getArguments().getSerializable(
+                    DESCRIBABLE_KEY);
         rootView = inflater.inflate(R.layout.fragment_graphs, container, false);
         Log.i("Loaded" , "Fragment");
         temperatureChart = (LineChart) rootView.findViewById(R.id.temperature_chart);
@@ -97,6 +106,27 @@ public class GraphsFragment extends Fragment {
                 break;
         }
         return true;
+    }
+
+    private void startTask() {
+        new Thread() {
+            @Override
+            public void run() {
+                super.run();
+                try {
+                    json = new FetchWeather(getContext()).execute(pf.getCity()).get();
+                }
+                catch (InterruptedException | ExecutionException ex) {
+                    ex.printStackTrace();
+                }
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        mDescribable = json.fort.getList();
+                    }
+                });
+            }
+        }.start();
     }
 
     public void function() {
