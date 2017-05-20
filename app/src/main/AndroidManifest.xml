@@ -47,9 +47,6 @@
         <activity
             android:name=".activity.LicenseActivity"
             android:label="License"/>
-        <activity
-            android:name=".activity.OtherWeatherActivity"
-            android:label="License"/>
 
         <service
             android:name=".service.AlarmTriggerService"
