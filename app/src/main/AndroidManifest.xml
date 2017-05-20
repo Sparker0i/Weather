@@ -9,9 +9,6 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
-    <supports-screens
-        android:requiresSmallestWidthDp="320" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_dark"
