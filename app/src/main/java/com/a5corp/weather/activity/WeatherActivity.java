@@ -63,9 +63,10 @@ public class WeatherActivity extends AppCompatActivity {
 
     @Shortcut(id = "graphs", icon = R.mipmap.ic_launcher_dark , shortLabel = "Weather Graphs" , rank = 1)
     public void addGraphs() {
-        new Handler().postDelayed(new Runnable() {
+        handler.postDelayed(new Runnable() {
             @Override
             public void run() {
+                drawer.setSelectionAtPosition(2);
                 GraphsFragment graphsFragment = newGraphInstance(new ArrayList<>(wf.getDailyJson()));
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.fragment, graphsFragment)
@@ -76,9 +77,10 @@ public class WeatherActivity extends AppCompatActivity {
 
     @Shortcut(id = "maps", icon = R.mipmap.ic_launcher_dark , shortLabel = "Weather Maps")
     public void addMaps() {
-        new Handler().postDelayed(new Runnable() {
+        handler.postDelayed(new Runnable() {
             @Override
             public void run() {
+                drawer.setSelectionAtPosition(3);
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.fragment, mf)
                         .commit();
