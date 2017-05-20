@@ -3,6 +3,7 @@ package com.a5corp.weather.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.content.ContextCompat;
@@ -16,7 +17,7 @@ import com.a5corp.weather.BuildConfig;
 import com.a5corp.weather.R;
 import com.a5corp.weather.fragment.GraphsFragment;
 import com.a5corp.weather.fragment.MapsFragment;
-import com.a5corp.weather.fragment.WeatherFragment;
+import com.a5corp.weather.fragment.OtherWeatherFragment;
 import com.a5corp.weather.model.WeatherFort;
 import com.a5corp.weather.preferences.Prefs;
 import com.a5corp.weather.service.AlarmTriggerService;
@@ -42,61 +43,66 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import shortbread.Shortbread;
-import shortbread.Shortcut;
 
-public class WeatherActivity extends AppCompatActivity {
+public class OtherWeatherActivity extends AppCompatActivity {
     Prefs preferences;
-    WeatherFragment wf;
+    OtherWeatherFragment wf;
     GraphsFragment gf;
     MapsFragment mf;
+    Handler handler;
     @BindView(R.id.toolbar) Toolbar toolbar;
     Drawer drawer;
     NotificationManagerCompat mManager;
-
-    @Shortcut(id = "home", icon = R.mipmap.ic_launcher_dark , shortLabel = "Weather Info", rank = 2)
-    public void addWeather() {
-        Intent intent = new Intent(WeatherActivity.this , OtherWeatherActivity.class);
-        intent.putExtra("drawer" , 1);
-        startActivity(intent);
-    }
-
-    @Shortcut(id = "graphs", icon = R.mipmap.ic_launcher_dark , shortLabel = "Weather Graphs" , rank = 1)
-    public void addGraphs() {
-        Intent intent = new Intent(WeatherActivity.this , OtherWeatherActivity.class);
-        intent.putExtra("drawer" , 2);
-        startActivity(intent);
-    }
-
-    @Shortcut(id = "maps", icon = R.mipmap.ic_launcher_dark , shortLabel = "Weather Maps" , rank = 0)
-    public void addMaps() {
-        Intent intent = new Intent(WeatherActivity.this , OtherWeatherActivity.class);
-        intent.putExtra("drawer" , 3);
-        startActivity(intent);
-    }
+    int mode = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.i("Activity" , WeatherActivity.class.getSimpleName());
+        Log.i("Activity" , OtherWeatherActivity.class.getSimpleName());
         mManager = NotificationManagerCompat.from(this);
         preferences = new Prefs(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
+        handler = new Handler();
 
-        wf = new WeatherFragment();
+        wf = new OtherWeatherFragment();
         gf = new GraphsFragment();
         mf = new MapsFragment();
 
-        getSupportFragmentManager().beginTransaction()
-                .add(R.id.fragment, wf)
-                .commit();
-        initDrawer(1);
-    }
+        Intent intent = getIntent();
+        Log.i("Drawer" , intent.getIntExtra("drawer", 1) + "");
 
-    public void createShortcuts() {
-        Shortbread.create(this);
+        if (savedInstanceState == null) {
+            switch (intent.getIntExtra("drawer", 1)) {
+                case 1:
+                    getSupportFragmentManager().beginTransaction()
+                            .add(R.id.fragment, wf)
+                            .commit();
+                    break;
+                case 2:
+                    getSupportFragmentManager().beginTransaction()
+                            .add(R.id.fragment, wf)
+                            .commit();
+                    new Thread() {
+                        @Override
+                        public void run() {
+                            while (mode != 1) {
+                                getSupportFragmentManager().beginTransaction()
+                                        .add(R.id.fragment, gf)
+                                        .commit();
+                            }
+                        }
+                    }.start();
+                    break;
+                case 3:
+                    getSupportFragmentManager().beginTransaction()
+                            .add(R.id.fragment, mf)
+                            .commit();
+                    break;
+            }
+            initDrawer(intent.getIntExtra("drawer", 1));
+        }
     }
 
     public void initDrawer(int pos) {
@@ -151,7 +157,7 @@ public class WeatherActivity extends AppCompatActivity {
                     preferences.setUnits("metric");
                 }
                 drawer.closeDrawer();
-                wf = new WeatherFragment();
+                wf = new OtherWeatherFragment();
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.fragment, wf)
                         .commit();
@@ -196,7 +202,7 @@ public class WeatherActivity extends AppCompatActivity {
                             if (drawerItem != null) {
                                 switch((int) drawerItem.getIdentifier()) {
                                     case 1:
-                                        wf = new WeatherFragment();
+                                        wf = new OtherWeatherFragment();
                                         getSupportFragmentManager().beginTransaction()
                                                 .replace(R.id.fragment, wf)
                                                 .commit();
@@ -217,7 +223,7 @@ public class WeatherActivity extends AppCompatActivity {
                                         showApiKeyBox();
                                         break;
                                     case 7:
-                                        startActivity(new Intent(WeatherActivity.this, AboutActivity.class));
+                                        startActivity(new Intent(OtherWeatherActivity.this, AboutActivity.class));
                                         break;
                                 }
                             }

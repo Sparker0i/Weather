@@ -3,14 +3,18 @@ package com.a5corp.weather.fragment;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.pm.ShortcutInfo;
+import android.content.pm.ShortcutManager;
 import android.graphics.Typeface;
+import android.graphics.drawable.Icon;
+import android.os.Build;
+import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetDialogFragment;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.SpannableString;
@@ -45,6 +49,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -57,7 +62,7 @@ import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
 
 import static com.a5corp.weather.utils.Constants.DESCRIBABLE_KEY;
 
-public class WeatherFragment extends Fragment {
+public class OtherWeatherFragment extends Fragment {
     Typeface weatherFont;
     @BindView(R.id.button1) TextView button;
     TextView detailsField[] = new TextView[10] , weatherIcon[] = new TextView[11];
@@ -89,7 +94,7 @@ public class WeatherFragment extends Fragment {
     View rootView;
     Permissions permission;
 
-    public WeatherFragment() {
+    public OtherWeatherFragment() {
         handler = new Handler();
     }
 
@@ -271,7 +276,7 @@ public class WeatherFragment extends Fragment {
                                 showTargets();
                             pd.dismiss();
                             preferences.setLastCity(city);
-                            ((WeatherActivity) getActivity()).createShortcuts();
+                            createShortcuts();
                         }
                     });
                 }
@@ -403,6 +408,46 @@ public class WeatherFragment extends Fragment {
                     }
                 })
                 .show();
+    }
+
+    private void createShortcuts() {
+        ShortcutManager manager;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
+            manager = getContext().getSystemService(ShortcutManager.class);
+            ShortcutInfo homeShortcut , graphShortcut , mapShortcut;
+
+            Intent homeIntent = new Intent(getContext() , WeatherActivity.class);
+            homeIntent.putExtra("drawer" , 1);
+            homeIntent.setAction(Intent.ACTION_VIEW);
+            homeShortcut = new ShortcutInfo.Builder(getContext() , "Shortcut")
+                    .setShortLabel("Weather Home")
+                    .setLongLabel("Weather Home")
+                    .setIcon(Icon.createWithResource(getContext() , R.mipmap.ic_launcher_dark))
+                    .setIntent(homeIntent)
+                    .build();
+
+            Intent graphIntent = new Intent(getContext() , WeatherActivity.class);
+            graphIntent.putExtra("drawer" , 2);
+            graphIntent.setAction(Intent.ACTION_VIEW);
+            graphShortcut = new ShortcutInfo.Builder(getContext() , "Shortcut")
+                    .setShortLabel("Weather Graphs")
+                    .setLongLabel("Weather Graphs")
+                    .setIcon(Icon.createWithResource(getContext() , R.mipmap.ic_launcher_dark))
+                    .setIntent(graphIntent)
+                    .build();
+
+            Intent mapIntent = new Intent(getContext() , WeatherActivity.class);
+            mapIntent.putExtra("drawer" , 1);
+            mapIntent.setAction(Intent.ACTION_VIEW);
+            mapShortcut = new ShortcutInfo.Builder(getContext() , "Shortcut")
+                    .setShortLabel("Weather Home")
+                    .setLongLabel("Weather Home")
+                    .setIcon(Icon.createWithResource(getContext() , R.mipmap.ic_launcher_dark))
+                    .setIntent(homeIntent)
+                    .build();
+
+            manager.setDynamicShortcuts(Arrays.asList(homeShortcut , graphShortcut , mapShortcut));
+        }
     }
 
     public void showNoInternet() {
@@ -982,8 +1027,8 @@ public class WeatherFragment extends Fragment {
                     }
                 });
             }
-            final String d1 = new java.text.SimpleDateFormat("hh:mm a" , Locale.US).format(new Date(json0.getSys().getSunrise() * 1000));
-            final String d2 = new java.text.SimpleDateFormat("hh:mm a" , Locale.US).format(new Date(json0.getSys().getSunset() * 1000));
+            final String d1 = new SimpleDateFormat("hh:mm a" , Locale.US).format(new Date(json0.getSys().getSunrise() * 1000));
+            final String d2 = new SimpleDateFormat("hh:mm a" , Locale.US).format(new Date(json0.getSys().getSunset() * 1000));
             sunriseView.setText(d1);
             sunsetView.setText(d2);
             DateFormat df = DateFormat.getDateTimeInstance();
