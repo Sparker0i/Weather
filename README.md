@@ -21,6 +21,7 @@ Get it on Google Play and F-Droid:
 - Added Custom OWM Key Option
 - Material Drawer and new About Screen
 - Fixed bug where disabling location permission caused the app to crash
+- Added App Shortcuts for Launcher Icon (Android 7.1+)
 
 For previous versions, please refer Changelog file.
 
