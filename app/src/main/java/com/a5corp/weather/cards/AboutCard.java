@@ -187,6 +187,7 @@ public class AboutCard extends Card
                         context.startActivity(intent);
                     }
                 });
+                break;
             }
 
             case 5:
