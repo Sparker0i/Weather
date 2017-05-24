@@ -117,7 +117,7 @@ public class WeatherActivity extends AppCompatActivity {
         final Context context = this;
         final IProfile profile = new ProfileDrawerItem().withName("Simple Weather")
                 .withEmail("Version : " + BuildConfig.VERSION_NAME)
-                .withIcon(R.drawable.ic_launcher_dark);
+                .withIcon(R.mipmap.ic_launcher_x);
         AccountHeader headerResult = new AccountHeaderBuilder()
                 .withActivity(this)
                 .withHeaderBackground(R.drawable.header)

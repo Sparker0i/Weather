@@ -1,6 +1,8 @@
 package com.a5corp.weather.fragment;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -11,13 +13,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.a5corp.weather.GlobalActivity;
 import com.a5corp.weather.R;
+import com.a5corp.weather.activity.FirstLaunch;
 import com.a5corp.weather.activity.WeatherActivity;
 import com.a5corp.weather.internet.CheckConnection;
+import com.a5corp.weather.permissions.Permissions;
 import com.a5corp.weather.preferences.Prefs;
+import com.a5corp.weather.utils.Constants;
+import com.github.florent37.materialtextfield.MaterialTextField;
 
 public class FirstLaunchFragment extends Fragment {
 
@@ -25,6 +32,8 @@ public class FirstLaunchFragment extends Fragment {
     EditText cityInput;
     TextView message;
     Prefs preferences;
+    Permissions permission;
+    MaterialTextField textField;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -32,6 +41,16 @@ public class FirstLaunchFragment extends Fragment {
         rootView = inflater.inflate(R.layout.fragment_first_launch, container, false);
         preferences = new Prefs(getContext());
         cityInput = (EditText) rootView.findViewById(R.id.city_input);
+        textField = (MaterialTextField) rootView.findViewById(R.id.materialTextField);
+        ImageView img = (ImageView) textField.findViewById(R.id.mtf_image);
+        img.setImageAlpha(android.R.drawable.ic_menu_mylocation);
+        img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                permission = new Permissions(getContext());
+                permission.checkPermission();
+            }
+        });
         message = (TextView) rootView.findViewById(R.id.intro_text);
         if (GlobalActivity.i == 0) {
             message.setText(getString(R.string.pick_city));
@@ -75,5 +94,23 @@ public class FirstLaunchFragment extends Fragment {
         Log.i("Loaded", "Weather");
         startActivity(intent);
         Log.i("Changed", "City");
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode ,
+                                           @NonNull String permissions[] ,
+                                           @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case Constants.READ_COARSE_LOCATION: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    ((FirstLaunch) getContext()).execute();
+                } else {
+                    permission.permissionDenied();
+                }
+                break;
+            }
+        }
     }
 }

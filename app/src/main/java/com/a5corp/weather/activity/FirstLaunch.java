@@ -18,4 +18,8 @@ public class FirstLaunch extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
     }
+
+    public void execute() {
+
+    }
 }
