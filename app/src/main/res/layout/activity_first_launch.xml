@@ -21,6 +21,14 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_first_launch" />
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/fragment"
+        android:paddingTop="?attr/actionBarSize"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.a5corp.weather.WeatherActivity"
+        tools:ignore="MergeRootFrame"
+        android:background="@color/colorPrimary" />
 
 </android.support.design.widget.CoordinatorLayout>

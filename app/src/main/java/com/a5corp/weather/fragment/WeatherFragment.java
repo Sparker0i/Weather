@@ -33,6 +33,7 @@ import com.a5corp.weather.activity.FirstLaunch;
 import com.a5corp.weather.activity.WeatherActivity;
 import com.a5corp.weather.internet.CheckConnection;
 import com.a5corp.weather.internet.FetchWeather;
+import com.a5corp.weather.model.Global;
 import com.a5corp.weather.model.Info;
 import com.a5corp.weather.model.WeatherFort;
 import com.a5corp.weather.model.WeatherInfo;
@@ -170,7 +171,20 @@ public class WeatherFragment extends Fragment {
         setHasOptionsMenu(true);
         preferences = new Prefs(getContext());
         weatherFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/weather.ttf");
-        updateWeatherData(preferences.getCity(), null, null);
+        if (new Global().info == null)
+            updateWeatherData(preferences.getCity(), null, null);
+        else {
+            preferences.setLaunched();
+            renderWeather(new Global().info);
+            Snackbar snackbar = Snackbar.make(rootView, "Loaded Weather Data", 500);
+            snackbar.show();
+            //function();
+            if (!preferences.getv3TargetShown())
+                showTargets();
+            pd.dismiss();
+            preferences.setLastCity(new Global().info.day.getName());
+            ((WeatherActivity) getActivity()).createShortcuts();
+        }
     }
 
     @Override

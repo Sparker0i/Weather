@@ -21,6 +21,8 @@ import com.a5corp.weather.R;
 import com.a5corp.weather.activity.FirstLaunch;
 import com.a5corp.weather.activity.WeatherActivity;
 import com.a5corp.weather.internet.CheckConnection;
+import com.a5corp.weather.model.Global;
+import com.a5corp.weather.permissions.GPSTracker;
 import com.a5corp.weather.permissions.Permissions;
 import com.a5corp.weather.preferences.Prefs;
 import com.a5corp.weather.utils.Constants;
@@ -34,6 +36,8 @@ public class FirstLaunchFragment extends Fragment {
     Prefs preferences;
     Permissions permission;
     MaterialTextField textField;
+    Global global;
+    GPSTracker gps;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,6 +46,7 @@ public class FirstLaunchFragment extends Fragment {
         preferences = new Prefs(getContext());
         cityInput = (EditText) rootView.findViewById(R.id.city_input);
         textField = (MaterialTextField) rootView.findViewById(R.id.materialTextField);
+        global = new Global();
         ImageView img = (ImageView) textField.findViewById(R.id.mtf_image);
         img.setImageAlpha(android.R.drawable.ic_menu_mylocation);
         img.setOnClickListener(new View.OnClickListener() {
@@ -105,7 +110,10 @@ public class FirstLaunchFragment extends Fragment {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    ((FirstLaunch) getContext()).execute();
+                    gps = new GPSTracker(getContext());
+                    global.latitude = gps.getLatitude();
+                    global.longitude = gps.getLongitude();
+                    ((FirstLaunch) getActivity()).execute();
                 } else {
                     permission.permissionDenied();
                 }

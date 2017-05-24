@@ -38,7 +38,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/materialTextField"
-        app:mtf_image="@drawable/icon"
+        app:mtf_image="@drawable/logo"
         app:mtf_backgroundColor="@color/md_white_1000"
         app:mtf_openKeyboardOnFocus="true"
         android:layout_centerVertical="true"
