@@ -97,9 +97,13 @@ public class WeatherActivity extends AppCompatActivity {
         setContentView(R.layout.activity_weather);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
+        Intent intent = getIntent();
         handler = new Handler();
 
         wf = new WeatherFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("mode" , intent.getIntExtra("mode" , 0));
+        wf.setArguments(bundle);
         gf = new GraphsFragment();
         mf = new MapsFragment();
 

@@ -18,10 +18,8 @@ import android.widget.TextView;
 
 import com.a5corp.weather.GlobalActivity;
 import com.a5corp.weather.R;
-import com.a5corp.weather.activity.FirstLaunch;
 import com.a5corp.weather.activity.WeatherActivity;
 import com.a5corp.weather.internet.CheckConnection;
-import com.a5corp.weather.model.Global;
 import com.a5corp.weather.permissions.GPSTracker;
 import com.a5corp.weather.permissions.Permissions;
 import com.a5corp.weather.preferences.Prefs;
@@ -36,7 +34,6 @@ public class FirstLaunchFragment extends Fragment {
     Prefs preferences;
     Permissions permission;
     MaterialTextField textField;
-    Global global;
     GPSTracker gps;
 
     @Override
@@ -46,9 +43,8 @@ public class FirstLaunchFragment extends Fragment {
         preferences = new Prefs(getContext());
         cityInput = (EditText) rootView.findViewById(R.id.city_input);
         textField = (MaterialTextField) rootView.findViewById(R.id.materialTextField);
-        global = new Global();
         ImageView img = (ImageView) textField.findViewById(R.id.mtf_image);
-        img.setImageAlpha(android.R.drawable.ic_menu_mylocation);
+        img.setImageAlpha(R.drawable.logo);
         img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,7 +68,7 @@ public class FirstLaunchFragment extends Fragment {
                     Snackbar.make(rootView , "Please check your Internet connection." , Snackbar.LENGTH_SHORT).show();
                 }
                 else if (cityInput.getText().length() > 0) {
-                    launchActivity();
+                    launchActivity(0);
                 }
                 else {
                     Snackbar.make(rootView , "Enter a City Name First" , Snackbar.LENGTH_SHORT).show();
@@ -83,7 +79,7 @@ public class FirstLaunchFragment extends Fragment {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
-                    launchActivity();
+                    launchActivity(0);
                     return true;
                 }
                 return false;
@@ -92,10 +88,11 @@ public class FirstLaunchFragment extends Fragment {
         return rootView;
     }
 
-    private void launchActivity() {
+    private void launchActivity(int mode) {
         preferences.setCity(cityInput.getText().toString());
         Intent intent = new Intent(getActivity(), WeatherActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.putExtra("mode" , mode);
         Log.i("Loaded", "Weather");
         startActivity(intent);
         Log.i("Changed", "City");
@@ -111,10 +108,10 @@ public class FirstLaunchFragment extends Fragment {
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     gps = new GPSTracker(getContext());
-                    global.latitude = gps.getLatitude();
-                    global.longitude = gps.getLongitude();
-                    Log.i("Given" , "Execution");
-                    ((FirstLaunch) getActivity()).execute();
+                    preferences.setLatitude(Float.parseFloat(gps.getLatitude()));
+                    preferences.setLongitude(Float.parseFloat(gps.getLongitude()));
+                    launchActivity(1);
+
                 } else {
                     permission.permissionDenied();
                 }
