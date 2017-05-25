@@ -171,7 +171,11 @@ public class WeatherFragment extends Fragment {
         preferences = new Prefs(getContext());
         weatherFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/weather.ttf");
         Bundle bundle = getArguments();
-        int mode = bundle.getInt("mode" , 0);
+        int mode;
+        if (bundle != null)
+            mode = bundle.getInt("mode" , 0);
+        else
+            mode = 0;
         if (mode == 0)
             updateWeatherData(preferences.getCity(), null, null);
         else

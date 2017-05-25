@@ -110,14 +110,14 @@ public class WeatherActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.fragment, wf)
                 .commit();
-        initDrawer(1);
+        initDrawer();
     }
 
     public void createShortcuts() {
         Shortbread.create(this);
     }
 
-    public void initDrawer(int pos) {
+    public void initDrawer() {
         final Context context = this;
         final IProfile profile = new ProfileDrawerItem().withName("Simple Weather")
                 .withEmail("Version : " + BuildConfig.VERSION_NAME)
@@ -168,11 +168,12 @@ public class WeatherActivity extends AppCompatActivity {
                 else {
                     preferences.setUnits("metric");
                 }
-                drawer.closeDrawer();
+                /*
                 wf = new WeatherFragment();
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.fragment, wf)
                         .commit();
+                */
             }
         });
         item5.withOnCheckedChangeListener(new OnCheckedChangeListener() {
@@ -192,7 +193,7 @@ public class WeatherActivity extends AppCompatActivity {
         drawer = new DrawerBuilder()
                 .withActivity(this)
                 .withToolbar(toolbar)
-                .withSelectedItem(pos)
+                .withSelectedItem(1)
                 .withTranslucentStatusBar(true)
                 .withAccountHeader(headerResult)
                 .withActionBarDrawerToggleAnimated(true)
