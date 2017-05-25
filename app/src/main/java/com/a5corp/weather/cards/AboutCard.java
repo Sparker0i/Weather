@@ -192,12 +192,6 @@ public class AboutCard extends Card
 
             case 5:
             {
-                ((TextView)parent.findViewById(R.id.build_version)).setText(BuildConfig.VERSION_NAME);
-                break;
-            }
-
-            case 6:
-            {
                 parent.findViewById(R.id.insp_1).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

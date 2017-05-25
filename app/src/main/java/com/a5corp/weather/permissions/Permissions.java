@@ -22,11 +22,6 @@ public class Permissions {
         mContext = context;
     }
 
-    public void checkPermission() {
-        Log.i("Ask" , "Permission");
-        ActivityCompat.requestPermissions((Activity) mContext, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, Constants.READ_COARSE_LOCATION);
-    }
-
     private void showNoRationale() {
         View rootView = ((Activity) mContext).getWindow().getDecorView().findViewById(R.id.fragment);
         Snackbar.make(rootView , "Tap Settings, then in Permissions, enable the Location Permission to do this action" , Snackbar.LENGTH_INDEFINITE)
