@@ -98,6 +98,25 @@ public class WeatherFragment extends Fragment {
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_weather, container, false);
         ButterKnife.bind(this , rootView);
+        MaterialDialog.Builder builder = new MaterialDialog.Builder(this.getActivity())
+                .title("Please Wait")
+                .content("Loading")
+                .cancelable(false)
+                .progress(true , 0);
+        pd = builder.build();
+        setHasOptionsMenu(true);
+        preferences = new Prefs(getContext());
+        weatherFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/weather.ttf");
+        Bundle bundle = getArguments();
+        int mode;
+        if (bundle != null)
+            mode = bundle.getInt("mode" , 0);
+        else
+            mode = 0;
+        if (mode == 0)
+            updateWeatherData(preferences.getCity(), null, null);
+        else
+            updateWeatherData(null , Float.toString(preferences.getLatitude()) , Float.toString(preferences.getLongitude()));
         gps = new GPSTracker(getContext());
         cityField.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
         updatedField.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
@@ -156,30 +175,6 @@ public class WeatherFragment extends Fragment {
             weatherIcon[i].setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
         }
         return rootView;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        MaterialDialog.Builder builder = new MaterialDialog.Builder(this.getActivity())
-                .title("Please Wait")
-                .content("Loading")
-                .cancelable(false)
-                .progress(true , 0);
-        pd = builder.build();
-        setHasOptionsMenu(true);
-        preferences = new Prefs(getContext());
-        weatherFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/weather.ttf");
-        Bundle bundle = getArguments();
-        int mode;
-        if (bundle != null)
-            mode = bundle.getInt("mode" , 0);
-        else
-            mode = 0;
-        if (mode == 0)
-            updateWeatherData(preferences.getCity(), null, null);
-        else
-            updateWeatherData(null , Float.toString(preferences.getLatitude()) , Float.toString(preferences.getLongitude()));
     }
 
     @Override
