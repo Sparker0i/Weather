@@ -40,7 +40,6 @@
         android:id="@+id/materialTextField"
         app:mtf_image="@drawable/logo"
         app:mtf_backgroundColor="@color/md_white_1000"
-        app:mtf_openKeyboardOnFocus="true"
         android:layout_centerVertical="true"
         android:layout_alignParentStart="true"
         android:layout_toStartOf="@+id/go_button"

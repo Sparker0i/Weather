@@ -53,7 +53,7 @@ public class FirstLaunchFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 permission = new Permissions(getContext());
-                permission.checkPermission();
+                requestPermissions(new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION} , Constants.READ_COARSE_LOCATION);
             }
         });
         message = (TextView) rootView.findViewById(R.id.intro_text);
@@ -113,6 +113,7 @@ public class FirstLaunchFragment extends Fragment {
                     gps = new GPSTracker(getContext());
                     global.latitude = gps.getLatitude();
                     global.longitude = gps.getLongitude();
+                    Log.i("Given" , "Execution");
                     ((FirstLaunch) getActivity()).execute();
                 } else {
                     permission.permissionDenied();
