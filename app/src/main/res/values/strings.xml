@@ -15,6 +15,10 @@
     <string name="credits"><u>CREDITS</u></string>
     <string name="refresh">Refresh</string>
 
+    <string name="speed">Speed : %f</string>
+    <string name="mps">m/s</string>
+    <string name="mph">miles/h</string>
+
     <string name="humidity_icon">&#xf07a;</string>
     <string name="pressure_icon">&#xf079;</string>
     <string name="speed_icon">&#xf050;</string>
@@ -103,7 +107,18 @@
 
     <string name="place_not_found">Sorry, no weather data found.</string>
 
+    <string name="change_owm_key_header">Change OWM API Key</string>
+    <string name="change_owm_key_content">You can enter your own custom OpenWeatherMap API key, and help reduce the load from my API Key.
+
+        BEWARE: Entering a wrong API Key may result in the app going haywire. Do this at your own risk</string>
+
     <string name="go">GO</string>
+    <string name="reset">RESET</string>
+    <string name="cancel">@android:string/cancel</string>
+
+    <string name="enter_city_first">Enter a City Name First</string>
+    <string name="check_internet">Please check your Internet connection</string>
+    <string name="enable_location">Please Enable Location Permission to Perform this action.</string>
 
     <string name="c">°C</string>
     <string name="daily">DAILY</string>
@@ -119,6 +134,7 @@
     <string name="drawer_item_custom_key">Custom OpenWeatherMap Key</string>
     <string name="drawer_item_notifications">Show Hourly Notifications</string>
     <string name="drawer_item_fahrenheit">Use Fahrenheit</string>
+    <string name="drawer_version_header">Version</string>
 
     <string name="morning">Morning</string>
     <string name="night">Night</string>
@@ -140,7 +156,6 @@
     <string name="author_header">AUTHOR</string>
     <string name="credits_header">CREDITS</string>
     <string name="libraries_header">OPEN SOURCE LICENSES</string>
-    <string name="version_header">VERSION</string>
     <string name="license_header">LICENSE</string>
     <string name="inspiration_header">INSPIRATION</string>
     <string name="build_version">Build version</string>
@@ -241,5 +256,8 @@
     <string name="other_apps_link">https://play.google.com/store/apps/dev?id=6116967233401290402</string>
     <string name="app_link_direct">https://play.google.com/store/apps/details?id=com.a5corp.weather</string>
     <string name="github_link">https://github.com/Sparker0i</string>
+
     <string name="enter_city_hint">Enter city name</string>
+
+    <string name="choose_app">Choose an app</string>
 </resources>

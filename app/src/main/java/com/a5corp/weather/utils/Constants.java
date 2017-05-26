@@ -16,6 +16,8 @@ public class Constants {
     public static final String LONGITUDE = "lon";
 
     public static final String UNITS = "units";
+    public static final String METRIC = "metric";
+    public static final String IMPERIAL = "imperial";
 
     public static final String NOTIFICATIONS = "notifs";
 
@@ -37,4 +39,7 @@ public class Constants {
     public static final String OWM_APP_ID = "4c08a22b02c58467e6241629c1d08717";
 
     public static final String DESCRIBABLE_KEY = "describable_key";
+
+    public static final String LIBRARY_ID = "libId";
+    public static final String MODE = "mode";
 }

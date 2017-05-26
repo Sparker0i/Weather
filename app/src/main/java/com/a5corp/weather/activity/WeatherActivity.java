@@ -102,7 +102,7 @@ public class WeatherActivity extends AppCompatActivity {
 
         wf = new WeatherFragment();
         Bundle bundle = new Bundle();
-        bundle.putInt("mode" , intent.getIntExtra("mode" , 0));
+        bundle.putInt("mode" , intent.getIntExtra(Constants.MODE , 0));
         wf.setArguments(bundle);
         gf = new GraphsFragment();
         mf = new MapsFragment();
@@ -119,8 +119,8 @@ public class WeatherActivity extends AppCompatActivity {
 
     public void initDrawer() {
         final Context context = this;
-        final IProfile profile = new ProfileDrawerItem().withName("Simple Weather")
-                .withEmail("Version : " + BuildConfig.VERSION_NAME)
+        final IProfile profile = new ProfileDrawerItem().withName(getString(R.string.app_name))
+                .withEmail(getString(R.string.drawer_version_header) + " : " + BuildConfig.VERSION_NAME)
                 .withIcon(R.mipmap.ic_launcher_x);
         AccountHeader headerResult = new AccountHeaderBuilder()
                 .withActivity(this)
@@ -150,7 +150,7 @@ public class WeatherActivity extends AppCompatActivity {
                         .icon(GoogleMaterial.Icon.gmd_create))
                 .withSelectable(false);
         SecondarySwitchDrawerItem item4 = new SecondarySwitchDrawerItem().withIdentifier(4).withName(getString(R.string.drawer_item_fahrenheit))
-                .withChecked(preferences.getUnits().equals("imperial"))
+                .withChecked(preferences.getUnits().equals(Constants.IMPERIAL))
                 .withIcon(new IconicsDrawable(this)
                         .icon(WeatherIcons.Icon.wic_fahrenheit))
                 .withSelectable(false);
@@ -163,17 +163,11 @@ public class WeatherActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(IDrawerItem drawerItem, CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    preferences.setUnits("imperial");
+                    preferences.setUnits(Constants.IMPERIAL);
                 }
                 else {
-                    preferences.setUnits("metric");
+                    preferences.setUnits(Constants.METRIC);
                 }
-                /*
-                wf = new WeatherFragment();
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragment, wf)
-                        .commit();
-                */
             }
         });
         item5.withOnCheckedChangeListener(new OnCheckedChangeListener() {
@@ -248,17 +242,16 @@ public class WeatherActivity extends AppCompatActivity {
 
     private void showApiKeyBox() {
         new MaterialDialog.Builder(this)
-                .title("Change OWM API Key")
-                .content("You can enter your own custom OpenWeatherMap API key, and help reduce the load from my API Key\n\n" +
-                        "BEWARE: Entering a wrong API Key may result in the app going haywire. Do this at your own risk")
-                .neutralText("RESET")
+                .title(getString(R.string.change_owm_key_header))
+                .content(getString(R.string.change_owm_key_content))
+                .neutralText(getString(R.string.reset))
                 .onNeutral(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                         preferences.setWeatherKey(Constants.OWM_APP_ID);
                     }
                 })
-                .negativeText("CANCEL")
+                .negativeText(getString(R.string.cancel))
                 .onNegative(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog , @NonNull DialogAction which) {

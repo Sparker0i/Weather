@@ -5,34 +5,27 @@ import android.content.Intent;
 import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
-import com.a5corp.weather.BuildConfig;
 import com.a5corp.weather.R;
 import com.a5corp.weather.activity.LicenseActivity;
-import com.afollestad.materialdialogs.MaterialDialog;
 
 import it.gmariotti.cardslib.library.internal.Card;
 
-public class AboutCard extends Card
-{
+public class AboutCard extends Card {
     private int type;
     private Context context;
 
-    public AboutCard(Context context, int innerLayout, int type)
-    {
+    public AboutCard(Context context, int innerLayout, int type) {
         super(context, innerLayout);
         this.type = type;
         this.context = context;
     }
 
     @Override
-    public void setupInnerViewElements(ViewGroup parent, View view)
-    {
+    public void setupInnerViewElements(ViewGroup parent, View view) {
         super.setupInnerViewElements(parent, view);
 
-        switch (type)
-        {
+        switch (type) {
             case 1:
             {
                 (parent.findViewById(R.id.more_apps)).setOnClickListener(
@@ -220,8 +213,7 @@ public class AboutCard extends Card
         }
     }
 
-    private void showLicense(int libId)
-    {
+    private void showLicense(int libId) {
         Intent intent = new Intent(context, LicenseActivity.class);
         intent.putExtra("libId", libId);
         context.startActivity(intent);

@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.a5corp.weather.R;
 import com.a5corp.weather.model.WeatherFort;
 import com.a5corp.weather.preferences.Prefs;
+import com.a5corp.weather.utils.Constants;
 
 public class CustomBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
@@ -27,7 +28,7 @@ public class CustomBottomSheetDialogFragment extends BottomSheetDialogFragment {
     Prefs preferences;
     Typeface weatherFont;
     WeatherFort.WeatherList json;
-    private static final String DESCRIBABLE_KEY = "describable_key";
+    private static final String DESCRIBABLE_KEY = Constants.DESCRIBABLE_KEY;
     WeatherFort.WeatherList mDescribable;
 
     @Override
@@ -121,11 +122,11 @@ public class CustomBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
     public void setOthers() {
         try {
-            String wind = "Speed : " + json.getSpeed() + " m/";
+            String wind = "Speed : " + json.getSpeed();
             if (preferences.getUnits().equals("imperial"))
-                wind = wind + "h";
+                wind = wind + " m/h";
             else
-                wind = wind + "s";
+                wind = wind + " m/s";
             windText.setText(wind);
             try {
                 rainText.setText("Rain : " + json.getRain() + " mm");

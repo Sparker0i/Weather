@@ -67,13 +67,13 @@ public class FirstLaunchFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (!new CheckConnection(getContext()).isNetworkAvailable()) {
-                    Snackbar.make(rootView , "Please check your Internet connection." , Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(rootView , getString(R.string.check_internet) , Snackbar.LENGTH_SHORT).show();
                 }
                 else if (cityInput.getText().length() > 0) {
                     launchActivity(0);
                 }
                 else {
-                    Snackbar.make(rootView , "Enter a City Name First" , Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(rootView , getString(R.string.enter_city_first) , Snackbar.LENGTH_SHORT).show();
                 }
             }
         });
@@ -118,8 +118,8 @@ public class FirstLaunchFragment extends Fragment {
                         launchActivity(1);
                     }
                 } else {
-                    Snackbar.make(rootView , "Please Enable Location Permission to Perform this action" , Snackbar.LENGTH_SHORT)
-                            .setAction("SETTINGS", new View.OnClickListener() {
+                    Snackbar.make(rootView , getString(R.string.enable_location) , Snackbar.LENGTH_SHORT)
+                            .setAction(getString(R.string.drawer_item_settings) , new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
                                     final Intent i = new Intent();

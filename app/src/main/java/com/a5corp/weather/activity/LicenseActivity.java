@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.a5corp.weather.R;
+import com.a5corp.weather.utils.Constants;
 import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.material_design_iconic_typeface_library.MaterialDesignIconic;
 
@@ -40,7 +41,7 @@ public class LicenseActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_license);
         ButterKnife.bind(this);
-        libID = getIntent().getExtras().getInt("libId");
+        libID = getIntent().getExtras().getInt(Constants.LIBRARY_ID);
 
         switch (libID)
         {
