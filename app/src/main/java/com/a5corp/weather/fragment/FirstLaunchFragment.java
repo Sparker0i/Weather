@@ -2,8 +2,6 @@ package com.a5corp.weather.fragment;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.Uri;
-import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -118,21 +116,7 @@ public class FirstLaunchFragment extends Fragment {
                         launchActivity(1);
                     }
                 } else {
-                    Snackbar.make(rootView , getString(R.string.enable_location) , Snackbar.LENGTH_SHORT)
-                            .setAction(getString(R.string.drawer_item_settings) , new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    final Intent i = new Intent();
-                                    i.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                                    i.addCategory(Intent.CATEGORY_DEFAULT);
-                                    i.setData(Uri.parse("package:" + getContext().getApplicationContext().getPackageName()));
-                                    i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                    i.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-                                    i.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
-                                    getContext().startActivity(i);
-                                }
-                            })
-                            .show();
+                    permission.permissionDenied();
                 }
                 break;
             }

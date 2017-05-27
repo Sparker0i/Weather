@@ -19,7 +19,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class FetchWeatherOther extends AsyncTask<String , Void , WeatherInfo> {
-    private static final String OPEN_WEATHER_MAP_DAILY_API = "http://api.openweathermap.org/data/2.5/weather?";
     private final String LOG_TAG = FetchWeatherOther.class.getSimpleName();
 
     private Uri builtDay;
@@ -40,7 +39,7 @@ public class FetchWeatherOther extends AsyncTask<String , Void , WeatherInfo> {
 
             WeatherInfo weather = gsonWeather();
             if (weather.getCod() != 200) {
-                Log.e(LOG_TAG , "cod is 0");
+                Log.e(LOG_TAG , "cod is not 200");
                 return null;
             }
             return weather;
@@ -55,7 +54,7 @@ public class FetchWeatherOther extends AsyncTask<String , Void , WeatherInfo> {
     private void city(String... params) {
         String UNITS_VALUE = preferences.getUnits();
         System.out.println(UNITS_VALUE);
-        builtDay = Uri.parse(OPEN_WEATHER_MAP_DAILY_API).buildUpon()
+        builtDay = Uri.parse(Constants.OPEN_WEATHER_MAP_DAILY_API).buildUpon()
                 .appendQueryParameter(Constants.QUERY_PARAM , params[0])
                 .appendQueryParameter(Constants.FORMAT_PARAM , Constants.FORMAT_VALUE)
                 .appendQueryParameter(Constants.UNITS_PARAM , UNITS_VALUE)

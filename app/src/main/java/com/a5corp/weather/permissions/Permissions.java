@@ -43,7 +43,7 @@ public class Permissions {
     }
 
     private void showRationale() {
-        View rootView = ((WeatherActivity) mContext).getWindow().getDecorView().findViewById(R.id.fragment);
+        View rootView = ((Activity) mContext).getWindow().getDecorView().findViewById(R.id.fragment);
         Snackbar.make(rootView , "This Permission Is Required to access Weather Data of your location" , Snackbar.LENGTH_LONG).show();
         Log.i("Permissions" , "showRationale");
     }
