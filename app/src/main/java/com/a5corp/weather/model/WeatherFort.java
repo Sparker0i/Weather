@@ -43,7 +43,7 @@ public class WeatherFort implements Serializable{
         private long dt;
         private Temp temp;
         private double pressure;
-        private double humidity;
+        private int humidity;
         private double speed;
         private double deg;
         private double rain;
@@ -70,7 +70,7 @@ public class WeatherFort implements Serializable{
             return pressure;
         }
 
-        public double getHumidity() {
+        public int getHumidity() {
             return humidity;
         }
 
