@@ -4,6 +4,7 @@
     <string name="app_name">Simple Weather</string>
     <string name="app_icon">&#xf002;</string>
     <string name="change_city">Change City</string>
+    <string name="enter_zip_code">You can change the city by entering City name or the ZIP Code</string>
     <string name="could_not_find">Hey there, could not find the city you wanted. Please enter a new one :</string>
     <string name="about_page">About</string>
     <string name="location">Location</string>
@@ -13,6 +14,7 @@
     <string name="first_go_text">GO</string>
     <string name="uh_oh">Uh oh. Seems like the city you entered does not exist on the Database. Please Try Again</string>
     <string name="pick_city">Hey there, let\'s start by picking a city for you</string>
+    <string name="hey_there_condition">Hey there, %s here right now!</string>
     <string name="credits"><u>CREDITS</u></string>
     <string name="refresh">Refresh</string>
 
@@ -22,14 +24,23 @@
     <string name="mm">mm</string>
     <string name="rain_">Rain : %.2f</string>
     <string name="snow_">Snow : %.2f</string>
-    <string name="humidity">Humidity : %.2f %%</string>
+    <string name="humidity">Humidity : %d %%</string>
     <string name="pressure">Pressure : %.2f hPa</string>
 
-    <string name="wind">%f %s</string>
-    <string name="wind_speed">Wind Speed</string>
-    <string name="humidity_">%f %%</string>
+    <string name="wind" formatted="false">%1$.2f %2$s</string>
+    <string name="wind_speed">Wind Speed : %1$.2f %2$s</string>
+    <string name="humidity_">%d %%</string>
     <string name="sunrise">Sunrise at : %s</string>
     <string name="sunset">Sunset at : %s</string>
+
+    <string name="north">Wind blowing towards North</string>
+    <string name="north_east">Wind blowing in the North-East direction</string>
+    <string name="north_west">Wind blowing in the North-West direction</string>
+    <string name="south">Wind blowing towards South</string>
+    <string name="south_east">Wind blowing in the South-East direction</string>
+    <string name="south_west">Wind blowing in the South-West direction</string>
+    <string name="east">Wind blowing towards East</string>
+    <string name="west">Wind blowing towards West</string>
 
     <string name="humidity_icon">&#xf07a;</string>
     <string name="pressure_icon">&#xf079;</string>
@@ -140,6 +151,7 @@
     <string name="title_activity_detail">Details</string>
     <string name="title_activity_first_launch">Enter City</string>
 
+    <!-- Drawer Strings -->
     <string name="drawer_item_home">Home</string>
     <string name="drawer_item_graph">Weather Graphs</string>
     <string name="drawer_item_map">Weather Map</string>

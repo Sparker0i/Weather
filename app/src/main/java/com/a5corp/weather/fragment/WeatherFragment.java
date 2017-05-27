@@ -287,12 +287,10 @@ public class WeatherFragment extends Fragment {
         pd.dismiss();
         Intent intent = new Intent(getActivity(), FirstLaunch.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        Log.i("Loaded", "Weather");
         startActivity(intent);
     }
 
     public List<WeatherFort.WeatherList> getDailyJson() {
-        Log.i("list" , json.fort.getList().toString());
         return json.fort.getList();
     }
 
@@ -457,7 +455,6 @@ public class WeatherFragment extends Fragment {
     private void setWeatherIcon(int id , int i) {
         String icon = "";
         if (i == 10) {
-            Log.i("Here" , "Entered");
             if (checkDay())
                 switch (id) {
                     case 501:
@@ -906,7 +903,6 @@ public class WeatherFragment extends Fragment {
                     break;
             }
         }
-        Log.i(Integer.toString(id) , Integer.toString(i));
         weatherIcon[i].setText(icon);
     }
 
@@ -919,18 +915,13 @@ public class WeatherFragment extends Fragment {
 
     private void renderWeather(Info jsonObj){
         try {
-            Log.i("Showed" , "Done");
             json0 = jsonObj.day;
-            Log.i("Json 0" , json0.toString());
             json1 = jsonObj.fort;
-            Log.i("Json 1" , json1.toString());
             tc = json0.getMain().getTemp();
             preferences.setLatitude((float) json1.getCity().getCoord().getLatitude());
-            Log.i("Lat", Float.toString((float) json1.getCity().getCoord().getLatitude()));
             preferences.setLongitude((float) json1.getCity().getCoord().getLongitude());
-            Log.i("Lon", Float.toString((float) json1.getCity().getCoord().getLongitude()));
             preferences.setCity(json1.getCity().getName());
-            int a = (int) Math.round(json0.getMain().getTemp());                        //℃
+            int a = (int) Math.round(json0.getMain().getTemp());
             final String city = json1.getCity().getName().toUpperCase(Locale.US) +
                     ", " +
                     json1.getCity().getCountry();
@@ -947,9 +938,7 @@ public class WeatherFragment extends Fragment {
             for (int i = 0; i < 10; ++i)
             {
                 details.set(i , json1.getList().get(i));
-                Log.i("listItem" , i + " " + json1.getList().get(i).toString());
             }
-            Log.i("Objects" , "JSON Objects Created");
             for (int i = 0; i < 10; ++i)
             {
                 final WeatherFort.WeatherList J = details.get(i);
@@ -962,7 +951,6 @@ public class WeatherFragment extends Fragment {
                 ss1.setSpan(new RelativeSizeSpan(1.1f) , 0 , 7 , 0); // set size
                 ss1.setSpan(new RelativeSizeSpan(1.4f) , 8 , 12 , 0);
                 detailsField[i].setText(ss1);
-                Log.i("Details[" + Integer.toString(i) + "]", "Information String " + Integer.toString(i + 1) + " loaded");
                 setWeatherIcon(J.getWeather().get(0).getId() , i);
                 detailsField[i].setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
@@ -985,33 +973,32 @@ public class WeatherFragment extends Fragment {
             DateFormat df = DateFormat.getDateTimeInstance();
             String updatedOn = "Last update: " + df.format(new Date(json0.getDt() * 1000));
             updatedField.setText(updatedOn);
-            final String humidity = String.format(Locale.ENGLISH , getString(R.string.humidity_) , json0.getMain().getHumidity());
+            final String humidity = String.format(getString(R.string.humidity_) , json0.getMain().getHumidity());
             humidityView.setText(humidity);
             humidityIcon.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Snackbar.make(rootView , String.format(Locale.ENGLISH , getString(R.string.humidity) , json0.getMain().getHumidity()) , Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(rootView , String.format(Locale.ENGLISH , getString(R.string.humidity) , json0.getMain().getHumidity()) + " %" , Snackbar.LENGTH_SHORT).show();
                 }
             });
             humidityView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Snackbar.make(rootView , String.format(Locale.ENGLISH , getString(R.string.humidity) , json0.getMain().getHumidity()) , Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(rootView , String.format(Locale.ENGLISH , getString(R.string.humidity) , json0.getMain().getHumidity()) + " %" , Snackbar.LENGTH_SHORT).show();
                 }
             });
-            Log.i("Humidity Loaded" , "Done");
             final String wind = String.format(Locale.ENGLISH , getString(R.string.wind) , json0.getWind().getSpeed() , preferences.getUnits().equals("metric") ? getString(R.string.mps) : getString(R.string.mph));
             windView.setText(wind);
             windIcon.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Snackbar.make(rootView , getString(R.string.wind_speed) + wind , Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(rootView , String.format(Locale.ENGLISH , getString(R.string.wind_speed) , json0.getWind().getSpeed() , preferences.getUnits().equals("metric") ? getString(R.string.mps) : getString(R.string.mph)) , Snackbar.LENGTH_SHORT).show();
                 }
             });
             windView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Snackbar.make(rootView , getString(R.string.wind_speed) + wind , Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(rootView , String.format(Locale.ENGLISH , getString(R.string.wind_speed) , json0.getWind().getSpeed() , preferences.getUnits().equals("metric") ? getString(R.string.mps) : getString(R.string.mph)) , Snackbar.LENGTH_SHORT).show();
                 }
             });
             humidityIcon.setOnClickListener(new View.OnClickListener() {
@@ -1050,10 +1037,7 @@ public class WeatherFragment extends Fragment {
                     Snackbar.make(rootView , String.format(Locale.ENGLISH , getString(R.string.sunset) , d2) , Snackbar.LENGTH_SHORT).show();
                 }
             });
-            Log.i("Wind Loaded" , "Done");
-            Log.i("10" , "Weather Icon 11 Set");
             setWeatherIcon(json0.getWeather().get(0).getId() , 10);
-            Log.i("Set" , "Main Weather Icon");
             weatherIcon[10].setOnClickListener(new View.OnClickListener()
             {
                 public void onClick (View v)
@@ -1066,7 +1050,7 @@ public class WeatherFragment extends Fragment {
                             String cap = s.substring(0, 1).toUpperCase() + s.substring(1);
                             builder.append(cap.concat(" "));
                         }
-                        Snackbar.make(v , "Hey there, " + builder.toString() + "here right now!", Snackbar.LENGTH_SHORT)
+                        Snackbar.make(v , String.format(getString(R.string.hey_there_condition) , builder.toString()), Snackbar.LENGTH_SHORT)
                                 .show();
                     }
                     catch (Exception e) {
@@ -1079,7 +1063,7 @@ public class WeatherFragment extends Fragment {
             int deg = json0.getWind().getDirection();
             setDeg(deg);
         }catch(Exception e){
-            Log.e("SimpleWeather", "One or more fields not found in the JSON data");
+            Log.e(WeatherFragment.class.getSimpleName() , "One or more fields not found in the JSON data");
         }
     }
 
@@ -1090,7 +1074,7 @@ public class WeatherFragment extends Fragment {
                 directionView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Snackbar.make(view , "Wind blowing towards North" , Snackbar.LENGTH_SHORT).show();
+                        Snackbar.make(view , getString(R.string.north) , Snackbar.LENGTH_SHORT).show();
                     }
                 });
                 break;
@@ -1098,7 +1082,7 @@ public class WeatherFragment extends Fragment {
                 directionView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Snackbar.make(view , "Wind blowing in the North-East direction" , Snackbar.LENGTH_SHORT).show();
+                        Snackbar.make(view , getString(R.string.north_east) , Snackbar.LENGTH_SHORT).show();
                     }
                 });
                 break;
@@ -1106,7 +1090,7 @@ public class WeatherFragment extends Fragment {
                 directionView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Snackbar.make(view , "Wind blowing towards East" , Snackbar.LENGTH_SHORT).show();
+                        Snackbar.make(view , getString(R.string.east) , Snackbar.LENGTH_SHORT).show();
                     }
                 });
                 break;
@@ -1114,7 +1098,7 @@ public class WeatherFragment extends Fragment {
                 directionView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Snackbar.make(view , "Wind blowing in the South-East direction" , Snackbar.LENGTH_SHORT).show();
+                        Snackbar.make(view , getString(R.string.south_east) , Snackbar.LENGTH_SHORT).show();
                     }
                 });
                 break;
@@ -1122,7 +1106,7 @@ public class WeatherFragment extends Fragment {
                 directionView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Snackbar.make(view , "Wind blowing towards South" , Snackbar.LENGTH_SHORT).show();
+                        Snackbar.make(view , getString(R.string.south) , Snackbar.LENGTH_SHORT).show();
                     }
                 });
                 break;
@@ -1130,7 +1114,7 @@ public class WeatherFragment extends Fragment {
                 directionView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Snackbar.make(view , "Wind blowing in the South-West direction" , Snackbar.LENGTH_SHORT).show();
+                        Snackbar.make(view , getString(R.string.south_west) , Snackbar.LENGTH_SHORT).show();
                     }
                 });
                 break;
@@ -1138,7 +1122,7 @@ public class WeatherFragment extends Fragment {
                 directionView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Snackbar.make(view , "Wind blowing towards West" , Snackbar.LENGTH_SHORT).show();
+                        Snackbar.make(view , getString(R.string.west) , Snackbar.LENGTH_SHORT).show();
                     }
                 });
                 break;
@@ -1146,7 +1130,7 @@ public class WeatherFragment extends Fragment {
                 directionView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Snackbar.make(view , "Wind blowing in the North-West direction" , Snackbar.LENGTH_SHORT).show();
+                        Snackbar.make(view , getString(R.string.north_west) , Snackbar.LENGTH_SHORT).show();
                     }
                 });
                 break;
@@ -1164,9 +1148,9 @@ public class WeatherFragment extends Fragment {
 
     private void showMenuInputDialog() {
         new MaterialDialog.Builder(getContext())
-                .title("Change City")
-                .content("You can change the city by entering City name or the ZIP Code")
-                .negativeText("CANCEL")
+                .title(getString(R.string.change_city))
+                .content(getString(R.string.enter_zip_code))
+                .negativeText(getString(R.string.cancel))
                 .onNegative(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog , @NonNull DialogAction which) {
