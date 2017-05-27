@@ -99,8 +99,8 @@ public class WeatherFragment extends Fragment {
         rootView = inflater.inflate(R.layout.fragment_weather, container, false);
         ButterKnife.bind(this , rootView);
         MaterialDialog.Builder builder = new MaterialDialog.Builder(this.getActivity())
-                .title("Please Wait")
-                .content("Loading")
+                .title(getString(R.string.please_wait))
+                .content(getString(R.string.loading))
                 .cancelable(false)
                 .progress(true , 0);
         pd = builder.build();
@@ -110,7 +110,7 @@ public class WeatherFragment extends Fragment {
         Bundle bundle = getArguments();
         int mode;
         if (bundle != null)
-            mode = bundle.getInt("mode" , 0);
+            mode = bundle.getInt(Constants.MODE , 0);
         else
             mode = 0;
         if (mode == 0)
@@ -312,9 +312,9 @@ public class WeatherFragment extends Fragment {
 
     private void showInputDialog() {
         new MaterialDialog.Builder(this.getActivity())
-                .title("Change City")
-                .content("Hey there, could not find the city you wanted. Please enter a new one:")
-                .negativeText("CANCEL")
+                .title(getString(R.string.change_city))
+                .content(getString(R.string.could_not_find))
+                .negativeText(getString(R.string.cancel))
                 .onNegative(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog , @NonNull DialogAction which) {
@@ -339,20 +339,17 @@ public class WeatherFragment extends Fragment {
                             .setTarget(R.id.search)
                             .setBackgroundColour(ContextCompat.getColor(getContext() , R.color.md_light_blue_400))
                             .setFocalColour(ContextCompat.getColor(getContext() , R.color.colorAccent))
-                            .setPrimaryText("Search for a city")
-                            .setSecondaryText("Search for weather data from over 200,000 cities and towns")
+                            .setPrimaryText(getString(R.string.target_search_title))
+                            .setSecondaryText(getString(R.string.target_search_content))
                             .setIconDrawableColourFilter(ContextCompat.getColor(getContext() , R.color.md_black_1000))
-                            .setOnHidePromptListener(new MaterialTapTargetPrompt.OnHidePromptListener()
-                            {
+                            .setOnHidePromptListener(new MaterialTapTargetPrompt.OnHidePromptListener() {
                                 @Override
-                                public void onHidePrompt(MotionEvent event, boolean tappedTarget)
-                                {
+                                public void onHidePrompt(MotionEvent event, boolean tappedTarget) {
 
                                 }
 
                                 @Override
-                                public void onHidePromptComplete()
-                                {
+                                public void onHidePromptComplete() {
                                     showRefresh();
                                 }
                             })
@@ -365,20 +362,17 @@ public class WeatherFragment extends Fragment {
         new MaterialTapTargetPrompt.Builder(getActivity())
                 .setTarget(R.id.location)
                 .setBackgroundColour(ContextCompat.getColor(getContext() , R.color.md_light_blue_400))
-                .setPrimaryText("Search data of your location")
+                .setPrimaryText(getString(R.string.target_location_title))
                 .setFocalColour(ContextCompat.getColor(getContext() , R.color.colorAccent))
-                .setSecondaryText("Tap to check the weather of the location you are at right now. Swipe from the left edge of the screen to the right to see more options")
-                .setOnHidePromptListener(new MaterialTapTargetPrompt.OnHidePromptListener()
-                {
+                .setSecondaryText(getString(R.string.target_location_content))
+                .setOnHidePromptListener(new MaterialTapTargetPrompt.OnHidePromptListener() {
                     @Override
-                    public void onHidePrompt(MotionEvent event, boolean tappedTarget)
-                    {
+                    public void onHidePrompt(MotionEvent event, boolean tappedTarget) {
                         preferences.setv3TargetShown(true);
                     }
 
                     @Override
-                    public void onHidePromptComplete()
-                    {
+                    public void onHidePromptComplete() {
                         preferences.setv3TargetShown(true);
                     }
                 })
@@ -389,14 +383,12 @@ public class WeatherFragment extends Fragment {
         new MaterialTapTargetPrompt.Builder(getActivity())
                 .setTarget(R.id.toolbar)
                 .setBackgroundColour(ContextCompat.getColor(getContext() , R.color.md_light_blue_400))
-                .setPrimaryText("Refresh")
+                .setPrimaryText(getString(R.string.target_refresh_title))
                 .setFocalColour(ContextCompat.getColor(getContext() , R.color.colorAccent))
-                .setSecondaryText("Swipe from the top to refresh")
-                .setOnHidePromptListener(new MaterialTapTargetPrompt.OnHidePromptListener()
-                {
+                .setSecondaryText(getString(R.string.target_refresh_content))
+                .setOnHidePromptListener(new MaterialTapTargetPrompt.OnHidePromptListener() {
                     @Override
-                    public void onHidePrompt(MotionEvent event, boolean tappedTarget)
-                    {
+                    public void onHidePrompt(MotionEvent event, boolean tappedTarget) {
 
                     }
 
@@ -411,10 +403,10 @@ public class WeatherFragment extends Fragment {
 
     public void showNoInternet() {
         new MaterialDialog.Builder(getContext())
-                .title("No Internet")
+                .title(getString(R.string.no_internet_title))
                 .cancelable(false)
-                .content("Internet Access Needs To Be Enabled To Display Weather Data")
-                .positiveText("MOBILE DATA")
+                .content(getString(R.string.no_internet_content))
+                .positiveText(getString(R.string.no_internet_mobile_data))
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
@@ -423,7 +415,7 @@ public class WeatherFragment extends Fragment {
                         startActivityForResult(intent , 0);
                     }
                 })
-                .negativeText("WIFI")
+                .negativeText(getString(R.string.no_internet_wifi))
                 .onNegative(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
@@ -993,73 +985,69 @@ public class WeatherFragment extends Fragment {
             DateFormat df = DateFormat.getDateTimeInstance();
             String updatedOn = "Last update: " + df.format(new Date(json0.getDt() * 1000));
             updatedField.setText(updatedOn);
-            String humidity = json0.getMain().getHumidity() + "%";
+            final String humidity = String.format(Locale.ENGLISH , getString(R.string.humidity_) , json0.getMain().getHumidity());
             humidityView.setText(humidity);
             humidityIcon.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Snackbar.make(rootView , "Humidity : " + humidityView.getText() , Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(rootView , String.format(Locale.ENGLISH , getString(R.string.humidity) , json0.getMain().getHumidity()) , Snackbar.LENGTH_SHORT).show();
                 }
             });
             humidityView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Snackbar.make(rootView , "Humidity : " + humidityView.getText() , Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(rootView , String.format(Locale.ENGLISH , getString(R.string.humidity) , json0.getMain().getHumidity()) , Snackbar.LENGTH_SHORT).show();
                 }
             });
             Log.i("Humidity Loaded" , "Done");
-            String wind = json0.getWind().getSpeed() + " m/";
-            if (preferences.getUnits().equals("imperial"))
-                wind = wind + "h";
-            else
-                wind = wind + "s";
+            final String wind = String.format(Locale.ENGLISH , getString(R.string.wind) , json0.getWind().getSpeed() , preferences.getUnits().equals("metric") ? getString(R.string.mps) : getString(R.string.mph));
             windView.setText(wind);
             windIcon.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Snackbar.make(rootView , "Wind Speed : " + windView.getText() , Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(rootView , getString(R.string.wind_speed) + wind , Snackbar.LENGTH_SHORT).show();
                 }
             });
             windView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Snackbar.make(rootView , "Wind Speed : " + windView.getText() , Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(rootView , getString(R.string.wind_speed) + wind , Snackbar.LENGTH_SHORT).show();
                 }
             });
             humidityIcon.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Snackbar.make(rootView , "Humidity : " + humidityView.getText() , Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(rootView , String.format(Locale.ENGLISH , getString(R.string.humidity) , json0.getMain().getHumidity()) , Snackbar.LENGTH_SHORT).show();
                 }
             });
             humidityView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Snackbar.make(rootView , "Humidity : " + humidityView.getText() , Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(rootView , String.format(Locale.ENGLISH , getString(R.string.humidity) , json0.getMain().getHumidity()) , Snackbar.LENGTH_SHORT).show();
                 }
             });
             sunriseIcon.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Snackbar.make(rootView , "Sunrise at : " + sunriseView.getText() , Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(rootView , String.format(Locale.ENGLISH , getString(R.string.sunrise) , d1) , Snackbar.LENGTH_SHORT).show();
                 }
             });
             sunriseView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Snackbar.make(rootView , "Sunrise at : " + sunriseView.getText() , Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(rootView , String.format(Locale.ENGLISH , getString(R.string.sunrise) , d1) , Snackbar.LENGTH_SHORT).show();
                 }
             });
             sunsetIcon.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Snackbar.make(rootView , "Sunset at : " + sunsetView.getText() , Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(rootView , String.format(Locale.ENGLISH , getString(R.string.sunset) , d2) , Snackbar.LENGTH_SHORT).show();
                 }
             });
             sunsetView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Snackbar.make(rootView , "Sunset at : " + sunsetView.getText() , Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(rootView , String.format(Locale.ENGLISH , getString(R.string.sunset) , d2) , Snackbar.LENGTH_SHORT).show();
                 }
             });
             Log.i("Wind Loaded" , "Done");

@@ -18,6 +18,8 @@ import com.a5corp.weather.model.WeatherFort;
 import com.a5corp.weather.preferences.Prefs;
 import com.a5corp.weather.utils.Constants;
 
+import java.util.Locale;
+
 public class CustomBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
     TextView windIcon , rainIcon , snowIcon , humidityIcon , pressureIcon;
@@ -122,26 +124,26 @@ public class CustomBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
     public void setOthers() {
         try {
-            String wind = "Speed : " + json.getSpeed();
+            String wind = String.format(Locale.ENGLISH , getString(R.string.speed) , json.getSpeed());
             if (preferences.getUnits().equals("imperial"))
-                wind = wind + " m/h";
+                wind = wind + " " + getString(R.string.mph);
             else
-                wind = wind + " m/s";
+                wind = wind + " " + getString(R.string.mps);
             windText.setText(wind);
             try {
-                rainText.setText("Rain : " + json.getRain() + " mm");
+                rainText.setText(String.format(Locale.ENGLISH , getString(R.string.rain_) , json.getRain()) + " " + getString(R.string.mm));
             }
             catch (Exception ex) {
-                rainText.setText("Rain : 0 mm");
+                rainText.setText(String.format(Locale.ENGLISH , getString(R.string.rain_) , 0) + " " + getString(R.string.mm));
             }
             try {
-                snowText.setText("Snow : " + json.getSnow() + " mm");
+                snowText.setText(String.format(Locale.ENGLISH , getString(R.string.snow_) , json.getSnow()) + " " + getString(R.string.mm));
             }
             catch (Exception ex) {
-                snowText.setText("Snow : 0 mm");
+                snowText.setText(String.format(Locale.ENGLISH , getString(R.string.snow_) , 0) + " " + getString(R.string.mm));
             }
-            humidityText.setText("Humidity : " + json.getHumidity() + " %");
-            pressureText.setText("Pressure : " + json.getPressure() + " hPa");
+            humidityText.setText(String.format(Locale.ENGLISH , getString(R.string.humidity) , json.getHumidity()));
+            pressureText.setText(String.format(Locale.ENGLISH , getString(R.string.pressure) , json.getPressure()));
         }
         catch (Exception ex) {
             ex.printStackTrace();

@@ -34,6 +34,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
 import static com.a5corp.weather.utils.Constants.DESCRIBABLE_KEY;
@@ -67,8 +68,8 @@ public class GraphsFragment extends Fragment {
         mValueFormatter = new CustomFormatter();
         pf = new Prefs(getContext());
         MaterialDialog.Builder builder = new MaterialDialog.Builder(this.getActivity())
-                .title("Please Wait")
-                .content("Loading")
+                .title(getString(R.string.please_wait))
+                .content(getString(R.string.loading))
                 .cancelable(false)
                 .progress(true , 0);
         pd = builder.build();
@@ -231,7 +232,8 @@ public class GraphsFragment extends Fragment {
                     temperatureChart.getData().getDataSetCount() - 1));
             temperatureChart.getLegend().setTextColor(Color.parseColor("#FFFFFF"));
         }
-        set = new LineDataSet(tempEntries, "Temperature, " + getString(R.string.c));
+        String temp = String.format(Locale.ENGLISH , getString(R.string.g_temp) , pf.getUnits().equals("metric") ? getString(R.string.c) : getString(R.string.f));
+        set = new LineDataSet(tempEntries, temp);
         set.setMode(LineDataSet.Mode.CUBIC_BEZIER);
         set.setCubicIntensity(0.2f);
         set.setDrawCircles(false);
@@ -282,7 +284,7 @@ public class GraphsFragment extends Fragment {
                     rainChart.getData().getDataSetCount() - 1));
             rainChart.getLegend().setTextColor(Color.parseColor("#FFFFFF"));
         }
-        set = new LineDataSet(rainEntries, "Rain, mm");
+        set = new LineDataSet(rainEntries, getString(R.string.g_rain));
         set.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
         set.setCubicIntensity(0.2f);
         set.setDrawCircles(false);
@@ -333,7 +335,7 @@ public class GraphsFragment extends Fragment {
                     pressureChart.getData().getDataSetCount() - 1));
             pressureChart.getLegend().setTextColor(Color.parseColor("#FFFFFF"));
         }
-        set = new LineDataSet(pressureEntries, "Pressure, Pa");
+        set = new LineDataSet(pressureEntries, getString(R.string.g_pressure));
         set.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
         set.setCubicIntensity(0.2f);
         set.setDrawCircles(false);
@@ -384,7 +386,7 @@ public class GraphsFragment extends Fragment {
                     snowChart.getData().getDataSetCount() - 1));
             snowChart.getLegend().setTextColor(Color.parseColor("#FFFFFF"));
         }
-        set = new LineDataSet(snowEntries, "Snow, mm");
+        set = new LineDataSet(snowEntries, getString(R.string.g_snow));
         set.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
         set.setCubicIntensity(0.2f);
         set.setDrawCircles(false);
@@ -435,7 +437,8 @@ public class GraphsFragment extends Fragment {
                     windChart.getData().getDataSetCount() - 1));
             windChart.getLegend().setTextColor(Color.parseColor("#FFFFFF"));
         }
-        set = new LineDataSet(windEntries, "Wind, m/s");
+        String wind = String.format(Locale.ENGLISH , getString(R.string.g_wind) , pf.getUnits().equals("metric") ? getString(R.string.mps) : getString(R.string.mph));
+        set = new LineDataSet(windEntries, wind);
         set.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
         set.setCubicIntensity(0.2f);
         set.setDrawCircles(false);
@@ -497,19 +500,19 @@ public class GraphsFragment extends Fragment {
         c.setTime(new Date(dt));
         switch(c.get(Calendar.DAY_OF_WEEK)) {
             case Calendar.SUNDAY :
-                return "Sun";
+                return getString(R.string.sun);
             case Calendar.MONDAY :
-                return "Mon";
+                return getString(R.string.mon);
             case Calendar.TUESDAY :
-                return "Tue";
+                return getString(R.string.tue);
             case Calendar.WEDNESDAY :
-                return "Wed";
+                return getString(R.string.wed);
             case Calendar.THURSDAY :
-                return "Thu";
+                return getString(R.string.thu);
             case Calendar.FRIDAY :
-                return "Fri";
+                return getString(R.string.fri);
             case Calendar.SATURDAY :
-                return "Sat";
+                return getString(R.string.sat);
         }
         return null;
     }

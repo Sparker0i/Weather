@@ -4,6 +4,7 @@
     <string name="app_name">Simple Weather</string>
     <string name="app_icon">&#xf002;</string>
     <string name="change_city">Change City</string>
+    <string name="could_not_find">Hey there, could not find the city you wanted. Please enter a new one :</string>
     <string name="about_page">About</string>
     <string name="location">Location</string>
     <string name="toggle_values">Toggle Values</string>
@@ -15,9 +16,20 @@
     <string name="credits"><u>CREDITS</u></string>
     <string name="refresh">Refresh</string>
 
-    <string name="speed">Speed : %f</string>
+    <string name="speed">Speed : %.2f</string>
     <string name="mps">m/s</string>
     <string name="mph">miles/h</string>
+    <string name="mm">mm</string>
+    <string name="rain_">Rain : %.2f</string>
+    <string name="snow_">Snow : %.2f</string>
+    <string name="humidity">Humidity : %.2f %%</string>
+    <string name="pressure">Pressure : %.2f hPa</string>
+
+    <string name="wind">%f %s</string>
+    <string name="wind_speed">Wind Speed</string>
+    <string name="humidity_">%f %%</string>
+    <string name="sunrise">Sunrise at : %s</string>
+    <string name="sunset">Sunset at : %s</string>
 
     <string name="humidity_icon">&#xf07a;</string>
     <string name="pressure_icon">&#xf079;</string>
@@ -109,8 +121,7 @@
 
     <string name="change_owm_key_header">Change OWM API Key</string>
     <string name="change_owm_key_content">You can enter your own custom OpenWeatherMap API key, and help reduce the load from my API Key.
-
-        BEWARE: Entering a wrong API Key may result in the app going haywire. Do this at your own risk</string>
+        \n\nBEWARE: Entering a wrong API Key may result in the app going haywire. Do this at your own risk</string>
 
     <string name="go">GO</string>
     <string name="reset">RESET</string>
@@ -119,8 +130,11 @@
     <string name="enter_city_first">Enter a City Name First</string>
     <string name="check_internet">Please check your Internet connection</string>
     <string name="enable_location">Please Enable Location Permission to Perform this action.</string>
+    <string name="please_wait">Please Wait</string>
+    <string name="loading">Loading</string>
 
     <string name="c">°C</string>
+    <string name="f">°F</string>
     <string name="daily">DAILY</string>
 
     <string name="title_activity_detail">Details</string>
@@ -141,7 +155,20 @@
     <string name="day">Day</string>
     <string name="Evening">Evening</string>
 
-    <!-- Widgets strings -->
+    <!-- Target Strings -->
+    <string name="target_search_title">Search for a city</string>
+    <string name="target_search_content">Search for weather data from over 200,000 cities and towns</string>
+    <string name="target_location_title">Search data of your location</string>
+    <string name="target_location_content">Tap to check the weather of the location you are at right now. Swipe from the left edge of the screen to the right to see more options</string>
+    <string name="target_refresh_title">Refresh</string>
+    <string name="target_refresh_content">Swipe from the top to refresh</string>
+
+    <string name="no_internet_title">No Internet</string>
+    <string name="no_internet_content">Internet Access Needs To Be Enabled To Display Weather Data</string>
+    <string name="no_internet_mobile_data">Mobile Data</string>
+    <string name="no_internet_wifi">Wi-Fi</string>
+
+    <!-- Widgets Strings -->
     <string name="widget_weather_icon_description">Current weather icon</string>
     <string name="widget_refresh_button">Widget refresh button</string>
 
@@ -149,6 +176,22 @@
     <string name="bottom_rain">Rain</string>
     <string name="bottom_wind">Wind</string>
     <string name="bottom_temperature">Temperature</string>
+
+    <!-- Graph Strings -->
+    <string name="g_rain">Rain, mm</string>
+    <string name="g_pressure">Pressure, hPa</string>
+    <string name="g_snow">Snow, mm</string>
+    <string name="g_temp">Temperature, %s</string>
+    <string name="g_wind">Rain, %s</string>
+
+    <!-- Days -->
+    <string name="sun">Sun</string>
+    <string name="mon">Mon</string>
+    <string name="tue">Tue</string>
+    <string name="wed">Wed</string>
+    <string name="thu">Thu</string>
+    <string name="fri">Fri</string>
+    <string name="sat">Sat</string>
 
     <!-- About -->
     <string name="github">GITHUB</string>
