@@ -72,9 +72,11 @@ public class NotificationBuilderService extends Service
                 }
                 catch (InterruptedException iex) {
                     Log.e("InterruptedException" , "iex");
+                    return;
                 }
                 catch (ExecutionException eex) {
                     Log.e("ExecutionException" , "eex");
+                    return;
                 }
                 getObjects();
             }
@@ -98,7 +100,6 @@ public class NotificationBuilderService extends Service
         else
             ut = "°F";
         builder.setAutoCancel(false);
-        builder.setTicker(Math.round(temp) + ut + " at " + city);
         builder.setContentTitle("Weather Notification");
         builder.setContentText(Math.round(temp) + ut + " at " + city);
         builder.setStyle(new NotificationCompat.BigTextStyle().bigText("City : " + city

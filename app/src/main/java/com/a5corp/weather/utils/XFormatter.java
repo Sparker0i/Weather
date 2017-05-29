@@ -1,8 +1,5 @@
 package com.a5corp.weather.utils;
 
-
-import android.util.Log;
-
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 

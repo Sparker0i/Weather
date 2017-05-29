@@ -32,24 +32,18 @@ public class GlobalActivity extends AppCompatActivity {
         if (!cp.getPrefs().getBoolean("first" , true)) {
             prefs.setLaunched();
             prefs.setCity(cp.getCity());
-            Log.i("Yeah" , "True");
         }
-        else
-            Log.i("No" , "False");
 
         super.onResume();
+        Intent intent;
 
         if (prefs.getLaunched()) {
-            Intent intent = new Intent(GlobalActivity.this, WeatherActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            Log.i("Loaded" , "Weather");
-            startActivity(intent);
+            intent = new Intent(GlobalActivity.this, WeatherActivity.class);
         }
         else {
-            Intent intent = new Intent(GlobalActivity.this, FirstLaunch.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            Log.i("Loaded" , "First");
-            startActivity(intent);
+            intent = new Intent(GlobalActivity.this, FirstLaunch.class);
         }
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 }

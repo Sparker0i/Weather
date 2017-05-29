@@ -107,12 +107,4 @@ public class Prefs {
     public String getWeatherKey() {
         return prefs.getString(Constants.OWM_KEY , Constants.OWM_APP_ID);
     }
-
-    public void setv3ResetShown(boolean bool) {
-        prefs.edit().putBoolean(Constants.V3RESET , bool).apply();
-    }
-
-    public boolean getv3ResetShown() {
-        return prefs.getBoolean(Constants.V3RESET , false);
-    }
 }

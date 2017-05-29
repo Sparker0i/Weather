@@ -9,6 +9,7 @@ public class Constants {
     
     public static final String CITY = "city";
     public static final String LASTCITY = "lcity";
+    public static final String LAST_NOTIF = "last_notif";
 
     public static final String FIRST = "first";
 

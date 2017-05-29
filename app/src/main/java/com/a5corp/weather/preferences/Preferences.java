@@ -6,8 +6,8 @@ import android.content.SharedPreferences;
 /**
  * Deprecated starting version 3 of Simple Weather
  *
- * This Preferences class has no moved to a more robust Prefs class instead.
- * This class is being maintained for a stable user experience
+ * This Preferences class has now moved to a more robust Prefs class instead.
+ * This class is being maintained for maintaining a stable user experience
  *
  * @deprecated use {@link com.a5corp.weather.preferences.Prefs} class instead.
  */

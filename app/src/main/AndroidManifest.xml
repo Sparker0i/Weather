@@ -60,12 +60,6 @@
             </intent-filter>
         </receiver>
 
-        <receiver android:name=".receiver.MyReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-            </intent-filter>
-        </receiver>
-
         <receiver android:name=".widget.SmallWidgetProvider">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
