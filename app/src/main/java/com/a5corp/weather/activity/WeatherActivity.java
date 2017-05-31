@@ -2,6 +2,7 @@ package com.a5corp.weather.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -95,6 +96,7 @@ public class WeatherActivity extends AppCompatActivity {
         preferences = new Prefs(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         Intent intent = getIntent();
