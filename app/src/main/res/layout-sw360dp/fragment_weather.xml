@@ -343,7 +343,6 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="#FFFFFF"
                 android:textSize="100sp"
-                android:layout_marginStart="48dp"
                 android:layout_below="@+id/updated_field"
                 android:layout_toEndOf="@+id/daily_view" />
 
@@ -396,7 +395,7 @@
                         android:textAlignment="center"
                         android:layout_gravity="center_horizontal"
                         android:textSize="40sp"
-                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textColor="#FFFFFF" />
 
                     <TextView
@@ -425,7 +424,7 @@
                         android:textSize="40sp"
                         android:layout_gravity="center_horizontal"
                         android:textAlignment="center"
-                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textColor="#FFFFFF" />
 
                     <TextView
@@ -434,6 +433,7 @@
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:id="@+id/humidity_view"
                         android:textColor="#FFFFFF"
+                        android:gravity="center"
                         android:layout_gravity="center_horizontal"
                         android:textAlignment="center" />
                 </LinearLayout>
@@ -453,7 +453,7 @@
                         android:gravity="center"
                         android:textSize="40sp"
                         android:textAlignment="center"
-                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textColor="#FFFFFF" />
 
                     <TextView
@@ -462,6 +462,7 @@
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:id="@+id/sunrise_view"
                         android:textColor="#FFFFFF"
+                        android:gravity="center"
                         android:layout_gravity="center_horizontal"
                         android:textAlignment="center" />
                 </LinearLayout>
@@ -470,7 +471,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:minWidth="85sp"
-                    android:layout_marginEnd="8dp"
                     android:orientation="vertical"
                     android:layout_weight="1">
                     <TextView
@@ -481,7 +481,7 @@
                         android:textSize="40sp"
                         android:textAlignment="center"
                         android:layout_gravity="center_horizontal"
-                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textColor="#FFFFFF" />
 
                     <TextView
@@ -490,6 +490,7 @@
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:id="@+id/sunset_view"
                         android:layout_gravity="center_horizontal"
+                        android:gravity="center"
                         android:textColor="#FFFFFF"
                         android:textAlignment="center" />
                 </LinearLayout>
