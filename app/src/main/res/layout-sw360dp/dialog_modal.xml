@@ -23,11 +23,11 @@
 
         <TextView
             android:id="@+id/description"
-            android:layout_width="match_parent"
-            android:layout_height="36dp"
+            android:layout_width="336dp"
+            android:layout_height="48dp"
             android:gravity="center_vertical"
             android:textColor="#000000"
-            android:textSize="15sp"
+            android:textSize="20sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Sky is clear"/>
@@ -50,7 +50,8 @@
             android:orientation="horizontal"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/divider" >
+            app:layout_constraintTop_toBottomOf="@+id/divider"
+            >
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -65,7 +66,7 @@
                     android:gravity="center"
                     android:text="@string/night"
                     android:textColor="#000000"
-                    android:textSize="14sp"
+                    android:textSize="16sp"
                     tools:text="Night"/>
 
                 <TextView
@@ -73,7 +74,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:textSize="14sp"
+                    android:textSize="16sp"
                     tools:text="451"/>
             </LinearLayout>
 
@@ -90,7 +91,7 @@
                     android:gravity="center"
                     android:text="@string/morning"
                     android:textColor="#000000"
-                    android:textSize="14sp"
+                    android:textSize="16sp"
                     tools:text="Morning"/>
 
                 <TextView
@@ -98,7 +99,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:textSize="14sp"
+                    android:textSize="16sp"
                     tools:text="451"/>
             </LinearLayout>
 
@@ -116,7 +117,7 @@
                     android:gravity="center"
                     android:text="@string/day"
                     android:textColor="#000000"
-                    android:textSize="14sp"
+                    android:textSize="16sp"
                     tools:text="Day"/>
 
                 <TextView
@@ -124,7 +125,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:textSize="14sp"
+                    android:textSize="16sp"
                     tools:text="451"/>
             </LinearLayout>
 
@@ -142,7 +143,7 @@
                     android:gravity="center"
                     android:text="@string/Evening"
                     android:textColor="#000000"
-                    android:textSize="14sp"
+                    android:textSize="16sp"
                     tools:text="Evening"/>
 
                 <TextView
@@ -150,15 +151,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:textSize="14sp"
+                    android:textSize="16sp"
                     tools:text="451"/>
             </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/layout_wind"
-            android:layout_width="match_parent"
-            android:layout_height="36dp"
+            android:layout_width="336dp"
+            android:layout_height="48dp"
             android:orientation="horizontal"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/forecast.temperature">
@@ -166,11 +167,11 @@
             <TextView
                 android:id="@+id/wind_icon"
                 android:layout_width="48dp"
-                android:layout_height="36dp"
+                android:layout_height="48dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                android:layout_marginTop="4dp"
-                android:textSize="18sp"
+                android:layout_marginTop="6dp"
+                android:textSize="24sp"
                 tools:ignore="ContentDescription" />
 
             <TextView
@@ -178,14 +179,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 tools:text="Wind: 3 m/s NW"/>
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/layout_rain"
             android:layout_width="336dp"
-            android:layout_height="36dp"
+            android:layout_height="48dp"
             android:orientation="horizontal"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/layout_wind">
@@ -193,11 +194,11 @@
             <TextView
                 android:id="@+id/rain_icon"
                 android:layout_width="48dp"
-                android:layout_height="36dp"
+                android:layout_height="48dp"
                 android:layout_gravity="center_horizontal|center_vertical"
                 android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                android:layout_marginTop="4dp"
-                android:textSize="18sp"
+                android:layout_marginTop="6dp"
+                android:textSize="24sp"
                 tools:ignore="ContentDescription" />
 
             <TextView
@@ -205,14 +206,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 tools:text="Rain 3mm"/>
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/layout_snow"
             android:layout_width="336dp"
-            android:layout_height="36dp"
+            android:layout_height="48dp"
             android:orientation="horizontal"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/layout_rain">
@@ -220,11 +221,11 @@
             <TextView
                 android:id="@+id/snow_icon"
                 android:layout_width="48dp"
-                android:layout_height="36dp"
+                android:layout_height="48dp"
                 android:layout_gravity="center_horizontal|center_vertical"
                 android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                android:layout_marginTop="4dp"
-                android:textSize="18sp"
+                android:layout_marginTop="6dp"
+                android:textSize="24sp"
                 tools:ignore="ContentDescription" />
 
             <TextView
@@ -232,14 +233,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 tools:text="Snow: 666mm"/>
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/layout_humidity"
             android:layout_width="336dp"
-            android:layout_height="36dp"
+            android:layout_height="48dp"
             android:orientation="horizontal"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/layout_snow">
@@ -247,12 +248,12 @@
             <TextView
                 android:id="@+id/humidity_icon"
                 android:layout_width="48dp"
-                android:layout_height="36dp"
+                android:layout_height="48dp"
                 android:layout_gravity="center"
                 android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="6dp"
                 android:cropToPadding="false"
-                android:textSize="18sp"
+                android:textSize="24sp"
                 tools:ignore="ContentDescription" />
 
             <TextView
@@ -260,14 +261,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 tools:text="Humidity: 99%"/>
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/layout_pressure"
             android:layout_width="336dp"
-            android:layout_height="36dp"
+            android:layout_height="48dp"
             android:orientation="horizontal"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/layout_humidity">
@@ -275,10 +276,10 @@
             <TextView
                 android:id="@+id/pressure_icon"
                 android:layout_width="48dp"
-                android:layout_height="36dp"
+                android:layout_height="48dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="4dp"
-                android:textSize="18sp"
+                android:layout_marginTop="6dp"
+                android:textSize="24sp"
                 tools:ignore="ContentDescription" />
 
             <TextView
@@ -287,7 +288,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/activity_horizontal_margin"
                 android:gravity="center"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 tools:text="Pressure: 1970 hPa"/>
         </LinearLayout>
     </android.support.constraint.ConstraintLayout>
