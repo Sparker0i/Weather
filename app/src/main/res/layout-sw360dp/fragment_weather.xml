@@ -356,18 +356,38 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="#FFFFFF" />
 
-            <TextView
-                android:id="@+id/button1"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
+                android:orientation="horizontal"
+                android:layout_marginTop="40dp"
                 android:layout_below="@+id/updated_field"
-                android:layout_marginEnd="50dp"
-                android:layout_marginTop="41dp"
-                android:paddingStart="4dp"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textSize="30sp"
-                tools:ignore="RtlSymmetry" />
+                android:layout_toEndOf="@+id/weather_icon11"
+                android:paddingStart="32dp"
+                android:paddingEnd="32dp"
+                android:layout_marginEnd="42dp">
+
+                <TextView
+                    android:id="@+id/button1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:layout_weight="1"
+                    android:textSize="32sp" />
+
+                <TextView
+                    android:id="@+id/direction_view"
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="textStart"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="4dp"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="#FFFFFF"
+                    android:textSize="35sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -496,20 +516,6 @@
                 </LinearLayout>
 
             </LinearLayout>
-
-            <TextView
-                android:id="@+id/direction_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingStart="10dp"
-                android:paddingBottom="16dp"
-                android:textAlignment="textStart"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="#FFFFFF"
-                android:textSize="40sp"
-                android:textStyle="bold"
-                android:layout_above="@+id/ll1"
-                android:layout_alignStart="@+id/button1" />
         </RelativeLayout>
     </android.support.v4.widget.NestedScrollView>
 </com.a5corp.weather.widget.OnlyVerticalSwipeRefreshLayout>
