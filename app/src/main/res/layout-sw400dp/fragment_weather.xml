@@ -361,7 +361,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="40dp"
                 android:layout_below="@+id/updated_field"
                 android:layout_toEndOf="@+id/weather_icon11"
                 android:paddingStart="32dp"
@@ -386,7 +386,7 @@
                     android:layout_marginTop="4dp"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="#FFFFFF"
-                    android:textSize="40sp"
+                    android:textSize="30sp"
                     android:textStyle="bold" />
             </LinearLayout>
 

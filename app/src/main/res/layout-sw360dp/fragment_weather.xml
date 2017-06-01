@@ -344,6 +344,7 @@
                 android:textColor="#FFFFFF"
                 android:textSize="100sp"
                 android:layout_below="@+id/updated_field"
+                android:layout_marginStart="32dp"
                 android:layout_toEndOf="@+id/daily_view" />
 
             <TextView
@@ -362,10 +363,9 @@
                 android:orientation="horizontal"
                 android:layout_marginTop="40dp"
                 android:layout_below="@+id/updated_field"
-                android:layout_toEndOf="@+id/weather_icon11"
                 android:paddingStart="32dp"
                 android:paddingEnd="32dp"
-                android:layout_marginEnd="42dp">
+                android:layout_alignParentEnd="true">
 
                 <TextView
                     android:id="@+id/button1"
@@ -422,7 +422,7 @@
                         android:id="@+id/wind_view"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="start"
+                        android:gravity="center"
                         android:textAlignment="center"
                         android:layout_gravity="center_horizontal"
                         android:textAppearance="?android:attr/textAppearanceMedium"
