@@ -60,7 +60,7 @@ public class NotificationBuilderService extends Service
             mManager.cancelAll();
             Log.i("Cannot Build" , "Notification");
         }
-        return Service.START_STICKY;
+        return Service.START_NOT_STICKY;
     }
 
     public void getWeather() {
