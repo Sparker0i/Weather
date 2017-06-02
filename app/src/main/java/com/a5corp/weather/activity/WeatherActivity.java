@@ -6,6 +6,7 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -211,22 +212,31 @@ public class WeatherActivity extends AppCompatActivity {
                             if (drawerItem != null) {
                                 switch((int) drawerItem.getIdentifier()) {
                                     case 1:
-                                        wf = new WeatherFragment();
-                                        getSupportFragmentManager().beginTransaction()
-                                                .replace(R.id.fragment, wf)
-                                                .commit();
+                                        Fragment f = getSupportFragmentManager().findFragmentById(R.id.fragment);
+                                        if (!(f instanceof WeatherFragment)) {
+                                            wf = new WeatherFragment();
+                                            getSupportFragmentManager().beginTransaction()
+                                                    .replace(R.id.fragment, wf)
+                                                    .commit();
+                                        }
                                         break;
                                     case 2:
-                                        GraphsFragment graphsFragment = newGraphInstance(new ArrayList<>(wf.getDailyJson()));
-                                        getSupportFragmentManager().beginTransaction()
-                                                .replace(R.id.fragment, graphsFragment)
-                                                .commit();
+                                        f = getSupportFragmentManager().findFragmentById(R.id.fragment);
+                                        if (!(f instanceof GraphsFragment)) {
+                                            GraphsFragment graphsFragment = newGraphInstance(new ArrayList<>(wf.getDailyJson()));
+                                            getSupportFragmentManager().beginTransaction()
+                                                    .replace(R.id.fragment, graphsFragment)
+                                                    .commit();
+                                        }
                                         break;
                                     case 3:
-                                        MapsFragment mapsFragment = new MapsFragment();
-                                        getSupportFragmentManager().beginTransaction()
-                                                .replace(R.id.fragment, mapsFragment)
-                                                .commit();
+                                        f = getSupportFragmentManager().findFragmentById(R.id.fragment);
+                                        if (!(f instanceof MapsFragment)) {
+                                            MapsFragment mapsFragment = new MapsFragment();
+                                            getSupportFragmentManager().beginTransaction()
+                                                    .replace(R.id.fragment, mapsFragment)
+                                                    .commit();
+                                        }
                                         break;
                                     case 6:
                                         showApiKeyBox();

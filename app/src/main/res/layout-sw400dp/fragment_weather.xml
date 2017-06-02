@@ -363,10 +363,10 @@
                 android:orientation="horizontal"
                 android:layout_marginTop="40dp"
                 android:layout_below="@+id/updated_field"
-                android:layout_toEndOf="@+id/weather_icon11"
                 android:paddingStart="32dp"
+                android:layout_marginEnd="24dp"
                 android:paddingEnd="32dp"
-                android:layout_marginEnd="42dp">
+                android:layout_alignParentEnd="true">
 
                 <TextView
                     android:id="@+id/button1"
