@@ -171,6 +171,14 @@ public class WeatherActivity extends AppCompatActivity {
                 else {
                     preferences.setUnits(Constants.METRIC);
                 }
+                Fragment f = getSupportFragmentManager().findFragmentById(R.id.fragment);
+                if (f instanceof WeatherFragment) {
+                    wf = new WeatherFragment();
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.fragment, wf)
+                            .commit();
+                    drawer.closeDrawer();
+                }
             }
         });
         item5.withOnCheckedChangeListener(new OnCheckedChangeListener() {

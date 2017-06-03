@@ -50,7 +50,6 @@ public class GraphsFragment extends Fragment {
             snowEntries = new ArrayList<>() ,
             windEntries = new ArrayList<>();
     Prefs pf;
-    MaterialDialog pd;
     CustomFormatter mValueFormatter;
     String[] dates = new String[10];
     private Menu menu;
@@ -67,12 +66,6 @@ public class GraphsFragment extends Fragment {
         super.onCreate(savedInstanceState);
         mValueFormatter = new CustomFormatter();
         pf = new Prefs(getContext());
-        MaterialDialog.Builder builder = new MaterialDialog.Builder(this.getActivity())
-                .title(getString(R.string.please_wait))
-                .content(getString(R.string.loading))
-                .cancelable(false)
-                .progress(true , 0);
-        pd = builder.build();
         setHasOptionsMenu(true);
     }
 
@@ -109,39 +102,8 @@ public class GraphsFragment extends Fragment {
         pressureChart = (LineChart) rootView.findViewById(R.id.pressure_chart);
         snowChart = (LineChart) rootView.findViewById(R.id.snow_chart);
         windChart = (LineChart) rootView.findViewById(R.id.wind_chart);
-        if (getArguments() == null) {
-            pd.show();
-            new Thread() {
-                @Override
-                public void run() {
-                    super.run();
-                    try {
-                        json = new FetchWeather(getContext()).execute(pf.getCity()).get();
-                    }
-                    catch (InterruptedException | ExecutionException ex) {
-                        ex.printStackTrace();
-                    }
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            pd.dismiss();
-                            mDescribable = json.fort.getList();
-                        }
-                    });
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            function();
-                        }
-                    });
-                }
-            }.start();
-        }
-        else {
-            mDescribable = (ArrayList<WeatherFort.WeatherList>) getArguments().getSerializable(
-                    DESCRIBABLE_KEY);
-            function();
-        }
+        mDescribable = (ArrayList<WeatherFort.WeatherList>) getArguments().getSerializable(DESCRIBABLE_KEY);
+        function();
     }
 
     public void function() {

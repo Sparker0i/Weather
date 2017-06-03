@@ -20,7 +20,7 @@
 
     <string name="speed">Speed : %.2f</string>
     <string name="mps">m/s</string>
-    <string name="mph">miles/h</string>
+    <string name="mph">mil/h</string>
     <string name="hPa">hPa</string>
     <string name="mm">mm</string>
     <string name="rain_">Rain : %.2f</string>
@@ -198,7 +198,7 @@
     <string name="g_pressure">Pressure, hPa</string>
     <string name="g_snow">Snow, mm</string>
     <string name="g_temp">Temperature, %s</string>
-    <string name="g_wind">Rain, %s</string>
+    <string name="g_wind">Wind, %s</string>
 
     <!-- Days -->
     <string name="sun">Sun</string>
