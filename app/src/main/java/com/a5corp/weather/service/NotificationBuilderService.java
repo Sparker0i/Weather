@@ -29,6 +29,7 @@ public class NotificationBuilderService extends Service
     PendingIntent pendingIntent;
     NotificationCompat.Builder builder;
     WeatherInfo json;
+    String data;
 
     @Override
     public IBinder onBind(Intent arg0)
@@ -78,40 +79,62 @@ public class NotificationBuilderService extends Service
                     Log.e("ExecutionException" , "eex");
                     return;
                 }
-                getObjects();
+                buildNotification();
             }
         }.start();
     }
 
-    public void getObjects() {
-        double temp = json.getMain().getTemp();
-        String city = json.getName();
-        double pressure = json.getMain().getPressure();
-        double humidity = json.getMain().getHumidity();
-        buildNotification(temp , pressure , humidity , city);
-    }
-
-    public void buildNotification(double temp , double pressure , double humidity , String city) {
-        builder = new NotificationCompat.Builder(this);
-        mManager.cancelAll();
+    public void buildNotification() {
+        double temp;
         String ut;
+        String city;
         if (preferences.getUnits().equals("metric"))
             ut = "°C";
         else
             ut = "°F";
-        builder.setAutoCancel(false);
-        builder.setContentTitle("Weather Notification");
-        builder.setContentText(Math.round(temp) + ut + " at " + city);
-        builder.setStyle(new NotificationCompat.BigTextStyle().bigText("City : " + city
-                + "\nTemperature : " + Math.round(temp) + ut
-                + "\nPressure : " + pressure + " hPa"
-                + "\nHumidity : " + humidity + "%"));
-        builder.setSmallIcon(R.drawable.ic_notification_icon);
-        builder.setContentIntent(pendingIntent);
-        if (Build.VERSION.SDK_INT >= 24)
-            builder.setColor(Color.parseColor("#ff0000"));
-        myNotification = builder.build();
-        mManager.notify(Constants.MY_NOTIFICATION_ID , myNotification);
-        Log.i("Built", "Notification");
+        try {
+            city = json.getName();
+            data += "City : " + city;
+        }
+        catch (Exception ex) {
+            Log.e("Failed Notification" , "No City");
+        }
+        try {
+            temp = json.getMain().getTemp();
+            data += "\nTemperature : " + Math.round(temp) + ut;
+        }
+        catch (Exception ex) {
+            Log.e("Failed Notification" , "No temp");
+        }
+        double pressure;
+        try {
+            pressure = json.getMain().getPressure();
+            data += "\nPressure : " + pressure + " hPa";
+        }
+        catch (Exception ex) {
+            Log.e("Failed Notification" , "No Pressure");
+        }
+        double humidity;
+        try {
+            humidity = json.getMain().getHumidity();
+            data += "\nHumidity : " + humidity + "%";
+        }
+        catch (Exception ex) {
+            Log.e("Failed Notification" , "No Humidity");
+        }
+        builder = new NotificationCompat.Builder(this);
+        if (!data.equals("")) {
+            mManager.cancelAll();
+            builder.setAutoCancel(false);
+            builder.setContentTitle("Weather Notification");
+            builder.setContentText(data);
+            builder.setSmallIcon(R.drawable.ic_notification_icon);
+            builder.setContentIntent(pendingIntent);
+            if (Build.VERSION.SDK_INT >= 24)
+                builder.setColor(Color.parseColor("#ff0000"));
+            myNotification = builder.build();
+            mManager.notify(Constants.MY_NOTIFICATION_ID, myNotification);
+            Log.i("Built", "Notification");
+        }
     }
 }
