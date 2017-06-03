@@ -18,6 +18,7 @@ import com.a5corp.weather.model.WeatherInfo;
 import com.a5corp.weather.preferences.Prefs;
 import com.a5corp.weather.utils.Constants;
 
+import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
 public class NotificationBuilderService extends Service
@@ -87,54 +88,55 @@ public class NotificationBuilderService extends Service
     public void buildNotification() {
         double temp;
         String ut;
-        String city;
+        String city = null;
+        builder = new NotificationCompat.Builder(this);
         if (preferences.getUnits().equals("metric"))
             ut = "°C";
         else
             ut = "°F";
         try {
             city = json.getName();
-            data += "City : " + city;
+            data = String.format(Locale.ENGLISH , getString(R.string.notif_city) , city);
         }
         catch (Exception ex) {
             Log.e("Failed Notification" , "No City");
         }
-        try {
-            temp = json.getMain().getTemp();
-            data += "\nTemperature : " + Math.round(temp) + ut;
-        }
-        catch (Exception ex) {
-            Log.e("Failed Notification" , "No temp");
-        }
-        double pressure;
-        try {
-            pressure = json.getMain().getPressure();
-            data += "\nPressure : " + pressure + " hPa";
-        }
-        catch (Exception ex) {
-            Log.e("Failed Notification" , "No Pressure");
-        }
-        double humidity;
-        try {
-            humidity = json.getMain().getHumidity();
-            data += "\nHumidity : " + humidity + "%";
-        }
-        catch (Exception ex) {
-            Log.e("Failed Notification" , "No Humidity");
-        }
-        builder = new NotificationCompat.Builder(this);
-        if (!data.equals("")) {
-            mManager.cancelAll();
-            builder.setAutoCancel(false);
-            builder.setContentTitle("Weather Notification");
-            builder.setContentText(data);
-            builder.setSmallIcon(R.drawable.ic_notification_icon);
-            builder.setContentIntent(pendingIntent);
-            if (Build.VERSION.SDK_INT >= 24)
-                builder.setColor(Color.parseColor("#ff0000"));
-            myNotification = builder.build();
-            mManager.notify(Constants.MY_NOTIFICATION_ID, myNotification);
-            Log.i("Built", "Notification");
+        if (city != null) {
+            try {
+                temp = json.getMain().getTemp();
+                data += "\n" + String.format(Locale.ENGLISH, getString(R.string.notif_temp), Math.round(temp), ut);
+                builder.setContentText(Math.round(temp) + ut + " at " + city);
+            } catch (Exception ex) {
+                Log.e("Failed Notification", "No temp");
+                builder.setContentText(city);
+            }
+            double pressure;
+            try {
+                pressure = json.getMain().getPressure();
+                data += "\n" + String.format(Locale.ENGLISH , getString(R.string.pressure) , pressure);
+            } catch (Exception ex) {
+                Log.e("Failed Notification", "No Pressure");
+            }
+            double humidity;
+            try {
+                humidity = json.getMain().getHumidity();
+                data += "\n" + String.format(Locale.ENGLISH , getString(R.string.humidity) , Math.round(humidity));
+            } catch (Exception ex) {
+                Log.e("Failed Notification", "No Humidity ");
+            }
+            if (!data.equals("")) {
+                mManager.cancelAll();
+                builder.setAutoCancel(false);
+                builder.setContentTitle("Weather Notification");
+                builder.setStyle(new NotificationCompat.BigTextStyle().bigText(data));
+                builder.setSmallIcon(R.drawable.ic_notification_icon);
+                builder.setContentIntent(pendingIntent);
+                if (Build.VERSION.SDK_INT >= 24)
+                    builder.setColor(Color.parseColor("#ff0000"));
+                myNotification = builder.build();
+                mManager.notify(Constants.MY_NOTIFICATION_ID, myNotification);
+                Log.i("Built", "Notification");
+            }
         }
     }
 }

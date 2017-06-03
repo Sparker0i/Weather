@@ -21,6 +21,7 @@
     <string name="speed">Speed : %.2f</string>
     <string name="mps">m/s</string>
     <string name="mph">miles/h</string>
+    <string name="hPa">hPa</string>
     <string name="mm">mm</string>
     <string name="rain_">Rain : %.2f</string>
     <string name="snow_">Snow : %.2f</string>
@@ -32,6 +33,9 @@
     <string name="humidity_">%d %%</string>
     <string name="sunrise">Sunrise at : %s</string>
     <string name="sunset">Sunset at : %s</string>
+
+    <string name="notif_temp" formatted="false">Temperature : %1$d %2$s</string>
+    <string name="notif_city">City : %s</string>
 
     <string name="north">Wind blowing towards North</string>
     <string name="north_east">Wind blowing in the North-East direction</string>
