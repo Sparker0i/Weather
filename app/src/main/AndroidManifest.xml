@@ -69,6 +69,11 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/small_widget_info" />
         </receiver>
+        <receiver android:name=".receiver.UpgradeReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+            </intent-filter>
+        </receiver>
         <receiver android:name=".widget.LargeWidgetProvider">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />

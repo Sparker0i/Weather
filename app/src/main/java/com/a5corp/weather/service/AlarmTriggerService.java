@@ -24,14 +24,15 @@ public class AlarmTriggerService extends IntentService {
     protected void onHandleIntent(Intent intent) {
         preferences = new Prefs(this);
 
-        Intent myIntent = new Intent(this, MyReceiver.class);
-        pendingIntent = PendingIntent.getBroadcast(this, 0, myIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        if (preferences.getNotifs()) {
+            Intent myIntent = new Intent(this, MyReceiver.class);
+            pendingIntent = PendingIntent.getBroadcast(this, 0, myIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+            AlarmManager am = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
 
-        AlarmManager am = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
-        if (preferences.getNotifs())
-            am.setInexactRepeating(AlarmManager.RTC_WAKEUP,
-                    SystemClock.elapsedRealtime() + 2,
+            am.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
+                    SystemClock.elapsedRealtime(),
                     AlarmManager.INTERVAL_HOUR,
                     pendingIntent);
+        }
     }
 }
