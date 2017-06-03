@@ -21,7 +21,7 @@
             <com.github.mikephil.charting.charts.LineChart
                 android:id="@+id/temperature_chart"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="225dp"
                 android:padding="@dimen/activity_horizontal_margin" />
         </it.gmariotti.cardslib.library.view.CardViewNative>
 
@@ -41,7 +41,7 @@
             <com.github.mikephil.charting.charts.LineChart
                 android:id="@+id/rain_chart"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="225dp"
                 android:padding="@dimen/activity_horizontal_margin" />
         </it.gmariotti.cardslib.library.view.CardViewNative>
 
@@ -61,7 +61,7 @@
             <com.github.mikephil.charting.charts.LineChart
                 android:id="@+id/pressure_chart"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="225dp"
                 android:padding="@dimen/activity_horizontal_margin" />
         </it.gmariotti.cardslib.library.view.CardViewNative>
 
@@ -81,7 +81,7 @@
             <com.github.mikephil.charting.charts.LineChart
                 android:id="@+id/snow_chart"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="225dp"
                 android:padding="@dimen/activity_horizontal_margin" />
         </it.gmariotti.cardslib.library.view.CardViewNative>
 
@@ -101,7 +101,7 @@
             <com.github.mikephil.charting.charts.LineChart
                 android:id="@+id/wind_chart"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="225dp"
                 android:padding="@dimen/activity_horizontal_margin" />
         </it.gmariotti.cardslib.library.view.CardViewNative>
 
