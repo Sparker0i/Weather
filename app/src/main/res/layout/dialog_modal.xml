@@ -36,7 +36,7 @@
             android:id="@+id/divider"
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:background="#bdbdbd"
+            android:background="#ffffff"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/description"/>
@@ -159,6 +159,7 @@
             android:id="@+id/layout_wind"
             android:layout_width="match_parent"
             android:layout_height="36dp"
+            android:layout_marginTop="8dp"
             android:orientation="horizontal"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/forecast.temperature">
@@ -168,7 +169,6 @@
                 android:layout_width="48dp"
                 android:layout_height="36dp"
                 android:layout_gravity="center_vertical"
-                android:layout_marginEnd="@dimen/activity_horizontal_margin"
                 android:layout_marginTop="4dp"
                 android:textSize="18sp"
                 tools:ignore="ContentDescription" />
@@ -184,7 +184,7 @@
 
         <LinearLayout
             android:id="@+id/layout_rain"
-            android:layout_width="336dp"
+            android:layout_width="match_parent"
             android:layout_height="36dp"
             android:orientation="horizontal"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -195,7 +195,6 @@
                 android:layout_width="48dp"
                 android:layout_height="36dp"
                 android:layout_gravity="center_horizontal|center_vertical"
-                android:layout_marginEnd="@dimen/activity_horizontal_margin"
                 android:layout_marginTop="4dp"
                 android:textSize="18sp"
                 tools:ignore="ContentDescription" />
@@ -211,7 +210,7 @@
 
         <LinearLayout
             android:id="@+id/layout_snow"
-            android:layout_width="336dp"
+            android:layout_width="match_parent"
             android:layout_height="36dp"
             android:orientation="horizontal"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -222,7 +221,6 @@
                 android:layout_width="48dp"
                 android:layout_height="36dp"
                 android:layout_gravity="center_horizontal|center_vertical"
-                android:layout_marginEnd="@dimen/activity_horizontal_margin"
                 android:layout_marginTop="4dp"
                 android:textSize="18sp"
                 tools:ignore="ContentDescription" />
@@ -238,7 +236,7 @@
 
         <LinearLayout
             android:id="@+id/layout_humidity"
-            android:layout_width="336dp"
+            android:layout_width="match_parent"
             android:layout_height="36dp"
             android:orientation="horizontal"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -249,7 +247,6 @@
                 android:layout_width="48dp"
                 android:layout_height="36dp"
                 android:layout_gravity="center"
-                android:layout_marginEnd="@dimen/activity_horizontal_margin"
                 android:layout_marginTop="4dp"
                 android:cropToPadding="false"
                 android:textSize="18sp"
@@ -266,7 +263,7 @@
 
         <LinearLayout
             android:id="@+id/layout_pressure"
-            android:layout_width="336dp"
+            android:layout_width="match_parent"
             android:layout_height="36dp"
             android:orientation="horizontal"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -285,7 +282,6 @@
                 android:id="@+id/pressure"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/activity_horizontal_margin"
                 android:gravity="center"
                 android:textSize="14sp"
                 tools:text="Pressure: 1970 hPa"/>
