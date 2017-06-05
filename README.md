@@ -12,10 +12,8 @@ Get it on Google Play and F-Droid:
 
 ## Changelog:
 
-(Version Next)
+(Version 4.0)
 - Added App Shortcuts for Launcher Icon (Android 7.1+)
-
-(Version 3.x)
 - Added Widget Option
 - Added Weather Notification
 - Added Fahrenheit Temperature Option
