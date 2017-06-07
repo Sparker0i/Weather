@@ -28,13 +28,7 @@ public class LargeWidgetProvider extends AppWidgetProvider {
     }
 
     @Override
-    public void onReceive(Context context, Intent intent) {
-        Log.i("Trigger" , "Large Widget");
-        context.startService(new Intent(context , LargeWidgetService.class));
-    }
-
-    @Override
-    public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
+    public void onUpdate(Context context, AppWidgetManager appWidgetManager, int... appWidgetIds) {
         super.onUpdate(context, appWidgetManager, appWidgetIds);
         Log.i("Trigger2" , "Large Widget");
         for (int appWidgetId : appWidgetIds) {
@@ -44,14 +38,13 @@ public class LargeWidgetProvider extends AppWidgetProvider {
             preLoadWeather(context , remoteViews);
             Intent intent = new Intent(context, LargeWidgetProvider.class);
             intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
-            intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetIds[appWidgetId]);
+            intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds);
             PendingIntent pendingIntent = PendingIntent.getBroadcast(context,
-                    0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+                    0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
             remoteViews.setOnClickPendingIntent(R.id.widget_button_refresh, pendingIntent);
 
             Intent intentStartActivity = new Intent(context, WeatherActivity.class);
-            PendingIntent pendingIntent2 = PendingIntent.getActivity(context, 0,
-                    intentStartActivity, 0);
+            PendingIntent pendingIntent2 = PendingIntent.getActivity(context, 0, intentStartActivity, 0);
             remoteViews.setOnClickPendingIntent(R.id.widget_root, pendingIntent2);
 
             appWidgetManager.updateAppWidget(appWidgetId, remoteViews);
@@ -74,14 +67,14 @@ public class LargeWidgetProvider extends AppWidgetProvider {
         String speedScale = prefs.getUnits().equals("metric") ? context.getString(R.string.mps) : context.getString(R.string.mph);
 
         String temperature = String.format(Locale.getDefault(), "%.0f", lwPrefs.getTemperature());
-        String description = lwPrefs.getDescription();
-        String wind = context.getString(R.string.wind_speed, lwPrefs.getSpeed(), speedScale);
+        String description = format(lwPrefs.getDescription());
+        String wind = context.getString(R.string.wind_, lwPrefs.getSpeed(), speedScale);
         String humidity = context.getString(R.string.humidity, lwPrefs.getHumidity());
         String pressure = context.getString(R.string.pressure, lwPrefs.getPressure());
         int iconId = lwPrefs.getIcon();
         String weatherIcon = Utils.getStrIcon(iconId , context);
 
-        remoteViews.setTextViewText(R.id.widget_city, lwPrefs.getCity());
+        remoteViews.setTextViewText(R.id.widget_city, lwPrefs.getCity() + ", " + lwPrefs.getCountry());
         remoteViews.setTextViewText(R.id.widget_temperature, temperature + temperatureScale);
         remoteViews.setTextViewText(R.id.widget_description, description);
         remoteViews.setTextViewText(R.id.widget_wind, wind);
@@ -89,5 +82,15 @@ public class LargeWidgetProvider extends AppWidgetProvider {
         remoteViews.setTextViewText(R.id.widget_pressure, pressure);
         remoteViews.setImageViewBitmap(R.id.widget_icon,
                 Utils.createWeatherIcon(context, weatherIcon));
+    }
+
+    private String format(String rs) {
+        String[] strArray = rs.split(" ");
+        StringBuilder builder = new StringBuilder();
+        for (String s : strArray) {
+            String cap = s.substring(0, 1).toUpperCase() + s.substring(1);
+            builder.append(cap.concat(" "));
+        }
+        return builder.toString();
     }
 }

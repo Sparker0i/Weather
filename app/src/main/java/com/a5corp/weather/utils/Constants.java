@@ -46,6 +46,7 @@ public class Constants {
 
     public static final String LARGE_WIDGET_TEMPERATURE = "temperature";
     public static final String LARGE_WIDGET_DESCRIPTION = "description";
+    public static final String LARGE_WIDGET_COUNTRY = "country";
     public static final String LARGE_WIDGET_PRESSURE = "pressure";
     public static final String LARGE_WIDGET_HUMIDITY = "humidity";
     public static final String LARGE_WIDGET_WIND_SPEED = "wind_speed";

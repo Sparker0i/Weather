@@ -72,28 +72,20 @@ public class LWPrefs {
         return prefs.getInt(Constants.LARGE_WIDGET_ICON , 500);
     }
 
-    public void setSunrise(long sunrise) {
-        prefs.edit().putLong(Constants.LARGE_WIDGET_SUNRISE , sunrise).apply();
-    }
-
-    public long getSunrise() {
-        return prefs.getLong(Constants.LARGE_WIDGET_SUNRISE , 0);
-    }
-
     public void setDescription(String description) {
         prefs.edit().putString(Constants.LARGE_WIDGET_DESCRIPTION , description).apply();
     }
 
     public String getDescription() {
-        return prefs.getString(Constants.LARGE_WIDGET_DESCRIPTION , "Cloudy");
+        return prefs.getString(Constants.LARGE_WIDGET_DESCRIPTION , "Moderate Rain");
     }
 
-    public void setSunset(long sunset) {
-        prefs.edit().putLong(Constants.LARGE_WIDGET_SUNSET , sunset).apply();
+    public void setCountry(String country) {
+        prefs.edit().putString(Constants.LARGE_WIDGET_COUNTRY , country).apply();
     }
 
-    public long getSunset() {
-        return prefs.getLong(Constants.LARGE_WIDGET_SUNSET , 0);
+    public String getCountry() {
+        return prefs.getString(Constants.LARGE_WIDGET_COUNTRY , "IN");
     }
 
     public void saveWeather(WeatherInfo weather) {
@@ -102,8 +94,7 @@ public class LWPrefs {
         setHumidity(weather.getMain().getHumidity());
         setSpeed(weather.getWind().getSpeed());
         setIcon(weather.getWeather().get(0).getId());
-        setSunrise(weather.getSys().getSunrise());
+        setCountry(weather.getSys().getCountry());
         setDescription(weather.getWeather().get(0).getDescription());
-        setSunset(weather.getSys().getSunset());
     }
 }
