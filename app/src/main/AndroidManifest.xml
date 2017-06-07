@@ -51,7 +51,8 @@
             android:enabled="true" />
 
         <receiver android:name=".receiver.StartupReceiver"
-            android:enabled="true">
+            android:enabled="true"
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
@@ -83,6 +84,8 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/large_widget_info" />
         </receiver>
+
+        <service android:name=".widget.LargeWidgetService"/>
     </application>
 
 </manifest>

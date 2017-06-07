@@ -70,6 +70,10 @@ public class WeatherInfo {
             return description;
         }
 
+        public void setDescription(String desc) {
+            this.description = desc;
+        }
+
         public int getId() {
             return id;
         }

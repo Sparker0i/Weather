@@ -9,7 +9,6 @@ public class Constants {
     
     public static final String CITY = "city";
     public static final String LASTCITY = "lcity";
-    public static final String LAST_NOTIF = "last_notif";
 
     public static final String FIRST = "first";
 
@@ -24,8 +23,6 @@ public class Constants {
 
     public static final String SMALLWIDGET = "jsonSmall";
     public static final String LARGEWIDGET = "jsonLarge";
-
-    public static final String V3RESET = "v3-city-reset";
 
     public static final String V3TUTORIAL = "tut-v3-shown";
 
@@ -46,4 +43,13 @@ public class Constants {
 
     public static final String OPEN_WEATHER_MAP_FORECAST_API = "http://api.openweathermap.org/data/2.5/forecast/daily?";
     public static final String OPEN_WEATHER_MAP_DAILY_API = "http://api.openweathermap.org/data/2.5/weather?";
+
+    public static final String LARGE_WIDGET_TEMPERATURE = "temperature";
+    public static final String LARGE_WIDGET_DESCRIPTION = "description";
+    public static final String LARGE_WIDGET_PRESSURE = "pressure";
+    public static final String LARGE_WIDGET_HUMIDITY = "humidity";
+    public static final String LARGE_WIDGET_WIND_SPEED = "wind_speed";
+    public static final String LARGE_WIDGET_ICON = "icon";
+    public static final String LARGE_WIDGET_SUNRISE = "sunrise";
+    public static final String LARGE_WIDGET_SUNSET = "sunset";
 }
