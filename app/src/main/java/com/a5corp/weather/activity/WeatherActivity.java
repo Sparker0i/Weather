@@ -22,7 +22,7 @@ import com.a5corp.weather.fragment.MapsFragment;
 import com.a5corp.weather.fragment.WeatherFragment;
 import com.a5corp.weather.model.WeatherFort;
 import com.a5corp.weather.preferences.Prefs;
-import com.a5corp.weather.service.AlarmTriggerService;
+import com.a5corp.weather.service.NotificationService;
 import com.a5corp.weather.utils.Constants;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -186,11 +186,11 @@ public class WeatherActivity extends AppCompatActivity {
             public void onCheckedChanged(IDrawerItem drawerItem, CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     preferences.setNotifs(true);
-                    startService(new Intent(context , AlarmTriggerService.class));
+                    NotificationService.setNotificationServiceAlarm(context , preferences.getNotifs());
                 }
                 else {
                     preferences.setNotifs(false);
-                    stopService(new Intent(context , AlarmTriggerService.class));
+                    NotificationService.setNotificationServiceAlarm(context , preferences.getNotifs());
                     mManager.cancelAll();
                 }
             }

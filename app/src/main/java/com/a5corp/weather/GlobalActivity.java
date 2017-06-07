@@ -9,7 +9,6 @@ import com.a5corp.weather.activity.FirstLaunch;
 import com.a5corp.weather.activity.WeatherActivity;
 import com.a5corp.weather.preferences.Preferences;
 import com.a5corp.weather.preferences.Prefs;
-import com.a5corp.weather.service.NotificationBuilderService;
 
 public class GlobalActivity extends AppCompatActivity {
 
@@ -29,9 +28,6 @@ public class GlobalActivity extends AppCompatActivity {
         cp = new Preferences(this);
         prefs = new Prefs(this);
         super.onResume();
-
-        if (prefs.getNotifs())
-            startService(new Intent(this , NotificationBuilderService.class));
 
         if (!cp.getPrefs().getBoolean("first" , true)) {
             prefs.setLaunched();

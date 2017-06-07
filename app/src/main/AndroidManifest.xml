@@ -32,8 +32,6 @@
         <activity android:name=".activity.FirstLaunch" android:label="Enter City" />
         <activity android:name=".activity.LicenseActivity" android:label="License"/>
 
-        <service android:name=".service.AlarmTriggerService" android:enabled="true" />
-        <service android:name=".service.NotificationBuilderService" android:enabled="true" />
         <service android:name=".widget.LargeWidgetService"/>
         <service android:name=".widget.SmallWidgetService"/>
 
@@ -43,7 +41,6 @@
             </intent-filter>
         </receiver>
 
-        <receiver android:name=".receiver.MyReceiver" android:enabled="true" />
         <receiver android:name=".receiver.UpgradeReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />

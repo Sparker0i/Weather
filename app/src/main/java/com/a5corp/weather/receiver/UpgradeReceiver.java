@@ -7,7 +7,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-import com.a5corp.weather.service.NotificationBuilderService;
+import com.a5corp.weather.preferences.Prefs;
+import com.a5corp.weather.service.NotificationService;
 import com.a5corp.weather.widget.LargeWidgetProvider;
 import com.a5corp.weather.widget.SmallWidgetProvider;
 
@@ -16,8 +17,7 @@ public class UpgradeReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         Log.i("In" , UpgradeReceiver.class.getSimpleName());
-        Intent service1 = new Intent(context, NotificationBuilderService.class);
-        context.startService(service1);
+        NotificationService.setNotificationServiceAlarm(context , new Prefs(context).getNotifs());
 
         Intent intent2 = new Intent(context, LargeWidgetProvider.class);
         intent2.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
