@@ -28,6 +28,7 @@
     <string name="humidity">Humidity : %d %%</string>
     <string name="pressure">Pressure : %.2f hPa</string>
     <string name="temperature">Temperature : %1$.2f %2$s</string>
+    <string name="city">City : %s</string>
 
     <string name="wind" formatted="false">%1$.2f %2$s</string>
     <string name="wind_speed">Wind Speed : %1$.2f %2$s</string>

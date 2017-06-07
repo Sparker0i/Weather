@@ -82,12 +82,12 @@ public class NotificationService extends IntentService {
         String speedScale = prefs.getUnits().equals("metric") ? getString(R.string.mps) : getString(R.string.mph);
 
         String temperature = getString(R.string.temperature , weather.getMain().getTemp() , temperatureScale);
-
+        String city = getString(R.string.city , weather.getName() + ", " + weather.getSys().getCountry());
         String wind = getString(R.string.wind_ , weather.getWind().getSpeed(), speedScale);
         String humidity = getString(R.string.humidity , weather.getMain().getHumidity());
         String pressure = getString(R.string.pressure, weather.getMain().getPressure());
 
-        String data = temperature + "\n" + wind + "\n" + humidity + "\n" + pressure;
+        String data = city + "\n" + temperature + "\n" + wind + "\n" + humidity + "\n" + pressure;
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
