@@ -4,13 +4,16 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import com.a5corp.weather.model.WeatherInfo;
 import com.a5corp.weather.utils.Constants;
 
 public class SWPrefs {
     private static SharedPreferences prefs;
+    private Context context;
 
     public SWPrefs(Context context) {
         prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        this.context = context;
     }
 
     public SharedPreferences getPrefs() {
@@ -18,93 +21,44 @@ public class SWPrefs {
     }
 
     public String getCity() {
-        String city = null;
-        return prefs.getString(Constants.CITY , null);
+        return new Prefs(context).getCity();
     }
 
     public void setCity(String city) {
-        SharedPreferences.Editor prefsEditor = prefs.edit();
-        prefsEditor.putString(Constants.CITY , city);
-        prefsEditor.apply();
-    }
-
-    public void setLaunched() {
-        prefs.edit().putBoolean(Constants.FIRST , true).apply();
-    }
-
-    public boolean getLaunched() {
-        return prefs.getBoolean(Constants.FIRST , false);
-    }
-
-    public void setLastCity(String city) {
-        prefs.edit().putString(Constants.LASTCITY , city).apply();
-    }
-
-    public String getLastCity() {
-        return prefs.getString(Constants.LASTCITY , null);
-    }
-
-    public void setLatitude(float lat) {
-        prefs.edit().putFloat(Constants.LATITUDE , lat).apply();
-    }
-
-    public float getLatitude() {
-        return prefs.getFloat(Constants.LATITUDE , 0);
-    }
-
-    public void setLongitude(float lon) {
-        prefs.edit().putFloat(Constants.LONGITUDE , lon).apply();
-    }
-
-    public float getLongitude() {
-        return prefs.getFloat(Constants.LONGITUDE , 0);
-    }
-
-    public void setUnits(String string) {
-        prefs.edit().putString(Constants.UNITS , string).apply();
+        new Prefs(context).setCity(city);
     }
 
     public String getUnits() {
-        return prefs.getString(Constants.UNITS , "metric");
+        return new Prefs(context).getUnits();
     }
 
-    public void setNotifs(Boolean bool) {
-        prefs.edit().putBoolean(Constants.NOTIFICATIONS , bool).apply();
+    public void setTemperature(double temp) {
+        prefs.edit().putLong(Constants.LARGE_WIDGET_TEMPERATURE , Double.doubleToLongBits(temp)).apply();
     }
 
-    public Boolean getNotifs() {
-        return prefs.getBoolean(Constants.NOTIFICATIONS , false);
+    public double getTemperature() {
+        return Double.longBitsToDouble(prefs.getLong(Constants.LARGE_WIDGET_TEMPERATURE , 0));
     }
 
-    public void storeSmallWidget(String json) {
-        prefs.edit().putString(Constants.SMALLWIDGET , json).apply();
+    public void setIcon(int id) {
+        prefs.edit().putInt(Constants.LARGE_WIDGET_ICON , id).apply();
     }
 
-    public String getSmallWidget() {
-        return prefs.getString(Constants.SMALLWIDGET , null);
+    public int getIcon() {
+        return prefs.getInt(Constants.LARGE_WIDGET_ICON , 500);
     }
 
-    public void storeLargeWidget(String json) {
-        prefs.edit().putString(Constants.LARGEWIDGET , json).apply();
+    public void setCountry(String country) {
+        prefs.edit().putString(Constants.LARGE_WIDGET_COUNTRY , country).apply();
     }
 
-    public String getLargeWidget() {
-        return prefs.getString(Constants.LARGEWIDGET , null);
+    public String getCountry() {
+        return prefs.getString(Constants.LARGE_WIDGET_COUNTRY , "IN");
     }
 
-    public void setv3TargetShown(boolean bool) {
-        prefs.edit().putBoolean(Constants.V3TUTORIAL , bool).apply();
-    }
-
-    public boolean getv3TargetShown() {
-        return prefs.getBoolean(Constants.V3TUTORIAL , false);
-    }
-
-    public void setWeatherKey(String str) {
-        prefs.edit().putString(Constants.OWM_KEY , str).apply();
-    }
-
-    public String getWeatherKey() {
-        return prefs.getString(Constants.OWM_KEY , Constants.OWM_APP_ID);
+    public void saveWeather(WeatherInfo weather) {
+        setTemperature(weather.getMain().getTemp());
+        setIcon(weather.getWeather().get(0).getId());
+        setCountry(weather.getSys().getCountry());
     }
 }

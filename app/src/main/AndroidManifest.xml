@@ -16,77 +16,51 @@
         android:resizeableActivity="true"
         android:theme="@style/AppTheme.NoActionBar"
         tools:targetApi="n">
-        <activity
-            android:name=".GlobalActivity"
-            android:label="@string/app_name">
+        <activity android:name=".GlobalActivity" android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".activity.AboutActivity"
-            android:label="About"
+        <activity android:name=".activity.AboutActivity" android:label="About"
             android:parentActivityName=".activity.WeatherActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.a5corp.weather.activity.WeatherActivity" />
         </activity>
-        <activity
-            android:name=".activity.WeatherActivity"
-            android:label="@string/app_name" />
-        <activity
-            android:name=".activity.FirstLaunch"
-            android:label="Enter City" />
-        <activity
-            android:name=".activity.LicenseActivity"
-            android:label="License"/>
+        <activity android:name=".activity.WeatherActivity" android:label="@string/app_name" />
+        <activity android:name=".activity.FirstLaunch" android:label="Enter City" />
+        <activity android:name=".activity.LicenseActivity" android:label="License"/>
 
-        <service
-            android:name=".service.AlarmTriggerService"
-            android:enabled="true" />
-        <service
-            android:name=".service.NotificationBuilderService"
-            android:enabled="true" />
+        <service android:name=".service.AlarmTriggerService" android:enabled="true" />
+        <service android:name=".service.NotificationBuilderService" android:enabled="true" />
+        <service android:name=".widget.LargeWidgetService"/>
+        <service android:name=".widget.SmallWidgetService"/>
 
-        <receiver android:name=".receiver.StartupReceiver"
-            android:enabled="true"
-            android:exported="false">
+        <receiver android:name=".receiver.StartupReceiver" android:enabled="true" android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
 
-        <receiver android:name=".receiver.MyReceiver"
-            android:enabled="true" />
-
-        <receiver android:name=".widget.SmallWidgetProvider">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/small_widget_info" />
-        </receiver>
+        <receiver android:name=".receiver.MyReceiver" android:enabled="true" />
         <receiver android:name=".receiver.UpgradeReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".widget.LargeWidgetProvider"
-            android:enabled="true">
+        <receiver android:name=".widget.LargeWidgetProvider" android:enabled="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/large_widget_info" />
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/large_widget_info" />
         </receiver>
-
-        <service android:name=".widget.LargeWidgetService"/>
+        <receiver android:name=".widget.SmallWidgetProvider" android:enabled="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/small_widget_info" />
+        </receiver>
     </application>
 
 </manifest>
