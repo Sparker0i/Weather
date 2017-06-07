@@ -30,6 +30,7 @@
 
     <string name="wind" formatted="false">%1$.2f %2$s</string>
     <string name="wind_speed">Wind Speed : %1$.2f %2$s</string>
+    <string name="wind_">Wind : %1$.2f %2$s</string>
     <string name="humidity_">%d %%</string>
     <string name="sunrise">Sunrise at : %s</string>
     <string name="sunset">Sunset at : %s</string>

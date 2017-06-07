@@ -5,6 +5,7 @@ import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.widget.RemoteViews;
 
 import com.a5corp.weather.R;
@@ -28,21 +29,24 @@ public class LargeWidgetProvider extends AppWidgetProvider {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        Log.i("Trigger" , "Large Widget");
         context.startService(new Intent(context , LargeWidgetService.class));
     }
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         super.onUpdate(context, appWidgetManager, appWidgetIds);
-
+        Log.i("Trigger2" , "Large Widget");
         for (int appWidgetId : appWidgetIds) {
             RemoteViews remoteViews = new RemoteViews(context.getPackageName(),
                     R.layout.widget_large);
 
             preLoadWeather(context , remoteViews);
-            Intent intentRefreshService = new Intent(context, LargeWidgetProvider.class);
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0,
-                    intentRefreshService, 0);
+            Intent intent = new Intent(context, LargeWidgetProvider.class);
+            intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+            intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetIds[appWidgetId]);
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(context,
+                    0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
             remoteViews.setOnClickPendingIntent(R.id.widget_button_refresh, pendingIntent);
 
             Intent intentStartActivity = new Intent(context, WeatherActivity.class);

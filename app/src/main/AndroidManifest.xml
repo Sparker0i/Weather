@@ -75,9 +75,11 @@
                 <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".widget.LargeWidgetProvider">
+        <receiver android:name=".widget.LargeWidgetProvider"
+            android:enabled="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.a5corp.weather.action.FORCED_APPWIDGET_UPDATE"/>
             </intent-filter>
 
             <meta-data

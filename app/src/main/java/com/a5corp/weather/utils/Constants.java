@@ -52,4 +52,7 @@ public class Constants {
     public static final String LARGE_WIDGET_ICON = "icon";
     public static final String LARGE_WIDGET_SUNRISE = "sunrise";
     public static final String LARGE_WIDGET_SUNSET = "sunset";
+
+    public static final String ACTION_FORCED_APPWIDGET_UPDATE =
+            "com.a5corp.weather.action.FORCED_APPWIDGET_UPDATE";
 }

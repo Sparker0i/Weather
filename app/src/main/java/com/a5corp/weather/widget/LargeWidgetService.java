@@ -41,7 +41,7 @@ public class LargeWidgetService extends IntentService{
             lwPrefs.saveWeather(weatherRaw);
             updateWidget(weatherRaw);
         } catch (IOException e) {
-            Log.e(TAG, "Error get weather", e);
+            Log.e(TAG, "Could not retrieve Weather", e);
             stopSelf();
         }
     }
@@ -58,7 +58,7 @@ public class LargeWidgetService extends IntentService{
             String speedScale = prefs.getUnits().equals("metric") ? getString(R.string.mps) : getString(R.string.mph);
 
             String temperature = String.format(Locale.getDefault(), "%.0f", weather.getMain().getTemp());
-            String wind = getString(R.string.wind, weather.getWind().getSpeed(), speedScale);
+            String wind = getString(R.string.wind_, weather.getWind().getSpeed(), speedScale);
             String humidity = getString(R.string.humidity, weather.getMain().getHumidity());
             String pressure = getString(R.string.pressure, weather.getMain().getPressure());
             int iconId = weather.getWeather().get(0).getId();
@@ -66,10 +66,17 @@ public class LargeWidgetService extends IntentService{
 
             RemoteViews remoteViews = new RemoteViews(this.getPackageName(),
                     R.layout.widget_large);
-            remoteViews.setTextViewText(R.id.widget_city, weather.getName());
-            remoteViews.setTextViewText(R.id.widget_temperature, temperature + " " + temperatureScale);
+            remoteViews.setTextViewText(R.id.widget_city, weather.getName() + ", " + weather.getSys().getCountry());
+            remoteViews.setTextViewText(R.id.widget_temperature, temperature + temperatureScale);
+            String rs = weather.getWeather().get(0).getDescription();
+            String[] strArray = rs.split(" ");
+            StringBuilder builder = new StringBuilder();
+            for (String s : strArray) {
+                String cap = s.substring(0, 1).toUpperCase() + s.substring(1);
+                builder.append(cap.concat(" "));
+            }
             remoteViews.setTextViewText(R.id.widget_description,
-                    weather.getWeather().get(0).getDescription());
+                    builder.toString());
             remoteViews.setTextViewText(R.id.widget_wind, wind);
             remoteViews.setTextViewText(R.id.widget_humidity, humidity);
             remoteViews.setTextViewText(R.id.widget_pressure, pressure);
