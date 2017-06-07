@@ -19,7 +19,6 @@ import com.a5corp.weather.internet.CheckConnection;
 import com.a5corp.weather.internet.Request;
 import com.a5corp.weather.model.WeatherInfo;
 import com.a5corp.weather.preferences.Prefs;
-import com.a5corp.weather.utils.Constants;
 
 import java.io.IOException;
 
@@ -61,7 +60,7 @@ public class NotificationService extends IntentService {
                                                    boolean isNotificationEnable) {
         Intent intent = NotificationService.newIntent(context);
         PendingIntent pendingIntent = PendingIntent.getService(context, 0, intent,
-                PendingIntent.FLAG_CANCEL_CURRENT);
+                PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         long intervalMillis = AlarmManager.INTERVAL_HOUR;
         if (isNotificationEnable) {
@@ -95,13 +94,13 @@ public class NotificationService extends IntentService {
 
         builder.setAutoCancel(false);
         builder.setContentTitle("Weather Notification");
+        builder.setContentText(Math.round(weather.getMain().getTemp()) + temperatureScale + " at " + weather.getName());
         builder.setStyle(new NotificationCompat.BigTextStyle().bigText(data));
         builder.setSmallIcon(R.drawable.ic_notification_icon);
         builder.setContentIntent(pendingIntent);
         if (Build.VERSION.SDK_INT >= 24)
             builder.setColor(Color.parseColor("#ff0000"));
         Notification notification = builder.build();
-        notificationManager.notify(Constants.MY_NOTIFICATION_ID, notification);
-
+        notificationManager.notify(0 , notification);
     }
 }
