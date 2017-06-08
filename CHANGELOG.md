@@ -24,3 +24,13 @@
 
 Bugs Fixed:
 - Fixed bug where disabling location permission caused the app to crash
+
+## v4.0 - v4.x (2017-06-xx)
+
+- Reworked Large Widget
+- Reworked Small Widget
+- Upgraded Notification Listener
+
+Bugs Fixed:
+- Fixed Swipe Refresh triggered when scrolling through Daily view
+- Fixed Disappearing Widgets on Reboot (from v4.0)
