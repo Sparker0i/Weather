@@ -232,7 +232,8 @@ public class WeatherFragment extends Fragment {
                 catch (ExecutionException eex) {
                     Log.e("ExecutionException" , "eex");
                 }
-                pd.dismiss();
+                if (pd.isShowing())
+                    pd.dismiss();
                 if (swipeView != null && swipeView.isRefreshing())
                     swipeView.post(new Runnable() {
                         @Override
@@ -256,7 +257,8 @@ public class WeatherFragment extends Fragment {
                                     showNoInternet();
                                 }
                                 else {
-                                    pd.dismiss();
+                                    if (pd.isShowing())
+                                        pd.dismiss();
                                     showInputDialog();
                                 }
                             }
@@ -273,7 +275,8 @@ public class WeatherFragment extends Fragment {
                             //function();
                             if (!preferences.getv3TargetShown())
                                 showTargets();
-                            pd.dismiss();
+                            if (pd.isShowing())
+                                pd.dismiss();
                             preferences.setLastCity(json.day.getName());
                             ((WeatherActivity) getActivity()).createShortcuts();
                         }
@@ -284,7 +287,8 @@ public class WeatherFragment extends Fragment {
     }
 
     public void FirstStart() {
-        pd.dismiss();
+        if (pd.isShowing())
+            pd.dismiss();
         Intent intent = new Intent(getActivity(), FirstLaunch.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
