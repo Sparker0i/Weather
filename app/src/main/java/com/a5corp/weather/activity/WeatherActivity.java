@@ -186,13 +186,12 @@ public class WeatherActivity extends AppCompatActivity {
             public void onCheckedChanged(IDrawerItem drawerItem, CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     preferences.setNotifs(true);
-                    NotificationService.setNotificationServiceAlarm(context , preferences.getNotifs());
                 }
                 else {
                     preferences.setNotifs(false);
-                    NotificationService.setNotificationServiceAlarm(context , preferences.getNotifs());
                     mManager.cancelAll();
                 }
+                NotificationService.setNotificationServiceAlarm(context , preferences.getNotifs());
             }
         });
         drawer = new DrawerBuilder()
