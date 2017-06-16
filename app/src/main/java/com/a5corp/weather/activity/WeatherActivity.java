@@ -144,14 +144,6 @@ public class WeatherActivity extends AppCompatActivity {
         SecondaryDrawerItem item3 = new SecondaryDrawerItem().withIdentifier(3).withName(R.string.drawer_item_map)
                 .withIcon(new IconicsDrawable(this)
                         .icon(GoogleMaterial.Icon.gmd_map));
-        SecondaryDrawerItem item7 = new SecondaryDrawerItem().withIdentifier(7).withName(R.string.drawer_item_about)
-                .withIcon(new IconicsDrawable(this)
-                        .icon(GoogleMaterial.Icon.gmd_info))
-                .withSelectable(false);
-        SecondaryDrawerItem item6 = new SecondaryDrawerItem().withIdentifier(6).withName(getString(R.string.drawer_item_custom_key))
-                .withIcon(new IconicsDrawable(this)
-                        .icon(GoogleMaterial.Icon.gmd_create))
-                .withSelectable(false);
         SecondarySwitchDrawerItem item4 = new SecondarySwitchDrawerItem().withIdentifier(4).withName(getString(R.string.drawer_item_fahrenheit))
                 .withChecked(preferences.getUnits().equals(Constants.IMPERIAL))
                 .withIcon(new IconicsDrawable(this)
@@ -161,6 +153,18 @@ public class WeatherActivity extends AppCompatActivity {
                 .withChecked(preferences.getNotifs())
                 .withIcon(new IconicsDrawable(this)
                         .icon(GoogleMaterial.Icon.gmd_notifications))
+                .withSelectable(false);
+        SecondaryDrawerItem item6 = new SecondaryDrawerItem().withIdentifier(6).withName(getString(R.string.drawer_item_custom_key))
+                .withIcon(new IconicsDrawable(this)
+                        .icon(GoogleMaterial.Icon.gmd_create))
+                .withSelectable(false);
+        SecondaryDrawerItem item7 = new SecondaryDrawerItem().withIdentifier(7).withName(getString(R.string.drawer_item_paytm))
+                .withIcon(new IconicsDrawable(this)
+                        .icon(GoogleMaterial.Icon.gmd_attach_money))
+                .withSelectable(false);
+        SecondaryDrawerItem item8 = new SecondaryDrawerItem().withIdentifier(7).withName(R.string.drawer_item_about)
+                .withIcon(new IconicsDrawable(this)
+                        .icon(GoogleMaterial.Icon.gmd_info))
                 .withSelectable(false);
         item4.withOnCheckedChangeListener(new OnCheckedChangeListener() {
             @Override
@@ -210,7 +214,8 @@ public class WeatherActivity extends AppCompatActivity {
                         item5,
                         new DividerDrawerItem(),
                         item6,
-                        item7
+                        item7,
+                        item8
                 )
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override

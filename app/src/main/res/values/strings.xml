@@ -167,6 +167,7 @@
     <string name="drawer_item_custom_key">Custom OpenWeatherMap Key</string>
     <string name="drawer_item_notifications">Show Hourly Notifications</string>
     <string name="drawer_item_fahrenheit">Use Fahrenheit</string>
+    <string name="drawer_item_paytm">Donate via PayTm</string>
     <string name="drawer_version_header">Version</string>
 
     <string name="morning">Morning</string>
