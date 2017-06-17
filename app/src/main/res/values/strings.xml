@@ -175,6 +175,8 @@
     <string name="day">Day</string>
     <string name="Evening">Evening</string>
 
+    <string name="paytm_donate">Your donation could help me develop and support more apps. Scan this QR Code via PayTm app on another phone</string>
+
     <!-- Target Strings -->
     <string name="target_search_title">Search for a city</string>
     <string name="target_search_content">Search for weather data from over 200,000 cities and towns</string>

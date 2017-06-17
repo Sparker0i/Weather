@@ -30,6 +30,7 @@ repositories {
     mavenCentral() // jcenter() works as well because it pulls from Maven Central
 }
 
+
 dependencies {
     compile('com.mikepenz:materialdrawer:5.8.1@aar') {
         transitive = true
@@ -52,7 +53,7 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.mikepenz:material-design-iconic-typeface:2.2.0.2@aar'
     compile 'com.jakewharton:butterknife:8.5.1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
     compile 'com.github.matthiasrobbers:shortbread:1.0.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
     annotationProcessor 'com.github.matthiasrobbers:shortbread-compiler:1.0.1'
 }
