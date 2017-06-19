@@ -162,7 +162,7 @@ public class WeatherActivity extends AppCompatActivity {
                 .withIcon(new IconicsDrawable(this)
                         .icon(GoogleMaterial.Icon.gmd_attach_money))
                 .withSelectable(false);
-        SecondaryDrawerItem item8 = new SecondaryDrawerItem().withIdentifier(7).withName(R.string.drawer_item_about)
+        SecondaryDrawerItem item8 = new SecondaryDrawerItem().withIdentifier(8).withName(R.string.drawer_item_about)
                 .withIcon(new IconicsDrawable(this)
                         .icon(GoogleMaterial.Icon.gmd_info))
                 .withSelectable(false);
@@ -254,6 +254,9 @@ public class WeatherActivity extends AppCompatActivity {
                                         showApiKeyBox();
                                         break;
                                     case 7:
+                                        startActivity(new Intent(WeatherActivity.this , PaytmDonateActivity.class));
+                                        break;
+                                    case 8:
                                         startActivity(new Intent(WeatherActivity.this, AboutActivity.class));
                                         break;
                                 }
