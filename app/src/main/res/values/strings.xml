@@ -175,7 +175,7 @@
     <string name="day">Day</string>
     <string name="Evening">Evening</string>
 
-    <string name="paytm_donate">Your donation could help me develop and support more apps. Scan this QR Code via PayTm app on another phone</string>
+    <string name="paytm_donate">Your donation could help me develop and support more apps. Scan this QR Code via PayTm app on another phone, or click on it </string>
 
     <!-- Target Strings -->
     <string name="target_search_title">Search for a city</string>
@@ -325,4 +325,5 @@
     <string name="enter_city_hint">Enter city name</string>
 
     <string name="choose_app">Choose an app</string>
+    <string name="title_activity_paytm_donate">Donate via PayTm</string>
 </resources>
