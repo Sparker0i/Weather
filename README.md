@@ -12,18 +12,7 @@ Get it on Google Play and F-Droid:
 
 ## Changelog:
 
-(Version 4.0)
-- Added App Shortcuts for Launcher Icon (Android 7.1+)
-- Added Widget Option
-- Added Weather Notification
-- Added Fahrenheit Temperature Option
-- Added Weather Graphs and Maps
-- New Look for Weather Details Screen
-- Added Custom OWM Key Option
-- Material Drawer and new About Screen
-- Fixed bug where disabling location permission caused the app to crash
-
-For previous versions, please refer Changelog file.
+Please refer CHANGELOG.md file.
 
 ## Contributing
 
