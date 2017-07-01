@@ -92,14 +92,12 @@ public class NotificationService extends IntentService {
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
 
-        PendingIntent intent1 = PendingIntent.getActivity(this , 0 , newIntent(this) , 0);
         builder.setAutoCancel(false);
         builder.setContentTitle("Weather Notification");
         builder.setContentText(Math.round(weather.getMain().getTemp()) + temperatureScale + " at " + weather.getName());
         builder.setStyle(new NotificationCompat.BigTextStyle().bigText(data));
         builder.setSmallIcon(R.drawable.ic_notification_icon);
         builder.setContentIntent(pendingIntent);
-        builder.addAction(new NotificationCompat.Action(R.drawable.ic_notification_icon , getString(R.string.refresh) , intent1));
         if (Build.VERSION.SDK_INT >= 24)
             builder.setColor(Color.parseColor("#ff0000"));
         Notification notification = builder.build();
