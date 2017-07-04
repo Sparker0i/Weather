@@ -175,7 +175,7 @@
     <string name="day">Day</string>
     <string name="Evening">Evening</string>
 
-    <string name="paytm_donate">Your donation could help me develop and support more apps. Scan this QR Code via PayTm app on another phone, or click on it </string>
+    <string name="paytm_donate">Your donation could help me develop and support more apps. If you wish to donate, click on the QR Code and save it to your gallery, and open this QR Code in your PayTm app </string>
 
     <!-- Target Strings -->
     <string name="target_search_title">Search for a city</string>
