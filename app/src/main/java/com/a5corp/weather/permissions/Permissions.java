@@ -48,6 +48,12 @@ public class Permissions {
         Log.i("Permissions" , "showRationale");
     }
 
+    private void showStorageRationale() {
+        View rootView = ((Activity) mContext).getWindow().getDecorView().findViewById(R.id.fragment);
+        Snackbar.make(rootView , "This Permission Is Required to store the QR Code to your gallery so that you can open it in the PayTm app" , Snackbar.LENGTH_LONG).show();
+        Log.i("Permissions" , "showRationale");
+    }
+
     public void permissionDenied() {
         // permission was not granted
         // permission is denied (this is the first time, when "never ask again" is not checked) so ask again explaining the usage of permission
@@ -59,6 +65,10 @@ public class Permissions {
             showRationale();
         } //permission is denied (and never ask again is  checked)
         //shouldShowRequestPermissionRationale will return false
+        else if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) mContext,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            showStorageRationale();
+        }
         else {
             showNoRationale();
         }

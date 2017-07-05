@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.a5corp.weather.R;
 
@@ -20,6 +21,7 @@ public class PaytmDonateActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null)
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ImageView imageView = (ImageView) findViewById(R.id.imageView);
     }
 
     @Override
