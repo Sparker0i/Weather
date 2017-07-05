@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
+    android:id="@+id/root"
     tools:context="com.a5corp.weather.activity.PaytmDonateActivity">
 
     <android.support.design.widget.AppBarLayout

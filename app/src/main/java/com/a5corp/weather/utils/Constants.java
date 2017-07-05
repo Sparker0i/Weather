@@ -31,8 +31,7 @@ public class Constants {
     public static final String MAIL = "aadityamenon007@gmail.com";
 
     public static final int READ_COARSE_LOCATION = 20;
-
-    public static final int MY_NOTIFICATION_ID = 32094;
+    public static final int WRITE_EXTERNAL_STORAGE = 21;
 
     public static final String OWM_APP_ID = "4c08a22b02c58467e6241629c1d08717";
 
@@ -51,9 +50,4 @@ public class Constants {
     public static final String LARGE_WIDGET_HUMIDITY = "humidity";
     public static final String LARGE_WIDGET_WIND_SPEED = "wind_speed";
     public static final String LARGE_WIDGET_ICON = "icon";
-    public static final String LARGE_WIDGET_SUNRISE = "sunrise";
-    public static final String LARGE_WIDGET_SUNSET = "sunset";
-
-    public static final String ACTION_FORCED_APPWIDGET_UPDATE =
-            "com.a5corp.weather.action.FORCED_APPWIDGET_UPDATE";
 }

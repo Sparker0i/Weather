@@ -65,12 +65,18 @@ public class Permissions {
             showRationale();
         } //permission is denied (and never ask again is  checked)
         //shouldShowRequestPermissionRationale will return false
-        else if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) mContext,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-            showStorageRationale();
-        }
         else {
             showNoRationale();
+        }
+    }
+
+    public void showDenialMessage(int requestCode) {
+        switch (requestCode) {
+            case Constants.WRITE_EXTERNAL_STORAGE:
+                if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) mContext,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                    showStorageRationale();
+                }
         }
     }
 }
