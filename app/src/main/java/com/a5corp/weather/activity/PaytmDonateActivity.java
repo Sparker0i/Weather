@@ -4,9 +4,11 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -25,14 +27,18 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.concurrent.ExecutionException;
 
 public class PaytmDonateActivity extends AppCompatActivity {
     Permissions permission;
+    Handler handler;
+    int err;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_paytm_donate);
+        handler = new Handler();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null)
@@ -57,6 +63,7 @@ public class PaytmDonateActivity extends AppCompatActivity {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Log.i("Yes" , "Done");
                     imageClicked();
                 } else {
                     permission.showDenialMessage(Constants.WRITE_EXTERNAL_STORAGE);
@@ -67,25 +74,11 @@ public class PaytmDonateActivity extends AppCompatActivity {
     }
 
     private void imageClicked() {
-        Bitmap bm = BitmapFactory.decodeResource(getResources() , R.drawable.qr);
-        String extStorageDirectory = Environment.getExternalStorageDirectory().toString();
-        Log.i("Storage" , extStorageDirectory);
-        OutputStream outputStream;
-        File file = new File(extStorageDirectory , "/Pictures/Donate to Simple Weather Developer.png");
         try {
-            outputStream = new FileOutputStream(file);
-            bm.compress(Bitmap.CompressFormat.PNG , 100 , outputStream);
-            outputStream.flush();
-            outputStream.close();
-            Snackbar.make(findViewById(R.id.root), "Saved to : " + extStorageDirectory + "/Pictures/" + "Donate to Simple Weather Developer.png" , Snackbar.LENGTH_LONG).show();
+            new Task().execute().get();
         }
-        catch (FileNotFoundException fex) {
-            fex.printStackTrace();
-            Snackbar.make(findViewById(R.id.root) , "Could Not Save the QR Code to gallery, please check the relevant permissions on your phone and try again later", Snackbar.LENGTH_LONG).show();
-        }
-        catch (IOException iex) {
-            iex.printStackTrace();
-            Snackbar.make(findViewById(R.id.root) , "Please Try Again Later" , Snackbar.LENGTH_LONG).show();
+        catch (InterruptedException | ExecutionException ex) {
+            ex.printStackTrace();
         }
     }
 
@@ -105,5 +98,46 @@ public class PaytmDonateActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         finish();
+    }
+
+    private class Task extends AsyncTask<Void , Integer , Void> {
+        @Override
+        protected Void doInBackground(Void... params) {
+            Log.i("In Here" , "In Jere");
+            Bitmap bm = BitmapFactory.decodeResource(getResources() , R.drawable.qr);
+            final String extStorageDirectory = Environment.getExternalStorageDirectory().toString();
+            Log.i("Storage" , extStorageDirectory);
+            OutputStream outputStream;
+            File file = new File(extStorageDirectory , "/Pictures/Donate to Simple Weather Developer.png");
+            try {
+                outputStream = new FileOutputStream(file);
+                bm.compress(Bitmap.CompressFormat.PNG , 100 , outputStream);
+                outputStream.flush();
+                outputStream.close();
+                err = 0;
+            }
+            catch (FileNotFoundException fex) {
+                fex.printStackTrace();
+                err = 1;
+            }
+            catch (IOException iex) {
+                iex.printStackTrace();
+                err = -1;
+            }
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    switch (err) {
+                        case 0 : Snackbar.make(findViewById(R.id.root), "Saved to : " + extStorageDirectory + "/Pictures/" + "Donate to Simple Weather Developer.png" , Snackbar.LENGTH_LONG).show();
+                            break;
+                        case 1 : Snackbar.make(findViewById(R.id.root) , "Could Not Save the QR Code to gallery, please check the relevant permissions on your phone and try again later", Snackbar.LENGTH_LONG).show();
+                            break;
+                        case -1 : Snackbar.make(findViewById(R.id.root) , "Please Try Again Later" , Snackbar.LENGTH_LONG).show();
+                            break;
+                    }
+                }
+            });
+            return null;
+        }
     }
 }
