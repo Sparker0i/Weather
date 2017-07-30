@@ -21,6 +21,7 @@ import android.widget.ImageView;
 import com.a5corp.weather.R;
 import com.a5corp.weather.permissions.Permissions;
 import com.a5corp.weather.utils.Constants;
+import com.afollestad.materialdialogs.MaterialDialog;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -32,6 +33,7 @@ import java.util.concurrent.ExecutionException;
 public class PaytmDonateActivity extends AppCompatActivity {
     Permissions permission;
     Handler handler;
+    MaterialDialog pd;
     int err;
 
     @Override
@@ -44,6 +46,11 @@ public class PaytmDonateActivity extends AppCompatActivity {
         if (getSupportActionBar() != null)
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         final ImageView imageView = (ImageView) findViewById(R.id.imageView);
+        pd = new MaterialDialog.Builder(this)
+                .title(getString(R.string.please_wait))
+                .content(getString(R.string.loading))
+                .cancelable(false)
+                .progress(true , 0).build();
         permission = new Permissions(this);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,11 +110,15 @@ public class PaytmDonateActivity extends AppCompatActivity {
     private class Task extends AsyncTask<Void , Integer , Void> {
         @Override
         protected Void doInBackground(Void... params) {
-            Log.i("In Here" , "In Jere");
             Bitmap bm = BitmapFactory.decodeResource(getResources() , R.drawable.qr);
             final String extStorageDirectory = Environment.getExternalStorageDirectory().toString();
-            Log.i("Storage" , extStorageDirectory);
             OutputStream outputStream;
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    pd.show();
+                }
+            });
             File file = new File(extStorageDirectory , "/Pictures/Donate to Simple Weather Developer.png");
             try {
                 outputStream = new FileOutputStream(file);
@@ -124,9 +135,10 @@ public class PaytmDonateActivity extends AppCompatActivity {
                 iex.printStackTrace();
                 err = -1;
             }
-            handler.post(new Runnable() {
+            handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
+                    pd.hide();
                     switch (err) {
                         case 0 : Snackbar.make(findViewById(R.id.root), "Saved to : " + extStorageDirectory + "/Pictures/" + "Donate to Simple Weather Developer.png" , Snackbar.LENGTH_LONG).show();
                             break;
@@ -136,7 +148,7 @@ public class PaytmDonateActivity extends AppCompatActivity {
                             break;
                     }
                 }
-            });
+            } , 2000);
             return null;
         }
     }
