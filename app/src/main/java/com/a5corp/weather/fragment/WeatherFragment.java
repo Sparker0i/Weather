@@ -20,7 +20,6 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;
@@ -166,11 +165,11 @@ public class WeatherFragment extends Fragment {
             String f = "details_view" + (i + 1) , g = "weather_icon" + (i + 1);
             if (i != 10) {
                 int resID = getResources().getIdentifier(f, "id", getContext().getPackageName());
-                detailsField[i] = (TextView) rootView.findViewById(resID);
+                detailsField[i] = rootView.findViewById(resID);
                 detailsField[i].setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
             }
             int resIDI = getResources().getIdentifier(g, "id" , getContext().getPackageName());
-            weatherIcon[i] = (TextView)rootView.findViewById(resIDI);
+            weatherIcon[i] = rootView.findViewById(resIDI);
             weatherIcon[i].setTypeface(weatherFont);
             weatherIcon[i].setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
         }
@@ -344,15 +343,11 @@ public class WeatherFragment extends Fragment {
                             .setPrimaryText(getString(R.string.target_search_title))
                             .setSecondaryText(getString(R.string.target_search_content))
                             .setIconDrawableColourFilter(ContextCompat.getColor(getContext() , R.color.md_black_1000))
-                            .setOnHidePromptListener(new MaterialTapTargetPrompt.OnHidePromptListener() {
+                            .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener() {
                                 @Override
-                                public void onHidePrompt(MotionEvent event, boolean tappedTarget) {
-
-                                }
-
-                                @Override
-                                public void onHidePromptComplete() {
-                                    showRefresh();
+                                public void onPromptStateChanged(MaterialTapTargetPrompt prompt , int state) {
+                                    if (state == MaterialTapTargetPrompt.STATE_FOCAL_PRESSED || state == MaterialTapTargetPrompt.STATE_DISMISSING)
+                                        showRefresh();
                                 }
                             })
                             .show();
@@ -367,15 +362,11 @@ public class WeatherFragment extends Fragment {
                 .setPrimaryText(getString(R.string.target_location_title))
                 .setFocalColour(ContextCompat.getColor(getContext() , R.color.colorAccent))
                 .setSecondaryText(getString(R.string.target_location_content))
-                .setOnHidePromptListener(new MaterialTapTargetPrompt.OnHidePromptListener() {
+                .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener() {
                     @Override
-                    public void onHidePrompt(MotionEvent event, boolean tappedTarget) {
-                        preferences.setv3TargetShown(true);
-                    }
-
-                    @Override
-                    public void onHidePromptComplete() {
-                        preferences.setv3TargetShown(true);
+                    public void onPromptStateChanged(MaterialTapTargetPrompt prompt , int state) {
+                        if (state == MaterialTapTargetPrompt.STATE_FOCAL_PRESSED || state == MaterialTapTargetPrompt.STATE_DISMISSING)
+                            preferences.setv3TargetShown(true);
                     }
                 })
                 .show();
@@ -388,16 +379,11 @@ public class WeatherFragment extends Fragment {
                 .setPrimaryText(getString(R.string.target_refresh_title))
                 .setFocalColour(ContextCompat.getColor(getContext() , R.color.colorAccent))
                 .setSecondaryText(getString(R.string.target_refresh_content))
-                .setOnHidePromptListener(new MaterialTapTargetPrompt.OnHidePromptListener() {
+                .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener() {
                     @Override
-                    public void onHidePrompt(MotionEvent event, boolean tappedTarget) {
-
-                    }
-
-                    @Override
-                    public void onHidePromptComplete()
-                    {
-                        showLocTarget();
+                    public void onPromptStateChanged(MaterialTapTargetPrompt prompt , int state) {
+                        if (state == MaterialTapTargetPrompt.STATE_FOCAL_PRESSED || state == MaterialTapTargetPrompt.STATE_DISMISSING)
+                            showLocTarget();
                     }
                 })
                 .show();

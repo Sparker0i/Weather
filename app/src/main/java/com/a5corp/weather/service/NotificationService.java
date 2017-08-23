@@ -1,8 +1,11 @@
 package com.a5corp.weather.service;
 
+import android.annotation.TargetApi;
 import android.app.AlarmManager;
 import android.app.IntentService;
 import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -21,6 +24,8 @@ import com.a5corp.weather.model.WeatherInfo;
 import com.a5corp.weather.preferences.Prefs;
 
 import java.io.IOException;
+
+import it.gmariotti.cardslib.library.utils.BitmapUtils;
 
 public class NotificationService extends IntentService {
 
@@ -89,7 +94,18 @@ public class NotificationService extends IntentService {
 
         String data = city + "\n" + temperature + "\n" + wind + "\n" + humidity + "\n" + pressure;
 
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            String id = "w01", name = getString(R.string.weather_notification_title);
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            String desc = getString(R.string.weather_notification_description);
+
+            NotificationChannel channel = new NotificationChannel(id, name, importance);
+            channel.setDescription(desc);
+            notificationManager.createNotificationChannel(channel);
+
+
+        }
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
 
         builder.setAutoCancel(false);

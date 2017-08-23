@@ -170,6 +170,9 @@
     <string name="drawer_item_paytm">Donate via PayTm</string>
     <string name="drawer_version_header">Version</string>
 
+    <string name="weather_notification_title">Weather</string>
+    <string name="weather_notification_description">Enable Hourly Weather Notifications</string>
+
     <string name="morning">Morning</string>
     <string name="night">Night</string>
     <string name="day">Day</string>

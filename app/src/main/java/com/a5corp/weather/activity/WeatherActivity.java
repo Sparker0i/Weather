@@ -58,6 +58,8 @@ public class WeatherActivity extends AppCompatActivity {
     NotificationManagerCompat mManager;
     Handler handler;
 
+    int mode = 0;
+
     @Shortcut(id = "home", icon = R.drawable.shortcut_home , shortLabel = "Weather Info", rank = 2)
     public void addWeather() {
 
@@ -117,7 +119,10 @@ public class WeatherActivity extends AppCompatActivity {
     }
 
     public void createShortcuts() {
-        Shortbread.create(this);
+        if (mode == 0) {
+            Shortbread.create(this);
+            mode = -1;
+        }
     }
 
     public void initDrawer() {
