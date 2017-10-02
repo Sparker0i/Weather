@@ -1,6 +1,5 @@
 package com.a5corp.weather.service;
 
-import android.annotation.TargetApi;
 import android.app.AlarmManager;
 import android.app.IntentService;
 import android.app.Notification;
@@ -11,9 +10,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
+import android.os.IBinder;
 import android.os.SystemClock;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationManagerCompat;
+import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.a5corp.weather.R;
@@ -25,15 +24,20 @@ import com.a5corp.weather.preferences.Prefs;
 
 import java.io.IOException;
 
-import it.gmariotti.cardslib.library.utils.BitmapUtils;
-
 public class NotificationService extends IntentService {
 
     private static final String TAG = "NotificationsService";
     Prefs prefs;
+    Notification.Builder builder;
 
     public NotificationService() {
         super(TAG);
+    }
+
+    @Nullable
+    @Override
+    public IBinder onBind(Intent intent) {
+        return super.onBind(intent);
     }
 
     @Override
@@ -63,20 +67,22 @@ public class NotificationService extends IntentService {
 
     public static void setNotificationServiceAlarm(Context context,
                                                    boolean isNotificationEnable) {
+        Log.i("In" , "Notification Service Alarm");
         Intent intent = NotificationService.newIntent(context);
         PendingIntent pendingIntent = PendingIntent.getService(context, 0, intent,
                 PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         long intervalMillis = AlarmManager.INTERVAL_HOUR;
-        if (isNotificationEnable) {
-            alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
-                    SystemClock.elapsedRealtime(),
-                    intervalMillis,
-                    pendingIntent);
-        } else {
-            alarmManager.cancel(pendingIntent);
-            pendingIntent.cancel();
-        }
+        if (alarmManager != null)
+            if (isNotificationEnable) {
+                alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
+                        SystemClock.elapsedRealtime(),
+                        intervalMillis,
+                        pendingIntent);
+            } else {
+                alarmManager.cancel(pendingIntent);
+                pendingIntent.cancel();
+            }
     }
 
     private void weatherNotification(WeatherInfo weather) {
@@ -95,27 +101,28 @@ public class NotificationService extends IntentService {
         String data = city + "\n" + temperature + "\n" + wind + "\n" + humidity + "\n" + pressure;
 
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        assert notificationManager != null;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             String id = "w01", name = getString(R.string.weather_notification_title);
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            int importance = NotificationManager.IMPORTANCE_MIN;
             String desc = getString(R.string.weather_notification_description);
 
             NotificationChannel channel = new NotificationChannel(id, name, importance);
             channel.setDescription(desc);
             notificationManager.createNotificationChannel(channel);
-
-
+            builder = new Notification.Builder(this , id);
         }
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
+        else
+            builder = new Notification.Builder(this);
 
         builder.setAutoCancel(false);
-        builder.setContentTitle("Weather Notification");
-        builder.setContentText(Math.round(weather.getMain().getTemp()) + temperatureScale + " at " + weather.getName());
-        builder.setStyle(new NotificationCompat.BigTextStyle().bigText(data));
+        builder.setContentTitle(Math.round(weather.getMain().getTemp()) + temperatureScale + " at " + weather.getName());
+        builder.setContentText(data);
+        builder.setStyle(new Notification.BigTextStyle().bigText(data));
         builder.setSmallIcon(R.drawable.ic_notification_icon);
         builder.setContentIntent(pendingIntent);
         if (Build.VERSION.SDK_INT >= 24)
-            builder.setColor(Color.parseColor("#ff0000"));
+            builder.setColor(Color.RED);
         Notification notification = builder.build();
         notificationManager.notify(0 , notification);
     }

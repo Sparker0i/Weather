@@ -13,6 +13,8 @@ import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
 import android.text.style.RelativeSizeSpan;
 import android.util.Log;
@@ -22,7 +24,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.HorizontalScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -59,7 +60,7 @@ import static com.a5corp.weather.utils.Constants.DESCRIBABLE_KEY;
 public class WeatherFragment extends Fragment {
     Typeface weatherFont;
     @BindView(R.id.button1) TextView button;
-    TextView detailsField[] = new TextView[10] , weatherIcon[] = new TextView[11];
+    @BindView(R.id.weather_icon11) TextView weatherIcon;
     @BindView(R.id.wind_view) TextView windView;
     @BindView(R.id.humidity_view) TextView humidityView;
     @BindView(R.id.direction_view) TextView directionView;
@@ -72,7 +73,7 @@ public class WeatherFragment extends Fragment {
     @BindView(R.id.sunset_icon) TextView sunsetIcon;
     @BindView(R.id.wind_icon) TextView windIcon;
     @BindView(R.id.humidity_icon) TextView humidityIcon;
-    @BindView(R.id.horizontalScrollView) HorizontalScrollView horizontalScrollView;
+    @BindView(R.id.horizontal_recycler_view) RecyclerView horizontalRecyclerView;
     double tc;
     Handler handler;
     BottomSheetDialogFragment bottomSheetDialogFragment;
@@ -160,19 +161,9 @@ public class WeatherFragment extends Fragment {
         sunsetView.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
         button.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
         pd.show();
-        for (int i = 0; i < 11; ++i)
-        {
-            String f = "details_view" + (i + 1) , g = "weather_icon" + (i + 1);
-            if (i != 10) {
-                int resID = getResources().getIdentifier(f, "id", getContext().getPackageName());
-                detailsField[i] = rootView.findViewById(resID);
-                detailsField[i].setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
-            }
-            int resIDI = getResources().getIdentifier(g, "id" , getContext().getPackageName());
-            weatherIcon[i] = rootView.findViewById(resIDI);
-            weatherIcon[i].setTypeface(weatherFont);
-            weatherIcon[i].setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
-        }
+        horizontalRecyclerView.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        weatherIcon.setTypeface(weatherFont);
+        weatherIcon.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
         return rootView;
     }
 
@@ -442,7 +433,7 @@ public class WeatherFragment extends Fragment {
         }
     }
 
-    private void setWeatherIcon(int id , int i) {
+    private String setWeatherIcon(int id , int i) {
         String icon = "";
         if (i == 10) {
             if (checkDay())
@@ -893,7 +884,9 @@ public class WeatherFragment extends Fragment {
                     break;
             }
         }
-        weatherIcon[i].setText(icon);
+        if (i == 10)
+            weatherIcon.setText(icon);
+        return icon;
     }
 
     private boolean checkDay() {
@@ -929,33 +922,11 @@ public class WeatherFragment extends Fragment {
             {
                 details.set(i , json1.getList().get(i));
             }
-            for (int i = 0; i < 10; ++i)
-            {
-                final WeatherFort.WeatherList J = details.get(i);
-                long date1 = J.getDt();
-                Date expiry = new Date(date1 * 1000);
-                String date = new SimpleDateFormat("EE, dd" , Locale.US).format(expiry);
-                SpannableString ss1 = new SpannableString(date + "\n"
-                        + J.getTemp().getMax() + "°" + "      "
-                        + J.getTemp().getMin() + "°" + "\n");
-                ss1.setSpan(new RelativeSizeSpan(1.1f) , 0 , 7 , 0); // set size
-                ss1.setSpan(new RelativeSizeSpan(1.4f) , 8 , 12 , 0);
-                detailsField[i].setText(ss1);
-                setWeatherIcon(J.getWeather().get(0).getId() , i);
-                detailsField[i].setOnClickListener(new View.OnClickListener() {
-                    public void onClick(View v) {
-                        bottomSheetDialogFragment = newInstance(J);
-                        bottomSheetDialogFragment.show(getActivity().getSupportFragmentManager(), bottomSheetDialogFragment.getTag());
-                    }
-                });
-                weatherIcon[i].setOnClickListener(new View.OnClickListener() {
-                    public void onClick(View v)
-                    {
-                        bottomSheetDialogFragment = newInstance(J);
-                        bottomSheetDialogFragment.show(getActivity().getSupportFragmentManager(), bottomSheetDialogFragment.getTag());
-                    }
-                });
-            }
+            HorizontalAdapter horizontalAdapter = new HorizontalAdapter(details);
+            LinearLayoutManager horizontalLayoutManager
+                    = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+            horizontalRecyclerView.setLayoutManager(horizontalLayoutManager);
+            horizontalRecyclerView.setAdapter(horizontalAdapter);
             final String d1 = new java.text.SimpleDateFormat("hh:mm a" , Locale.US).format(new Date(json0.getSys().getSunrise() * 1000));
             final String d2 = new java.text.SimpleDateFormat("hh:mm a" , Locale.US).format(new Date(json0.getSys().getSunset() * 1000));
             sunriseView.setText(d1);
@@ -1028,7 +999,7 @@ public class WeatherFragment extends Fragment {
                 }
             });
             setWeatherIcon(json0.getWeather().get(0).getId() , 10);
-            weatherIcon[10].setOnClickListener(new View.OnClickListener()
+            weatherIcon.setOnClickListener(new View.OnClickListener()
             {
                 public void onClick (View v)
                 {
@@ -1154,4 +1125,69 @@ public class WeatherFragment extends Fragment {
                     }
                 }).show();
     }
+
+    public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.MyViewHolder> {
+
+        private List<WeatherFort.WeatherList> horizontalList;
+
+        class MyViewHolder extends RecyclerView.ViewHolder {
+            TextView weather_icon , details_view;
+
+            MyViewHolder(View view) {
+                super(view);
+                weather_icon = view.findViewById(R.id.weather_icon);
+                details_view = view.findViewById(R.id.details_view);
+            }
+        }
+
+        HorizontalAdapter(List<WeatherFort.WeatherList> horizontalList) {
+            this.horizontalList = horizontalList;
+        }
+
+        @Override
+        public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            View itemView = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.weather_daily_list_item, parent, false);
+
+            return new MyViewHolder(itemView);
+        }
+
+        @Override
+        public void onBindViewHolder(MyViewHolder holder, int position) {
+            holder.weather_icon.setText(setWeatherIcon(horizontalList.get(position).getWeather().get(0).getId() , position));
+            long date1 = horizontalList.get(position).getDt();
+            Date expiry = new Date(date1 * 1000);
+            String date = new SimpleDateFormat("EE, dd" , Locale.US).format(expiry);
+            SpannableString ss1 = new SpannableString(date + "\n"
+                    + horizontalList.get(position).getTemp().getMax() + "°" + "      "
+                    + horizontalList.get(position).getTemp().getMin() + "°" + "\n");
+            ss1.setSpan(new RelativeSizeSpan(1.1f) , 0 , 7 , 0); // set size
+            ss1.setSpan(new RelativeSizeSpan(1.4f) , 8 , 12 , 0);
+            holder.details_view.setText(ss1);
+            final int pos = position;
+            holder.details_view.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    bottomSheetDialogFragment = newInstance(horizontalList.get(pos));
+                    bottomSheetDialogFragment.show(getActivity().getSupportFragmentManager(), bottomSheetDialogFragment.getTag());
+                }
+            });
+            holder.weather_icon.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v)
+                {
+                    bottomSheetDialogFragment = newInstance(horizontalList.get(pos));
+                    bottomSheetDialogFragment.show(getActivity().getSupportFragmentManager(), bottomSheetDialogFragment.getTag());
+                }
+            });
+            holder.weather_icon.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
+            holder.weather_icon.setTypeface(weatherFont);
+            holder.details_view.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
+        }
+
+        @Override
+        public int getItemCount() {
+            return horizontalList.size();
+        }
+    }
 }
+
+
