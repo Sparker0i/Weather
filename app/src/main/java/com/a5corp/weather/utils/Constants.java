@@ -40,8 +40,8 @@ public class Constants {
     public static final String LIBRARY_ID = "libId";
     public static final String MODE = "mode";
 
-    public static final String OPEN_WEATHER_MAP_FORECAST_API = "http://api.openweathermap.org/data/2.5/forecast/daily?";
-    public static final String OPEN_WEATHER_MAP_DAILY_API = "http://api.openweathermap.org/data/2.5/weather?";
+    public static final String OPEN_WEATHER_MAP_FORECAST_API = "https://api.openweathermap.org/data/2.5/forecast/daily?";
+    public static final String OPEN_WEATHER_MAP_DAILY_API = "https://api.openweathermap.org/data/2.5/weather?";
 
     public static final String LARGE_WIDGET_TEMPERATURE = "temperature";
     public static final String LARGE_WIDGET_DESCRIPTION = "description";
