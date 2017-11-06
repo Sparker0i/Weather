@@ -23,8 +23,8 @@
     <string name="mph">mil/h</string>
     <string name="hPa">hPa</string>
     <string name="mm">mm</string>
-    <string name="rain_">Rain : %.2f</string>
-    <string name="snow_">Snow : %.2f</string>
+    <string name="rain_">Rain : %.2f mm</string>
+    <string name="snow_">Snow : %.2f mm</string>
     <string name="humidity">Humidity : %d %%</string>
     <string name="pressure">Pressure : %.2f hPa</string>
     <string name="temperature">Temperature : %1$.2f %2$s</string>
@@ -48,6 +48,10 @@
     <string name="south_west">Wind blowing in the South-West direction</string>
     <string name="east">Wind blowing towards East</string>
     <string name="west">Wind blowing towards West</string>
+
+    <string name="paytm_err_0">"Saved to : %s "/Pictures/Donate to Simple Weather Developer.png"</string>
+    <string name="paytm_err_1">Could Not Save the QR Code to gallery, please check the relevant permissions on your phone and try again later</string>
+    <string name="paytm_err_min_1">Please Try Again Later</string>
 
     <string name="humidity_icon">&#xf07a;</string>
     <string name="pressure_icon">&#xf079;</string>

@@ -140,11 +140,11 @@ public class PaytmDonateActivity extends AppCompatActivity {
                 public void run() {
                     pd.hide();
                     switch (err) {
-                        case 0 : Snackbar.make(findViewById(R.id.root), "Saved to : " + extStorageDirectory + "/Pictures/" + "Donate to Simple Weather Developer.png" , Snackbar.LENGTH_LONG).show();
+                        case 0 : Snackbar.make(findViewById(R.id.root), getString(R.string.paytm_err_0 , extStorageDirectory) , Snackbar.LENGTH_LONG).show();
                             break;
-                        case 1 : Snackbar.make(findViewById(R.id.root) , "Could Not Save the QR Code to gallery, please check the relevant permissions on your phone and try again later", Snackbar.LENGTH_LONG).show();
+                        case 1 : Snackbar.make(findViewById(R.id.root) , getString(R.string.paytm_err_1), Snackbar.LENGTH_LONG).show();
                             break;
-                        case -1 : Snackbar.make(findViewById(R.id.root) , "Please Try Again Later" , Snackbar.LENGTH_LONG).show();
+                        case -1 : Snackbar.make(findViewById(R.id.root) , getString(R.string.paytm_err_min_1) , Snackbar.LENGTH_LONG).show();
                             break;
                     }
                 }

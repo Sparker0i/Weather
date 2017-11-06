@@ -131,16 +131,16 @@ public class CustomBottomSheetDialogFragment extends BottomSheetDialogFragment {
                 wind = wind + " " + getString(R.string.mps);
             windText.setText(wind);
             try {
-                rainText.setText(String.format(Locale.ENGLISH , getString(R.string.rain_) , json.getRain()) + " " + getString(R.string.mm));
+                rainText.setText(String.format(Locale.ENGLISH , getString(R.string.rain_) , json.getRain()));
             }
             catch (Exception ex) {
-                rainText.setText(String.format(Locale.ENGLISH , getString(R.string.rain_) , 0) + " " + getString(R.string.mm));
+                rainText.setText(String.format(Locale.ENGLISH , getString(R.string.rain_) , 0));
             }
             try {
-                snowText.setText(String.format(Locale.ENGLISH , getString(R.string.snow_) , json.getSnow()) + " " + getString(R.string.mm));
+                snowText.setText(String.format(Locale.ENGLISH , getString(R.string.snow_) , json.getSnow()));
             }
             catch (Exception ex) {
-                snowText.setText(String.format(Locale.ENGLISH , getString(R.string.snow_) , 0) + " " + getString(R.string.mm));
+                snowText.setText(String.format(Locale.ENGLISH , getString(R.string.snow_) , 0));
             }
             humidityText.setText(String.format(Locale.ENGLISH , getString(R.string.humidity) , json.getHumidity()));
             pressureText.setText(String.format(Locale.ENGLISH , getString(R.string.pressure) , json.getPressure()));
