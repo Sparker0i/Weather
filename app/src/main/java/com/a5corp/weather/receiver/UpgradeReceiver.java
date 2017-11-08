@@ -17,7 +17,7 @@ public class UpgradeReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         Log.i("In" , UpgradeReceiver.class.getSimpleName());
-        NotificationService.setNotificationServiceAlarm(context , new Prefs(context).getNotifs());
+        NotificationService.enqueueWork(context , intent);
 
         Intent intent2 = new Intent(context, LargeWidgetProvider.class);
         intent2.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);

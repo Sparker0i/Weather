@@ -29,7 +29,7 @@ public class StartupReceiver extends BroadcastReceiver {
             intent2.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
             context.sendBroadcast(intent2);
 
-            NotificationService.setNotificationServiceAlarm(context, new Prefs(context).getNotifs());
+            NotificationService.enqueueWork(context, intent);
         }
         else
             Log.i("No" , "Boot");

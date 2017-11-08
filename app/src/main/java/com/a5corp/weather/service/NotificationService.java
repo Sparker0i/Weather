@@ -48,6 +48,23 @@ public class NotificationService extends JobIntentService {
             return;
         }
 
+        Log.i("In" , "Notification Service Alarm");
+        intent = NotificationService.newIntent(this);
+        PendingIntent pendingIntent = PendingIntent.getService(this, 0, intent,
+                PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        long intervalMillis = AlarmManager.INTERVAL_HOUR;
+        if (alarmManager != null)
+            if (new Prefs(this).getNotifs()) {
+                alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
+                        SystemClock.elapsedRealtime(),
+                        intervalMillis,
+                        pendingIntent);
+            } else {
+                alarmManager.cancel(pendingIntent);
+                pendingIntent.cancel();
+            }
+
         prefs = new Prefs(this);
         String city = prefs.getCity();
         String units = prefs.getUnits();
@@ -55,7 +72,8 @@ public class NotificationService extends JobIntentService {
         try {
             WeatherInfo weather;
             weather = new Request(this).getItems(city, units);
-            weatherNotification(weather);
+            if (new Prefs(this).getNotifs())
+                weatherNotification(weather);
         } catch (IOException e) {
             Log.e(TAG, "Error get weather", e);
         }
