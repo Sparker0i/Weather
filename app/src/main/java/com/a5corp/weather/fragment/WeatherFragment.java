@@ -1,6 +1,7 @@
 package com.a5corp.weather.fragment;
 
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
@@ -11,6 +12,7 @@ import android.support.design.widget.BottomSheetDialogFragment;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -39,6 +41,7 @@ import com.a5corp.weather.model.WeatherInfo;
 import com.a5corp.weather.permissions.GPSTracker;
 import com.a5corp.weather.permissions.Permissions;
 import com.a5corp.weather.preferences.Prefs;
+import com.a5corp.weather.service.NotificationService;
 import com.a5corp.weather.utils.Constants;
 import com.a5corp.weather.utils.Utils;
 import com.afollestad.materialdialogs.DialogAction;
@@ -46,7 +49,6 @@ import com.afollestad.materialdialogs.MaterialDialog;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -95,19 +97,19 @@ public class WeatherFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_weather, container, false);
         ButterKnife.bind(this , rootView);
-        MaterialDialog.Builder builder = new MaterialDialog.Builder(this.getActivity())
+        MaterialDialog.Builder builder = new MaterialDialog.Builder(this.activity())
                 .title(getString(R.string.please_wait))
                 .content(getString(R.string.loading))
                 .cancelable(false)
                 .progress(true , 0);
         pd = builder.build();
         setHasOptionsMenu(true);
-        preferences = new Prefs(getContext());
-        weatherFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/weather.ttf");
+        preferences = new Prefs(context());
+        weatherFont = Typeface.createFromAsset(activity().getAssets(), "fonts/weather.ttf");
         Bundle bundle = getArguments();
         int mode;
         if (bundle != null)
@@ -118,23 +120,23 @@ public class WeatherFragment extends Fragment {
             updateWeatherData(preferences.getCity(), null, null);
         else
             updateWeatherData(null , Float.toString(preferences.getLatitude()) , Float.toString(preferences.getLongitude()));
-        gps = new GPSTracker(getContext());
-        cityField.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
-        updatedField.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
-        humidityView.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
-        sunriseIcon.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
+        gps = new GPSTracker(context());
+        cityField.setTextColor(ContextCompat.getColor(context() , R.color.textColor));
+        updatedField.setTextColor(ContextCompat.getColor(context() , R.color.textColor));
+        humidityView.setTextColor(ContextCompat.getColor(context() , R.color.textColor));
+        sunriseIcon.setTextColor(ContextCompat.getColor(context() , R.color.textColor));
         sunriseIcon.setTypeface(weatherFont);
-        sunriseIcon.setText(getActivity().getString(R.string.sunrise_icon));
-        sunsetIcon.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
+        sunriseIcon.setText(activity().getString(R.string.sunrise_icon));
+        sunsetIcon.setTextColor(ContextCompat.getColor(context() , R.color.textColor));
         sunsetIcon.setTypeface(weatherFont);
-        sunsetIcon.setText(getActivity().getString(R.string.sunset_icon));
-        windIcon.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
+        sunsetIcon.setText(activity().getString(R.string.sunset_icon));
+        windIcon.setTextColor(ContextCompat.getColor(context() , R.color.textColor));
         windIcon.setTypeface(weatherFont);
-        windIcon.setText(getActivity().getString(R.string.speed_icon));
-        humidityIcon.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
+        windIcon.setText(activity().getString(R.string.speed_icon));
+        humidityIcon.setTextColor(ContextCompat.getColor(context() , R.color.textColor));
         humidityIcon.setTypeface(weatherFont);
-        humidityIcon.setText(getActivity().getString(R.string.humidity_icon));
-        windView.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
+        humidityIcon.setText(activity().getString(R.string.humidity_icon));
+        windView.setTextColor(ContextCompat.getColor(context() , R.color.textColor));
         swipeView.setColorSchemeResources(R.color.red, R.color.green , R.color.blue , R.color.yellow , R.color.orange);
         swipeView.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -155,30 +157,30 @@ public class WeatherFragment extends Fragment {
             }
         });
         directionView.setTypeface(weatherFont);
-        directionView.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
+        directionView.setTextColor(ContextCompat.getColor(context() , R.color.textColor));
         dailyView.setText(getString(R.string.daily));
-        dailyView.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
-        sunriseView.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
-        sunsetView.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
-        button.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
+        dailyView.setTextColor(ContextCompat.getColor(context() , R.color.textColor));
+        sunriseView.setTextColor(ContextCompat.getColor(context() , R.color.textColor));
+        sunsetView.setTextColor(ContextCompat.getColor(context() , R.color.textColor));
+        button.setTextColor(ContextCompat.getColor(context() , R.color.textColor));
         pd.show();
         horizontalRecyclerView.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
         weatherIcon.setTypeface(weatherFont);
-        weatherIcon.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
-        ((WeatherActivity) getActivity()).showFab();
+        weatherIcon.setTextColor(ContextCompat.getColor(context() , R.color.textColor));
+        ((WeatherActivity) activity()).showFab();
         return rootView;
     }
 
     @Override
     public void onCreateOptionsMenu(Menu menu , MenuInflater inflater) {
-        getActivity().getMenuInflater().inflate(R.menu.menu_weather, menu);
+        activity().getMenuInflater().inflate(R.menu.menu_weather, menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.location :
-                permission = new Permissions(getContext());
+                permission = new Permissions(context());
                 requestPermissions(new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION} , Constants.READ_COARSE_LOCATION);
                 break;
             case R.id.search :
@@ -191,7 +193,7 @@ public class WeatherFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 0) {
-            cc = new CheckConnection(getContext());
+            cc = new CheckConnection(context());
             if (!cc.isNetworkAvailable())
                 showNoInternet();
             else {
@@ -208,7 +210,7 @@ public class WeatherFragment extends Fragment {
     }
 
     private void updateWeatherData(final String city, final String lat, final String lon) {
-        wt = new FetchWeather(getContext());
+        wt = new FetchWeather(context());
         new Thread() {
             public void run() {
                 try {
@@ -237,14 +239,14 @@ public class WeatherFragment extends Fragment {
                     preferences.setCity(preferences.getLastCity());
                     handler.post(new Runnable() {
                         public void run() {
-                            Toast.makeText(getActivity(),
-                                    getActivity().getString(R.string.place_not_found),
+                            Toast.makeText(activity(),
+                                    activity().getString(R.string.place_not_found),
                                     Toast.LENGTH_LONG).show();
                             GlobalActivity.i = 1;
                             if (!preferences.getLaunched()) {
                                 FirstStart();
                             } else {
-                                cc = new CheckConnection(getContext());
+                                cc = new CheckConnection(context());
                                 if (!cc.isNetworkAvailable()) {
                                     showNoInternet();
                                 }
@@ -270,7 +272,8 @@ public class WeatherFragment extends Fragment {
                             if (pd.isShowing())
                                 pd.dismiss();
                             preferences.setLastCity(json.day.getName());
-                            ((WeatherActivity) getActivity()).createShortcuts();
+                            ((WeatherActivity) activity()).createShortcuts();
+                            NotificationService.enqueueWork(context() , new Intent(context() , WeatherActivity.class));
                         }
                     });
                 }
@@ -281,7 +284,7 @@ public class WeatherFragment extends Fragment {
     public void FirstStart() {
         if (pd.isShowing())
             pd.dismiss();
-        Intent intent = new Intent(getActivity(), FirstLaunch.class);
+        Intent intent = new Intent(activity(), FirstLaunch.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
@@ -303,9 +306,17 @@ public class WeatherFragment extends Fragment {
         pd.show();
         updateWeatherData(null, lat, lon);
     }
+    
+    private Context context() {
+        return getContext();
+    }
+    
+    private FragmentActivity activity() {
+        return getActivity();
+    }
 
     private void showInputDialog() {
-            new MaterialDialog.Builder(this.getActivity())
+            new MaterialDialog.Builder(activity())
                     .title(getString(R.string.change_city))
                     .content(getString(R.string.could_not_find))
                     .negativeText(getString(R.string.cancel))
@@ -329,13 +340,13 @@ public class WeatherFragment extends Fragment {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    new MaterialTapTargetPrompt.Builder(getActivity())
+                    new MaterialTapTargetPrompt.Builder(activity())
                             .setTarget(R.id.search)
-                            .setBackgroundColour(ContextCompat.getColor(getContext() , R.color.md_light_blue_400))
-                            .setFocalColour(ContextCompat.getColor(getContext() , R.color.colorAccent))
+                            .setBackgroundColour(ContextCompat.getColor(context() , R.color.md_light_blue_400))
+                            .setFocalColour(ContextCompat.getColor(context() , R.color.colorAccent))
                             .setPrimaryText(getString(R.string.target_search_title))
                             .setSecondaryText(getString(R.string.target_search_content))
-                            .setIconDrawableColourFilter(ContextCompat.getColor(getContext() , R.color.md_black_1000))
+                            .setIconDrawableColourFilter(ContextCompat.getColor(context() , R.color.md_black_1000))
                             .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener() {
                                 @Override
                                 public void onPromptStateChanged(MaterialTapTargetPrompt prompt , int state) {
@@ -349,11 +360,11 @@ public class WeatherFragment extends Fragment {
     }
 
     private void showLocTarget() {
-        new MaterialTapTargetPrompt.Builder(getActivity())
+        new MaterialTapTargetPrompt.Builder(activity())
                 .setTarget(R.id.location)
-                .setBackgroundColour(ContextCompat.getColor(getContext() , R.color.md_light_blue_400))
+                .setBackgroundColour(ContextCompat.getColor(context() , R.color.md_light_blue_400))
                 .setPrimaryText(getString(R.string.target_location_title))
-                .setFocalColour(ContextCompat.getColor(getContext() , R.color.colorAccent))
+                .setFocalColour(ContextCompat.getColor(context() , R.color.colorAccent))
                 .setSecondaryText(getString(R.string.target_location_content))
                 .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener() {
                     @Override
@@ -366,11 +377,11 @@ public class WeatherFragment extends Fragment {
     }
 
     private void showRefresh() {
-        new MaterialTapTargetPrompt.Builder(getActivity())
+        new MaterialTapTargetPrompt.Builder(activity())
                 .setTarget(R.id.toolbar)
-                .setBackgroundColour(ContextCompat.getColor(getContext() , R.color.md_light_blue_400))
+                .setBackgroundColour(ContextCompat.getColor(context() , R.color.md_light_blue_400))
                 .setPrimaryText(getString(R.string.target_refresh_title))
-                .setFocalColour(ContextCompat.getColor(getContext() , R.color.colorAccent))
+                .setFocalColour(ContextCompat.getColor(context() , R.color.colorAccent))
                 .setSecondaryText(getString(R.string.target_refresh_content))
                 .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener() {
                     @Override
@@ -383,7 +394,7 @@ public class WeatherFragment extends Fragment {
     }
 
     public void showNoInternet() {
-        new MaterialDialog.Builder(getContext())
+        new MaterialDialog.Builder(context())
                 .title(getString(R.string.no_internet_title))
                 .cancelable(false)
                 .content(getString(R.string.no_internet_content))
@@ -425,7 +436,7 @@ public class WeatherFragment extends Fragment {
     }
 
     private void showCity() {
-        gps = new GPSTracker(getContext());
+        gps = new GPSTracker(context());
         if (!gps.canGetLocation())
             gps.showSettingsAlert();
         else {
@@ -433,13 +444,6 @@ public class WeatherFragment extends Fragment {
             String lon = gps.getLongitude();
             changeCity(lat, lon);
         }
-    }
-
-    private boolean checkDay() {
-        Calendar c = Calendar.getInstance();
-        int hours = c.get(Calendar.HOUR_OF_DAY);
-
-        return !(hours >= 18 || hours <= 6);
     }
 
     private void renderWeather(Info jsonObj){
@@ -470,7 +474,7 @@ public class WeatherFragment extends Fragment {
             }
             HorizontalAdapter horizontalAdapter = new HorizontalAdapter(details);
             LinearLayoutManager horizontalLayoutManager
-                    = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+                    = new LinearLayoutManager(context(), LinearLayoutManager.HORIZONTAL, false);
             horizontalRecyclerView.setLayoutManager(horizontalLayoutManager);
             horizontalRecyclerView.setAdapter(horizontalAdapter);
             final String d1 = new java.text.SimpleDateFormat("hh:mm a" , Locale.US).format(new Date(json0.getSys().getSunrise() * 1000));
@@ -544,7 +548,7 @@ public class WeatherFragment extends Fragment {
                     Snackbar.make(rootView , String.format(Locale.ENGLISH , getString(R.string.sunset) , d2) , Snackbar.LENGTH_SHORT).show();
                 }
             });
-            weatherIcon.setText(Utils.setWeatherIcon(getContext() , json0.getWeather().get(0).getId() , 10));
+            weatherIcon.setText(Utils.setWeatherIcon(context() , json0.getWeather().get(0).getId() , 10));
             weatherIcon.setOnClickListener(new View.OnClickListener()
             {
                 public void onClick (View v)
@@ -577,7 +581,7 @@ public class WeatherFragment extends Fragment {
     private void setDeg(int deg) {
         int index = Math.abs(Math.round(deg % 360) / 45);
         switch (index) {
-            case 0 : directionView.setText(getActivity().getString(R.string.top));
+            case 0 : directionView.setText(activity().getString(R.string.top));
                 directionView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -585,7 +589,7 @@ public class WeatherFragment extends Fragment {
                     }
                 });
                 break;
-            case 1 : directionView.setText(getActivity().getString(R.string.top_right));
+            case 1 : directionView.setText(activity().getString(R.string.top_right));
                 directionView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -593,7 +597,7 @@ public class WeatherFragment extends Fragment {
                     }
                 });
                 break;
-            case 2 : directionView.setText(getActivity().getString(R.string.right));
+            case 2 : directionView.setText(activity().getString(R.string.right));
                 directionView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -601,7 +605,7 @@ public class WeatherFragment extends Fragment {
                     }
                 });
                 break;
-            case 3 : directionView.setText(getActivity().getString(R.string.bottom_right));
+            case 3 : directionView.setText(activity().getString(R.string.bottom_right));
                 directionView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -609,7 +613,7 @@ public class WeatherFragment extends Fragment {
                     }
                 });
                 break;
-            case 4 : directionView.setText(getActivity().getString(R.string.down));
+            case 4 : directionView.setText(activity().getString(R.string.down));
                 directionView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -617,7 +621,7 @@ public class WeatherFragment extends Fragment {
                     }
                 });
                 break;
-            case 5 : directionView.setText(getActivity().getString(R.string.bottom_left));
+            case 5 : directionView.setText(activity().getString(R.string.bottom_left));
                 directionView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -625,7 +629,7 @@ public class WeatherFragment extends Fragment {
                     }
                 });
                 break;
-            case 6 : directionView.setText(getActivity().getString(R.string.left));
+            case 6 : directionView.setText(activity().getString(R.string.left));
                 directionView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -633,7 +637,7 @@ public class WeatherFragment extends Fragment {
                     }
                 });
                 break;
-            case 7 : directionView.setText(getActivity().getString(R.string.top_left));
+            case 7 : directionView.setText(activity().getString(R.string.top_left));
                 directionView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -654,7 +658,7 @@ public class WeatherFragment extends Fragment {
     }
 
     private void showMenuInputDialog() {
-        new MaterialDialog.Builder(getContext())
+        new MaterialDialog.Builder(context())
                 .title(getString(R.string.change_city))
                 .content(getString(R.string.enter_zip_code))
                 .negativeText(getString(R.string.cancel))
@@ -700,7 +704,7 @@ public class WeatherFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(MyViewHolder holder, int position) {
-            holder.weather_icon.setText(Utils.setWeatherIcon(getContext() , horizontalList.get(position).getWeather().get(0).getId() , position));
+            holder.weather_icon.setText(Utils.setWeatherIcon(context() , horizontalList.get(position).getWeather().get(0).getId() , position));
             long date1 = horizontalList.get(position).getDt();
             Date expiry = new Date(date1 * 1000);
             String date = new SimpleDateFormat("EE, dd" , Locale.US).format(expiry);
@@ -714,19 +718,19 @@ public class WeatherFragment extends Fragment {
             holder.details_view.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     bottomSheetDialogFragment = newInstance(horizontalList.get(pos));
-                    bottomSheetDialogFragment.show(getActivity().getSupportFragmentManager(), bottomSheetDialogFragment.getTag());
+                    bottomSheetDialogFragment.show(activity().getSupportFragmentManager(), bottomSheetDialogFragment.getTag());
                 }
             });
             holder.weather_icon.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v)
                 {
                     bottomSheetDialogFragment = newInstance(horizontalList.get(pos));
-                    bottomSheetDialogFragment.show(getActivity().getSupportFragmentManager(), bottomSheetDialogFragment.getTag());
+                    bottomSheetDialogFragment.show(activity().getSupportFragmentManager(), bottomSheetDialogFragment.getTag());
                 }
             });
-            holder.weather_icon.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
+            holder.weather_icon.setTextColor(ContextCompat.getColor(context() , R.color.textColor));
             holder.weather_icon.setTypeface(weatherFont);
-            holder.details_view.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
+            holder.details_view.setTextColor(ContextCompat.getColor(context() , R.color.textColor));
         }
 
         @Override
