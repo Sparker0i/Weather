@@ -10,7 +10,6 @@ import android.widget.RemoteViews;
 
 import com.a5corp.weather.R;
 import com.a5corp.weather.activity.WeatherActivity;
-import com.a5corp.weather.preferences.LWPrefs;
 import com.a5corp.weather.preferences.Prefs;
 import com.a5corp.weather.utils.Utils;
 import com.a5corp.weather.utils.WidgetProviderAlarm;
@@ -61,20 +60,19 @@ public class LargeWidgetProvider extends AppWidgetProvider {
     }
 
     private void preLoadWeather(Context context, RemoteViews remoteViews) {
-        LWPrefs lwPrefs = new LWPrefs(context);
         Prefs prefs = new Prefs(context);
         String temperatureScale = prefs.getUnits().equals("metric") ? context.getString(R.string.c) : context.getString(R.string.f);
         String speedScale = prefs.getUnits().equals("metric") ? context.getString(R.string.mps) : context.getString(R.string.mph);
 
-        String temperature = String.format(Locale.getDefault(), "%.0f", lwPrefs.getTemperature());
-        String description = format(lwPrefs.getDescription());
-        String wind = context.getString(R.string.wind_, lwPrefs.getSpeed(), speedScale);
-        String humidity = context.getString(R.string.humidity, lwPrefs.getHumidity());
-        String pressure = context.getString(R.string.pressure, lwPrefs.getPressure());
-        int iconId = lwPrefs.getIcon();
-        String weatherIcon = Utils.getStrIcon(iconId , context);
+        String temperature = String.format(Locale.getDefault(), "%.0f", prefs.getTemperature());
+        String description = format(prefs.getDescription());
+        String wind = context.getString(R.string.wind_, prefs.getSpeed(), speedScale);
+        String humidity = context.getString(R.string.humidity, prefs.getHumidity());
+        String pressure = context.getString(R.string.pressure, prefs.getPressure());
+        int iconId = prefs.getIcon();
+        String weatherIcon = Utils.setWeatherIcon(context , iconId , 0);
 
-        remoteViews.setTextViewText(R.id.widget_city, lwPrefs.getCity() + ", " + lwPrefs.getCountry());
+        remoteViews.setTextViewText(R.id.widget_city, prefs.getCity() + ", " + prefs.getCountry());
         remoteViews.setTextViewText(R.id.widget_temperature, temperature + temperatureScale);
         remoteViews.setTextViewText(R.id.widget_description, description);
         remoteViews.setTextViewText(R.id.widget_wind, wind);

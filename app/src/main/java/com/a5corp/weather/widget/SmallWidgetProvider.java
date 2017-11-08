@@ -10,7 +10,6 @@ import android.widget.RemoteViews;
 
 import com.a5corp.weather.R;
 import com.a5corp.weather.activity.WeatherActivity;
-import com.a5corp.weather.preferences.SWPrefs;
 import com.a5corp.weather.preferences.Prefs;
 import com.a5corp.weather.utils.Utils;
 import com.a5corp.weather.utils.WidgetProviderAlarm;
@@ -61,15 +60,14 @@ public class SmallWidgetProvider extends AppWidgetProvider {
     }
 
     private void preLoadWeather(Context context, RemoteViews remoteViews) {
-        SWPrefs SWPrefs = new SWPrefs(context);
         Prefs prefs = new Prefs(context);
         String temperatureScale = prefs.getUnits().equals("metric") ? context.getString(R.string.c) : context.getString(R.string.f);
 
-        String temperature = String.format(Locale.getDefault(), "%.0f", SWPrefs.getTemperature());
-        int iconId = SWPrefs.getIcon();
-        String weatherIcon = Utils.getStrIcon(iconId , context);
+        String temperature = String.format(Locale.getDefault(), "%.0f", prefs.getTemperature());
+        int iconId = prefs.getIcon();
+        String weatherIcon = Utils.setWeatherIcon(context, iconId, 0);
 
-        remoteViews.setTextViewText(R.id.widget_city, SWPrefs.getCity() + ", " + SWPrefs.getCountry());
+        remoteViews.setTextViewText(R.id.widget_city, prefs.getCity() + ", " + prefs.getCountry());
         remoteViews.setTextViewText(R.id.widget_temperature, temperature + temperatureScale);
         remoteViews.setImageViewBitmap(R.id.widget_icon,
                 Utils.createWeatherIcon(context, weatherIcon));

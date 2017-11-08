@@ -11,7 +11,6 @@ import com.a5corp.weather.R;
 import com.a5corp.weather.internet.CheckConnection;
 import com.a5corp.weather.internet.Request;
 import com.a5corp.weather.model.WeatherInfo;
-import com.a5corp.weather.preferences.SWPrefs;
 import com.a5corp.weather.preferences.Prefs;
 import com.a5corp.weather.utils.Utils;
 
@@ -32,7 +31,7 @@ public class SmallWidgetService extends IntentService{
         if (!cc.isNetworkAvailable())
             return;
 
-        SWPrefs SWPrefs = new SWPrefs(this);
+        Prefs SWPrefs = new Prefs(this);
         String city = SWPrefs.getCity();
         String units = SWPrefs.getUnits();
 
@@ -58,7 +57,7 @@ public class SmallWidgetService extends IntentService{
 
             String temperature = String.format(Locale.getDefault(), "%.0f", weather.getMain().getTemp());
             int iconId = weather.getWeather().get(0).getId();
-            String weatherIcon = Utils.getStrIcon(iconId, this);
+            String weatherIcon = Utils.setWeatherIcon( this, iconId, 0);
 
             RemoteViews remoteViews = new RemoteViews(this.getPackageName(),
                     R.layout.widget_small);

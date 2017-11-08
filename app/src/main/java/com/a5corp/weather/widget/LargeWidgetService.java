@@ -11,7 +11,6 @@ import com.a5corp.weather.R;
 import com.a5corp.weather.internet.CheckConnection;
 import com.a5corp.weather.internet.Request;
 import com.a5corp.weather.model.WeatherInfo;
-import com.a5corp.weather.preferences.LWPrefs;
 import com.a5corp.weather.preferences.Prefs;
 import com.a5corp.weather.utils.Utils;
 
@@ -32,7 +31,7 @@ public class LargeWidgetService extends IntentService{
         if (!cc.isNetworkAvailable())
             return;
 
-        LWPrefs lwPrefs = new LWPrefs(this);
+        Prefs lwPrefs = new Prefs(this);
         String city = lwPrefs.getCity();
         String units = lwPrefs.getUnits();
 
@@ -62,7 +61,7 @@ public class LargeWidgetService extends IntentService{
             String humidity = getString(R.string.humidity, weather.getMain().getHumidity());
             String pressure = getString(R.string.pressure, weather.getMain().getPressure());
             int iconId = weather.getWeather().get(0).getId();
-            String weatherIcon = Utils.getStrIcon(iconId, this);
+            String weatherIcon = Utils.setWeatherIcon( this, iconId, 0);
 
             RemoteViews remoteViews = new RemoteViews(this.getPackageName(),
                     R.layout.widget_large);
