@@ -50,9 +50,12 @@
             android:name=".activity.LicenseActivity"
             android:label="License" />
 
-        <service android:name=".widget.LargeWidgetService" />
-        <service android:name=".widget.SmallWidgetService" />
-        <service android:name=".service.NotificationService" />
+        <service android:name=".widget.LargeWidgetService"
+            android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <service android:name=".widget.SmallWidgetService"
+            android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <service android:name=".service.NotificationService"
+            android:permission="android.permission.BIND_JOB_SERVICE"/>
 
         <receiver
             android:name=".receiver.StartupReceiver"

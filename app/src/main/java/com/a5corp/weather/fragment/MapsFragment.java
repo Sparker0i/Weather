@@ -33,6 +33,7 @@ public class MapsFragment extends Fragment {
         webView = (WebView) rootView.findViewById(R.id.webView);
         prefs = new Prefs(getContext());
         loadMap();
+        ((WeatherActivity) getActivity()).hideFab();
         return rootView;
     }
 

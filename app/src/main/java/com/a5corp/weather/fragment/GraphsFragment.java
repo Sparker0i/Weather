@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.a5corp.weather.R;
+import com.a5corp.weather.activity.WeatherActivity;
 import com.a5corp.weather.internet.FetchWeather;
 import com.a5corp.weather.model.Info;
 import com.a5corp.weather.model.WeatherFort;
@@ -76,6 +77,7 @@ public class GraphsFragment extends Fragment {
         rootView = inflater.inflate(R.layout.fragment_graphs, container, false);
         Log.i("Loaded" , "Fragment");
         startTask();
+        ((WeatherActivity) getActivity()).hideFab();
         return rootView;
     }
 

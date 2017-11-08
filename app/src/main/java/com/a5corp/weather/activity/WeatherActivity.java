@@ -1,11 +1,13 @@
 package com.a5corp.weather.activity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.content.ContextCompat;
@@ -16,6 +18,7 @@ import android.view.View;
 import android.widget.CompoundButton;
 
 import com.a5corp.weather.BuildConfig;
+import com.a5corp.weather.GlobalActivity;
 import com.a5corp.weather.R;
 import com.a5corp.weather.fragment.GraphsFragment;
 import com.a5corp.weather.fragment.MapsFragment;
@@ -57,6 +60,7 @@ public class WeatherActivity extends AppCompatActivity {
     Drawer drawer;
     NotificationManagerCompat mManager;
     Handler handler;
+    FloatingActionButton fab;
 
     int mode = 0;
 
@@ -92,6 +96,14 @@ public class WeatherActivity extends AppCompatActivity {
         } , 750);
     }
 
+    public void hideFab() {
+        fab.hide();
+    }
+
+    public void showFab() {
+        fab.show();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.i("Activity" , WeatherActivity.class.getSimpleName());
@@ -101,6 +113,43 @@ public class WeatherActivity extends AppCompatActivity {
         setContentView(R.layout.activity_weather);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         ButterKnife.bind(this);
+        final Context context = this;
+        fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new MaterialDialog.Builder(context)
+                        .title("Change City")
+                        .content("You can change the city by entering City name or the ZIP Code")
+                        .onAny(new MaterialDialog.SingleButtonCallback() {
+                            @Override
+                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                fab.show();
+                            }
+                        })
+                        .dismissListener(new DialogInterface.OnDismissListener() {
+                            @Override
+                            public void onDismiss(DialogInterface dialogInterface) {
+                                fab.show();
+                            }
+                        })
+                        .negativeText("CANCEL")
+                        .onNegative(new MaterialDialog.SingleButtonCallback() {
+                            @Override
+                            public void onClick(@NonNull MaterialDialog dialog , @NonNull DialogAction which) {
+                                dialog.dismiss();
+                                fab.show();
+                            }
+                        })
+                        .input(null, null, new MaterialDialog.InputCallback() {
+                            @Override
+                            public void onInput(@NonNull MaterialDialog dialog, @NonNull CharSequence input) {
+                                changeCity(input.toString());
+                                fab.show();
+                            }
+                        }).show();
+            }
+        });
         setSupportActionBar(toolbar);
         Intent intent = getIntent();
         handler = new Handler();
@@ -123,6 +172,13 @@ public class WeatherActivity extends AppCompatActivity {
             Shortbread.create(this);
             mode = -1;
         }
+    }
+
+    public void changeCity(String city){
+        WeatherFragment wf = (WeatherFragment)getSupportFragmentManager()
+                .findFragmentById(R.id.container);
+        wf.changeCity(city);
+        GlobalActivity.cp.setCity(city);
     }
 
     public void initDrawer() {

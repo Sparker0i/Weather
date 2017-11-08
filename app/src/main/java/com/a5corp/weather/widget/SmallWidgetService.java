@@ -1,9 +1,11 @@
 package com.a5corp.weather.widget;
 
-import android.app.IntentService;
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.v4.app.JobIntentService;
 import android.util.Log;
 import android.widget.RemoteViews;
 
@@ -17,16 +19,16 @@ import com.a5corp.weather.utils.Utils;
 import java.io.IOException;
 import java.util.Locale;
 
-public class SmallWidgetService extends IntentService{
+public class SmallWidgetService extends JobIntentService{
 
     private static final String TAG = "smallWidgetService";
 
     public SmallWidgetService() {
-        super(TAG);
+        super();
     }
 
     @Override
-    protected void onHandleIntent(Intent intent) {
+    protected void onHandleWork(@NonNull Intent intent) {
         CheckConnection cc = new CheckConnection(this);
         if (!cc.isNetworkAvailable())
             return;
@@ -43,6 +45,10 @@ public class SmallWidgetService extends IntentService{
             Log.e(TAG, "Could not retrieve Weather", e);
             stopSelf();
         }
+    }
+
+    public static void enqueueWork(Context context , Intent intent) {
+        enqueueWork(context , SmallWidgetService.class , 0x01 , intent);
     }
 
     private void updateWidget(WeatherInfo weather) {

@@ -1,7 +1,6 @@
 package com.a5corp.weather.service;
 
 import android.app.AlarmManager;
-import android.app.IntentService;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -12,7 +11,9 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.IBinder;
 import android.os.SystemClock;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.JobIntentService;
 import android.util.Log;
 
 import com.a5corp.weather.R;
@@ -24,14 +25,14 @@ import com.a5corp.weather.preferences.Prefs;
 
 import java.io.IOException;
 
-public class NotificationService extends IntentService {
+public class NotificationService extends JobIntentService {
 
     private static final String TAG = "NotificationsService";
     Prefs prefs;
     Notification.Builder builder;
 
     public NotificationService() {
-        super(TAG);
+        super();
     }
 
     @Nullable
@@ -41,7 +42,7 @@ public class NotificationService extends IntentService {
     }
 
     @Override
-    protected void onHandleIntent(Intent intent) {
+    protected void onHandleWork(@NonNull Intent intent) {
         CheckConnection checkNetwork = new CheckConnection(this);
         if (!checkNetwork.isNetworkAvailable()) {
             return;
@@ -58,6 +59,10 @@ public class NotificationService extends IntentService {
         } catch (IOException e) {
             Log.e(TAG, "Error get weather", e);
         }
+    }
+
+    public static void enqueueWork(Context context , Intent intent) {
+        enqueueWork(context , NotificationService.class , 0x01 , intent);
     }
 
     public static Intent newIntent(Context context) {

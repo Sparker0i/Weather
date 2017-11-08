@@ -165,6 +165,7 @@ public class WeatherFragment extends Fragment {
         horizontalRecyclerView.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
         weatherIcon.setTypeface(weatherFont);
         weatherIcon.setTextColor(ContextCompat.getColor(getContext() , R.color.textColor));
+        ((WeatherActivity) getActivity()).showFab();
         return rootView;
     }
 
