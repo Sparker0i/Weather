@@ -2,19 +2,61 @@
 <RelativeLayout
     android:id="@+id/widget_root"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_height="wrap_content"
     android:background="@color/colorPrimary">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="8dp"
+        android:id="@+id/ll"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/widget_city"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:lines="1"
+            android:textColor="@color/textColor"
+            android:textSize="18sp"
+            tools:text="Kayamkulam, IN" />
+
+        <ImageButton
+            android:id="@+id/widget_button_refresh"
+            android:layout_width="48dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/widget_refresh_button"
+            android:src="@drawable/ic_refresh_white_18dp" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
+        android:layout_below="@id/ll"
         android:gravity="center_vertical"
         android:paddingEnd="8dp"
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
         android:paddingStart="8dp">
+
+        <ImageView
+            android:id="@+id/widget_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:layout_weight="0.3"
+            android:contentDescription="@string/widget_weather_icon_description"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -23,40 +65,14 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/widget_city"
+                android:id="@+id/widget_temperature"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:ellipsize="end"
+                android:textAlignment="viewStart"
                 android:lines="1"
                 android:textColor="@color/textColor"
-                android:textSize="18sp" />
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/widget_temperature"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:textAlignment="viewStart"
-                    android:lines="1"
-                    android:textColor="@color/textColor"
-                    android:textSize="30sp"/>
-
-                <ImageButton
-                    android:id="@+id/widget_button_refresh"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@android:color/transparent"
-                    android:contentDescription="@string/widget_refresh_button"
-                    android:paddingEnd="12dp"
-                    android:paddingStart="12dp"
-                    android:src="@drawable/ic_refresh_white_18dp" />
-            </LinearLayout>
+                android:textSize="30sp"/>
 
             <TextView
                 android:id="@+id/widget_description"
@@ -95,14 +111,6 @@
                 android:lines="1"
                 android:textColor="@color/textColor" />
         </LinearLayout>
-
-        <ImageView
-            android:id="@+id/widget_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_vertical|center_horizontal"
-            android:layout_weight="0.3"
-            android:contentDescription="@string/widget_weather_icon_description"/>
     </LinearLayout>
 
 </RelativeLayout>
