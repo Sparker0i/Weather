@@ -118,6 +118,7 @@ public class WeatherActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                fab.hide();
                 new MaterialDialog.Builder(context)
                         .title("Change City")
                         .content("You can change the city by entering City name or the ZIP Code")
@@ -162,7 +163,7 @@ public class WeatherActivity extends AppCompatActivity {
         mf = new MapsFragment();
 
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.fragment, wf)
+                .replace(R.id.fragment, wf)
                 .commit();
         initDrawer();
     }
@@ -175,10 +176,10 @@ public class WeatherActivity extends AppCompatActivity {
     }
 
     public void changeCity(String city){
-        WeatherFragment wf = (WeatherFragment)getSupportFragmentManager()
-                .findFragmentById(R.id.container);
+        WeatherFragment wf = (WeatherFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.fragment);
         wf.changeCity(city);
-        GlobalActivity.cp.setCity(city);
+        new Prefs(this).setCity(city);
     }
 
     public void initDrawer() {

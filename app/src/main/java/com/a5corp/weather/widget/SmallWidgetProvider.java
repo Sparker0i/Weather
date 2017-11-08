@@ -48,7 +48,7 @@ public class SmallWidgetProvider extends AppWidgetProvider {
 
             appWidgetManager.updateAppWidget(appWidgetId, remoteViews);
         }
-        context.startService(new Intent(context, SmallWidgetService.class));
+        SmallWidgetService.enqueueWork(context , new Intent(context, SmallWidgetService.class));
     }
 
     @Override

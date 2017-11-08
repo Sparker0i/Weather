@@ -48,7 +48,7 @@ public class LargeWidgetProvider extends AppWidgetProvider {
 
             appWidgetManager.updateAppWidget(appWidgetId, remoteViews);
         }
-        context.startService(new Intent(context, LargeWidgetService.class));
+        LargeWidgetService.enqueueWork(context , new Intent(context, LargeWidgetService.class));
     }
 
     @Override
