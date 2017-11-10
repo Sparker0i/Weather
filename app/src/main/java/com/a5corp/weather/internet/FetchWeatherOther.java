@@ -1,8 +1,10 @@
 package com.a5corp.weather.internet;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.a5corp.weather.model.WeatherInfo;
@@ -23,9 +25,10 @@ public class FetchWeatherOther extends AsyncTask<String , Void , WeatherInfo> {
 
     private Uri builtDay;
     private Prefs preferences;
+    SharedPreferences sharedPreferences;
 
     public FetchWeatherOther(Context context) {
-        preferences = new Prefs(context);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
     }
 
     @Override
@@ -52,7 +55,7 @@ public class FetchWeatherOther extends AsyncTask<String , Void , WeatherInfo> {
     }
 
     private void city(String... params) {
-        String UNITS_VALUE = preferences.getUnits();
+        String UNITS_VALUE = sharedPreferences.getString(Constants.PREF_TEMPERATURE_UNITS , "metric");
         System.out.println(UNITS_VALUE);
         builtDay = Uri.parse(Constants.OPEN_WEATHER_MAP_DAILY_API).buildUpon()
                 .appendQueryParameter(Constants.QUERY_PARAM , params[0])

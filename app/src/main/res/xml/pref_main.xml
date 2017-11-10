@@ -1,0 +1,40 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/pref_temp_header">
+
+        <ListPreference
+            android:defaultValue="metric"
+            android:dialogTitle="@string/pref_units_summary"
+            android:entries="@array/pref_unit_keys"
+            android:entryValues="@array/pref_unit_values"
+            android:key="@string/pref_units"
+            android:summary="@string/pref_units_summary"
+            android:title="@string/pref_units_title" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/pref_notification_header">
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="@string/pref_enable_notifs"
+            android:title="@string/pref_enable_notifs_title" />
+
+        <ListPreference
+            android:defaultValue="60"
+            android:dependency="@string/pref_enable_notifs"
+            android:dialogTitle="@string/pref_refresh_summary"
+            android:entries="@array/notification_refresh_intervals_entries"
+            android:entryValues="@array/notification_refresh_interval_values"
+            android:key="@string/pref_refresh_interval"
+            android:title="@string/pref_refresh_title"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/pref_display_header">
+        <ListPreference
+            android:key="language_pref_key"
+            android:dialogTitle="@string/pref_lang_title"
+            android:title="@string/pref_lang_title"
+            android:entries="@array/language_entries"
+            android:entryValues="@array/language_values"/>
+    </PreferenceCategory>
+</PreferenceScreen>

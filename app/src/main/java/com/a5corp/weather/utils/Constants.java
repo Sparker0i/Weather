@@ -50,4 +50,7 @@ public class Constants {
     public static final String LARGE_WIDGET_HUMIDITY = "humidity";
     public static final String LARGE_WIDGET_WIND_SPEED = "wind_speed";
     public static final String LARGE_WIDGET_ICON = "icon";
+
+    //SETTINGS CONSTANTS
+    public static final String PREF_TEMPERATURE_UNITS = "pref_units";
 }

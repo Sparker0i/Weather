@@ -197,6 +197,31 @@
     <string name="no_internet_mobile_data">Mobile Data</string>
     <string name="no_internet_wifi">Wi-Fi</string>
 
+    <!-- Update Periods -->
+    <string name="update_period_15min">15 minutes</string>
+    <string name="update_period_30min">30 minutes</string>
+    <string name="update_period_1hour">1 hour</string>
+    <string name="update_period_3hours">3 hours</string>
+    <string name="update_period_6hours">6 hours</string>
+    <string name="update_period_12hours">12 hours</string>
+
+    <!-- Settings Headers -->
+    <string name="pref_temp_header">Temperature</string>
+    <string name="pref_notification_header">Notifications</string>
+    <string name="pref_display_header">Display</string>
+
+    <!-- Settings Titles -->
+    <string name="pref_units_title">Temperature Unit</string>
+    <string name="pref_enable_notifs_title">Enable Notifications</string>
+    <string name="pref_refresh_title">Refresh Interval</string>
+    <string name="pref_lang_title">Language</string>
+
+    <!-- Settings Summary -->
+    <string name="pref_units_summary">Choose a Preferred Temperature Unit you want to see the temperature in</string>
+    <string name="pref_refresh_summary">Refresh Interval</string>
+
+    <string name="pref_language_default">Use System Default Language</string>
+
     <!-- Widgets Strings -->
     <string name="widget_weather_icon_description">Current weather icon</string>
     <string name="widget_refresh_button">Widget refresh button</string>

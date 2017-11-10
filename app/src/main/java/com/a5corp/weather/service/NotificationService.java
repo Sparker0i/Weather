@@ -11,6 +11,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.IBinder;
 import android.os.SystemClock;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.JobIntentService;
@@ -22,6 +23,7 @@ import com.a5corp.weather.internet.CheckConnection;
 import com.a5corp.weather.internet.Request;
 import com.a5corp.weather.model.WeatherInfo;
 import com.a5corp.weather.preferences.Prefs;
+import com.a5corp.weather.utils.Constants;
 
 import java.io.IOException;
 
@@ -67,7 +69,7 @@ public class NotificationService extends JobIntentService {
 
         prefs = new Prefs(this);
         String city = prefs.getCity();
-        String units = prefs.getUnits();
+        String units = PreferenceManager.getDefaultSharedPreferences(this).getString(Constants.PREF_TEMPERATURE_UNITS , "metric");
 
         try {
             WeatherInfo weather;
@@ -112,8 +114,8 @@ public class NotificationService extends JobIntentService {
         Intent intent = new Intent(this, WeatherActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
 
-        String temperatureScale = prefs.getUnits().equals("metric") ? getString(R.string.c) : getString(R.string.f);
-        String speedScale = prefs.getUnits().equals("metric") ? getString(R.string.mps) : getString(R.string.mph);
+        String temperatureScale = PreferenceManager.getDefaultSharedPreferences(this).getString(Constants.PREF_TEMPERATURE_UNITS , "metric").equals("metric") ? getString(R.string.c) : getString(R.string.f);
+        String speedScale = PreferenceManager.getDefaultSharedPreferences(this).getString(Constants.PREF_TEMPERATURE_UNITS , "metric").equals("metric") ? getString(R.string.mps) : getString(R.string.mph);
 
         String temperature = getString(R.string.temperature , weather.getMain().getTemp() , temperatureScale);
         String city = getString(R.string.city , weather.getName() + ", " + weather.getSys().getCountry());

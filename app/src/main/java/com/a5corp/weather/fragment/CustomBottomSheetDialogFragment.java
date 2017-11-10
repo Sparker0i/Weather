@@ -3,6 +3,7 @@ package com.a5corp.weather.fragment;
 import android.app.Dialog;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
@@ -125,7 +126,7 @@ public class CustomBottomSheetDialogFragment extends BottomSheetDialogFragment {
     public void setOthers() {
         try {
             String wind = String.format(Locale.ENGLISH , getString(R.string.speed) , json.getSpeed());
-            if (preferences.getUnits().equals("imperial"))
+            if (PreferenceManager.getDefaultSharedPreferences(getContext()).getString(Constants.PREF_TEMPERATURE_UNITS , "metric").equals("imperial"))
                 wind = wind + " " + getString(R.string.mph);
             else
                 wind = wind + " " + getString(R.string.mps);

@@ -5,12 +5,14 @@ import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.RemoteViews;
 
 import com.a5corp.weather.R;
 import com.a5corp.weather.activity.WeatherActivity;
 import com.a5corp.weather.preferences.Prefs;
+import com.a5corp.weather.utils.Constants;
 import com.a5corp.weather.utils.Utils;
 import com.a5corp.weather.utils.WidgetProviderAlarm;
 
@@ -61,7 +63,7 @@ public class SmallWidgetProvider extends AppWidgetProvider {
 
     private void preLoadWeather(Context context, RemoteViews remoteViews) {
         Prefs prefs = new Prefs(context);
-        String temperatureScale = prefs.getUnits().equals("metric") ? context.getString(R.string.c) : context.getString(R.string.f);
+        String temperatureScale = PreferenceManager.getDefaultSharedPreferences(context).getString(Constants.PREF_TEMPERATURE_UNITS , "metric").equals("metric") ? context.getString(R.string.c) : context.getString(R.string.f);
 
         String temperature = String.format(Locale.getDefault(), "%.0f", prefs.getTemperature());
         int iconId = prefs.getIcon();

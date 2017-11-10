@@ -5,6 +5,7 @@ import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.JobIntentService;
 import android.util.Log;
@@ -15,6 +16,7 @@ import com.a5corp.weather.internet.CheckConnection;
 import com.a5corp.weather.internet.Request;
 import com.a5corp.weather.model.WeatherInfo;
 import com.a5corp.weather.preferences.Prefs;
+import com.a5corp.weather.utils.Constants;
 import com.a5corp.weather.utils.Utils;
 
 import java.io.IOException;
@@ -36,7 +38,7 @@ public class LargeWidgetService extends JobIntentService {
 
         Prefs lwPrefs = new Prefs(this);
         String city = lwPrefs.getCity();
-        String units = lwPrefs.getUnits();
+        String units = PreferenceManager.getDefaultSharedPreferences(this).getString(Constants.PREF_TEMPERATURE_UNITS , "metric");
 
         try {
             WeatherInfo weatherRaw = new Request(this).getItems(city, units);
@@ -56,8 +58,8 @@ public class LargeWidgetService extends JobIntentService {
 
         int[] widgetIds = widgetManager.getAppWidgetIds(widgetComponent);
         for (int appWidgetId : widgetIds) {
-            String temperatureScale = prefs.getUnits().equals("metric") ? getString(R.string.c) : getString(R.string.f);
-            String speedScale = prefs.getUnits().equals("metric") ? getString(R.string.mps) : getString(R.string.mph);
+            String temperatureScale = PreferenceManager.getDefaultSharedPreferences(this).getString(Constants.PREF_TEMPERATURE_UNITS , "metric").equals("metric") ? getString(R.string.c) : getString(R.string.f);
+            String speedScale = PreferenceManager.getDefaultSharedPreferences(this).getString(Constants.PREF_TEMPERATURE_UNITS , "metric").equals("metric") ? getString(R.string.mps) : getString(R.string.mph);
 
             String temperature = String.format(Locale.getDefault(), "%.0f", weather.getMain().getTemp());
             String wind = getString(R.string.wind_, weather.getWind().getSpeed(), speedScale);

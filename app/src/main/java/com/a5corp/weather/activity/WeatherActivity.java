@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -20,6 +21,7 @@ import android.widget.CompoundButton;
 import com.a5corp.weather.BuildConfig;
 import com.a5corp.weather.GlobalActivity;
 import com.a5corp.weather.R;
+import com.a5corp.weather.activity.settings.SettingsActivity;
 import com.a5corp.weather.fragment.GraphsFragment;
 import com.a5corp.weather.fragment.MapsFragment;
 import com.a5corp.weather.fragment.WeatherFragment;
@@ -207,7 +209,7 @@ public class WeatherActivity extends AppCompatActivity {
                 .withIcon(new IconicsDrawable(this)
                         .icon(GoogleMaterial.Icon.gmd_map));
         SecondarySwitchDrawerItem item4 = new SecondarySwitchDrawerItem().withIdentifier(4).withName(getString(R.string.drawer_item_fahrenheit))
-                .withChecked(preferences.getUnits().equals(Constants.IMPERIAL))
+                .withChecked(PreferenceManager.getDefaultSharedPreferences(this).getString(Constants.PREF_TEMPERATURE_UNITS , "metric").equals(Constants.IMPERIAL))
                 .withIcon(new IconicsDrawable(this)
                         .icon(WeatherIcons.Icon.wic_fahrenheit))
                 .withSelectable(false);
@@ -227,6 +229,10 @@ public class WeatherActivity extends AppCompatActivity {
         SecondaryDrawerItem item8 = new SecondaryDrawerItem().withIdentifier(8).withName(R.string.drawer_item_about)
                 .withIcon(new IconicsDrawable(this)
                         .icon(GoogleMaterial.Icon.gmd_info))
+                .withSelectable(false);
+        SecondaryDrawerItem item9 = new SecondaryDrawerItem().withIdentifier(9).withName(R.string.drawer_item_settings)
+                .withIcon(new IconicsDrawable(this)
+                        .icon(GoogleMaterial.Icon.gmd_settings))
                 .withSelectable(false);
         item4.withOnCheckedChangeListener(new OnCheckedChangeListener() {
             @Override
@@ -279,6 +285,7 @@ public class WeatherActivity extends AppCompatActivity {
                         item7,
                         item8
                 )
+                .addStickyDrawerItems(item9)
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
@@ -320,6 +327,9 @@ public class WeatherActivity extends AppCompatActivity {
                                         break;
                                     case 8:
                                         startActivity(new Intent(WeatherActivity.this, AboutActivity.class));
+                                        break;
+                                    case 9:
+                                        startActivity(new Intent(WeatherActivity.this, SettingsActivity.class));
                                         break;
                                 }
                             }

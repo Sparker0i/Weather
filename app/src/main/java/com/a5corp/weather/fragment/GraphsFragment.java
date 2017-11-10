@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
@@ -20,6 +21,7 @@ import com.a5corp.weather.internet.FetchWeather;
 import com.a5corp.weather.model.Info;
 import com.a5corp.weather.model.WeatherFort;
 import com.a5corp.weather.preferences.Prefs;
+import com.a5corp.weather.utils.Constants;
 import com.a5corp.weather.utils.CustomFormatter;
 import com.a5corp.weather.utils.XFormatter;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -196,7 +198,7 @@ public class GraphsFragment extends Fragment {
                     temperatureChart.getData().getDataSetCount() - 1));
             temperatureChart.getLegend().setTextColor(Color.parseColor("#FFFFFF"));
         }
-        String temp = String.format(Locale.ENGLISH , getString(R.string.g_temp) , pf.getUnits().equals("metric") ? getString(R.string.c) : getString(R.string.f));
+        String temp = String.format(Locale.ENGLISH , getString(R.string.g_temp) , PreferenceManager.getDefaultSharedPreferences(getContext()).getString(Constants.PREF_TEMPERATURE_UNITS , "metric").equals("metric") ? getString(R.string.c) : getString(R.string.f));
         set = new LineDataSet(tempEntries, temp);
         set.setMode(LineDataSet.Mode.CUBIC_BEZIER);
         set.setCubicIntensity(0.2f);
@@ -401,7 +403,7 @@ public class GraphsFragment extends Fragment {
                     windChart.getData().getDataSetCount() - 1));
             windChart.getLegend().setTextColor(Color.parseColor("#FFFFFF"));
         }
-        String wind = String.format(Locale.ENGLISH , getString(R.string.g_wind) , pf.getUnits().equals("metric") ? getString(R.string.mps) : getString(R.string.mph));
+        String wind = String.format(Locale.ENGLISH , getString(R.string.g_wind) , PreferenceManager.getDefaultSharedPreferences(getContext()).getString(Constants.PREF_TEMPERATURE_UNITS , "metric").equals("metric") ? getString(R.string.mps) : getString(R.string.mph));
         set = new LineDataSet(windEntries, wind);
         set.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
         set.setCubicIntensity(0.2f);
