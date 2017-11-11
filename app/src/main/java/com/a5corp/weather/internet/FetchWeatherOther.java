@@ -55,7 +55,7 @@ public class FetchWeatherOther extends AsyncTask<String , Void , WeatherInfo> {
     }
 
     private void city(String... params) {
-        String UNITS_VALUE = sharedPreferences.getString(Constants.PREF_TEMPERATURE_UNITS , "metric");
+        String UNITS_VALUE = sharedPreferences.getString(Constants.PREF_TEMPERATURE_UNITS , Constants.METRIC);
         System.out.println(UNITS_VALUE);
         builtDay = Uri.parse(Constants.OPEN_WEATHER_MAP_DAILY_API).buildUpon()
                 .appendQueryParameter(Constants.QUERY_PARAM , params[0])

@@ -66,7 +66,7 @@ public class Prefs {
 
     @Deprecated
     public String getUnits() {
-        return prefs.getString(Constants.UNITS , "metric");
+        return prefs.getString(Constants.UNITS , Constants.METRIC);
     }
 
     public void setNotifs(Boolean bool) {

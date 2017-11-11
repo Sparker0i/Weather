@@ -37,7 +37,7 @@ public class SmallWidgetService extends JobIntentService{
 
         Prefs SWPrefs = new Prefs(this);
         String city = SWPrefs.getCity();
-        String units = PreferenceManager.getDefaultSharedPreferences(this).getString(Constants.PREF_TEMPERATURE_UNITS , "metric");
+        String units = PreferenceManager.getDefaultSharedPreferences(this).getString(Constants.PREF_TEMPERATURE_UNITS , Constants.METRIC);
 
         try {
             WeatherInfo weatherRaw = new Request(this).getItems(city, units);
@@ -61,7 +61,7 @@ public class SmallWidgetService extends JobIntentService{
 
         int[] widgetIds = widgetManager.getAppWidgetIds(widgetComponent);
         for (int appWidgetId : widgetIds) {
-            String temperatureScale = PreferenceManager.getDefaultSharedPreferences(this).getString(Constants.PREF_TEMPERATURE_UNITS , "metric").equals("metric") ? getString(R.string.c) : getString(R.string.f);
+            String temperatureScale = PreferenceManager.getDefaultSharedPreferences(this).getString(Constants.PREF_TEMPERATURE_UNITS , Constants.METRIC).equals(Constants.METRIC) ? getString(R.string.c) : getString(R.string.f);
 
             String temperature = String.format(Locale.getDefault(), "%.0f", weather.getMain().getTemp());
             int iconId = weather.getWeather().get(0).getId();

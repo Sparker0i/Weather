@@ -44,35 +44,35 @@ public class CustomBottomSheetDialogFragment extends BottomSheetDialogFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.dialog_modal , container, false);
-        condition = (TextView) rootView.findViewById(R.id.description);
+        condition = rootView.findViewById(R.id.description);
         preferences = new Prefs(getContext());
-        nightValue = (TextView) rootView.findViewById(R.id.night_temperature);
-        mornValue = (TextView) rootView.findViewById(R.id.morning_temperature);
-        dayValue = (TextView) rootView.findViewById(R.id.day_temperature);
-        eveValue = (TextView) rootView.findViewById(R.id.evening_temperature);
-        windIcon = (TextView) rootView.findViewById(R.id.wind_icon);
+        nightValue = rootView.findViewById(R.id.night_temperature);
+        mornValue = rootView.findViewById(R.id.morning_temperature);
+        dayValue = rootView.findViewById(R.id.day_temperature);
+        eveValue = rootView.findViewById(R.id.evening_temperature);
+        windIcon = rootView.findViewById(R.id.wind_icon);
         windIcon.setTypeface(weatherFont);
         windIcon.setText(getString(R.string.speed_icon));
-        rainIcon = (TextView) rootView.findViewById(R.id.rain_icon);
+        rainIcon = rootView.findViewById(R.id.rain_icon);
         rainIcon.setTypeface(weatherFont);
         rainIcon.setText(getString(R.string.rain));
-        snowIcon = (TextView) rootView.findViewById(R.id.snow_icon);
+        snowIcon = rootView.findViewById(R.id.snow_icon);
         snowIcon.setTypeface(weatherFont);
         snowIcon.setText(getString(R.string.snow));
-        humidityIcon = (TextView) rootView.findViewById(R.id.humidity_icon);
+        humidityIcon = rootView.findViewById(R.id.humidity_icon);
         humidityIcon.setTypeface(weatherFont);
         humidityIcon.setText(getString(R.string.humidity_icon));
-        pressureIcon = (TextView) rootView.findViewById(R.id.pressure_icon);
+        pressureIcon = rootView.findViewById(R.id.pressure_icon);
         pressureIcon.setTypeface(weatherFont);
         pressureIcon.setText(getString(R.string.pressure_icon));
-        windText = (TextView) rootView.findViewById(R.id.wind);
-        rainText = (TextView) rootView.findViewById(R.id.rain);
-        snowText = (TextView) rootView.findViewById(R.id.snow);
-        humidityText = (TextView) rootView.findViewById(R.id.humidity);
-        pressureText = (TextView) rootView.findViewById(R.id.pressure);
+        windText = rootView.findViewById(R.id.wind);
+        rainText = rootView.findViewById(R.id.rain);
+        snowText = rootView.findViewById(R.id.snow);
+        humidityText = rootView.findViewById(R.id.humidity);
+        pressureText = rootView.findViewById(R.id.pressure);
         updateElements();
         return rootView;
     }
@@ -126,7 +126,7 @@ public class CustomBottomSheetDialogFragment extends BottomSheetDialogFragment {
     public void setOthers() {
         try {
             String wind = String.format(Locale.ENGLISH , getString(R.string.speed) , json.getSpeed());
-            if (PreferenceManager.getDefaultSharedPreferences(getContext()).getString(Constants.PREF_TEMPERATURE_UNITS , "metric").equals("imperial"))
+            if (PreferenceManager.getDefaultSharedPreferences(getContext()).getString(Constants.PREF_TEMPERATURE_UNITS , Constants.METRIC).equals(Constants.IMPERIAL))
                 wind = wind + " " + getString(R.string.mph);
             else
                 wind = wind + " " + getString(R.string.mps);

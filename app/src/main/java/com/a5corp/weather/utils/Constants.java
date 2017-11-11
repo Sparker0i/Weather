@@ -51,4 +51,5 @@ public class Constants {
     //SETTINGS CONSTANTS
     public static final String PREF_TEMPERATURE_UNITS = "units";
     public static final String PREF_ENABLE_NOTIFS = "notifs";
+    public static final String PREF_DISPLAY_LANGUAGE = "pref_language";
 }

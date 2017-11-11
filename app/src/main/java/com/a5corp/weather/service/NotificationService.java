@@ -69,7 +69,7 @@ public class NotificationService extends JobIntentService {
 
         prefs = new Prefs(this);
         String city = prefs.getCity();
-        String units = PreferenceManager.getDefaultSharedPreferences(this).getString(Constants.PREF_TEMPERATURE_UNITS , "metric");
+        String units = PreferenceManager.getDefaultSharedPreferences(this).getString(Constants.PREF_TEMPERATURE_UNITS , Constants.METRIC);
 
         try {
             WeatherInfo weather;
@@ -90,32 +90,12 @@ public class NotificationService extends JobIntentService {
         return new Intent(context, NotificationService.class);
     }
 
-    public static void setNotificationServiceAlarm(Context context,
-                                                   boolean isNotificationEnable) {
-        Log.i("In" , "Notification Service Alarm");
-        Intent intent = NotificationService.newIntent(context);
-        PendingIntent pendingIntent = PendingIntent.getService(context, 0, intent,
-                PendingIntent.FLAG_UPDATE_CURRENT);
-        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        long intervalMillis = AlarmManager.INTERVAL_HOUR;
-        if (alarmManager != null)
-            if (isNotificationEnable) {
-                alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
-                        SystemClock.elapsedRealtime(),
-                        intervalMillis,
-                        pendingIntent);
-            } else {
-                alarmManager.cancel(pendingIntent);
-                pendingIntent.cancel();
-            }
-    }
-
     private void weatherNotification(WeatherInfo weather) {
         Intent intent = new Intent(this, WeatherActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
 
-        String temperatureScale = PreferenceManager.getDefaultSharedPreferences(this).getString(Constants.PREF_TEMPERATURE_UNITS , "metric").equals("metric") ? getString(R.string.c) : getString(R.string.f);
-        String speedScale = PreferenceManager.getDefaultSharedPreferences(this).getString(Constants.PREF_TEMPERATURE_UNITS , "metric").equals("metric") ? getString(R.string.mps) : getString(R.string.mph);
+        String temperatureScale = PreferenceManager.getDefaultSharedPreferences(this).getString(Constants.PREF_TEMPERATURE_UNITS , Constants.METRIC).equals(Constants.METRIC) ? getString(R.string.c) : getString(R.string.f);
+        String speedScale = PreferenceManager.getDefaultSharedPreferences(this).getString(Constants.PREF_TEMPERATURE_UNITS , Constants.METRIC).equals(Constants.METRIC) ? getString(R.string.mps) : getString(R.string.mph);
 
         String temperature = getString(R.string.temperature , weather.getMain().getTemp() , temperatureScale);
         String city = getString(R.string.city , weather.getName() + ", " + weather.getSys().getCountry());

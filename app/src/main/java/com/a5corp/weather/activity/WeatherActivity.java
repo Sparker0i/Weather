@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -16,7 +15,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.widget.CompoundButton;
 
 import com.a5corp.weather.BuildConfig;
 import com.a5corp.weather.R;
@@ -36,11 +34,9 @@ import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
-import com.mikepenz.materialdrawer.interfaces.OnCheckedChangeListener;
 import com.mikepenz.materialdrawer.model.DividerDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
-import com.mikepenz.materialdrawer.model.SecondarySwitchDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import com.mikepenz.weather_icons_typeface_library.WeatherIcons;
@@ -167,6 +163,7 @@ public class WeatherActivity extends AppCompatActivity {
                 .replace(R.id.fragment, wf)
                 .commit();
         initDrawer();
+        NotificationService.enqueueWork(this , new Intent(this , WeatherActivity.class));
     }
 
     public void createShortcuts() {
@@ -184,7 +181,6 @@ public class WeatherActivity extends AppCompatActivity {
     }
 
     public void initDrawer() {
-        final Context context = this;
         final IProfile profile = new ProfileDrawerItem().withName(getString(R.string.app_name))
                 .withEmail(getString(R.string.drawer_version_header) + " : " + BuildConfig.VERSION_NAME)
                 .withIcon(R.mipmap.ic_launcher_x);
@@ -207,11 +203,6 @@ public class WeatherActivity extends AppCompatActivity {
         SecondaryDrawerItem item3 = new SecondaryDrawerItem().withIdentifier(3).withName(R.string.drawer_item_map)
                 .withIcon(new IconicsDrawable(this)
                         .icon(GoogleMaterial.Icon.gmd_map));
-        SecondarySwitchDrawerItem item5 = new SecondarySwitchDrawerItem().withIdentifier(5).withName(getString(R.string.drawer_item_notifications))
-                .withChecked(preferences.getNotifs())
-                .withIcon(new IconicsDrawable(this)
-                        .icon(GoogleMaterial.Icon.gmd_notifications))
-                .withSelectable(false);
         SecondaryDrawerItem item6 = new SecondaryDrawerItem().withIdentifier(6).withName(getString(R.string.drawer_item_custom_key))
                 .withIcon(new IconicsDrawable(this)
                         .icon(GoogleMaterial.Icon.gmd_create))
@@ -228,19 +219,6 @@ public class WeatherActivity extends AppCompatActivity {
                 .withIcon(new IconicsDrawable(this)
                         .icon(GoogleMaterial.Icon.gmd_settings))
                 .withSelectable(false);
-        item5.withOnCheckedChangeListener(new OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(IDrawerItem drawerItem, CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    preferences.setNotifs(true);
-                }
-                else {
-                    preferences.setNotifs(false);
-                    mManager.cancelAll();
-                }
-                NotificationService.enqueueWork(context , new Intent(context , WeatherActivity.class));
-            }
-        });
         drawer = new DrawerBuilder()
                 .withActivity(this)
                 .withToolbar(toolbar)
@@ -252,8 +230,6 @@ public class WeatherActivity extends AppCompatActivity {
                         item1,
                         item2,
                         item3,
-                        new DividerDrawerItem(),
-                        item5,
                         new DividerDrawerItem(),
                         item6,
                         item7,

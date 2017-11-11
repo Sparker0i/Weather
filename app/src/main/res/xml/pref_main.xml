@@ -31,7 +31,7 @@
 
     <PreferenceCategory android:title="@string/pref_display_header">
         <ListPreference
-            android:key="language_pref_key"
+            android:key="@string/pref_language"
             android:dialogTitle="@string/pref_lang_title"
             android:title="@string/pref_lang_title"
             android:entries="@array/language_entries"

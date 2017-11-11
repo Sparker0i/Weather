@@ -63,8 +63,8 @@ public class LargeWidgetProvider extends AppWidgetProvider {
 
     private void preLoadWeather(Context context, RemoteViews remoteViews) {
         Prefs prefs = new Prefs(context);
-        String temperatureScale = PreferenceManager.getDefaultSharedPreferences(context).getString(Constants.PREF_TEMPERATURE_UNITS , "metric").equals("metric") ? context.getString(R.string.c) : context.getString(R.string.f);
-        String speedScale = PreferenceManager.getDefaultSharedPreferences(context).getString(Constants.PREF_TEMPERATURE_UNITS , "metric").equals("metric") ? context.getString(R.string.mps) : context.getString(R.string.mph);
+        String temperatureScale = PreferenceManager.getDefaultSharedPreferences(context).getString(Constants.PREF_TEMPERATURE_UNITS , Constants.METRIC).equals(Constants.METRIC) ? context.getString(R.string.c) : context.getString(R.string.f);
+        String speedScale = PreferenceManager.getDefaultSharedPreferences(context).getString(Constants.PREF_TEMPERATURE_UNITS , Constants.METRIC).equals(Constants.METRIC) ? context.getString(R.string.mps) : context.getString(R.string.mph);
 
         String temperature = String.format(Locale.getDefault(), "%.0f", prefs.getTemperature());
         String description = format(prefs.getDescription());

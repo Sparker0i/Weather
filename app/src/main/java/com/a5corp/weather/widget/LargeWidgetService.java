@@ -38,7 +38,7 @@ public class LargeWidgetService extends JobIntentService {
 
         Prefs lwPrefs = new Prefs(this);
         String city = lwPrefs.getCity();
-        String units = PreferenceManager.getDefaultSharedPreferences(this).getString(Constants.PREF_TEMPERATURE_UNITS , "metric");
+        String units = PreferenceManager.getDefaultSharedPreferences(this).getString(Constants.PREF_TEMPERATURE_UNITS , Constants.METRIC);
 
         try {
             WeatherInfo weatherRaw = new Request(this).getItems(city, units);
@@ -58,8 +58,8 @@ public class LargeWidgetService extends JobIntentService {
 
         int[] widgetIds = widgetManager.getAppWidgetIds(widgetComponent);
         for (int appWidgetId : widgetIds) {
-            String temperatureScale = PreferenceManager.getDefaultSharedPreferences(this).getString(Constants.PREF_TEMPERATURE_UNITS , "metric").equals("metric") ? getString(R.string.c) : getString(R.string.f);
-            String speedScale = PreferenceManager.getDefaultSharedPreferences(this).getString(Constants.PREF_TEMPERATURE_UNITS , "metric").equals("metric") ? getString(R.string.mps) : getString(R.string.mph);
+            String temperatureScale = PreferenceManager.getDefaultSharedPreferences(this).getString(Constants.PREF_TEMPERATURE_UNITS , Constants.METRIC).equals(Constants.METRIC) ? getString(R.string.c) : getString(R.string.f);
+            String speedScale = PreferenceManager.getDefaultSharedPreferences(this).getString(Constants.PREF_TEMPERATURE_UNITS , Constants.METRIC).equals(Constants.METRIC) ? getString(R.string.mps) : getString(R.string.mph);
 
             String temperature = String.format(Locale.getDefault(), "%.0f", weather.getMain().getTemp());
             String wind = getString(R.string.wind_, weather.getWind().getSpeed(), speedScale);
