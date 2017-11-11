@@ -19,7 +19,6 @@ import android.view.View;
 import android.widget.CompoundButton;
 
 import com.a5corp.weather.BuildConfig;
-import com.a5corp.weather.GlobalActivity;
 import com.a5corp.weather.R;
 import com.a5corp.weather.activity.settings.SettingsActivity;
 import com.a5corp.weather.fragment.GraphsFragment;
@@ -208,11 +207,6 @@ public class WeatherActivity extends AppCompatActivity {
         SecondaryDrawerItem item3 = new SecondaryDrawerItem().withIdentifier(3).withName(R.string.drawer_item_map)
                 .withIcon(new IconicsDrawable(this)
                         .icon(GoogleMaterial.Icon.gmd_map));
-        SecondarySwitchDrawerItem item4 = new SecondarySwitchDrawerItem().withIdentifier(4).withName(getString(R.string.drawer_item_fahrenheit))
-                .withChecked(PreferenceManager.getDefaultSharedPreferences(this).getString(Constants.PREF_TEMPERATURE_UNITS , "metric").equals(Constants.IMPERIAL))
-                .withIcon(new IconicsDrawable(this)
-                        .icon(WeatherIcons.Icon.wic_fahrenheit))
-                .withSelectable(false);
         SecondarySwitchDrawerItem item5 = new SecondarySwitchDrawerItem().withIdentifier(5).withName(getString(R.string.drawer_item_notifications))
                 .withChecked(preferences.getNotifs())
                 .withIcon(new IconicsDrawable(this)
@@ -234,25 +228,6 @@ public class WeatherActivity extends AppCompatActivity {
                 .withIcon(new IconicsDrawable(this)
                         .icon(GoogleMaterial.Icon.gmd_settings))
                 .withSelectable(false);
-        item4.withOnCheckedChangeListener(new OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(IDrawerItem drawerItem, CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    preferences.setUnits(Constants.IMPERIAL);
-                }
-                else {
-                    preferences.setUnits(Constants.METRIC);
-                }
-                Fragment f = getSupportFragmentManager().findFragmentById(R.id.fragment);
-                if (f instanceof WeatherFragment) {
-                    wf = new WeatherFragment();
-                    getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.fragment, wf)
-                            .commit();
-                    drawer.closeDrawer();
-                }
-            }
-        });
         item5.withOnCheckedChangeListener(new OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(IDrawerItem drawerItem, CompoundButton buttonView, boolean isChecked) {
@@ -263,7 +238,7 @@ public class WeatherActivity extends AppCompatActivity {
                     preferences.setNotifs(false);
                     mManager.cancelAll();
                 }
-                NotificationService.setNotificationServiceAlarm(context , preferences.getNotifs());
+                NotificationService.enqueueWork(context , new Intent(context , WeatherActivity.class));
             }
         });
         drawer = new DrawerBuilder()
@@ -278,7 +253,6 @@ public class WeatherActivity extends AppCompatActivity {
                         item2,
                         item3,
                         new DividerDrawerItem(),
-                        item4,
                         item5,
                         new DividerDrawerItem(),
                         item6,

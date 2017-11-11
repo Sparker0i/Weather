@@ -21,9 +21,6 @@ public class Constants {
 
     public static final String NOTIFICATIONS = "notifs";
 
-    public static final String SMALLWIDGET = "jsonSmall";
-    public static final String LARGEWIDGET = "jsonLarge";
-
     public static final String V3TUTORIAL = "tut-v3-shown";
 
     public static final String OWM_KEY = "owm_key";
@@ -52,5 +49,6 @@ public class Constants {
     public static final String LARGE_WIDGET_ICON = "icon";
 
     //SETTINGS CONSTANTS
-    public static final String PREF_TEMPERATURE_UNITS = "pref_units";
+    public static final String PREF_TEMPERATURE_UNITS = "units";
+    public static final String PREF_ENABLE_NOTIFS = "notifs";
 }
