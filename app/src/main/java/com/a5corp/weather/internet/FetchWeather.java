@@ -27,7 +27,7 @@ public class FetchWeather extends AsyncTask<String , Void , Info> {
 
     private Uri builtDay , builtFort;
     private Prefs preferences;
-    SharedPreferences sharedPreferences;
+    private SharedPreferences sharedPreferences;
 
     public FetchWeather(Context context) {
         preferences = new Prefs(context);

@@ -203,10 +203,6 @@ public class WeatherActivity extends AppCompatActivity {
         SecondaryDrawerItem item3 = new SecondaryDrawerItem().withIdentifier(3).withName(R.string.drawer_item_map)
                 .withIcon(new IconicsDrawable(this)
                         .icon(GoogleMaterial.Icon.gmd_map));
-        SecondaryDrawerItem item6 = new SecondaryDrawerItem().withIdentifier(6).withName(getString(R.string.drawer_item_custom_key))
-                .withIcon(new IconicsDrawable(this)
-                        .icon(GoogleMaterial.Icon.gmd_create))
-                .withSelectable(false);
         SecondaryDrawerItem item7 = new SecondaryDrawerItem().withIdentifier(7).withName(getString(R.string.drawer_item_paytm))
                 .withIcon(new IconicsDrawable(this)
                         .icon(GoogleMaterial.Icon.gmd_attach_money))
@@ -231,7 +227,6 @@ public class WeatherActivity extends AppCompatActivity {
                         item2,
                         item3,
                         new DividerDrawerItem(),
-                        item6,
                         item7,
                         item8
                 )
@@ -269,9 +264,6 @@ public class WeatherActivity extends AppCompatActivity {
                                                     .commit();
                                         }
                                         break;
-                                    case 6:
-                                        showApiKeyBox();
-                                        break;
                                     case 7:
                                         startActivity(new Intent(WeatherActivity.this , PaytmDonateActivity.class));
                                         break;
@@ -287,32 +279,6 @@ public class WeatherActivity extends AppCompatActivity {
                     }
                 })
                 .build();
-    }
-
-    private void showApiKeyBox() {
-        new MaterialDialog.Builder(this)
-                .title(getString(R.string.change_owm_key_header))
-                .content(getString(R.string.change_owm_key_content))
-                .neutralText(getString(R.string.reset))
-                .onNeutral(new MaterialDialog.SingleButtonCallback() {
-                    @Override
-                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                        preferences.setWeatherKey(Constants.OWM_APP_ID);
-                    }
-                })
-                .negativeText(getString(R.string.cancel))
-                .onNegative(new MaterialDialog.SingleButtonCallback() {
-                    @Override
-                    public void onClick(@NonNull MaterialDialog dialog , @NonNull DialogAction which) {
-                        dialog.dismiss();
-                    }
-                })
-                .input(null, null, new MaterialDialog.InputCallback() {
-                    @Override
-                    public void onInput(@NonNull MaterialDialog dialog, @NonNull CharSequence input) {
-                        preferences.setWeatherKey(input.toString());
-                    }
-                }).show();
     }
 
     @Override

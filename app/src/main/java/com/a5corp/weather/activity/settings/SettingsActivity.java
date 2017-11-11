@@ -5,12 +5,15 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.MenuItem;
 
 import com.a5corp.weather.R;
 import com.a5corp.weather.activity.WeatherActivity;
+import com.a5corp.weather.preferences.Prefs;
 import com.a5corp.weather.service.NotificationService;
 import com.a5corp.weather.utils.Constants;
+import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 
 public class SettingsActivity extends AppCompatPreferenceActivity {
@@ -51,6 +54,36 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                             .title(getString(R.string.restart_app))
                             .content(getString(R.string.restart_app_content))
                             .show();
+                    return true;
+                }
+            });
+
+            findPreference(Constants.OWM_KEY).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    new MaterialDialog.Builder(getActivity())
+                            .title(getString(R.string.pref_owm_key_title))
+                            .content(getString(R.string.pref_owm_key_summary))
+                            .neutralText(getString(R.string.reset))
+                            .onNeutral(new MaterialDialog.SingleButtonCallback() {
+                                @Override
+                                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                    new Prefs(getActivity()).setWeatherKey(Constants.OWM_APP_ID);
+                                }
+                            })
+                            .negativeText(getString(R.string.cancel))
+                            .onNegative(new MaterialDialog.SingleButtonCallback() {
+                                @Override
+                                public void onClick(@NonNull MaterialDialog dialog , @NonNull DialogAction which) {
+                                    dialog.dismiss();
+                                }
+                            })
+                            .input(null, null, new MaterialDialog.InputCallback() {
+                                @Override
+                                public void onInput(@NonNull MaterialDialog dialog, @NonNull CharSequence input) {
+                                    new Prefs(getActivity()).setWeatherKey(input.toString().replaceAll(" " , ""));
+                                }
+                            }).show();
                     return true;
                 }
             });

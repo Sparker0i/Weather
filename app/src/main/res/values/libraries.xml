@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="github">GITHUB</string>
+    <string name="other_apps">OTHER APPS</string>
+    <string name="author_header">AUTHOR</string>
+    <string name="credits_header">CREDITS</string>
+    <string name="libraries_header">OPEN SOURCE LICENSES</string>
+    <string name="license_header">LICENSE</string>
+    <string name="inspiration_header">INSPIRATION</string>
+    <string name="build_version">Build version</string>
+    <string name="dev_1_title">Aaditya Menon</string>
+    <string name="dev_1_name">\@Sparker0i</string>
+    <string name="dev_1_link">http://sparker0i.in</string>
+    <string name="dev_2_title">OpenWeatherMap</string>
+    <string name="dev_2_name">OpenWeatherMap Inc.</string>
+    <string name="dev_2_link">https://openweathermap.org/</string>
+    <string name="app_license">App License</string>
+    <string name="app_license_value">GNU GPL v3</string>
+
+    <string name="lib_1">Weather Icons</string>
+    <string name="lib_1_author">Erik Flowers</string>
+    <string name="lib_1_link">https://github.com/erikflowers/weather-icons/</string>
+    <string name="lib_1_license"><![CDATA[
+    Weather Icons licensed under SIL OFL 1.1]]>
+    </string>
+
+    <string name="lib_2">Material Drawer</string>
+    <string name="lib_2_author">Mike Penz</string>
+    <string name="lib_2_link">https://github.com/mikepenz/MaterialDrawer</string>
+    <string name="lib_2_license"><![CDATA[Copyright 2016 Mike Penz]]></string>
+
+    <string name="lib_3">Card Library</string>
+    <string name="lib_3_author">Gabriele Mariotti</string>
+    <string name="lib_3_link">https://github.com/gabrielemariotti/cardslib</string>
+    <string name="lib_3_license"><![CDATA[Copyright © 2013-2014 Gabriele Mariotti]]>
+    </string>
+
+    <string name="lib_4">Android Iconics</string>
+    <string name="lib_4_author">Mike Penz</string>
+    <string name="lib_4_link">https://github.com/mikepenz/Android-Iconics</string>
+    <string name="lib_4_license"><![CDATA[Copyright 2016 Mike Penz]]>
+    </string>
+
+    <string name="lib_5">MPAndroidChart</string>
+    <string name="lib_5_author">Philipp Jahoda</string>
+    <string name="lib_5_link">https://github.com/PhilJay/MPAndroidChart/</string>
+    <string name="lib_5_license"><![CDATA[Copyright 2016 Philipp Jahoda]]></string>
+
+    <string name="lib_6">Material Dialogs</string>
+    <string name="lib_6_author">Aidan Follestad</string>
+    <string name="lib_6_link">https://github.com/afollestad/material-dialogs</string>
+    <string name="lib_6_license"><![CDATA[Copyright © 2014–2016 Aidan Michael Follestad]]></string>
+
+    <string name="lib_7">Material Bottom Navigation</string>
+    <string name="lib_7_author">Alessandro Crugnola</string>
+    <string name="lib_7_link">https://github.com/sephiroth74/Material-BottomNavigation</string>
+    <string name="lib_7_license"><![CDATA[Copyright © 2016 Alessandro Crugnola]]></string>
+
+    <string name="lib_8">Material Tap Target Prompt</string>
+    <string name="lib_8_author">Samuel Wall</string>
+    <string name="lib_8_link">https://github.com/sjwall/MaterialTapTargetPrompt</string>
+    <string name="lib_8_license"><![CDATA[Copyright © 2016 Samuel Wall ]]></string>
+
+    <string name="lib_9">Material Icons</string>
+    <string name="lib_9_author">Google</string>
+    <string name="lib_9_link">https://github.com/google/material-design-icons</string>
+    <string name="lib_9_license"><![CDATA[Copyright © 2016 Google ]]></string>
+
+    <string name="lib_10">Gson</string>
+    <string name="lib_10_author">Google</string>
+    <string name="lib_10_link">https://github.com/google/gson</string>
+    <string name="lib_10_license"><![CDATA[Copyright © 2016 Google ]]></string>
+
+    <string name="lib_11">Butterknife</string>
+    <string name="lib_11_author">Jake Wharton</string>
+    <string name="lib_11_link">https://github.com/JakeWharton/butterknife</string>
+    <string name="lib_11_license"><![CDATA[Copyright 2013 Jake Wharton ]]></string>
+
+    <string name="insp_1">Good Weather</string>
+    <string name="insp_1_author">AsdTm</string>
+    <string name="insp_1_link">https://play.google.com/store/apps/details?id=org.asdtm.goodweather</string>
+
+    <string name="insp_2">Forecastie</string>
+    <string name="insp_2_author">Castica Labs</string>
+    <string name="insp_2_link">https://play.google.com/store/apps/details?id=com.casticalabs.forecastie</string>
+
+    <string name="insp_3">Mini RTO</string>
+    <string name="insp_3_author">chandruscm</string>
+    <string name="insp_3_link">https://play.google.com/store/apps/details?id=com.chandruscm.minirto</string>
+
+    <string name="license_link">https://www.gnu.org/licenses/gpl-3.0.txt</string>
+
+    <string name="mit_license"><![CDATA[
+    <br><br>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+    <br><br>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+    <br><br>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+    ]]></string>
+
+    <string name="apache_license"><![CDATA[
+    <br><br>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+    <br><br><a href="http://www.apache.org/licenses/LICENSE-2.0">http://www.apache.org/licenses/LICENSE-2.0</a>
+    <br><br>Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+    ]]></string>
+</resources>

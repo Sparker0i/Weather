@@ -37,4 +37,11 @@
             android:entries="@array/language_entries"
             android:entryValues="@array/language_values"/>
     </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/pref_other_header">
+        <Preference
+            android:key="@string/pref_key"
+            android:title="@string/pref_owm_key_title"
+            android:summary="@string/pref_owm_key_summary"/>
+    </PreferenceCategory>
 </PreferenceScreen>
