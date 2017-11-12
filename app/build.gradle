@@ -42,12 +42,12 @@ dependencies {
     compile('com.mikepenz:materialdrawer:5.8.1@aar') {
         transitive = true
     }
-    compile 'com.android.support:support-v4:27.0.0'
-    compile 'com.android.support:support-v13:27.0.0'
-    compile 'com.android.support:cardview-v7:27.0.0'
+    compile 'com.android.support:support-v4:27.0.1'
+    compile 'com.android.support:support-v13:27.0.1'
+    compile 'com.android.support:cardview-v7:27.0.1'
     compile 'com.google.code.gson:gson:2.8.2'
-    compile 'com.android.support:appcompat-v7:27.0.0'
-    compile 'com.android.support:design:27.0.0'
+    compile 'com.android.support:appcompat-v7:27.0.1'
+    compile 'com.android.support:design:27.0.1'
     compile 'uk.co.samuelwall:material-tap-target-prompt:2.0.1'
     compile 'com.afollestad.material-dialogs:core:0.9.4.7'
     compile 'com.mikepenz:iconics-core:2.9.1@aar'
@@ -55,6 +55,7 @@ dependencies {
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.2'
     compile 'com.mikepenz:google-material-typeface:3.0.1.1.original@aar'
     compile 'com.github.florent37:materialtextfield:1.0.7'
+    compile 'com.github.jorgecastilloprz:fabprogresscircle:1.01@aar'
     compile 'com.mikepenz:weather-icons-typeface:2.0.10.3@aar'
     compile 'com.github.gabrielemariotti.cards:cardslib-core:2.1.0'
     compile 'com.github.gabrielemariotti.cards:cardslib-cards:2.1.0'

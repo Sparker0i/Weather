@@ -37,13 +37,13 @@ public class FirstLaunchFragment extends Fragment {
     GPSTracker gps;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_first_launch, container, false);
         preferences = new Prefs(getContext());
-        cityInput = (EditText) rootView.findViewById(R.id.city_input);
-        textField = (MaterialTextField) rootView.findViewById(R.id.materialTextField);
-        ImageView img = (ImageView) textField.findViewById(R.id.mtf_image);
+        cityInput = rootView.findViewById(R.id.city_input);
+        textField = rootView.findViewById(R.id.materialTextField);
+        ImageView img = textField.findViewById(R.id.mtf_image);
         img.setImageAlpha(R.drawable.logo);
         img.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,14 +52,14 @@ public class FirstLaunchFragment extends Fragment {
                 requestPermissions(new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION} , Constants.READ_COARSE_LOCATION);
             }
         });
-        message = (TextView) rootView.findViewById(R.id.intro_text);
+        message = rootView.findViewById(R.id.intro_text);
         if (GlobalActivity.i == 0) {
             message.setText(getString(R.string.pick_city));
         }
         else {
             message.setText(getString(R.string.uh_oh));
         }
-        Button goButton = (Button) rootView.findViewById(R.id.go_button);
+        Button goButton = rootView.findViewById(R.id.go_button);
         goButton.setText(getString(R.string.first_go_text));
         goButton.setOnClickListener(new View.OnClickListener() {
             @Override
