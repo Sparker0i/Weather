@@ -47,6 +47,7 @@ import com.a5corp.weather.utils.Constants;
 import com.a5corp.weather.utils.Utils;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.github.clans.fab.FloatingActionButton;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -78,12 +79,14 @@ public class WeatherFragment extends Fragment {
     @BindView(R.id.wind_icon) TextView windIcon;
     @BindView(R.id.humidity_icon) TextView humidityIcon;
     @BindView(R.id.horizontal_recycler_view) RecyclerView horizontalRecyclerView;
+    LinearLayoutManager horizontalLayoutManager;
     double tc;
     Handler handler;
     BottomSheetDialogFragment bottomSheetDialogFragment;
     WeatherInfo json0;
     WeatherFort json1;
     @BindView(R.id.swipe) SwipeRefreshLayout swipeView;
+    FloatingActionButton fab;
     CheckConnection cc;
     Info json;
     MaterialDialog pd;
@@ -111,6 +114,7 @@ public class WeatherFragment extends Fragment {
         setHasOptionsMenu(true);
         preferences = new Prefs(context());
         weatherFont = Typeface.createFromAsset(activity().getAssets(), "fonts/weather.ttf");
+        fab = ((WeatherActivity) activity()).findViewById(R.id.fab);
         Bundle bundle = getArguments();
         int mode;
         if (bundle != null)
@@ -155,6 +159,18 @@ public class WeatherFragment extends Fragment {
                         swipeView.setRefreshing(false);
                     }
                 }, 10000);
+            }
+        });
+        horizontalLayoutManager
+                = new LinearLayoutManager(context(), LinearLayoutManager.HORIZONTAL, false);
+        horizontalRecyclerView.setLayoutManager(horizontalLayoutManager);
+        horizontalRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                if (horizontalLayoutManager.findLastVisibleItemPosition() == 9)
+                    fab.hide(true);
+                else
+                    fab.show(true);
             }
         });
         directionView.setTypeface(weatherFont);
@@ -474,9 +490,6 @@ public class WeatherFragment extends Fragment {
                 details.set(i , json1.getList().get(i));
             }
             HorizontalAdapter horizontalAdapter = new HorizontalAdapter(details);
-            LinearLayoutManager horizontalLayoutManager
-                    = new LinearLayoutManager(context(), LinearLayoutManager.HORIZONTAL, false);
-            horizontalRecyclerView.setLayoutManager(horizontalLayoutManager);
             horizontalRecyclerView.setAdapter(horizontalAdapter);
             final String d1 = new java.text.SimpleDateFormat("hh:mm a" , Locale.US).format(new Date(json0.getSys().getSunrise() * 1000));
             final String d2 = new java.text.SimpleDateFormat("hh:mm a" , Locale.US).format(new Date(json0.getSys().getSunset() * 1000));
