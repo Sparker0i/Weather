@@ -228,6 +228,7 @@ public class WeatherFragment extends Fragment {
 
     private void updateWeatherData(final String city, final String lat, final String lon) {
         wt = new FetchWeather(context());
+        fab.setIndeterminate(true);
         new Thread() {
             public void run() {
                 try {
@@ -263,6 +264,7 @@ public class WeatherFragment extends Fragment {
                             if (!preferences.getLaunched()) {
                                 FirstStart();
                             } else {
+                                fab.setIndeterminate(false);
                                 cc = new CheckConnection(context());
                                 if (!cc.isNetworkAvailable()) {
                                     showNoInternet();
@@ -284,6 +286,7 @@ public class WeatherFragment extends Fragment {
                             Snackbar snackbar = Snackbar.make(rootView, "Loaded Weather Data", 500);
                             snackbar.show();
                             //function();
+                            progress(0);
                             if (!preferences.getv3TargetShown())
                                 showTargets();
                             if (pd.isShowing())
@@ -296,6 +299,41 @@ public class WeatherFragment extends Fragment {
                 }
             }
         }.start();
+    }
+
+    private void progress(int i) {
+        fab.setIndeterminate(false);
+        i += 2;
+        final int progress = i;
+        if (i < fab.getMax()) {
+            fab.setProgress(i, false);
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    progress(progress);
+                }
+            }, 30);
+        }
+        else if (fab.getMax() == i) {
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    fab.hideProgress();
+                    fab.setColorNormal(ContextCompat.getColor(context() , R.color.md_green_700));
+                    fab.setImageDrawable(ContextCompat.getDrawable(context() , R.drawable.ic_done_black_24dp));
+                    progress(progress);
+                }
+            });
+        }
+        else {
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    fab.setColorNormal(ContextCompat.getColor(context() , R.color.accent));
+                    fab.setImageDrawable(ContextCompat.getDrawable(context() , R.drawable.ic_search_white_24dp));
+                }
+            }, 1000);
+        }
     }
 
     public void FirstStart() {

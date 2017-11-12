@@ -39,6 +39,9 @@
         android:layout_gravity="bottom|end"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
+        app:fab_progress_indeterminate="true"
+        app:fab_progress="0"
+        app:fab_progress_max="100"
         android:src="@drawable/ic_search_white_24dp"/>
 
 </android.support.design.widget.CoordinatorLayout>
