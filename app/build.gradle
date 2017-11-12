@@ -55,7 +55,7 @@ dependencies {
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.2'
     compile 'com.mikepenz:google-material-typeface:3.0.1.1.original@aar'
     compile 'com.github.florent37:materialtextfield:1.0.7'
-    compile 'com.github.jorgecastilloprz:fabprogresscircle:1.01@aar'
+    compile 'com.github.clans:fab:1.6.4'
     compile 'com.mikepenz:weather-icons-typeface:2.0.10.3@aar'
     compile 'com.github.gabrielemariotti.cards:cardslib-core:2.1.0'
     compile 'com.github.gabrielemariotti.cards:cardslib-cards:2.1.0'

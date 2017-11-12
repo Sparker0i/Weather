@@ -7,7 +7,6 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.content.ContextCompat;
@@ -28,6 +27,7 @@ import com.a5corp.weather.service.NotificationService;
 import com.a5corp.weather.utils.Constants;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.github.clans.fab.FloatingActionButton;
 import com.mikepenz.google_material_typeface_library.GoogleMaterial;
 import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.materialdrawer.AccountHeader;
@@ -94,11 +94,11 @@ public class WeatherActivity extends AppCompatActivity {
     }
 
     public void hideFab() {
-        fab.hide();
+        fab.hide(true);
     }
 
     public void showFab() {
-        fab.show();
+        fab.show(true);
     }
 
     @Override
@@ -115,20 +115,20 @@ public class WeatherActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                fab.hide();
+                fab.hide(true);
                 new MaterialDialog.Builder(context)
                         .title("Change City")
                         .content("You can change the city by entering City name or the ZIP Code")
                         .onAny(new MaterialDialog.SingleButtonCallback() {
                             @Override
                             public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                                fab.show();
+                                fab.show(true);
                             }
                         })
                         .dismissListener(new DialogInterface.OnDismissListener() {
                             @Override
                             public void onDismiss(DialogInterface dialogInterface) {
-                                fab.show();
+                                fab.show(true);
                             }
                         })
                         .negativeText("CANCEL")
@@ -136,14 +136,14 @@ public class WeatherActivity extends AppCompatActivity {
                             @Override
                             public void onClick(@NonNull MaterialDialog dialog , @NonNull DialogAction which) {
                                 dialog.dismiss();
-                                fab.show();
+                                fab.show(true);
                             }
                         })
                         .input(null, null, new MaterialDialog.InputCallback() {
                             @Override
                             public void onInput(@NonNull MaterialDialog dialog, @NonNull CharSequence input) {
                                 changeCity(input.toString());
-                                fab.show();
+                                fab.show(true);
                             }
                         }).show();
             }
@@ -151,7 +151,7 @@ public class WeatherActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         Intent intent = getIntent();
         handler = new Handler();
-
+        fab.show(true);
         wf = new WeatherFragment();
         Bundle bundle = new Bundle();
         bundle.putInt("mode" , intent.getIntExtra(Constants.MODE , 0));
