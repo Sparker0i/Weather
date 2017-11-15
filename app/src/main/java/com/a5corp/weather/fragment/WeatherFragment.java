@@ -200,9 +200,6 @@ public class WeatherFragment extends Fragment {
                 permission = new Permissions(context());
                 requestPermissions(new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION} , Constants.READ_COARSE_LOCATION);
                 break;
-            case R.id.search :
-                showMenuInputDialog();
-                break;
         }
         return true;
     }
@@ -291,7 +288,7 @@ public class WeatherFragment extends Fragment {
                                 showTargets();
                             if (pd.isShowing())
                                 pd.dismiss();
-                            preferences.setLastCity(json.day.getName());
+                            preferences.setLastCity(json.day.getName() + "," + json.day.getSys().getCountry());
                             ((WeatherActivity) activity()).createShortcuts();
                             NotificationService.enqueueWork(context() , new Intent(context() , WeatherActivity.class));
                         }
@@ -396,7 +393,7 @@ public class WeatherFragment extends Fragment {
                 @Override
                 public void run() {
                     new MaterialTapTargetPrompt.Builder(activity())
-                            .setTarget(R.id.search)
+                            .setTarget(R.id.fab)
                             .setBackgroundColour(ContextCompat.getColor(context() , R.color.md_light_blue_400))
                             .setFocalColour(ContextCompat.getColor(context() , R.color.colorAccent))
                             .setPrimaryText(getString(R.string.target_search_title))
@@ -709,27 +706,7 @@ public class WeatherFragment extends Fragment {
         return fragment;
     }
 
-    private void showMenuInputDialog() {
-        new MaterialDialog.Builder(context())
-                .title(getString(R.string.change_city))
-                .content(getString(R.string.enter_zip_code))
-                .negativeText(getString(R.string.cancel))
-                .onNegative(new MaterialDialog.SingleButtonCallback() {
-                    @Override
-                    public void onClick(@NonNull MaterialDialog dialog , @NonNull DialogAction which) {
-                        dialog.dismiss();
-                    }
-                })
-                .input(null, null, new MaterialDialog.InputCallback() {
-                    @Override
-                    public void onInput(@NonNull MaterialDialog dialog, @NonNull CharSequence input) {
-                        changeCity(input.toString());
-                    }
-                }).show();
-    }
-
     public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.MyViewHolder> {
-
         private List<WeatherFort.WeatherList> horizontalList;
 
         class MyViewHolder extends RecyclerView.ViewHolder {

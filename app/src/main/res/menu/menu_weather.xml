@@ -4,12 +4,6 @@
     tools:context="com.a5corp.weather.activity.WeatherActivity" >
 
     <item
-        android:id="@+id/search"
-        android:icon="@drawable/ic_search_white_24dp"
-        android:title="@string/search"
-        app:showAsAction="ifRoom"/>
-
-    <item
         android:id="@+id/location"
         android:icon="@drawable/ic_gps_fixed_white_24dp"
         android:title="@string/location"

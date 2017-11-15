@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.database.sqlite.SQLiteConstraintException;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -21,7 +22,10 @@ import com.a5corp.weather.activity.settings.SettingsActivity;
 import com.a5corp.weather.fragment.GraphsFragment;
 import com.a5corp.weather.fragment.MapsFragment;
 import com.a5corp.weather.fragment.WeatherFragment;
+import com.a5corp.weather.internet.FetchWeather;
+import com.a5corp.weather.model.Info;
 import com.a5corp.weather.model.WeatherFort;
+import com.a5corp.weather.preferences.DBHelper;
 import com.a5corp.weather.preferences.Prefs;
 import com.a5corp.weather.service.NotificationService;
 import com.a5corp.weather.utils.Constants;
@@ -42,6 +46,8 @@ import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import com.mikepenz.weather_icons_typeface_library.WeatherIcons;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -53,20 +59,23 @@ public class WeatherActivity extends AppCompatActivity {
     WeatherFragment wf;
     GraphsFragment gf;
     MapsFragment mf;
-    @BindView(R.id.toolbar) Toolbar toolbar;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
     Drawer drawer;
     NotificationManagerCompat mManager;
     Handler handler;
     FloatingActionButton fab;
+    DBHelper dbHelper;
+    Fragment f;
 
     int mode = 0;
 
-    @Shortcut(id = "home", icon = R.drawable.shortcut_home , shortLabel = "Weather Info", rank = 2)
+    @Shortcut(id = "home", icon = R.drawable.shortcut_home, shortLabel = "Weather Info", rank = 2)
     public void addWeather() {
 
     }
 
-    @Shortcut(id = "graphs", icon = R.drawable.shortcut_graph , shortLabel = "Weather Graphs" , rank = 1)
+    @Shortcut(id = "graphs", icon = R.drawable.shortcut_graph, shortLabel = "Weather Graphs", rank = 1)
     public void addGraphs() {
         handler.postDelayed(new Runnable() {
             @Override
@@ -77,10 +86,10 @@ public class WeatherActivity extends AppCompatActivity {
                         .replace(R.id.fragment, graphsFragment)
                         .commit();
             }
-        } , 750);
+        }, 750);
     }
 
-    @Shortcut(id = "maps", icon = R.drawable.shortcut_map , shortLabel = "Weather Maps")
+    @Shortcut(id = "maps", icon = R.drawable.shortcut_map, shortLabel = "Weather Maps")
     public void addMaps() {
         handler.postDelayed(new Runnable() {
             @Override
@@ -90,7 +99,7 @@ public class WeatherActivity extends AppCompatActivity {
                         .replace(R.id.fragment, mf)
                         .commit();
             }
-        } , 750);
+        }, 750);
     }
 
     public void hideFab() {
@@ -103,49 +112,19 @@ public class WeatherActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.i("Activity" , WeatherActivity.class.getSimpleName());
+        Log.i("Activity", WeatherActivity.class.getSimpleName());
         mManager = NotificationManagerCompat.from(this);
         preferences = new Prefs(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         ButterKnife.bind(this);
-        final Context context = this;
         fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 fab.hide(true);
-                new MaterialDialog.Builder(context)
-                        .title("Change City")
-                        .content("You can change the city by entering City name or the ZIP Code")
-                        .onAny(new MaterialDialog.SingleButtonCallback() {
-                            @Override
-                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                                fab.show(true);
-                            }
-                        })
-                        .dismissListener(new DialogInterface.OnDismissListener() {
-                            @Override
-                            public void onDismiss(DialogInterface dialogInterface) {
-                                fab.show(true);
-                            }
-                        })
-                        .negativeText("CANCEL")
-                        .onNegative(new MaterialDialog.SingleButtonCallback() {
-                            @Override
-                            public void onClick(@NonNull MaterialDialog dialog , @NonNull DialogAction which) {
-                                dialog.dismiss();
-                                fab.show(true);
-                            }
-                        })
-                        .input(null, null, new MaterialDialog.InputCallback() {
-                            @Override
-                            public void onInput(@NonNull MaterialDialog dialog, @NonNull CharSequence input) {
-                                changeCity(input.toString());
-                                fab.show(true);
-                            }
-                        }).show();
+                showInputDialog();
             }
         });
         setSupportActionBar(toolbar);
@@ -154,16 +133,143 @@ public class WeatherActivity extends AppCompatActivity {
         fab.show(true);
         wf = new WeatherFragment();
         Bundle bundle = new Bundle();
-        bundle.putInt("mode" , intent.getIntExtra(Constants.MODE , 0));
+        bundle.putInt("mode", intent.getIntExtra(Constants.MODE, 0));
         wf.setArguments(bundle);
         gf = new GraphsFragment();
         mf = new MapsFragment();
-
+        dbHelper = new DBHelper(this);
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment, wf)
                 .commit();
         initDrawer();
-        NotificationService.enqueueWork(this , new Intent(this , WeatherActivity.class));
+        NotificationService.enqueueWork(this, new Intent(this, WeatherActivity.class));
+    }
+
+    private void showInputDialog() {
+        new MaterialDialog.Builder(this)
+                .title(getString(R.string.change_city))
+                .content(getString(R.string.enter_zip_code))
+                .onAny(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        fab.show(true);
+                    }
+                })
+                .dismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialogInterface) {
+                        fab.show(true);
+                    }
+                })
+                .negativeText("CANCEL")
+                .onNegative(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        dialog.dismiss();
+                        fab.show(true);
+                    }
+                })
+                .input(null, null, new MaterialDialog.InputCallback() {
+                    @Override
+                    public void onInput(@NonNull MaterialDialog dialog, @NonNull CharSequence input) {
+                        changeCity(input.toString());
+                        fab.show(true);
+                    }
+                }).show();
+    }
+
+    private void showCityDialog() {
+        new MaterialDialog.Builder(this)
+                .title("Add City")
+                .content("You can enter a new city in the list of saved cities")
+                .onAny(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        dialog.dismiss();
+                    }
+                })
+                .negativeText("CANCEL")
+                .onNegative(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        dialog.dismiss();
+                    }
+                })
+                .input(null, null, new MaterialDialog.InputCallback() {
+                    @Override
+                    public void onInput(@NonNull MaterialDialog dialog, @NonNull CharSequence input) {
+                        checkForCity(input.toString());
+                    }
+                }).show();
+    }
+
+    Info json;
+    int i = 5;
+
+    private void checkForCity(final String city) {
+        final FetchWeather wt = new FetchWeather(this);
+        final Context context = this;
+        new Thread() {
+            @Override
+            public void run() {
+                try {
+                    json = wt.execute(city).get();
+                } catch (InterruptedException | ExecutionException ex) {
+                    ex.printStackTrace();
+                }
+                if (json == null) {
+                    new MaterialDialog.Builder(context)
+                            .title("City Not Found")
+                            .content("Could Not Find The City You Wanted")
+                            .onAny(new MaterialDialog.SingleButtonCallback() {
+                                @Override
+                                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                    dialog.dismiss();
+                                }
+                            })
+                            .negativeText("OK")
+                            .onNegative(new MaterialDialog.SingleButtonCallback() {
+                                @Override
+                                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                } else {
+                    try {
+                        dbHelper.addCity(json.day.getName() + "," + json.day.getSys().getCountry());
+                        SecondaryDrawerItem itemx = new SecondaryDrawerItem().withName(json.day.getName() + "," + json.day.getSys().getCountry())
+                                .withIcon(new IconicsDrawable(context)
+                                        .icon(GoogleMaterial.Icon.gmd_map))
+                                .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+                                    @Override
+                                    public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
+                                        reinitialize();
+                                        if (!(f instanceof WeatherFragment)) {
+                                            wf = new WeatherFragment();
+                                            getSupportFragmentManager().beginTransaction()
+                                                    .replace(R.id.fragment, wf)
+                                                    .commit();
+                                        }
+                                        return true;
+                                    }
+                                });
+                        drawer.addItemAtPosition(itemx , i++);
+                    }
+                    catch (SQLiteConstraintException ex) {
+                        new MaterialDialog.Builder(context)
+                                .title("City Already Exists")
+                                .content("You Need Not Add This City Again")
+                                .negativeText("OK")
+                                .onNegative(new MaterialDialog.SingleButtonCallback() {
+                                    @Override
+                                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                        dialog.dismiss();
+                                    }
+                                });
+                    }
+                }
+            }
+        }.start();
     }
 
     public void createShortcuts() {
@@ -194,28 +300,99 @@ public class WeatherActivity extends AppCompatActivity {
                 .withSelectionListEnabled(false)
                 .withProfileImagesClickable(false)
                 .build();
-        SecondaryDrawerItem item1 = new SecondaryDrawerItem().withIdentifier(1).withName(R.string.drawer_item_home)
+        SecondaryDrawerItem item1 = new SecondaryDrawerItem().withName(R.string.drawer_item_home)
                 .withIcon(new IconicsDrawable(this)
-                        .icon(WeatherIcons.Icon.wic_day_sunny));
-        SecondaryDrawerItem item2 = new SecondaryDrawerItem().withIdentifier(2).withName(R.string.drawer_item_graph)
+                        .icon(WeatherIcons.Icon.wic_day_sunny))
+                .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+                    @Override
+                    public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
+                        reinitialize();
+                        if (!(f instanceof WeatherFragment)) {
+                            wf = new WeatherFragment();
+                            getSupportFragmentManager().beginTransaction()
+                                    .replace(R.id.fragment, wf)
+                                    .commit();
+                        }
+                        return true;
+                    }
+                });
+        SecondaryDrawerItem item2 = new SecondaryDrawerItem().withName(R.string.drawer_item_graph)
                 .withIcon(new IconicsDrawable(this)
-                        .icon(GoogleMaterial.Icon.gmd_trending_up));
-        SecondaryDrawerItem item3 = new SecondaryDrawerItem().withIdentifier(3).withName(R.string.drawer_item_map)
+                        .icon(GoogleMaterial.Icon.gmd_trending_up))
+                .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+                    @Override
+                    public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
+                        reinitialize();
+                        if (!(f instanceof GraphsFragment)) {
+                            GraphsFragment graphsFragment = newGraphInstance(new ArrayList<>(wf.getDailyJson()));
+                            getSupportFragmentManager().beginTransaction()
+                                    .replace(R.id.fragment, graphsFragment)
+                                    .commit();
+                        }
+                        return true;
+                    }
+                });
+        SecondaryDrawerItem item3 = new SecondaryDrawerItem().withName(R.string.drawer_item_map)
                 .withIcon(new IconicsDrawable(this)
-                        .icon(GoogleMaterial.Icon.gmd_map));
-        SecondaryDrawerItem item7 = new SecondaryDrawerItem().withIdentifier(7).withName(getString(R.string.drawer_item_paytm))
+                        .icon(GoogleMaterial.Icon.gmd_map))
+                .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+                    @Override
+                    public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
+                        reinitialize();
+                        if (!(f instanceof MapsFragment)) {
+                            MapsFragment mapsFragment = new MapsFragment();
+                            getSupportFragmentManager().beginTransaction()
+                                    .replace(R.id.fragment, mapsFragment)
+                                    .commit();
+                        }
+                        return true;
+                    }
+                });
+        SecondaryDrawerItem item4 = new SecondaryDrawerItem().withName(R.string.drawer_item_add_city)
+                .withIcon(new IconicsDrawable(this)
+                        .icon(GoogleMaterial.Icon.gmd_add_location))
+                .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+                    @Override
+                    public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
+                        showCityDialog();
+                        return true;
+                    }
+                });
+        SecondaryDrawerItem item7 = new SecondaryDrawerItem().withName(getString(R.string.drawer_item_paytm))
                 .withIcon(new IconicsDrawable(this)
                         .icon(GoogleMaterial.Icon.gmd_attach_money))
-                .withSelectable(false);
-        SecondaryDrawerItem item8 = new SecondaryDrawerItem().withIdentifier(8).withName(R.string.drawer_item_about)
+                .withSelectable(false)
+                .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+                    @Override
+                    public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
+                        startActivity(new Intent(WeatherActivity.this , PaytmDonateActivity.class));
+                        return true;
+                    }
+                });
+        SecondaryDrawerItem item8 = new SecondaryDrawerItem().withName(R.string.drawer_item_about)
                 .withIcon(new IconicsDrawable(this)
                         .icon(GoogleMaterial.Icon.gmd_info))
-                .withSelectable(false);
-        SecondaryDrawerItem item9 = new SecondaryDrawerItem().withIdentifier(9).withName(R.string.drawer_item_settings)
+                .withSelectable(false)
+                .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+                    @Override
+                    public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
+                        startActivity(new Intent(WeatherActivity.this, AboutActivity.class));
+                        return true;
+                    }
+                });
+        SecondaryDrawerItem item9 = new SecondaryDrawerItem().withName(R.string.drawer_item_settings)
                 .withIcon(new IconicsDrawable(this)
                         .icon(GoogleMaterial.Icon.gmd_settings))
-                .withSelectable(false);
-        drawer = new DrawerBuilder()
+                .withSelectable(false)
+                .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+                    @Override
+                    public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
+                        startActivity(new Intent(WeatherActivity.this, SettingsActivity.class));
+                        return true;
+                    }
+                });
+        DrawerBuilder drawerBuilder = new DrawerBuilder();
+        drawerBuilder
                 .withActivity(this)
                 .withToolbar(toolbar)
                 .withSelectedItem(1)
@@ -227,58 +404,44 @@ public class WeatherActivity extends AppCompatActivity {
                         item2,
                         item3,
                         new DividerDrawerItem(),
+                        item4
+                        /*new DividerDrawerItem(),
                         item7,
-                        item8
+                        item8*/
                 )
-                .addStickyDrawerItems(item9)
-                .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
-                    @Override
-                    public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
-                        // do something with the clicked item :D
-                            if (drawerItem != null) {
-                                switch((int) drawerItem.getIdentifier()) {
-                                    case 1:
-                                        Fragment f = getSupportFragmentManager().findFragmentById(R.id.fragment);
-                                        if (!(f instanceof WeatherFragment)) {
-                                            wf = new WeatherFragment();
-                                            getSupportFragmentManager().beginTransaction()
-                                                    .replace(R.id.fragment, wf)
-                                                    .commit();
-                                        }
-                                        break;
-                                    case 2:
-                                        f = getSupportFragmentManager().findFragmentById(R.id.fragment);
-                                        if (!(f instanceof GraphsFragment)) {
-                                            GraphsFragment graphsFragment = newGraphInstance(new ArrayList<>(wf.getDailyJson()));
-                                            getSupportFragmentManager().beginTransaction()
-                                                    .replace(R.id.fragment, graphsFragment)
-                                                    .commit();
-                                        }
-                                        break;
-                                    case 3:
-                                        f = getSupportFragmentManager().findFragmentById(R.id.fragment);
-                                        if (!(f instanceof MapsFragment)) {
-                                            MapsFragment mapsFragment = new MapsFragment();
-                                            getSupportFragmentManager().beginTransaction()
-                                                    .replace(R.id.fragment, mapsFragment)
-                                                    .commit();
-                                        }
-                                        break;
-                                    case 7:
-                                        startActivity(new Intent(WeatherActivity.this , PaytmDonateActivity.class));
-                                        break;
-                                    case 8:
-                                        startActivity(new Intent(WeatherActivity.this, AboutActivity.class));
-                                        break;
-                                    case 9:
-                                        startActivity(new Intent(WeatherActivity.this, SettingsActivity.class));
-                                        break;
-                                }
+                .addStickyDrawerItems(item9);
+        List<String> cities = dbHelper.getCities();
+        for (String city : cities) {
+            drawerBuilder.addDrawerItems(new SecondaryDrawerItem().withName(city)
+                    .withIcon(new IconicsDrawable(this)
+                            .icon(GoogleMaterial.Icon.gmd_map))
+                    .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+                        @Override
+                        public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
+                            reinitialize();
+                            if (!(f instanceof WeatherFragment)) {
+                                wf = new WeatherFragment();
+                                getSupportFragmentManager().beginTransaction()
+                                        .replace(R.id.fragment, wf)
+                                        .commit();
                             }
-                        return false;
-                    }
-                })
+                            return true;
+                        }
+                    })
+            );
+        }
+        drawer = drawerBuilder
+                .addDrawerItems(
+                    new DividerDrawerItem(),
+                    item7,
+                    item8,
+                    item9
+                )
                 .build();
+    }
+
+    private void reinitialize() {
+        f = getSupportFragmentManager().findFragmentById(R.id.fragment);
     }
 
     @Override
