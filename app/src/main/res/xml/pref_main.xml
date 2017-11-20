@@ -41,7 +41,7 @@
     <PreferenceCategory android:title="@string/pref_other_header">
         <Preference
             android:key="@string/pref_delete_cities"
-            android:title="@string/pref_owm_key_title"
+            android:title="@string/pref_delete_cities_title"
             android:summary="@string/pref_delete_cities_summary"/>
 
         <Preference
