@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.database.sqlite.SQLiteConstraintException;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -269,7 +268,6 @@ public class WeatherActivity extends AppCompatActivity {
                                             .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                                                 @Override
                                                 public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
-                                                    reinitialize();
                                                     if (!(f instanceof WeatherFragment)) {
                                                         wf = new WeatherFragment();
                                                         getSupportFragmentManager().beginTransaction()
@@ -322,13 +320,10 @@ public class WeatherActivity extends AppCompatActivity {
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
-                        reinitialize();
-                        if (!(f instanceof WeatherFragment)) {
-                            wf = new WeatherFragment();
-                            getSupportFragmentManager().beginTransaction()
-                                    .replace(R.id.fragment, wf)
-                                    .commit();
-                        }
+                        wf = new WeatherFragment();
+                        getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.fragment, wf)
+                                .commit();
                         return true;
                     }
                 });
@@ -338,7 +333,6 @@ public class WeatherActivity extends AppCompatActivity {
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
-                        reinitialize();
                         if (!(f instanceof GraphsFragment)) {
                             GraphsFragment graphsFragment = newGraphInstance(new ArrayList<>(wf.getDailyJson()));
                             getSupportFragmentManager().beginTransaction()
@@ -354,7 +348,6 @@ public class WeatherActivity extends AppCompatActivity {
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
-                        reinitialize();
                         if (!(f instanceof MapsFragment)) {
                             MapsFragment mapsFragment = new MapsFragment();
                             getSupportFragmentManager().beginTransaction()
@@ -427,20 +420,17 @@ public class WeatherActivity extends AppCompatActivity {
                 )
                 .addStickyDrawerItems(item9);
         List<String> cities = dbHelper.getCities();
-        for (String city : cities) {
+        for (final String city : cities) {
             drawerBuilder.addDrawerItems(new SecondaryDrawerItem().withName(city)
                     .withIcon(new IconicsDrawable(this)
                             .icon(GoogleMaterial.Icon.gmd_place))
                     .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                         @Override
                         public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
-                            reinitialize();
-                            if (!(f instanceof WeatherFragment)) {
-                                wf = new WeatherFragment();
-                                getSupportFragmentManager().beginTransaction()
-                                        .replace(R.id.fragment, wf)
-                                        .commit();
-                            }
+                            wf = new WeatherFragment().setCity(city);
+                            getSupportFragmentManager().beginTransaction()
+                                    .replace(R.id.fragment, wf)
+                                    .commit();
                             return true;
                         }
                     })
@@ -450,14 +440,9 @@ public class WeatherActivity extends AppCompatActivity {
                 .addDrawerItems(
                     new DividerDrawerItem(),
                     item7,
-                    item8,
-                    item9
+                    item8
                 );
         drawer = drawerBuilder.build();
-    }
-
-    private void reinitialize() {
-        f = getSupportFragmentManager().findFragmentById(R.id.fragment);
     }
 
     @Override

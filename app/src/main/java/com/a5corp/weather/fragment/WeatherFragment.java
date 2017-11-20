@@ -89,6 +89,7 @@ public class WeatherFragment extends Fragment {
     FloatingActionButton fab;
     CheckConnection cc;
     Info json;
+    String citys = null;
     MaterialDialog pd;
     FetchWeather wt;
     Prefs preferences;
@@ -98,6 +99,15 @@ public class WeatherFragment extends Fragment {
 
     public WeatherFragment() {
         handler = new Handler();
+    }
+
+    public WeatherFragment setCity(String city) {
+        this.citys = city;
+        return this;
+    }
+
+    public String getCity() {
+        return citys;
     }
 
     @Override
@@ -230,7 +240,7 @@ public class WeatherFragment extends Fragment {
             public void run() {
                 try {
                     if (lat == null && lon == null) {
-                        json = wt.execute(city).get();
+                        json = wt.execute(citys != null ? citys : city).get();
                     } else if (city == null) {
                         json = wt.execute(lat, lon).get();
                     }
@@ -288,7 +298,10 @@ public class WeatherFragment extends Fragment {
                                 showTargets();
                             if (pd.isShowing())
                                 pd.dismiss();
-                            preferences.setLastCity(json.day.getName() + "," + json.day.getSys().getCountry());
+                            if (citys == null)
+                                preferences.setLastCity(json.day.getName() + "," + json.day.getSys().getCountry());
+                            else
+                                preferences.setLastCity(preferences.getLastCity());
                             ((WeatherActivity) activity()).createShortcuts();
                             NotificationService.enqueueWork(context() , new Intent(context() , WeatherActivity.class));
                         }
@@ -309,7 +322,7 @@ public class WeatherFragment extends Fragment {
                 public void run() {
                     progress(progress);
                 }
-            }, 30);
+            }, 5);
         }
         else if (fab.getMax() == i) {
             handler.post(new Runnable() {
@@ -505,7 +518,8 @@ public class WeatherFragment extends Fragment {
             tc = json0.getMain().getTemp();
             preferences.setLatitude((float) json1.getCity().getCoord().getLatitude());
             preferences.setLongitude((float) json1.getCity().getCoord().getLongitude());
-            preferences.setCity(json1.getCity().getName());
+            if (citys == null)
+                preferences.setCity(json1.getCity().getName() + "," + json0.getSys().getCountry());
             int a = (int) Math.round(json0.getMain().getTemp());
             final String city = json1.getCity().getName().toUpperCase(Locale.US) +
                     ", " +
