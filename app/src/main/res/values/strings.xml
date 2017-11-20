@@ -125,12 +125,14 @@
     <string name="pref_refresh_title">Refresh Interval</string>
     <string name="pref_lang_title">Language</string>
     <string name="pref_owm_key_title">Custom OpenWeatherMap Key</string>
+    <string name="pref_delete_cities_title">Delete Cities</string>
 
     <!-- Settings Summary -->
     <string name="pref_units_summary">Choose a Preferred Temperature Unit you want to see the temperature in</string>
     <string name="pref_refresh_summary">Refresh Interval</string>
     <string name="pref_owm_key_summary">You can enter your own custom OpenWeatherMap API key, and help reduce the load from my API Key.
-        \n\nBEWARE: Entering a wrong API Key may result in the app going haywire. Do this at your own risk</string>
+        \n\nBEWARE: Entering a wrong API Key may result in unwanted actions. Do this at your own risk</string>
+    <string name="pref_delete_cities_summary">Delete From the extra cities displayed in the app</string>
 
     <string name="pref_language_default">Use System Default Language</string>
 

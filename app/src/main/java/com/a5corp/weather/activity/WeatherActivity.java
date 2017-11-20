@@ -218,55 +218,71 @@ public class WeatherActivity extends AppCompatActivity {
                     ex.printStackTrace();
                 }
                 if (json == null) {
-                    new MaterialDialog.Builder(context)
-                            .title("City Not Found")
-                            .content("Could Not Find The City You Wanted")
-                            .onAny(new MaterialDialog.SingleButtonCallback() {
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            new MaterialDialog.Builder(context)
+                                    .title("City Not Found")
+                                    .content("Could Not Find The City You Wanted")
+                                    .onAny(new MaterialDialog.SingleButtonCallback() {
+                                        @Override
+                                        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                            dialog.dismiss();
+                                        }
+                                    })
+                                    .negativeText("OK")
+                                    .onNegative(new MaterialDialog.SingleButtonCallback() {
+                                        @Override
+                                        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                            dialog.dismiss();
+                                        }
+                                    });
+                        }
+                    });
+                } else {
+                        if (dbHelper.cityExists(json.day.getName() + "," + json.day.getSys().getCountry())) {
+                            handler.post(new Runnable() {
                                 @Override
-                                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                                    dialog.dismiss();
-                                }
-                            })
-                            .negativeText("OK")
-                            .onNegative(new MaterialDialog.SingleButtonCallback() {
-                                @Override
-                                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                                    dialog.dismiss();
+                                public void run() {
+                                    new MaterialDialog.Builder(context)
+                                            .title("City Already Exists")
+                                            .content("You Need Not Add This City Again")
+                                            .negativeText("OK")
+                                            .onNegative(new MaterialDialog.SingleButtonCallback() {
+                                                @Override
+                                                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                                    dialog.dismiss();
+                                                }
+                                            })
+                                            .show();
                                 }
                             });
-                } else {
-                    try {
-                        dbHelper.addCity(json.day.getName() + "," + json.day.getSys().getCountry());
-                        SecondaryDrawerItem itemx = new SecondaryDrawerItem().withName(json.day.getName() + "," + json.day.getSys().getCountry())
-                                .withIcon(new IconicsDrawable(context)
-                                        .icon(GoogleMaterial.Icon.gmd_map))
-                                .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
-                                    @Override
-                                    public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
-                                        reinitialize();
-                                        if (!(f instanceof WeatherFragment)) {
-                                            wf = new WeatherFragment();
-                                            getSupportFragmentManager().beginTransaction()
-                                                    .replace(R.id.fragment, wf)
-                                                    .commit();
-                                        }
-                                        return true;
-                                    }
-                                });
-                        drawer.addItemAtPosition(itemx , i++);
-                    }
-                    catch (SQLiteConstraintException ex) {
-                        new MaterialDialog.Builder(context)
-                                .title("City Already Exists")
-                                .content("You Need Not Add This City Again")
-                                .negativeText("OK")
-                                .onNegative(new MaterialDialog.SingleButtonCallback() {
-                                    @Override
-                                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                                        dialog.dismiss();
-                                    }
-                                });
-                    }
+                        }
+                        else {
+                            dbHelper.addCity(json.day.getName() + "," + json.day.getSys().getCountry());
+                            handler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    SecondaryDrawerItem itemx = new SecondaryDrawerItem().withName(json.day.getName() + "," + json.day.getSys().getCountry())
+                                            .withIcon(new IconicsDrawable(context)
+                                                    .icon(GoogleMaterial.Icon.gmd_place))
+                                            .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+                                                @Override
+                                                public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
+                                                    reinitialize();
+                                                    if (!(f instanceof WeatherFragment)) {
+                                                        wf = new WeatherFragment();
+                                                        getSupportFragmentManager().beginTransaction()
+                                                                .replace(R.id.fragment, wf)
+                                                                .commit();
+                                                    }
+                                                    return true;
+                                                }
+                                            });
+                                    drawer.addItemAtPosition(itemx, ++i);
+                                }
+                            });
+                        }
                 }
             }
         }.start();
@@ -414,7 +430,7 @@ public class WeatherActivity extends AppCompatActivity {
         for (String city : cities) {
             drawerBuilder.addDrawerItems(new SecondaryDrawerItem().withName(city)
                     .withIcon(new IconicsDrawable(this)
-                            .icon(GoogleMaterial.Icon.gmd_map))
+                            .icon(GoogleMaterial.Icon.gmd_place))
                     .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                         @Override
                         public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
@@ -430,14 +446,14 @@ public class WeatherActivity extends AppCompatActivity {
                     })
             );
         }
-        drawer = drawerBuilder
+        drawerBuilder
                 .addDrawerItems(
                     new DividerDrawerItem(),
                     item7,
                     item8,
                     item9
-                )
-                .build();
+                );
+        drawer = drawerBuilder.build();
     }
 
     private void reinitialize() {

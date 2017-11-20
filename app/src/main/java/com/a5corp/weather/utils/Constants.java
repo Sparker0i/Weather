@@ -23,8 +23,6 @@ public class Constants {
 
     public static final String V3TUTORIAL = "tut-v3-shown";
 
-    public static final String OWM_KEY = "owm_key";
-
     public static final String MAIL = "aadityamenon007@gmail.com";
 
     public static final int READ_COARSE_LOCATION = 20;
@@ -52,4 +50,6 @@ public class Constants {
     public static final String PREF_TEMPERATURE_UNITS = "units";
     public static final String PREF_ENABLE_NOTIFS = "notifs";
     public static final String PREF_DISPLAY_LANGUAGE = "pref_language";
+    public static final String PREF_OWM_KEY = "owm_key";
+    public static final String PREF_DELETE_CITIES = "pref_delete_cities";
 }

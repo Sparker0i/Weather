@@ -86,11 +86,11 @@ public class Prefs {
     }
 
     public void setWeatherKey(String str) {
-        prefs.edit().putString(Constants.OWM_KEY , str).apply();
+        prefs.edit().putString(Constants.PREF_OWM_KEY , str).apply();
     }
 
     public String getWeatherKey() {
-        return prefs.getString(Constants.OWM_KEY , Constants.OWM_APP_ID);
+        return prefs.getString(Constants.PREF_OWM_KEY , Constants.OWM_APP_ID);
     }
 
     public void setTemperature(double temp) {

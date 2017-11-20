@@ -6,10 +6,13 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.a5corp.weather.R;
 import com.a5corp.weather.activity.WeatherActivity;
+import com.a5corp.weather.preferences.DBHelper;
 import com.a5corp.weather.preferences.Prefs;
 import com.a5corp.weather.service.NotificationService;
 import com.a5corp.weather.utils.Constants;
@@ -18,6 +21,8 @@ import com.afollestad.materialdialogs.MaterialDialog;
 
 public class SettingsActivity extends AppCompatPreferenceActivity {
 
+    private static int changed = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +30,10 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
 
         // load settings fragment
         getFragmentManager().beginTransaction().replace(android.R.id.content, new MainPreferenceFragment()).commit();
+    }
+
+    private boolean isStateChanged() {
+        return changed == 1;
     }
 
     public static class MainPreferenceFragment extends PreferenceFragment {
@@ -58,7 +67,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                 }
             });
 
-            findPreference(Constants.OWM_KEY).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            findPreference(Constants.PREF_OWM_KEY).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
                     new MaterialDialog.Builder(getActivity())
@@ -87,7 +96,33 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                     return true;
                 }
             });
+
+            findPreference(Constants.PREF_DELETE_CITIES).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    new MaterialDialog.Builder(getActivity())
+                            .title(getString(R.string.pref_delete_cities_title))
+                            .content(getString(R.string.pref_delete_cities_summary))
+                            .positiveText(getString(android.R.string.ok))
+                            .items(new DBHelper(getActivity()).getCities())
+                            .itemsCallbackMultiChoice(null, new MaterialDialog.ListCallbackMultiChoice() {
+                                @Override
+                                public boolean onSelection(MaterialDialog dialog, Integer[] which, CharSequence[] text) {
+                                    for (CharSequence city : text) {
+                                        changed = 1;
+                                        Log.i("Changed" , changed + "");
+                                        new DBHelper(getActivity()).deleteCity(city.toString());
+                                    }
+                                    return true;
+                                }
+                            })
+                            .show();
+                    return true;
+                }
+            });
         }
+
+
     }
 
     @Override
@@ -107,7 +142,13 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                         .getString(preference.getKey(), ""));
     }
 
-
+    @Override
+    public void onBackPressed() {
+        if (isStateChanged())
+            startActivity(new Intent(this , WeatherActivity.class));
+        else
+            finish();
+    }
 
     /**
      * A preference value change listener that updates the preference's summary
