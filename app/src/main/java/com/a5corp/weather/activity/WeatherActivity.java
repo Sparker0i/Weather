@@ -269,7 +269,7 @@ public class WeatherActivity extends AppCompatActivity {
                                                 @Override
                                                 public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
                                                     if (!(f instanceof WeatherFragment)) {
-                                                        wf = new WeatherFragment();
+                                                        wf = new WeatherFragment().setCity(json.day.getName() + "," + json.day.getSys().getCountry());
                                                         getSupportFragmentManager().beginTransaction()
                                                                 .replace(R.id.fragment, wf)
                                                                 .commit();
@@ -366,7 +366,8 @@ public class WeatherActivity extends AppCompatActivity {
                         showCityDialog();
                         return true;
                     }
-                });
+                })
+                .withSelectable(false);
         SecondaryDrawerItem item7 = new SecondaryDrawerItem().withName(getString(R.string.drawer_item_paytm))
                 .withIcon(new IconicsDrawable(this)
                         .icon(GoogleMaterial.Icon.gmd_attach_money))
@@ -404,7 +405,6 @@ public class WeatherActivity extends AppCompatActivity {
         drawerBuilder
                 .withActivity(this)
                 .withToolbar(toolbar)
-                .withSelectedItem(1)
                 .withTranslucentStatusBar(true)
                 .withAccountHeader(headerResult)
                 .withActionBarDrawerToggleAnimated(true)
