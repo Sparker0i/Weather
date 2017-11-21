@@ -160,7 +160,7 @@ public class WeatherActivity extends AppCompatActivity {
                         fab.show(true);
                     }
                 })
-                .negativeText("CANCEL")
+                .negativeText(getString(android.R.string.cancel))
                 .onNegative(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
@@ -179,15 +179,15 @@ public class WeatherActivity extends AppCompatActivity {
 
     private void showCityDialog() {
         new MaterialDialog.Builder(this)
-                .title("Add City")
-                .content("You can enter a new city in the list of saved cities")
+                .title(getString(R.string.drawer_item_add_city))
+                .content(getString(R.string.pref_add_city_content))
                 .onAny(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                         dialog.dismiss();
                     }
                 })
-                .negativeText("CANCEL")
+                .negativeText(getString(android.R.string.cancel))
                 .onNegative(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
@@ -221,15 +221,15 @@ public class WeatherActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             new MaterialDialog.Builder(context)
-                                    .title("City Not Found")
-                                    .content("Could Not Find The City You Wanted")
+                                    .title(getString(R.string.city_not_found))
+                                    .content(getString(R.string.city_not_found))
                                     .onAny(new MaterialDialog.SingleButtonCallback() {
                                         @Override
                                         public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                                             dialog.dismiss();
                                         }
                                     })
-                                    .negativeText("OK")
+                                    .negativeText(getString(android.R.string.ok))
                                     .onNegative(new MaterialDialog.SingleButtonCallback() {
                                         @Override
                                         public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
@@ -244,9 +244,9 @@ public class WeatherActivity extends AppCompatActivity {
                                 @Override
                                 public void run() {
                                     new MaterialDialog.Builder(context)
-                                            .title("City Already Exists")
-                                            .content("You Need Not Add This City Again")
-                                            .negativeText("OK")
+                                            .title(getString(R.string.city_already_exists))
+                                            .content(getString(R.string.need_not_add))
+                                            .negativeText(getString(android.R.string.ok))
                                             .onNegative(new MaterialDialog.SingleButtonCallback() {
                                                 @Override
                                                 public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
@@ -302,7 +302,7 @@ public class WeatherActivity extends AppCompatActivity {
 
     public void initDrawer() {
         final IProfile profile = new ProfileDrawerItem().withName(getString(R.string.app_name))
-                .withEmail(getString(R.string.drawer_version_header) + " : " + BuildConfig.VERSION_NAME)
+                .withEmail(getString(R.string.drawer_version_header , BuildConfig.VERSION_NAME))
                 .withIcon(R.mipmap.ic_launcher_x);
         AccountHeader headerResult = new AccountHeaderBuilder()
                 .withActivity(this)

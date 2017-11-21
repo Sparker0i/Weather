@@ -177,7 +177,7 @@ public class WeatherFragment extends Fragment {
         horizontalRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                if (horizontalLayoutManager.findLastVisibleItemPosition() == 9)
+                if (horizontalLayoutManager.findLastVisibleItemPosition() == 9 || citys != null)
                     fab.hide(true);
                 else
                     fab.show(true);
@@ -194,7 +194,10 @@ public class WeatherFragment extends Fragment {
         horizontalRecyclerView.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
         weatherIcon.setTypeface(weatherFont);
         weatherIcon.setTextColor(ContextCompat.getColor(context() , R.color.textColor));
-        ((WeatherActivity) activity()).showFab();
+        if (citys == null)
+            ((WeatherActivity) activity()).showFab();
+        else
+            ((WeatherActivity) activity()).hideFab();
         return rootView;
     }
 
@@ -235,7 +238,8 @@ public class WeatherFragment extends Fragment {
 
     private void updateWeatherData(final String city, final String lat, final String lon) {
         wt = new FetchWeather(context());
-        fab.setIndeterminate(true);
+        if (citys == null)
+            fab.setIndeterminate(true);
         new Thread() {
             public void run() {
                 try {
@@ -271,7 +275,8 @@ public class WeatherFragment extends Fragment {
                             if (!preferences.getLaunched()) {
                                 FirstStart();
                             } else {
-                                fab.setIndeterminate(false);
+                                if (citys == null)
+                                    fab.setIndeterminate(false);
                                 cc = new CheckConnection(context());
                                 if (!cc.isNetworkAvailable()) {
                                     showNoInternet();
@@ -292,17 +297,17 @@ public class WeatherFragment extends Fragment {
                             renderWeather(json);
                             Snackbar snackbar = Snackbar.make(rootView, "Loaded Weather Data", 500);
                             snackbar.show();
-                            //function();
-                            progress(0);
                             if (!preferences.getv3TargetShown())
                                 showTargets();
                             if (pd.isShowing())
                                 pd.dismiss();
-                            if (citys == null)
+                            if (citys == null) {
                                 preferences.setLastCity(json.day.getName() + "," + json.day.getSys().getCountry());
+                                ((WeatherActivity) activity()).createShortcuts();
+                                progress(0);
+                            }
                             else
                                 preferences.setLastCity(preferences.getLastCity());
-                            ((WeatherActivity) activity()).createShortcuts();
                             NotificationService.enqueueWork(context() , new Intent(context() , WeatherActivity.class));
                         }
                     });
