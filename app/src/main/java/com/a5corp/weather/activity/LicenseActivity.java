@@ -1,5 +1,6 @@
 package com.a5corp.weather.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
@@ -13,6 +14,8 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.a5corp.weather.R;
+import com.a5corp.weather.app.MyContextWrapper;
+import com.a5corp.weather.preferences.Prefs;
 import com.a5corp.weather.utils.Constants;
 import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.material_design_iconic_typeface_library.MaterialDesignIconic;
@@ -34,6 +37,12 @@ public class LicenseActivity extends AppCompatActivity
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse(link));
         startActivity(intent);
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        Context context = MyContextWrapper.wrap(newBase, new Prefs(newBase).getLanguage());
+        super.attachBaseContext(context);
     }
 
     @Override

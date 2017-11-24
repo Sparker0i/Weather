@@ -1,5 +1,6 @@
 package com.a5corp.weather.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
@@ -11,7 +12,9 @@ import android.view.MenuItem;
 import android.widget.AbsListView;
 
 import com.a5corp.weather.R;
+import com.a5corp.weather.app.MyContextWrapper;
 import com.a5corp.weather.cards.AboutCard;
+import com.a5corp.weather.preferences.Prefs;
 import com.a5corp.weather.utils.Constants;
 
 import java.util.ArrayList;
@@ -36,6 +39,12 @@ public class AboutActivity extends AppCompatActivity
         startActivity(Intent.createChooser(intent , getString(R.string.choose_app)));
     }
     private int previousVisibleItem;
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        Context context = MyContextWrapper.wrap(newBase, new Prefs(newBase).getLanguage());
+        super.attachBaseContext(context);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState)

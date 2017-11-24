@@ -1,6 +1,7 @@
 package com.a5corp.weather.activity;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -19,7 +20,9 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.a5corp.weather.R;
+import com.a5corp.weather.app.MyContextWrapper;
 import com.a5corp.weather.permissions.Permissions;
+import com.a5corp.weather.preferences.Prefs;
 import com.a5corp.weather.utils.Constants;
 import com.afollestad.materialdialogs.MaterialDialog;
 
@@ -100,6 +103,12 @@ public class PaytmDonateActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        Context context = MyContextWrapper.wrap(newBase, new Prefs(newBase).getLanguage());
+        super.attachBaseContext(context);
     }
 
     @Override
