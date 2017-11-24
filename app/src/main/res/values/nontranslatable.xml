@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Settings Keys -->
-    <string name="pref_units">units</string>
-    <string name="pref_enable_notifs">notifs</string>
-    <string name="pref_refresh_interval">pref_refresh_interval</string>
-    <string name="pref_language">pref_language</string>
-    <string name="pref_key">owm_key</string>
-    <string name="pref_delete_cities">pref_delete_cities</string>
+    <string name="pref_units" translatable="false">units</string>
+    <string name="pref_enable_notifs" translatable="false">notifs</string>
+    <string name="pref_refresh_interval" translatable="false">pref_refresh_interval</string>
+    <string name="pref_language" translatable="false">pref_language</string>
+    <string name="pref_key" translatable="false">owm_key</string>
+    <string name="pref_delete_cities" translatable="false">pref_delete_cities</string>
 
-    <string name="app_name">Simple Weather</string>
-    <string name="app_key">4c08a22b02c58467e6241629c1d08717</string>
+    <string name="app_name" translatable="false">Simple Weather</string>
+    <string name="app_key" translatable="false">4c08a22b02c58467e6241629c1d08717</string>
 </resources>

@@ -12,7 +12,6 @@
 
     <!-- Languages array -->
     <string-array name="language_entries">
-        <item name="default">@string/pref_language_default</item>
         <item name="english">English</item>
         <item name="basque">Euskara (Basque)</item>
         <item name="belarusian">Беларуская (Belarusian)</item>
@@ -29,7 +28,6 @@
         <item name="turkish">Türkçe (Turkish)</item>
     </string-array>
     <string-array name="language_values">
-        <item name="default"></item>
         <item name="english">en</item>
         <item name="basque">eu</item>
         <item name="belarusian">be</item>

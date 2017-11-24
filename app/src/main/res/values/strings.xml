@@ -4,7 +4,6 @@
     <string name="enter_zip_code">You can change the city by entering City name or the ZIP Code</string>
     <string name="could_not_find">Hey there, could not find the city you wanted. Please enter a new one :</string>
     <string name="city_not_found">City Not Found</string>
-    <string name="about_page">About</string>
     <string name="city_already_exists">City Already Exists</string>
     <string name="need_not_add">You Need Not Add This City Again</string>
     <string name="location">Location</string>
@@ -15,6 +14,7 @@
     <string name="uh_oh">Uh oh. Seems like the city you entered does not exist on the Database. Please Try Again</string>
     <string name="pick_city">Hey there, let\'s start by picking a city for you</string>
     <string name="hey_there_condition">Hey there, %shere right now!</string>
+    <string name="loaded_weather_data">Loaded Weather Data</string>
     <string name="credits"><u>CREDITS</u></string>
     <string name="refresh">Refresh</string>
 
@@ -174,4 +174,5 @@
 
     <string name="choose_app">Choose an app</string>
     <string name="title_activity_paytm_donate">Donate via PayTm</string>
+    <string name="github">GITHUB</string>
 </resources>

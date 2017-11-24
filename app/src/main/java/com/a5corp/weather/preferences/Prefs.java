@@ -40,6 +40,10 @@ public class Prefs {
         prefs.edit().putString(Constants.LASTCITY , city).apply();
     }
 
+    public String getLanguage() {
+        return prefs.getString(Constants.PREF_DISPLAY_LANGUAGE , "en");
+    }
+
     public String getLastCity() {
         return prefs.getString(Constants.LASTCITY , null);
     }

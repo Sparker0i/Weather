@@ -295,7 +295,7 @@ public class WeatherFragment extends Fragment {
                         public void run() {
                             preferences.setLaunched();
                             renderWeather(json);
-                            Snackbar snackbar = Snackbar.make(rootView, "Loaded Weather Data", 500);
+                            Snackbar snackbar = Snackbar.make(rootView, getString(R.string.loaded_weather_data) , 500);
                             snackbar.show();
                             if (!preferences.getv3TargetShown())
                                 showTargets();

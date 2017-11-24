@@ -18,6 +18,7 @@ import android.view.View;
 import com.a5corp.weather.BuildConfig;
 import com.a5corp.weather.R;
 import com.a5corp.weather.activity.settings.SettingsActivity;
+import com.a5corp.weather.app.MyContextWrapper;
 import com.a5corp.weather.fragment.GraphsFragment;
 import com.a5corp.weather.fragment.MapsFragment;
 import com.a5corp.weather.fragment.WeatherFragment;
@@ -46,6 +47,7 @@ import com.mikepenz.weather_icons_typeface_library.WeatherIcons;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
 import butterknife.BindView;
@@ -107,6 +109,12 @@ public class WeatherActivity extends AppCompatActivity {
 
     public void showFab() {
         fab.show(true);
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        Context context = MyContextWrapper.wrap(newBase, new Prefs(newBase).getLanguage());
+        super.attachBaseContext(context);
     }
 
     @Override

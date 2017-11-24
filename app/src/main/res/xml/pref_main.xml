@@ -35,6 +35,7 @@
             android:dialogTitle="@string/pref_lang_title"
             android:title="@string/pref_lang_title"
             android:entries="@array/language_entries"
+            android:defaultValue="en"
             android:entryValues="@array/language_values"/>
     </PreferenceCategory>
 

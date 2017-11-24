@@ -1,5 +1,7 @@
 package com.a5corp.weather.activity.settings;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
@@ -19,6 +21,8 @@ import com.a5corp.weather.utils.Constants;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 
+import java.util.Locale;
+
 public class SettingsActivity extends AppCompatPreferenceActivity {
 
     private static int changed = 0;
@@ -36,7 +40,27 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         return changed == 1;
     }
 
-    public static class MainPreferenceFragment extends PreferenceFragment {
+    public static class MainPreferenceFragment extends PreferenceFragment implements Preference.OnPreferenceChangeListener {
+
+        @Override
+        public boolean onPreferenceChange(Preference preference, Object o) {
+            switch (preference.getKey()) {
+                case Constants.PREF_DISPLAY_LANGUAGE:
+                    Log.i("In" , "Change Language");
+                    Resources resources = getResources();
+                    String loc = o.toString();
+                    Locale locale = new Locale(loc);
+                    Log.i("Locale" , loc);
+                    Configuration configuration = resources.getConfiguration();
+                    configuration.setLocale(locale);
+                    getResources().updateConfiguration(configuration,
+                            getResources().getDisplayMetrics());
+                    getActivity().recreate();
+                    break;
+            }
+            return true;
+        }
+
         @Override
         public void onCreate(final Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -120,9 +144,9 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                     return true;
                 }
             });
+
+            findPreference(Constants.PREF_DISPLAY_LANGUAGE).setOnPreferenceChangeListener(this);
         }
-
-
     }
 
     @Override

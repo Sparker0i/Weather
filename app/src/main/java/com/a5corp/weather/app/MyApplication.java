@@ -3,43 +3,57 @@ package com.a5corp.weather.app;
 import android.app.Application;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.os.Build;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 import com.a5corp.weather.R;
 
 import java.util.Locale;
 
-public class MyApplication extends Application
-{
+public class MyApplication extends Application {
     private Locale locale = null;
 
     @Override
-    public void onConfigurationChanged(Configuration newConfig)
-    {
-        super.onConfigurationChanged(newConfig);
-        if (locale != null)
-        {
-            newConfig.locale = locale;
-            Locale.setDefault(locale);
-            getBaseContext().getResources().updateConfiguration(newConfig, getBaseContext().getResources().getDisplayMetrics());
-        }
+    public void onCreate() {
+        super.onCreate();
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        Configuration config = getBaseContext().getResources().getConfiguration();
+
+        String lang = preferences.getString(getString(R.string.pref_language) , "en");
+        locale = new Locale(lang);
+        config.setLocale(locale);
+        Log.i("Locale" , lang);
+        Locale.setDefault(locale);
+        updateConfiguration(config);
+        setSystemLocale(config , locale);
     }
 
     @Override
-    public void onCreate()
-    {
-        super.onCreate();
-
-        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
-
-        Configuration config = getBaseContext().getResources().getConfiguration();
-
-        String lang = settings.getString(getString(R.string.pref_language), "");
-        if (! "".equals(lang) && ! config.locale.getLanguage().equals(lang))
-        {
-            locale = new Locale(lang);
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        if (locale != null) {
+            setSystemLocale(newConfig, locale);
             Locale.setDefault(locale);
+            updateConfiguration(newConfig);
+        }
+    }
+
+    @SuppressWarnings("deprecation")
+    private static void setSystemLocale(Configuration config, Locale locale) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            config.setLocale(locale);
+        } else {
             config.locale = locale;
+        }
+    }
+
+    @SuppressWarnings("deprecation")
+    private void updateConfiguration(Configuration config) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            getBaseContext().createConfigurationContext(config);
+        } else {
             getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
         }
     }
