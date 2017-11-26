@@ -15,7 +15,7 @@ import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.JobIntentService;
-import android.util.Log;
+import com.a5corp.weather.model.Log;
 
 import com.a5corp.weather.R;
 import com.a5corp.weather.activity.WeatherActivity;

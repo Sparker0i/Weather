@@ -8,7 +8,7 @@ import android.net.Uri;
 import android.provider.Settings;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
-import android.util.Log;
+import com.a5corp.weather.model.Log;
 import android.view.View;
 
 import com.a5corp.weather.R;

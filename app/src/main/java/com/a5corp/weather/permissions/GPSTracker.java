@@ -9,7 +9,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
-import android.util.Log;
+import com.a5corp.weather.model.Log;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;

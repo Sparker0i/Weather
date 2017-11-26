@@ -1,16 +1,13 @@
 package com.a5corp.weather.activity.settings;
+
 import android.content.Intent;
-import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.a5corp.weather.R;
 import com.a5corp.weather.activity.WeatherActivity;
@@ -20,8 +17,6 @@ import com.a5corp.weather.service.NotificationService;
 import com.a5corp.weather.utils.Constants;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
-
-import java.util.Locale;
 
 public class SettingsActivity extends AppCompatPreferenceActivity {
 
@@ -46,16 +41,12 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         public boolean onPreferenceChange(Preference preference, Object o) {
             switch (preference.getKey()) {
                 case Constants.PREF_DISPLAY_LANGUAGE:
-                    Log.i("In" , "Change Language");
-                    Resources resources = getResources();
-                    String loc = o.toString();
-                    Locale locale = new Locale(loc);
-                    Log.i("Locale" , loc);
-                    Configuration configuration = resources.getConfiguration();
-                    configuration.setLocale(locale);
-                    getResources().updateConfiguration(configuration,
-                            getResources().getDisplayMetrics());
-                    getActivity().recreate();
+                    new MaterialDialog.Builder(getActivity())
+                            .title(getString(R.string.restart_app))
+                            .content(getString(R.string.restart_app_content))
+                            .positiveText(getString(android.R.string.ok))
+                            .build()
+                            .show();
                     break;
             }
             return true;
@@ -134,7 +125,6 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                                 public boolean onSelection(MaterialDialog dialog, Integer[] which, CharSequence[] text) {
                                     for (CharSequence city : text) {
                                         changed = 1;
-                                        Log.i("Changed" , changed + "");
                                         new DBHelper(getActivity()).deleteCity(city.toString());
                                     }
                                     return true;

@@ -5,7 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
+import com.a5corp.weather.model.Log;
 
 import com.a5corp.weather.preferences.Prefs;
 import com.a5corp.weather.service.NotificationService;

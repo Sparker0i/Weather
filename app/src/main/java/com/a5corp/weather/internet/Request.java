@@ -1,7 +1,7 @@
 package com.a5corp.weather.internet;
 
 import android.content.Context;
-import android.util.Log;
+import com.a5corp.weather.model.Log;
 
 import com.a5corp.weather.model.WeatherInfo;
 import com.a5corp.weather.preferences.Prefs;

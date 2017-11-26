@@ -6,7 +6,7 @@ import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
 import android.preference.PreferenceManager;
-import android.util.Log;
+import com.a5corp.weather.model.Log;
 import android.widget.RemoteViews;
 
 import com.a5corp.weather.R;

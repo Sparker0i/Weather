@@ -7,7 +7,7 @@ import android.content.Intent;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.JobIntentService;
-import android.util.Log;
+import com.a5corp.weather.model.Log;
 import android.widget.RemoteViews;
 
 import com.a5corp.weather.R;

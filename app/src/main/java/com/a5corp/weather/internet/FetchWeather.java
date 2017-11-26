@@ -5,7 +5,7 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
-import android.util.Log;
+import com.a5corp.weather.model.Log;
 
 import com.a5corp.weather.model.Info;
 import com.a5corp.weather.model.WeatherFort;

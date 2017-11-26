@@ -20,7 +20,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
 import android.text.style.RelativeSizeSpan;
-import android.util.Log;
+import com.a5corp.weather.model.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;

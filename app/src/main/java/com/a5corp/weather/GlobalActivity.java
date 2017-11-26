@@ -3,7 +3,7 @@ package com.a5corp.weather;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import com.a5corp.weather.model.Log;
 
 import com.a5corp.weather.activity.FirstLaunch;
 import com.a5corp.weather.activity.WeatherActivity;

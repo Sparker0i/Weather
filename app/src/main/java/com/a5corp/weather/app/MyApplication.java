@@ -5,7 +5,7 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.preference.PreferenceManager;
-import android.util.Log;
+import com.a5corp.weather.model.Log;
 
 import com.a5corp.weather.R;
 

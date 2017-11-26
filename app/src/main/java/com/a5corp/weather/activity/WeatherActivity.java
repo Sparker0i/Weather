@@ -12,7 +12,7 @@ import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
+import com.a5corp.weather.model.Log;
 import android.view.View;
 
 import com.a5corp.weather.BuildConfig;
