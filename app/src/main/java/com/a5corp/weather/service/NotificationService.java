@@ -39,7 +39,7 @@ public class NotificationService extends JobIntentService {
 
     @Nullable
     @Override
-    public IBinder onBind(Intent intent) {
+    public IBinder onBind(@NonNull Intent intent) {
         return super.onBind(intent);
     }
 
@@ -55,7 +55,8 @@ public class NotificationService extends JobIntentService {
         PendingIntent pendingIntent = PendingIntent.getService(this, 0, intent,
                 PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        long intervalMillis = prefs.getTime();
+        prefs = new Prefs(this);
+        long intervalMillis = Long.parseLong(prefs.getTime());
         if (alarmManager != null)
             if (new Prefs(this).getNotifs()) {
                 alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
@@ -67,7 +68,6 @@ public class NotificationService extends JobIntentService {
                 pendingIntent.cancel();
             }
 
-        prefs = new Prefs(this);
         String city = prefs.getCity();
         String units = PreferenceManager.getDefaultSharedPreferences(this).getString(Constants.PREF_TEMPERATURE_UNITS , Constants.METRIC);
 

@@ -41,8 +41,9 @@ public class Prefs {
         prefs.edit().putString(Constants.LASTCITY , city).apply();
     }
 
-    public long getTime() {
-        return prefs.getLong(Constants.PREF_REFRESH_INTERVAL , AlarmManager.INTERVAL_HOUR);
+    public String getTime() {
+        long time = Long.parseLong(prefs.getString(Constants.PREF_REFRESH_INTERVAL , Long.toString(AlarmManager.INTERVAL_HOUR / 60000))) * 60000;
+        return Long.toString(time);
     }
 
     public String getLanguage() {

@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.SystemClock;
 
+import com.a5corp.weather.preferences.Prefs;
+
 public class WidgetProviderAlarm {
 
     private static final String TAG = "AppWidgetProviderAlarm";
@@ -19,8 +21,7 @@ public class WidgetProviderAlarm {
     }
 
     public void setAlarm() {
-        String updatePeriodStr = "60";
-        long updatePeriodMills = AlarmManager.INTERVAL_HOUR;
+        long updatePeriodMills = Long.parseLong(new Prefs(mContext).getTime());
         AlarmManager alarmManager = (AlarmManager) mContext.getSystemService(Context.ALARM_SERVICE);
         alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME,
                 SystemClock.elapsedRealtime() + updatePeriodMills,
