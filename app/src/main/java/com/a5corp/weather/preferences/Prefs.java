@@ -1,5 +1,6 @@
 package com.a5corp.weather.preferences;
 
+import android.app.AlarmManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -38,6 +39,10 @@ public class Prefs {
 
     public void setLastCity(String city) {
         prefs.edit().putString(Constants.LASTCITY , city).apply();
+    }
+
+    public long getTime() {
+        return prefs.getLong(Constants.PREF_REFRESH_INTERVAL , AlarmManager.INTERVAL_HOUR);
     }
 
     public String getLanguage() {

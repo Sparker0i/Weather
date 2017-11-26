@@ -1,5 +1,6 @@
 package com.a5corp.weather.activity.settings;
 
+import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
@@ -12,6 +13,9 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.a5corp.weather.app.MyContextWrapper;
+import com.a5corp.weather.preferences.Prefs;
+
 /**
  * A {@link android.preference.PreferenceActivity} which implements and proxies the necessary calls
  * to be used with AppCompat.
@@ -19,6 +23,12 @@ import android.view.ViewGroup;
 public abstract class AppCompatPreferenceActivity extends PreferenceActivity {
 
     private AppCompatDelegate mDelegate;
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        Context context = MyContextWrapper.wrap(newBase, new Prefs(newBase).getLanguage());
+        super.attachBaseContext(context);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

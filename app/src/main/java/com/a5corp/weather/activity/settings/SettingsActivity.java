@@ -1,5 +1,6 @@
 package com.a5corp.weather.activity.settings;
 
+import android.content.Context;
 import android.content.Intent;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -11,6 +12,7 @@ import android.view.MenuItem;
 
 import com.a5corp.weather.R;
 import com.a5corp.weather.activity.WeatherActivity;
+import com.a5corp.weather.app.MyContextWrapper;
 import com.a5corp.weather.preferences.DBHelper;
 import com.a5corp.weather.preferences.Prefs;
 import com.a5corp.weather.service.NotificationService;
@@ -21,6 +23,12 @@ import com.afollestad.materialdialogs.MaterialDialog;
 public class SettingsActivity extends AppCompatPreferenceActivity {
 
     private static int changed = 0;
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        Context context = MyContextWrapper.wrap(newBase, new Prefs(newBase).getLanguage());
+        super.attachBaseContext(context);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

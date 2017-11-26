@@ -9,6 +9,8 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
+
+import com.a5corp.weather.R;
 import com.a5corp.weather.model.Log;
 
 import com.afollestad.materialdialogs.DialogAction;
@@ -151,9 +153,9 @@ public class GPSTracker implements LocationListener {
      * */
     public void showSettingsAlert() {
         new MaterialDialog.Builder(mContext)
-                .title("Enable GPS")
-                .content("You need to enable GPS for this function to work")
-                .positiveText("ENABLE")
+                .title(mContext.getString(R.string.enable_gps))
+                .content(mContext.getString(R.string.enable_gps_content))
+                .positiveText(mContext.getString(R.string.enable))
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
@@ -161,7 +163,7 @@ public class GPSTracker implements LocationListener {
                         mContext.startActivity(intent);
                     }
                 })
-                .negativeText("CANCEL")
+                .negativeText(mContext.getString(R.string.cancel))
                 .onNegative(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {

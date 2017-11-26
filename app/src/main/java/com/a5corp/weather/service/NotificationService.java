@@ -55,7 +55,7 @@ public class NotificationService extends JobIntentService {
         PendingIntent pendingIntent = PendingIntent.getService(this, 0, intent,
                 PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        long intervalMillis = AlarmManager.INTERVAL_HOUR;
+        long intervalMillis = prefs.getTime();
         if (alarmManager != null)
             if (new Prefs(this).getNotifs()) {
                 alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,

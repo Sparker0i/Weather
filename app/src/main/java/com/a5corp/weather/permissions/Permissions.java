@@ -24,8 +24,8 @@ public class Permissions {
 
     private void showNoRationale() {
         View rootView = ((Activity) mContext).getWindow().getDecorView().findViewById(R.id.fragment);
-        Snackbar.make(rootView , "Tap Settings, then in Permissions, enable the Location Permission to do this action" , Snackbar.LENGTH_INDEFINITE)
-                .setAction("SETTINGS", new View.OnClickListener() {
+        Snackbar.make(rootView , mContext.getString(R.string.rationale_string) , Snackbar.LENGTH_INDEFINITE)
+                .setAction(mContext.getString(R.string.settings), new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         final Intent i = new Intent();
@@ -42,15 +42,15 @@ public class Permissions {
         Log.i("Permissions" , "showNoRationale");
     }
 
-    private void showRationale() {
+    private void showLocationRationale() {
         View rootView = ((Activity) mContext).getWindow().getDecorView().findViewById(R.id.fragment);
-        Snackbar.make(rootView , "This Permission Is Required to access Weather Data of your location" , Snackbar.LENGTH_LONG).show();
+        Snackbar.make(rootView , mContext.getString(R.string.show_location_rationale) , Snackbar.LENGTH_LONG).show();
         Log.i("Permissions" , "showRationale");
     }
 
     private void showStorageRationale() {
         View rootView = ((Activity) mContext).getWindow().getDecorView().findViewById(R.id.fragment);
-        Snackbar.make(rootView , "This Permission Is Required to store the QR Code to your gallery so that you can open it in the PayTm app" , Snackbar.LENGTH_LONG).show();
+        Snackbar.make(rootView , mContext.getString(R.string.show_storage_rationale) , Snackbar.LENGTH_LONG).show();
         Log.i("Permissions" , "showRationale");
     }
 
@@ -62,7 +62,7 @@ public class Permissions {
         Log.i("Denied" , "Permission");
         if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) mContext,
                 Manifest.permission.ACCESS_COARSE_LOCATION)) {
-            showRationale();
+            showLocationRationale();
         } //permission is denied (and never ask again is  checked)
         //shouldShowRequestPermissionRationale will return false
         else {
