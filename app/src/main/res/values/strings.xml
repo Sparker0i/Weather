@@ -40,14 +40,15 @@
     <string name="notif_temp" formatted="false">Temperature : %1$d %2$s</string>
     <string name="notif_city">City : %s</string>
 
-    <string name="north">Wind blowing towards North</string>
-    <string name="north_east">Wind blowing in the North-East direction</string>
-    <string name="north_west">Wind blowing in the North-West direction</string>
-    <string name="south">Wind blowing towards South</string>
-    <string name="south_east">Wind blowing in the South-East direction</string>
-    <string name="south_west">Wind blowing in the South-West direction</string>
-    <string name="east">Wind blowing towards East</string>
-    <string name="west">Wind blowing towards West</string>
+    <string name="wind_blowing_in">Wind Blowing towards %s</string>
+    <string name="north">North</string>
+    <string name="north_east">North-East</string>
+    <string name="north_west">North-West</string>
+    <string name="south">South</string>
+    <string name="south_east">South-East</string>
+    <string name="south_west">South-West</string>
+    <string name="east">East</string>
+    <string name="west">West</string>
 
     <string name="paytm_err_0">"Saved to : %s "/Pictures/Donate to Simple Weather Developer.png"</string>
     <string name="paytm_err_1">Could Not Save the QR Code to gallery, please check the relevant permissions on your phone and try again later</string>

@@ -198,7 +198,7 @@ public class GraphsFragment extends Fragment {
                     temperatureChart.getData().getDataSetCount() - 1));
             temperatureChart.getLegend().setTextColor(Color.parseColor("#FFFFFF"));
         }
-        String temp = String.format(Locale.ENGLISH , getString(R.string.g_temp) , PreferenceManager.getDefaultSharedPreferences(getContext()).getString(Constants.PREF_TEMPERATURE_UNITS , Constants.METRIC).equals(Constants.METRIC) ? getString(R.string.c) : getString(R.string.f));
+        String temp = getString(R.string.g_temp , PreferenceManager.getDefaultSharedPreferences(getContext()).getString(Constants.PREF_TEMPERATURE_UNITS , Constants.METRIC).equals(Constants.METRIC) ? getString(R.string.c) : getString(R.string.f));
         set = new LineDataSet(tempEntries, temp);
         set.setMode(LineDataSet.Mode.CUBIC_BEZIER);
         set.setCubicIntensity(0.2f);
@@ -403,7 +403,7 @@ public class GraphsFragment extends Fragment {
                     windChart.getData().getDataSetCount() - 1));
             windChart.getLegend().setTextColor(Color.parseColor("#FFFFFF"));
         }
-        String wind = String.format(Locale.ENGLISH , getString(R.string.g_wind) , PreferenceManager.getDefaultSharedPreferences(getContext()).getString(Constants.PREF_TEMPERATURE_UNITS , Constants.METRIC).equals(Constants.METRIC) ? getString(R.string.mps) : getString(R.string.mph));
+        String wind = getString(R.string.g_wind , PreferenceManager.getDefaultSharedPreferences(getContext()).getString(Constants.PREF_TEMPERATURE_UNITS , Constants.METRIC).equals(Constants.METRIC) ? getString(R.string.mps) : getString(R.string.mph));
         set = new LineDataSet(windEntries, wind);
         set.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
         set.setCubicIntensity(0.2f);

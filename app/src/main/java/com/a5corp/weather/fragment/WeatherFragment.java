@@ -552,68 +552,58 @@ public class WeatherFragment extends Fragment {
             DateFormat df = DateFormat.getDateTimeInstance();
             String updatedOn = "Last update: " + df.format(new Date(json0.getDt() * 1000));
             updatedField.setText(updatedOn);
-            final String humidity = String.format(getString(R.string.humidity_) , json0.getMain().getHumidity());
+            final String humidity = getString(R.string.humidity_ , json0.getMain().getHumidity());
+            final String humidity1 = getString(R.string.humidity , json0.getMain().getHumidity());
             humidityView.setText(humidity);
             humidityIcon.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Snackbar.make(rootView , String.format(Locale.ENGLISH , getString(R.string.humidity) , json0.getMain().getHumidity()) + " %" , Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(rootView , humidity1 , Snackbar.LENGTH_SHORT).show();
                 }
             });
             humidityView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Snackbar.make(rootView , String.format(Locale.ENGLISH , getString(R.string.humidity) , json0.getMain().getHumidity()) + " %" , Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(rootView , humidity1 , Snackbar.LENGTH_SHORT).show();
                 }
             });
-            final String wind = String.format(Locale.ENGLISH , getString(R.string.wind) , json0.getWind().getSpeed() , PreferenceManager.getDefaultSharedPreferences(getContext()).getString(Constants.PREF_TEMPERATURE_UNITS , Constants.METRIC).equals(Constants.METRIC) ? getString(R.string.mps) : getString(R.string.mph));
+            final String wind = getString(R.string.wind , json0.getWind().getSpeed() , PreferenceManager.getDefaultSharedPreferences(getContext()).getString(Constants.PREF_TEMPERATURE_UNITS , Constants.METRIC).equals(Constants.METRIC) ? getString(R.string.mps) : getString(R.string.mph));
+            final String wind1 = getString(R.string.wind_ , json0.getWind().getSpeed() , PreferenceManager.getDefaultSharedPreferences(getContext()).getString(Constants.PREF_TEMPERATURE_UNITS , Constants.METRIC).equals(Constants.METRIC) ? getString(R.string.mps) : getString(R.string.mph));
             windView.setText(wind);
             windIcon.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Snackbar.make(rootView , String.format(Locale.ENGLISH , getString(R.string.wind_speed) , json0.getWind().getSpeed() , PreferenceManager.getDefaultSharedPreferences(getContext()).getString(Constants.PREF_TEMPERATURE_UNITS , Constants.METRIC).equals(Constants.METRIC) ? getString(R.string.mps) : getString(R.string.mph)) , Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(rootView , wind1 , Snackbar.LENGTH_SHORT).show();
                 }
             });
             windView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Snackbar.make(rootView , String.format(Locale.ENGLISH , getString(R.string.wind_speed) , json0.getWind().getSpeed() , PreferenceManager.getDefaultSharedPreferences(getContext()).getString(Constants.PREF_TEMPERATURE_UNITS , Constants.METRIC).equals(Constants.METRIC) ? getString(R.string.mps) : getString(R.string.mph)) , Snackbar.LENGTH_SHORT).show();
-                }
-            });
-            humidityIcon.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Snackbar.make(rootView , String.format(Locale.ENGLISH , getString(R.string.humidity) , json0.getMain().getHumidity()) , Snackbar.LENGTH_SHORT).show();
-                }
-            });
-            humidityView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Snackbar.make(rootView , String.format(Locale.ENGLISH , getString(R.string.humidity) , json0.getMain().getHumidity()) , Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(rootView , wind1 , Snackbar.LENGTH_SHORT).show();
                 }
             });
             sunriseIcon.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Snackbar.make(rootView , String.format(Locale.ENGLISH , getString(R.string.sunrise) , d1) , Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(rootView , getString(R.string.sunrise , d1) , Snackbar.LENGTH_SHORT).show();
                 }
             });
             sunriseView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Snackbar.make(rootView , String.format(Locale.ENGLISH , getString(R.string.sunrise) , d1) , Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(rootView , getString(R.string.sunrise , d1) , Snackbar.LENGTH_SHORT).show();
                 }
             });
             sunsetIcon.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Snackbar.make(rootView , String.format(Locale.ENGLISH , getString(R.string.sunset) , d2) , Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(rootView , getString(R.string.sunset , d2) , Snackbar.LENGTH_SHORT).show();
                 }
             });
             sunsetView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Snackbar.make(rootView , String.format(Locale.ENGLISH , getString(R.string.sunset) , d2) , Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(rootView , getString(R.string.sunset , d2) , Snackbar.LENGTH_SHORT).show();
                 }
             });
             weatherIcon.setText(Utils.setWeatherIcon(context() , json0.getWeather().get(0).getId() , 10));
@@ -629,7 +619,7 @@ public class WeatherFragment extends Fragment {
                             String cap = s.substring(0, 1).toUpperCase() + s.substring(1);
                             builder.append(cap.concat(" "));
                         }
-                        Snackbar.make(v , String.format(getString(R.string.hey_there_condition) , builder.toString()), Snackbar.LENGTH_SHORT)
+                        Snackbar.make(v , getString(R.string.hey_there_condition , builder.toString()), Snackbar.LENGTH_SHORT)
                                 .show();
                     }
                     catch (Exception e) {
@@ -650,70 +640,39 @@ public class WeatherFragment extends Fragment {
         int index = Math.abs(Math.round(deg % 360) / 45);
         switch (index) {
             case 0 : directionView.setText(activity().getString(R.string.top));
-                directionView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Snackbar.make(view , getString(R.string.north) , Snackbar.LENGTH_SHORT).show();
-                    }
-                });
+                setDirection(getString(R.string.north));
                 break;
             case 1 : directionView.setText(activity().getString(R.string.top_right));
-                directionView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Snackbar.make(view , getString(R.string.north_east) , Snackbar.LENGTH_SHORT).show();
-                    }
-                });
+                setDirection(getString(R.string.north_east));
                 break;
             case 2 : directionView.setText(activity().getString(R.string.right));
-                directionView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Snackbar.make(view , getString(R.string.east) , Snackbar.LENGTH_SHORT).show();
-                    }
-                });
+                setDirection(getString(R.string.east));
                 break;
             case 3 : directionView.setText(activity().getString(R.string.bottom_right));
-                directionView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Snackbar.make(view , getString(R.string.south_east) , Snackbar.LENGTH_SHORT).show();
-                    }
-                });
+                setDirection(getString(R.string.south_east));
                 break;
             case 4 : directionView.setText(activity().getString(R.string.down));
-                directionView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Snackbar.make(view , getString(R.string.south) , Snackbar.LENGTH_SHORT).show();
-                    }
-                });
+                setDirection(getString(R.string.south));
                 break;
             case 5 : directionView.setText(activity().getString(R.string.bottom_left));
-                directionView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Snackbar.make(view , getString(R.string.south_west) , Snackbar.LENGTH_SHORT).show();
-                    }
-                });
+                setDirection(getString(R.string.south_west));
                 break;
             case 6 : directionView.setText(activity().getString(R.string.left));
-                directionView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Snackbar.make(view , getString(R.string.west) , Snackbar.LENGTH_SHORT).show();
-                    }
-                });
+                setDirection(getString(R.string.west));
                 break;
             case 7 : directionView.setText(activity().getString(R.string.top_left));
-                directionView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Snackbar.make(view , getString(R.string.north_west) , Snackbar.LENGTH_SHORT).show();
-                    }
-                });
+                setDirection(getString(R.string.north_west));
                 break;
         }
+    }
+
+    private void setDirection(final String string) {
+        directionView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view , getString(R.string.wind_blowing_in , string) , Snackbar.LENGTH_SHORT).show();
+            }
+        });
     }
 
     public static CustomBottomSheetDialogFragment newInstance(WeatherFort.WeatherList describable) {

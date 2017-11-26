@@ -125,26 +125,26 @@ public class CustomBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
     public void setOthers() {
         try {
-            String wind = String.format(Locale.ENGLISH , getString(R.string.speed) , json.getSpeed());
+            String wind = getString(R.string.speed , json.getSpeed());
             if (PreferenceManager.getDefaultSharedPreferences(getContext()).getString(Constants.PREF_TEMPERATURE_UNITS , Constants.METRIC).equals(Constants.IMPERIAL))
                 wind = wind + " " + getString(R.string.mph);
             else
                 wind = wind + " " + getString(R.string.mps);
             windText.setText(wind);
             try {
-                rainText.setText(String.format(Locale.ENGLISH , getString(R.string.rain_) , json.getRain()));
+                rainText.setText(getString(R.string.rain_ , json.getRain()));
             }
             catch (Exception ex) {
-                rainText.setText(String.format(Locale.ENGLISH , getString(R.string.rain_) , 0));
+                rainText.setText(getString(R.string.rain_ , 0));
             }
             try {
-                snowText.setText(String.format(Locale.ENGLISH , getString(R.string.snow_) , json.getSnow()));
+                snowText.setText(getString(R.string.snow_ , json.getSnow()));
             }
             catch (Exception ex) {
-                snowText.setText(String.format(Locale.ENGLISH , getString(R.string.snow_) , 0));
+                snowText.setText(getString(R.string.snow_ , 0));
             }
-            humidityText.setText(String.format(Locale.ENGLISH , getString(R.string.humidity) , json.getHumidity()));
-            pressureText.setText(String.format(Locale.ENGLISH , getString(R.string.pressure) , json.getPressure()));
+            humidityText.setText(getString(R.string.humidity , json.getHumidity()));
+            pressureText.setText(getString(R.string.pressure , json.getPressure()));
         }
         catch (Exception ex) {
             ex.printStackTrace();
