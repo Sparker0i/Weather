@@ -268,9 +268,6 @@ public class WeatherFragment extends Fragment {
                     preferences.setCity(preferences.getLastCity());
                     handler.post(new Runnable() {
                         public void run() {
-                            Toast.makeText(activity(),
-                                    activity().getString(R.string.place_not_found),
-                                    Toast.LENGTH_LONG).show();
                             GlobalActivity.i = 1;
                             if (!preferences.getLaunched()) {
                                 FirstStart();

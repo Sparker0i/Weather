@@ -17,7 +17,7 @@
         android:id="@+id/go_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/go"
+        android:text="@android:string/ok"
         android:layout_below="@+id/materialTextField"
         android:layout_alignParentEnd="true" />
 

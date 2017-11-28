@@ -12,8 +12,6 @@ import com.a5corp.weather.model.Log;
 import android.view.View;
 
 import com.a5corp.weather.R;
-import com.a5corp.weather.activity.WeatherActivity;
-import com.a5corp.weather.utils.Constants;
 
 public class Permissions {
     private Context mContext;
@@ -48,12 +46,6 @@ public class Permissions {
         Log.i("Permissions" , "showRationale");
     }
 
-    private void showStorageRationale() {
-        View rootView = ((Activity) mContext).getWindow().getDecorView().findViewById(R.id.fragment);
-        Snackbar.make(rootView , mContext.getString(R.string.show_storage_rationale) , Snackbar.LENGTH_LONG).show();
-        Log.i("Permissions" , "showRationale");
-    }
-
     public void permissionDenied() {
         // permission was not granted
         // permission is denied (this is the first time, when "never ask again" is not checked) so ask again explaining the usage of permission
@@ -67,16 +59,6 @@ public class Permissions {
         //shouldShowRequestPermissionRationale will return false
         else {
             showNoRationale();
-        }
-    }
-
-    public void showDenialMessage(int requestCode) {
-        switch (requestCode) {
-            case Constants.WRITE_EXTERNAL_STORAGE:
-                if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) mContext,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                    showStorageRationale();
-                }
         }
     }
 }

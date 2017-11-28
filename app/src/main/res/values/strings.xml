@@ -45,12 +45,9 @@
     <string name="east">East</string>
     <string name="west">West</string>
 
-    <string name="place_not_found">Sorry, no weather data found.</string>
-
     <string name="restart_app">Restart The App</string>
     <string name="restart_app_content">Please Restart the App to Check With The New Configuration</string>
 
-    <string name="go">GO</string>
     <string name="reset">RESET</string>
 
     <string name="enter_city_first">Enter a City Name First</string>
@@ -76,12 +73,10 @@
     <string name="drawer_item_map">Weather Map</string>
     <string name="drawer_item_settings">Settings</string>
     <string name="drawer_item_about">About</string>
-    <string name="drawer_item_paytm">Donate via PayTm</string>
     <string name="drawer_item_add_city">Add City</string>
 
     <string name="rationale_string">Tap Settings, then in Permissions, enable the Location Permission to do this action</string>
     <string name="show_location_rationale">This Permission Is Required to access Weather Data of your location</string>
-    <string name="show_storage_rationale">This Permission Is Required to store the QR Code to your gallery so that you can open it in the PayTm app</string>
 
     <string name="morning">Morning</string>
     <string name="night">Night</string>
@@ -129,11 +124,9 @@
     <string name="bottom_temperature">Temperature</string>
 
     <!-- Graph Strings -->
-    <string name="g_rain">Rain, mm</string>
     <string name="g_pressure">Pressure, hPa</string>
     <string name="g_snow">Snow, mm</string>
     <string name="g_temp">Temperature, %s</string>
-    <string name="g_wind">Wind, %s</string>
 
     <!-- About -->
     <string name="enter_city_hint">Enter city name</string>

@@ -376,17 +376,6 @@ public class WeatherActivity extends AppCompatActivity {
                     }
                 })
                 .withSelectable(false);
-        SecondaryDrawerItem item7 = new SecondaryDrawerItem().withName(getString(R.string.drawer_item_paytm))
-                .withIcon(new IconicsDrawable(this)
-                        .icon(GoogleMaterial.Icon.gmd_attach_money))
-                .withSelectable(false)
-                .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
-                    @Override
-                    public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
-                        startActivity(new Intent(WeatherActivity.this , PaytmDonateActivity.class));
-                        return true;
-                    }
-                });
         SecondaryDrawerItem item8 = new SecondaryDrawerItem().withName(R.string.drawer_item_about)
                 .withIcon(new IconicsDrawable(this)
                         .icon(GoogleMaterial.Icon.gmd_info))
@@ -426,7 +415,9 @@ public class WeatherActivity extends AppCompatActivity {
                         item7,
                         item8*/
                 )
-                .addStickyDrawerItems(item9);
+                .addStickyDrawerItems(
+                        item8,
+                        item9);
         List<String> cities = dbHelper.getCities();
         for (final String city : cities) {
             drawerBuilder.addDrawerItems(new SecondaryDrawerItem().withName(city)
@@ -444,12 +435,6 @@ public class WeatherActivity extends AppCompatActivity {
                     })
             );
         }
-        drawerBuilder
-                .addDrawerItems(
-                    new DividerDrawerItem(),
-                    item7,
-                    item8
-                );
         drawer = drawerBuilder.build();
     }
 

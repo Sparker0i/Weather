@@ -8,7 +8,6 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -32,16 +31,6 @@
             android:label="About"
             android:configChanges="locale"
             android:parentActivityName=".activity.WeatherActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.a5corp.weather.activity.WeatherActivity" />
-        </activity>
-        <activity
-            android:name=".activity.PaytmDonateActivity"
-            android:label="@string/title_activity_paytm_donate"
-            android:configChanges="locale"
-            android:parentActivityName=".activity.WeatherActivity"
-            android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.a5corp.weather.activity.WeatherActivity" />

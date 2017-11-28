@@ -1,11 +1,13 @@
 package com.a5corp.weather.fragment;
 
-import android.annotation.SuppressLint;
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import com.a5corp.weather.model.Log;
 import android.view.LayoutInflater;
@@ -17,14 +19,11 @@ import android.view.ViewGroup;
 
 import com.a5corp.weather.R;
 import com.a5corp.weather.activity.WeatherActivity;
-import com.a5corp.weather.internet.FetchWeather;
-import com.a5corp.weather.model.Info;
 import com.a5corp.weather.model.WeatherFort;
 import com.a5corp.weather.preferences.Prefs;
 import com.a5corp.weather.utils.Constants;
 import com.a5corp.weather.utils.CustomFormatter;
 import com.a5corp.weather.utils.XFormatter;
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
@@ -38,10 +37,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.concurrent.ExecutionException;
 
 import static com.a5corp.weather.utils.Constants.DESCRIBABLE_KEY;
 
+@SuppressWarnings("unchecked")
 public class GraphsFragment extends Fragment {
 
     View rootView;
@@ -58,7 +57,6 @@ public class GraphsFragment extends Fragment {
     private Menu menu;
     int i = 0;
     private ArrayList<WeatherFort.WeatherList> mDescribable;
-    Info json;
 
     public GraphsFragment() {
         handler = new Handler();
@@ -73,21 +71,29 @@ public class GraphsFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_graphs, container, false);
         Log.i("Loaded" , "Fragment");
         startTask();
-        ((WeatherActivity) getActivity()).hideFab();
+        ((WeatherActivity) activity()).hideFab();
         return rootView;
+    }
+
+    public Context context() {
+        return getContext();
+    }
+
+    public FragmentActivity activity() {
+        return getActivity();
     }
 
     @Override
     public void onCreateOptionsMenu(Menu menu , MenuInflater inflater) {
-        getActivity().getMenuInflater().inflate(R.menu.menu_graph, menu);
+        activity().getMenuInflater().inflate(R.menu.menu_graph, menu);
         this.menu = menu;
-        this.menu.getItem(0).setIcon(ContextCompat.getDrawable(getContext() , R.drawable.ic_radio_button_unchecked_white_24dp));
+        this.menu.getItem(0).setIcon(ContextCompat.getDrawable(context() , R.drawable.ic_radio_button_unchecked_white_24dp));
     }
 
     @Override
@@ -101,11 +107,11 @@ public class GraphsFragment extends Fragment {
     }
 
     private void startTask() {
-        temperatureChart = (LineChart) rootView.findViewById(R.id.temperature_chart);
-        rainChart = (LineChart) rootView.findViewById(R.id.rain_chart);
-        pressureChart = (LineChart) rootView.findViewById(R.id.pressure_chart);
-        snowChart = (LineChart) rootView.findViewById(R.id.snow_chart);
-        windChart = (LineChart) rootView.findViewById(R.id.wind_chart);
+        temperatureChart = rootView.findViewById(R.id.temperature_chart);
+        rainChart = rootView.findViewById(R.id.rain_chart);
+        pressureChart = rootView.findViewById(R.id.pressure_chart);
+        snowChart = rootView.findViewById(R.id.snow_chart);
+        windChart = rootView.findViewById(R.id.wind_chart);
         mDescribable = (ArrayList<WeatherFort.WeatherList>) getArguments().getSerializable(DESCRIBABLE_KEY);
         function();
     }
@@ -117,11 +123,11 @@ public class GraphsFragment extends Fragment {
 
     public void toggleValues() {
         if (i == 1) {
-            menu.getItem(0).setIcon(ContextCompat.getDrawable(getContext() , R.drawable.ic_radio_button_unchecked_white_24dp));
+            menu.getItem(0).setIcon(ContextCompat.getDrawable(context() , R.drawable.ic_radio_button_unchecked_white_24dp));
             i = 0;
         }
         else {
-            menu.getItem(0).setIcon(ContextCompat.getDrawable(getContext() , R.drawable.ic_radio_button_checked_white_24dp));
+            menu.getItem(0).setIcon(ContextCompat.getDrawable(context() , R.drawable.ic_radio_button_checked_white_24dp));
             i = 1;
         }
         for (IDataSet set : temperatureChart.getData().getDataSets()) {
@@ -250,7 +256,7 @@ public class GraphsFragment extends Fragment {
                     rainChart.getData().getDataSetCount() - 1));
             rainChart.getLegend().setTextColor(Color.parseColor("#FFFFFF"));
         }
-        set = new LineDataSet(rainEntries, getString(R.string.g_rain));
+        set = new LineDataSet(rainEntries, getString(R.string.bottom_rain) + "," + getString(R.string.mm));
         set.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
         set.setCubicIntensity(0.2f);
         set.setDrawCircles(false);
@@ -403,7 +409,7 @@ public class GraphsFragment extends Fragment {
                     windChart.getData().getDataSetCount() - 1));
             windChart.getLegend().setTextColor(Color.parseColor("#FFFFFF"));
         }
-        String wind = getString(R.string.g_wind , PreferenceManager.getDefaultSharedPreferences(getContext()).getString(Constants.PREF_TEMPERATURE_UNITS , Constants.METRIC).equals(Constants.METRIC) ? getString(R.string.mps) : getString(R.string.mph));
+        String wind = getString(R.string.bottom_wind) + ", " + (PreferenceManager.getDefaultSharedPreferences(getContext()).getString(Constants.PREF_TEMPERATURE_UNITS , Constants.METRIC).equals(Constants.METRIC) ? getString(R.string.mps) : getString(R.string.mph));
         set = new LineDataSet(windEntries, wind);
         set.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
         set.setCubicIntensity(0.2f);
