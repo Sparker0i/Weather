@@ -163,7 +163,7 @@ public class GPSTracker implements LocationListener {
                         mContext.startActivity(intent);
                     }
                 })
-                .negativeText(mContext.getString(R.string.cancel))
+                .negativeText(mContext.getString(android.R.string.cancel))
                 .onNegative(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {

@@ -459,27 +459,10 @@ public class GraphsFragment extends Fragment {
         }
     }
 
-    @SuppressLint("SwitchIntDef")
     public String getDay(long dt) {
         dt *= 1000;
         Calendar c = Calendar.getInstance();
         c.setTime(new Date(dt));
-        switch(c.get(Calendar.DAY_OF_WEEK)) {
-            case Calendar.SUNDAY :
-                return getString(R.string.sun);
-            case Calendar.MONDAY :
-                return getString(R.string.mon);
-            case Calendar.TUESDAY :
-                return getString(R.string.tue);
-            case Calendar.WEDNESDAY :
-                return getString(R.string.wed);
-            case Calendar.THURSDAY :
-                return getString(R.string.thu);
-            case Calendar.FRIDAY :
-                return getString(R.string.fri);
-            case Calendar.SATURDAY :
-                return getString(R.string.sat);
-        }
-        return null;
+        return c.getDisplayName(Calendar.DAY_OF_WEEK , Calendar.SHORT , new Locale(new Prefs(getActivity()).getLanguage()));
     }
 }

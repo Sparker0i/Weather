@@ -108,9 +108,9 @@ public class NotificationService extends JobIntentService {
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         assert notificationManager != null;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            String id = "w01", name = getString(R.string.weather_notification_title);
+            String id = "w01", name = "Weather";
             int importance = NotificationManager.IMPORTANCE_MIN;
-            String desc = getString(R.string.weather_notification_description);
+            String desc = "Enable Hourly Weather Notifications";
 
             NotificationChannel channel = new NotificationChannel(id, name, importance);
             channel.setDescription(desc);

@@ -103,7 +103,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                                     new Prefs(getActivity()).setWeatherKey(Constants.OWM_APP_ID);
                                 }
                             })
-                            .negativeText(getString(R.string.cancel))
+                            .negativeText(getString(android.R.string.cancel))
                             .onNegative(new MaterialDialog.SingleButtonCallback() {
                                 @Override
                                 public void onClick(@NonNull MaterialDialog dialog , @NonNull DialogAction which) {

@@ -310,7 +310,7 @@ public class WeatherActivity extends AppCompatActivity {
 
     public void initDrawer() {
         final IProfile profile = new ProfileDrawerItem().withName(getString(R.string.app_name))
-                .withEmail(getString(R.string.drawer_version_header , BuildConfig.VERSION_NAME))
+                .withEmail("Version : " + BuildConfig.VERSION_NAME)
                 .withIcon(R.mipmap.ic_launcher_x);
         AccountHeader headerResult = new AccountHeaderBuilder()
                 .withActivity(this)
