@@ -138,10 +138,10 @@ public class CustomBottomSheetDialogFragment extends BottomSheetDialogFragment {
                 rainText.setText(getString(R.string.rain_ , 0));
             }
             try {
-                snowText.setText(getString(R.string.snow_ , json.getSnow()));
+                snowText.setText(getString(R.string.snow_ , json.getSnow() , preferences.getUnits().equals("metric") ? getContext().getString(R.string.mps) : getContext().getString(R.string.mph)));
             }
             catch (Exception ex) {
-                snowText.setText(getString(R.string.snow_ , 0));
+                snowText.setText(getString(R.string.snow_ , 0 , preferences.getUnits().equals("metric") ? getContext().getString(R.string.mps) : getContext().getString(R.string.mph)));
             }
             humidityText.setText(getString(R.string.humidity , json.getHumidity()));
             pressureText.setText(getString(R.string.pressure , json.getPressure()));

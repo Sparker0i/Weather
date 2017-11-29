@@ -387,7 +387,7 @@ public class WeatherActivity extends AppCompatActivity {
                         return true;
                     }
                 });
-        SecondaryDrawerItem item9 = new SecondaryDrawerItem().withName(R.string.drawer_item_settings)
+        SecondaryDrawerItem item9 = new SecondaryDrawerItem().withName(R.string.settings)
                 .withIcon(new IconicsDrawable(this)
                         .icon(GoogleMaterial.Icon.gmd_settings))
                 .withSelectable(false)
@@ -411,9 +411,6 @@ public class WeatherActivity extends AppCompatActivity {
                         item3,
                         new DividerDrawerItem(),
                         item4
-                        /*new DividerDrawerItem(),
-                        item7,
-                        item8*/
                 )
                 .addStickyDrawerItems(
                         item8,

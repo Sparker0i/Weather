@@ -12,6 +12,7 @@
 
     <!-- Languages array -->
     <string-array name="language_entries">
+        <item name="arabic"></item>
         <item name="english">English</item>
         <item name="chinese">简体中文 (Chinese)</item>
         <item name="hindi">हिन्दी (Hindi)</item>
@@ -23,6 +24,7 @@
         <item name="turkish">Türkçe (Turkish)</item>
     </string-array>
     <string-array name="language_values">
+        <item name="arabic">ar</item>
         <item name="english">en</item>
         <item name="chinese">zh</item>
         <item name="hindi">hi</item>

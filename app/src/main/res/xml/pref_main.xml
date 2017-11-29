@@ -22,7 +22,7 @@
         <ListPreference
             android:defaultValue="60"
             android:dependency="@string/pref_enable_notifs"
-            android:dialogTitle="@string/pref_refresh_summary"
+            android:dialogTitle="@string/pref_refresh_title"
             android:entries="@array/notification_refresh_intervals_entries"
             android:entryValues="@array/notification_refresh_interval_values"
             android:key="@string/pref_refresh_interval"
