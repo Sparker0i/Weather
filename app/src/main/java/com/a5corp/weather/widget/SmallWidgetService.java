@@ -69,7 +69,7 @@ public class SmallWidgetService extends JobIntentService{
 
             RemoteViews remoteViews = new RemoteViews(this.getPackageName(),
                     R.layout.widget_small);
-            remoteViews.setTextViewText(R.id.widget_city, weather.getName() + ", " + weather.getSys().getCountry());
+            remoteViews.setTextViewText(R.id.widget_city, weather.getName() + "," + weather.getSys().getCountry());
             remoteViews.setTextViewText(R.id.widget_temperature, temperature + temperatureScale);
 
             remoteViews.setImageViewBitmap(R.id.widget_icon,

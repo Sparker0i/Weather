@@ -14,7 +14,6 @@
     <string name="pick_city">Hey there, let\'s start by picking a city for you</string>
     <string name="hey_there_condition">Hey there, %s here right now!</string>
     <string name="loaded_weather_data">Loaded Weather Data</string>
-    <string name="credits"><u>CREDITS</u></string>
     <string name="refresh">Refresh</string>
 
     <string name="speed">Speed : %.2f</string>
@@ -124,7 +123,5 @@
 
     <!-- About -->
     <string name="enter_city_hint">Enter city name</string>
-
     <string name="choose_app">Choose an app</string>
-    <string name="title_activity_paytm_donate">Donate via PayTm</string>
 </resources>

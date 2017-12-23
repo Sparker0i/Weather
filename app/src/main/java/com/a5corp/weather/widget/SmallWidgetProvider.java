@@ -69,7 +69,7 @@ public class SmallWidgetProvider extends AppWidgetProvider {
         int iconId = prefs.getIcon();
         String weatherIcon = Utils.setWeatherIcon(context, iconId, 0);
 
-        remoteViews.setTextViewText(R.id.widget_city, prefs.getCity() + ", " + prefs.getCountry());
+        remoteViews.setTextViewText(R.id.widget_city, prefs.getCity());
         remoteViews.setTextViewText(R.id.widget_temperature, temperature + temperatureScale);
         remoteViews.setImageViewBitmap(R.id.widget_icon,
                 Utils.createWeatherIcon(context, weatherIcon));

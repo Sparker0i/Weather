@@ -70,7 +70,7 @@ public class LargeWidgetService extends JobIntentService {
 
             RemoteViews remoteViews = new RemoteViews(this.getPackageName(),
                     R.layout.widget_large);
-            remoteViews.setTextViewText(R.id.widget_city, weather.getName() + ", " + weather.getSys().getCountry());
+            remoteViews.setTextViewText(R.id.widget_city, weather.getName() + "," + weather.getSys().getCountry());
             remoteViews.setTextViewText(R.id.widget_temperature, temperature + temperatureScale);
             String rs = weather.getWeather().get(0).getDescription();
             String[] strArray = rs.split(" ");

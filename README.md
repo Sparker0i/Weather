@@ -10,12 +10,13 @@ Get it on Google Play and F-Droid (coming soon in XDA Labs Marketplace):
 [<img src="https://f-droid.org/badge/get-it-on.png" alt="Get it on F-Droid" height="80">](https://f-droid.org/repository/browse/?fdid=com.a5corp.weather)
 [<img src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png' alt='Get it on Google Play' width='210' height='80'>](https://play.google.com/store/apps/details?id=com.a5corp.weather)
 
-## Changelog:
-
+## Changelog
 Please refer CHANGELOG.md file.
 
-## Contributing
+## Translators
+If you want to translate you can easily do so on [Transifex](https://www.transifex.com/a5-corp/simple-weather).
 
+## Contributing
 - Create a new PR with a feature you want to add (though this depends upon the discretion of the developer, ie. me), or fix a bug in an already existing feature
 
 ![Weather App](/img/App.png)

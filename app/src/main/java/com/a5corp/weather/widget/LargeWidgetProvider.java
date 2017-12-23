@@ -74,7 +74,7 @@ public class LargeWidgetProvider extends AppWidgetProvider {
         int iconId = prefs.getIcon();
         String weatherIcon = Utils.setWeatherIcon(context , iconId , 0);
 
-        remoteViews.setTextViewText(R.id.widget_city, prefs.getCity() + ", " + prefs.getCountry());
+        remoteViews.setTextViewText(R.id.widget_city, prefs.getCity());
         remoteViews.setTextViewText(R.id.widget_temperature, temperature + temperatureScale);
         remoteViews.setTextViewText(R.id.widget_description, description);
         remoteViews.setTextViewText(R.id.widget_wind, wind);
