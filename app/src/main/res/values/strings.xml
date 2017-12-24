@@ -17,21 +17,12 @@
     <string name="refresh">Refresh</string>
 
     <string name="speed">Speed : %.2f</string>
-    <string name="rain_">Rain : %.2f mm</string>
     <string name="snow_">Snow : %1$.2f %2$s</string>
     <string name="humidity">Humidity : %d %%</string>
     <string name="pressure">Pressure : %.2f hPa</string>
-    <string name="temperature">Temperature : %1$.2f %2$s</string>
     <string name="city">City : %s</string>
 
-    <string name="wind" formatted="false">%1$.2f %2$s</string>
     <string name="wind_">Wind : %1$.2f %2$s</string>
-    <string name="humidity_">%d %%</string>
-    <string name="sunrise">Sunrise at : %s</string>
-    <string name="sunset">Sunset at : %s</string>
-
-    <string name="notif_temp" formatted="false">Temperature : %1$d %2$s</string>
-    <string name="notif_city">City : %s</string>
 
     <string name="wind_blowing_in">Wind Blowing towards %s</string>
     <string name="north">North</string>
@@ -58,12 +49,9 @@
     <string name="loading">Loading</string>
     <string name="settings">Settings</string>
 
-    <string name="c">°C</string>
-    <string name="f">°F</string>
     <string name="daily">DAILY</string>
     <string name="enable">ENABLE</string>
 
-    <string name="title_activity_detail">Details</string>
     <string name="title_activity_first_launch">Enter City</string>
 
     <!-- Drawer Strings -->
@@ -123,5 +111,4 @@
 
     <!-- About -->
     <string name="enter_city_hint">Enter city name</string>
-    <string name="choose_app">Choose an app</string>
 </resources>

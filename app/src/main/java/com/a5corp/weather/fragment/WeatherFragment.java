@@ -578,30 +578,6 @@ public class WeatherFragment extends Fragment {
                     Snackbar.make(rootView , wind1 , Snackbar.LENGTH_SHORT).show();
                 }
             });
-            sunriseIcon.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Snackbar.make(rootView , getString(R.string.sunrise , d1) , Snackbar.LENGTH_SHORT).show();
-                }
-            });
-            sunriseView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Snackbar.make(rootView , getString(R.string.sunrise , d1) , Snackbar.LENGTH_SHORT).show();
-                }
-            });
-            sunsetIcon.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Snackbar.make(rootView , getString(R.string.sunset , d2) , Snackbar.LENGTH_SHORT).show();
-                }
-            });
-            sunsetView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Snackbar.make(rootView , getString(R.string.sunset , d2) , Snackbar.LENGTH_SHORT).show();
-                }
-            });
             weatherIcon.setText(Utils.setWeatherIcon(context() , json0.getWeather().get(0).getId() , 10));
             weatherIcon.setOnClickListener(new View.OnClickListener()
             {

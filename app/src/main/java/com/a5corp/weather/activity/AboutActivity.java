@@ -36,7 +36,7 @@ public class AboutActivity extends AppCompatActivity
     @BindView(R.id.fab) FloatingActionButton fab;
     @OnClick(R.id.fab) void onClick() {
         Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:" + Constants.MAIL));
-        startActivity(Intent.createChooser(intent , getString(R.string.choose_app)));
+        startActivity(Intent.createChooser(intent , "Choose an app"));
     }
     private int previousVisibleItem;
 
