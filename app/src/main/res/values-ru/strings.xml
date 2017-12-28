@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="change_city">Сменить город</string>
+    <string name="enter_zip_code">Выбрать город можно введя его название или почтовый индекс</string>
+    <string name="could_not_find">Знаешь, не могу найти нужный тебе город. Пожалуйста, укажи новый:</string>
+    <string name="city_not_found">Город не найден</string>
+    <string name="city_already_exists">Такой город уже есть</string>
+    <string name="need_not_add">Ни к чему добавлять этот город снова</string>
+    <string name="location">Местоположение</string>
+    <string name="toggle_values">Сменить величины</string>
+
+    <string name="uh_oh">Увы! указанного города в базе нет. Попробуй по-другому</string>
+    <string name="pick_city">Привет! Давай сперва выберем твой город</string>
+    <string name="hey_there_condition">Привет! Тут сейчас %s!</string>
+
+    <string name="snow_">Снег: %1$.2f %2$s</string>
+    <string name="humidity">Влажность: %d %%</string>
+    <string name="pressure">Давление: %.2f гПа</string>
+
+    <string name="wind_">Ветер: %1$.2f %2$s</string>
+
+    <string name="wind_blowing_in">Направление ветра: %s</string>
+    <string name="north">Южный</string>
+    <string name="north_east">Юго-западный</string>
+    <string name="north_west">Юго-восточный</string>
+    <string name="south">Северный</string>
+    <string name="south_east">Северо-западный</string>
+    <string name="south_west">Северо-восточный</string>
+    <string name="east">Западный</string>
+    <string name="west">Восточный</string>
+
+    <string name="restart_app">Перезапуск приложения</string>
+    <string name="restart_app_content">Чтобы проверить новые настройки , пожалуйста, перезапусти приложение</string>
+
+    <string name="reset">СБРОС</string>
+
+    <string name="enter_city_first">Сперва укажи название города</string>
+    <string name="check_internet">Проверь подключение к интернету, пожалуйста.</string>
+    <string name="enable_location">Для этого дай приложению доступ к определению местоположения</string>
+    <string name="enable_gps">Включить GPS</string>
+    <string name="enable_gps_content">Для этой функциональности требуется включить GPS</string>
+
+    <string name="please_wait">Минуточку</string>
+    <string name="loading">Загружаю</string>
+    <string name="settings">Настройки</string>
+
+    <string name="daily">Ежедневная</string>
+    <string name="enable">ВКЛЮЧИТЬ</string>
+
+    <string name="title_activity_first_launch">Укажи город</string>
+
+    <!-- Drawer Strings -->
+    <string name="drawer_item_home">Дом</string>
+    <string name="drawer_item_graph">Погодные графики</string>
+    <string name="drawer_item_map">Карта погоды</string>
+    <string name="drawer_item_about">О приложении</string>
+    <string name="drawer_item_add_city">Добавить город</string>
+
+    <string name="rationale_string">Для этого коснитесь значка Настройки, затем — Разрешения и включите разрешение Определения местоположения</string>
+    <string name="show_location_rationale">Это разрешение требуется для получения погодной сводки в твоём местонахождении</string>
+
+    <string name="morning">Утром</string>
+    <string name="night">Ночью</string>
+    <string name="day">Днём</string>
+    <string name="Evening">Вечером</string>
+
+    <!-- Target Strings -->
+    <string name="target_search_title">Найти город</string>
+    <string name="target_search_content">Поиск погодных сводок среди более чем 200 000 городов и посёлков</string>
+    <string name="target_location_content">Прикоснись, чтобы проверить погоду в месте, где ты сейчас находишься. Проведи от левого края экрана направо, чтобы увидеть настройки</string>
+    <string name="target_refresh_title">Обновить</string>
+    <string name="target_refresh_content">Для обновления потяните сверху-вниз</string>
+
+    <string name="no_internet_title">Нет интернета</string>
+    <string name="no_internet_content">Доступ к интернету нужен для отображения погодной сводки</string>
+
+    <!-- Settings Headers -->
+    <string name="pref_temp_header">Температура</string>
+    <string name="pref_notification_header">Уведомления</string>
+    <string name="pref_display_header">Отображение</string>
+    <string name="pref_other_header">Прочие настройки</string>
+
+    <!-- Settings Titles -->
+    <string name="pref_units_title">Единицы измерения температуры</string>
+    <string name="pref_enable_notifs_title">Включить уведомления</string>
+    <string name="pref_refresh_title">Интервал обновления</string>
+    <string name="pref_lang_title">Язык</string>
+    <string name="pref_owm_key_title">Собственный ключ к OpenWeatherMap</string>
+    <string name="pref_delete_cities_title">Удалить города</string>
+
+    <!-- Settings Summary -->
+    <string name="pref_units_summary">Выбери предпочитаемые единицы измерения, отображение температуры будет производиться в этих единицах</string>
+    <string name="pref_owm_key_summary">Можно указать собственный ключ к API OpenWeatherMap, это снизит нагрузку на мой ключ к API.
+        \n\nОсторожно: Если ввести не верный ключ к API можно натворить дел. Пользуйся на свой страх и риск</string>
+    <string name="pref_delete_cities_summary">Удалить из дополнительно отображаемых в приложении городов</string>
+    <string name="pref_add_city_content">Можно указать имя города и добавить его к списку сохранённых городов</string>
+
+    <!-- Bottom Bar Strings -->
+    <string name="bottom_rain">Осадки</string>
+    <string name="bottom_wind">Ветер</string>
+
+    <!-- Graph Strings -->
+    <string name="g_pressure">Давление, гПа</string>
+    <string name="g_snow">Снег, мм</string>
+</resources>

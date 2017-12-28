@@ -60,7 +60,7 @@ public class FirstLaunchFragment extends Fragment {
             message.setText(getString(R.string.uh_oh));
         }
         Button goButton = rootView.findViewById(R.id.go_button);
-        goButton.setText(getString(R.string.first_go_text));
+        goButton.setText(getString(android.R.string.ok));
         goButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

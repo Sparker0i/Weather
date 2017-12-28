@@ -291,8 +291,6 @@ public class WeatherFragment extends Fragment {
                         public void run() {
                             preferences.setLaunched();
                             renderWeather(json);
-                            Snackbar snackbar = Snackbar.make(rootView, getString(R.string.loaded_weather_data) , 500);
-                            snackbar.show();
                             if (!preferences.getv3TargetShown())
                                 showTargets();
                             if (pd.isShowing())
@@ -591,7 +589,7 @@ public class WeatherFragment extends Fragment {
                             String cap = s.substring(0, 1).toUpperCase() + s.substring(1);
                             builder.append(cap.concat(" "));
                         }
-                        Snackbar.make(v , getString(R.string.hey_there_condition , builder.toString()), Snackbar.LENGTH_SHORT)
+                        Snackbar.make(v , getString(R.string.hey_there_condition , builder.toString().substring(0 , builder.length() - 1)), Snackbar.LENGTH_SHORT)
                                 .show();
                     }
                     catch (Exception e) {

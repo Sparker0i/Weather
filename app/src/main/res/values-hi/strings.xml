@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="change_city">शहर बदलें</string>
+    <string name="enter_zip_code">शहर बदलने के लिए आप शहर का नाम या फिर Zip कोड डाल सकते हैं</string>
+    <string name="could_not_find">जिस शहर को आप ढूंढ रहे थे उसकी जानकारी नहीं मिल सकी, कृप्या दोबारा कोशिश करें :</string>
+    <string name="city_not_found">शहर नहीं मिला</string>
+    <string name="city_already_exists">शहर पहले से ही मौजूद हैं</string>
+    <string name="need_not_add">आपको यह शहर दुबारा डालने की ज़रुरत नहीं हैं</string>
+    <string name="location">जीपीएस</string>
+    <string name="toggle_values">मूल्य दिखाएं</string>
+
+    <string name="uh_oh">अरे नहीं | आप जिस शहर को ढूंढ रहे थे, हमारे पास उसकी जानकारी नहीं हैं | कृप्या दोबारा कोशिश करें</string>
+    <string name="pick_city">चलिए, पहले एक शहर चुन लेते हैं</string>
+    <string name="hey_there_condition">इस वक्त यहाँ %s चल रहा हैं</string>
+
+    <string name="snow_">हिमपात: %1$.2f %2$s</string>
+    <string name="humidity">नमी :  %d %%</string>
+    <string name="pressure">नैतिक दबाव : %.2f hPa</string>
+
+    <string name="wind_">हवा गति: %1$.2f %2$s</string>
+
+    <string name="wind_blowing_in">हवा की दिशा : %s</string>
+    <string name="north">उत्तर</string>
+    <string name="north_east">ईशान</string>
+    <string name="north_west">वायु</string>
+    <string name="south">दक्षिण</string>
+    <string name="south_east">अग्नि</string>
+    <string name="south_west">नैऋत्य</string>
+    <string name="east">पूर्व</string>
+    <string name="west">पश्चिम</string>
+
+    <string name="restart_app">App दोबारा खोलें</string>
+    <string name="restart_app_content">इस App को एक नयी भाषा में देखने के लिए App दोबारा खोलें</string>
+
+    <string name="reset">RESET</string>
+
+    <string name="enter_city_first">पहले एक शहर का नाम तो डाल लीजिए</string>
+    <string name="check_internet">कृप्या अपना इंटरनेट पुनः देखें</string>
+    <string name="enable_location">यह कार्य पूर्ण करने के लिए अपनी जगह जानने का permission दीजिये</string>
+    <string name="enable_gps">कृप्या GPS चालू करें</string>
+    <string name="enable_gps_content">यह कार्य करने के लिए GPS अनिवार्य हैं</string>
+
+    <string name="please_wait">कृपया प्रतीक्षा करें</string>
+    <string name="loading">आ रहा हैं, सब्र रखें</string>
+    <string name="settings">Settings</string>
+
+    <string name="daily">प्रतिदिन</string>
+    <string name="enable">ENABLE</string>
+
+    <string name="title_activity_first_launch">शहर का नाम डालिये</string>
+
+    <!-- Drawer Strings -->
+    <string name="drawer_item_home">घर</string>
+    <string name="drawer_item_graph">मौसम रेखांकन</string>
+    <string name="drawer_item_map">मौसम नक्षा</string>
+    <string name="drawer_item_about">इस App के बारें में</string>
+    <string name="drawer_item_add_city">शहर योग करें</string>
+
+    <string name="rationale_string">Settings में जाएं, फिर Permissions में Location की अनुमति दें</string>
+    <string name="show_location_rationale">यह कार्य पूरा करने के लिए आपके इस वक्त के स्थान का जानना अनिवार्य हैं</string>
+
+    <string name="morning">सुबह</string>
+    <string name="night">रात</string>
+    <string name="day">दिनभर</string>
+    <string name="Evening">शाम</string>
+
+    <!-- Target Strings -->
+    <string name="target_search_title">शहर ढूंढें</string>
+    <string name="target_search_content">200000 शहरों की तापमान को जान सकेंगे यहाँ से</string>
+    <string name="target_location_content">इस वक्त के स्थान का तापमान जानने के लिए यह दबाएं | बाएं तरफ ऊपर वाला बटन दबाकर अधिक विकल्प पाएं</string>
+    <string name="target_refresh_title">ताज़ा करें</string>
+    <string name="target_refresh_content">तापमान को update करने के लिए ऊपर से खीचें</string>
+
+    <string name="no_internet_title">इंटरनेट मौजूद नहीं</string>
+    <string name="no_internet_content">तापमान देखने के लिए इंटरनेट अनिवार्य हैं</string>
+
+    <!-- Settings Headers -->
+    <string name="pref_temp_header">तापमान</string>
+    <string name="pref_notification_header">सूचनाएं</string>
+    <string name="pref_display_header">भाषा</string>
+    <string name="pref_other_header">अन्य विकल्प</string>
+
+    <!-- Settings Titles -->
+    <string name="pref_units_title">तापमान इकाई</string>
+    <string name="pref_enable_notifs_title">सूचनाएं चालू करें</string>
+    <string name="pref_refresh_title">ताज़ा करने का मध्यांतर</string>
+    <string name="pref_lang_title">भाषा</string>
+    <string name="pref_owm_key_title">अपना OpenWeatherMap key डालें</string>
+    <string name="pref_delete_cities_title">शहर हटाएँ</string>
+
+    <!-- Settings Summary -->
+    <string name="pref_units_summary">अपनी मनपसंद तापमान इकाई चुनें</string>
+    <string name="pref_owm_key_summary">आप अपना OpenWeatherMap API key डालकर मेरे app में तापमान अधिक गति से देख सकेंगे | 
+\n\nसावधान: गलत API key डालने पर App काम करना बंद हो सकता हैं | कृपया ध्यान से डालें</string>
+    <string name="pref_delete_cities_summary">इस app में दिखाएं अन्य शहरों को हटाएँ</string>
+    <string name="pref_add_city_content">आप एक नए शहर को ढूंढ कर इस app में दाल सकेंगे</string>
+
+    <!-- Bottom Bar Strings -->
+    <string name="bottom_rain">बारिश</string>
+    <string name="bottom_wind">हवा गति</string>
+
+    <!-- Graph Strings -->
+    <string name="g_pressure">नैतिक दबाव, hPa</string>
+    <string name="g_snow">हिमपात, mm</string>
+</resources>

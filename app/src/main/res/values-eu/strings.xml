@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="change_city">Aldatu hiria</string>
+    <string name="enter_zip_code">Hiria alda dezakezu bere izena edo posta kodea sartuz</string>
+    <string name="could_not_find">Ei!, ezin izan dugu nahi duzun hiria topatu. Mesedez, sartu beste berri bat :</string>
+    <string name="city_not_found">Hiria ez da aurkitu</string>
+    <string name="city_already_exists">Hiria aldez aurretik badago</string>
+    <string name="need_not_add">Ez duzu hiria berriro gehitu behar</string>
+    <string name="location">Kokapena</string>
+    <string name="toggle_values">Aldatu balioak</string>
+
+    <string name="uh_oh">Ups! Ez dugu sartu duzun hiria datubasean topatu. Saiatu berriro, mesedez.</string>
+    <string name="pick_city">Kaixo, hasteko hiri bat aukeratu</string>
+    <string name="hey_there_condition">Kaixo, une honetan hemen %s dago!</string>
+
+    <string name="snow_">Elurra : %1$.2f %2$s</string>
+    <string name="humidity">Hezetasuna : %d %%</string>
+    <string name="pressure">Presioa : %.2f hPa</string>
+
+    <string name="wind_">Haizea : %1$.2f %2$s</string>
+
+    <string name="wind_blowing_in">Haizearen norabidea : %s</string>
+    <string name="north">Iparraldea</string>
+    <string name="north_east">Ipar-Ekialdea</string>
+    <string name="north_west">Ipar-Mendebaldea</string>
+    <string name="south">Hegoaldea</string>
+    <string name="south_east">Hego-Ekialdea</string>
+    <string name="south_west">Hego-Mendebaldea</string>
+    <string name="east">Ekialdea</string>
+    <string name="west">Mendebaldea</string>
+
+    <string name="restart_app">Aplikazioa berrabiarazi</string>
+    <string name="restart_app_content">Berrabiarazi aplikazioa ezarpen berriak erabiltzeko, mesedez</string>
+
+    <string name="reset">BEREZARRI</string>
+
+    <string name="enter_city_first">Lehenik eta behin, hiri bat sartu</string>
+    <string name="check_internet">Egiaztatu zure interneteko konexioa ondo dabilela</string>
+    <string name="enable_location">Kokatzeko baimena gaitu behar duzu ekintza hau burutzeko.</string>
+    <string name="enable_gps">Gaitu GPSa</string>
+    <string name="enable_gps_content">GPS gaitu behar duzu aukera hau erabiltzeko</string>
+
+    <string name="please_wait">Itxaron, mesedez</string>
+    <string name="loading">Kargatzen</string>
+    <string name="settings">Ezarpenak</string>
+
+    <string name="daily">Egunez egun</string>
+    <string name="enable">GAITU</string>
+
+    <string name="title_activity_first_launch">Sartu hiria</string>
+
+    <!-- Drawer Strings -->
+    <string name="drawer_item_home">Hasiera</string>
+    <string name="drawer_item_graph">Eguraldiaren grafikoak</string>
+    <string name="drawer_item_map">Eguraldiaren mapa</string>
+    <string name="drawer_item_about">Honi buruz</string>
+    <string name="drawer_item_add_city">Gehitu hiria</string>
+
+    <string name="rationale_string">Ezarpenak sakatu, ostean baimenak, eta kokapenaren baimena gaitu hau egiteko</string>
+    <string name="show_location_rationale">Baimen hau beharrezkoa da zure kokapenaren eguraldi-datuak izateko</string>
+
+    <string name="morning">Goiza</string>
+    <string name="night">Gaua</string>
+    <string name="day">Eguna</string>
+    <string name="Evening">Arratsaldea</string>
+
+    <!-- Target Strings -->
+    <string name="target_search_title">Bilatu hiria</string>
+    <string name="target_search_content">Bilatu eguraldiaren datuak 200.000 hiri eta herrien artean baino gehiago</string>
+    <string name="target_location_content">Sakatu zauden kokapenaren eguraldia ikusteko. Pasatu hatza pantailaren ezker ertzetatik eskumatara aukera gehiago ikusteko</string>
+    <string name="target_refresh_title">Eguneratu</string>
+    <string name="target_refresh_content">Pasatu hatza goiko partetik eguneratzeko</string>
+
+    <string name="no_internet_title">Datu-konexiorik ez</string>
+    <string name="no_internet_content">Interneterako sarbidea izan behar duzu eguraldiaren datuak ikusteko.</string>
+
+    <!-- Settings Headers -->
+    <string name="pref_temp_header">Tenperatura</string>
+    <string name="pref_notification_header">Jakinarazpenak</string>
+    <string name="pref_display_header">Pantaila</string>
+    <string name="pref_other_header">Beste ezarpenak</string>
+
+    <!-- Settings Titles -->
+    <string name="pref_units_title">Tenperatura unitatea</string>
+    <string name="pref_enable_notifs_title">Gaitu jakinarazpenak</string>
+    <string name="pref_refresh_title">Freskatzeko tartea</string>
+    <string name="pref_lang_title">Hizkuntza</string>
+    <string name="pref_owm_key_title">Pertsonalizatu OpenWeatherMap gakoa</string>
+    <string name="pref_delete_cities_title">Ezabatu hiriak</string>
+
+    <!-- Settings Summary -->
+    <string name="pref_units_summary">Aukeratu tenperatura zein unitatetan ikusi nahi duzun </string>
+    <string name="pref_owm_key_summary">Zure pertsonalizatutako OpenWeatherMap APIren gakoa pertsonalizatu ahal duzu, nire API gakoaren karga murrizteko.
+\n\nKONTUZ: APIren gako okerra sartzen baduzu, portaera arraroak gerta litezke. Erabilera zure ardurapean dago.</string>
+    <string name="pref_delete_cities_summary">Ezabatu aplikazioan erakusten diren hiri gehigarrietatik</string>
+    <string name="pref_add_city_content">Hiri berri bat sar dezakezu eta gordetako hirien zerrendara gehitu.</string>
+
+    <!-- Bottom Bar Strings -->
+    <string name="bottom_rain">Euria</string>
+    <string name="bottom_wind">Haizea</string>
+
+    <!-- Graph Strings -->
+    <string name="g_pressure">Presioa, hPa</string>
+    <string name="g_snow">Elurra, mm</string>
+</resources>

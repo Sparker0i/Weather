@@ -125,11 +125,7 @@ public class CustomBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
     public void setOthers() {
         try {
-            String wind = getString(R.string.speed , json.getSpeed());
-            if (PreferenceManager.getDefaultSharedPreferences(getContext()).getString(Constants.PREF_TEMPERATURE_UNITS , Constants.METRIC).equals(Constants.IMPERIAL))
-                wind = wind + " " + getString(R.string.mph);
-            else
-                wind = wind + " " + getString(R.string.mps);
+            String wind = getString(R.string.wind_ , json.getSpeed() , PreferenceManager.getDefaultSharedPreferences(getContext()).getString(Constants.PREF_TEMPERATURE_UNITS , Constants.METRIC).equals(Constants.IMPERIAL) ? getString(R.string.mph) : getString(R.string.mps));
             windText.setText(wind);
             try {
                 rainText.setText(getString(R.string.rain_ , getString(R.string.bottom_rain) , json.getRain()));

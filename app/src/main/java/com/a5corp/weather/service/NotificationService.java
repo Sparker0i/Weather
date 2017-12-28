@@ -97,7 +97,7 @@ public class NotificationService extends JobIntentService {
         String temperatureScale = PreferenceManager.getDefaultSharedPreferences(this).getString(Constants.PREF_TEMPERATURE_UNITS , Constants.METRIC).equals(Constants.METRIC) ? getString(R.string.c) : getString(R.string.f);
         String speedScale = PreferenceManager.getDefaultSharedPreferences(this).getString(Constants.PREF_TEMPERATURE_UNITS , Constants.METRIC).equals(Constants.METRIC) ? getString(R.string.mps) : getString(R.string.mph);
 
-        String temperature = getString(R.string.temperature , getString(R.string.bottom_temperature) , weather.getMain().getTemp() , temperatureScale);
+        String temperature = getString(R.string.temperature , getString(R.string.pref_temp_header) , weather.getMain().getTemp() , temperatureScale);
         String city = getString(R.string.city , weather.getName() + ", " + weather.getSys().getCountry());
         String wind = getString(R.string.wind_ , weather.getWind().getSpeed(), speedScale);
         String humidity = getString(R.string.humidity , weather.getMain().getHumidity());

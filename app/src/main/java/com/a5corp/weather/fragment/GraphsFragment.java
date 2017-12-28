@@ -204,7 +204,7 @@ public class GraphsFragment extends Fragment {
                     temperatureChart.getData().getDataSetCount() - 1));
             temperatureChart.getLegend().setTextColor(Color.parseColor("#FFFFFF"));
         }
-        String temp = getString(R.string.bottom_temperature) + ", " + (PreferenceManager.getDefaultSharedPreferences(getContext()).getString(Constants.PREF_TEMPERATURE_UNITS , Constants.METRIC).equals(Constants.METRIC) ? getString(R.string.c) : getString(R.string.f));
+        String temp = getString(R.string.pref_temp_header) + ", " + (PreferenceManager.getDefaultSharedPreferences(getContext()).getString(Constants.PREF_TEMPERATURE_UNITS , Constants.METRIC).equals(Constants.METRIC) ? getString(R.string.c) : getString(R.string.f));
         set = new LineDataSet(tempEntries, temp);
         set.setMode(LineDataSet.Mode.CUBIC_BEZIER);
         set.setCubicIntensity(0.2f);

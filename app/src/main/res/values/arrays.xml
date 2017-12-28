@@ -12,8 +12,9 @@
 
     <!-- Languages array -->
     <string-array name="language_entries">
-        <item name="arabic">عربى (Arabic)</item>
-        <item name="belarusian">Belarusian</item>
+        <item name="arabic">(Arabic) عربى</item>
+        <item name="belarusian">беларуская (Belarusian)</item>
+        <item name="basque">Euskara</item>
         <item name="english">English</item>
         <item name="chinese">简体中文 (Chinese)</item>
         <item name="danish">Danish</item>
@@ -21,7 +22,7 @@
         <item name="french">Français (French)</item>
         <item name="german">Deutsch (German)</item>
         <item name="italian">Italian</item>
-        <item name="norwegian">Norwegian Bokmål</item>
+        <item name="norwegian">Norwegian Bokmål (Norwegian)</item>
         <item name="spanish">Español (Spanish)</item>
         <item name="japanese">日本語 (Japanese)</item>
         <item name="russian">Русский (Russian)</item>
@@ -30,6 +31,7 @@
     <string-array name="language_values">
         <item name="arabic">ar</item>
         <item name="belarusian">be</item>
+        <item name="basque">eu</item>
         <item name="english">en</item>
         <item name="chinese">zh</item>
         <item name="danish">da</item>
@@ -37,7 +39,7 @@
         <item name="french">fr</item>
         <item name="german">de</item>
         <item name="italian">it</item>
-        <item name="norwegian">nb</item>
+        <item name="norwegian">nb-rNL</item>
         <item name="spanish">es</item>
         <item name="japanese">ja</item>
         <item name="russian">ru</item>

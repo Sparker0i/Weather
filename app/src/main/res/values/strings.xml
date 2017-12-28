@@ -9,18 +9,13 @@
     <string name="location">Location</string>
     <string name="toggle_values">Toggle Values</string>
 
-    <string name="first_go_text">GO</string>
     <string name="uh_oh">Uh oh. Seems like the city you entered does not exist on the Database. Please Try Again</string>
     <string name="pick_city">Hey there, let\'s start by picking a city for you</string>
     <string name="hey_there_condition">Hey there, %s here right now!</string>
-    <string name="loaded_weather_data">Loaded Weather Data</string>
-    <string name="refresh">Refresh</string>
 
-    <string name="speed">Speed : %.2f</string>
     <string name="snow_">Snow : %1$.2f %2$s</string>
     <string name="humidity">Humidity : %d %%</string>
     <string name="pressure">Pressure : %.2f hPa</string>
-    <string name="city">City : %s</string>
 
     <string name="wind_">Wind : %1$.2f %2$s</string>
 
@@ -103,12 +98,8 @@
     <!-- Bottom Bar Strings -->
     <string name="bottom_rain">Rain</string>
     <string name="bottom_wind">Wind</string>
-    <string name="bottom_temperature">Temperature</string>
 
     <!-- Graph Strings -->
     <string name="g_pressure">Pressure, hPa</string>
     <string name="g_snow">Snow, mm</string>
-
-    <!-- About -->
-    <string name="enter_city_hint">Enter city name</string>
 </resources>

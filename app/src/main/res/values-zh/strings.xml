@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="change_city">更改城市</string>
+    <string name="enter_zip_code">输入城市名称或邮政编码即可更改城市</string>
+    <string name="could_not_find">找不到你想要的城市。请重新输入：</string>
+    <string name="city_not_found">未找到城市</string>
+    <string name="city_already_exists">城市已存在</string>
+    <string name="need_not_add">你不用再次添加城市</string>
+    <string name="location">定位</string>
+    <string name="toggle_values">切换值</string>
+
+    <string name="uh_oh">你输入的城市似乎在数据库上不存在。请再试一遍。</string>
+    <string name="pick_city">嘿，我们先来为你挑选一座城市</string>
+    <string name="hey_there_condition">现在是%s！</string>
+
+    <string name="snow_">雪量：%1$.2f%2$s</string>
+    <string name="humidity">湿度：%d%%</string>
+    <string name="pressure">气压：%.2fhPa</string>
+
+    <string name="wind_">风：%1$.2f%2$s</string>
+
+    <string name="wind_blowing_in">风向%s</string>
+    <string name="north">北风</string>
+    <string name="north_east">东北风</string>
+    <string name="north_west">西北风</string>
+    <string name="south">南风</string>
+    <string name="south_east">东南风</string>
+    <string name="south_west">西南风</string>
+    <string name="east">东风</string>
+    <string name="west">西风</string>
+
+    <string name="restart_app">重启软件</string>
+    <string name="restart_app_content">请重启软件以应用新的配置</string>
+
+    <string name="reset">重启</string>
+
+    <string name="enter_city_first">首先输入城市名称</string>
+    <string name="check_internet">请检查网络连接</string>
+    <string name="enable_location">请启用位置权限来执行此操作</string>
+    <string name="enable_gps">启用GPS</string>
+    <string name="enable_gps_content">你需要启用GPS才能使用此功能</string>
+
+    <string name="please_wait">请稍等</string>
+    <string name="loading">加载中</string>
+    <string name="settings">设置</string>
+
+    <string name="daily">每日预报</string>
+    <string name="enable">开启</string>
+
+    <string name="title_activity_first_launch">输入城市</string>
+
+    <!-- Drawer Strings -->
+    <string name="drawer_item_home">主页</string>
+    <string name="drawer_item_graph">天气图表</string>
+    <string name="drawer_item_map">天气地图</string>
+    <string name="drawer_item_about">关于</string>
+    <string name="drawer_item_add_city">添加城市</string>
+
+    <string name="rationale_string">点击设置，然后在权限中启用位置权限来执行此操作</string>
+    <string name="show_location_rationale">需要此权限才能访问你的位置的天气数据</string>
+
+    <string name="morning">早晨</string>
+    <string name="night">夜晚</string>
+    <string name="day">日间</string>
+    <string name="Evening">晚间</string>
+
+    <!-- Target Strings -->
+    <string name="target_search_title">搜索城市</string>
+    <string name="target_search_content">搜索来自20多万个城镇的天气数据</string>
+    <string name="target_location_content">点击查看你当前位置的天气。从左向右滑动以查看更多选项</string>
+    <string name="target_refresh_title">刷新</string>
+    <string name="target_refresh_content">从上到下滑动刷新</string>
+
+    <string name="no_internet_title">无网络</string>
+    <string name="no_internet_content">需要启用网络权限来显示天气数据</string>
+
+    <!-- Settings Headers -->
+    <string name="pref_temp_header">温度</string>
+    <string name="pref_notification_header">通知</string>
+    <string name="pref_display_header">显示</string>
+    <string name="pref_other_header">其他设置</string>
+
+    <!-- Settings Titles -->
+    <string name="pref_units_title">温度单位</string>
+    <string name="pref_enable_notifs_title">启用通知</string>
+    <string name="pref_refresh_title">刷新间隔</string>
+    <string name="pref_lang_title">语言</string>
+    <string name="pref_owm_key_title">自定义 OpenWeatherMap 的 Key</string>
+    <string name="pref_delete_cities_title">删除城市</string>
+
+    <!-- Settings Summary -->
+    <string name="pref_units_summary">选择您想要查看温度的首选温度单位</string>
+    <string name="pref_owm_key_summary">你可以输入自己的 OpenWeatherMap API key，还可以减少我的 API Key 的使用频率。
+        \n\n注意： 输入错误的 API Key 可能会导致你不想要的结果。你需要自己承担风险</string>
+    <string name="pref_delete_cities_summary">删除在软件中显示其他的城市</string>
+    <string name="pref_add_city_content">你可以进入一个新城市并将其添加到已保存的城市列表中</string>
+
+    <!-- Bottom Bar Strings -->
+    <string name="bottom_rain">雨量</string>
+    <string name="bottom_wind">风速</string>
+
+    <!-- Graph Strings -->
+    <string name="g_pressure">气压，hpa</string>
+    <string name="g_snow">雨量，mm</string>
+</resources>

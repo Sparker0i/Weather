@@ -52,7 +52,7 @@
             android:layout_alignParentStart="true"
             android:layout_below="@+id/materialTextField"
             android:ems="10"
-            android:hint="@string/enter_city_hint"
+            android:hint="@string/title_activity_first_launch"
             android:inputType="textPersonName" />
 
     </com.github.florent37.materialtextfield.MaterialTextField>
