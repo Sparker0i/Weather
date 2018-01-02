@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="change_city">Cambiar ciudad</string>
+    <string name="enter_zip_code">Puedes cambiar la ciudad ingresando su nombre o código postal</string>
+    <string name="could_not_find">Oye, no pudimos encontrar la ciudad que quieres. Ingresa una nueva:</string>
+    <string name="location">Ubicación</string>
+    <string name="toggle_values">Alternar valores</string>
+
+    <string name="uh_oh">Oh oh. Parece que la ciudad que ingresaste no existe en la base de datos. Intenta de nuevo</string>
+    <string name="pick_city">Oye, empecemos seleccionando una ciudad por ti</string>
+
+    <string name="snow_">Nieve: %.2f mm</string>
+    <string name="pressure">Presión: %.2f hPa</string>
+
+    <string name="wind_">Viento: %1$.2f %2$s</string>
+
+    <string name="north">El viento sopla hacia el norte</string>
+    <string name="north_east">El viento sopla en dirección noreste</string>
+    <string name="north_west">El viento sopla en dirección noroeste</string>
+    <string name="south">El viento sopla hacia el sur</string>
+    <string name="south_east">El viento sopla en dirección sureste</string>
+    <string name="south_west">El viento sopla en dirección suroeste</string>
+    <string name="east">El viento sopla hacia el este</string>
+    <string name="west">El viento sopla hacia el oeste</string>
+
+    <string name="restart_app">Reinicia la app</string>
+    <string name="restart_app_content">Reinicia la aplicación para comprobar con la configuración nueva</string>
+
+    <string name="reset">RESTABLECER</string>
+    <string name="enter_city_first">Primeto ingresa un nombre de ciudad</string>
+    <string name="check_internet">Verifica tu conexión a Internet</string>
+    <string name="enable_location">Activa el permiso de ubicación para realizar esta acción.</string>
+    <string name="please_wait">Aguarda</string>
+    <string name="loading">Cargando</string>
+
+    <string name="title_activity_first_launch">Ingresa una ciudad</string>
+
+    <string name="drawer_item_home">Inicio</string>
+    <string name="drawer_item_graph">Gráficos del tiempo</string>
+    <string name="drawer_item_map">Mapas del tiempo</string>
+    <string name="drawer_item_about">Acerca de</string>
+
+    <string name="morning">Mañana</string>
+    <string name="night">Noche</string>
+    <string name="day">Día</string>
+    <string name="Evening">Tarde</string>
+
+    <string name="target_search_title">Busca una ciudad</string>
+    <string name="target_refresh_title">Actualizar</string>
+    <string name="no_internet_title">Sin Internet</string>
+    <string name="no_internet_content">Se necesita que esté activado el acceso a Internet para mostrar datos del tiempo</string>
+    <string name="no_internet_mobile_data">Datos móviles</string>
+    <string name="update_period_15min">15 minutos</string>
+    <string name="update_period_30min">30 minutos</string>
+    <string name="update_period_1hour">1 hora</string>
+    <string name="update_period_3hours">3 horas</string>
+    <string name="update_period_6hours">6 horas</string>
+    <string name="update_period_12hours">12 horas</string>
+
+    <string name="pref_temp_header">Temperatura</string>
+    <string name="pref_notification_header">Notificaciones</string>
+    <string name="pref_display_header">Mostrar</string>
+    <string name="pref_other_header">Otras preferencias</string>
+
+    <string name="pref_units_title">Unidad de temperatura</string>
+    <string name="pref_enable_notifs_title">Activar notificaciones</string>
+    <string name="pref_refresh_title">Intervalo de actualización</string>
+    <string name="pref_lang_title">Idioma</string>
+
+    <string name="widget_weather_icon_description">Icono del tiempo actual</string>
+    <string name="bottom_rain">Lluvia</string>
+    <string name="bottom_wind">Viento</string>
+
+    <string name="g_pressure">Presión, hPa</string>
+    <string name="g_snow">Nieve, mm</string>
+
+</resources>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="change_city">Stad wijzigen</string>
+    <string name="enter_zip_code">U kunt de stad wijzigen door een naam of postcode in te voeren</string>
+    <string name="could_not_find">De gezochte stad kan niet worden gevonden. Voer een andere naam in:</string>
+    <string name="city_not_found">Stad niet gevonden</string>
+    <string name="city_already_exists">Stad is al toegevoegd</string>
+    <string name="need_not_add">U hoeft deze stad niet opnieuw toe te voegen</string>
+    <string name="location">Locatie</string>
+    <string name="toggle_values">Waarden omschakele</string>
+
+    <string name="uh_oh">Oeps, het lijkt erop dat de gezochte stad zich niet bevindt in de database. Probeer het opnieuw.</string>
+    <string name="pick_city">Hallo! Laten we beginnen met het kiezen van een stad.</string>
+    <string name="hey_there_condition">Hallo, %s is nu hier!</string>
+
+    <string name="snow_">Sneeuw: %1$.2f %2$s</string>
+    <string name="humidity">Luchtvochtigheid: %d%%</string>
+    <string name="pressure">Luchtdruk: %.2f hPa</string>
+
+    <string name="wind_">Wind: %1$.2f%2$s</string>
+
+    <string name="wind_blowing_in">Windrichting: %s</string>
+    <string name="north">Noord</string>
+    <string name="north_east">Noordoost</string>
+    <string name="north_west">Noordwest</string>
+    <string name="south">Zuid</string>
+    <string name="south_east">Zuidoost</string>
+    <string name="south_west">Zuidwest</string>
+    <string name="east">Oost</string>
+    <string name="west">West</string>
+
+    <string name="restart_app">Herstart de ap</string>
+    <string name="restart_app_content">Herstart de app om de nieuwe configuratie toe te passen</string>
+
+    <string name="reset">STANDAARDWAARDEN</string>
+
+    <string name="enter_city_first">Voer eerst een stadsnaam in</string>
+    <string name="check_internet">Controleer uw internetverbinding</string>
+    <string name="enable_location">Schakel locatietoestemming in om deze actie uit te voeren.</string>
+    <string name="enable_gps">GPS inschakelen</string>
+    <string name="enable_gps_content">U moet GPS inschakelen om deze functie te kunnen gebruiken</string>
+
+    <string name="please_wait">Even geduld</string>
+    <string name="loading">Bezig met laden</string>
+    <string name="settings">Instellingen</string>
+
+    <string name="daily">DAGELIJKS</string>
+    <string name="enable">INSCHAKELEN</string>
+
+    <string name="title_activity_first_launch">Voer naam in</string>
+
+    <!-- Drawer Strings -->
+    <string name="drawer_item_home">Thuis</string>
+    <string name="drawer_item_graph">Weerstatistieken</string>
+    <string name="drawer_item_map">Weerkaart</string>
+    <string name="drawer_item_about">Over</string>
+    <string name="drawer_item_add_city">Stad toevoegen</string>
+
+    <string name="rationale_string">Druk op Instellingen, dan Toestemmingen en schakel locatietoestemmng in</string>
+    <string name="show_location_rationale">Deze toestemming is vereist om de weergegevens van uw locatie op te kunnen vragen</string>
+
+    <string name="morning">Ochtend</string>
+    <string name="night">Nacht</string>
+    <string name="day">Dag</string>
+    <string name="Evening">Avond</string>
+
+    <!-- Target Strings -->
+    <string name="target_search_title">Zoeken naar een stad</string>
+    <string name="target_search_content">Zoeken naar weergegevens van meer dan 200.000 steden</string>
+    <string name="target_location_content">Druk om het weer te controleren op uw huidige locatie. Veeg vanaf de linkerkant van het scherm om meer opties te weergeven.</string>
+    <string name="target_refresh_title">Verversen</string>
+    <string name="target_refresh_content">Veeg vanaf de bovenkant om te verversen</string>
+
+    <string name="no_internet_title">Geen internetverbinding</string>
+    <string name="no_internet_content">Internettoegang moet worden ingeschakeld om weergegevens weer te kunnen geven</string>
+
+    <!-- Settings Headers -->
+    <string name="pref_temp_header">Temperatuur</string>
+    <string name="pref_notification_header">Meldingen</string>
+    <string name="pref_display_header">Weergave</string>
+    <string name="pref_other_header">Overige instellingen</string>
+
+    <!-- Settings Titles -->
+    <string name="pref_units_title">Temperatuureenheid</string>
+    <string name="pref_enable_notifs_title">Meldingen inschakelen</string>
+    <string name="pref_refresh_title">Ververstussenpose</string>
+    <string name="pref_lang_title">Taal</string>
+    <string name="pref_owm_key_title">Aangepaste OpenWeatherMap-sleutel</string>
+    <string name="pref_delete_cities_title">Steden verwijderen</string>
+
+    <!-- Settings Summary -->
+    <string name="pref_units_summary">Kies de door u geprefereerde temperatuureenheid</string>
+    <string name="pref_owm_key_summary">U kunt uw eigen aangepaste OpenWeatherMap-sleutel invoeren en zo de druk op mijn sleutel verlichten.
+  \n\nLET OP: Het invoeren van een onjuiste sleutel kan leiden tot ongewenste acties. Dit is op eigen risico.</string>
+    <string name="pref_delete_cities_summary">Verwijderen uit de extra steden-lijst</string>
+    <string name="pref_add_city_content">U kunt nu een nieuwe stad zoeken en toevoegen aan de lijst met opgeslagen steden</string>
+
+    <!-- Bottom Bar Strings -->
+    <string name="bottom_rain">Regen</string>
+    <string name="bottom_wind">Wind</string>
+
+    <!-- Graph Strings -->
+    <string name="g_pressure">Luchtdruk, hPa</string>
+    <string name="g_snow">Sneeuw, mm</string>
+</resources>

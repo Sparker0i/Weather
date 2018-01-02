@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -27,21 +27,32 @@
         android:id="@+id/fragment"
         android:paddingTop="?attr/actionBarSize"
         android:layout_width="match_parent"
+        android:clipChildren="false"
+        android:clipToPadding="false"
         android:layout_height="match_parent"
         tools:context="com.a5corp.weather.WeatherActivity"
-        tools:ignore="MergeRootFrame"
-        android:background="@color/colorPrimary" />
+        android:background="@color/colorPrimary" >
+        <com.github.jorgecastilloprz.FABProgressCircle
+            android:id="@+id/fabProgressCircle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            app:finalIcon="@drawable/ic_done_black_24dp"
+            app:arcColor="@color/fabEndColor"
+            android:layout_marginBottom="8dp"
+            app:arcWidth="2dp"
+            app:reusable="true"
+            android:layout_marginEnd="8dp">
 
-    <com.github.clans.fab.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        app:fab_progress_indeterminate="true"
-        app:fab_progress="0"
-        app:fab_progress_max="100"
-        android:src="@drawable/ic_search_white_24dp"/>
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/search"
+                android:tint="@color/white"
+                app:elevation="1dp"
+                app:borderWidth="4dp" />
+        </com.github.jorgecastilloprz.FABProgressCircle>
+    </FrameLayout>
 
-</android.support.design.widget.CoordinatorLayout>
+</RelativeLayout>

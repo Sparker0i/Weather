@@ -67,7 +67,7 @@ public class SmallWidgetProvider extends AppWidgetProvider {
 
         String temperature = String.format(Locale.getDefault(), "%.0f", prefs.getTemperature());
         int iconId = prefs.getIcon();
-        String weatherIcon = Utils.setWeatherIcon(context, iconId, 0);
+        String weatherIcon = Utils.setWeatherIcon(context, iconId);
 
         remoteViews.setTextViewText(R.id.widget_city, prefs.getCity());
         remoteViews.setTextViewText(R.id.widget_temperature, temperature + temperatureScale);

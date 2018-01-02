@@ -7,6 +7,7 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.content.ContextCompat;
@@ -31,7 +32,6 @@ import com.a5corp.weather.service.NotificationService;
 import com.a5corp.weather.utils.Constants;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.github.clans.fab.FloatingActionButton;
 import com.mikepenz.google_material_typeface_library.GoogleMaterial;
 import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.materialdrawer.AccountHeader;
@@ -47,11 +47,7 @@ import com.mikepenz.weather_icons_typeface_library.WeatherIcons;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.concurrent.ExecutionException;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import shortbread.Shortbread;
 import shortbread.Shortcut;
 
@@ -60,7 +56,6 @@ public class WeatherActivity extends AppCompatActivity {
     WeatherFragment wf;
     GraphsFragment gf;
     MapsFragment mf;
-    @BindView(R.id.toolbar)
     Toolbar toolbar;
     Drawer drawer;
     NotificationManagerCompat mManager;
@@ -104,11 +99,11 @@ public class WeatherActivity extends AppCompatActivity {
     }
 
     public void hideFab() {
-        fab.hide(true);
+        fab.hide();
     }
 
     public void showFab() {
-        fab.show(true);
+        fab.show();
     }
 
     @Override
@@ -119,25 +114,25 @@ public class WeatherActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_weather);
         Log.i("Activity", WeatherActivity.class.getSimpleName());
         mManager = NotificationManagerCompat.from(this);
         preferences = new Prefs(this);
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_weather);
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        ButterKnife.bind(this);
         fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                fab.hide(true);
+                fab.hide();
                 showInputDialog();
             }
         });
-        setSupportActionBar(toolbar);
         Intent intent = getIntent();
         handler = new Handler();
-        fab.show(true);
+        fab.show();
         wf = new WeatherFragment();
         Bundle bundle = new Bundle();
         bundle.putInt("mode", intent.getIntExtra(Constants.MODE, 0));
@@ -159,13 +154,13 @@ public class WeatherActivity extends AppCompatActivity {
                 .onAny(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                        fab.show(true);
+                        fab.show();
                     }
                 })
                 .dismissListener(new DialogInterface.OnDismissListener() {
                     @Override
                     public void onDismiss(DialogInterface dialogInterface) {
-                        fab.show(true);
+                        fab.show();
                     }
                 })
                 .negativeText(getString(android.R.string.cancel))
@@ -173,14 +168,14 @@ public class WeatherActivity extends AppCompatActivity {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                         dialog.dismiss();
-                        fab.show(true);
+                        fab.show();
                     }
                 })
                 .input(null, null, new MaterialDialog.InputCallback() {
                     @Override
                     public void onInput(@NonNull MaterialDialog dialog, @NonNull CharSequence input) {
                         changeCity(input.toString());
-                        fab.show(true);
+                        fab.show();
                     }
                 }).show();
     }

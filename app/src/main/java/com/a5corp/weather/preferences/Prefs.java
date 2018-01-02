@@ -74,7 +74,6 @@ public class Prefs {
         prefs.edit().putString(Constants.UNITS , string).apply();
     }
 
-    @Deprecated
     public String getUnits() {
         return prefs.getString(Constants.UNITS , Constants.METRIC);
     }

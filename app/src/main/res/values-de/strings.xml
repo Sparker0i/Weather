@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string name="location">Ort</string>
+
+    <string name="mps">m/s</string>
+    <string name="mph">mil/h</string>
+    <string name="hPa">hPa</string>
+    <string name="mm">mm</string>
+    <string name="snow_">Schnee: %.2f mm</string>
+    <string name="humidity">Luftfeuchtigkeit: %d %%</string>
+    <string name="pressure">Luftdruck: %.2f hPa</string>
+
+    <string name="wind_">Wind: %1$.2f %2$s</string>
+
+    <string name="restart_app">App neu starten</string>
+    <string name="reset">ZURÜCKSETZEN</string>
+
+    <string name="enter_city_first">Geben Sie zuerst einen Ortsnamen ein</string>
+    <string name="check_internet">Bitte überprüfen Sie Ihre Internetverbindung</string>
+    <string name="please_wait">Bitte warten</string>
+    <string name="loading">Laden</string>
+    <string name="daily">TÄGLICH</string>
+
+    <string name="title_activity_first_launch">Ort eingeben</string>
+
+    <string name="drawer_item_graph">Wettergrafiken</string>
+    <string name="drawer_item_map">Wetterkarte</string>
+    <string name="drawer_item_about">Über</string>
+
+    <string name="morning">Morgen</string>
+    <string name="night">Nacht</string>
+    <string name="day">Tag</string>
+    <string name="Evening">Abend</string>
+
+    <string name="target_search_title">Suche einen Ort</string>
+    <string name="target_search_content">Suche nach Wetterdaten aus über 200.000 Städten und kleineren Orten</string>
+    <string name="target_refresh_title">Aktualisieren</string>
+    <string name="no_internet_title">Kein Internet</string>
+    <string name="no_internet_wifi">WLAN</string>
+
+    <string name="update_period_15min">15 Minuten</string>
+    <string name="update_period_30min">30 Minuten</string>
+    <string name="update_period_1hour">1 Stunde</string>
+    <string name="update_period_3hours">3 Stunden</string>
+    <string name="update_period_6hours">6 Stunden</string>
+    <string name="update_period_12hours">12 Stunden</string>
+
+    <string name="pref_temp_header">Temperatur</string>
+    <string name="pref_notification_header">Benachrichtigungen</string>
+    <string name="pref_display_header">Anzeige</string>
+    <string name="pref_other_header">Andere Einstellungen</string>
+
+    <string name="pref_units_title">Einheit für Temperatur</string>
+    <string name="pref_enable_notifs_title">Benachrichtigungen einschalten</string>
+    <string name="pref_lang_title">Sprache</string>
+    <string name="bottom_rain">Regen</string>
+    <string name="bottom_wind">Wind</string>
+
+    <string name="other_apps_link">https://play.google.com/store/apps/dev?id=6116967233401290402</string>
+    <string name="app_link_direct">https://play.google.com/store/apps/details?id=com.a5corp.weather</string>
+    <string name="github_link">https://github.com/Sparker0i</string>
+
+    <string name="change_city">Ort ändern</string>
+    <string name="enter_zip_code">Sie können den Ort ändern, indem Sie den Namen oder die Postleitzahl eingeben</string>
+    <string name="could_not_find">Der gesuchte Ort konnte nicht gefunden werden. Bitte geben Sie einen anderen Ort ein:</string>
+    <string name="toggle_values">Werte umschalten</string>
+    <string name="uh_oh">Anscheinend ist der Ort, den Sie eingegeben haben, nicht in der Datenbank enthalten. Bitte versuchen Sie es erneut.</string>
+    <string name="pick_city">Beginnen Sie, indem Sie einen Ort aussuchen.</string>
+    <string name="north">Wind aus Süd</string>
+    <string name="north_east">Wind aus Südwest</string>
+    <string name="north_west">Wind aus Südost</string>
+    <string name="south">Wind aus Nord</string>
+    <string name="south_east">Wind aus Nordwest</string>
+    <string name="south_west">Wind aus Nordost</string>
+    <string name="east">Wind aus West</string>
+    <string name="west">Wind aus Ost</string>
+
+    <string name="drawer_item_home">Home</string>
+
+    <string name="target_refresh_content">Wischen Sie von oben, um zu aktualisieren</string>
+
+    <string name="no_internet_content">Der Internetzugriff muss eingeschaltet sein, um Wetterdaten anzuzeigen.</string>
+    <string name="no_internet_mobile_data">Mobile Daten</string>
+    <string name="pref_refresh_title">Aktualisierungsintervall</string>
+    <string name="pref_owm_key_title">Eigener OpenWeatherMap-Schlüssel</string>
+
+    <string name="widget_weather_icon_description">Aktuelles Wettersymbol</string>
+    <string name="g_pressure">Luftdruck, hPa</string>
+    <string name="g_snow">Schnee, mm</string>
+
+</resources>

@@ -65,7 +65,7 @@ public class SmallWidgetService extends JobIntentService{
 
             String temperature = String.format(Locale.getDefault(), "%.0f", weather.getMain().getTemp());
             int iconId = weather.getWeather().get(0).getId();
-            String weatherIcon = Utils.setWeatherIcon( this, iconId, 0);
+            String weatherIcon = Utils.setWeatherIcon( this, iconId);
 
             RemoteViews remoteViews = new RemoteViews(this.getPackageName(),
                     R.layout.widget_small);

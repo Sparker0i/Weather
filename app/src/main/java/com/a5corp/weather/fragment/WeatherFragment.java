@@ -10,6 +10,7 @@ import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetDialogFragment;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -46,7 +47,6 @@ import com.a5corp.weather.utils.Constants;
 import com.a5corp.weather.utils.Utils;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.github.clans.fab.FloatingActionButton;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -57,6 +57,7 @@ import java.util.concurrent.ExecutionException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.github.jorgecastilloprz.FABProgressCircle;
 import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
 
 import static com.a5corp.weather.utils.Constants.DESCRIBABLE_KEY;
@@ -86,6 +87,8 @@ public class WeatherFragment extends Fragment {
     WeatherFort json1;
     @BindView(R.id.swipe) SwipeRefreshLayout swipeView;
     FloatingActionButton fab;
+    FABProgressCircle fabProgressCircle;
+
     CheckConnection cc;
     Info json;
     String citys = null;
@@ -114,6 +117,7 @@ public class WeatherFragment extends Fragment {
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_weather, container, false);
         ButterKnife.bind(this , rootView);
+        fabProgressCircle = ((WeatherActivity) activity()).findViewById(R.id.fabProgressCircle);
         MaterialDialog.Builder builder = new MaterialDialog.Builder(this.activity())
                 .title(getString(R.string.please_wait))
                 .content(getString(R.string.loading))
@@ -177,9 +181,9 @@ public class WeatherFragment extends Fragment {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 if (horizontalLayoutManager.findLastVisibleItemPosition() == 9 || citys != null)
-                    fab.hide(true);
+                    fab.hide();
                 else
-                    fab.show(true);
+                    fab.show();
             }
         });
         directionView.setTypeface(weatherFont);
@@ -202,7 +206,8 @@ public class WeatherFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu , MenuInflater inflater) {
-        activity().getMenuInflater().inflate(R.menu.menu_weather, menu);
+        if (citys == null)
+            activity().getMenuInflater().inflate(R.menu.menu_weather, menu);
     }
 
     @Override
@@ -238,7 +243,12 @@ public class WeatherFragment extends Fragment {
     private void updateWeatherData(final String city, final String lat, final String lon) {
         wt = new FetchWeather(context());
         if (citys == null)
-            fab.setIndeterminate(true);
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    fabProgressCircle.show();
+                }
+            } , 50);
         new Thread() {
             public void run() {
                 try {
@@ -272,7 +282,7 @@ public class WeatherFragment extends Fragment {
                                 FirstStart();
                             } else {
                                 if (citys == null)
-                                    fab.setIndeterminate(false);
+                                    fabProgressCircle.hide();
                                 cc = new CheckConnection(context());
                                 if (!cc.isNetworkAvailable()) {
                                     showNoInternet();
@@ -298,7 +308,7 @@ public class WeatherFragment extends Fragment {
                             if (citys == null) {
                                 preferences.setLastCity(json.day.getName() + "," + json.day.getSys().getCountry());
                                 ((WeatherActivity) activity()).createShortcuts();
-                                progress(0);
+                                progress();
                             }
                             else
                                 preferences.setLastCity(preferences.getLastCity());
@@ -310,39 +320,8 @@ public class WeatherFragment extends Fragment {
         }.start();
     }
 
-    private void progress(int i) {
-        fab.setIndeterminate(false);
-        i += 2;
-        final int progress = i;
-        if (i < fab.getMax()) {
-            fab.setProgress(i, false);
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    progress(progress);
-                }
-            }, 5);
-        }
-        else if (fab.getMax() == i) {
-            handler.post(new Runnable() {
-                @Override
-                public void run() {
-                    fab.hideProgress();
-                    fab.setColorNormal(ContextCompat.getColor(context() , R.color.md_green_700));
-                    fab.setImageDrawable(ContextCompat.getDrawable(context() , R.drawable.ic_done_black_24dp));
-                    progress(progress);
-                }
-            });
-        }
-        else {
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    fab.setColorNormal(ContextCompat.getColor(context() , R.color.accent));
-                    fab.setImageDrawable(ContextCompat.getDrawable(context() , R.drawable.ic_search_white_24dp));
-                }
-            }, 1000);
-        }
+    private void progress() {
+        fabProgressCircle.beginFinalAnimation();
     }
 
     public void FirstStart() {
@@ -576,7 +555,7 @@ public class WeatherFragment extends Fragment {
                     Snackbar.make(rootView , wind1 , Snackbar.LENGTH_SHORT).show();
                 }
             });
-            weatherIcon.setText(Utils.setWeatherIcon(context() , json0.getWeather().get(0).getId() , 10));
+            weatherIcon.setText(Utils.setWeatherIcon(context() , json0.getWeather().get(0).getId()));
             weatherIcon.setOnClickListener(new View.OnClickListener()
             {
                 public void onClick (View v)
@@ -681,7 +660,7 @@ public class WeatherFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(MyViewHolder holder, int position) {
-            holder.weather_icon.setText(Utils.setWeatherIcon(context() , horizontalList.get(position).getWeather().get(0).getId() , position));
+            holder.weather_icon.setText(Utils.setWeatherIcon(context() , horizontalList.get(position).getWeather().get(0).getId()));
             long date1 = horizontalList.get(position).getDt();
             Date expiry = new Date(date1 * 1000);
             String date = new SimpleDateFormat("EE, dd" , Locale.US).format(expiry);

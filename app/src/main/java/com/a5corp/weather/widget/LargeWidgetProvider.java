@@ -72,7 +72,7 @@ public class LargeWidgetProvider extends AppWidgetProvider {
         String humidity = context.getString(R.string.humidity, prefs.getHumidity());
         String pressure = context.getString(R.string.pressure, prefs.getPressure());
         int iconId = prefs.getIcon();
-        String weatherIcon = Utils.setWeatherIcon(context , iconId , 0);
+        String weatherIcon = Utils.setWeatherIcon(context , iconId);
 
         remoteViews.setTextViewText(R.id.widget_city, prefs.getCity());
         remoteViews.setTextViewText(R.id.widget_temperature, temperature + temperatureScale);

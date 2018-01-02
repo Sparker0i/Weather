@@ -1,6 +1,5 @@
 package com.a5corp.weather.widget;
 
-import android.app.IntentService;
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -66,7 +65,7 @@ public class LargeWidgetService extends JobIntentService {
             String humidity = getString(R.string.humidity, weather.getMain().getHumidity());
             String pressure = getString(R.string.pressure, weather.getMain().getPressure());
             int iconId = weather.getWeather().get(0).getId();
-            String weatherIcon = Utils.setWeatherIcon( this, iconId, 0);
+            String weatherIcon = Utils.setWeatherIcon( this, iconId);
 
             RemoteViews remoteViews = new RemoteViews(this.getPackageName(),
                     R.layout.widget_large);
