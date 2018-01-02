@@ -3,8 +3,6 @@
     <string name="humidity_icon" translatable="false">&#xf07a;</string>
     <string name="pressure_icon" translatable="false">&#xf079;</string>
     <string name="speed_icon" translatable="false">&#xf050;</string>
-    <string name="day_icon" translatable="false">&#xf00d;</string>
-    <string name="night_icon" translatable="false">&#xf0ae;</string>
     <string name="sunrise_icon" translatable="false">&#xf051;</string>
     <string name="sunset_icon" translatable="false">&#xf052;</string>
 
@@ -18,71 +16,17 @@
     <string name="top" translatable="false">&#xf058;</string>
 
     <string name="weather_sunny" translatable="false">&#xf00d;</string>
-    <string name="weather_sunny_cloudy" translatable="false">&#xf002;</string>
     <string name="weather_clear_night" translatable="false">&#xf02e;</string>
-    <string name="thunderstorm_with_light_rain" translatable="false">&#xf01d;</string>
     <string name="weather_foggy" translatable="false">&#xf014;</string>
     <string name="weather_cloudy" translatable="false">&#xf013;</string>
     <string name="weather_rainy" translatable="false">&#xf019;</string>
-    <string name="weather_heavy_drizzle" translatable="false">&#xf015;</string>
     <string name="weather_snowy" translatable="false">&#xf01b;</string>
     <string name="weather_thunder" translatable="false">&#xf01e;</string>
     <string name="weather_drizzle" translatable="false">&#xf01a;</string>
-    <string name="weather_rain_wind" translatable="false">&#xf018;</string>
-    <string name="weather_rain_drizzle" translatable="false">&#xf017;</string>
-    <string name="weather_heavy_snow" translatable="false">&#xf076;</string>
-    <string name="weather_shower_rain" translatable="false">&#xf01a;</string>
-    <string name="weather_sleet" translatable="false">&#xf0b5;</string>
-    <string name="weather_smoke" translatable="false">&#xf062;</string>
-    <string name="weather_dust" translatable="false">&#xf063;</string>
-    <string name="weather_storm" translatable="false">&#xf0ce;</string>
-    <string name="weather_hurricane" translatable="false">&#xf0cf;</string>
-    <string name="weather_volcano" translatable="false">&#xf0c8;</string>
-    <string name="weather_tornado" translatable="false">&#xf056;</string>
-    <string name="thunderstorm" translatable="false">&#xf01e;</string>
-    <string name="lightning" translatable="false">&#xf016;</string>
-    <string name="sprinkle" translatable="false">&#xf01c;</string>
     <string name="rain" translatable="false">&#xf019;</string>
-    <string name="rain_wind" translatable="false">&#xf018;</string>
-    <string name="rain_mix" translatable="false">&#xf017;</string>
-    <string name="showers" translatable="false">&#xf01a;</string>
-    <string name="storm_showers" translatable="false">&#xf01d;</string>
     <string name="snow" translatable="false">&#xf01b;</string>
-    <string name="sleet" translatable="false">&#xf0b5;</string>
-    <string name="smoke" translatable="false">&#xf062;</string>
-    <string name="haze" translatable="false">&#xf0b6;</string>
-    <string name="dust" translatable="false">&#xf063;</string>
-    <string name="volcano" translatable="false">&#xf0c8;</string>
-    <string name="fog" translatable="false">&#xf014;</string>
-    <string name="cloudy_gusts" translatable="false">&#xf011;</string>
-    <string name="tornado" translatable="false">&#xf056;</string>
-    <string name="cloudy" translatable="false">&#xf013;</string>
-    <string name="hurricane" translatable="false">&#xf073;</string>
-    <string name="snowflake_cold" translatable="false">&#xf076;</string>
-    <string name="hot" translatable="false">&#xf072;</string>
-    <string name="windy" translatable="false">&#xf021;</string>
-    <string name="hail" translatable="false">&#xf015;</string>
-    <string name="strong_wind" translatable="false">&#xf050;</string>
 
     <!--Day Icons-->
-    <string name="day_clear" translatable="false">&#xf00d;</string>
-    <string name="day_cloudy" translatable="false">&#xf002;</string>
-    <string name="day_rainy" translatable="false">&#xf008;</string>
-    <string name="day_heavy_drizzle" translatable="false">&#xf004;</string>
-    <string name="day_snowy" translatable="false">&#xf00a;</string>
-    <string name="day_thunder" translatable="false">&#xf01e;</string>
-    <string name="day_drizzle" translatable="false">&#xf009;</string>
-    <string name="day_rain_wind" translatable="false">&#xf007;</string>
-    <string name="day_rain_drizzle" translatable="false">&#xf006;</string>
 
     <!-- Night Icons -->
-    <string name="night_clear" translatable="false">&#xf02e;</string>
-    <string name="night_cloudy" translatable="false">&#xf086;</string>
-    <string name="night_rainy" translatable="false">&#xf028;</string>
-    <string name="night_heavy_drizzle" translatable="false">&#xf024;</string>
-    <string name="night_snowy" translatable="false">&#xf02a;</string>
-    <string name="night_thunder" translatable="false">&#xf02d;</string>
-    <string name="night_drizzle" translatable="false">&#xf029;</string>
-    <string name="night_rain_wind" translatable="false">&#xf027;</string>
-    <string name="night_rain_drizzle" translatable="false">&#xf026;</string>
 </resources>

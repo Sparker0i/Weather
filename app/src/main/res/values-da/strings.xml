@@ -36,7 +36,6 @@
 
     <string name="enter_city_first">Indtast først bynavn</string>
     <string name="check_internet">Kontrollere internet forbindelsen</string>
-    <string name="enable_location">Aktivere placeringstilladelse for denne handling</string>
     <string name="enable_gps">Aktivere GPS</string>
     <string name="enable_gps_content">Aktivere GPS for denne funktion</string>
 

@@ -36,12 +36,11 @@
 
     <string name="enter_city_first">Voer eerst een stadsnaam in</string>
     <string name="check_internet">Controleer uw internetverbinding</string>
-    <string name="enable_location">Schakel locatietoestemming in om deze actie uit te voeren.</string>
     <string name="enable_gps">GPS inschakelen</string>
     <string name="enable_gps_content">U moet GPS inschakelen om deze functie te kunnen gebruiken</string>
 
-    <string name="please_wait">Even geduld...</string>
-    <string name="loading">Bezig met laden...</string>
+    <string name="please_wait">Even geduld</string>
+    <string name="loading">Bezig met laden</string>
     <string name="settings">Instellingen</string>
 
     <string name="daily">DAGELIJKS</string>

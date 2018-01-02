@@ -6,10 +6,8 @@
     <string name="libraries_header">OPEN SOURCE LICENSES</string>
     <string name="license_header">LICENSE</string>
     <string name="inspiration_header">INSPIRATION</string>
-    <string name="build_version">Build version</string>
     <string name="dev_1_title" translatable="false">Aaditya Menon</string>
     <string name="dev_1_name" translatable="false">\@Sparker0i</string>
-    <string name="dev_1_link" translatable="false">http://sparker0i.in</string>
     <string name="dev_2_title" translatable="false">OpenWeatherMap</string>
     <string name="dev_2_name" translatable="false">OpenWeatherMap Inc.</string>
     <string name="dev_2_link" translatable="false">https://openweathermap.org/</string>

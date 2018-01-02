@@ -11,7 +11,6 @@
 
     <string name="mps">м/с</string>
     <string name="mph">міль/г</string>
-    <string name="hPa">гПа</string>
     <string name="mm">мм</string>
     <string name="snow_">Снег: %.2f мм</string>
     <string name="humidity">Вільготнасть: %d %%</string>
@@ -35,7 +34,6 @@
 
     <string name="enter_city_first">Увядзіце спачатку назву горада</string>
     <string name="check_internet">Калі ласка, праверце ваша Інтэрнет-злучэнне</string>
-    <string name="enable_location">Калі ласка, дайце дазвол на месцазнаходжанне для выканання гэтага дзеяння.</string>
     <string name="please_wait">Калі ласка, чакайце</string>
     <string name="loading">Загрузка</string>
 
@@ -97,7 +95,6 @@
     <string name="g_snow">Снег, мм</string>
 
     <string name="other_apps_link">https://play.google.com/store/apps/dev?id=6116967233401290402</string>
-    <string name="app_link_direct">https://play.google.com/store/apps/details?id=com.a5corp.weather</string>
     <string name="github_link">https://github.com/Sparker0i</string>
 
 </resources>

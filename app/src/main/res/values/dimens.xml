@@ -5,20 +5,12 @@
     <dimen name="bottom_margin">6dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
 
-    <dimen name="widget_margin">8dp</dimen>
-
     <dimen name="about_card_margin_top">1dp</dimen>
     <dimen name="about_card_margin_bottom">0dp</dimen>
     <dimen name="about_card_margin_left">0dp</dimen>
     <dimen name="about_card_margin_right">0dp</dimen>
 
     <dimen name="font_normal">12sp</dimen>
-    <dimen name="font_large">14dp</dimen>
-    <dimen name="font_extra_large">20dp</dimen>
 
     <dimen name="margin_normal">10dp</dimen>
-    <dimen name="margin_medium">5dp</dimen>
-    <dimen name="margin_large">15dp</dimen>
-    <dimen name="margin_very_large">24dp</dimen>
-    <dimen name="margin_very_very_large">64dp</dimen>
 </resources>

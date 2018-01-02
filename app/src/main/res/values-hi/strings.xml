@@ -36,7 +36,6 @@
 
     <string name="enter_city_first">पहले एक शहर का नाम तो डाल लीजिए</string>
     <string name="check_internet">कृप्या अपना इंटरनेट पुनः देखें</string>
-    <string name="enable_location">यह कार्य पूर्ण करने के लिए अपनी जगह जानने का permission दीजिये</string>
     <string name="enable_gps">कृप्या GPS चालू करें</string>
     <string name="enable_gps_content">यह कार्य करने के लिए GPS अनिवार्य हैं</string>
 

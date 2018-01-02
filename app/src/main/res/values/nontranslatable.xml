@@ -10,7 +10,6 @@
 
     <string name="mps" translatable="false">m/s</string>
     <string name="mph" translatable="false">mil/h</string>
-    <string name="hPa" translatable="false">hPa</string>
     <string name="mm" translatable="false">mm</string>
 
     <string name="temperature">%1$s : %2$.2f %3$s</string>
@@ -30,7 +29,6 @@
     <string name="widget_refresh_button" translatable="false">Widget refresh button</string>
 
     <string name="other_apps_link" translatable="false">https://play.google.com/store/apps/dev?id=6116967233401290402</string>
-    <string name="app_link_direct" translatable="false">https://play.google.com/store/apps/details?id=com.a5corp.weather</string>
     <string name="github_link" translatable="false">https://github.com/Sparker0i</string>
 
     <!-- Update Periods -->
@@ -42,5 +40,4 @@
     <string name="update_period_12hours" translatable="false">12 hours</string>
 
     <string name="app_name" translatable="false">Simple Weather</string>
-    <string name="app_key" translatable="false">4c08a22b02c58467e6241629c1d08717</string>
 </resources>

@@ -36,7 +36,6 @@
 
     <string name="enter_city_first">Enter a City Name First</string>
     <string name="check_internet">Please check your Internet connection</string>
-    <string name="enable_location">Please Enable Location Permission to Perform this action.</string>
     <string name="enable_gps">Enable GPS</string>
     <string name="enable_gps_content">You need to enable GPS for this function to work</string>
 

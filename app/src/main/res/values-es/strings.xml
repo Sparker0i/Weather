@@ -28,7 +28,6 @@
     <string name="reset">RESTABLECER</string>
     <string name="enter_city_first">Primeto ingresa un nombre de ciudad</string>
     <string name="check_internet">Verifica tu conexión a Internet</string>
-    <string name="enable_location">Activa el permiso de ubicación para realizar esta acción.</string>
     <string name="please_wait">Aguarda</string>
     <string name="loading">Cargando</string>
 

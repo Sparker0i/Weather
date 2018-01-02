@@ -62,12 +62,6 @@
         </activity>
 
         <service
-            android:name=".widget.LargeWidgetService"
-            android:permission="android.permission.BIND_JOB_SERVICE" />
-        <service
-            android:name=".widget.SmallWidgetService"
-            android:permission="android.permission.BIND_JOB_SERVICE" />
-        <service
             android:name=".service.NotificationService"
             android:permission="android.permission.BIND_JOB_SERVICE" />
 
@@ -77,7 +71,7 @@
                 <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".widget.NewWidgetProvider">
+        <receiver android:name=".widget.LargeWidgetProvider">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -101,17 +95,6 @@
             </intent-filter>
         </receiver>
         <receiver
-            android:name=".widget.LargeWidgetProvider"
-            android:enabled="true">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/large_widget_info" />
-        </receiver>
-        <receiver
             android:name=".widget.SmallWidgetProvider"
             android:enabled="true">
             <intent-filter>
@@ -120,7 +103,7 @@
 
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/small_widget_info" />
+                android:resource="@xml/small_widget" />
         </receiver>
     </application>
 

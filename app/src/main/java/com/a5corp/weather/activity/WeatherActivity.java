@@ -47,6 +47,7 @@ import com.mikepenz.weather_icons_typeface_library.WeatherIcons;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.concurrent.ExecutionException;
 import shortbread.Shortbread;
 import shortbread.Shortcut;
@@ -411,7 +412,9 @@ public class WeatherActivity extends AppCompatActivity {
                         item8,
                         item9);
         List<String> cities = dbHelper.getCities();
-        for (final String city : cities) {
+        final ListIterator<String> listIterator = cities.listIterator(cities.size());
+        while (listIterator.hasPrevious()) {
+            final String city = listIterator.previous();
             drawerBuilder.addDrawerItems(new SecondaryDrawerItem().withName(city)
                     .withIcon(new IconicsDrawable(this)
                             .icon(GoogleMaterial.Icon.gmd_place))

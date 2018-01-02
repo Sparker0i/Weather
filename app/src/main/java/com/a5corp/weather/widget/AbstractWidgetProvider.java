@@ -16,7 +16,8 @@ public abstract class AbstractWidgetProvider extends AppWidgetProvider {
     }
 
     public static void updateWidgets(Context context) {
-        updateWidgets(context, NewWidgetProvider.class);
+        updateWidgets(context, LargeWidgetProvider.class);
+        updateWidgets(context, SmallWidgetProvider.class);
     }
 
     private static void updateWidgets(Context context, Class widgetClass) {

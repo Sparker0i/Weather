@@ -1,77 +1,119 @@
 package com.a5corp.weather.widget;
 
+import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
-import android.appwidget.AppWidgetProvider;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Build;
 import android.preference.PreferenceManager;
-import com.a5corp.weather.model.Log;
 import android.widget.RemoteViews;
 
+import com.a5corp.weather.BuildConfig;
 import com.a5corp.weather.R;
 import com.a5corp.weather.activity.WeatherActivity;
-import com.a5corp.weather.preferences.Prefs;
+import com.a5corp.weather.model.Log;
+import com.a5corp.weather.model.WeatherInfo;
 import com.a5corp.weather.utils.Constants;
 import com.a5corp.weather.utils.Utils;
-import com.a5corp.weather.utils.WidgetProviderAlarm;
 
+import java.util.Date;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
-public class SmallWidgetProvider extends AppWidgetProvider {
+public class SmallWidgetProvider extends AbstractWidgetProvider {
+
+    private static final String TAG = "SimpleWidgetProvider";
+
+    private static final String ACTION_UPDATE_TIME = "com.a5corp.weather.UPDATE_TIME";
+
+    private static final long DURATION_MINUTE = TimeUnit.SECONDS.toMillis(30);
 
     @Override
-    public void onEnabled(Context context) {
-        super.onEnabled(context);
-        WidgetProviderAlarm appWidgetProviderAlarm =
-                new WidgetProviderAlarm(context, SmallWidgetProvider.class);
-        appWidgetProviderAlarm.setAlarm();
-    }
-
-    @Override
-    public void onUpdate(Context context, AppWidgetManager appWidgetManager, int... appWidgetIds) {
-        super.onUpdate(context, appWidgetManager, appWidgetIds);
-        Log.i("Trigger2" , "Small Widget");
-        for (int appWidgetId : appWidgetIds) {
+    public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
+        for (int widgetId : appWidgetIds) {
+            Log.i("In" , "New Widget Provider");
             RemoteViews remoteViews = new RemoteViews(context.getPackageName(),
                     R.layout.widget_small);
 
-            preLoadWeather(context , remoteViews);
-            Intent intent = new Intent(context, SmallWidgetProvider.class);
-            intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
-            intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds);
+            Intent intent = new Intent(context, AlarmReceiver.class);
             PendingIntent pendingIntent = PendingIntent.getBroadcast(context,
                     0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
             remoteViews.setOnClickPendingIntent(R.id.widget_button_refresh, pendingIntent);
 
-            Intent intentStartActivity = new Intent(context, WeatherActivity.class);
-            PendingIntent pendingIntent2 = PendingIntent.getActivity(context, 0, intentStartActivity, 0);
-            remoteViews.setOnClickPendingIntent(R.id.widget_root, pendingIntent2);
+            intent = new Intent(context, WeatherActivity.class);
+            pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
+            remoteViews.setOnClickPendingIntent(R.id.widget_root, pendingIntent);
 
-            appWidgetManager.updateAppWidget(appWidgetId, remoteViews);
+            SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+            WeatherInfo weather;
+            if(!sp.getString("lastToday", "").equals("")) {
+                weather = parseWidgetJson(sp.getString("lastToday", ""));
+            }
+            else {
+                try {
+                    pendingIntent.send();
+                } catch (PendingIntent.CanceledException e) {
+                    e.printStackTrace();
+                }
+                return;
+            }
+            String temperatureScale = PreferenceManager.getDefaultSharedPreferences(context).getString(Constants.PREF_TEMPERATURE_UNITS , Constants.METRIC).equals(Constants.METRIC) ? context.getString(R.string.c) : context.getString(R.string.f);
+            String temperature = String.format(Locale.getDefault(), "%.0f", weather.getMain().getTemp());
+            int iconId = weather.getWeather().get(0).getId();
+            String weatherIcon = Utils.setWeatherIcon( context, iconId);
+
+            remoteViews.setTextViewText(R.id.widget_city, weather.getName() + "," + weather.getSys().getCountry());
+            remoteViews.setTextViewText(R.id.widget_temperature, temperature + temperatureScale);
+            remoteViews.setImageViewBitmap(R.id.widget_icon,
+                    Utils.createWeatherIcon(context, weatherIcon));
+
+            appWidgetManager.updateAppWidget(widgetId, remoteViews);
         }
-        SmallWidgetService.enqueueWork(context , new Intent(context, SmallWidgetService.class));
+        scheduleNextUpdate(context);
+    }
+
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+        ComponentName provider = new ComponentName(context.getPackageName(), getClass().getName());
+        int ids[] = appWidgetManager.getAppWidgetIds(provider);
+        onUpdate(context, appWidgetManager, ids);
     }
 
     @Override
     public void onDisabled(Context context) {
         super.onDisabled(context);
-        WidgetProviderAlarm appWidgetProviderAlarm =
-                new WidgetProviderAlarm(context, SmallWidgetProvider.class);
-        appWidgetProviderAlarm.cancelAlarm();
+
+        Log.d(TAG, "Disable simple widget updates");
+        cancelUpdate(context);
     }
 
-    private void preLoadWeather(Context context, RemoteViews remoteViews) {
-        Prefs prefs = new Prefs(context);
-        String temperatureScale = PreferenceManager.getDefaultSharedPreferences(context).getString(Constants.PREF_TEMPERATURE_UNITS , Constants.METRIC).equals(Constants.METRIC) ? context.getString(R.string.c) : context.getString(R.string.f);
+    private static void scheduleNextUpdate(Context context) {
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        long now = new Date().getTime();
+        long nextUpdate = now + DURATION_MINUTE - now % DURATION_MINUTE;
+        if (BuildConfig.DEBUG) {
+            Log.i(TAG, "Next widget update: " +
+                    android.text.format.DateFormat.getTimeFormat(context).format(new Date(nextUpdate)));
+        }
+        if (Build.VERSION.SDK_INT >= 19) {
+            alarmManager.setExact(AlarmManager.RTC, nextUpdate, getTimeIntent(context));
+        } else {
+            alarmManager.set(AlarmManager.RTC, nextUpdate, getTimeIntent(context));
+        }
+    }
 
-        String temperature = String.format(Locale.getDefault(), "%.0f", prefs.getTemperature());
-        int iconId = prefs.getIcon();
-        String weatherIcon = Utils.setWeatherIcon(context, iconId);
+    private static void cancelUpdate(Context context) {
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        alarmManager.cancel(getTimeIntent(context));
+    }
 
-        remoteViews.setTextViewText(R.id.widget_city, prefs.getCity());
-        remoteViews.setTextViewText(R.id.widget_temperature, temperature + temperatureScale);
-        remoteViews.setImageViewBitmap(R.id.widget_icon,
-                Utils.createWeatherIcon(context, weatherIcon));
+    private static PendingIntent getTimeIntent(Context context) {
+        Intent intent = new Intent(context, AlarmReceiver.class);
+        intent.setAction(ACTION_UPDATE_TIME);
+        return PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
     }
 }

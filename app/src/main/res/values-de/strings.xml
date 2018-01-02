@@ -4,7 +4,6 @@
 
     <string name="mps">m/s</string>
     <string name="mph">mil/h</string>
-    <string name="hPa">hPa</string>
     <string name="mm">mm</string>
     <string name="snow_">Schnee: %.2f mm</string>
     <string name="humidity">Luftfeuchtigkeit: %d %%</string>
@@ -57,7 +56,6 @@
     <string name="bottom_wind">Wind</string>
 
     <string name="other_apps_link">https://play.google.com/store/apps/dev?id=6116967233401290402</string>
-    <string name="app_link_direct">https://play.google.com/store/apps/details?id=com.a5corp.weather</string>
     <string name="github_link">https://github.com/Sparker0i</string>
 
     <string name="change_city">Ort ändern</string>
