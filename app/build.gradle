@@ -6,14 +6,14 @@ android {
     }
 
     compileSdkVersion 27
-    buildToolsVersion '27.0.0'
+    buildToolsVersion '27.0.3'
 
     defaultConfig {
         applicationId "com.a5corp.weather"
         minSdkVersion 17
         targetSdkVersion 27
-        versionCode 580
-        versionName "4.1.1"
+        versionCode 642
+        versionName "5.0"
     }
     buildTypes {
         release {
