@@ -19,6 +19,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.RelativeSizeSpan;
 import com.a5corp.weather.model.Log;
@@ -399,7 +400,7 @@ public class WeatherFragment extends Fragment {
                             })
                             .show();
                 }
-            }, 1500);
+            }, 4500);
     }
 
     private void showLocTarget() {
@@ -663,12 +664,14 @@ public class WeatherFragment extends Fragment {
             holder.weather_icon.setText(Utils.setWeatherIcon(context() , horizontalList.get(position).getWeather().get(0).getId()));
             long date1 = horizontalList.get(position).getDt();
             Date expiry = new Date(date1 * 1000);
-            String date = new SimpleDateFormat("EE, dd" , Locale.US).format(expiry);
-            SpannableString ss1 = new SpannableString(date + "\n"
-                    + horizontalList.get(position).getTemp().getMax() + "°" + "      "
-                    + horizontalList.get(position).getTemp().getMin() + "°" + "\n");
-            ss1.setSpan(new RelativeSizeSpan(1.1f) , 0 , 7 , 0); // set size
-            ss1.setSpan(new RelativeSizeSpan(1.4f) , 8 , 12 , 0);
+            String date = new SimpleDateFormat("EE, dd" , new Locale(new Prefs(context()).getLanguage())).format(expiry);
+            String line2 =
+                    horizontalList.get(position).getTemp().getMax() + "°" + "      ";
+            String line3 = horizontalList.get(position).getTemp().getMin() + "°";
+            String fs = date + "\n" + line2 + line3 + "\n";
+            SpannableString ss1 = new SpannableString(fs);
+            ss1.setSpan(new RelativeSizeSpan(1.1f) , fs.indexOf(date) , date.length() , Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            ss1.setSpan(new RelativeSizeSpan(1.4f) , fs.indexOf(line2) , date.length() + line2.length() , 0);
             holder.details_view.setText(ss1);
             final int pos = position;
             holder.details_view.setOnClickListener(new View.OnClickListener() {

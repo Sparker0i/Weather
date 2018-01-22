@@ -3,7 +3,7 @@
     <string name="change_city">Ændre byen</string>
     <string name="enter_zip_code">Du kan ændre byen ved at indtaste bynavn eller postnummer</string>
     <string name="could_not_find">Hej der, kunne ikke finde byen. Indtast en ny:</string>
-    <string name="city_not_found">Byen ikke fundeti</string>
+    <string name="city_not_found">Byen ikke fundet</string>
     <string name="city_already_exists">Byen eksisterer allerede</string>
     <string name="need_not_add">Du behøver ikke tilføje byen igen</string>
     <string name="location">Placering</string>
@@ -11,7 +11,7 @@
 
     <string name="uh_oh">Byen findes ikke i databasen. Prøv igen.</string>
     <string name="pick_city">Start med at lade programmet vælge byen</string>
-    <string name="hey_there_condition">%s her lige nu!</string>
+    <string name="hey_there_condition">Hej der, %s her lige nu!</string>
 
     <string name="snow_">Sne: %1$.2f %2$s</string>
     <string name="humidity">Luftfugtighed: %d %%</string>
@@ -36,6 +36,7 @@
 
     <string name="enter_city_first">Indtast først bynavn</string>
     <string name="check_internet">Kontrollere internet forbindelsen</string>
+    <string name="enable_location">Aktivere placeringstilladelse for denne handling</string>
     <string name="enable_gps">Aktivere GPS</string>
     <string name="enable_gps_content">Aktivere GPS for denne funktion</string>
 
@@ -55,8 +56,8 @@
     <string name="drawer_item_about">Om</string>
     <string name="drawer_item_add_city">Tilføje byen</string>
 
-    <string name="rationale_string">Vælge opsætning. derefter tilladelser, aktiver placeringstilladelse for denne handling</string>
-    <string name="show_location_rationale">Tilladelsen kræves for at tilgå vejrdata</string>
+    <string name="rationale_string">Vælge opsætning. derefter i rettigheder, aktivere placering rettigheder for denne handling</string>
+    <string name="show_location_rationale">Denne rettighed kræves for at tilgå vejrdata på din placering</string>
 
     <string name="morning">Morgen</string>
     <string name="night">Nat</string>
@@ -66,7 +67,7 @@
     <!-- Target Strings -->
     <string name="target_search_title">Søg efter byen</string>
     <string name="target_search_content">Søg efter vejrdata fra over 200.000 byer</string>
-    <string name="target_location_content">Tryk for at kontrollere vejret på den aktuelle placering. Stryg fra venstre mod højre for at se flere indstillinger</string>
+    <string name="target_location_content">Tryk for at kontrollere vejret på den nuværende placering. Stryg fra venstre mod højre for at se flere indstillinger</string>
     <string name="target_refresh_title">Genopfriske</string>
     <string name="target_refresh_content">Stryg fra toppen for at genopfriske</string>
 
@@ -82,14 +83,14 @@
     <!-- Settings Titles -->
     <string name="pref_units_title">Temperatur enhed</string>
     <string name="pref_enable_notifs_title">Aktivere påmindelser</string>
-    <string name="pref_refresh_title">Genopfriske nterval</string>
+    <string name="pref_refresh_title">Genopfriske interval</string>
     <string name="pref_lang_title">Sprog</string>
-    <string name="pref_owm_key_title">Tilpasset OpenWeatherMap nøgle</string>
+    <string name="pref_owm_key_title">Bruger tilpasset OpenWeatherMap nøgle</string>
     <string name="pref_delete_cities_title">Slette byer</string>
 
     <!-- Settings Summary -->
     <string name="pref_units_summary">Vælge foretrukken temperatur enhed</string>
-    <string name="pref_owm_key_summary">Indtast personlig tilpasset OpenWeatherMap API nøgle, og hjælp med at reducere belastningen på udviklers  API nøgle.
+    <string name="pref_owm_key_summary">Indtast personlig tilpasset OpenWeatherMap API nøgle, og hjælp med at reducere belastningen på udviklerens  API nøgle.
         \n\nPas på: Forkert API nøgle kan resultere i uønskede handlinger. Gør dette på egen risiko</string>
     <string name="pref_delete_cities_summary">Slette fra de ekstra byer vist i programmet</string>
     <string name="pref_add_city_content">Indtast en ny by og tilføj den til listen af gemte byer</string>

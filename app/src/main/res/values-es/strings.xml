@@ -1,18 +1,25 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="change_city">Cambiar ciudad</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="change_city">Cambiar ciudad</string>
     <string name="enter_zip_code">Puedes cambiar la ciudad ingresando su nombre o código postal</string>
     <string name="could_not_find">Oye, no pudimos encontrar la ciudad que quieres. Ingresa una nueva:</string>
+    <string name="city_not_found">Ciudad no encontrada</string>
+    <string name="city_already_exists">La ciudad ya existe</string>
+    <string name="need_not_add">No necesitas añadir nuevamente esta ciudad</string>
     <string name="location">Ubicación</string>
     <string name="toggle_values">Alternar valores</string>
 
     <string name="uh_oh">Oh oh. Parece que la ciudad que ingresaste no existe en la base de datos. Intenta de nuevo</string>
     <string name="pick_city">Oye, empecemos seleccionando una ciudad por ti</string>
+    <string name="hey_there_condition">Oye, %s aquí ahora!</string>
 
     <string name="snow_">Nieve: %.2f mm</string>
+    <string name="humidity">Humedad: %d %%</string>
     <string name="pressure">Presión: %.2f hPa</string>
 
     <string name="wind_">Viento: %1$.2f %2$s</string>
 
+    <string name="wind_blowing_in">Viento soplando hacia el %s</string>
     <string name="north">El viento sopla hacia el norte</string>
     <string name="north_east">El viento sopla en dirección noreste</string>
     <string name="north_west">El viento sopla en dirección noroeste</string>
@@ -23,53 +30,76 @@
     <string name="west">El viento sopla hacia el oeste</string>
 
     <string name="restart_app">Reinicia la app</string>
-    <string name="restart_app_content">Reinicia la aplicación para comprobar con la configuración nueva</string>
+    <string name="restart_app_content">Reinicia la aplicación para comprobar la nueva configuración</string>
 
     <string name="reset">RESTABLECER</string>
-    <string name="enter_city_first">Primeto ingresa un nombre de ciudad</string>
+
+    <string name="enter_city_first">Primero ingresa un nombre de ciudad</string>
     <string name="check_internet">Verifica tu conexión a Internet</string>
+    <string name="enable_location">Activa el permiso de ubicación para realizar esta acción.</string>
+    <string name="enable_gps">Habilitar GPS</string>
+    <string name="enable_gps_content">Necesitas habilitar el GPS para usar esta función</string>
+
     <string name="please_wait">Aguarda</string>
     <string name="loading">Cargando</string>
+    <string name="settings">Ajustes</string>
+
+    <string name="daily">DIARIO</string>
+    <string name="enable">HABILITAR</string>
 
     <string name="title_activity_first_launch">Ingresa una ciudad</string>
 
+    <!-- Drawer Strings -->
     <string name="drawer_item_home">Inicio</string>
     <string name="drawer_item_graph">Gráficos del tiempo</string>
     <string name="drawer_item_map">Mapas del tiempo</string>
     <string name="drawer_item_about">Acerca de</string>
+    <string name="drawer_item_add_city">Añadir ciudad</string>
+
+    <string name="rationale_string">Toca Ajustes, y en Permisos habilitar el permiso de Ubicación para poder realizar esta acción</string>
+    <string name="show_location_rationale">Este permiso es requerido para acceder a la información del tiempo en su ubicación</string>
 
     <string name="morning">Mañana</string>
     <string name="night">Noche</string>
     <string name="day">Día</string>
     <string name="Evening">Tarde</string>
 
+    <!-- Target Strings -->
     <string name="target_search_title">Busca una ciudad</string>
+    <string name="target_search_content">Busca información del tiempo de más de 200.000 ciudades y pueblos</string>
+    <string name="target_location_content">Toca para verificar el tiempo en la ubicación en la que te encuentras ahora. Desliza desde el borde izquierdo de la pantalla hacia la derecha para ver mas opciones</string>
     <string name="target_refresh_title">Actualizar</string>
+    <string name="target_refresh_content">Desliza desde arriba para actualizar</string>
+
     <string name="no_internet_title">Sin Internet</string>
     <string name="no_internet_content">Se necesita que esté activado el acceso a Internet para mostrar datos del tiempo</string>
-    <string name="no_internet_mobile_data">Datos móviles</string>
-    <string name="update_period_15min">15 minutos</string>
-    <string name="update_period_30min">30 minutos</string>
-    <string name="update_period_1hour">1 hora</string>
-    <string name="update_period_3hours">3 horas</string>
-    <string name="update_period_6hours">6 horas</string>
-    <string name="update_period_12hours">12 horas</string>
 
+    <!-- Settings Headers -->
     <string name="pref_temp_header">Temperatura</string>
     <string name="pref_notification_header">Notificaciones</string>
     <string name="pref_display_header">Mostrar</string>
     <string name="pref_other_header">Otras preferencias</string>
 
+    <!-- Settings Titles -->
     <string name="pref_units_title">Unidad de temperatura</string>
     <string name="pref_enable_notifs_title">Activar notificaciones</string>
     <string name="pref_refresh_title">Intervalo de actualización</string>
     <string name="pref_lang_title">Idioma</string>
+    <string name="pref_owm_key_title">Clave personalizada de OpenWeatherMap</string>
+    <string name="pref_delete_cities_title">Borrar ciudades</string>
 
-    <string name="widget_weather_icon_description">Icono del tiempo actual</string>
+    <!-- Settings Summary -->
+    <string name="pref_units_summary">Elije la unidad de medida en la que prefieres ver la temperatura</string>
+    <string name="pref_owm_key_summary">Puedes ingresar tu propia clave personalizada de acceso a la API de OpenWeatherMap, y ayudar a reducir el uso de mi clave de acceso a la API.
+\n\nCUIDADO: Ingresando una clave errónea de acceso a la API puede resultar en acciones no deseadas. Házlo a tu propio riesgo</string>
+    <string name="pref_delete_cities_summary">Borrar desde las ciudades extras mostradas en la app</string>
+    <string name="pref_add_city_content">Puedes ingresar una nueva ciudad y añadirla a la lista de ciudades guardadas</string>
+
+    <!-- Bottom Bar Strings -->
     <string name="bottom_rain">Lluvia</string>
     <string name="bottom_wind">Viento</string>
 
+    <!-- Graph Strings -->
     <string name="g_pressure">Presión, hPa</string>
     <string name="g_snow">Nieve, mm</string>
-
 </resources>

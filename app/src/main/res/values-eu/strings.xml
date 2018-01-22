@@ -36,6 +36,7 @@
 
     <string name="enter_city_first">Lehenik eta behin, hiri bat sartu</string>
     <string name="check_internet">Egiaztatu zure interneteko konexioa ondo dabilela</string>
+    <string name="enable_location">Kokatzeko baimena gaitu behar duzu ekintza hau burutzeko.</string>
     <string name="enable_gps">Gaitu GPSa</string>
     <string name="enable_gps_content">GPS gaitu behar duzu aukera hau erabiltzeko</string>
 

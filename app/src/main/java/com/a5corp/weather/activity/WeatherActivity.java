@@ -32,6 +32,7 @@ import com.a5corp.weather.service.NotificationService;
 import com.a5corp.weather.utils.Constants;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.github.jorgecastilloprz.FABProgressCircle;
 import com.mikepenz.google_material_typeface_library.GoogleMaterial;
 import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.materialdrawer.AccountHeader;
@@ -101,10 +102,17 @@ public class WeatherActivity extends AppCompatActivity {
 
     public void hideFab() {
         fab.hide();
+        ((FABProgressCircle)findViewById(R.id.fabProgressCircle)).hide();
     }
 
     public void showFab() {
         fab.show();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                ((FABProgressCircle)findViewById(R.id.fabProgressCircle)).show();
+            }
+        } , 500);
     }
 
     @Override
@@ -127,7 +135,8 @@ public class WeatherActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                fab.hide();
+                hideFab();
+                ((FABProgressCircle) findViewById(R.id.fabProgressCircle)).onCompleteFABAnimationEnd();
                 showInputDialog();
             }
         });
@@ -169,14 +178,14 @@ public class WeatherActivity extends AppCompatActivity {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                         dialog.dismiss();
-                        fab.show();
+                        showFab();
                     }
                 })
                 .input(null, null, new MaterialDialog.InputCallback() {
                     @Override
                     public void onInput(@NonNull MaterialDialog dialog, @NonNull CharSequence input) {
                         changeCity(input.toString());
-                        fab.show();
+                        showFab();
                     }
                 }).show();
     }

@@ -36,6 +36,7 @@
 
     <string name="enter_city_first">首先输入城市名称</string>
     <string name="check_internet">请检查网络连接</string>
+    <string name="enable_location">请启用位置权限来执行此操作</string>
     <string name="enable_gps">启用GPS</string>
     <string name="enable_gps_content">你需要启用GPS才能使用此功能</string>
 

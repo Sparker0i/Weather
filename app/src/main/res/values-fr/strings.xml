@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="change_city">Changer de ville</string>
+    <string name="enter_zip_code">Vous pouvez changer la ville en saisissant un nom de ville ou un code postal</string>
+    <string name="could_not_find">Impossible de trouver la ville que vous désirez. Veuillez en saisir une autre :</string>
+    <string name="city_not_found">Ville non trouvée</string>
+    <string name="city_already_exists">La ville existe déjà</string>
+    <string name="need_not_add">Vous n\'avez pas besoin d\'ajouter cette ville à nouveau</string>
+    <string name="location">Lieu</string>
+    <string name="toggle_values">Changer les valeurs</string>
+
+    <string name="uh_oh">Il semble que votre ville n\'existe pas dans notre base de données. Veuillez réessayer.</string>
+    <string name="pick_city">Commencons par choisir une ville pour vous</string>
+    <string name="hey_there_condition">%s actuellement ici !</string>
+
+    <string name="snow_">Neige : %1$.2f %2$s</string>
+    <string name="humidity">Humidité : %d %%</string>
+    <string name="pressure">Pression : %.2f hPa</string>
+
+    <string name="wind_">Vent : %1$.2f %2$s</string>
+
+    <string name="wind_blowing_in">Le vent souffle en direction de %s</string>
+    <string name="north">Nord</string>
+    <string name="north_east">Nord-Est</string>
+    <string name="north_west">Nord-Ouest</string>
+    <string name="south">Sud</string>
+    <string name="south_east">Sud-Est</string>
+    <string name="south_west">Sud-Ouest</string>
+    <string name="east">Est</string>
+    <string name="west">Ouest</string>
+
+    <string name="restart_app">Redémarrer l\'application</string>
+    <string name="restart_app_content">Veuillez redémarrer l\'application pour vérifier avec la nouvelle configuration</string>
+
+    <string name="reset">Réinitialiser</string>
+
+    <string name="enter_city_first">Commencer par saisir un nom de ville</string>
+    <string name="check_internet">Veuillez vérifier votre connexion Internet</string>
+    <string name="enable_location">Veuillez activer la permission de localisation GPS pour permettre cette action</string>
+    <string name="enable_gps">Activer le GPS</string>
+    <string name="enable_gps_content">Vous devez activer le GPS pour utiliser cette fonctionnalité</string>
+
+    <string name="please_wait">Veuillez patienter</string>
+    <string name="loading">Chargement</string>
+    <string name="settings">Paramètres</string>
+
+    <string name="daily">Journalier</string>
+    <string name="enable">Activer</string>
+
+    <string name="title_activity_first_launch">Saisir une ville</string>
+
+    <!-- Drawer Strings -->
+    <string name="drawer_item_home">Accueil</string>
+    <string name="drawer_item_graph">Graphiques météo</string>
+    <string name="drawer_item_map">Carte météo</string>
+    <string name="drawer_item_about">À propos</string>
+    <string name="drawer_item_add_city">Ajouter une ville</string>
+
+    <string name="rationale_string">Toucher Paramètres, ensuite dans les permissions, activer la permission de localisation GPS pour effectuer cette action</string>
+    <string name="show_location_rationale">Cette permission est nécessaire pour accéder aux données météo de votre lieu</string>
+
+    <string name="morning">Matin</string>
+    <string name="night">Nuit</string>
+    <string name="day">Jour</string>
+    <string name="Evening">Soir</string>
+
+    <!-- Target Strings -->
+    <string name="target_search_title">Rechercher une ville</string>
+    <string name="target_search_content">Rechercher pour les données météo depuis plus de 200 000 villes et villages</string>
+    <string name="target_location_content">Toucher pour vérifier la météo de votre lieu actuel. Balayez depuis le côté gauche de l\'écran vers le droit pour voir plus d\'options</string>
+    <string name="target_refresh_title">Rafraichir</string>
+    <string name="target_refresh_content">Balayer vers le haut pour rafraichir</string>
+
+    <string name="no_internet_title">Pas de connexion Internet</string>
+    <string name="no_internet_content">L\'accès Internet doit être activé pour afficher les données météo</string>
+
+    <!-- Settings Headers -->
+    <string name="pref_temp_header">Température</string>
+    <string name="pref_notification_header">Notifications</string>
+    <string name="pref_display_header">Affichage</string>
+    <string name="pref_other_header">Autres paramètres</string>
+
+    <!-- Settings Titles -->
+    <string name="pref_units_title">Unité de température</string>
+    <string name="pref_enable_notifs_title">Activer les notifications</string>
+    <string name="pref_refresh_title">Rafraichir l\'intervalle</string>
+    <string name="pref_lang_title">Langue</string>
+    <string name="pref_owm_key_title">Clé OpenWeatherMap personnalisée</string>
+    <string name="pref_delete_cities_title">Supprimer les villes</string>
+
+    <!-- Settings Summary -->
+    <string name="pref_units_summary">Choisissez l\'unité de température que vous désirez utiliser</string>
+    <string name="pref_owm_key_summary">Vous pouvez saisir votre propre clé API OpenWeatherMap, et aider à la réduction de charge de ma clé API.
+        \n\nAttention: Entrer une mauvaise clé API peut engendrer des actions non désirées. Faites le à vos propres risques.</string>
+    <string name="pref_delete_cities_summary">Supprimer des villes additionnels affichées dans l\'application</string>
+    <string name="pref_add_city_content">Vous pouvez saisir une nouvelle ville et l\'ajouter à la liste</string>
+
+    <!-- Bottom Bar Strings -->
+    <string name="bottom_rain">Pluie</string>
+    <string name="bottom_wind">Vent</string>
+
+    <!-- Graph Strings -->
+    <string name="g_pressure">Pression, hPa</string>
+    <string name="g_snow">Neige, mm</string>
+</resources>
