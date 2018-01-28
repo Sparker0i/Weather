@@ -9,7 +9,7 @@ Get it on Google Play and F-Droid (coming soon in XDA Labs Marketplace):
 
 [<img src="https://f-droid.org/badge/get-it-on.png" alt="Get it on F-Droid" height="80">](https://f-droid.org/repository/browse/?fdid=com.a5corp.weather)
 [<img src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png' alt='Get it on Google Play' width='210' height='80'>](https://play.google.com/store/apps/details?id=com.a5corp.weather)
-[![XDA](https://labs.xda-developers.com/store/app/com.a5corp.weather)](/img/xda.png)
+[<img src='/img/xda.png'>](https://labs.xda-developers.com/store/app/com.a5corp.weather)
 
 ## Changelog
 Please refer CHANGELOG.md file.
