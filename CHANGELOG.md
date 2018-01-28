@@ -34,3 +34,16 @@ Bugs Fixed:
 Bugs Fixed:
 - Fixed Swipe Refresh triggered when scrolling through Daily view
 - Fixed Disappearing Widgets on Reboot (from v4.0)
+
+## v5.0 - v5.x (2018-01-xx)
+
+- New layout for home screen widgets
+- Slightly darker colors in the app
+- Simple Weather now in 10 more languages. All thanks to the translators who have helped me translate the app
+- Add multiple cities in the app
+- Removed Weather Maps, as the existing service is no longer supported. Weather maps will return in a new release.
+- Return of the Red Floating Search Button
+- Better responsiveness in the notification and widget
+
+Bugs Fixed:
+- Fixed App Crash when progress in the search button has not been completed and the search button was clicked (from 5.0)
