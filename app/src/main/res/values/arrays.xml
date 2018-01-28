@@ -5,13 +5,13 @@
         <item>@string/f</item>
     </string-array>
 
-    <string-array name="pref_unit_values">
+    <string-array name="pref_unit_values" translatable="false">
         <item>metric</item>
         <item>imperial</item>
     </string-array>
 
     <!-- Languages array -->
-    <string-array name="language_entries">
+    <string-array name="language_entries" translatable="false">
         <item name="basque">Euskara</item>
         <item name="english">English</item>
         <item name="chinese">简体中文 (Chinese)</item>
@@ -24,7 +24,7 @@
         <item name="japanese">日本語 (Japanese)</item>
         <item name="russian">Русский (Russian)</item>
     </string-array>
-    <string-array name="language_values">
+    <string-array name="language_values" translatable="false">
         <item name="basque">eu</item>
         <item name="english"></item>
         <item name="chinese">zh</item>

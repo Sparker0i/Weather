@@ -38,6 +38,7 @@ import com.a5corp.weather.activity.WeatherActivity;
 import com.a5corp.weather.internet.CheckConnection;
 import com.a5corp.weather.internet.FetchWeather;
 import com.a5corp.weather.model.Info;
+import com.a5corp.weather.model.Snack;
 import com.a5corp.weather.model.WeatherFort;
 import com.a5corp.weather.model.WeatherInfo;
 import com.a5corp.weather.permissions.GPSTracker;
@@ -118,7 +119,6 @@ public class WeatherFragment extends Fragment {
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_weather, container, false);
         ButterKnife.bind(this , rootView);
-        fabProgressCircle = ((WeatherActivity) activity()).findViewById(R.id.fabProgressCircle);
         MaterialDialog.Builder builder = new MaterialDialog.Builder(this.activity())
                 .title(getString(R.string.please_wait))
                 .content(getString(R.string.loading))
@@ -127,9 +127,10 @@ public class WeatherFragment extends Fragment {
         pd = builder.build();
         setHasOptionsMenu(true);
         preferences = new Prefs(context());
-        weatherFont = Typeface.createFromAsset(activity().getAssets(), "fonts/weather.ttf");
+        weatherFont = Typeface.createFromAsset(activity().getAssets(), "fonts/weather-icons-v2.0.10.ttf");
         fab = ((WeatherActivity) activity()).findViewById(R.id.fab);
         Bundle bundle = getArguments();
+        fabProgressCircle = ((WeatherActivity) activity()).findViewById(R.id.fabProgressCircle);
         int mode;
         if (bundle != null)
             mode = bundle.getInt(Constants.MODE , 0);
@@ -160,19 +161,13 @@ public class WeatherFragment extends Fragment {
         swipeView.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                swipeView.setRefreshing(true);
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
                         changeCity(preferences.getCity());
-                    }
-                });
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
                         swipeView.setRefreshing(false);
                     }
-                }, 10000);
+                });
             }
         });
         horizontalLayoutManager
@@ -267,13 +262,6 @@ public class WeatherFragment extends Fragment {
                 }
                 if (pd.isShowing())
                     pd.dismiss();
-                if (swipeView != null && swipeView.isRefreshing())
-                    swipeView.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            swipeView.setRefreshing(false);
-                        }
-                    });
                 if (json == null) {
                     preferences.setCity(preferences.getLastCity());
                     handler.post(new Runnable() {
@@ -322,7 +310,13 @@ public class WeatherFragment extends Fragment {
     }
 
     private void progress() {
-        fabProgressCircle.beginFinalAnimation();
+        fabProgressCircle.onArcAnimationComplete();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                fabProgressCircle.hide();
+            }
+        } , 500);
     }
 
     public void FirstStart() {
@@ -339,15 +333,13 @@ public class WeatherFragment extends Fragment {
 
     public void changeCity(String city)
     {
-        if (!swipeView.isRefreshing())
-            pd.show();
         updateWeatherData(city, null, null);
         preferences.setCity(city);
     }
 
     public void changeCity(String lat , String lon)
     {
-        pd.show();
+        ((WeatherActivity) activity()).showFab();
         updateWeatherData(null, lat, lon);
     }
     
@@ -507,8 +499,7 @@ public class WeatherFragment extends Fragment {
             cityField.setOnClickListener(new View.OnClickListener()
             {
                 public void onClick(View v) {
-                    Snackbar.make(v, city, Snackbar.LENGTH_SHORT)
-                            .show();
+                    Snack.make(v, city, Snackbar.LENGTH_SHORT);
                 }
             });
             Log.i("Location" , "Location Received");
@@ -532,13 +523,13 @@ public class WeatherFragment extends Fragment {
             humidityIcon.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Snackbar.make(rootView , humidity1 , Snackbar.LENGTH_SHORT).show();
+                    Snack.make(rootView , humidity1 , Snackbar.LENGTH_SHORT);
                 }
             });
             humidityView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Snackbar.make(rootView , humidity1 , Snackbar.LENGTH_SHORT).show();
+                    Snack.make(rootView , humidity1 , Snackbar.LENGTH_SHORT);
                 }
             });
             final String wind = getString(R.string.wind , json0.getWind().getSpeed() , PreferenceManager.getDefaultSharedPreferences(getContext()).getString(Constants.PREF_TEMPERATURE_UNITS , Constants.METRIC).equals(Constants.METRIC) ? getString(R.string.mps) : getString(R.string.mph));
@@ -547,13 +538,13 @@ public class WeatherFragment extends Fragment {
             windIcon.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Snackbar.make(rootView , wind1 , Snackbar.LENGTH_SHORT).show();
+                    Snack.make(rootView , wind1 , Snackbar.LENGTH_SHORT);
                 }
             });
             windView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Snackbar.make(rootView , wind1 , Snackbar.LENGTH_SHORT).show();
+                    Snack.make(rootView , wind1 , Snackbar.LENGTH_SHORT);
                 }
             });
             weatherIcon.setText(Utils.setWeatherIcon(context() , json0.getWeather().get(0).getId()));
@@ -569,8 +560,7 @@ public class WeatherFragment extends Fragment {
                             String cap = s.substring(0, 1).toUpperCase() + s.substring(1);
                             builder.append(cap.concat(" "));
                         }
-                        Snackbar.make(v , getString(R.string.hey_there_condition , builder.toString().substring(0 , builder.length() - 1)), Snackbar.LENGTH_SHORT)
-                                .show();
+                        Snack.make(v , getString(R.string.hey_there_condition , builder.toString().substring(0 , builder.length() - 1)), Snackbar.LENGTH_SHORT);
                     }
                     catch (Exception e) {
                         Log.e("Error", "Main Weather Icon OnClick Details could not be loaded");
@@ -620,7 +610,7 @@ public class WeatherFragment extends Fragment {
         directionView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view , getString(R.string.wind_blowing_in , string) , Snackbar.LENGTH_SHORT).show();
+                Snack.make(view , getString(R.string.wind_blowing_in , string) , Snackbar.LENGTH_SHORT);
             }
         });
     }

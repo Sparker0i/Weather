@@ -40,7 +40,7 @@ public class CustomBottomSheetDialogFragment extends BottomSheetDialogFragment {
         mDescribable = (WeatherFort.WeatherList) getArguments().getSerializable(
                 DESCRIBABLE_KEY);
         json = mDescribable;
-        weatherFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/weather.ttf");
+        weatherFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/weather-icons-v2.0.10.ttf");
     }
 
     @Override

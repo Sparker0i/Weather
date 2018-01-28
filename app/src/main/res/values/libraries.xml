@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="other_apps">OTHER APPS</string>
-    <string name="author_header">AUTHOR</string>
-    <string name="credits_header">CREDITS</string>
-    <string name="libraries_header">OPEN SOURCE LICENSES</string>
-    <string name="license_header">LICENSE</string>
-    <string name="inspiration_header">INSPIRATION</string>
+    <string name="other_apps" translatable="false">OTHER APPS</string>
+    <string name="author_header" translatable="false">AUTHOR</string>
+    <string name="credits_header" translatable="false">CREDITS</string>
+    <string name="libraries_header" translatable="false">OPEN SOURCE LICENSES</string>
+    <string name="license_header" translatable="false">LICENSE</string>
+    <string name="inspiration_header" translatable="false">INSPIRATION</string>
     <string name="dev_1_title" translatable="false">Aaditya Menon</string>
     <string name="dev_1_name" translatable="false">\@Sparker0i</string>
     <string name="dev_2_title" translatable="false">OpenWeatherMap</string>

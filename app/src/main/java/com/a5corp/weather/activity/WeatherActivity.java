@@ -21,7 +21,6 @@ import com.a5corp.weather.R;
 import com.a5corp.weather.activity.settings.SettingsActivity;
 import com.a5corp.weather.app.MyContextWrapper;
 import com.a5corp.weather.fragment.GraphsFragment;
-import com.a5corp.weather.fragment.MapsFragment;
 import com.a5corp.weather.fragment.WeatherFragment;
 import com.a5corp.weather.internet.FetchWeather;
 import com.a5corp.weather.model.Info;
@@ -57,7 +56,7 @@ public class WeatherActivity extends AppCompatActivity {
     Prefs preferences;
     WeatherFragment wf;
     GraphsFragment gf;
-    MapsFragment mf;
+    //MapsFragment mf;
     Toolbar toolbar;
     Drawer drawer;
     NotificationManagerCompat mManager;
@@ -68,7 +67,7 @@ public class WeatherActivity extends AppCompatActivity {
 
     int mode = 0;
 
-    @Shortcut(id = "home", icon = R.drawable.shortcut_home, shortLabel = "Weather Info", rank = 2)
+    @Shortcut(id = "home", icon = R.drawable.shortcut_home, shortLabel = "Home", rank = 2)
     public void addWeather() {
 
     }
@@ -87,7 +86,7 @@ public class WeatherActivity extends AppCompatActivity {
         }, 750);
     }
 
-    @Shortcut(id = "maps", icon = R.drawable.shortcut_map, shortLabel = "Weather Maps")
+    /*@Shortcut(id = "maps", icon = R.drawable.shortcut_map, shortLabel = "Weather Maps")
     public void addMaps() {
         handler.postDelayed(new Runnable() {
             @Override
@@ -98,19 +97,21 @@ public class WeatherActivity extends AppCompatActivity {
                         .commit();
             }
         }, 750);
-    }
+    }*/
 
     public void hideFab() {
         fab.hide();
-        ((FABProgressCircle)findViewById(R.id.fabProgressCircle)).hide();
+        findViewById(R.id.fabProgressCircle).setVisibility(View.INVISIBLE);
+        ((FABProgressCircle) findViewById(R.id.fabProgressCircle)).hide();
     }
 
     public void showFab() {
         fab.show();
+        findViewById(R.id.fabProgressCircle).setVisibility(View.VISIBLE);
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                ((FABProgressCircle)findViewById(R.id.fabProgressCircle)).show();
+
             }
         } , 500);
     }
@@ -136,7 +137,6 @@ public class WeatherActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 hideFab();
-                ((FABProgressCircle) findViewById(R.id.fabProgressCircle)).onCompleteFABAnimationEnd();
                 showInputDialog();
             }
         });
@@ -148,7 +148,7 @@ public class WeatherActivity extends AppCompatActivity {
         bundle.putInt("mode", intent.getIntExtra(Constants.MODE, 0));
         wf.setArguments(bundle);
         gf = new GraphsFragment();
-        mf = new MapsFragment();
+        //mf = new MapsFragment();
         dbHelper = new DBHelper(this);
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment, wf)
@@ -355,7 +355,7 @@ public class WeatherActivity extends AppCompatActivity {
                         return true;
                     }
                 });
-        SecondaryDrawerItem item3 = new SecondaryDrawerItem().withName(R.string.drawer_item_map)
+        /*SecondaryDrawerItem item3 = new SecondaryDrawerItem().withName(R.string.drawer_item_map)
                 .withIcon(new IconicsDrawable(this)
                         .icon(GoogleMaterial.Icon.gmd_map))
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
@@ -369,7 +369,7 @@ public class WeatherActivity extends AppCompatActivity {
                         }
                         return true;
                     }
-                });
+                });*/
         SecondaryDrawerItem item4 = new SecondaryDrawerItem().withName(R.string.drawer_item_add_city)
                 .withIcon(new IconicsDrawable(this)
                         .icon(GoogleMaterial.Icon.gmd_add_location))
@@ -413,7 +413,7 @@ public class WeatherActivity extends AppCompatActivity {
                 .addDrawerItems(
                         item1,
                         item2,
-                        item3,
+                        //item3,
                         new DividerDrawerItem(),
                         item4
                 )

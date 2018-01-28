@@ -16,6 +16,7 @@ import com.a5corp.weather.BuildConfig;
 import com.a5corp.weather.R;
 import com.a5corp.weather.activity.WeatherActivity;
 import com.a5corp.weather.model.WeatherInfo;
+import com.a5corp.weather.preferences.Prefs;
 import com.a5corp.weather.utils.Constants;
 import com.a5corp.weather.utils.Utils;
 
@@ -25,7 +26,7 @@ import java.util.concurrent.TimeUnit;
 
 public class LargeWidgetProvider extends AbstractWidgetProvider {
 
-    private static final String TAG = "SimpleWidgetProvider";
+    private static final String TAG = "LargeWidgetProvider";
 
     private static final String ACTION_UPDATE_TIME = "com.a5corp.weather.UPDATE_TIME";
 
@@ -110,7 +111,7 @@ public class LargeWidgetProvider extends AbstractWidgetProvider {
     private static void scheduleNextUpdate(Context context) {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         long now = new Date().getTime();
-        long nextUpdate = now + DURATION_MINUTE - now % DURATION_MINUTE;
+        long nextUpdate = now + Long.parseLong(new Prefs(context).getTime());
         if (BuildConfig.DEBUG) {
             Log.i(TAG, "Next widget update: " +
                     android.text.format.DateFormat.getTimeFormat(context).format(new Date(nextUpdate)));

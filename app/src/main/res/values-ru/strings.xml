@@ -36,7 +36,6 @@
 
     <string name="enter_city_first">Сперва укажи название города</string>
     <string name="check_internet">Проверь подключение к интернету, пожалуйста.</string>
-    <string name="enable_location">Для этого дай приложению доступ к определению местоположения</string>
     <string name="enable_gps">Включить GPS</string>
     <string name="enable_gps_content">Для этой функциональности требуется включить GPS</string>
 

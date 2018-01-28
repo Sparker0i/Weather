@@ -36,7 +36,6 @@
 
     <string name="enter_city_first">まず都市名を入力してください</string>
     <string name="check_internet">インターネット接続を確認してください</string>
-    <string name="enable_location">この操作を実行するため、位置情報のアクセス許可を有効にしてください</string>
     <string name="enable_gps">GPS を有効にする</string>
     <string name="enable_gps_content">この起動を動作させるため、GPS を有効にする必要があります</string>
 

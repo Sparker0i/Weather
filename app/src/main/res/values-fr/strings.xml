@@ -36,7 +36,6 @@
 
     <string name="enter_city_first">Commencer par saisir un nom de ville</string>
     <string name="check_internet">Veuillez vérifier votre connexion Internet</string>
-    <string name="enable_location">Veuillez activer la permission de localisation GPS pour permettre cette action</string>
     <string name="enable_gps">Activer le GPS</string>
     <string name="enable_gps_content">Vous devez activer le GPS pour utiliser cette fonctionnalité</string>
 

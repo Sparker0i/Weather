@@ -12,14 +12,14 @@
     <string name="mph" translatable="false">mil/h</string>
     <string name="mm" translatable="false">mm</string>
 
-    <string name="temperature">%1$s : %2$.2f %3$s</string>
-    <string name="wind" formatted="false">%1$.2f %2$s</string>
-    <string name="humidity_">%d %%</string>
-    <string name="rain_">%1$s : %2$.2f mm</string>
-    <string name="city">City : %s</string>
+    <string name="temperature" translatable="false">%1$s : %2$.2f %3$s</string>
+    <string name="wind" formatted="false" translatable="false">%1$.2f %2$s</string>
+    <string name="humidity_" translatable="false">%d %%</string>
+    <string name="rain_" translatable="false">%1$s : %2$.2f mm</string>
+    <string name="city" translatable="false">City : %s</string>
 
-    <string name="c">°C</string>
-    <string name="f">°F</string>
+    <string name="c" translatable="false">°C</string>
+    <string name="f" translatable="false">°F</string>
 
     <string name="no_internet_mobile_data" translatable="false">Mobile Data</string>
     <string name="no_internet_wifi" translatable="false">Wi-Fi</string>
