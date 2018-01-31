@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:bbn_badgeColor="#FFFF0000"
+    app:bbn_rippleColor="#33ffffff"
+    android:background="@android:color/black">
+    <item
+        android:id="@+id/map_rain"
+        android:icon="@drawable/ic_action_water"
+        android:color="@color/md_blue_700"
+        android:title="@string/bottom_rain" />
+    <item
+        android:id="@+id/map_wind"
+        android:icon="@drawable/ic_action_wind"
+        android:color="@color/md_green_700"
+        android:title="@string/bottom_wind" />
+    <item
+        android:id="@+id/map_temperature"
+        android:color="@color/md_orange_700"
+        android:icon="@drawable/ic_action_temperature"
+        android:title="@string/pref_temp_header" />
+</menu>

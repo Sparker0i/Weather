@@ -13,6 +13,8 @@ import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+
+import com.a5corp.weather.fragment.MapsFragment;
 import com.a5corp.weather.model.Log;
 import android.view.View;
 
@@ -355,7 +357,7 @@ public class WeatherActivity extends AppCompatActivity {
                         return true;
                     }
                 });
-        /*SecondaryDrawerItem item3 = new SecondaryDrawerItem().withName(R.string.drawer_item_map)
+        SecondaryDrawerItem item3 = new SecondaryDrawerItem().withName(R.string.drawer_item_map)
                 .withIcon(new IconicsDrawable(this)
                         .icon(GoogleMaterial.Icon.gmd_map))
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
@@ -369,7 +371,7 @@ public class WeatherActivity extends AppCompatActivity {
                         }
                         return true;
                     }
-                });*/
+                });
         SecondaryDrawerItem item4 = new SecondaryDrawerItem().withName(R.string.drawer_item_add_city)
                 .withIcon(new IconicsDrawable(this)
                         .icon(GoogleMaterial.Icon.gmd_add_location))
@@ -413,7 +415,7 @@ public class WeatherActivity extends AppCompatActivity {
                 .addDrawerItems(
                         item1,
                         item2,
-                        //item3,
+                        item3,
                         new DividerDrawerItem(),
                         item4
                 )

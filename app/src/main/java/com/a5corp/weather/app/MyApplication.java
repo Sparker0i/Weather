@@ -8,6 +8,8 @@ import android.preference.PreferenceManager;
 import com.a5corp.weather.model.Log;
 
 import com.a5corp.weather.R;
+import com.a5corp.weather.preferences.Prefs;
+import com.a5corp.weather.utils.LanguageUtil;
 
 import java.util.Locale;
 
@@ -28,6 +30,9 @@ public class MyApplication extends Application {
         Locale.setDefault(locale);
         updateConfiguration(config);
         setSystemLocale(config , locale);
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O)
+            LanguageUtil.setLanguage(this, new Prefs(this).getLanguage());
     }
 
     @Override
