@@ -1,5 +1,6 @@
 package com.a5corp.weather.activity.settings;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.preference.ListPreference;
@@ -7,12 +8,17 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.view.MenuItem;
 
 import com.a5corp.weather.R;
 import com.a5corp.weather.activity.WeatherActivity;
 import com.a5corp.weather.app.MyContextWrapper;
+import com.a5corp.weather.internet.CheckConnection;
+import com.a5corp.weather.internet.FetchWeather;
+import com.a5corp.weather.model.Info;
+import com.a5corp.weather.model.Snack;
 import com.a5corp.weather.preferences.DBHelper;
 import com.a5corp.weather.preferences.Prefs;
 import com.a5corp.weather.service.NotificationService;
@@ -110,10 +116,52 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                                     dialog.dismiss();
                                 }
                             })
-                            .input(null, null, new MaterialDialog.InputCallback() {
+                            .input(null, new Prefs(getActivity()).getWeatherKey(), new MaterialDialog.InputCallback() {
                                 @Override
                                 public void onInput(@NonNull MaterialDialog dialog, @NonNull CharSequence input) {
-                                    new Prefs(getActivity()).setWeatherKey(input.toString().replaceAll(" " , ""));
+                                    if (input.length() == 0)
+                                        Snack.make(getActivity().findViewById(android.R.id.content) , "Please enter a valid key" , Snack.LENGTH_SHORT);
+                                    else {
+                                        try {
+                                            if (new CheckConnection(getActivity()).isNetworkAvailable() && !new Prefs(getActivity()).getWeatherKey().equals(input.toString())) {
+                                                new Prefs(getActivity()).setWeatherKey(input.toString());
+                                                Info info = new FetchWeather(getActivity()).execute(new Prefs(getActivity()).getCity()).get();
+                                                if (info.day.getCod() != 200) {
+                                                    new MaterialDialog.Builder(getActivity())
+                                                            .title("Unable to Fetch Weather Key")
+                                                            .content("There may be some problem in the weather key entered. Reseting to the default one..")
+                                                            .positiveText(android.R.string.ok);
+                                                    new Prefs(getActivity()).setWeatherKey(Constants.OWM_APP_ID);
+                                                }
+                                            }
+                                            else {
+                                                new MaterialDialog.Builder(getActivity())
+                                                        .title(getString(R.string.no_internet_title))
+                                                        .cancelable(false)
+                                                        .content(getString(R.string.no_internet_content))
+                                                        .positiveText(getString(R.string.no_internet_mobile_data))
+                                                        .onPositive(new MaterialDialog.SingleButtonCallback() {
+                                                            @Override
+                                                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                                                Intent intent = new Intent();
+                                                                intent.setComponent(new ComponentName("com.android.settings","com.android.settings.Settings$DataUsageSummaryActivity"));
+                                                                startActivityForResult(intent , 0);
+                                                            }
+                                                        })
+                                                        .negativeText(getString(R.string.no_internet_wifi))
+                                                        .onNegative(new MaterialDialog.SingleButtonCallback() {
+                                                            @Override
+                                                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                                                startActivityForResult(new Intent(Settings.ACTION_WIFI_SETTINGS) , 0);
+                                                            }
+                                                        })
+                                                        .show();
+                                            }
+                                        }
+                                        catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
                                 }
                             }).show();
                     return true;
