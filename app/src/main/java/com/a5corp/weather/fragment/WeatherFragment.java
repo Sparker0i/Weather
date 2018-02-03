@@ -502,7 +502,6 @@ public class WeatherFragment extends Fragment {
                     Snack.make(v, city, Snackbar.LENGTH_SHORT);
                 }
             });
-            Log.i("Location" , "Location Received");
             List<WeatherFort.WeatherList> details = json1.getList();
             for (int i = 0; i < 10; ++i)
             {
