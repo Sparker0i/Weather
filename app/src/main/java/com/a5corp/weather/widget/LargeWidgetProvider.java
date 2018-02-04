@@ -30,8 +30,6 @@ public class LargeWidgetProvider extends AbstractWidgetProvider {
 
     private static final String ACTION_UPDATE_TIME = "com.a5corp.weather.UPDATE_TIME";
 
-    private static final long DURATION_MINUTE = TimeUnit.SECONDS.toMillis(30);
-
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         for (int widgetId : appWidgetIds) {
@@ -39,14 +37,14 @@ public class LargeWidgetProvider extends AbstractWidgetProvider {
             RemoteViews remoteViews = new RemoteViews(context.getPackageName(),
                     R.layout.widget_large);
 
-            Intent intent = new Intent(context, AlarmReceiver.class);
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(context,
+            Intent intent = new Intent(context, WeatherActivity.class);
+            PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
+            remoteViews.setOnClickPendingIntent(R.id.widget_root, pendingIntent);
+
+            intent = new Intent(context, AlarmReceiver.class);
+            pendingIntent = PendingIntent.getBroadcast(context,
                     0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
             remoteViews.setOnClickPendingIntent(R.id.widget_button_refresh, pendingIntent);
-
-            intent = new Intent(context, WeatherActivity.class);
-            pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
-            remoteViews.setOnClickPendingIntent(R.id.widget_root, pendingIntent);
 
             SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
             WeatherInfo weather;
@@ -112,10 +110,8 @@ public class LargeWidgetProvider extends AbstractWidgetProvider {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         long now = new Date().getTime();
         long nextUpdate = now + Long.parseLong(new Prefs(context).getTime());
-        if (BuildConfig.DEBUG) {
-            Log.i(TAG, "Next widget update: " +
-                    android.text.format.DateFormat.getTimeFormat(context).format(new Date(nextUpdate)));
-        }
+        Log.i(TAG, "Next widget update: " +
+                android.text.format.DateFormat.getTimeFormat(context).format(new Date(nextUpdate)));
         if (Build.VERSION.SDK_INT >= 19) {
             alarmManager.setExact(AlarmManager.RTC, nextUpdate, getTimeIntent(context));
         } else {
