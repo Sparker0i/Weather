@@ -3,27 +3,24 @@ package com.a5corp.weather.cards;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.v7.widget.CardView;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.a5corp.weather.R;
 import com.a5corp.weather.activity.LicenseActivity;
 
-import it.gmariotti.cardslib.library.internal.Card;
-
-public class AboutCard extends Card {
+public class AboutCard {
     private int type;
     private Context context;
 
     public AboutCard(Context context, int innerLayout, int type) {
-        super(context, innerLayout);
+        //super(context);
         this.type = type;
         this.context = context;
     }
 
-    @Override
     public void setupInnerViewElements(ViewGroup parent, View view) {
-        super.setupInnerViewElements(parent, view);
 
         switch (type) {
             case 1:

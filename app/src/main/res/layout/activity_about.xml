@@ -29,11 +29,10 @@
         android:paddingTop="?attr/actionBarSize"
         android:layout_margin="0dp">
 
-        <it.gmariotti.cardslib.library.view.CardListView
+        <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:animateLayoutChanges="true"
-            card:list_card_layout_resourceID="@layout/about_card"
             android:id="@+id/about_list"/>
 
         <View

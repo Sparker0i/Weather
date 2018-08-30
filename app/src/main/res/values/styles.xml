@@ -8,20 +8,6 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="about_card">
-        <item name="android:layout_marginTop">@dimen/about_card_margin_top</item>
-        <item name="android:layout_marginBottom">@dimen/about_card_margin_bottom</item>
-        <item name="android:layout_marginLeft">@dimen/about_card_margin_left</item>
-        <item name="android:layout_marginRight">@dimen/about_card_margin_right</item>
-    </style>
-
-    <style name="about_card_inner">
-        <item name="android:paddingTop">@dimen/card_expand_native_layout_padding_top</item>
-        <item name="android:paddingBottom">@dimen/card_expand_native_layout_padding_bottom</item>
-        <item name="android:paddingLeft">@dimen/card_expand_native_layout_padding_left</item>
-        <item name="android:paddingRight">@dimen/card_expand_native_layout_padding_right</item>
-    </style>
-
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>

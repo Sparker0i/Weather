@@ -8,15 +8,15 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
+        android:name=".app.MyApplication"
         android:allowBackup="true"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher_x"
-        android:name=".app.MyApplication"
-        android:resizeableActivity="false"
         android:label="@string/app_name"
+        android:resizeableActivity="false"
         android:theme="@style/AppTheme.NoActionBar"
         tools:targetApi="n">
         <activity
@@ -24,13 +24,14 @@
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".activity.AboutActivity"
-            android:label="About"
             android:configChanges="locale"
+            android:label="About"
             android:parentActivityName=".activity.WeatherActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -44,8 +45,8 @@
         <activity
             android:name=".activity.FirstLaunch"
             android:configChanges="locale"
-            android:resizeableActivity="false"
             android:label="Enter City"
+            android:resizeableActivity="false"
             tools:targetApi="n" />
         <activity
             android:name=".activity.LicenseActivity"
@@ -80,7 +81,6 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/large_widget" />
         </receiver>
-
         <receiver
             android:name=".receiver.StartupReceiver"
             android:enabled="true">
@@ -105,6 +105,8 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/small_widget" />
         </receiver>
+
+        <activity android:name=".activity.NewAboutActivity"></activity>
     </application>
 
 </manifest>

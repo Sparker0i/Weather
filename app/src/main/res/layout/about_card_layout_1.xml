@@ -1,8 +1,15 @@
-<LinearLayout
+<android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:padding="8dp">
+<LinearLayout
+
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:clickable="false"
     android:layout_gravity="center">
 
     <TextView
@@ -55,3 +62,4 @@
     </RelativeLayout>
 
 </LinearLayout>
+</android.support.v7.widget.CardView>
