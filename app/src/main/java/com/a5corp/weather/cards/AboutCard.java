@@ -90,15 +90,6 @@ public class AboutCard {
                     }
                 });
 
-                parent.findViewById(R.id.lib_3).setOnClickListener(new View.OnClickListener()
-                {
-                    @Override
-                    public void onClick(View v)
-                    {
-                        showLicense(3);
-                    }
-                });
-
                 parent.findViewById(R.id.lib_4).setOnClickListener(new View.OnClickListener()
                 {
                     @Override

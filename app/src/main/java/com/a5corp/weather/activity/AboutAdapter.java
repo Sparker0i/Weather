@@ -23,12 +23,6 @@ public class AboutAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         this.context = context;
     }
 
-    private void showLicense(int libId) {
-        Intent intent = new Intent(context, LicenseActivity.class);
-        intent.putExtra("libId", libId);
-        context.startActivity(intent);
-    }
-
     public static class About1ViewHolder extends RecyclerView.ViewHolder {
         public ViewGroup parent;
         public Context context;
@@ -123,15 +117,6 @@ public class AboutAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 public void onClick(View v)
                 {
                     showLicense(2);
-                }
-            });
-
-            parent.findViewById(R.id.lib_3).setOnClickListener(new View.OnClickListener()
-            {
-                @Override
-                public void onClick(View v)
-                {
-                    showLicense(3);
                 }
             });
 

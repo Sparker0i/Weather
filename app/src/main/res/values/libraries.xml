@@ -26,12 +26,6 @@
     <string name="lib_2_link" translatable="false">https://github.com/mikepenz/MaterialDrawer</string>
     <string name="lib_2_license" translatable="false"><![CDATA[Copyright 2016 Mike Penz]]></string>
 
-    <string name="lib_3" translatable="false">Card Library</string>
-    <string name="lib_3_author" translatable="false">Gabriele Mariotti</string>
-    <string name="lib_3_link" translatable="false">https://github.com/gabrielemariotti/cardslib</string>
-    <string name="lib_3_license" translatable="false"><![CDATA[Copyright © 2013-2014 Gabriele Mariotti]]>
-    </string>
-
     <string name="lib_4" translatable="false">Android Iconics</string>
     <string name="lib_4_author" translatable="false">Mike Penz</string>
     <string name="lib_4_link" translatable="false">https://github.com/mikepenz/Android-Iconics</string>
