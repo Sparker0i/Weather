@@ -50,7 +50,6 @@ public class LicenseActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_license);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         ButterKnife.bind(this);
         libID = getIntent().getExtras().getInt(Constants.LIBRARY_ID);
 
