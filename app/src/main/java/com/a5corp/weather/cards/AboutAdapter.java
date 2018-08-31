@@ -1,4 +1,4 @@
-package com.a5corp.weather.activity;
+package com.a5corp.weather.cards;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,17 +10,17 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.a5corp.weather.R;
+import com.a5corp.weather.model.AboutModel;
+import com.a5corp.weather.activity.LicenseActivity;
 
 import java.util.List;
 
 public class AboutAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<AboutModel> aboutCards;
-    private Context context;
 
-    public AboutAdapter(List<AboutModel> aboutCards , Context context) {
+    public AboutAdapter(List<AboutModel> aboutCards) {
         this.aboutCards = aboutCards;
-        this.context = context;
     }
 
     public static class About1ViewHolder extends RecyclerView.ViewHolder {

@@ -105,8 +105,6 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/small_widget" />
         </receiver>
-
-        <activity android:name=".activity.NewAboutActivity"></activity>
     </application>
 
 </manifest>

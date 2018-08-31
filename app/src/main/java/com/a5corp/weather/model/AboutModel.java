@@ -1,4 +1,4 @@
-package com.a5corp.weather.activity;
+package com.a5corp.weather.model;
 
 public class AboutModel {
     public static final int ABOUT_1 = 1;

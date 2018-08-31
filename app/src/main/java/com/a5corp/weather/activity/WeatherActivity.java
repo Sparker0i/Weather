@@ -390,7 +390,7 @@ public class WeatherActivity extends AppCompatActivity {
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
-                        startActivity(new Intent(WeatherActivity.this, NewAboutActivity.class));
+                        startActivity(new Intent(WeatherActivity.this, AboutActivity.class));
                         return true;
                     }
                 });
