@@ -86,6 +86,7 @@
     <string name="pref_lang_title">Language</string>
     <string name="pref_owm_key_title">Custom OpenWeatherMap Key</string>
     <string name="pref_delete_cities_title">Delete Cities</string>
+    <string name="pref_time_format_title">Time Format</string>
 
     <!-- Settings Summary -->
     <string name="pref_units_summary">Choose a Preferred Temperature Unit you want to see the temperature in</string>
@@ -93,6 +94,7 @@
         \n\nBEWARE: Entering a wrong API Key may result in unwanted actions. Do this at your own risk</string>
     <string name="pref_delete_cities_summary">Delete From the extra cities displayed in the app</string>
     <string name="pref_add_city_content">You can enter a new city and add it to the list of saved cities</string>
+    <string name="pref_time_format_summary">Show time in 24 hour format</string>
 
     <!-- Bottom Bar Strings -->
     <string name="bottom_rain">Rain</string>

@@ -26,28 +26,35 @@
             android:entries="@array/notification_refresh_intervals_entries"
             android:entryValues="@array/notification_refresh_interval_values"
             android:key="@string/pref_refresh_interval"
-            android:title="@string/pref_refresh_title"/>
+            android:title="@string/pref_refresh_title" />
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/pref_display_header">
         <ListPreference
-            android:key="@string/pref_language"
-            android:dialogTitle="@string/pref_lang_title"
-            android:title="@string/pref_lang_title"
-            android:entries="@array/language_entries"
             android:defaultValue=""
-            android:entryValues="@array/language_values"/>
+            android:dialogTitle="@string/pref_lang_title"
+            android:entries="@array/language_entries"
+            android:entryValues="@array/language_values"
+            android:key="@string/pref_language"
+            android:title="@string/pref_lang_title" />
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:dialogTitle="@string/pref_time_format_title"
+            android:key="@string/pref_time_format"
+            android:summary="@string/pref_time_format_summary"
+            android:title="@string/pref_time_format_title" />
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/pref_other_header">
         <Preference
             android:key="@string/pref_delete_cities"
-            android:title="@string/pref_delete_cities_title"
-            android:summary="@string/pref_delete_cities_summary"/>
+            android:summary="@string/pref_delete_cities_summary"
+            android:title="@string/pref_delete_cities_title" />
 
         <Preference
             android:key="@string/pref_key"
-            android:title="@string/pref_owm_key_title"
-            android:summary="@string/pref_owm_key_summary"/>
+            android:summary="@string/pref_owm_key_summary"
+            android:title="@string/pref_owm_key_title" />
     </PreferenceCategory>
 </PreferenceScreen>

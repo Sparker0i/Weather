@@ -53,4 +53,5 @@ public class Constants {
     public static final String PREF_OWM_KEY = "owm_key";
     public static final String PREF_DELETE_CITIES = "pref_delete_cities";
     public static final String PREF_REFRESH_INTERVAL = "pref_refresh_interval";
+    public static final String PREF_TIME_FORMAT = "pref_time_format";
 }

@@ -54,4 +54,9 @@
         <item>360</item>
         <item>720</item>
     </string-array>
+
+    <string-array name="time_options_values" translatable="false">
+        <item>AM</item>
+        <item>PM</item>
+    </string-array>
 </resources>
