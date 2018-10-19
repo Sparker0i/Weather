@@ -66,36 +66,21 @@ import static com.a5corp.weather.utils.Constants.DESCRIBABLE_KEY;
 
 public class WeatherFragment extends Fragment {
     Typeface weatherFont;
-    @BindView(R.id.button1)
-    TextView button;
-    @BindView(R.id.weather_icon11)
-    TextView weatherIcon;
-    @BindView(R.id.wind_view)
-    TextView windView;
-    @BindView(R.id.humidity_view)
-    TextView humidityView;
-    @BindView(R.id.direction_view)
-    TextView directionView;
-    @BindView(R.id.daily_view)
-    TextView dailyView;
-    @BindView(R.id.updated_field)
-    TextView updatedField;
-    @BindView(R.id.city_field)
-    TextView cityField;
-    @BindView(R.id.sunrise_view)
-    TextView sunriseView;
-    @BindView(R.id.sunset_view)
-    TextView sunsetView;
-    @BindView(R.id.sunrise_icon)
-    TextView sunriseIcon;
-    @BindView(R.id.sunset_icon)
-    TextView sunsetIcon;
-    @BindView(R.id.wind_icon)
-    TextView windIcon;
-    @BindView(R.id.humidity_icon)
-    TextView humidityIcon;
-    @BindView(R.id.horizontal_recycler_view)
-    RecyclerView horizontalRecyclerView;
+    @BindView(R.id.button1) TextView button;
+    @BindView(R.id.weather_icon11) TextView weatherIcon;
+    @BindView(R.id.wind_view) TextView windView;
+    @BindView(R.id.humidity_view) TextView humidityView;
+    @BindView(R.id.direction_view) TextView directionView;
+    @BindView(R.id.daily_view) TextView dailyView;
+    @BindView(R.id.updated_field) TextView updatedField;
+    @BindView(R.id.city_field) TextView cityField;
+    @BindView(R.id.sunrise_view) TextView sunriseView;
+    @BindView(R.id.sunset_view) TextView sunsetView;
+    @BindView(R.id.sunrise_icon) TextView sunriseIcon;
+    @BindView(R.id.sunset_icon) TextView sunsetIcon;
+    @BindView(R.id.wind_icon) TextView windIcon;
+    @BindView(R.id.humidity_icon) TextView humidityIcon;
+    @BindView(R.id.horizontal_recycler_view) RecyclerView horizontalRecyclerView;
     LinearLayoutManager horizontalLayoutManager;
     double tc;
     Handler handler;
