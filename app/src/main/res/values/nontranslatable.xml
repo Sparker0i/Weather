@@ -7,6 +7,7 @@
     <string name="pref_language" translatable="false">pref_language</string>
     <string name="pref_key" translatable="false">owm_key</string>
     <string name="pref_delete_cities" translatable="false">pref_delete_cities</string>
+    <string name="pref_time_format" translatable="false">pref_time_format</string>
 
     <string name="mps" translatable="false">m/s</string>
     <string name="mph" translatable="false">mil/h</string>
