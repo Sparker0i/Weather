@@ -89,19 +89,6 @@
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:layout_weight="1"
                     android:textSize="32sp" />
-
-                <TextView
-                    android:id="@+id/direction_view"
-                    android:layout_width="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:textAlignment="textStart"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="4dp"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="#FFFFFF"
-                    android:textSize="35sp"
-                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
@@ -123,7 +110,7 @@
                     android:layout_marginEnd="8dp"
                     android:layout_weight="1">
                     <TextView
-                        android:id="@+id/wind_icon"
+                        android:id="@+id/direction_view"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
