@@ -1,10 +1,9 @@
 package com.a5corp.weather.activity;
 
 import android.content.Context;
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.a5corp.weather.R;
 import com.a5corp.weather.app.MyContextWrapper;

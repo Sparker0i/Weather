@@ -9,7 +9,7 @@
     app:behavior_hideable="true"
     app:behavior_peekHeight="100dp">
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/root"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -292,5 +292,5 @@
                 android:textSize="16sp"
                 tools:text="Pressure: 1970 hPa"/>
         </LinearLayout>
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

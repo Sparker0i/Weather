@@ -4,11 +4,11 @@ import android.app.Dialog;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.BottomSheetBehavior;
-import android.support.design.widget.BottomSheetDialogFragment;
-import android.support.design.widget.CoordinatorLayout;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,8 +18,6 @@ import com.a5corp.weather.R;
 import com.a5corp.weather.model.WeatherFort;
 import com.a5corp.weather.preferences.Prefs;
 import com.a5corp.weather.utils.Constants;
-
-import java.util.Locale;
 
 public class CustomBottomSheetDialogFragment extends BottomSheetDialogFragment {
 

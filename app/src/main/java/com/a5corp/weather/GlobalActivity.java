@@ -1,9 +1,8 @@
 package com.a5corp.weather;
 
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import com.a5corp.weather.model.Log;
 
 import com.a5corp.weather.activity.FirstLaunch;
