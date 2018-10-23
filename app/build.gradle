@@ -27,6 +27,7 @@ android {
 
 repositories {
     mavenCentral() // jcenter() works as well because it pulls from Maven Central
+    google()
     maven {
         url "https://maven.google.com"
     }
