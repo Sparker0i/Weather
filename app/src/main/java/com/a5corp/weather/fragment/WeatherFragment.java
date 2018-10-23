@@ -498,8 +498,8 @@ public class WeatherFragment extends Fragment {
             HorizontalAdapter horizontalAdapter = new HorizontalAdapter(details);
             horizontalRecyclerView.setAdapter(horizontalAdapter);
             boolean timeFormat24Hours = preferences.isTimeFormat24Hours();
-            final String d1 = new java.text.SimpleDateFormat(timeFormat24Hours ? "kkmm" : "hh:mm a", Locale.US).format(new Date(json0.getSys().getSunrise() * 1000));
-            final String d2 = new java.text.SimpleDateFormat(timeFormat24Hours ? "kkmm" : "hh:mm a", Locale.US).format(new Date(json0.getSys().getSunset() * 1000));
+            final String d1 = new java.text.SimpleDateFormat(timeFormat24Hours ? "kk:mm" : "hh:mm a", Locale.US).format(new Date(json0.getSys().getSunrise() * 1000));
+            final String d2 = new java.text.SimpleDateFormat(timeFormat24Hours ? "kk:mm" : "hh:mm a", Locale.US).format(new Date(json0.getSys().getSunset() * 1000));
             sunriseView.setText(d1);
             sunsetView.setText(d2);
             DateFormat df = DateFormat.getDateTimeInstance();
