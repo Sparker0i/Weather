@@ -78,7 +78,6 @@ public class WeatherFragment extends Fragment {
     @BindView(R.id.sunset_view) TextView sunsetView;
     @BindView(R.id.sunrise_icon) TextView sunriseIcon;
     @BindView(R.id.sunset_icon) TextView sunsetIcon;
-    @BindView(R.id.wind_icon) TextView windIcon;
     @BindView(R.id.humidity_icon) TextView humidityIcon;
     @BindView(R.id.horizontal_recycler_view) RecyclerView horizontalRecyclerView;
     LinearLayoutManager horizontalLayoutManager;
@@ -151,9 +150,6 @@ public class WeatherFragment extends Fragment {
         sunsetIcon.setTextColor(ContextCompat.getColor(context(), R.color.textColor));
         sunsetIcon.setTypeface(weatherFont);
         sunsetIcon.setText(activity().getString(R.string.sunset_icon));
-        windIcon.setTextColor(ContextCompat.getColor(context(), R.color.textColor));
-        windIcon.setTypeface(weatherFont);
-        windIcon.setText(activity().getString(R.string.speed_icon));
         humidityIcon.setTextColor(ContextCompat.getColor(context(), R.color.textColor));
         humidityIcon.setTypeface(weatherFont);
         humidityIcon.setText(activity().getString(R.string.humidity_icon));
@@ -527,7 +523,7 @@ public class WeatherFragment extends Fragment {
             final String wind = getString(R.string.wind, json0.getWind().getSpeed(), PreferenceManager.getDefaultSharedPreferences(getContext()).getString(Constants.PREF_TEMPERATURE_UNITS, Constants.METRIC).equals(Constants.METRIC) ? getString(R.string.mps) : getString(R.string.mph));
             final String wind1 = getString(R.string.wind_, json0.getWind().getSpeed(), PreferenceManager.getDefaultSharedPreferences(getContext()).getString(Constants.PREF_TEMPERATURE_UNITS, Constants.METRIC).equals(Constants.METRIC) ? getString(R.string.mps) : getString(R.string.mph));
             windView.setText(wind);
-            windIcon.setOnClickListener(new View.OnClickListener() {
+            directionView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Snack.make(rootView, wind1, Snackbar.LENGTH_SHORT);
