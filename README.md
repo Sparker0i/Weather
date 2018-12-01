@@ -1,7 +1,7 @@
 # Simple Weather
 [![Build Status](https://travis-ci.org/Sparker0i/Weather.svg?branch=master)](https://travis-ci.org/Sparker0i/Weather)
 [![Release](https://img.shields.io/github/release/Sparker0i/Weather.svg)](https://github.com/Sparker0i/Weather/releases)
-[![License](https://img.shields.io/badge/license-GNU_GPLv3-orange.svg)](https://raw.githubusercontent.com/Sparker0i/Weather/HEAD/LICENSE)
+[![License](https://img.shields.io/badge/license-GNU_GPLv3-orange.svg)](https://raw.githubusercontent.com/Sparker0i/Weather/HEAD/LICENSE) [![Join the chat at https://gitter.im/SimpleWeather/Lobby](https://badges.gitter.im/SimpleWeather/Lobby.svg)](https://gitter.im/SimpleWeather/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Welcome to my Open Source, easy to use Weather app, built using Android Studio for Android 4.1+
 
