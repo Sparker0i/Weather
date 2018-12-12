@@ -186,7 +186,7 @@ public class WeatherFragment extends Fragment {
         sunriseView.setTextColor(ContextCompat.getColor(context(), R.color.textColor));
         sunsetView.setTextColor(ContextCompat.getColor(context(), R.color.textColor));
         button.setTextColor(ContextCompat.getColor(context(), R.color.textColor));
-        pd.show();
+        //pd.show();
         horizontalRecyclerView.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
         weatherIcon.setTypeface(weatherFont);
         weatherIcon.setTextColor(ContextCompat.getColor(context(), R.color.textColor));
@@ -234,6 +234,8 @@ public class WeatherFragment extends Fragment {
     }
 
     private void updateWeatherData(final String city, final String lat, final String lon) {
+        final SplashScreenFragment splashScreenFragment=new SplashScreenFragment();
+        getActivity().getSupportFragmentManager().beginTransaction().add(R.id.fragment,splashScreenFragment).commit();
         wt = new FetchWeather(context());
         if (citys == null)
             handler.postDelayed(new Runnable() {
@@ -258,6 +260,7 @@ public class WeatherFragment extends Fragment {
                 if (pd.isShowing())
                     pd.dismiss();
                 if (json == null) {
+                    getActivity().getSupportFragmentManager().beginTransaction().remove(splashScreenFragment).commit();
                     preferences.setCity(preferences.getLastCity());
                     handler.post(new Runnable() {
                         public void run() {
@@ -283,6 +286,7 @@ public class WeatherFragment extends Fragment {
                         public void run() {
                             preferences.setLaunched();
                             renderWeather(json);
+                            getActivity().getSupportFragmentManager().beginTransaction().remove(splashScreenFragment).commit();
                             if (!preferences.getv3TargetShown())
                                 showTargets();
                             if (pd.isShowing())

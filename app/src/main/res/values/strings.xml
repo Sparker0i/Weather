@@ -103,4 +103,7 @@
     <!-- Graph Strings -->
     <string name="g_pressure">Pressure, hPa</string>
     <string name="g_snow">Snow, mm</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
