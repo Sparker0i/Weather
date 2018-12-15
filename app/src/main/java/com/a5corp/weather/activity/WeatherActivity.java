@@ -151,11 +151,16 @@ public class WeatherActivity extends AppCompatActivity {
         gf = new GraphsFragment();
         //mf = new MapsFragment();
         dbHelper = new DBHelper(this);
+        NotificationService.enqueueWork(this, new Intent(this, WeatherActivity.class));
+        initDrawer();
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment, wf)
                 .commit();
-        initDrawer();
-        NotificationService.enqueueWork(this, new Intent(this, WeatherActivity.class));
     }
 
     private void showInputDialog() {

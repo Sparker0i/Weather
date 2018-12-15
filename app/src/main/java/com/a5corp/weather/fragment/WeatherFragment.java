@@ -16,6 +16,7 @@ import com.google.android.material.snackbar.Snackbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -100,6 +101,8 @@ public class WeatherFragment extends Fragment {
     GPSTracker gps;
     View rootView;
     Permissions permission;
+    MaterialDialog materialDialog;
+    FragmentTransaction ft;
 
     public WeatherFragment() {
         handler = new Handler();
@@ -221,6 +224,10 @@ public class WeatherFragment extends Fragment {
             if (!cc.isNetworkAvailable())
                 showNoInternet();
             else {
+                Log.i("tag----","on Activity result");
+               // materialDialog.setCancelable(true);
+               // materialDialog.dismiss();
+                //materialDialog.cancel();
                 pd.show();
                 updateWeatherData(preferences.getCity(), null, null);
             }
@@ -235,9 +242,13 @@ public class WeatherFragment extends Fragment {
 
     private void updateWeatherData(final String city, final String lat, final String lon) {
         final SplashScreenFragment splashScreenFragment=new SplashScreenFragment();
+        getActivity().getSupportFragmentManager().beginTransaction().remove(splashScreenFragment).commit();
         getActivity().getSupportFragmentManager().beginTransaction().add(R.id.fragment,splashScreenFragment).commit();
+
+        //ft.addToBackStack(null);
         wt = new FetchWeather(context());
         if (citys == null)
+            Log.i("tag----","citys is null");
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -247,11 +258,15 @@ public class WeatherFragment extends Fragment {
         new Thread() {
             public void run() {
                 try {
+                    Log.i("tag----","run---");
                     if (lat == null && lon == null) {
                         json = wt.execute(citys != null ? citys : city).get();
                     } else if (city == null) {
                         json = wt.execute(lat, lon).get();
                     }
+                    Log.i("tag----","run over---");
+
+
                 } catch (InterruptedException iex) {
                     Log.e("InterruptedException", "iex");
                 } catch (ExecutionException eex) {
@@ -260,6 +275,7 @@ public class WeatherFragment extends Fragment {
                 if (pd.isShowing())
                     pd.dismiss();
                 if (json == null) {
+                    Log.i("tag----","json is null");
                     getActivity().getSupportFragmentManager().beginTransaction().remove(splashScreenFragment).commit();
                     preferences.setCity(preferences.getLastCity());
                     handler.post(new Runnable() {
@@ -270,8 +286,9 @@ public class WeatherFragment extends Fragment {
                             } else {
                                 if (citys == null)
                                     fabProgressCircle.hide();
-                                cc = new CheckConnection(context());
+                                cc = new CheckConnection(activity());
                                 if (!cc.isNetworkAvailable()) {
+                                    Log.i("tag----","internet not available");
                                     showNoInternet();
                                 } else {
                                     if (pd.isShowing())
@@ -284,6 +301,7 @@ public class WeatherFragment extends Fragment {
                 } else {
                     handler.post(new Runnable() {
                         public void run() {
+                            Log.i("tag----","run is handler post not json null");
                             preferences.setLaunched();
                             renderWeather(json);
                             getActivity().getSupportFragmentManager().beginTransaction().remove(splashScreenFragment).commit();
@@ -328,6 +346,7 @@ public class WeatherFragment extends Fragment {
     }
 
     public void changeCity(String city) {
+        Log.i("tag----","change city");
         updateWeatherData(city, null, null);
         preferences.setCity(city);
     }
@@ -424,9 +443,10 @@ public class WeatherFragment extends Fragment {
     }
 
     public void showNoInternet() {
-        new MaterialDialog.Builder(context())
+        materialDialog= new MaterialDialog.Builder(context())
                 .title(getString(R.string.no_internet_title))
                 .cancelable(false)
+                .autoDismiss(true)
                 .content(getString(R.string.no_internet_content))
                 .positiveText(getString(R.string.no_internet_mobile_data))
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
@@ -477,6 +497,8 @@ public class WeatherFragment extends Fragment {
     }
 
     private void renderWeather(Info jsonObj) {
+        Log.i("tag----","rendering json");
+
         try {
             json0 = jsonObj.day;
             json1 = jsonObj.fort;

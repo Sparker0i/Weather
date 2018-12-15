@@ -27,6 +27,7 @@ public class FetchWeather extends AsyncTask<String , Void , Info> {
 
     private Uri builtDay , builtFort;
     private Prefs preferences;
+    Info array;
     private SharedPreferences sharedPreferences;
 
     public FetchWeather(Context context) {
@@ -41,7 +42,7 @@ public class FetchWeather extends AsyncTask<String , Void , Info> {
         else
             coordinates(params);
         try {
-            Info array = new Info();
+            array = new Info();
             array.day = gsonWeather();
             array.fort = gsonFort();
 
@@ -57,6 +58,12 @@ public class FetchWeather extends AsyncTask<String , Void , Info> {
             e.printStackTrace();
             return null;
         }
+    }
+
+    @Override
+    protected void onPostExecute(Info info) {
+        super.onPostExecute(info);
+        array=info;
     }
 
     private void city(String... params) {
