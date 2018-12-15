@@ -111,6 +111,10 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/small_widget" />
         </receiver>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

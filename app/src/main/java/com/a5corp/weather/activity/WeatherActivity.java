@@ -151,8 +151,8 @@ public class WeatherActivity extends AppCompatActivity {
         gf = new GraphsFragment();
         //mf = new MapsFragment();
         dbHelper = new DBHelper(this);
-        NotificationService.enqueueWork(this, new Intent(this, WeatherActivity.class));
         initDrawer();
+        NotificationService.enqueueWork(this, new Intent(this, WeatherActivity.class));
     }
 
     @Override

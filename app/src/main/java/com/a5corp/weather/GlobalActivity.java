@@ -2,6 +2,8 @@ package com.a5corp.weather;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+
 import androidx.appcompat.app.AppCompatActivity;
 import com.a5corp.weather.model.Log;
 
@@ -15,6 +17,7 @@ public class GlobalActivity extends AppCompatActivity {
     public static Preferences cp;
     public static Prefs prefs;
     public static int i = 0;
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,15 +38,19 @@ public class GlobalActivity extends AppCompatActivity {
         }
 
         super.onResume();
-        Intent intent;
-
         if (prefs.getLaunched()) {
             intent = new Intent(GlobalActivity.this, WeatherActivity.class);
         }
         else {
             intent = new Intent(GlobalActivity.this, FirstLaunch.class);
         }
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
+        Handler handler=new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+            }
+        },1000);
     }
 }
