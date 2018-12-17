@@ -28,6 +28,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.a5corp.weather.GlobalActivity;
@@ -179,6 +180,7 @@ public class WeatherFragment extends Fragment {
                     fab.show();
             }
         });
+
         directionView.setTypeface(weatherFont);
         directionView.setTextColor(ContextCompat.getColor(context(), R.color.textColor));
         dailyView.setText(getString(R.string.daily));
@@ -210,6 +212,8 @@ public class WeatherFragment extends Fragment {
                 permission = new Permissions(context());
                 requestPermissions(new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION}, Constants.READ_COARSE_LOCATION);
                 break;
+            case R.id.share:
+                shareClicked();
         }
         return true;
     }
@@ -684,6 +688,26 @@ public class WeatherFragment extends Fragment {
     public void onResume() {
         changeCity(preferences.getCity());
         super.onResume();
+    }
+
+    public void shareClicked()
+    {
+        final String city = json1.getCity().getName().toUpperCase(Locale.US) +
+                ", " +
+                json1.getCity().getCountry();
+        int temperature = (int) Math.round(json0.getMain().getTemp());
+        String temp_unit = PreferenceManager.getDefaultSharedPreferences(getContext()).getString(Constants.PREF_TEMPERATURE_UNITS, Constants.METRIC).equals(Constants.METRIC) ? (char) 0x00B0 +" Celsius" : (char) 0x00B0 + " Fahrenheit";
+        final String wind1 = getString(R.string.wind_, json0.getWind().getSpeed(), PreferenceManager.getDefaultSharedPreferences(getContext()).getString(Constants.PREF_TEMPERATURE_UNITS, Constants.METRIC).equals(Constants.METRIC) ? getString(R.string.mps) : getString(R.string.mph));
+        final String humidity1 = getString(R.string.humidity, json0.getMain().getHumidity());
+        boolean timeFormat24Hours = preferences.isTimeFormat24Hours();
+        final String sunriseTime = new java.text.SimpleDateFormat(timeFormat24Hours ? "kk:mm" : "hh:mm a", Locale.US).format(new Date(json0.getSys().getSunrise() * 1000));
+        final String sunsetTime = new java.text.SimpleDateFormat(timeFormat24Hours ? "kk:mm" : "hh:mm a", Locale.US).format(new Date(json0.getSys().getSunset() * 1000));
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT,"Region : " + city + "\nTemperature : " + temperature + "" + temp_unit + "\n" + wind1 + "\n" + humidity1 + "\nSunrise Time : " + sunriseTime + "\nSunset Time : " + sunsetTime + "\n\n" + "Download Simple Weather today: https://play.google.com/store/apps/details?id=com.a5corp.weather" + "\n");
+        sendIntent.setType("text/plain");
+        Intent.createChooser(sendIntent,"Share via");
+        startActivity(sendIntent);
     }
 }
 
