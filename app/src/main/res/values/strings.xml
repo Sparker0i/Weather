@@ -8,6 +8,7 @@
     <string name="need_not_add">You Need Not Add This City Again</string>
     <string name="location">Location</string>
     <string name="toggle_values">Toggle Values</string>
+    <string name="download">Download Simple Weather today: https://play.google.com/store/apps/details?id=com.a5corp.weather</string>
 
     <string name="uh_oh">Uh oh. Seems like the city you entered does not exist on the Database. Please Try Again</string>
     <string name="pick_city">Hey there, let\'s start by picking a city for you</string>

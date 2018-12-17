@@ -9,4 +9,13 @@
         android:title="@string/location"
         app:showAsAction="ifRoom"/>
 
+    <item
+        android:id="@+id/share"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:tint="@color/white"
+        app:elevation="1dp"
+        android:title="Share"
+        app:borderWidth="4dp"/>
+
 </menu>
