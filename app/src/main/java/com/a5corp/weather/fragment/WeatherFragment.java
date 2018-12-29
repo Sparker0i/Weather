@@ -394,8 +394,8 @@ public class WeatherFragment extends Fragment {
             public void run() {
                 new MaterialTapTargetPrompt.Builder(activity())
                         .setTarget(R.id.fab)
-                        .setBackgroundColour(ContextCompat.getColor(activity(), R.color.md_light_blue_400))
-                        .setFocalColour(ContextCompat.getColor(activity(), R.color.colorAccent))
+                        .setBackgroundColour(ContextCompat.getColor(getActivity(), R.color.md_light_blue_400))
+                        .setFocalColour(ContextCompat.getColor(getActivity(), R.color.colorAccent))
                         .setPrimaryText(getString(R.string.target_search_title))
                         .setSecondaryText(getString(R.string.target_search_content))
                         .setIconDrawableColourFilter(ContextCompat.getColor(activity(), R.color.md_black_1000))
