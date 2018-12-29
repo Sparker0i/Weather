@@ -2,7 +2,12 @@ package com.a5corp.weather;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.a5corp.weather.internet.FetchWeather;
+import com.a5corp.weather.model.Info;
 import com.a5corp.weather.model.Log;
 
 import com.a5corp.weather.activity.FirstLaunch;
@@ -10,11 +15,14 @@ import com.a5corp.weather.activity.WeatherActivity;
 import com.a5corp.weather.preferences.Preferences;
 import com.a5corp.weather.preferences.Prefs;
 
+import java.util.concurrent.ExecutionException;
+
 public class GlobalActivity extends AppCompatActivity {
 
     public static Preferences cp;
     public static Prefs prefs;
     public static int i = 0;
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,15 +43,48 @@ public class GlobalActivity extends AppCompatActivity {
         }
 
         super.onResume();
-        Intent intent;
+        intent=new Intent();
 
         if (prefs.getLaunched()) {
-            intent = new Intent(GlobalActivity.this, WeatherActivity.class);
+            if(prefs.getCity()!=null && prefs.getCity().length()>0){
+                FetchWeather fw=new FetchWeather(this);
+                try {
+                    Info json=fw.execute(prefs.getCity()).get();
+                    intent = new Intent(GlobalActivity.this, WeatherActivity.class);
+                    intent.putExtra("json",json);
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }else{
+                FetchWeather fw=new FetchWeather(this);
+                try {
+                    float lat=prefs.getLatitude();
+                    float lon=prefs.getLongitude();
+                    Info json=fw.execute(String.valueOf(lat),String.valueOf(lon)).get();
+                    intent = new Intent(GlobalActivity.this, WeatherActivity.class);
+                    intent.putExtra("json",json);
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            Handler handler=new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    startActivity(intent);
+                }
+            },1000);
         }
         else {
             intent = new Intent(GlobalActivity.this, FirstLaunch.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
         }
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
+
     }
 }

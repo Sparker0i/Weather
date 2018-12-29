@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @SuppressWarnings("unused")
-public class WeatherInfo {
+public class WeatherInfo implements Serializable{
     private Coordinates coord;
     private Main main;
     private String name;
@@ -44,7 +44,7 @@ public class WeatherInfo {
         return weather;
     }
 
-    public class Main {
+    public class Main implements Serializable{
         private double temp;
         private double humidity;
         private double pressure;
@@ -79,7 +79,7 @@ public class WeatherInfo {
         }
     }
 
-    public class Wind {
+    public class Wind implements Serializable{
         private float speed;
         @SerializedName("deg")
         private float direction;
@@ -93,7 +93,7 @@ public class WeatherInfo {
         }
     }
 
-    public class Sys {
+    public class Sys implements Serializable{
         private long sunrise;
         private long sunset;
         private String country;
@@ -111,7 +111,7 @@ public class WeatherInfo {
         }
     }
 
-    public class Coordinates {
+    public class Coordinates implements Serializable{
         @SerializedName("lat")
         private double latitude;
         @SerializedName("lon")

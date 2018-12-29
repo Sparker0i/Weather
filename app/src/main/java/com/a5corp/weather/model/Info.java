@@ -1,6 +1,8 @@
 package com.a5corp.weather.model;
 
-public class Info {
+import java.io.Serializable;
+
+public class Info implements Serializable {
     public WeatherFort fort;
     public WeatherInfo day;
 }
