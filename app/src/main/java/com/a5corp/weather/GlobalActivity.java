@@ -47,30 +47,16 @@ public class GlobalActivity extends AppCompatActivity {
         intent=new Intent();
 
         if (prefs.getLaunched()) {
-            if(prefs.getCity()!=null && prefs.getCity().length()>0){
-                FetchWeather fw=new FetchWeather(this);
-                try {
-                    Info json=fw.execute(prefs.getCity()).get();
-                    intent = new Intent(GlobalActivity.this, WeatherActivity.class);
-                    intent.putExtra(Constants.SPLASH_DATA,json);
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }else{
-                FetchWeather fw=new FetchWeather(this);
-                try {
-                    float lat=prefs.getLatitude();
-                    float lon=prefs.getLongitude();
-                    Info json=fw.execute(String.valueOf(lat),String.valueOf(lon)).get();
-                    intent = new Intent(GlobalActivity.this, WeatherActivity.class);
-                    intent.putExtra(Constants.SPLASH_DATA,json);
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+
+            FetchWeather fw=new FetchWeather(this);
+            try {
+                Info json=fw.execute(prefs.getCity()).get();
+                intent = new Intent(GlobalActivity.this, WeatherActivity.class);
+                intent.putExtra(Constants.SPLASH_DATA,json);
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             Handler handler=new Handler();
