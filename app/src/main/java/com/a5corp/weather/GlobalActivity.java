@@ -14,6 +14,7 @@ import com.a5corp.weather.activity.FirstLaunch;
 import com.a5corp.weather.activity.WeatherActivity;
 import com.a5corp.weather.preferences.Preferences;
 import com.a5corp.weather.preferences.Prefs;
+import com.a5corp.weather.utils.Constants;
 
 import java.util.concurrent.ExecutionException;
 
@@ -51,7 +52,7 @@ public class GlobalActivity extends AppCompatActivity {
                 try {
                     Info json=fw.execute(prefs.getCity()).get();
                     intent = new Intent(GlobalActivity.this, WeatherActivity.class);
-                    intent.putExtra("json",json);
+                    intent.putExtra(Constants.SPLASH_DATA,json);
                 } catch (ExecutionException e) {
                     e.printStackTrace();
                 } catch (InterruptedException e) {
@@ -64,7 +65,7 @@ public class GlobalActivity extends AppCompatActivity {
                     float lon=prefs.getLongitude();
                     Info json=fw.execute(String.valueOf(lat),String.valueOf(lon)).get();
                     intent = new Intent(GlobalActivity.this, WeatherActivity.class);
-                    intent.putExtra("json",json);
+                    intent.putExtra(Constants.SPLASH_DATA,json);
                 } catch (ExecutionException e) {
                     e.printStackTrace();
                 } catch (InterruptedException e) {

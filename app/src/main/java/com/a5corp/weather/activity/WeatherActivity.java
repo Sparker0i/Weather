@@ -59,7 +59,7 @@ public class WeatherActivity extends AppCompatActivity {
     GraphsFragment gf;
     //MapsFragment mf;
     Toolbar toolbar;
-    Info json_loaded_earlier,json;
+    Info jsonLoadedEarlier,json;
     Drawer drawer;
     NotificationManagerCompat mManager;
     Handler handler;
@@ -142,9 +142,9 @@ public class WeatherActivity extends AppCompatActivity {
         wf = new WeatherFragment();
         Bundle bundle = new Bundle();
         bundle.putInt("mode", intent.getIntExtra(Constants.MODE, 0));
-        if(intent.getSerializableExtra("json")!=null){
-            json_loaded_earlier=(Info)intent.getSerializableExtra("json");
-            bundle.putSerializable("json",json_loaded_earlier );
+        if(intent.getSerializableExtra(Constants.SPLASH_DATA)!=null){
+            jsonLoadedEarlier =(Info)intent.getSerializableExtra(Constants.SPLASH_DATA);
+            bundle.putSerializable(Constants.SPLASH_DATA, jsonLoadedEarlier);
         }
         wf.setArguments(bundle);
         gf = new GraphsFragment();
@@ -316,11 +316,11 @@ public class WeatherActivity extends AppCompatActivity {
     }
 
     public void changeCity(String city){
-        json_loaded_earlier=null;
+        jsonLoadedEarlier =null;
         WeatherFragment wf = (WeatherFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.fragment);
         Bundle bundle=wf.getArguments();
-        bundle.putSerializable("json",null);
+        bundle.putSerializable(Constants.SPLASH_DATA,null);
         wf.setArguments(bundle);
         wf.changeCity(city);
         new Prefs(this).setCity(city);
@@ -348,8 +348,8 @@ public class WeatherActivity extends AppCompatActivity {
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
                         wf = new WeatherFragment();
                         Bundle bundle=new Bundle();
-                        if(json_loaded_earlier!=null){
-                            bundle.putSerializable("json",json_loaded_earlier);
+                        if(jsonLoadedEarlier !=null){
+                            bundle.putSerializable(Constants.SPLASH_DATA, jsonLoadedEarlier);
                         }
                         wf.setArguments(bundle);
                         getSupportFragmentManager().beginTransaction()

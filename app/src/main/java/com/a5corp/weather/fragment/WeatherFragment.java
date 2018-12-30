@@ -238,11 +238,11 @@ public class WeatherFragment extends Fragment {
     }
 
     private void updateWeatherData(final String city, final String lat, final String lon) {
-        if (getArguments() != null && getArguments().getSerializable("json") != null) {
+        if (getArguments() != null && getArguments().getSerializable(Constants.SPLASH_DATA) != null) {
             Log.i("message","has json");
             handler.post(new Runnable() {
                 public void run() {
-                    json = (Info) getArguments().getSerializable("json");
+                    json = (Info) getArguments().getSerializable(Constants.SPLASH_DATA);
                     preferences.setLaunched();
                     renderWeather(json);
                     if (!preferences.getv3TargetShown())
@@ -496,7 +496,7 @@ public class WeatherFragment extends Fragment {
             String lon = gps.getLongitude();
             if(getArguments()!=null){
                 Bundle bundle=getArguments();
-                bundle.putSerializable("json",null);
+                bundle.putSerializable(Constants.SPLASH_DATA,null);
                 getActivity().getSupportFragmentManager().findFragmentById(R.id.fragment).setArguments(bundle);
             }
             changeCity(lat, lon);
