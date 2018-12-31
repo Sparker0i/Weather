@@ -238,72 +238,94 @@ public class WeatherFragment extends Fragment {
     }
 
     private void updateWeatherData(final String city, final String lat, final String lon) {
-        wt = new FetchWeather(context());
-        if (citys == null)
-            handler.postDelayed(new Runnable() {
-                @Override
+        if (getArguments() != null && getArguments().getSerializable(Constants.SPLASH_DATA) != null) {
+            Log.i("message","has json");
+            handler.post(new Runnable() {
                 public void run() {
-                    fabProgressCircle.show();
+                    json = (Info) getArguments().getSerializable(Constants.SPLASH_DATA);
+                    preferences.setLaunched();
+                    renderWeather(json);
+                    if (!preferences.getv3TargetShown())
+                        showTargets();
+                    if (pd.isShowing())
+                        pd.dismiss();
+                    if (citys == null) {
+                        preferences.setLastCity(json.day.getName() + "," + json.day.getSys().getCountry());
+                        ((WeatherActivity) activity()).createShortcuts();
+                    } else
+                        preferences.setLastCity(preferences.getLastCity());
+                    NotificationService.enqueueWork(context(), new Intent(context(), WeatherActivity.class));
                 }
-            }, 50);
-        new Thread() {
-            public void run() {
-                try {
-                    if (lat == null && lon == null) {
-                        json = wt.execute(citys != null ? citys : city).get();
-                    } else if (city == null) {
-                        json = wt.execute(lat, lon).get();
+            });
+        } else {
+            Log.i("message","has to load json");
+            wt = new FetchWeather(context());
+            if(citys==null){
+                Handler handler=new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        fabProgressCircle.show();
                     }
-                } catch (InterruptedException iex) {
-                    Log.e("InterruptedException", "iex");
-                } catch (ExecutionException eex) {
-                    Log.e("ExecutionException", "eex");
+                },50);
+            }
+            try {
+                if (lat == null && lon == null) {
+                    json = wt.execute(citys != null ? citys : city).get();
+                } else if (city == null) {
+                    json = wt.execute(lat, lon).get();
+                    Log.i("message",lat+lon);
                 }
-                if (pd.isShowing())
-                    pd.dismiss();
-                if (json == null) {
-                    preferences.setCity(preferences.getLastCity());
-                    handler.post(new Runnable() {
-                        public void run() {
-                            GlobalActivity.i = 1;
-                            if (!preferences.getLaunched()) {
-                                FirstStart();
+            } catch (InterruptedException iex) {
+                Log.e("InterruptedException", "iex");
+            } catch (ExecutionException eex) {
+                Log.e("ExecutionException", "eex");
+            }
+            if (pd.isShowing())
+                pd.dismiss();
+            if (json == null) {
+                preferences.setCity(preferences.getLastCity());
+                handler.post(new Runnable() {
+                    public void run() {
+                        GlobalActivity.i = 1;
+                        if (!preferences.getLaunched()) {
+                            FirstStart();
+                        } else {
+                            if (citys == null)
+                                fabProgressCircle.hide();
+                            cc = new CheckConnection(context());
+                            if (!cc.isNetworkAvailable()) {
+                                showNoInternet();
                             } else {
-                                if (citys == null)
-                                    fabProgressCircle.hide();
-                                cc = new CheckConnection(context());
-                                if (!cc.isNetworkAvailable()) {
-                                    showNoInternet();
-                                } else {
-                                    if (pd.isShowing())
-                                        pd.dismiss();
-                                    showInputDialog();
-                                }
+                                if (pd.isShowing())
+                                    pd.dismiss();
+                                showInputDialog();
                             }
                         }
-                    });
-                } else {
-                    handler.post(new Runnable() {
-                        public void run() {
-                            preferences.setLaunched();
-                            renderWeather(json);
-                            if (!preferences.getv3TargetShown())
-                                showTargets();
-                            if (pd.isShowing())
-                                pd.dismiss();
-                            if (citys == null) {
-                                preferences.setLastCity(json.day.getName() + "," + json.day.getSys().getCountry());
-                                ((WeatherActivity) activity()).createShortcuts();
-                                progress();
-                            } else
-                                preferences.setLastCity(preferences.getLastCity());
-                            NotificationService.enqueueWork(context(), new Intent(context(), WeatherActivity.class));
-                        }
-                    });
-                }
+                    }
+                });
+            } else {
+                handler.post(new Runnable() {
+                    public void run() {
+                        preferences.setLaunched();
+                        renderWeather(json);
+                        if (!preferences.getv3TargetShown())
+                            showTargets();
+                        if (pd.isShowing())
+                            pd.dismiss();
+                        if (citys == null) {
+                            preferences.setLastCity(json.day.getName() + "," + json.day.getSys().getCountry());
+                            ((WeatherActivity) getActivity()).createShortcuts();
+                            progress();
+                        } else
+                            preferences.setLastCity(preferences.getLastCity());
+                        NotificationService.enqueueWork(context(), new Intent(context(), WeatherActivity.class));
+                    }
+                });
             }
-        }.start();
+        }
     }
+
 
     private void progress() {
         fabProgressCircle.onArcAnimationComplete();
@@ -372,11 +394,11 @@ public class WeatherFragment extends Fragment {
             public void run() {
                 new MaterialTapTargetPrompt.Builder(activity())
                         .setTarget(R.id.fab)
-                        .setBackgroundColour(ContextCompat.getColor(context(), R.color.md_light_blue_400))
-                        .setFocalColour(ContextCompat.getColor(context(), R.color.colorAccent))
+                        .setBackgroundColour(ContextCompat.getColor(getActivity(), R.color.md_light_blue_400))
+                        .setFocalColour(ContextCompat.getColor(getActivity(), R.color.colorAccent))
                         .setPrimaryText(getString(R.string.target_search_title))
                         .setSecondaryText(getString(R.string.target_search_content))
-                        .setIconDrawableColourFilter(ContextCompat.getColor(context(), R.color.md_black_1000))
+                        .setIconDrawableColourFilter(ContextCompat.getColor(activity(), R.color.md_black_1000))
                         .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener() {
                             @Override
                             public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
@@ -466,12 +488,17 @@ public class WeatherFragment extends Fragment {
     }
 
     private void showCity() {
-        gps = new GPSTracker(context());
+        gps = new GPSTracker(activity());
         if (!gps.canGetLocation())
             gps.showSettingsAlert();
         else {
             String lat = gps.getLatitude();
             String lon = gps.getLongitude();
+            if(getArguments()!=null){
+                Bundle bundle=getArguments();
+                bundle.putSerializable(Constants.SPLASH_DATA,null);
+                getActivity().getSupportFragmentManager().findFragmentById(R.id.fragment).setArguments(bundle);
+            }
             changeCity(lat, lon);
         }
     }

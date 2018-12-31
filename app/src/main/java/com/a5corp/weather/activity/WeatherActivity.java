@@ -59,6 +59,7 @@ public class WeatherActivity extends AppCompatActivity {
     GraphsFragment gf;
     //MapsFragment mf;
     Toolbar toolbar;
+    Info jsonLoadedEarlier,json;
     Drawer drawer;
     NotificationManagerCompat mManager;
     Handler handler;
@@ -133,30 +134,37 @@ public class WeatherActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                hideFab();
-                showInputDialog();
-            }
-        });
+        fab.setClickable(true);
+        fab.setOnClickListener(fabClickListener);
         Intent intent = getIntent();
         handler = new Handler();
         fab.show();
         wf = new WeatherFragment();
         Bundle bundle = new Bundle();
         bundle.putInt("mode", intent.getIntExtra(Constants.MODE, 0));
+        if(intent.getSerializableExtra(Constants.SPLASH_DATA)!=null){
+            jsonLoadedEarlier =(Info)intent.getSerializableExtra(Constants.SPLASH_DATA);
+            bundle.putSerializable(Constants.SPLASH_DATA, jsonLoadedEarlier);
+        }
         wf.setArguments(bundle);
         gf = new GraphsFragment();
         //mf = new MapsFragment();
         dbHelper = new DBHelper(this);
+        initDrawer();
+        NotificationService.enqueueWork(this, new Intent(this, WeatherActivity.class));
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment, wf)
                 .commit();
-        initDrawer();
-        NotificationService.enqueueWork(this, new Intent(this, WeatherActivity.class));
     }
 
+    View.OnClickListener fabClickListener=new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Log.i("message","fab clicked!");
+            hideFab();
+            showInputDialog();
+        }
+    };
     private void showInputDialog() {
         new MaterialDialog.Builder(this)
                 .title(getString(R.string.change_city))
@@ -215,10 +223,10 @@ public class WeatherActivity extends AppCompatActivity {
                 }).show();
     }
 
-    Info json;
     int i = 5;
 
     private void checkForCity(final String city) {
+
         final FetchWeather wt = new FetchWeather(this);
         final Context context = this;
         new Thread() {
@@ -282,6 +290,7 @@ public class WeatherActivity extends AppCompatActivity {
                                                 @Override
                                                 public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
                                                     if (!(f instanceof WeatherFragment)) {
+                                                        Log.i("message","onItemClick");
                                                         wf = new WeatherFragment().setCity(json.day.getName() + "," + json.day.getSys().getCountry());
                                                         getSupportFragmentManager().beginTransaction()
                                                                 .replace(R.id.fragment, wf)
@@ -307,8 +316,12 @@ public class WeatherActivity extends AppCompatActivity {
     }
 
     public void changeCity(String city){
+        jsonLoadedEarlier =null;
         WeatherFragment wf = (WeatherFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.fragment);
+        Bundle bundle=wf.getArguments();
+        bundle.putSerializable(Constants.SPLASH_DATA,null);
+        wf.setArguments(bundle);
         wf.changeCity(city);
         new Prefs(this).setCity(city);
     }
@@ -334,6 +347,11 @@ public class WeatherActivity extends AppCompatActivity {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
                         wf = new WeatherFragment();
+                        Bundle bundle=new Bundle();
+                        if(jsonLoadedEarlier !=null){
+                            bundle.putSerializable(Constants.SPLASH_DATA, jsonLoadedEarlier);
+                        }
+                        wf.setArguments(bundle);
                         getSupportFragmentManager().beginTransaction()
                                 .replace(R.id.fragment, wf)
                                 .commit();

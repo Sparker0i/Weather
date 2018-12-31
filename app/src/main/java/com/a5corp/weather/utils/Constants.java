@@ -1,7 +1,11 @@
 package com.a5corp.weather.utils;
 
+import com.a5corp.weather.model.Info;
+
 public class Constants {
     public static final String QUERY_PARAM = "q";
+    public static final String SPLASH_DATA="splash_data";
+
     public static final String FORMAT_PARAM = "mode";
     public static final String FORMAT_VALUE = "json";
     public static final String UNITS_PARAM = "units";
