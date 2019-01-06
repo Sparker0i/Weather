@@ -44,7 +44,8 @@ If you want to translate you can easily do so on [Transifex](https://www.transif
 ## Contributing
 - Fork this repo
 - Clone your forked repo
-- Create a new PR with a feature you want to add (though this depends upon the discretion of the developer, ie. me), or fix a bug in an already existing feature
+- Create a new PR for fixing a bug
+- If you want to add a new feature into the app, open an issue and let's have a discussion. If I feel okay, I can merge it when you make a PR.
 
 ![Weather App](/img/App.png)
 
