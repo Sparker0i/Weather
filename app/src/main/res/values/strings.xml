@@ -103,4 +103,7 @@
     <!-- Graph Strings -->
     <string name="g_pressure">Pressure, hPa</string>
     <string name="g_snow">Snow, mm</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="configure">Configure</string>
+    <string name="add_widget">Add widget</string>
 </resources>
